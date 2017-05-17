@@ -8,9 +8,10 @@ LevelGenerator::LevelGenerator():
 scalar(1000)
 {
 	//create zone and generate dungeon
-	_zone[0] = Zone(18, 18, 5, 5, 10, 500);
+	//_zone[0] = Zone(18, 18, 5, 5, 10, 500);
 	
-	drawDungeonFloor(_zone[0]);
+	//drawDungeonFloor(_zone[0]);
+	placeCity(City(0,0, 5, 5, 0), "fun house", Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 }
 
 LevelGenerator::~LevelGenerator()
@@ -90,31 +91,35 @@ void LevelGenerator::createPlane(std::string pName)
 		1, 5, 5,
 		Ogre::Vector3::UNIT_Z);
 }
-/*
-void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::string pName) {
+
+void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::string pName) const {
 	//TODO: add uv coordinates
 
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(pName, "General");
 
 	Ogre::SubMesh* sub = mesh->createSubMesh();
 
-	const float sqrt13 = 0.577350269f; /*sqrt(1/3)#1#
+	const float sqrt13(1 / 3);
 	int x = pPosition.x * pScalar;
-	int y = 1;
+	int y = 0;
 	int z = pPosition.z * pScalar;
 
 	//create vertices
 	const size_t nVertices = 4;
-	const size_t vBufCount = 3 * 2 * nVertices;
+	const size_t vBufCount = 5 * nVertices;
 	float vertices[vBufCount] = {
-		static_cast<float>(x + pScalar), static_cast<float>(y), static_cast<float>(z),			 //1
-		sqrt13,  -sqrt13, -sqrt13,
-		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z),					 //2
-		-sqrt13, -sqrt13, -sqrt13,
-		static_cast<float>(x + pScalar), static_cast<float>(y), static_cast<float>(z + pScalar), //3
-		sqrt13,  -sqrt13, sqrt13,
-		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z + pScalar),			 //4
-		-sqrt13, -sqrt13, sqrt13,
+		static_cast<float>(1000), static_cast<float>(0), static_cast<float>(0),			 //1
+		//sqrt13,  -sqrt13, -sqrt13,
+		0,0,
+		static_cast<float>(0), static_cast<float>(0), static_cast<float>(0),					 //2
+		//-sqrt13, -sqrt13, -sqrt13,
+		0,1,
+		static_cast<float>(1000), static_cast<float>(0), static_cast<float>(1000), //3
+		//sqrt13,  -sqrt13, sqrt13,
+		1,0,
+		static_cast<float>(0), static_cast<float>(0), static_cast<float>(1000),			 //4
+		//-sqrt13, -sqrt13, sqrt13,
+		1,1
 	};
 
 	Ogre::RenderSystem* rs = Ogre::Root::getSingleton().getRenderSystem();
@@ -146,8 +151,11 @@ void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::stri
 	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_POSITION);
 	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);
 
-	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_NORMAL);
-	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);
+/*	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_NORMAL);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);*/
+
+	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT2, Ogre::VES_TEXTURE_COORDINATES);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT2);
 
 	Ogre::HardwareVertexBufferSharedPtr vBuf =
 		Ogre::HardwareBufferManager::getSingleton().createVertexBuffer(
@@ -187,13 +195,15 @@ void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::stri
 }
 
 void LevelGenerator::placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const {
-	createCityMesh(pCity, 1000, pName, pColour);//scalar set to 1000 for size
+	//createCityMesh(pCity, 1000, pName, pColour);//scalar set to 1000 for size
+	createTileMesh(1000, Coordinate(0,0), pName);
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
 		"Test/ColourTest", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 	material->getTechnique(0)->getPass(0)->setVertexColourTracking(Ogre::TVC_DIFFUSE);
 
 	Ogre::Entity* testCity = GameManager::getSingleton().getSceneManager()->createEntity("pCity - " + pName, pName);
-	testCity->setMaterialName("Test/ColourTest");
+	//testCity->setMaterialName("Test/ColourTest");
+	testCity->setMaterialName("Examples/Rockwall");
 
 	Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
 	thisSceneNode->setPosition(-35, 0, 0);
@@ -229,24 +239,32 @@ void LevelGenerator::createCityMesh(City pCity, int scalar, std::string pName, O
 
 	//create vertices
 	const size_t nVertices = 8;
-	const size_t vBufCount = 3 * 2 * nVertices;
+	const size_t vBufCount = 3 * 3 * nVertices;
 	float vertices[vBufCount] = {
 		static_cast<float>(x), static_cast<float>(y + h), static_cast<float>(z),         //0
 		-sqrt13, sqrt13,  -sqrt13,
+		0, 0,
 		static_cast<float>(x + w), static_cast<float>(y + h), static_cast<float>(z),     //1
 		sqrt13,  sqrt13,  -sqrt13,
+		0, 1,
 		static_cast<float>(x + w), static_cast<float>(y), static_cast<float>(z),         //2
 		sqrt13,  -sqrt13, -sqrt13,
+		1, 1,
 		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z),		     //3
 		-sqrt13, -sqrt13, -sqrt13,
+		1, 0,
 		static_cast<float>(x), static_cast<float>(y + h), static_cast<float>(z + d),     //4
 		-sqrt13, sqrt13,  sqrt13,
+		0, 0,
 		static_cast<float>(x + w), static_cast<float>(y + h), static_cast<float>(z + d), //5
 		sqrt13,  sqrt13,  sqrt13,
+		0, 1,
 		static_cast<float>(x + w), static_cast<float>(y), static_cast<float>(z + d),	 //6
 		sqrt13,  -sqrt13, sqrt13,
+		1, 0,
 		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z + d),	     //7
 		-sqrt13, -sqrt13, sqrt13,
+		1, 1
 	};
 
 	Ogre::RenderSystem* rs = Ogre::Root::getSingleton().getRenderSystem();
@@ -292,6 +310,9 @@ void LevelGenerator::createCityMesh(City pCity, int scalar, std::string pName, O
 	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_NORMAL);
 	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);
 
+	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT2, Ogre::VES_TEXTURE_COORDINATES);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT2);
+
 	Ogre::HardwareVertexBufferSharedPtr vBuf =
 		Ogre::HardwareBufferManager::getSingleton().createVertexBuffer(
 			offset, mesh->sharedVertexData->vertexCount, Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
@@ -327,4 +348,4 @@ void LevelGenerator::createCityMesh(City pCity, int scalar, std::string pName, O
 	mesh->_setBounds(Ogre::AxisAlignedBox(x, y, z, x + w, y + h, z + d));
 
 	mesh->load();
-}*/
+}

@@ -26,9 +26,9 @@ private:
 	void createPlane(std::string pName);
 
 	//Await further implementtation
-	//void createTileMesh(int pScalar, Coordinate pPosition, std::string pName);
-	//void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
-	//void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
+	void createTileMesh(int pScalar, Coordinate pPosition, std::string pName) const;
+	void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
+	void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
 };
 
 #endif
