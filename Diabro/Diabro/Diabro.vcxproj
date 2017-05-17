@@ -183,6 +183,7 @@
     <ClInclude Include="QuestItemContainer.h" />
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
+    <ClInclude Include="Strategy.h" />
     <ClInclude Include="TestFSM.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />

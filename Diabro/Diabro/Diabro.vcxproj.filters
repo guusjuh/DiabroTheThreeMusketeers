@@ -242,6 +242,9 @@
     <ClInclude Include="Player.h">
       <Filter>Headers\Characters</Filter>
     </ClInclude>
+    <ClInclude Include="Strategy.h">
+      <Filter>Headers\Quests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />

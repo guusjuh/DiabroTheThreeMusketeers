@@ -19,12 +19,14 @@ enum PreconditionsType {
 	KnowWhereToGo,
 	YouItemOfInterest,
 	TheyItemOfInterest,
+	BothItemOfInterest,
 };
 
 enum PostconditionType {
 	Accompanied,
 	YouHaveTheItem,
 	TheyHaveTheItem,
+	BothHaveTheItem,
 	YouInfo,
 	TheyInfo,
 	YouThere,
@@ -33,14 +35,21 @@ enum PostconditionType {
 
 class Action {
 public:
-	
+	Action(){}
+	~Action(){}
+
+	ActionType GetType() { return _type; }
+	std::vector<PreconditionsType> GetPreconditions() { return _preconditions; }
+	PostconditionType GetPostcondition() { return _postcondition; }
+	std::map<QuestContent, int> GetRequiredContent() { return _requiredContent; }
+
 private:
 	ActionType _type;
+
 	std::vector<PreconditionsType> _preconditions;
-	std::vector<PostconditionType> _postconditions;
+	PostconditionType _postcondition;
 
-	std::vector<>
-
+	std::map<QuestContent, int> _requiredContent;
 };
 
 #endif
