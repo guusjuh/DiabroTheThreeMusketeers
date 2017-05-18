@@ -546,12 +546,12 @@ bool* Zone::generateCollisionGrid(){
 			}
 		}
 	}
-
-	for each (City city in cities)
+	for (size_t i = 0; i < cities.size(); i++)
 	{
-		for each (Coordinate buildingPos in city.buildingPositions())
+		std::vector<Coordinate> buildings = cities[i].buildingPositions();
+		for (size_t j = 0; j < buildings.size(); j++)
 		{
-			grid[buildingPos.x + buildingPos.z * _width] = false;// set tiles at building pos false
+			grid[buildings[j].x + buildings[j].z * _width] = false;// set tiles at building pos false
 		}
 	}
 	
