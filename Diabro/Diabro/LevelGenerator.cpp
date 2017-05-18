@@ -5,14 +5,25 @@
 #include "math.h"
 
 LevelGenerator::LevelGenerator():
-scalar(1000)
+scalar(500)
 {
-	//create zone and generate dungeon
-	_zone[0] = Zone(49, 49, 5, 5, 10, 500);
-	//_zone[0] = Zone(18, 18, 5, 5, 10, 500);
-	
-	drawDungeonFloor(_zone[0]);
+	_zone[0] = Zone(29, 29, 5, 5, 15, 100);
+	for (int i = 0; i < _zone[0].cities.size(); ++i) {
+		City c = _zone[0].cities[i];
+		
+		//create unique pCity pName (just a number)
+		std::stringstream sstm; 
+		sstm << "pCity-" << i;
+
+		//TODO: generate city
+		_zone[0].cities[i].init();
+	}
+
+	spawnCityContent();
+
+	drawDungeonFloor(scalar, _zone[0]);
 }
+
 
 LevelGenerator::~LevelGenerator()
 {
@@ -53,11 +64,65 @@ Zone LevelGenerator::getZone(int pX, int pZ) {
 	return _zone[0];
 }
 /// creates a tile for each position in the zone
+void LevelGenerator::spawnCityContent() {
 
-/// \param pZone zone from which to draw the tiles
-void LevelGenerator::drawDungeonFloor(Zone pZone) {
-	
+	// loop through all cities
+	for (int i = 0; i < _zone[0].cities.size(); ++i) {
+		
+		// set a pointer to the current city 
+		City* thisCity = &_zone[0].cities[i];
 
+		// switch on the city type
+		switch(thisCity->typeFlag) {
+		case CityRT:
+			for (int j = 0; j < thisCity->Buildings().size(); ++j) { // for each building
+				spawnNPCs(thisCity, &thisCity->Buildings()[j]);
+			}
+			
+			break;
+
+		case HideoutRT:
+			// spawn enemy spawners in the middle of an enemy hideout
+			placeEnemySpawnNode(thisCity, i);
+			break;
+
+		default:
+			break;
+		}
+	}
+	return;
+}
+
+void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
+	// catch the buildings position
+	Ogre::Vector3 buildingPosition = pThisBuilding->getPositionInFrontOf();
+	Ogre::Vector3 offsets[3];
+	offsets[0] = Ogre::Vector3(-100, 25, -50);
+	offsets[1] = Ogre::Vector3(-100, 25, 0);
+	offsets[2] = Ogre::Vector3(-100, 25, 50);
+
+	// for each resident
+	for (int i = 0; i < pThisBuilding->residents; ++i) {
+		// the scene node for the resident
+		Ogre::SceneNode* instanceNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode();
+		instanceNode->translate(buildingPosition + offsets[i], Ogre::Node::TS_WORLD);
+
+		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
+		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
+		rotationNode->attachObject(instanceEntity);
+
+		Npc* instanceScript = new Npc(instanceNode, rotationNode, instanceEntity, pCity, pThisBuilding);
+		instanceScript->initialize();
+	}
+}
+
+
+void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
+	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
+	CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
+}
+
+void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {

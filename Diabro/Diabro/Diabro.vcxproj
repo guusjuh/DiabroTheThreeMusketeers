@@ -149,6 +149,7 @@
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="Affix.h" />
     <ClInclude Include="ArmorInstance.h" />
     <ClInclude Include="BaseApplication.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericFSM.h" />
     <ClInclude Include="IdleState.h" />
+    <ClInclude Include="IQuestContent.h" />
     <ClInclude Include="ItemContainer.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />
@@ -178,6 +180,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="QuestManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="QuestContentManager.h" />

@@ -6,8 +6,11 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false)
+Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
+: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding)
 {
+	//GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->GetZone(1,1).cities[0]
+
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
 	_dialogFile.open("DialogText.txt");
@@ -37,10 +40,8 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	}
 	_dialogCount = 0;
 
-	//TODO: discuss if this should be moved to some NPC generator class ----------------------------------------
-	// randomly assign a profession
-	int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(0, Profession::AMOUNT_OF_PROFS);
-	_profession = (Profession)randomRoll;
+	// randomly assign a profession based on the bui;ding type of its home
+	_profession = (Profession)_home->type;
 
 	// randomly assign needs
 	Need tempNeed;
@@ -48,19 +49,40 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	for (int i = 0; i < NeedType::AMOUNT_OF_NEEDTYPES; ++i) {
 		tempNeed.type = (NeedType)i;
 
-		randomRoll = GameManager::getSingletonPtr()->getRandomInRange(10, 100);
+		int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(10, 100);
 		tempNeed.value = randomRoll;
 		tempNeeds.push_back(tempNeed);
 	};
 
+	_name = getNameOptions()[GameManager::getSingletonPtr()->getRandomInRange(0, getNameOptions().size())];
 	_needs = new NeedSet(tempNeeds);
 
-	// ---------------------------------------------------------------------------------------------------------
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << "Hi, my name is " << _name << " and I am a " << _profession << std::endl;
+	fclose(fp);
+#endif
 }
 
 Npc::~Npc() {
 	delete _needs;
 }
+
+std::vector<std::string> Npc::getNameOptions() {
+	std::vector<std::string> _nameOptions;
+	_nameOptions.push_back("Gleann");
+	_nameOptions.push_back("Wolter");
+	_nameOptions.push_back("Jesper");
+	_nameOptions.push_back("Gus");
+	_nameOptions.push_back("Fredo");
+	_nameOptions.push_back("Kelvin");
+	_nameOptions.push_back("Mike");
+	_nameOptions.push_back("Resa");
+
+	return _nameOptions;
+}
+
 
 /// <summary>
 /// Updates the frame based on the specified deltatime.
@@ -68,7 +90,7 @@ Npc::~Npc() {
 /// <param name="pDeltatime">The time since last frame.</param>
 void Npc::update(Ogre::Real pDeltatime)
 {
-	BaseNpc::update(pDeltatime);
+	//BaseNpc::update(pDeltatime);
 
 	if(_playerDetected)
 	{

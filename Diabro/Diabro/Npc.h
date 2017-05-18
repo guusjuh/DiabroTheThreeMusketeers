@@ -6,14 +6,14 @@
 #include "Needs.h"
 
 enum Profession {
-	None = 0,
-	Smith,
+	Smith = 0,
 	Guard,
-	Parent,
-	Dungeoneer,
+	Priest,
 	Alchemist,
 	Shopkeeper,
 	Nobleman,
+
+	//Dungeoneer,
 
 	AMOUNT_OF_PROFS
 };
@@ -21,7 +21,7 @@ enum Profession {
 class Npc : public BaseNpc
 {
 public:
-	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*);
+	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, Building*);
 	~Npc();
 
 	static Ogre::String getMeshName() { return "penguin.mesh"; }
@@ -43,12 +43,15 @@ private:
 	Ogre::String _startDialogText;	
 	Ogre::String _endDialogText;
 
+	std::string _name;
 	NeedSet* _needs;				//!< A set of needs, when the value of a need is low, this NPC wants something.
 	Profession _profession;			//!< The profession of the NPC, used to generate relevant quests.
-	//Location _hometown;
+	City* _hometown;
+	Building* _home;
 
 	void adjustNeed(NeedType, int);
 
+	std::vector<std::string> getNameOptions();
 };
 
 #endif

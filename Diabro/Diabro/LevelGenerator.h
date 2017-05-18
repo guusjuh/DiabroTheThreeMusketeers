@@ -22,13 +22,17 @@ public:
 private:
 	Zone _zone[1]; ///<holds differnt zones in level
 
-	void drawDungeonFloor(Zone pZone);
+	void drawDungeonFloor(int pScalar, Zone pZone);
 	void createPlane(std::string pName);
 
 	//Await further implementtation
 	//void createTileMesh(int pScalar, Coordinate pPosition, std::string pName);
 	//void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
 	//void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
+
+	void spawnCityContent();
+	void placeEnemySpawnNode(City*, int);
+	void spawnNPCs(City*, Building*);
 };
 
 #endif
