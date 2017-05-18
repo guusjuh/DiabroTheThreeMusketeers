@@ -1,62 +1,73 @@
 #include "LevelGenerator.h"
 #include <OgreMeshManager.h>
 #include <OgreSubMesh.h>
-#include <OgreRoot.h>
-#include <OgreHardwareBufferManager.h>
 #include "GameManager.h"
+#include "math.h"
 
 LevelGenerator::LevelGenerator():
 scalar(1000)
 {
-	_zone[0] = Zone(19, 19, 5, 5, 5, 100);
-	for (int i = 0; i < _zone[0].cities.size(); ++i) {
-		City c = _zone[0].cities[i];
-		
-		//create unique pCity pName (just a number)
-		std::stringstream sstm; 
-		sstm << "pCity-" << i;
-
-		//TODO: generate city
-		_zone[0].cities[i].init();
-
-		//place spawner
-		if (GameManager::getSingletonPtr()->getRandomInRange(0,10) < 5){
-			Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn" + i);
-			//0.5f for height difference
-			CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 25, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
-		}
-		else
-		{
-			Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-			CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 0, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
-		}
-	}
-	drawDungeonFloor(scalar, _zone[0]);
+	//create zone and generate dungeon
+	_zone[0] = Zone(49, 49, 5, 5, 10, 500);
+	//_zone[0] = Zone(18, 18, 5, 5, 10, 500);
+	
+	drawDungeonFloor(_zone[0]);
 }
 
 LevelGenerator::~LevelGenerator()
 {
 }
+/// returns empty position within dungeon
+/// \param pEmptyNeighbours only returns positions with 8 emty neighbours
+Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {
+	return _zone[0].getPosition(1, pEmptyNeighbours);
+}
 
-Zone LevelGenerator::GetZone(int pX, int pZ) {
+/// transfroms a world position to a grid coordinate
+/// \param pWorldCoord coordinate in world position
+Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
+	int x = static_cast<int>(ceil(pWorldCoord.x / scalar + 0.0f));
+	int z = static_cast<int>(ceil(pWorldCoord.z / scalar + 0.0f));
+
+	return Coordinate(x,z);
+}
+
+/// transforms a grid coordinate to a world position
+/// \param pGridCoord grid coordinate
+Coordinate LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
+	return Coordinate(pGridCoord.x * scalar, pGridCoord.z * scalar);
+}
+
+/// retrieve zone
+/// \param pZoneId coordinate of zone, within zone grid
+Zone LevelGenerator::getZone(Coordinate pZoneId) {
 	//TODO:implement multiple zones
 	return _zone[0];
 }
 
+/// retrieve zone
+/// \param pX x position of the zone
+/// \param pZ z position of the zone
+Zone LevelGenerator::getZone(int pX, int pZ) {
+	//TODO:implement multiple zones
+	return _zone[0];
+}
+/// creates a tile for each position in the zone
 
-void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
+/// \param pZone zone from which to draw the tiles
+void LevelGenerator::drawDungeonFloor(Zone pZone) {
 	
 
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
 				Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
-				thisSceneNode->setPosition(ix * pScalar, 0, iz * pScalar);
+				thisSceneNode->setPosition(ix * scalar, 0, iz * scalar);
 
 				std::stringstream name;
 				name << "tile_" << ix << "-" << iz;
 
-				createPlane(pScalar, name.str());
+				createPlane(name.str());
 
 				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), name.str());
 				zoneEntity->setMaterialName("Examples/Rockwall");
@@ -66,20 +77,21 @@ void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
 	}
 }
 
-void LevelGenerator::createPlane(int pScalar, std::string pName)
+/// creates a plane mesh using Ogre's Mesh manager
+/// \param pName name of the plane (in format tile_x-z)
+void LevelGenerator::createPlane(std::string pName)
 {
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 	Ogre::MeshManager::getSingleton().createPlane(
 		pName,
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		plane,
-		pScalar, pScalar, 2, 2,
+		scalar, scalar, 2, 2,
 		true,
 		1, 5, 5,
 		Ogre::Vector3::UNIT_Z);
 }
-
-
+/*
 void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::string pName) {
 	//TODO: add uv coordinates
 
@@ -87,7 +99,7 @@ void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::stri
 
 	Ogre::SubMesh* sub = mesh->createSubMesh();
 
-	const float sqrt13 = 0.577350269f; /*sqrt(1/3)*/
+	const float sqrt13 = 0.577350269f; /*sqrt(1/3)#1#
 	int x = pPosition.x * pScalar;
 	int y = 1;
 	int z = pPosition.z * pScalar;
@@ -175,8 +187,6 @@ void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::stri
 	mesh->load();
 }
 
-
-/*
 void LevelGenerator::placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const {
 	createCityMesh(pCity, 1000, pName, pColour);//scalar set to 1000 for size
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(

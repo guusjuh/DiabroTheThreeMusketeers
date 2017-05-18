@@ -3,14 +3,16 @@
 #include <vector>
 #include <OgreSceneNode.h>
 
+/// integer coordinate representing a 2D position
 struct Coordinate {
 	int x;
 	int z;
-	Coordinate(int x, int z) : x(x), z(z) {	}
+	Coordinate(int pX, int pZ) : x(pX), z(pZ) {	}
 	Coordinate() : x(0), z(0) {	}
 	~Coordinate() { }
 };
 
+///different types of rooms
 enum RoomType
 {
 	EmptyRT,
@@ -23,20 +25,24 @@ enum RoomType
 class City
 {
 public:
-	Coordinate position;
+	Coordinate position; ///< upper left corner position of room
 	RoomType typeFlag;
 	int width;
 	int depth;
-	int id;
+	int id; ///< unique id
 	int scalar;
 	void init();
 	City(int pX, int pZ, int pWidth, int pHeight, int pId, int scalar);
 	
+	//TODO: make local position
 	Coordinate getRandomPoint();
 
 	std::vector<Coordinate> connections;
+	City(int pX, int pZ, int pWidth, int pDepth, int pId);
 	~City();
 
+	Coordinate getCenterTile();
+	Coordinate getRandomTile();
 private:
 	void setRndType();
 

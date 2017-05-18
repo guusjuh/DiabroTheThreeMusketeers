@@ -242,6 +242,7 @@
     <None Include="Resources\materials\textures\yellowBox.jpg" />
     <None Include="testMaterial.material" />
     <None Include="DialogText.txt" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
