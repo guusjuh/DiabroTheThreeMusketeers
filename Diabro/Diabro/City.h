@@ -38,7 +38,6 @@ public:
 	Coordinate getRandomTile();
 private:
 	void setRndType();
-
 };
 
 #endif

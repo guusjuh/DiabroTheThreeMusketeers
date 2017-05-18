@@ -20,15 +20,13 @@ public:
 	int scalar; ///< scales grid position to world positions
 
 private:
-	Zone _zone[1]; ///<holds differnt zones in level
+	Zone _zone[1]; ///<holds different zones in level
 
-	void drawDungeonFloor(Zone pZone);
+	void drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol);
 	void createPlane(std::string pName);
 
-	//Await further implementtation
-	void createTileMesh(int pScalar, Coordinate pPosition, std::string pName) const;
-	void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
-	void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
+	//Await further implementation
+	void createTileMesh(Coordinate pPosition, std::string pName, Ogre::ColourValue pCol) const;
 };
 
 #endif
