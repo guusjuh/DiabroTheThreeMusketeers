@@ -104,6 +104,9 @@
     <ClCompile Include="TreeNode.cpp">
       <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
+    <ClCompile Include="GenericContainer.cpp">
+      <Filter>Sources\QuestContent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -215,9 +218,6 @@
     <ClInclude Include="QuestManager.h">
       <Filter>Headers\Quests</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
-      <Filter>Headers\Quests</Filter>
-    </ClInclude>
     <ClInclude Include="IQuestContent.h">
       <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
@@ -242,8 +242,20 @@
     <ClInclude Include="Player.h">
       <Filter>Headers\Characters</Filter>
     </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Headers\Quests\QuestParts</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionContainer.h">
+      <Filter>Headers\Quests\QuestParts</Filter>
+    </ClInclude>
     <ClInclude Include="Strategy.h">
-      <Filter>Headers\Quests</Filter>
+      <Filter>Headers\Quests\QuestParts</Filter>
+    </ClInclude>
+    <ClInclude Include="StrategyContainer.h">
+      <Filter>Headers\Quests\QuestParts</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericContainer.h">
+      <Filter>Headers\Quests\QuestParts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -324,6 +336,9 @@
     </Filter>
     <Filter Include="Headers\Characters">
       <UniqueIdentifier>{1b52370f-9b0e-4558-ac66-2da619f60e8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Quests\QuestParts">
+      <UniqueIdentifier>{8f45cf93-133b-4cce-b1e7-dbbd72aa1c03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
