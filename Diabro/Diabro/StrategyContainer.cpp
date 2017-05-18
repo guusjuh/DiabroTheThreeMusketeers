@@ -1,0 +1,72 @@
+#include "StrategyContainer.h"
+#include "QuestManager.h" 
+#include "GameManager.h"
+#include "tinyxml2.h"
+#include <stdio.h>
+
+void StrategyContainer::readFromXML()
+{
+	tinyxml2::XMLDocument doc;
+	doc.LoadFile("../../Strategies.xml");
+	tinyxml2::XMLElement* rootNode = doc.FirstChildElement("StrategyContainer");
+
+	if (rootNode)
+	{
+		tinyxml2::XMLElement* stratNode = rootNode->FirstChildElement("Strategy");
+
+		for (stratNode; stratNode; stratNode = stratNode->NextSiblingElement())
+		{
+			// id
+			int id = stratNode->FirstChildElement("ID")->IntText();
+
+			// name strat
+			std::string nameStrat = stratNode->FirstChildElement("NameStrat")->FirstChild()->ToText()->Value();
+
+			// quest name
+			QuestName questName;
+			tinyxml2::XMLElement* questNameNode = stratNode->FirstChildElement("QuestName");
+			questName.preString = questNameNode->FirstChildElement("pre")->FirstChild()->ToText()->Value();
+			questName.postString = questNameNode->FirstChildElement("post")->FirstChild()->ToText()->Value();
+			for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin();
+				it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
+				std::string tempTemplate = questNameNode->FirstChildElement("template")->FirstChild()->ToText()->Value();
+				if (tempTemplate == it->first) {
+					questName.templateContent = it->second;
+				}
+			}			
+
+			// need type
+			NeedType needType = (NeedType)0;
+			for (std::map<std::string, NeedType>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToNeedType.begin(); 
+				it != GameManager::getSingletonPtr()->getQuestManager()->stringToNeedType.end(); ++it) {
+				std::string typeString = stratNode->FirstChildElement("NeedType")->FirstChild()->ToText()->Value();
+				if (typeString == it->first) {
+					needType = it->second;
+				}
+			}
+
+			// action list
+			std::vector<Action*> actions;
+			tinyxml2::XMLElement* actionsNode = stratNode->FirstChildElement("Actions");
+			tinyxml2::XMLElement* actionNode = actionsNode->FirstChildElement("Action");
+			for (actionNode; actionNode; actionNode = actionNode->NextSiblingElement())
+			{
+				Action* tempAction;
+				int nrAction = actionNode->IntText();
+				
+				std::vector<Action*> copy = GameManager::getSingletonPtr()->getQuestManager()->actionContainer->GetObjects();
+				for (int i = 0; i < copy.size(); ++i)
+				{
+					if (copy[i]->GetID() == nrAction)
+					{
+						tempAction = new Action((*copy[i]));
+					}
+				}
+
+				actions.push_back(tempAction);
+			}
+			Strategy* strategy = new Strategy(id, nameStrat, questName, needType, actions);
+		}
+
+	}
+}

@@ -1,6 +1,8 @@
-<StrategyContainer>
+<?xml version="1.0" encoding="Windows-1252"?>
+<StrategyContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 <Strategy>
+	<ID>0</ID>
 	<NameStrat>Deliver item for study</NameStrat>
 	<QuestName>
 		<pre>The </pre>
@@ -16,6 +18,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>1</ID>
 	<NameStrat>Interview NPC</NameStrat>
 	<QuestName>
 		<pre>The </pre>
@@ -32,6 +35,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>2</ID>
 	<NameStrat>Obtain luxuries</NameStrat>
 	<QuestName>
 		<pre>The journey for the beautiful </pre>
@@ -47,6 +51,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>3</ID>
 	<NameStrat>Kill pests</NameStrat>
 	<QuestName>
 		<pre>The harrassement of </pre>
@@ -63,6 +68,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>4</ID>
 	<NameStrat>Obtain rare item</NameStrat>
 	<QuestName>
 		<pre>The exceptional </pre>
@@ -78,6 +84,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>5</ID>
 	<NameStrat>Kill enemies</NameStrat>
 	<QuestName>
 		<pre>The slaughter of </pre>
@@ -94,6 +101,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>6</ID>
 	<NameStrat>Visit a dangerous place</NameStrat>
 	<QuestName>
 		<pre>The dangerous journey to </pre>
@@ -109,6 +117,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>7</ID>
 	<NameStrat>Revenge, Justice</NameStrat>
 	<QuestName>
 		<pre></pre>
@@ -123,6 +132,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>8</ID>
 	<NameStrat>Check on NPC</NameStrat>
 	<QuestName>
 		<pre>Worries about </pre>
@@ -139,6 +149,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>9</ID>
 	<NameStrat>Recover lost item</NameStrat>
 	<QuestName>
 		<pre>Finding </pre>
@@ -154,6 +165,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>10</ID>
 	<NameStrat>Attack threatening entities</NameStrat>
 	<QuestName>
 		<pre>Upholding against </pre>
@@ -170,6 +182,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>11</ID>
 	<NameStrat>Attack enemy</NameStrat>
 	<QuestName>
 		<pre>The battle against </pre>
@@ -184,6 +197,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>12</ID>
 	<NameStrat>Gather materials</NameStrat>
 	<QuestName>
 		<pre>The journey for </pre>
@@ -200,6 +214,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>13</ID>
 	<NameStrat>Deliver supplies</NameStrat>
 	<QuestName>
 		<pre>Dropping of </pre>
@@ -215,7 +230,9 @@
 </Strategy>
 
 <Strategy>
+	<ID>14</ID>
 	<NameStrat>Deliver supplies</NameStrat>
+	<QuestName>
 		<pre>The delivery of </pre>
 		<template>QuestItemQC</template>
 		<post></post>
@@ -230,6 +247,7 @@
 </Strategy>
 
 <Strategy>
+	<ID>15</ID>
 	<NameStrat>Trade for supplies</NameStrat>
 	<QuestName>
 		<pre>Interesting trade deal with </pre>

@@ -73,7 +73,7 @@ void GameManager::createScene(void)
 	_uiManager->init();
 
 	_questManager = new QuestManager();
-
+	_questManager->Initialize();
 	// set lights
 	setupLights(mSceneMgr);
 

@@ -14,21 +14,27 @@ struct QuestName {
 
 class Strategy {
 public:
+	Strategy(int pid, std::string pName, QuestName pNameQuest, NeedType pMotivation, std::vector<Action*> pActions)
+		: _id(pid), _nameStrategy(pName), _nameQuest(pNameQuest), _motivation(pMotivation), _actionSequence(pActions)
+	{
+		
+	}
+
 	int GetID() { return _id; }
 
 	std::string GetName() { return _nameStrategy; }
-	std::string GetNameQuest() { return _nameQuest; }
+	QuestName GetNameQuest() { return _nameQuest; }
 	NeedType GetMotivation() { return _motivation; }
-	std::vector<Action> GetActionSequence() { return _actionSequence; }
+	std::vector<Action*> GetActionSequence() { return _actionSequence; }
 
 private:
 	int _id;
 
 	std::string _nameStrategy;
-	std::string _nameQuest;
+	QuestName _nameQuest;
 
 	NeedType _motivation;
-	std::vector<Action> _actionSequence;
+	std::vector<Action*> _actionSequence;
 };
 
 #endif STRATEGY_H

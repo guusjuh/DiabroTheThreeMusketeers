@@ -107,6 +107,7 @@
     <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionContainer.cpp" />
     <ClCompile Include="ArmorInstance.cpp" />
     <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="BaseArmor.cpp" />
@@ -134,7 +135,9 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
+    <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="StrategyContainer.cpp" />
     <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="tinyxml2.cpp" />

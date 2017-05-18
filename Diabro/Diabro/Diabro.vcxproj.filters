@@ -78,13 +78,13 @@
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
     <ClCompile Include="QuestItemContainer.cpp">
-      <Filter>Sources\QuestContent</Filter>
+      <Filter>Sources\Quest\QuestContent</Filter>
     </ClCompile>
     <ClCompile Include="QuestItemGenerator.cpp">
-      <Filter>Sources\QuestContent</Filter>
+      <Filter>Sources\Quest\QuestContent</Filter>
     </ClCompile>
     <ClCompile Include="QuestContentManager.cpp">
-      <Filter>Sources\QuestContent</Filter>
+      <Filter>Sources\Quest\QuestContent</Filter>
     </ClCompile>
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Sources</Filter>
@@ -105,7 +105,16 @@
       <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
     <ClCompile Include="GenericContainer.cpp">
-      <Filter>Sources\QuestContent</Filter>
+      <Filter>Sources\Quest\QuestContent</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestManager.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionContainer.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="StrategyContainer.cpp">
+      <Filter>Sources\Quest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,9 +313,6 @@
     <Filter Include="Headers\Needs">
       <UniqueIdentifier>{6e9bfbbe-52d5-4f0b-b346-6cf303ea85a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\QuestContent">
-      <UniqueIdentifier>{941f42a8-19a0-45a9-9d67-1dba844f3563}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\LevelGeneration">
       <UniqueIdentifier>{4496d5fd-f0d4-4d38-823d-210e643542b6}</UniqueIdentifier>
     </Filter>
@@ -339,6 +345,12 @@
     </Filter>
     <Filter Include="Headers\Quests\QuestParts">
       <UniqueIdentifier>{8f45cf93-133b-4cce-b1e7-dbbd72aa1c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Quest">
+      <UniqueIdentifier>{68e2ae05-104f-4c19-bfa1-66b75cd2c6b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Quest\QuestContent">
+      <UniqueIdentifier>{941f42a8-19a0-45a9-9d67-1dba844f3563}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
