@@ -31,8 +31,10 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 	}
 	
 	generateCities(pMaxTries, pMaxCities);
+
 	int n = generatePathways(cities.size() + 1);
 	connectDungeon(cities.size() + 1 + n, 0.5f);
+
 
 	cleanGrid();
 	printGrid();
