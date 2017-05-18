@@ -7,7 +7,6 @@ City::City(int pX, int pZ, int pWidth, int pDepth, int pId) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId)
 {
 	setRndType();
-	init();
 }
 
 void City::init()
@@ -57,8 +56,8 @@ void City::generateBuildings()
 		buildingNode->setScale(2, 2, 2);
 		buildingNode->attachObject(_buildingEntity);
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * 1000, (width - 1) * 1000);
-		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * 1000, (depth - 1) * 1000);
+		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * 200, (width - 1) * 200);
+		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * 200, (depth - 1) * 200);
 		buildingNode->setPosition(xPos, 100, zPos);//GameManager::getSingletonPtr()->getRandomInRange(x * 1000, (x + width) * 1000), 50, GameManager::getSingletonPtr()->getRandomInRange(z * 1000, (z + depth) * 1000));
 
 		nodeList(buildingNode);
@@ -136,8 +135,8 @@ int City::getScaladDepth(int depth, int scalar)
 }
 
 Coordinate City::getRandomPoint(){
-	int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * 1000, (width - 1) * 1000);
-	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * 1000, (depth - 1) * 1000);
+	int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * 200, (width - 1) * 200);
+	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * 200, (depth - 1) * 200);
 
 	return Coordinate(xPos, zPos);
 }
@@ -147,7 +146,7 @@ std::vector<Coordinate> City::buildingPositions(){
 	positions.clear();
 	for (int i = 0; i < buildings.size(); i++) {
 		Ogre::Vector3 buildingPos = buildings[i]->getPosition();
-		positions.push_back(Coordinate(buildingPos.x / 1000, buildingPos.z / 1000));
+		positions.push_back(Coordinate(buildingPos.x / 200, buildingPos.z / 200));
 	}
 
 	return positions;

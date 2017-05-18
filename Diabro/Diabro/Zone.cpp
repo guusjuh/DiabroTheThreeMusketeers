@@ -463,6 +463,7 @@ bool Zone::placeCity(City pC) {
 				setTile(pC.position.x + ix, pC.position.z + iz, pC.id);
 			}
 		}
+		pC.init();
 		cities.push_back(pC);
 		return true;
 	}
@@ -563,11 +564,11 @@ void Zone::printCollisionGrid(){
 	for (int ix = 0; ix < _width; ++ix) {
 		for (int iy = 0; iy < _depth; ++iy) {
 			if (grid[ix + iy * _width]){
-				printf("1");
+				printf("1 ");
 			}
 			else
 			{
-				printf("0");
+				printf("0 ");
 			}
 		}
 		printf("\n");

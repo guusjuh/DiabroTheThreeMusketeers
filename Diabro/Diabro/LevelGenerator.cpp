@@ -5,10 +5,10 @@
 #include "math.h"
 
 LevelGenerator::LevelGenerator():
-scalar(1000)
+scalar(200)
 {
 	//create zone and generate dungeon
-	_zone[0] = Zone(49, 49, 5, 5, 10, 500);
+	_zone[0] = Zone(13, 13, 8, 8, 10, 500);
 	//_zone[0] = Zone(18, 18, 5, 5, 10, 500);
 	
 	drawDungeonFloor(_zone[0]);
