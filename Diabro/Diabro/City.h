@@ -12,14 +12,40 @@ struct Coordinate {
 	~Coordinate() { }
 };
 
-///different types of rooms
+// Rosa: commented out empty and hub since i didn't see good use for it and i needed the cities and hideouts
 enum RoomType
 {
-	EmptyRT,
+	//EmptyRT,
 	CityRT,
 	HideoutRT,
-	HubRT,
+	//HubRT,
 	sizeRT
+};
+
+enum BuildingType {
+	Smithery = 0,
+	GuardHouse,
+	Church,
+	PotionStore,
+	Shop,
+	FancyHouse,
+
+	HideOutHouse,
+
+	AMOUNT_OF_BUILDINGTYPES
+};
+
+struct Building {
+	Building(BuildingType pType, int pResidents, Ogre::Vector2 pPosition)
+		: type(pType), residents(pResidents), position(pPosition) {}
+
+	BuildingType type;
+	int residents;
+	Ogre::Vector2 position;
+
+	Ogre::Vector3 getPositionInFrontOf() {
+		return Ogre::Vector3(position.x, 0, position.y);
+	}
 };
 
 class City
@@ -43,6 +69,8 @@ public:
 
 	Coordinate getCenterTile();
 	Coordinate getRandomTile();
+	std::vector<Coordinate> buildingPositions();
+
 private:
 	void setRndType();
 

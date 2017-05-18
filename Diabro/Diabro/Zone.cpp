@@ -36,6 +36,7 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 
 	cleanGrid();
 	printGrid();
+	printCollisionGrid();
 }
 
 Zone::~Zone()
@@ -473,7 +474,9 @@ bool Zone::placeCity(City pC) {
 /// \param pMaxCities the maximum amount of cities to place
 void Zone::generateCities(int pMaxTries, int pMaxCities) {
 	int nCities = 0;
-	srand(time(NULL));
+	seed = time(NULL);
+
+	srand(seed);
 
 	for (int iTry = 0; iTry < pMaxTries; ++iTry) {
 		//generate width, depth, should be uneven for wall creation
@@ -512,5 +515,63 @@ void Zone::printGrid() {
 	}
 	fclose(fp);
 	//printValues();
+#endif
+}
+
+bool* Zone::getCollisionGrid(){
+	if (seed != lastSeed){
+		//create the array
+		collisionGrid = generateCollisionGrid();
+		lastSeed = seed;
+	}
+	return collisionGrid;
+}
+
+bool* Zone::generateCollisionGrid(){
+	bool* grid = new bool[(_width * _depth)];
+
+	for (size_t i = 0; i < _width; i++)
+	{
+		for (size_t j = 0; j < _depth; j++)
+		{
+			if (getTile(i, j)){
+				grid[i + j * _width] = true;
+			}
+			else
+			{
+				grid[i + j * _width] = false;
+			}
+		}
+	}
+
+	for each (City city in cities)
+	{
+		for each (Coordinate buildingPos in city.buildingPositions())
+		{
+			grid[buildingPos.x + buildingPos.z * _width] = false;// set tiles at building pos false
+		}
+	}
+	
+	return grid;
+}
+
+void Zone::printCollisionGrid(){
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	bool* grid = Zone::getCollisionGrid();
+	for (int ix = 0; ix < _width; ++ix) {
+		for (int iy = 0; iy < _depth; ++iy) {
+			if (grid[ix + iy * _width]){
+				printf("1");
+			}
+			else
+			{
+				printf("0");
+			}
+		}
+		printf("\n");
+	}
+	fclose(fp);
 #endif
 }

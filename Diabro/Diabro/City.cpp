@@ -7,7 +7,7 @@ City::City(int pX, int pZ, int pWidth, int pDepth, int pId) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId)
 {
 	setRndType();
-
+	init();
 }
 
 void City::init()
@@ -140,4 +140,15 @@ Coordinate City::getRandomPoint(){
 	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * 1000, (depth - 1) * 1000);
 
 	return Coordinate(xPos, zPos);
+}
+
+std::vector<Coordinate> City::buildingPositions(){
+	std::vector<Coordinate> positions;
+	positions.clear();
+	for (int i = 0; i < buildings.size(); i++) {
+		Ogre::Vector3 buildingPos = buildings[i]->getPosition();
+		positions.push_back(Coordinate(buildingPos.x / 1000, buildingPos.z / 1000));
+	}
+
+	return positions;
 }

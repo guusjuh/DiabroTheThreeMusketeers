@@ -16,6 +16,11 @@ private:
 	int* _tiles; ///< holds the zone grid, filled with all zone positions
 	int _numberOfRegions; ///< not yet implemented, decides the amount of closed of regions within the zone
 
+	unsigned int seed;
+	unsigned int lastSeed;
+
+	bool* collisionGrid;
+
 public:
 	std::vector<City> cities; ///< vector containing all cities within the zone
 
@@ -32,6 +37,9 @@ public:
 	Coordinate getPosition(int pId, bool pCheckNeighbours);
 	void printGrid();
 
+	void printCollisionGrid();
+
+	bool* getCollisionGrid();
 private:
 	void cleanGrid();
 	bool inGrid(Coordinate pCoord);
@@ -52,6 +60,8 @@ private:
 	bool hasCollision(Coordinate pPosition);
 	bool hasCollision(City pC);
 	bool placeCity(City pC);
+
+	bool* generateCollisionGrid();
 };
 
 #endif
