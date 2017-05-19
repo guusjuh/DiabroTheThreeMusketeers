@@ -59,9 +59,6 @@ public:
 	int id; ///< unique id
 	int scalar;
 	void init();
-
-	City(){}
-	City(int pX, int pZ, int pWidth, int pHeight, int pId, int scalar);
 	
 	//TODO: make local position
 	Coordinate getRandomPoint();
@@ -73,6 +70,8 @@ public:
 	~City();
 
 	std::vector<Building> Buildings() { return _buildingStructs; };
+
+	std::vector<Coordinate> buildingPositions();
 
 private:
 	void setRndType();

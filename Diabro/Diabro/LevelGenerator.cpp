@@ -8,16 +8,6 @@ LevelGenerator::LevelGenerator():
 scalar(500)
 {
 	_zone[0] = Zone(29, 29, 5, 5, 15, 100);
-	for (int i = 0; i < _zone[0].cities.size(); ++i) {
-		City c = _zone[0].cities[i];
-		
-		//create unique pCity pName (just a number)
-		std::stringstream sstm; 
-		sstm << "pCity-" << i;
-
-		//TODO: generate city
-		_zone[0].cities[i].init();
-	}
 
 	spawnCityContent();
 

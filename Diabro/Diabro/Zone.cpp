@@ -31,11 +31,14 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 	}
 	
 	generateCities(pMaxTries, pMaxCities);
+
 	int n = generatePathways(cities.size() + 1);
 	connectDungeon(cities.size() + 1 + n, 0.5f);
 
+
 	cleanGrid();
 	printGrid();
+	//printCollisionGrid();
 }
 
 Zone::~Zone()
@@ -462,6 +465,7 @@ bool Zone::placeCity(City pC) {
 				setTile(pC.position.x + ix, pC.position.z + iz, pC.id);
 			}
 		}
+		pC.init();
 		cities.push_back(pC);
 		return true;
 	}
@@ -473,7 +477,9 @@ bool Zone::placeCity(City pC) {
 /// \param pMaxCities the maximum amount of cities to place
 void Zone::generateCities(int pMaxTries, int pMaxCities) {
 	int nCities = 0;
-	srand(time(NULL));
+	seed = time(NULL);
+
+	srand(seed);
 
 	for (int iTry = 0; iTry < pMaxTries; ++iTry) {
 		//generate width, depth, should be uneven for wall creation
@@ -512,5 +518,63 @@ void Zone::printGrid() {
 	}
 	fclose(fp);
 	//printValues();
+#endif
+}
+
+bool* Zone::getCollisionGrid(){
+	if (seed != lastSeed){
+		//create the array
+		collisionGrid = generateCollisionGrid();
+		lastSeed = seed;
+	}
+	return collisionGrid;
+}
+
+bool* Zone::generateCollisionGrid(){
+	bool* grid = new bool[(_width * _depth)];
+
+	for (size_t i = 0; i < _width; i++)
+	{
+		for (size_t j = 0; j < _depth; j++)
+		{
+			if (getTile(i, j)){
+				grid[i + j * _width] = true;
+			}
+			else
+			{
+				grid[i + j * _width] = false;
+			}
+		}
+	}
+	for (size_t i = 0; i < cities.size(); i++)
+	{
+		std::vector<Coordinate> buildings = cities[i].buildingPositions();
+		for (size_t j = 0; j < buildings.size(); j++)
+		{
+			grid[buildings[j].x + buildings[j].z * _width] = false;// set tiles at building pos false
+		}
+	}
+	
+	return grid;
+}
+
+void Zone::printCollisionGrid(){
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	bool* grid = Zone::getCollisionGrid();
+	for (int ix = 0; ix < _width; ++ix) {
+		for (int iy = 0; iy < _depth; ++iy) {
+			if (grid[ix + iy * _width]){
+				printf("1 ");
+			}
+			else
+			{
+				printf("0 ");
+			}
+		}
+		printf("\n");
+	}
+	fclose(fp);
 #endif
 }
