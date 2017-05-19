@@ -7,13 +7,7 @@ template<typename T>
 class GenericContainer {
 public:
 	GenericContainer();
-	~GenericContainer() {
-		for (int i = 0; i < _objects.size(); ++i) {
-			if (_objects[i] != nullptr) {
-				delete _objects[i];
-			}
-		}
-	}
+	~GenericContainer();
 
 	int GetAmount() { return _amount; }
 	std::vector<T*> GetObjects() { return _objects; }
