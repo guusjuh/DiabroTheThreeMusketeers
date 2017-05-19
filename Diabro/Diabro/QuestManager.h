@@ -15,7 +15,6 @@ public:
 	{
 		actionContainer = new ActionContainer();
 		strategyContainer = new StrategyContainer();
-		int i = 0;
 	}
 
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }

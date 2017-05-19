@@ -25,8 +25,13 @@ void StrategyContainer::readFromXML()
 			// quest name
 			QuestName questName;
 			tinyxml2::XMLElement* questNameNode = stratNode->FirstChildElement("QuestName");
-			questName.preString = questNameNode->FirstChildElement("pre")->FirstChild()->ToText()->Value();
-			questName.postString = questNameNode->FirstChildElement("post")->FirstChild()->ToText()->Value();
+
+			// since the pre or post string can be null, first check for that 
+			tinyxml2::XMLNode* preNode = questNameNode->FirstChildElement("pre")->FirstChild();
+			questName.preString = preNode == nullptr ? "" : preNode->ToText()->Value();
+
+			tinyxml2::XMLNode* postNode = questNameNode->FirstChildElement("post")->FirstChild();
+			questName.postString = postNode == nullptr ? "" : postNode->ToText()->Value();
 			for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin();
 				it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
 				std::string tempTemplate = questNameNode->FirstChildElement("template")->FirstChild()->ToText()->Value();
@@ -66,6 +71,7 @@ void StrategyContainer::readFromXML()
 				actions.push_back(tempAction);
 			}
 			Strategy* strategy = new Strategy(id, nameStrat, questName, needType, actions);
+			_objects.push_back(strategy);
 		}
 
 	}
