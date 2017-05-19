@@ -53,10 +53,17 @@ set(HDRS
 	./Diabro/Diabro/TestFSM.h
 	./Diabro/Diabro/Needs.h
 	./Diabro/Diabro/BaseQuestItem.h
+	./Diabro/Diabro/IQuestContent.h	
 	./Diabro/Diabro/QuestContentManager.h 
 	./Diabro/Diabro/QuestItem.h 
 	./Diabro/Diabro/QuestItemContainer.h 
 	./Diabro/Diabro/QuestItemGenerator.h
+	./Diabro/Diabro/Action.h
+	./Diabro/Diabro/ActionContainer.h
+	./Diabro/Diabro/GenericContainer.h
+	./Diabro/Diabro/Strategy.h
+	./Diabro/Diabro/StrategyContainer.h
+	./Diabro/Diabro/QuestManager.h
 	./Diabro/Diabro/tinyxml2.h
 	./Diabro/Diabro/ArmorInstance.h
 	./Diabro/Diabro/BaseArmor.h
@@ -87,8 +94,12 @@ set(SRCS
 	./Diabro/Diabro/ItemManager.cpp
 	./Diabro/Diabro/ItemGenerator.cpp
 	./Diabro/Diabro/QuestContentManager.cpp
+	./Diabro/Diabro/GenericContainer.cpp
 	./Diabro/Diabro/QuestItemContainer.cpp
 	./Diabro/Diabro/QuestItemGenerator.cpp
+	./Diabro/Diabro/ActionContainer.cpp
+	./Diabro/Diabro/StrategyContainer.cpp
+	./Diabro/Diabro/QuestManager.cpp
 	./Diabro/Diabro/LevelGenerator.cpp
 	./Diabro/Diabro/Zone.cpp
 	./Diabro/Diabro/City.cpp
