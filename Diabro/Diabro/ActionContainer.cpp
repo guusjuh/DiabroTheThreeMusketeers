@@ -9,7 +9,11 @@ ActionContainer::ActionContainer() {
 }
 
 ActionContainer::~ActionContainer() {
-	GenericContainer<Action>::~GenericContainer();
+	for (int i = 0; i < _objects.size(); ++i) {
+		if (_objects[i] != nullptr) {
+			delete _objects[i];
+		}
+	}
 }
 
 void ActionContainer::readFromXML()

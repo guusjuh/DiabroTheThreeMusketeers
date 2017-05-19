@@ -9,7 +9,11 @@ StrategyContainer::StrategyContainer() {
 }
 
 StrategyContainer::~StrategyContainer() {
-	GenericContainer<Strategy>::~GenericContainer();
+	for (int i = 0; i < _objects.size(); ++i) {
+		if (_objects[i] != nullptr) {
+			delete _objects[i];
+		}
+	}
 }
 
 void StrategyContainer::readFromXML()
