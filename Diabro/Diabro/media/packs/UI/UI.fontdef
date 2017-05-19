@@ -1,0 +1,15 @@
+UI/Caption
+{
+	type 		truetype
+	source 		CelticHand.ttf
+	size 		15
+	resolution 	96
+}
+
+UI/Value
+{
+	type 		truetype
+	source 		CelticHand.ttf
+	size 		10
+	resolution 	96
+}

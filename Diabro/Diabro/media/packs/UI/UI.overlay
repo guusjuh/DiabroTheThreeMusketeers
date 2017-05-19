@@ -1,0 +1,38 @@
+template container Panel(UI/Green)
+{
+	metrics_mode pixels
+	material UI/Green
+	horz_align center
+	width 256
+	height 32
+}
+
+template container Panel(UI/Yellow)
+{
+	metrics_mode pixels
+	material UI/Yellow
+	horz_align center
+	width 256
+	height 32
+}
+
+template container Panel(UI/HUDText)
+{
+	metrics_mode pixels
+	top 100
+
+	material UI/Transparent	
+	transparent true
+
+	element TextArea(HUDCaption)
+	{
+        metrics_mode pixels
+        horz_align center
+        alignment center
+        top 9
+        font_name UI/Caption
+        char_height 20
+        space_width 7
+        colour 1 1 1
+	}
+}

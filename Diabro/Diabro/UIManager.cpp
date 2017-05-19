@@ -35,6 +35,19 @@ void UIManager::setupUI()
 	// create health bar
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
 	_staminaBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPRIGHT, "Stamina", "UI/Yellow");
+	//OgreBites::DecorWidget* test = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_BOTTOM, "HUDText", "UI/HUDText");
+	//test->getOverlayElement()->("Hello World");
+	//Ogre::OverlayElement* mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/HUDText", "Panel", "HUDText");
+	//mElement->setWidth(400);
+	//mElement->setHeight(100);
+/*	Ogre::OverlayContainer* container = (Ogre::OverlayContainer*)mElement;
+	Ogre::TextAreaOverlayElement* mTextArea = (Ogre::TextAreaOverlayElement*)container->getChild(mElement->getName() + "/HUDCaption");
+	Ogre::DisplayString text = "Hello World";
+	mTextArea->setTop(mTextArea->getHeight() + 10);
+	mTextArea->setCaption(text);*/
+	OgreBites::HUDText* hudText = _mSdkTrayMgr->createHUDText(OgreBites::TL_CENTER, "HUDText", "Hi Jasper!", 300, 40);
+	//hudText->setPadding(5);
+
 	//_staminaBarWidget->getOverlayElement()->setHorizontalAlignment(Ogre::GuiHorizontalAlignment::GHA_LEFT);
 	_staminaBarWidget->getOverlayElement()->setLeft(-128);
 }

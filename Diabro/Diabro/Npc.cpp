@@ -83,7 +83,6 @@ std::vector<std::string> Npc::getNameOptions() {
 	return _nameOptions;
 }
 
-
 /// <summary>
 /// Updates the frame based on the specified deltatime.
 /// </summary>

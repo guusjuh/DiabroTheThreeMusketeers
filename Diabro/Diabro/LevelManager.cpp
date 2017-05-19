@@ -44,7 +44,8 @@ void LevelManager::initialize()
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
-	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
+	_camNode->setPosition(Ogre::Vector3(0, 100, 0));
+	_camNode->pitch(Ogre::Degree(15), Ogre::Node::TS_LOCAL);
 	startPitchCam = _camNode->getOrientation().getPitch();
 }
 

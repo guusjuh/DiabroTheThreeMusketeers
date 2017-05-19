@@ -108,7 +108,7 @@ void GameManager::createCamera()
 	mCamera = mSceneMgr->createCamera("MainCam");
 
 	// set pos and rot
-	mCamera->setPosition(Ogre::Vector3(0, 150, 300));
+	mCamera->setPosition(Ogre::Vector3(0, 200, 300));
 	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
 	mCamera->setNearClipDistance(5);
 
