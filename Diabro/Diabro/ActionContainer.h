@@ -6,13 +6,8 @@
 
 class ActionContainer : public GenericContainer<Action> {
 public:
-	ActionContainer() {
-		readFromXML();
-	}
-
-	~ActionContainer() {
-		GenericContainer<Action>::~GenericContainer();
-	}
+	ActionContainer();
+	~ActionContainer();
 
 	void readFromXML();
 };

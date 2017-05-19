@@ -4,6 +4,14 @@
 #include "tinyxml2.h"
 #include <stdio.h>
 
+ActionContainer::ActionContainer() {
+	readFromXML();
+}
+
+ActionContainer::~ActionContainer() {
+	GenericContainer<Action>::~GenericContainer();
+}
+
 void ActionContainer::readFromXML()
 {
 	tinyxml2::XMLDocument doc;

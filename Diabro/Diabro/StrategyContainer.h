@@ -6,13 +6,8 @@
 
 class StrategyContainer : GenericContainer<Strategy> {
 public:
-	StrategyContainer()
-	{
-		readFromXML();
-	}
-	~StrategyContainer() {
-		GenericContainer<Strategy>::~GenericContainer();
-	}
+	StrategyContainer();
+	~StrategyContainer();
 
 	void readFromXML();
 };

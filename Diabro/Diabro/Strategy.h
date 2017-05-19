@@ -20,6 +20,14 @@ public:
 		
 	}
 
+	~Strategy() {
+		for (int i = 0; i < _actionSequence.size(); ++i) {
+			if (_actionSequence[i] != nullptr) {
+				delete _actionSequence[i];
+			}
+		}
+	}
+
 	int GetID() { return _id; }
 
 	std::string GetName() { return _nameStrategy; }
@@ -37,4 +45,4 @@ private:
 	std::vector<Action*> _actionSequence;
 };
 
-#endif STRATEGY_H
+#endif 
