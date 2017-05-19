@@ -1,8 +1,12 @@
 #ifndef ACTION_H
 #define ACTION_H
 
+#include <vector>
+#include <map>
+#include "QuestContentManager.h"
+
 enum ActionType {
-	Export = 0,
+	Escort = 0,
 	Exchange,
 	Explore,
 	Get,
@@ -19,12 +23,14 @@ enum PreconditionsType {
 	KnowWhereToGo,
 	YouItemOfInterest,
 	TheyItemOfInterest,
+	BothItemOfInterest,
 };
 
 enum PostconditionType {
 	Accompanied,
 	YouHaveTheItem,
 	TheyHaveTheItem,
+	BothHaveTheItem,
 	YouInfo,
 	TheyInfo,
 	YouThere,
@@ -33,14 +39,25 @@ enum PostconditionType {
 
 class Action {
 public:
-	
+	Action() : _id(0), _type((ActionType)0), _preconditions(0), _postcondition((PostconditionType)0){}
+	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::map<QuestContent, int> pQuestContent) :
+	_id(pID), _type(pType), _preconditions(pPreconditions), _postcondition(pPostcondition), _requiredContent(pQuestContent) {}
+	~Action(){}
+
+	int GetID() { return _id; }
+	ActionType GetType() { return _type; }
+	std::vector<PreconditionsType> GetPreconditions() { return _preconditions; }
+	PostconditionType GetPostcondition() { return _postcondition; }
+	std::map<QuestContent, int> GetRequiredContent() { return _requiredContent; }
+
 private:
+	int _id;
 	ActionType _type;
+
 	std::vector<PreconditionsType> _preconditions;
-	std::vector<PostconditionType> _postconditions;
+	PostconditionType _postcondition;
 
-	std::vector<>
-
+	std::map<QuestContent, int> _requiredContent;
 };
 
 #endif

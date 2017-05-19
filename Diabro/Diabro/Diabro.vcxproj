@@ -112,6 +112,7 @@
     <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionContainer.cpp" />
     <ClCompile Include="ArmorInstance.cpp" />
     <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="BaseArmor.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GenericContainer.cpp" />
     <ClCompile Include="GenericFSM.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="ItemContainer.cpp" />
@@ -138,7 +140,9 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
+    <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="StrategyContainer.cpp" />
     <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
@@ -150,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionContainer.h" />
     <ClInclude Include="Affix.h" />
     <ClInclude Include="ArmorInstance.h" />
     <ClInclude Include="BaseApplication.h" />
@@ -167,6 +172,7 @@
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GenericContainer.h" />
     <ClInclude Include="GenericFSM.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="IQuestContent.h" />
@@ -188,6 +194,8 @@
     <ClInclude Include="QuestItemContainer.h" />
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
+    <ClInclude Include="Strategy.h" />
+    <ClInclude Include="StrategyContainer.h" />
     <ClInclude Include="TestFSM.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />

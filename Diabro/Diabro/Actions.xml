@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ActionContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<Action>
+	<ID>0</ID>
+	<Type>Escort</Type>
+	<Preconditions>
+		<Precondition>SomebodyThere</Precondition>
+	</Preconditions>
+	<Postcondition>Accompanied</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>HideOutQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>NPCQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>1</ID>
+	<Type>Exchange</Type>
+	<Preconditions>
+		<Precondition>SomebodyThere</Precondition>
+		<Precondition>BothItemOfInterest</Precondition>
+	</Preconditions>
+	<Postcondition>BothHaveTheItem</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>QuestItemQC</Type>
+			<Nr>2</Nr>
+		</Pair>
+		<Pair>
+			<Type>TownQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>NPCQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>2</ID>
+	<Type>Explore</Type>
+	<Preconditions>
+		<Precondition>KnowWhereToGo</Precondition>
+	</Preconditions>
+	<Postcondition>YouInfo</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>TownQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>3</ID>
+	<Type>Explore</Type>
+	<Preconditions>
+		<Precondition>KnowWhereToGo</Precondition>
+	</Preconditions>
+	<Postcondition>YouInfo</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>HideOutQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>4</ID>
+	<Type>Get</Type>
+	<Preconditions>
+		<Precondition>SomethingThere</Precondition>
+	</Preconditions>
+	<Postcondition>YouHaveTheItem</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>TownQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>QuestItemQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>5</ID>
+	<Type>Get</Type>
+	<Preconditions>
+		<Precondition>SomethingThere</Precondition>
+	</Preconditions>
+	<Postcondition>YouHaveTheItem</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>HideOutQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>QuestItemQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+
+<Action>
+	<ID>6</ID>
+	<Type>Give</Type>
+	<Preconditions>
+		<Precondition>SomebodyThere</Precondition>
+		<Precondition>YouItemOfInterest</Precondition>
+	</Preconditions>
+	<Postcondition>TheyHaveTheItem</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>TownQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>QuestItemQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>7</ID>
+	<Type>Goto</Type>
+	<Preconditions>
+		<Precondition>KnowWhereToGo</Precondition>
+	</Preconditions>
+	<Postcondition>YouThere</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>TownQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>8</ID>
+	<Type>Goto</Type>
+	<Preconditions>
+		<Precondition>KnowWhereToGo</Precondition>
+	</Preconditions>
+	<Postcondition>YouThere</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>HideOutQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>9</ID>
+	<Type>Kill</Type>
+	<Preconditions>
+		<Precondition>SomebodyThere</Precondition>
+	</Preconditions>
+	<Postcondition>TheyDead</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>HideOutQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>EnemyQC</Type>
+			<Nr>2</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>10</ID>
+	<Type>Listen</Type>
+	<Preconditions>
+		<Precondition>SomebodyThere</Precondition>
+	</Preconditions>
+	<Postcondition>YouInfo</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>TownQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>NPCQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+
+<Action>
+	<ID>11</ID>
+	<Type>Report</Type>
+	<Preconditions>
+		<Precondition>SomebodyThere</Precondition>
+	</Preconditions>
+	<Postcondition>TheyInfo</Postcondition>
+	<RequiredContent>
+		<Pair>
+			<Type>TownQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+		<Pair>
+			<Type>NPCQC</Type>
+			<Nr>1</Nr>
+		</Pair>
+	</RequiredContent>
+</Action>
+</ActionContainer>

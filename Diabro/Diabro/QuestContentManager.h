@@ -5,6 +5,16 @@
 #include "QuestItemContainer.h"
 #include "QuestItemGenerator.h"
 #include "tinyxml2.h"
+#include "City.h"
+
+enum QuestContent {
+	QuestItemQC = 0,
+	ItemQC = 0,
+	TownQC,
+	HideOutQC,
+	NPCQC,
+	EnemyQC
+};
 
 class QuestContentManager {
 public:
@@ -15,7 +25,7 @@ public:
 	QuestItemGenerator* getItemGenerator() { return _itemGenerator; };
 
 	//TODO: create locations and store/ref to them in this content manager
-	//std::vector<Location> locations;
+	std::vector<City*> cities;
 
 private:
 	QuestItemContainer* _itemContainer;
