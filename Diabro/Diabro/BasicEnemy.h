@@ -16,7 +16,7 @@ public:
 
 	static Ogre::String getMeshName() { return "robot.mesh"; }
 
-	StateMachine<int> stateMachine;
+	StateMachine<Character> stateMachine;
 
 private:
 	//TODO: this code may be moved to the BaseNPC 

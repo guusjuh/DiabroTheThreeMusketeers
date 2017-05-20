@@ -10,14 +10,14 @@ IdleState::~IdleState()
 	
 }
 
-void IdleState::Enter(int* agent){
+void IdleState::Enter(Character* agent){
 
 }
 
-void IdleState::Execute(int* agent){
+void IdleState::Execute(Character* agent){
 
 }
 
-void IdleState::Exit(int* agent){
+void IdleState::Exit(Character* agent){
 
 }

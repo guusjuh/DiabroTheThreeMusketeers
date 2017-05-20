@@ -7,4 +7,4 @@ State<T>::State() {}
 template<typename T>
 State<T>::~State() {}
 
-template class State<int>;
+template class State<Character>;

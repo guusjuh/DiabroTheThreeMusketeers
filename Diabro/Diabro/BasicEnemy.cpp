@@ -11,10 +11,10 @@
 /// <param name="pMyEntity">My entity.</param>
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
-	State<int> startState = IdleState();
-	std::map<std::string, State<int>> possibleStates;
+	State<Character> startState = IdleState();
+	std::map<std::string, State<Character>> possibleStates;
 	possibleStates["Idle"] = startState;
-	stateMachine = StateMachine<int>(new int(), startState, possibleStates);
+	stateMachine = StateMachine<Character>(this, startState, possibleStates);
 
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 }

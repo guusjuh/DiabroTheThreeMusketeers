@@ -2,15 +2,16 @@
 #define IDLE_STATE_H
 
 #include "State.h"
+#include "Character.h"
 
-class IdleState : public State<int>
+class IdleState : public State<Character>
 {
 public:
 	IdleState();
 	~IdleState();
 
-	void Enter(int* agent);
-	void Execute(int* agent);
-	void Exit(int* agent);
+	void Enter(Character* agent);
+	void Execute(Character* agent);
+	void Exit(Character* agent);
 };
 #endif

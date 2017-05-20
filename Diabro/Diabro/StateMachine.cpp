@@ -11,6 +11,11 @@ StateMachine<T>::StateMachine(T* owner, State<T> startState, std::map<std::strin
 }
 
 template<typename T>
+StateMachine<T>::StateMachine(){
+
+}
+
+template<typename T>
 StateMachine<T>::~StateMachine(){
 
 }
@@ -38,4 +43,4 @@ void StateMachine<T>::setState(State<T> newState){
 	_currentState->Enter(_owner);
 }
 
-template class StateMachine < int > ;
+template class StateMachine < Character > ;

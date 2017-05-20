@@ -8,7 +8,7 @@ class StateMachine
 {
 public:
 	StateMachine(T* owner, State<T> startState, std::map<std::string, State<T>> possibleStates);
-	StateMachine() {}
+	StateMachine();
 	~StateMachine();
 
 	std::map<std::string, State<T>> _possibleStates;
