@@ -342,6 +342,10 @@ namespace DiabroUI
 			mElement->setHeight(height);
 			Ogre::OverlayContainer* container = (Ogre::OverlayContainer*)mElement;
 			mTextArea = (Ogre::TextAreaOverlayElement*)container->getChild(getName() + "/DialogText");
+
+			Ogre::TextAreaOverlayElement* continueText = (Ogre::TextAreaOverlayElement*)container->getChild(getName() + "/ContinueText");
+			continueText->setCaption("Press SPACE to continue");
+
 			mCaptionBar = (Ogre::BorderPanelOverlayElement*)container->getChild(getName() + "/DialogCaptionBar");
 			mCaptionBar->setWidth(width - 4);
 			mCaptionTextArea = (Ogre::TextAreaOverlayElement*)mCaptionBar->getChild(mCaptionBar->getName() + "/DialogCaption");

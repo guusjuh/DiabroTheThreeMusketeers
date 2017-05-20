@@ -76,15 +76,6 @@ template container BorderPanel(UI/PlayerHealthBar)
 	}
 }
 
-template container Panel(UI/Yellow)
-{
-	metrics_mode pixels
-	material UI/Yellow
-	horz_align center
-	width 256
-	height 32
-}
-
 template container Panel(UI/HUDText)
 {
 	metrics_mode pixels
@@ -102,7 +93,6 @@ template container Panel(UI/HUDText)
         colour 1 1 1
 	}
 }
-
 
 template container BorderPanel(UI/DialogBox)
 {
@@ -166,5 +156,19 @@ template container BorderPanel(UI/DialogBox)
         char_height 15
         space_width 8
         colour 0 0 0
+		
+	}
+	
+	element TextArea(ContinueText)
+	{
+		metrics_mode pixels
+		horz_align center
+		alignment center
+		vert_align bottom
+		bottom 50
+		font_name UI/Caption
+		char_height 15
+		space_width 7
+		colour 1 1 1
 	}
 }

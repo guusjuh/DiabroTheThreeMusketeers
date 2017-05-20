@@ -8,7 +8,7 @@
 /// </summary>
 UIManager::UIManager() 
 : _uiNode(0), _healthBarWidget(0), _maxWidthBar(0), _heightBar(0), 
-_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextOn(false), _uiElementMgr(0)
+_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextOn(false), _uiElementMgr(0), _mDialogTextArea(0)
 {
 }
 
@@ -55,8 +55,11 @@ void UIManager::showHUDText(Ogre::String pHUDText)
 	// count the symbols in text
 	int count = pHUDText.length();
 	float width = count * 14.25f;
+
 	if(_hudTextWidget != nullptr) 
 		hideHUDText();
+	if (_mDialogTextArea != nullptr)
+		destroyDialog();
 
 	_hudTextWidget = _uiElementMgr->createHUDText(DiabroUI::CENTER, "HUDText", pHUDText, width, 40);
 	_hudTextWidget->getOverlayElement()->setTop(-128);
@@ -76,6 +79,8 @@ void UIManager::hideHUDText()
 }
 
 void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
+	if (_hudTextWidget != nullptr) hideHUDText();
+
 	_mDialogTextArea = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "DialogTextArea", pNPCName, 400, 400);
 	_mDialogTextArea->setText(pDialogText);
 }
@@ -85,6 +90,7 @@ void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 /// </summary>
 void UIManager::destroyDialog() {
 	_uiElementMgr->destroyWidget("DialogTextArea");
+	_mDialogTextArea = nullptr;
 }
 
 /// <summary>
@@ -92,7 +98,7 @@ void UIManager::destroyDialog() {
 /// </summary>
 /// <param name="pDialogText">The p dialog text.</param>
 void UIManager::appendDialogText(Ogre::String pDialogText) {
-	_mDialogTextArea->appendText(pDialogText);
+	_mDialogTextArea->appendText("\n" + pDialogText);
 }
 
 /// <summary>
