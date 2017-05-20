@@ -38,12 +38,9 @@ void UIManager::setupUI()
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
 	_staminaBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPRIGHT, "Stamina", "UI/Yellow");
 
-	_hudTextWidget = _mSdkTrayMgr->createHUDText(OgreBites::TL_CENTER, "HUDText", "<insert text here>", 300, 40);
-	Ogre::OverlayContainer* container = dynamic_cast<Ogre::OverlayContainer*>(_hudTextWidget->getOverlayElement());
-
-	container->hide();
-
 	_staminaBarWidget->getOverlayElement()->setLeft(-128);
+
+	_hudTextWidget = nullptr;
 }
 
 void UIManager::update(const Ogre::FrameEvent& pFE) 
@@ -59,10 +56,15 @@ void UIManager::update(const Ogre::FrameEvent& pFE)
 
 void UIManager::showHUDText(Ogre::String pHUDText) 
 {
-	_hudTextWidget->setText(pHUDText);
+	// count the symbols in text
+	int count = pHUDText.length();
+	float width = count * 14.25f;
+	if(_hudTextWidget != nullptr) 
+		hideHUDText();
+
+	_hudTextWidget = _mSdkTrayMgr->createHUDText(OgreBites::TL_CENTER, "HUDText", pHUDText, width, 40);
 
 	_hudTextOn = true;
-	_hudTextWidget->show();
 
 	_hudTimer = _hudTotalTimer;
 }
@@ -70,7 +72,9 @@ void UIManager::showHUDText(Ogre::String pHUDText)
 void UIManager::hideHUDText()
 {
 	_hudTextOn = false;
-	_hudTextWidget->hide();
+
+	_mSdkTrayMgr->destroyWidget("HUDText");
+	_hudTextWidget = nullptr;
 
 	_hudTimer = 0;
 }

@@ -179,6 +179,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
+		_uiManager->showHUDText("I'm going backwards! Omg waaaaaaaaaaaaaaaaaaaah");
 		dirVec.z = 1;
 		break;
 
