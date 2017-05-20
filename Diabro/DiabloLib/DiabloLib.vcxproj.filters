@@ -18,22 +18,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Diabro\Affix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Diabro\BaseApplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Diabro\BaseEquipment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Diabro\BaseItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Diabro\BaseNpc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Diabro\BaseWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Diabro\BasicEnemy.h">
@@ -48,16 +36,10 @@
     <ClInclude Include="..\Diabro\CharacterStats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Diabro\EquimentInstance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Diabro\FloatRange.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Diabro\GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Diabro\ItemInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Diabro\LevelManager.h">
@@ -92,12 +74,6 @@
     <ClCompile Include="..\Diabro\BaseApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Diabro\BaseEquipment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Diabro\BaseItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Diabro\BaseNpc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -113,16 +89,10 @@
     <ClCompile Include="..\Diabro\CharacterSpawner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Diabro\EquimentInstance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Diabro\FloatRange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Diabro\GameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Diabro\ItemInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Diabro\LevelManager.cpp">

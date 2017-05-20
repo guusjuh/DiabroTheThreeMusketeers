@@ -11,20 +11,11 @@ public:
 	Player(Ogre::SceneNode*, Ogre::Entity*);
 	~Player(){}
 
-	void gainXP(int);
-	bool lightAttack() override;
-
-	bool initialize() override;
-	int _attackSpeed;
-	int _AttackCD;
-
-	BasicEnemy* _BasicEnemy;
-	
-	float getMaxHealth() { return _stats->GetStat(MaxHealth); }
+	float getMaxHealth() { return _maxHealth; }
 
 	bool adjustHealth(float) override;
-	bool adjustStaminaOverTime(Ogre::Real) override;
-	bool adjustStamina(float) override;
+	bool lightAttack() override;
+	void gainXP(int);
 
 private:
 	int _currentXP;

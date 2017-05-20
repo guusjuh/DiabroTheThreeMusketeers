@@ -48,7 +48,7 @@ bool BasicEnemy::lightAttack()
 	}
 
 	//deal damage 
-	_target->adjustHealth(_stats->DeterminedDamage());
+	_target->adjustHealth(_damage);
 	
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
@@ -58,7 +58,6 @@ bool BasicEnemy::lightAttack()
 void BasicEnemy::die() {
 	Character::die();
 	
-	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 }

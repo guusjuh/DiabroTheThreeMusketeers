@@ -26,7 +26,6 @@ void LevelManager::initialize()
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
-
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
@@ -34,8 +33,6 @@ void LevelManager::initialize()
 	playerNode->setPosition(position);
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
-	playerScript->initialize();
-
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->setPosition(Ogre::Vector3(0, 100, 0));
@@ -63,30 +60,6 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 	_hostileNpcScripts.push_back(hostile);
 
 	return _hostileNpcScripts.size() - 1;
-}
-
-/// <summary>
-/// Subscribes the item instance.
-/// </summary>
-/// <param name="item">The item instance.</param>
-/// <returns></returns>
-int LevelManager::subscribeItemInstance(ItemInstance* item)
-{
-	//TODO: add item id to instances of items
-	_instanceScripts.push_back(item);
-	return _instanceScripts.size() - 1;
-}
-
-/// <summary>
-/// Detaches the item instance.
-/// </summary>
-/// <param name="id">The identifier.</param>
-void LevelManager::detachItemInstance(int id) {
-	_instanceScripts.erase(_instanceScripts.begin() + id);
-	//reset id values
-	for (std::vector<ItemInstance*>::iterator it = _instanceScripts.begin() + id; it < _instanceScripts.end(); ++it) {
-		(*it)->id -= 1;
-	}
 }
 
 /// <summary>
