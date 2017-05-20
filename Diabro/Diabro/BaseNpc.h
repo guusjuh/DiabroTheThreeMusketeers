@@ -13,6 +13,8 @@ public:
 	void update(Ogre::Real) override;
 
 	void rotatePivot(Ogre::Vector3);
+
+	void calculateAStar(Ogre::Vector3 targetPos);
 	
 protected:
 	float _noticeDistance;

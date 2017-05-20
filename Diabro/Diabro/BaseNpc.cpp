@@ -11,7 +11,7 @@
 BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f), _myCity(pMyCity)
 {
 	_myRotationNode = pMyRotationNode;
-	wander();
+	//wander();
 }
 
 /// <summary>
@@ -76,11 +76,19 @@ void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
 	_dirVec = targetPos - getPosition();
 	_dirVec.normalise();
 	_dirVec.y = 0;*/
+
+
 	
-	Zone zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0,0);
+	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
+	_dirVec = Ogre::Vector3(1, 0, 0);
+}
+
+void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
+
+	Zone zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0);
 	bool* collisionGrid = zone.getCollisionGrid();
 
-	if (!collisionGrid[(int)(targetPos.x/200 + (targetPos.z/200 * zone._width))]){
+	if (!collisionGrid[(int)(targetPos.x / 200 + (targetPos.z / 200 * zone._width))]){
 		return;
 	}
 
@@ -91,9 +99,4 @@ void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
 
 	Node start = Node(currentPos.x, currentPos.z, targetPos.x, targetPos.z);
 	openList.push_back(start);
-
-
-	
-	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
-	_dirVec = Ogre::Vector3(1, 0, 0);
 }
