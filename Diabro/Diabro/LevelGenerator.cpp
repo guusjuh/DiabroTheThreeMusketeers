@@ -102,7 +102,6 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 		rotationNode->attachObject(instanceEntity);
 
 		Npc* instanceScript = new Npc(instanceNode, rotationNode, instanceEntity, pCity, pThisBuilding);
-		instanceScript->initialize();
 	}
 }
 

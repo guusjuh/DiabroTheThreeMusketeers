@@ -40,7 +40,6 @@ void CharacterSpawner<T>::spawnInstance() {
 		
 	rotationNode->attachObject(instanceEntity);
 	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity, _myCity);
-	instanceScript->initialize();
 }
 
 //template class CharacterSpawner < Npc >;

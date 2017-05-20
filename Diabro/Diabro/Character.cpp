@@ -16,16 +16,6 @@ _attackDistance(20), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted
 }
 
 /// <summary>
-/// Initializes this instance.
-/// </summary>
-/// <returns>False if something failed during initialization</returns>
-bool Character::initialize()
-{
-
-	return true;
-}
-
-/// <summary>
 /// Updates the frame based on the specified pDeltatime.
 /// </summary>
 /// <param name="pDeltatime">The time since last frame.</param>

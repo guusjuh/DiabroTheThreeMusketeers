@@ -19,7 +19,6 @@ public:
 
 	int id; //may only be changed by levelmanager, death scenario 
 
-	virtual bool initialize();
 	virtual void update(Ogre::Real);
 	virtual void move(Ogre::Vector3&);
 	virtual bool adjustHealth(float);

@@ -20,17 +20,6 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 }
 
 /// <summary>
-/// Initializes this instance.
-/// </summary>
-/// <returns></returns>
-bool Player::initialize()
-{
-	Character::initialize();
-
-	return true;
-}
-
-/// <summary>
 /// Adjusts the health.
 /// </summary>
 /// <param name="pAdjust">The adjustment of health.</param>

@@ -33,7 +33,6 @@ void LevelManager::initialize()
 	playerNode->setPosition(position);
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
-	playerScript->initialize();
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());

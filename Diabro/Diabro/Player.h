@@ -11,7 +11,6 @@ public:
 	Player(Ogre::SceneNode*, Ogre::Entity*);
 	~Player(){}
 
-	bool initialize() override;
 	bool adjustHealth(float) override;
 	bool lightAttack() override;
 	void gainXP(int);
