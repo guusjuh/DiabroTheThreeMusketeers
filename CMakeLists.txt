@@ -48,9 +48,9 @@ set(HDRS
 	./Diabro/Diabro/LevelGenerator.h
 	./Diabro/Diabro/Zone.h
 	./Diabro/Diabro/City.h
+	./Diabro/Diabro/StateMachine.h
 	./Diabro/Diabro/State.h
-	./Diabro/Diabro/GenericFSM.h
-	./Diabro/Diabro/TestFSM.h
+	./Diabro/Diabro/IdleState.h
 	./Diabro/Diabro/Needs.h
 	./Diabro/Diabro/BaseQuestItem.h
 	./Diabro/Diabro/IQuestContent.h	
@@ -103,6 +103,9 @@ set(SRCS
 	./Diabro/Diabro/LevelGenerator.cpp
 	./Diabro/Diabro/Zone.cpp
 	./Diabro/Diabro/City.cpp
+	./Diabro/Diabro/StateMachine.cpp
+	./Diabro/Diabro/State.cpp
+	./Diabro/Diabro/IdleState.cpp
 	./Diabro/Diabro/tinyxml2.cpp
 	./Diabro/Diabro/ArmorInstance.cpp
 	./Diabro/Diabro/BaseArmor.cpp

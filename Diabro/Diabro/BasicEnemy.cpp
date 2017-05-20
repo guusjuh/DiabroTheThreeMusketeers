@@ -1,6 +1,7 @@
 #include "BasicEnemy.h"
 #include "GameManager.h"
 #include "Player.h"
+#include "StateMachine.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicEnemy"/> class.
@@ -10,6 +11,11 @@
 /// <param name="pMyEntity">My entity.</param>
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
+	State<Character> startState = IdleState();
+	std::map<std::string, State<Character>> possibleStates;
+	possibleStates["Idle"] = startState;
+	stateMachine = StateMachine<Character>(this, startState, possibleStates);
+
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 }
 

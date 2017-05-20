@@ -128,7 +128,6 @@
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GenericContainer.cpp" />
-    <ClCompile Include="GenericFSM.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="ItemContainer.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
@@ -142,8 +141,8 @@
     <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="StrategyContainer.cpp" />
-    <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Tree.cpp" />
@@ -173,7 +172,7 @@
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericContainer.h" />
-    <ClInclude Include="GenericFSM.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="IQuestContent.h" />
     <ClInclude Include="ItemContainer.h" />
@@ -196,7 +195,6 @@
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="Strategy.h" />
     <ClInclude Include="StrategyContainer.h" />
-    <ClInclude Include="TestFSM.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />
