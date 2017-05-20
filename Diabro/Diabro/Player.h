@@ -4,6 +4,7 @@
 #pragma once
 #include "Character.h"
 #include "BasicEnemy.h"
+#include "Npc.h"
 
 class Player : public Character
 {
@@ -15,6 +16,8 @@ public:
 	bool lightAttack() override;
 
 	bool initialize() override;
+	void update(Ogre::Real) override;
+
 	int _attackSpeed;
 	int _AttackCD;
 
@@ -25,10 +28,15 @@ public:
 	bool adjustHealth(float) override;
 	bool adjustStaminaOverTime(Ogre::Real) override;
 	bool adjustStamina(float) override;
+	
+	void dialogTriggered();
 
 private:
 	int _currentXP;
 	int _xpTillNextLevel;
+
+	Npc* _nearbyNPC;
+	bool _inDialog;
 
 	int calcXpTillLevel(int);
 	void levelUp();

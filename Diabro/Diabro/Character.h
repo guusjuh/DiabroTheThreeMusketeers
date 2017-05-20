@@ -80,6 +80,7 @@ protected:
 	Ogre::Real _currAttackCooldown;
 	Ogre::Real _lightAttackCooldown;
 	//Ogre::Real _heavyAttackCooldown;
+	float _noticeDistance;
 
 	WeaponInstance* _weapon;
 	void setHand(WeaponInstance*);

@@ -179,7 +179,6 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		_uiManager->showHUDText("I'm going backwards! Omg waaaaaaaaaaaaaaaaaaaah");
 		dirVec.z = 1;
 		break;
 
@@ -195,9 +194,9 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	
 	case OIS::KC_LSHIFT:
 		_levelManager->playerScript->toggleRun(true);
-		_uiManager->showHUDText("Run bitch run!");
+		_uiManager->showHUDText("Run bitch run!", 1);
 		break;
-
+		
 	case OIS::KC_E:
 		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
 		{
@@ -228,19 +227,14 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
 	case OIS::KC_F:
-		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-		}
-		else {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
-		}
+		_levelManager->getPlayer()->dialogTriggered();		
 
 		//check if the item is within pickup range.
 
 		break;
 
 	case OIS::KC_SPACE:
-		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
+		_levelManager->getPlayer()->dialogTriggered();
 		break;
 
 	default:

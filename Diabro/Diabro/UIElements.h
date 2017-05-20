@@ -1222,8 +1222,8 @@ namespace DiabroUI
 		Ogre::Real mWidgetSpacing;            // widget spacing
 		Ogre::Real mTrayPadding;              // tray padding
 		bool mTrayDrag;                       // a mouse press was initiated on a tray
-		Ogre::OverlayContainer* mDialogShade; // top priority dialog shade
-		bool mCursorWasVisible;               // cursor state before showing dialog
+		Ogre::OverlayContainer* mDialogShade; // top priority talk shade
+		bool mCursorWasVisible;               // cursor state before showing talk
 		Ogre::Real mGroupInitProportion;      // proportion of load job assigned to initialising one resource group
 		Ogre::Real mGroupLoadProportion;      // proportion of load job assigned to loading one resource group
 		Ogre::Real mLoadInc;                  // loading increment

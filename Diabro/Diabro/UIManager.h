@@ -24,6 +24,8 @@ public:
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 	void showHUDText(Ogre::String);
+	void showHUDText(Ogre::String,float);
+	void hideHUDText();
 
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
@@ -38,14 +40,10 @@ private:
 	DiabroUI::HUDText*			_hudTextWidget;
 	float						_hudTotalTimer;
 	float						_hudTimer;
-	bool						_hudTextOn;
-
+	bool						_hudTextWithTimeOn;
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;
-
-	void hideHUDText();
-
 };
 
 #endif

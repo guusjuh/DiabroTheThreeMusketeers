@@ -31,17 +31,13 @@ public:
 	}
 
 	void update(Ogre::Real) override;
-	bool dialog(Ogre::Vector3);
-	void toggleDialog();
-	void continueDialog();
+	bool talk(Ogre::Vector3);
 	void die() override;
 
 private: 
 	bool _inDialog;					//!< True if the player is currently talking with this NPC.
-	std::ifstream _dialogFile;		//!< File containing the dialog text for this NPC.
-	int _dialogCount;				//!< The amount of different parts the dialog consists of.
-	Ogre::String _startDialogText;	
-	Ogre::String _endDialogText;
+	int _dialogCount;				//!< The amount of different parts the talk consists of.
+	std::vector<std::string> _dialog;
 
 	std::string _name;
 	NeedSet* _needs;				//!< A set of needs, when the value of a need is low, this NPC wants something.
