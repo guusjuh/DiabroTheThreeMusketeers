@@ -3,7 +3,7 @@
 
 TestFSM::TestFSM(State* pInitState) : GenericFSM(pInitState)
 {
-	beginState(_on);
+	setState(_on);
 }
 
 TestFSM::TestFSM() : GenericFSM()

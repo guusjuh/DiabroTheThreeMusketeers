@@ -2,24 +2,16 @@
 #define STATE_H_
 #include <OgrePrerequisites.h>
 
+template <typename T>
 class State
 {
 public:
-
-	State(int, std::string);
 	State();
 	~State();
 
-	std::string getStateName() { return _stateName; }
-	int getId() { return _id; }
-
-	void beginAction();
-	void updateAction();
-	void endAction();
-
-private:
-	int _id;
-	std::string _stateName;
+	void Enter(T agent) {}
+	void Execute(T agent) {}
+	void Exit(T agent) {}
 };
 
 #endif

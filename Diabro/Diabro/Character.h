@@ -19,6 +19,7 @@ class Character
 {
 public:
 	Character(Ogre::SceneNode*, Ogre::Entity*);
+	Character() {}
 	~Character() {}
 
 	virtual bool initialize();

@@ -8,6 +8,7 @@ class BaseNpc : public Character, public IQuestContent
 {
 public:
 	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City* );
+	BaseNpc() {}
 	//~BaseNpc();
 
 	void update(Ogre::Real) override;
