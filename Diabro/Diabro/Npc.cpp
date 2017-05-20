@@ -9,8 +9,6 @@
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
 : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding)
 {
-	//GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->GetZone(1,1).cities[0]
-
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
 	_dialogFile.open("DialogText.txt");

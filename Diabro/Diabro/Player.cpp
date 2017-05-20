@@ -9,15 +9,13 @@
 Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
 	// override default speeds
-	_movespeed = 250;
-	_runspeed = 550;
+	_movespeed = 450;
 
 	// initialize pLevel vars
 	_currentLevel = 1;
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
-	_attackDistance = 35;
 	_lightAttackCooldown = 1.2f;
 }
 
@@ -41,21 +39,7 @@ bool Player::adjustHealth(float pAdjust)
 {
 	if (!Character::adjustHealth(pAdjust)) { return false; }
 
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
-	return true;
-}
-
-/// <summary>
-/// Adjusts the stamina over time.
-/// </summary>
-/// <param name="deltatime">The time since last frame.</param>
-/// <returns>False if the player runs out of statina.</returns>
-bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
-{
-	Character::adjustStaminaOverTime(pDeltaTime);
-
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
-
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 	return true;
 }
 
@@ -73,24 +57,10 @@ bool Player::lightAttack()
 	}
 
 	//deal damage 
-	_target->adjustHealth(_stats->DeterminedDamage());
+	_target->adjustHealth(_damage);
 	
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
-
-	return true;
-}
-
-/// <summary>
-/// Adjusts the stamina.
-/// </summary>
-/// <param name="pAdjust">The adjustment in stamina.</param>
-/// <returns>False if the player runs out of statina.</returns>
-bool Player::adjustStamina(float pAdjust)
-{
-	Character::adjustStamina(pAdjust);
-
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
 
 	return true;
 }

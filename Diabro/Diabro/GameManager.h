@@ -11,7 +11,6 @@ Filename:    GameManager.h
 #include "LevelManager.h"
 #include <OgreSingleton.h>
 #include "UIManager.h"
-#include "ItemManager.h"
 #include "QuestContentManager.h"
 #include <ctime>
 #include "QuestManager.h"
@@ -33,12 +32,9 @@ public:
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return mCamera; }
 	Ogre::Timer* getGameTime(void) { return _gameTimer; }
-	int getItemNumber() { return _itemInstanceNumber; }
-	void addItemNumber() { _itemInstanceNumber++; }
 
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
-	ItemManager* getItemManager(void) { return _itemManager; }
 	QuestManager* getQuestManager(void) { return _questManager; }
 
 	int getRandomInRange(int pLO, int pHI) {
@@ -61,10 +57,8 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
 	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 
-	int _itemInstanceNumber;
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
-	ItemManager* _itemManager;
 	QuestManager* _questManager;
 
 	Ogre::Timer* _gameTimer;
