@@ -61,8 +61,8 @@ template container BorderPanel(SdkTrays/TextBox)
 {
 	metrics_mode pixels
 	material SdkTrays/TextBox
-	horz_align center
 	uv_coords 0.4 0.4 0.6 0.6
+	horz_align center
 	
 	border_material SdkTrays/TextBox
 	border_size 13 13 13 13

@@ -266,6 +266,9 @@
     <ClInclude Include="GenericContainer.h">
       <Filter>Headers\Quests\QuestParts</Filter>
     </ClInclude>
+    <ClInclude Include="UIElements.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />

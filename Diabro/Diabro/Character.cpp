@@ -152,13 +152,6 @@ bool Character::lightAttack()
 /// <returns>False if the character runs out of health.</returns>
 bool Character::adjustHealth(float pAdjust)
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("I got hit... %f \n", _currentHealth);
-	fclose(fp);
-#endif
-
 	_hitTime = _totalHitTime;
 	_hitted = true;
 
@@ -167,6 +160,13 @@ bool Character::adjustHealth(float pAdjust)
 		die();
 		return false;
 	}
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("I got hit... %f \n", _currentHealth);
+	fclose(fp);
+#endif
 
 	return true;
 }

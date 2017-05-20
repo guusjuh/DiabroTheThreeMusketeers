@@ -1,3 +1,21 @@
+template container BorderPanel(UI/Tray)
+{
+	metrics_mode pixels
+	material UI/Transparent
+	uv_coords 0.25 0.25 0.75 0.75
+	
+	border_material UI/Transparent
+	border_size 16 16 16 16
+	border_topleft_uv     0.00 0.00 0.25 0.25
+	border_top_uv         0.25 0.00 0.75 0.25
+	border_topright_uv    0.75 0.00 1.00 0.25
+	border_left_uv        0.00 0.25 0.25 0.75
+	border_right_uv       0.75 0.25 1.00 0.75
+	border_bottomleft_uv  0.00 0.75 0.25 1.00
+	border_bottom_uv      0.25 0.75 0.75 1.00
+	border_bottomright_uv 0.75 0.75 1.00 1.00
+}
+
 template container Panel(UI/Green)
 {
 	metrics_mode pixels
@@ -5,6 +23,57 @@ template container Panel(UI/Green)
 	horz_align center
 	width 256
 	height 32
+}
+
+template container BorderPanel(UI/PlayerHealthBar)
+{
+	metrics_mode pixels
+	material UI/BarBackground
+	uv_coords 0.25 0.25 0.75 0.75
+	horz_align center
+	height 32
+	
+	border_material UI/BarBackground
+	border_size 5 5 5 5
+	border_topleft_uv     0.00 0.00 0.25 0.25
+	border_top_uv         0.25 0.00 0.75 0.25
+	border_topright_uv    0.75 0.00 1.00 0.25
+	border_left_uv        0.00 0.25 0.25 0.75
+	border_right_uv       0.75 0.25 1.00 0.75
+	border_bottomleft_uv  0.00 0.75 0.25 1.00
+	border_bottom_uv      0.25 0.75 0.75 1.00
+	border_bottomright_uv 0.75 0.75 1.00 1.00
+	
+	element BorderPanel(Bar)
+	{
+		metrics_mode pixels
+		material UI/HealthBar
+		uv_coords 0.25 0.25 0.75 0.75
+		horz_align left
+		height 32
+		
+		border_material UI/HealthBar
+		border_size 5 5 5 5
+		border_topleft_uv     0.00 0.00 0.25 0.25
+		border_top_uv         0.25 0.00 0.75 0.25
+		border_topright_uv    0.75 0.00 1.00 0.25
+		border_left_uv        0.00 0.25 0.25 0.75
+		border_right_uv       0.75 0.25 1.00 0.75
+		border_bottomleft_uv  0.00 0.75 0.25 1.00
+		border_bottom_uv      0.25 0.75 0.75 1.00
+		border_bottomright_uv 0.75 0.75 1.00 1.00
+		
+		element TextArea(ValueText)
+		{
+			metrics_mode pixels
+			left 11
+			top 10
+			font_name UI/Value
+			char_height 19
+			space_width 8
+			colour 0 0 0
+		}
+	}
 }
 
 template container Panel(UI/Yellow)
@@ -20,7 +89,6 @@ template container Panel(UI/HUDText)
 {
 	metrics_mode pixels
 	transparent true
-	material UI/Transparent	
 
 	element TextArea(HUDCaption)
 	{
@@ -34,6 +102,7 @@ template container Panel(UI/HUDText)
         colour 1 1 1
 	}
 }
+
 
 template container BorderPanel(UI/DialogBox)
 {

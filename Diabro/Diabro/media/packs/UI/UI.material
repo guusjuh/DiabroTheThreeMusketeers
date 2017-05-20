@@ -61,6 +61,34 @@ material UI/Green
    }
 }
 
+material UI/HealthBar : UI/Base
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture healthBar.png
+         }
+      }
+   }
+}
+
+material UI/BarBackground : UI/Base
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture barBackground.png
+         }
+      }
+   }
+}
+
 material UI/Yellow
 {
    technique
@@ -92,23 +120,21 @@ material UI/Grey
    }
 }
 
-material UI/Transparent
+material UI/Transparent : UI/Base
 {
    technique
    {
       pass
-      {
-		lighting off
-         
+      {         
          texture_unit
          {
-			texture transparent.png
+			texture transparant.png
          }
       }
    }
 }
 
-material UI/LocatorSister
+material UI/LocatorSister : UI/Base
 {
    technique
    {
@@ -124,7 +150,7 @@ material UI/LocatorSister
    }
 }
 
-material UI/LocatorQuest
+material UI/LocatorQuest : UI/Base
 {
    technique
    {

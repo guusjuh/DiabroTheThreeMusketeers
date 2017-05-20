@@ -7,8 +7,8 @@
 /// e.g. the in-game and menu UI.
 /// </summary>
 UIManager::UIManager() 
-: _uiNode(0), _healthBarWidget(0), _staminaBarWidget(0), _maxWidthBar(0), _heightBar(0), 
-_mSdkTrayMgr(0), _mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextOn(false)
+: _uiNode(0), _healthBarWidget(0), _maxWidthBar(0), _heightBar(0), 
+_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextOn(false), _uiElementMgr(0)
 {
 }
 
@@ -17,8 +17,7 @@ _mSdkTrayMgr(0), _mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextOn(f
 /// </summary>
 void UIManager::init()
 {
-	_mSdkTrayMgr = new OgreBites::SdkTrayManager("DialogInterface", _mWindow, _mInputContext, _mSdkTrayListener);
-	_mSdkTrayMgr->hideCursor();
+	_uiElementMgr = new DiabroUI::UIElementsManager("MyInterface", _mWindow);
 
 	setupUI();
 
@@ -35,10 +34,7 @@ void UIManager::setupUI()
 	_uiNode->setPosition(0, 0, 0);
 
 	// create health bar
-	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
-	_staminaBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPRIGHT, "Stamina", "UI/Yellow");
-
-	_staminaBarWidget->getOverlayElement()->setLeft(-128);
+	_healthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMLEFT, "Health", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
 
 	_hudTextWidget = nullptr;
 }
@@ -62,8 +58,8 @@ void UIManager::showHUDText(Ogre::String pHUDText)
 	if(_hudTextWidget != nullptr) 
 		hideHUDText();
 
-	_hudTextWidget = _mSdkTrayMgr->createHUDText(OgreBites::TL_CENTER, "HUDText", pHUDText, width, 40);
-
+	_hudTextWidget = _uiElementMgr->createHUDText(DiabroUI::CENTER, "HUDText", pHUDText, width, 40);
+	_hudTextWidget->getOverlayElement()->setTop(-128);
 	_hudTextOn = true;
 
 	_hudTimer = _hudTotalTimer;
@@ -73,14 +69,14 @@ void UIManager::hideHUDText()
 {
 	_hudTextOn = false;
 
-	_mSdkTrayMgr->destroyWidget("HUDText");
+	_uiElementMgr->destroyWidget("HUDText");
 	_hudTextWidget = nullptr;
 
 	_hudTimer = 0;
 }
 
 void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
-	_mDialogTextArea = _mSdkTrayMgr->createDialogTextBox(OgreBites::TL_CENTER, "DialogTextArea", pNPCName, 400, 400);
+	_mDialogTextArea = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "DialogTextArea", pNPCName, 400, 400);
 	_mDialogTextArea->setText(pDialogText);
 }
 
@@ -88,7 +84,7 @@ void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 /// Destroys the dialog.
 /// </summary>
 void UIManager::destroyDialog() {
-	_mSdkTrayMgr->destroyWidget("DialogTextArea");
+	_uiElementMgr->destroyWidget("DialogTextArea");
 }
 
 /// <summary>
@@ -106,18 +102,7 @@ void UIManager::appendDialogText(Ogre::String pDialogText) {
 /// <param name="pMaxValue">The maximum pValue.</param>
 void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
-	_healthBarWidget->getOverlayElement()->setWidth(calcBarSize(pValue, pMaxValue, _maxWidthBar));
-}
-
-/// <summary>
-/// Adjusts the stamina bar pValue.
-/// </summary>
-/// <param name="pValue">The pValue.</param>
-/// <param name="pMaxValue">The maximum pValue.</param>
-void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
-{
-	_staminaBarWidget->getOverlayElement()->setWidth(calcBarSize(pValue, pMaxValue, _maxWidthBar));
-	_staminaBarWidget->getOverlayElement()->setLeft(pMaxValue - calcBarSize(pValue, pMaxValue, _maxWidthBar) + 1);
+	_healthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
 }
 
 /// <summary>

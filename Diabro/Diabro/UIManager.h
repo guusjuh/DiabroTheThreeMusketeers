@@ -5,6 +5,7 @@
 #include <OgreBillboardSet.h>
 #include "BaseApplication.h"
 #include "SdkTrays.h"
+#include "UIElements.h"
 
 class UIManager
 {
@@ -25,22 +26,20 @@ public:
 	void showHUDText(Ogre::String);
 
 private:
-	OgreBites::SdkTrayManager*	_mSdkTrayMgr;
-	OgreBites::SdkTrayListener* _mSdkTrayListener;
+	DiabroUI::UIElementsManager*	_uiElementMgr;
+	Ogre::SceneNode*			_uiNode;
 
 	Ogre::RenderWindow*			_mWindow;
-	OgreBites::InputContext     _mInputContext;
 
-	OgreBites::DialogTextBox*	_mDialogTextArea;
+	DiabroUI::DialogTextBox*	_mDialogTextArea;
 	
-	OgreBites::DecorWidget*		_healthBarWidget;
-	OgreBites::DecorWidget*		_staminaBarWidget;
+	DiabroUI::Bar*				_healthBarWidget;
 
-	OgreBites::HUDText*			_hudTextWidget;
+	DiabroUI::HUDText*			_hudTextWidget;
 	float						_hudTotalTimer;
 	float						_hudTimer;
 	bool						_hudTextOn;
-	Ogre::SceneNode*			_uiNode;
+
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;

@@ -54,8 +54,6 @@ bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
 	Character::adjustStaminaOverTime(pDeltaTime);
 
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
-
 	return true;
 }
 
@@ -89,8 +87,6 @@ bool Player::lightAttack()
 bool Player::adjustStamina(float pAdjust)
 {
 	Character::adjustStamina(pAdjust);
-
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
 
 	return true;
 }

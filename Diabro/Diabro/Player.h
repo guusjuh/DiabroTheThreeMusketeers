@@ -20,6 +20,8 @@ public:
 
 	BasicEnemy* _BasicEnemy;
 	
+	float getMaxHealth() { return _stats->GetStat(MaxHealth); }
+
 	bool adjustHealth(float) override;
 	bool adjustStaminaOverTime(Ogre::Real) override;
 	bool adjustStamina(float) override;
