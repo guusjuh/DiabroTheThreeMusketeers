@@ -7,9 +7,6 @@
 class Zone
 {
 private:
-	int _width;
-	int _depth;
-	
 	int _maxCityWidth;
 	int _maxCityHeight;
 
@@ -22,6 +19,9 @@ private:
 	bool* collisionGrid;
 
 public:
+	int _width;
+	int _depth;
+
 	std::vector<City> cities; ///< vector containing all cities within the zone
 
 	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries);

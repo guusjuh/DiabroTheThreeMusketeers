@@ -135,6 +135,7 @@
     <ClCompile Include="ItemInstance.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="Needs.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />

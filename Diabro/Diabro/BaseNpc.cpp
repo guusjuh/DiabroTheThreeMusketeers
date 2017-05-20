@@ -1,5 +1,6 @@
 #include "BaseNpc.h"
 #include "GameManager.h"
+#include "Node.h" 
 
 /// <summary>
 /// Creates a new instance of the <see cref="BaseNpc" /> class.
@@ -75,6 +76,23 @@ void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
 	_dirVec = targetPos - getPosition();
 	_dirVec.normalise();
 	_dirVec.y = 0;*/
+	
+	Zone zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0,0);
+	bool* collisionGrid = zone.getCollisionGrid();
+
+	if (!collisionGrid[(int)(targetPos.x/200 + (targetPos.z/200 * zone._width))]){
+		return;
+	}
+
+	std::vector<Node> openList;
+	std::vector<Node> closedList;
+
+	Ogre::Vector3 currentPos = getPosition();
+
+	Node start = Node(currentPos.x, currentPos.z, targetPos.x, targetPos.z);
+	openList.push_back(start);
+
+
 	
 	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
 	_dirVec = Ogre::Vector3(1, 0, 0);
