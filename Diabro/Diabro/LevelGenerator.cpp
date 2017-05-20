@@ -54,8 +54,8 @@ Zone LevelGenerator::getZone(int pX, int pZ) {
 /// creates a tile for each position in the zone
 
 /// \param pZone zone from which to draw the tiles
-void LevelGenerator::drawDungeonFloor(Zone pZone) {
-	
+void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
+	Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
 	createTileMesh("tileMesh", Ogre::ColourValue(1.0f, 0.0f, 1.0f, 1.0f));
 	donaldTrump("wallNorth", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f), NorthDT);
 	donaldTrump("wallEast", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f), EastDT);
@@ -92,6 +92,7 @@ void LevelGenerator::drawDungeonFloor(Zone pZone) {
 				}
 
 				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), (ix == 4 && iz == 2)?"tileMesh2" : "tileMesh");
+				//testCity->setMaterialName("Test/ColourTest");
 				zoneEntity->setMaterialName("Examples/Rockwall");
 				thisSceneNode->attachObject(zoneEntity);
 			}

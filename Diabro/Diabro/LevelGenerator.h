@@ -28,11 +28,11 @@ public:
 	int scalar; ///< scales grid position to world positions
 
 private:
-	Zone _zone[1]; ///<holds differnt zones in level
+	Zone _zone[1]; ///<holds different zones in level
 
-	void drawDungeonFloor(Zone pZone);
+	void drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol);
 
-	//Await further implementtation
+	//Await further implementation
 	void createTileMesh(std::string pName, Ogre::ColourValue pCol) const;
 	void donaldTrump(std::string pName, Ogre::ColourValue pCol, DirectionType direction) const;
 };
