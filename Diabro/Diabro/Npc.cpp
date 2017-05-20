@@ -107,11 +107,11 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 {
 	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
 	
-	if (distance < 500) // needs to be tweaked
+	if (distance < 1000000000000) // needs to be tweaked
 	{
 		_inDialog = true;
 
-		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, "Hello! Nice to meet you, sir! I'm telling you a long story. This way I can test whether or not the text goes to the next line.. that would be nice, wouldn't it?");
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;

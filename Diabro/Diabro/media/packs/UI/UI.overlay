@@ -10,7 +10,6 @@ template container Panel(UI/Green)
 template container Panel(UI/Yellow)
 {
 	metrics_mode pixels
-	transparent true
 	material UI/Yellow
 	horz_align center
 	width 256
@@ -21,7 +20,6 @@ template container Panel(UI/HUDText)
 {
 	metrics_mode pixels
 	transparent true
-
 	material UI/Transparent	
 
 	element TextArea(HUDCaption)
@@ -34,5 +32,70 @@ template container Panel(UI/HUDText)
         char_height 25
         space_width 10
         colour 1 1 1
+	}
+}
+
+template container BorderPanel(UI/DialogBox)
+{
+	metrics_mode pixels
+	material UI/TextBox
+	horz_align center
+	uv_coords 0.4 0.4 0.6 0.6
+	
+	border_material UI/TextBox
+	border_size 13 13 13 13
+	border_topleft_uv     0.0 0.0 0.4 0.4
+	border_top_uv         0.4 0.0 0.6 0.4
+	border_topright_uv    0.6 0.0 1.0 0.4
+	border_left_uv        0.0 0.4 0.4 0.6
+	border_right_uv       0.6 0.4 1.0 0.6
+	border_bottomleft_uv  0.0 0.6 0.4 1.0
+	border_bottom_uv      0.4 0.6 0.6 1.0
+	border_bottomright_uv 0.6 0.6 1.0 1.0
+	
+	container BorderPanel(DialogCaptionBar)
+	{
+		metrics_mode pixels
+		material UI/MiniTray
+		height 30
+		top 2
+		left 2
+		uv_coords 0.375 0.375 0.625 0.625
+		
+		border_material UI/MiniTray
+		border_size 12 12 12 12
+		border_topleft_uv     0.000 0.000 0.375 0.375
+		border_top_uv         0.375 0.000 0.625 0.375
+		border_topright_uv    0.625 0.000 1.000 0.375
+		border_left_uv        0.000 0.375 0.375 0.625
+		border_right_uv       0.625 0.375 1.000 0.625
+		border_bottomleft_uv  0.000 0.625 0.375 1.000
+		border_bottom_uv      0.375 0.625 0.625 1.000
+		border_bottomright_uv 0.625 0.625 1.000 1.000
+
+		element TextArea(DialogCaption)
+		{
+			metrics_mode pixels
+			horz_align center
+			alignment center
+			top 8
+			font_name UI/Caption
+			char_height 19
+			space_width 7
+			colour 0 0 0
+		}
+	}
+
+	element TextArea(DialogText)
+	{
+        metrics_mode pixels
+        font_name UI/Value
+		width 300
+        top 50
+        left 20
+        right 20
+        char_height 15
+        space_width 8
+        colour 0 0 0
 	}
 }

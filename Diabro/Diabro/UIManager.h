@@ -17,7 +17,7 @@ public:
 
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
-	void createDialog(Ogre::String);
+	void showDialog(Ogre::String, Ogre::String);
 	void destroyDialog();
 	void appendDialogText(Ogre::String);
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
@@ -31,7 +31,7 @@ private:
 	Ogre::RenderWindow*			_mWindow;
 	OgreBites::InputContext     _mInputContext;
 
-	OgreBites::TextBox*			_mDialogTextArea;
+	OgreBites::DialogTextBox*	_mDialogTextArea;
 	
 	OgreBites::DecorWidget*		_healthBarWidget;
 	OgreBites::DecorWidget*		_staminaBarWidget;

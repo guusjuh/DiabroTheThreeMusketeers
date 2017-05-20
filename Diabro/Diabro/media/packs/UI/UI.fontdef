@@ -10,6 +10,6 @@ UI/Value
 {
 	type 		truetype
 	source 		FantasyFont.ttf
-	size 		10
+	size 		20
 	resolution 	96
 }

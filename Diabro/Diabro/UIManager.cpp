@@ -79,8 +79,9 @@ void UIManager::hideHUDText()
 	_hudTimer = 0;
 }
 
-void UIManager::createDialog(Ogre::String pDialogText) {
-	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 400, 400);
+void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
+	_mDialogTextArea = _mSdkTrayMgr->createDialogTextBox(OgreBites::TL_CENTER, "DialogTextArea", pNPCName, 400, 400);
+	_mDialogTextArea->setText(pDialogText);
 }
 
 /// <summary>

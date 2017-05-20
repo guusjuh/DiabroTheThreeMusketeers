@@ -1,3 +1,50 @@
+material UI/Base
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend alpha_blend
+            depth_check off
+            
+            texture_unit
+            {
+                tex_address_mode clamp
+                filtering linear linear none
+            }
+        }
+    }
+}
+
+material UI/MiniTray : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture mini_tray.png
+            }
+        }
+    }
+}
+
+material UI/TextBox : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture text_box.png
+            }
+        }
+    }
+}
+
 material UI/Green
 {
    technique
