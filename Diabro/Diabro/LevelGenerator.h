@@ -3,6 +3,14 @@
 #include <OgreSceneManager.h>
 #include "Zone.h"
 
+///directions
+enum DirectionType
+{
+	NorthDT,
+	EastDT,
+	SouthDT,
+	WestDT
+};
 
 class LevelGenerator
 {
@@ -23,12 +31,10 @@ private:
 	Zone _zone[1]; ///<holds differnt zones in level
 
 	void drawDungeonFloor(Zone pZone);
-	void createPlane(std::string pName);
 
 	//Await further implementtation
-	void createTileMesh(int pScalar, Coordinate pPosition, std::string pName) const;
-	void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
-	void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
+	void createTileMesh(std::string pName, Ogre::ColourValue pCol) const;
+	void donaldTrump(std::string pName, Ogre::ColourValue pCol, DirectionType direction) const;
 };
 
 #endif
