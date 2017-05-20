@@ -29,10 +29,10 @@ template container Panel(UI/HUDText)
         metrics_mode pixels
         horz_align center
         alignment center
-        top 9
+        top 10
         font_name UI/Caption
-        char_height 20
-        space_width 7
+        char_height 25
+        space_width 10
         colour 1 1 1
 	}
 }

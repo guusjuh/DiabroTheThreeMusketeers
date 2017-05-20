@@ -6,7 +6,9 @@
 /// This class is created by the <see cref="GameManager" /> and contains all UI information, 
 /// e.g. the in-game and menu UI.
 /// </summary>
-UIManager::UIManager() : _uiNode(0), _healthBarWidget(0), _staminaBarWidget(0), _maxWidthBar(0), _heightBar(0), _mSdkTrayMgr(0), _mWindow(0)
+UIManager::UIManager() 
+: _uiNode(0), _healthBarWidget(0), _staminaBarWidget(0), _maxWidthBar(0), _heightBar(0), 
+_mSdkTrayMgr(0), _mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextOn(false)
 {
 }
 
@@ -35,21 +37,42 @@ void UIManager::setupUI()
 	// create health bar
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
 	_staminaBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPRIGHT, "Stamina", "UI/Yellow");
-	//OgreBites::DecorWidget* test = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_BOTTOM, "HUDText", "UI/HUDText");
-	//test->getOverlayElement()->("Hello World");
-	//Ogre::OverlayElement* mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/HUDText", "Panel", "HUDText");
-	//mElement->setWidth(400);
-	//mElement->setHeight(100);
-/*	Ogre::OverlayContainer* container = (Ogre::OverlayContainer*)mElement;
-	Ogre::TextAreaOverlayElement* mTextArea = (Ogre::TextAreaOverlayElement*)container->getChild(mElement->getName() + "/HUDCaption");
-	Ogre::DisplayString text = "Hello World";
-	mTextArea->setTop(mTextArea->getHeight() + 10);
-	mTextArea->setCaption(text);*/
-	OgreBites::HUDText* hudText = _mSdkTrayMgr->createHUDText(OgreBites::TL_CENTER, "HUDText", "Hi Jasper!", 300, 40);
-	//hudText->setPadding(5);
 
-	//_staminaBarWidget->getOverlayElement()->setHorizontalAlignment(Ogre::GuiHorizontalAlignment::GHA_LEFT);
+	_hudTextWidget = _mSdkTrayMgr->createHUDText(OgreBites::TL_CENTER, "HUDText", "<insert text here>", 300, 40);
+	Ogre::OverlayContainer* container = dynamic_cast<Ogre::OverlayContainer*>(_hudTextWidget->getOverlayElement());
+
+	container->hide();
+
 	_staminaBarWidget->getOverlayElement()->setLeft(-128);
+}
+
+void UIManager::update(const Ogre::FrameEvent& pFE) 
+{
+	if(_hudTextOn) {
+		_hudTimer -= pFE.timeSinceLastFrame;
+
+		if(_hudTimer <= 0) {
+			hideHUDText();
+		}
+	}
+}
+
+void UIManager::showHUDText(Ogre::String pHUDText) 
+{
+	_hudTextWidget->setText(pHUDText);
+
+	_hudTextOn = true;
+	_hudTextWidget->show();
+
+	_hudTimer = _hudTotalTimer;
+}
+
+void UIManager::hideHUDText()
+{
+	_hudTextOn = false;
+	_hudTextWidget->hide();
+
+	_hudTimer = 0;
 }
 
 void UIManager::createDialog(Ogre::String pDialogText) {

@@ -13,6 +13,7 @@ public:
 	
 	void init();
 	void setupUI();
+	void update(const Ogre::FrameEvent&);
 
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
@@ -20,6 +21,8 @@ public:
 	void destroyDialog();
 	void appendDialogText(Ogre::String);
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
+
+	void showHUDText(Ogre::String);
 
 private:
 	OgreBites::SdkTrayManager*	_mSdkTrayMgr;
@@ -29,13 +32,21 @@ private:
 	OgreBites::InputContext     _mInputContext;
 
 	OgreBites::TextBox*			_mDialogTextArea;
+	
 	OgreBites::DecorWidget*		_healthBarWidget;
 	OgreBites::DecorWidget*		_staminaBarWidget;
 
+	OgreBites::HUDText*			_hudTextWidget;
+	float						_hudTotalTimer;
+	float						_hudTimer;
+	bool						_hudTextOn;
 	Ogre::SceneNode*			_uiNode;
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;
+
+	void hideHUDText();
+
 };
 
 #endif

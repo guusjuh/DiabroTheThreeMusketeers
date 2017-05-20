@@ -1,15 +1,15 @@
 UI/Caption
 {
 	type 		truetype
-	source 		CelticHand.ttf
-	size 		15
+	source 		FantasyFont.ttf
+	size 		20
 	resolution 	96
 }
 
 UI/Value
 {
 	type 		truetype
-	source 		CelticHand.ttf
+	source 		FantasyFont.ttf
 	size 		10
 	resolution 	96
 }

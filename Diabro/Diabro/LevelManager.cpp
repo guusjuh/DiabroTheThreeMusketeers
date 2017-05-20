@@ -36,12 +36,6 @@ void LevelManager::initialize()
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
 
-	// ground 
-	/*createGroundMesh();
-	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
-	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
-	_groundEntity->setMaterialName("Examples/Rockwall");*/
-
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->setPosition(Ogre::Vector3(0, 100, 0));

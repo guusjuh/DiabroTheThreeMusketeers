@@ -152,7 +152,8 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
 
 	_levelManager->update(pFE);
- 
+	_uiManager->update(pFE);
+
 	return ret;
 }
 
@@ -193,6 +194,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	
 	case OIS::KC_LSHIFT:
 		_levelManager->playerScript->toggleRun(true);
+		_uiManager->showHUDText("Run bitch run!");
 		break;
 
 	case OIS::KC_E:
