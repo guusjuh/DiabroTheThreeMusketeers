@@ -7,7 +7,8 @@ template<typename T>
 class StateMachine
 {
 public:
-	StateMachine(T owner, State<T> startState, std::map<std::string, State<T>> possibleStates);
+	StateMachine(T* owner, State<T> startState, std::map<std::string, State<T>> possibleStates);
+	StateMachine() {}
 	~StateMachine();
 
 	std::map<std::string, State<T>> _possibleStates;
@@ -21,7 +22,7 @@ public:
 private:
 	State<T>* _currentState;
 	State<T>* _previous;
-	T _owner;
+	T* _owner;
 	
 };
 

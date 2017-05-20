@@ -1,13 +1,13 @@
 #include "StateMachine.h"
-#include "BasicEnemy.h"
+#include "Character.h"
 
 template<typename T>
-StateMachine<T>::StateMachine(T owner, State<T> startState, std::map<std::string, State<T>> possibleStates)
+StateMachine<T>::StateMachine(T* owner, State<T> startState, std::map<std::string, State<T>> possibleStates)
 {
 	_owner = owner;
 	_possibleStates = possibleStates;
 	_currentState = nullptr;
-	setState(startState);
+	this->setState(startState);
 }
 
 template<typename T>
@@ -18,8 +18,8 @@ StateMachine<T>::~StateMachine(){
 template<typename T>
 void StateMachine<T>::update()
 {
-	if (getCurrentState() != nullptr){
-		getCurrentState()->Execute(_owner);
+	if (this->getCurrentState() != nullptr){
+		this->getCurrentState()->Execute(_owner);
 	}
 }
 
@@ -38,4 +38,4 @@ void StateMachine<T>::setState(State<T> newState){
 	_currentState->Enter(_owner);
 }
 
-template class StateMachine < BasicEnemy > ;
+template class StateMachine < int > ;

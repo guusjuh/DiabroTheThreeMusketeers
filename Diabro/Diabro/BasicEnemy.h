@@ -2,18 +2,21 @@
 #define BASE_ENEMY_H_
 
 #include "BaseNpc.h"
+#include "StateMachine.h"
+#include "IdleState.h"
 
 class BasicEnemy : public BaseNpc
 {
 public:
 	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*);
-	BasicEnemy() {}
 	~BasicEnemy() {}
 
 	void update(Ogre::Real) override;
 	void die() override;
 
 	static Ogre::String getMeshName() { return "robot.mesh"; }
+
+	StateMachine<int> stateMachine;
 
 private:
 	//TODO: this code may be moved to the BaseNPC 

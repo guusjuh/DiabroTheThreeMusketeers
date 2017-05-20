@@ -1,5 +1,5 @@
 #include "State.h"
-#include "BasicEnemy.h"
+#include "Character.h"
 
 template<typename T>
 State<T>::State() {}
@@ -7,4 +7,4 @@ State<T>::State() {}
 template<typename T>
 State<T>::~State() {}
 
-template class State< BasicEnemy > ;
+template class State<int>;

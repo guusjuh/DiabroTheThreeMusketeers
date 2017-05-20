@@ -10,14 +10,14 @@ IdleState::~IdleState()
 	
 }
 
-void IdleState::Enter(BasicEnemy agent){
+void IdleState::Enter(int* agent){
 
 }
 
-void IdleState::Execute(BasicEnemy agent){
+void IdleState::Execute(int* agent){
 
 }
 
-void IdleState::Exit(BasicEnemy agent){
+void IdleState::Exit(int* agent){
 
 }

@@ -9,9 +9,9 @@ public:
 	State();
 	~State();
 
-	void Enter(T agent) {}
-	void Execute(T agent) {}
-	void Exit(T agent) {}
+	void Enter(T* agent) {}
+	void Execute(T* agent) {}
+	void Exit(T* agent) {}
 };
 
 #endif
