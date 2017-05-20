@@ -5,6 +5,7 @@
 #include <OgreBillboardSet.h>
 #include "BaseApplication.h"
 #include "SdkTrays.h"
+#include "UIElements.h"
 
 class UIManager
 {
@@ -13,29 +14,38 @@ public:
 	
 	void init();
 	void setupUI();
+	void update(const Ogre::FrameEvent&);
 
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
-	void createDialog(Ogre::String);
+	void showDialog(Ogre::String, Ogre::String);
 	void destroyDialog();
 	void appendDialogText(Ogre::String);
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
+	void showHUDText(Ogre::String);
+
 private:
-	OgreBites::SdkTrayManager*	_mSdkTrayMgr;
-	OgreBites::SdkTrayListener* _mSdkTrayListener;
+	DiabroUI::UIElementsManager*	_uiElementMgr;
+	Ogre::SceneNode*			_uiNode;
 
 	Ogre::RenderWindow*			_mWindow;
-	OgreBites::InputContext     _mInputContext;
 
-	OgreBites::TextBox*			_mDialogTextArea;
-	OgreBites::DecorWidget*		_healthBarWidget;
-	OgreBites::DecorWidget*		_staminaBarWidget;
+	DiabroUI::DialogTextBox*	_mDialogTextArea;
+	
+	DiabroUI::Bar*				_healthBarWidget;
 
-	Ogre::SceneNode*			_uiNode;
+	DiabroUI::HUDText*			_hudTextWidget;
+	float						_hudTotalTimer;
+	float						_hudTimer;
+	bool						_hudTextOn;
+
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;
+
+	void hideHUDText();
+
 };
 
 #endif

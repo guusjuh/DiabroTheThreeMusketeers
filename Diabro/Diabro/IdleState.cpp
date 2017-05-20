@@ -1,7 +1,6 @@
 #include "IdleState.h"
 
-IdleState::IdleState(int pId, std::string pName) 
-: State(pId, pName)
+IdleState::IdleState() 
 {
 	
 }
@@ -9,4 +8,16 @@ IdleState::IdleState(int pId, std::string pName)
 IdleState::~IdleState()
 {
 	
+}
+
+void IdleState::Enter(Character* agent){
+
+}
+
+void IdleState::Execute(Character* agent){
+
+}
+
+void IdleState::Exit(Character* agent){
+
 }

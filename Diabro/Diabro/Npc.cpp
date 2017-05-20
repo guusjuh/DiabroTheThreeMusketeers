@@ -9,8 +9,6 @@
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
 : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding)
 {
-	//GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->GetZone(1,1).cities[0]
-
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
 	_dialogFile.open("DialogText.txt");
@@ -83,7 +81,6 @@ std::vector<std::string> Npc::getNameOptions() {
 	return _nameOptions;
 }
 
-
 /// <summary>
 /// Updates the frame based on the specified deltatime.
 /// </summary>
@@ -108,11 +105,11 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 {
 	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
 	
-	if (distance < 500) // needs to be tweaked
+	if (distance < 1000000000000) // needs to be tweaked
 	{
 		_inDialog = true;
 
-		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, "Hello! Nice to meet you, sir! I'm telling you a long story. This way I can test whether or not the text goes to the next line.. that would be nice, wouldn't it?");
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;

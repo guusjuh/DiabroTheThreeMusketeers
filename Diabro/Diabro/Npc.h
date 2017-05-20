@@ -13,8 +13,6 @@ enum Profession {
 	Shopkeeper,
 	Nobleman,
 
-	//Dungeoneer,
-
 	AMOUNT_OF_PROFS
 };
 
@@ -26,9 +24,7 @@ public:
 
 	static Ogre::String getMeshName() { return "penguin.mesh"; }
 
-	bool getInDialog() {
-		return _inDialog;
-	}
+	bool getInDialog() { return _inDialog; }
 
 	void update(Ogre::Real) override;
 	bool dialog(Ogre::Vector3);

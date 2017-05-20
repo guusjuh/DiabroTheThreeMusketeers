@@ -1,0 +1,167 @@
+material UI/Base
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend alpha_blend
+            depth_check off
+            
+            texture_unit
+            {
+                tex_address_mode clamp
+                filtering linear linear none
+            }
+        }
+    }
+}
+
+material UI/MiniTray : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture mini_tray.png
+            }
+        }
+    }
+}
+
+material UI/TextBox : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture text_box.png
+            }
+        }
+    }
+}
+
+material UI/Green
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture greenBox.jpg
+         }
+      }
+   }
+}
+
+material UI/HealthBar : UI/Base
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture healthBar.png
+         }
+      }
+   }
+}
+
+material UI/BarBackground : UI/Base
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture barBackground.png
+         }
+      }
+   }
+}
+
+material UI/Yellow
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+         texture_unit
+         {
+			texture yellowBox.jpg
+         }
+      }
+   }
+}
+
+material UI/Grey
+{
+   technique
+   {
+      pass
+      {
+		lighting off
+         
+         texture_unit
+         {
+			texture greyBox.jpg
+         }
+      }
+   }
+}
+
+material UI/Transparent : UI/Base
+{
+   technique
+   {
+      pass
+      {         
+         texture_unit
+         {
+			texture transparant.png
+         }
+      }
+   }
+}
+
+material UI/LocatorSister : UI/Base
+{
+   technique
+   {
+      pass
+      {
+		lighting off
+         
+         texture_unit
+         {
+			texture Locator-Sister.png
+         }
+      }
+   }
+}
+
+material UI/LocatorQuest : UI/Base
+{
+   technique
+   {
+      pass
+      {
+		lighting off
+         
+         texture_unit
+         {
+			texture Locator-Quest.png
+         }
+      }
+   }
+}

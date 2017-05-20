@@ -6,7 +6,6 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 #include "SdkTrays.h"
-#include "TestFSM.h"
 #include "Tree.h"
 
 //---------------------------------------------------------------------------
@@ -16,7 +15,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _gameTimer(0), _questManager(0)
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0)
 {
 }
 //---------------------------------------------------------------------------
@@ -28,7 +27,6 @@ GameManager::~GameManager()
 	delete _gameTimer;
 	delete _levelManager;
 	delete _uiManager;
-	delete _itemManager;
 }
 
 //---------------------------------------------------------------------------
@@ -62,9 +60,6 @@ GameManager& GameManager::getSingleton(void)
 void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
-	_itemInstanceNumber = 0;
-
-	_itemManager = new ItemManager();
 
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
@@ -108,7 +103,7 @@ void GameManager::createCamera()
 	mCamera = mSceneMgr->createCamera("MainCam");
 
 	// set pos and rot
-	mCamera->setPosition(Ogre::Vector3(0, 150, 300));
+	mCamera->setPosition(Ogre::Vector3(0, 200, 300));
 	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
 	mCamera->setNearClipDistance(5);
 
@@ -152,7 +147,8 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
 
 	_levelManager->update(pFE);
- 
+	_uiManager->update(pFE);
+
 	return ret;
 }
 
@@ -178,6 +174,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
+		_uiManager->showHUDText("I'm going backwards! Omg waaaaaaaaaaaaaaaaaaaah");
 		dirVec.z = 1;
 		break;
 
@@ -190,50 +187,12 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	case OIS::KC_D:
 		dirVec.x = 1;
 		break;
-	
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(true);
-		break;
 
+		_uiManager->showHUDText("Run bitch run!");
 	case OIS::KC_E:
-		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
-		{
-			ItemInstance* item = _levelManager->getItemInstances()[i];
-			//check if the item is within pickup range.
-			if (item->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
-			{
-				//TODO: equipitem player for now, later on we should use inventory system.
-				switch (reinterpret_cast<EquipmentInstance*>(item)->getType())
-				{
-				case 0:
-					//weapon
-					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(item));
-					item->destroyItemInWorld();
-					break;
-				case 1:
-					//gear
-					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(item));
-					item->destroyItemInWorld();
-					break;
-				case 2:
-					//jewelry
-					break;
-				}
-				break;
-			}
-		}
-		break;
-	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
-	case OIS::KC_F:
-		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-		}
-		else {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
-		}
-
-		//check if the item is within pickup range.
-
+		//TODO: find the closed NPC
+		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
+		else dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
 		break;
 
 	case OIS::KC_SPACE:
@@ -277,15 +236,6 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
 		dirVec.x = 0;
-		break;
-
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(false);
-		break;
-
-	//TODO: this code should end the conversation with the current talking to NPC
-	//TODO: maybe write own casts for character types
-	case OIS::KC_F:
 		break;
 
 	default:

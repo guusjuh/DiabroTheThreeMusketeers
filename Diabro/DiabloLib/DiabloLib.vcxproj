@@ -144,21 +144,15 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Diabro\Affix.h" />
     <ClInclude Include="..\Diabro\BaseApplication.h" />
-    <ClInclude Include="..\Diabro\BaseEquipment.h" />
-    <ClInclude Include="..\Diabro\BaseItem.h" />
     <ClInclude Include="..\Diabro\BaseNpc.h" />
-    <ClInclude Include="..\Diabro\BaseWeapon.h" />
     <ClInclude Include="..\Diabro\BasicEnemy.h" />
     <ClInclude Include="..\Diabro\Character.h" />
     <ClInclude Include="..\Diabro\CharacterSpawner.h" />
     <ClInclude Include="..\Diabro\CharacterStats.h" />
     <ClInclude Include="..\Diabro\City.h" />
-    <ClInclude Include="..\Diabro\EquimentInstance.h" />
     <ClInclude Include="..\Diabro\FloatRange.h" />
     <ClInclude Include="..\Diabro\GameManager.h" />
-    <ClInclude Include="..\Diabro\ItemInstance.h" />
     <ClInclude Include="..\Diabro\LevelGenerator.h" />
     <ClInclude Include="..\Diabro\LevelManager.h" />
     <ClInclude Include="..\Diabro\Modifier.h" />
@@ -170,18 +164,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Diabro\BaseApplication.cpp" />
-    <ClCompile Include="..\Diabro\BaseEquipment.cpp" />
-    <ClCompile Include="..\Diabro\BaseItem.cpp" />
     <ClCompile Include="..\Diabro\BaseNpc.cpp" />
     <ClCompile Include="..\Diabro\BaseWeapon.cpp" />
     <ClCompile Include="..\Diabro\BasicEnemy.cpp" />
     <ClCompile Include="..\Diabro\Character.cpp" />
     <ClCompile Include="..\Diabro\CharacterSpawner.cpp" />
     <ClCompile Include="..\Diabro\City.cpp" />
-    <ClCompile Include="..\Diabro\EquimentInstance.cpp" />
     <ClCompile Include="..\Diabro\FloatRange.cpp" />
     <ClCompile Include="..\Diabro\GameManager.cpp" />
-    <ClCompile Include="..\Diabro\ItemInstance.cpp" />
     <ClCompile Include="..\Diabro\LevelManager.cpp" />
     <ClCompile Include="..\Diabro\Npc.cpp" />
     <ClCompile Include="..\Diabro\Player.cpp" />

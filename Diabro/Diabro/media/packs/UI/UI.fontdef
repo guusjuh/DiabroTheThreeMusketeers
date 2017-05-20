@@ -1,0 +1,15 @@
+UI/Caption
+{
+	type 		truetype
+	source 		FantasyFont.ttf
+	size 		20
+	resolution 	96
+}
+
+UI/Value
+{
+	type 		truetype
+	source 		FantasyFont.ttf
+	size 		20
+	resolution 	96
+}

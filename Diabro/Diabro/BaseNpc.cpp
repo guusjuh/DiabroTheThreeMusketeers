@@ -8,7 +8,7 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f), _myCity(pMyCity)
+BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : Character(pMyNode, pMyEntity), _timer(0), _noticeDistance(400.0f), _myCity(pMyCity)
 {
 	_myRotationNode = pMyRotationNode;
 	//wander();
@@ -25,11 +25,11 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 	detectPlayer();
 
 	if (!_playerDetected) {
-		_timeSince += pDeltatime;
+		_timer += pDeltatime;
 
-		if (_timeSince > 2)
+		if (_timer > 2)
 		{
-			_timeSince = 0;
+			_timer = 0;
 			wander();
 		}
 	}
@@ -45,7 +45,6 @@ void BaseNpc::rotatePivot(Ogre::Vector3 pRotationDegrees) {
 	_myRotationNode->roll(Ogre::Degree(pRotationDegrees.z), Ogre::Node::TS_LOCAL);
 }
 
-
 /// <summary>
 /// Detects the player if he is in range.
 /// </summary>
@@ -58,27 +57,18 @@ void BaseNpc::detectPlayer()
 		_playerDetected = false;
 	}
 }
+
 /// <summary>
 /// Lets this instance wander randomly.
 /// </summary>
-void BaseNpc::wander() {
-
-	//Switch direction
-	//generate a random integer value 1-4 every second
+void BaseNpc::wander() 
+{
 	Coordinate coord = _myCity->getRandomPoint();
-
-	//TODO: shouldn't be able to walk out of the level, clamp
 	walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
 }
 
-void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
-	/*
-	_dirVec = targetPos - getPosition();
-	_dirVec.normalise();
-	_dirVec.y = 0;*/
-
-
-	
+void BaseNpc::walkTo(Ogre::Vector3 targetPos) 
+{
 	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
 	_dirVec = Ogre::Vector3(1, 0, 0);
 }
