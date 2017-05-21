@@ -8,9 +8,11 @@ LevelGenerator::LevelGenerator():
 scalar(1000)
 {
 	//create zone and generate dungeon
-	_zone[0] = Zone(18, 18, 5, 5, 10, 500);
+	_zone[0] = Zone(10, 10, 3, 3, 5, 500);
 	
-	drawDungeonFloor(_zone[0]);
+
+	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
+	_zone[0].printGrid();
 }
 
 LevelGenerator::~LevelGenerator()
@@ -34,7 +36,7 @@ Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 /// transforms a grid coordinate to a world position
 /// \param pGridCoord grid coordinate
 Coordinate LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
-	return Coordinate(pGridCoord.x * scalar, pGridCoord.z * scalar);
+	return Coordinate((pGridCoord.x + 0.5f) * scalar, (pGridCoord.z + 0.5f) * scalar);
 }
 
 /// retrieve zone
@@ -55,43 +57,49 @@ Zone LevelGenerator::getZone(int pX, int pZ) {
 
 /// \param pZone zone from which to draw the tiles
 void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
-	Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
-	createTileMesh("tileMesh", Ogre::ColourValue(1.0f, 0.0f, 1.0f, 1.0f));
-	donaldTrump("wallNorth", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f), NorthDT);
-	donaldTrump("wallEast", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f), EastDT);
-	donaldTrump("wallSouth", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f), SouthDT);
-	donaldTrump("wallWest", Ogre::ColourValue(1.0f, 1.0f, 0.0f, 1.0f), WestDT);
+	createTileMesh("tileMesh", pCol);
+	donaldTrump("wallMesh", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f));
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
 				Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				thisSceneNode->setPosition(ix * scalar, 0, iz * scalar);
+				Ogre::SceneNode* wallNode = thisSceneNode->createChildSceneNode();
+				wallNode->setPosition(Ogre::Vector3(scalar / 2.0f, 0, scalar / 2.0f));
 
 				std::stringstream name;
 				name << "tile_" << ix << "-" << iz;
 
 				if (!pZone.getTile(ix, iz - 1)) {
-					Ogre::Entity* nWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("northWall: " + name.str(), "wallNorth");
+					Ogre::SceneNode* north = wallNode->createChildSceneNode();
+					Ogre::Entity* nWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("northWall" + name.str(), "wallMesh");
+					//north->yaw(Ogre::Radian(90 * Ogre::Math::PI / 180));
 					nWallEntity->setMaterialName("Examples/Rockwall");
-					thisSceneNode->attachObject(nWallEntity);
+					north->attachObject(nWallEntity);
 				}
-				if (!pZone.getTile(ix - 1, iz )) {
-					Ogre::Entity* eWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("eastWall: " + name.str(), "wallEast");
+				if (!pZone.getTile(ix - 1, iz)) {
+					Ogre::SceneNode* east = wallNode->createChildSceneNode();
+					Ogre::Entity* eWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("eastWall" + name.str(), "wallMesh");
 					eWallEntity->setMaterialName("Examples/Rockwall");
-					thisSceneNode->attachObject(eWallEntity);
+					east->attachObject(eWallEntity);
+					east->yaw(Ogre::Radian(90 * Ogre::Math::PI / 180));
 				}
 				if (!pZone.getTile(ix, iz + 1)) {
-					Ogre::Entity* sWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("southWall: " + name.str(), "wallSouth");
+					Ogre::SceneNode* south = wallNode->createChildSceneNode();
+					Ogre::Entity* sWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("southWall" + name.str(), "wallMesh");
 					sWallEntity->setMaterialName("Examples/Rockwall");
-					thisSceneNode->attachObject(sWallEntity);
+					south->attachObject(sWallEntity);
+					south->yaw(Ogre::Radian(180 * Ogre::Math::PI / 180));
 				}
 				if (!pZone.getTile(ix + 1, iz)) {
-					Ogre::Entity* wWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("westWall: " + name.str(), "wallWest");
+					Ogre::SceneNode* west = wallNode->createChildSceneNode();
+					Ogre::Entity* wWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("westWall" + name.str(), "wallMesh");
 					wWallEntity->setMaterialName("Examples/Rockwall");
-					thisSceneNode->attachObject(wWallEntity);
+					west->attachObject(wWallEntity);
+					west->yaw(Ogre::Radian(-90 * Ogre::Math::PI / 180));
 				}
 
-				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), (ix == 4 && iz == 2)?"tileMesh2" : "tileMesh");
+				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), "tileMesh");
 				//testCity->setMaterialName("Test/ColourTest");
 				zoneEntity->setMaterialName("Examples/Rockwall");
 				thisSceneNode->attachObject(zoneEntity);
@@ -100,64 +108,30 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 	}
 }
 
-/*/// creates a plane mesh using Ogre's Mesh manager
-/// \param pName name of the plane (in format tile_x-z)
-void LevelGenerator::createPlane(std::string pName)
-{
-	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-	Ogre::MeshManager::getSingleton().createPlane(
-		pName,
-		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		plane,
-		scalar, scalar, 2, 2,
-		true,
-		1, 5, 5,
-		Ogre::Vector3::UNIT_Z);
-}*/
-
-void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol, DirectionType direction) const {
+/// We're gonna build a wall!
+/// \param pName unique name for retrieving the mesh object
+/// \param pCol a colour modification to the object (white is normal colours)
+void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol) const {
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(pName, "General");
 
 	Ogre::SubMesh* sub = mesh->createSubMesh();
 
 	const float sqrt13(1 / 3);
-	int x = scalar, y = scalar, z = scalar;
-	bool clockWise = true;
 
-	switch (direction) {
-	case NorthDT:
-		x = scalar;
-		z = 0;
-		break;
-	case EastDT:
-		x = 0;
-		z = scalar;
-		break;
-	case SouthDT:
-		x = scalar;
-		z = 0;
-		clockWise = false;
-		break;
-	case WestDT:
-		x = 0;
-		z = scalar;
-		clockWise = false;
-		break;
-	}
 	//create vertices
 	const size_t nVertices = 4;
 	const size_t vBufCount = 8 * nVertices;
 	float vertices[vBufCount] = {
-		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z),			 //1
+		static_cast<float>(scalar / 2.0f), static_cast<float>(0), -(scalar / 2.0f),			 //1
 		sqrt13,  -sqrt13, -sqrt13,
 		1,0,
-		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z),				 //2
+		static_cast<float>(-(scalar / 2.0f)), static_cast<float>(0), -(scalar / 2.0f),				 //2
 		-sqrt13, -sqrt13, -sqrt13,
 		0,0,
-		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z),       //3
+		static_cast<float>(scalar/2.0f), static_cast<float>(scalar), -(scalar / 2.0f),       //3
 		sqrt13,  -sqrt13, sqrt13,
 		1,1,
-		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z),			 //4
+		static_cast<float>(-(scalar / 2.0f)), static_cast<float>(scalar), -(scalar / 2.0f),			 //4
 		-sqrt13, -sqrt13, sqrt13,
 		0,1
 	};
@@ -175,8 +149,8 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol, Dire
 											  //indices
 	const size_t iBufCount = 6;
 	unsigned short faces[iBufCount] = {
-		0, (clockWise) ? 3 : 2, (clockWise) ? 2 : 3,
-		1, (clockWise) ? 3 : 0, (clockWise) ? 0 : 3
+		0, 2, 3,
+		1, 0, 3
 	};
 
 	mesh->sharedVertexData = new Ogre::VertexData();
@@ -227,7 +201,7 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol, Dire
 	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
-	mesh->_setBounds(Ogre::AxisAlignedBox(0, 0, 0, scalar, scalar, 0));
+	mesh->_setBounds(Ogre::AxisAlignedBox(Ogre::AxisAlignedBox::EXTENT_INFINITE));
 
 	mesh->load();
 }

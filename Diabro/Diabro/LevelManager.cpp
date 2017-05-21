@@ -25,8 +25,8 @@ void LevelManager::initialize()
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	//Ogre::Vector3 position = Ogre::Vector3((levelGenerator.getZone(0, 0).cities[0].position.x + (levelGenerator.getZone(0, 0).cities[0].width / 2.0f))* levelGenerator.scalar, 0, (levelGenerator.getZone(0, 0).cities[0].position.z + (levelGenerator.getZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator.scalar);
-	playerNode->setPosition(Ogre::Vector3(0,0,0));
+	Coordinate position = levelGenerator.getWorldPosition(levelGenerator.getEmptyPosition(false));
+	playerNode->setPosition(Ogre::Vector3(position.x, 0, position.z));
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
 	
@@ -36,12 +36,6 @@ void LevelManager::initialize()
 	
 	Ogre::SceneNode* enemySpawnerNode = _levelNode->createChildSceneNode("enemySpawn");
 	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(2000, 0, 2000));
-
-	// ground 
-	/*createGroundMesh();
-	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
-	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
-	_groundEntity->setMaterialName("Examples/Rockwall");*/
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());

@@ -504,9 +504,9 @@ void Zone::printGrid() {
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	for (int ix = 0; ix < _width; ++ix) {
-		for (int iy = 0; iy < _depth; ++iy) {
-			printf((getTile(ix, iy) < 10 && getTile(ix, iy) >= 0)?"| " : "|");
-			printf("%d|", getTile(ix, iy));
+		for (int iz = 0; iz < _depth; ++iz) {
+			printf((getTile(iz, ix) < 10 && getTile(iz, ix) >= 0)?"| " : "|");
+			printf("%d|", getTile(iz, ix));
 		}
 		printf("\n");
 	}

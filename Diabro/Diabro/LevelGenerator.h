@@ -32,9 +32,8 @@ private:
 
 	void drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol);
 
-	//Await further implementation
 	void createTileMesh(std::string pName, Ogre::ColourValue pCol) const;
-	void donaldTrump(std::string pName, Ogre::ColourValue pCol, DirectionType direction) const;
+	void donaldTrump(std::string pName, Ogre::ColourValue pCol) const;
 };
 
 #endif
