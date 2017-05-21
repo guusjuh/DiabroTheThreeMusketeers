@@ -22,23 +22,15 @@ public:
 	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, Building*);
 	~Npc();
 
-	static Ogre::String getMeshName() { return "penguin.mesh"; }
-
 	bool getInDialog() { return _inDialog; }
 
 	void update(Ogre::Real) override;
-	bool dialog(Ogre::Vector3);
-	void toggleDialog();
-	void continueDialog();
 	bool talk(Ogre::Vector3);
 	void die() override;
 
 private: 
 	bool _inDialog;					//!< True if the player is currently talking with this NPC.
-	std::ifstream _dialogFile;		//!< File containing the dialog text for this NPC.
 	int _dialogCount;				//!< The amount of different parts the dialog consists of.
-	Ogre::String _startDialogText;	
-	Ogre::String _endDialogText;
 	std::vector<std::string> _dialog;
 
 	std::string _name;

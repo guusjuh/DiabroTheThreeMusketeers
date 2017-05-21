@@ -11,31 +11,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
-	_dialogFile.open("DialogText.txt");
-	if (_dialogFile.fail()) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("Error opening text file, file maybe corrupt or unreachable");
-		fclose(fp);
-#endif
-	}
-	else {
-		std::string line;
-		for (int i = 1; !_dialogFile.eof(); i++)
-		{
-			getline(_dialogFile, line);
-
-			if (i == 1) {
-				_startDialogText = line;
-			}
-			else if (i == 2) {
-				_endDialogText = line;
-			}
-
-		}
-		_dialogFile.close();
-	}
 	
 	_dialog.push_back("Hello! Nice to meet you, sir! I'm telling you a long story. This way I can test whether or not the text goes to the next line.. that would be nice, wouldn't it?");
 	_dialog.push_back("This is the first sentence of the talk.");
@@ -58,13 +33,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 
 	_name = getNameOptions()[GameManager::getSingletonPtr()->getRandomInRange(0, getNameOptions().size())];
 	_needs = new NeedSet(tempNeeds);
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << "Hi, my name is " << _name << " and I am a " << _profession << std::endl;
-	fclose(fp);
-#endif
 }
 
 Npc::~Npc() {
@@ -99,43 +67,6 @@ void Npc::update(Ogre::Real pDeltatime)
 	} 
 }
 
-
-/// <summary>
-/// Starts dialogs based on the distance between this instance and the specified player position.
-/// </summary>
-/// <param name="pPlayerPos">The current player position.</param>
-/// <returns>False if the player is too far away to start a dialog</returns>
-bool Npc::dialog(Ogre::Vector3 pPlayerPos)
-{
-	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
-	
-	if (distance < 1000000000000) // needs to be tweaked
-	{
-		_inDialog = true;
-
-		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, "Hello! Nice to meet you, sir! I'm telling you a long story. This way I can test whether or not the text goes to the next line.. that would be nice, wouldn't it?");
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("dialog on\n");
-		fclose(fp);
-#endif
-		
-		return true;
-	} else
-	{
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("out of range for dialog\n");
-		fclose(fp);
-#endif
-		
-		return false;
-	}
-}
-
 /// <summary>
 /// Dies this instance.
 /// </summary>
@@ -143,20 +74,6 @@ void Npc::die() {
 	Character::die();
 	
 	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
-}
-
-/// <summary>
-/// Starts dialogs based on the distance between this instance and the specified player position.
-/// </summary>
-void Npc::toggleDialog() {
-	_inDialog = false;
-	try {
-		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
-	}
-
-	catch (...) {
-		return;
-	};
 }
 
 /// <param name="pPlayerPos">The current player position.</param>

@@ -17,8 +17,6 @@ public:
 protected:
 	Ogre::SceneNode* _myRotationNode;
 	City* _myCity;
-
-	float _noticeDistance;
 	bool _playerDetected;
 
 	virtual void detectPlayer(); 

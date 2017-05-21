@@ -52,8 +52,6 @@ GameManager& GameManager::getSingleton(void)
 
 //---------------------------------------------------------------------------
 
-
-
 /// <summary>
 /// Creates the scene.
 /// </summary>

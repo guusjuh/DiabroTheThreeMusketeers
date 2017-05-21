@@ -15,7 +15,6 @@ public:
 	float getMaxHealth() { return _maxHealth; }
 	void update(Ogre::Real) override;
 
-
 	bool adjustHealth(float) override;
 	bool lightAttack() override;
 	void gainXP(int);

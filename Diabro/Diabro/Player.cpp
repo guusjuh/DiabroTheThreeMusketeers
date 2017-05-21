@@ -16,7 +16,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
-	_noticeDistance = 100;
+	_noticeDistance = 300;
 	_nearbyNPC = nullptr;
 	_inDialog = false;
 
