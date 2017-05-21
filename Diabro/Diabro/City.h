@@ -3,6 +3,7 @@
 #include <vector>
 #include <OgreSceneNode.h>
 #include "IQuestContent.h"
+#include "math.h"
 
 /// integer coordinate representing a 2D position
 struct Coordinate {
@@ -73,8 +74,13 @@ public:
 
 	std::vector<Coordinate> buildingPositions();
 
-private:
-	void setRndType();
+	float getDistTo(City* other) {
+		float xDist = other->position.x - position.x;
+		float yDist = other->position.z - position.z;
+
+		return sqrt(abs(pow(xDist, 2) + pow(yDist, 2)));
+	}
+	void setType(int type = -1);
 
 protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
@@ -91,7 +97,9 @@ private:
 	int buildingId;
 	int parentIteration;
 	int childIteration;
+
 	void generateBuildings();
+
 	int _scaledWidth;
 	int _scaledDepth;
 	int *_tiles2;

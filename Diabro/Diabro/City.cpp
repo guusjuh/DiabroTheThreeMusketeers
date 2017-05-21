@@ -6,7 +6,7 @@
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(500)
 {
-	setRndType();
+	//setType();
 }
 
 void City::init()
@@ -34,11 +34,14 @@ Coordinate City::getRandomTile() {
 }
 
 /// assigns the city a random type
-void City::setRndType()
+void City::setType(int type)
 {
-	//TODO:improve picking method
-	srand(355 * id);
-	typeFlag = static_cast<RoomType> (rand() % static_cast<int>(RoomType::sizeRT));
+	if(type == -1) {
+		srand(355 * id);
+		typeFlag = (RoomType)(rand() % (int)(sizeRT));
+	} else {
+		typeFlag = type < (int)sizeRT ? (RoomType)type : (RoomType)0;
+	}
 }
 
 void City::generateBuildings()

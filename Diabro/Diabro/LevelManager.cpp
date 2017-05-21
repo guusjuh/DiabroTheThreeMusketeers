@@ -29,8 +29,7 @@ void LevelManager::initialize()
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	Coordinate position = levelGenerator->getWorldPosition(levelGenerator->getEmptyPosition(false));
-	playerNode->setPosition(Ogre::Vector3(position.x, 0, position.z));
+	playerNode->setPosition(levelGenerator->getStartPos());
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
 	// camera

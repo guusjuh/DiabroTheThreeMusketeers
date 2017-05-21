@@ -12,6 +12,8 @@ scalar(500)
 
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
+
+	determineCityTypes();
 }
 
 
@@ -35,8 +37,8 @@ Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 
 /// transforms a grid coordinate to a world position
 /// \param pGridCoord grid coordinate
-Coordinate LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
-	return Coordinate((pGridCoord.x + 0.5f) * scalar, (pGridCoord.z + 0.5f) * scalar);
+Ogre::Vector3 LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
+	return Ogre::Vector3((pGridCoord.x + 0.5f) * scalar, 0, (pGridCoord.z + 0.5f) * scalar);
 }
 
 /// retrieve zone
@@ -302,4 +304,40 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 	mesh->_setBounds(Ogre::AxisAlignedBox(0, 0, 0, scalar, 0, scalar));
 
 	mesh->load();
+}
+
+void LevelGenerator::determineCityTypes() {
+	// if not two cities: problems!
+	if(_zone[0].cities.size() < 2) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("Not enough cities to play this dungeon!");
+		fclose(fp);
+#endif
+		return;
+	}
+	
+	// start
+	_startCity = &_zone[0].cities[0];
+
+	// end
+	City* furtherstCity = &_zone[0].cities[1];
+	float dist = _startCity->getDistTo(furtherstCity);
+	for (int i = 1; i < _zone[0].cities.size(); ++i) {
+		_zone[0].cities[i].setType();
+		
+		if(_startCity->getDistTo(&_zone[0].cities[i]) > dist) {
+			furtherstCity = &_zone[0].cities[i];
+			dist = _startCity->getDistTo(&_zone[0].cities[i]);
+		}
+	}
+
+	furtherstCity->setType((int)HideoutRT);
+	Ogre::SceneNode* sisNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("TesterNode");
+	Ogre::Entity* _sis = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
+	sisNode->createChildSceneNode()->attachObject(_sis);
+	sisNode->setPosition(Ogre::Vector3(furtherstCity->getCenterTile().x * scalar, 0, furtherstCity->getCenterTile().z* scalar));
+
+	_endCity = furtherstCity;
 }
