@@ -35,9 +35,13 @@ public:
 	static GameManager* getSingletonPtr(void);
 
 	void goNextState() {
-		if (state == End) reset();
+		if (state == End) {
+			reset();
+			return;
+		}
 		state = (GameState)(((int)state + 1) % 3);
 	}
+	void reset();
 
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return mCamera; }
@@ -67,7 +71,6 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
 	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 
-	void reset();
 
 	LevelManager* _levelManager;
 	UIManager* _uiManager;

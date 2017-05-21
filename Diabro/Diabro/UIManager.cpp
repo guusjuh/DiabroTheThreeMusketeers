@@ -135,7 +135,6 @@ bool UIManager::showEndText() {
 			GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
 			_textCount = 0;
 			_storyTextOn = false;
-			_first = false;
 		}
 	}
 
