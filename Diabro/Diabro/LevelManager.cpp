@@ -29,8 +29,8 @@ void LevelManager::initialize()
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	Ogre::Vector3 position = Ogre::Vector3((levelGenerator->getZone(0, 0).cities[0].position.x + (levelGenerator->getZone(0, 0).cities[0].width / 2.0f))* levelGenerator->scalar, 0, (levelGenerator->getZone(0, 0).cities[0].position.z + (levelGenerator->getZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
-	playerNode->setPosition(position);
+	Coordinate position = levelGenerator->getWorldPosition(levelGenerator->getEmptyPosition(false));
+	playerNode->setPosition(Ogre::Vector3(position.x, 0, position.z));
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
 	// camera

@@ -76,7 +76,6 @@ public:
 private:
 	void setRndType();
 
-
 protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
 	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another

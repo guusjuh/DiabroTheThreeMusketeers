@@ -3,6 +3,14 @@
 #include <OgreSceneManager.h>
 #include "Zone.h"
 
+///directions
+enum DirectionType
+{
+	NorthDT,
+	EastDT,
+	SouthDT,
+	WestDT
+};
 
 class LevelGenerator
 {
@@ -20,15 +28,12 @@ public:
 	int scalar; ///< scales grid position to world positions
 
 private:
-	Zone _zone[1]; ///<holds differnt zones in level
+	Zone _zone[1]; ///<holds different zones in level
 
-	void drawDungeonFloor(int pScalar, Zone pZone);
-	void createPlane(std::string pName);
+	void drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol);
 
-	//Await further implementtation
-	//void createTileMesh(int pScalar, Coordinate pPosition, std::string pName);
-	//void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
-	//void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
+	void createTileMesh(std::string pName, Ogre::ColourValue pCol) const;
+	void donaldTrump(std::string pName, Ogre::ColourValue pCol) const;
 
 	void spawnCityContent();
 	void placeEnemySpawnNode(City*, int);
