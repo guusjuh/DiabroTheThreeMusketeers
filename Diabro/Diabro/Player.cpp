@@ -27,6 +27,8 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_myNode = pMyNode;
 	_myEntity = pMyEntity;
 
+	setDirVector(Ogre::Vector3(0, 0, 0));
+
 	_inDialog = false;
 	_nearbyNPC = nullptr;
 }

@@ -79,7 +79,6 @@ void GameManager::createScene(void)
 
 void GameManager::reset() {
 	getSceneManager()->clearScene();
-
 	_levelManager->reset();
 
 	state = Start;
