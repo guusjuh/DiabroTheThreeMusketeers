@@ -18,6 +18,8 @@ public:
 	LevelGenerator();
 	~LevelGenerator();
 
+	void restart();
+
 	Zone getZone(Coordinate pZoneId);
 	Zone getZone(int pX, int pZ);
 	
@@ -25,6 +27,11 @@ public:
 	Coordinate getGridPosition(Coordinate pGridCoord);
 	Coordinate getEmptyPosition(bool pEmptyNeighbours);
 	
+	float getDistToSis(Ogre::Vector3 otherPos) {
+		return sqrt(abs(pow((_sisterNode->getPosition() - otherPos).x, 2)
+			+ pow((_sisterNode->getPosition() - otherPos).z, 2)));
+	}
+
 	Ogre::Vector3 getStartPos() {
 		return getWorldPosition(_startCity->position);
 	}
@@ -36,6 +43,8 @@ private:
 
 	City* _startCity;
 	City* _endCity;
+	
+	Ogre::SceneNode* _sisterNode;
 
 	void drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol);
 
@@ -46,6 +55,9 @@ private:
 	void spawnCityContent();
 	void placeEnemySpawnNode(City*, int);
 	void spawnNPCs(City*, Building*);
+
+	Ogre::SceneNode* _dungeonNode;
+	std::vector<Ogre::Entity*> _content;
 };
 
 #endif

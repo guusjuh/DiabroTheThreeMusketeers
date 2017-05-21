@@ -8,7 +8,7 @@
 /// </summary>
 UIManager::UIManager() 
 : _uiNode(0), _healthBarWidget(0), _maxWidthBar(0), _heightBar(0), 
-_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0)
+_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0), _storyTextOn(false)
 {
 }
 
@@ -23,6 +23,20 @@ void UIManager::init()
 
 	_maxWidthBar = _healthBarWidget->getOverlayElement()->getWidth();
 	_heightBar = _healthBarWidget->getOverlayElement()->getHeight();
+
+	_startGameText.push_back("Sis, where are you? Where did you go?");
+	_startGameText.push_back("This cave is huge.. How can I find her?");
+	_startGameText.push_back("I'll have to use my wisdom and my sword");
+	
+	_startLevelText.push_back("Where did she go now?!");
+	_startLevelText.push_back("I thought I just found her.");
+	_startLevelText.push_back("Stupid kids, always getting in trouble...");
+	
+	_endLevelText.push_back("There you are!");
+	_endLevelText.push_back("I searched all over the place for you!");
+	_endLevelText.push_back("Now, let's go back home.");	
+
+	_first = true;
 }
 
 /// <summary>
@@ -39,15 +53,93 @@ void UIManager::setupUI()
 	_hudTextWidget = nullptr;
 }
 
-void UIManager::update(const Ogre::FrameEvent& pFE) 
+void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 {
-	if(_hudTextWithTimeOn) {
+	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
-		if(_hudTimer <= 0) {
+		if (_hudTimer <= 0) {
+			hideHUDText();
+			if(!showStartText()) {
+				GameManager::getSingletonPtr()->goNextState();
+			}
+		}
+	}
+	else {
+		showStartText();
+	}
+}
+
+void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
+{
+	if (_hudTextWithTimeOn) {
+		_hudTimer -= pFE.timeSinceLastFrame;
+
+		if (_hudTimer <= 0) {
 			hideHUDText();
 		}
 	}
+}
+
+void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
+{
+	if (_hudTextWithTimeOn) {
+		_hudTimer -= pFE.timeSinceLastFrame;
+
+		if (_hudTimer <= 0) {
+			hideHUDText();
+			if (!showEndText()) {
+				GameManager::getSingletonPtr()->goNextState();
+			}
+		}
+	}
+	else {
+		showEndText();
+	}
+}
+
+bool UIManager::showStartText() {
+	static int _textCount = 0;
+	if (!_storyTextOn) {
+		_storyTextOn = true;
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText((_first ? _startGameText[_textCount] : _startLevelText[_textCount]), 2.5f);
+	}
+	else {
+		_textCount++;
+		if (_textCount < (_first ? _startGameText.size() : _startLevelText.size())) {
+			GameManager::getSingletonPtr()->getUIManager()->showHUDText(_first ? _startGameText[_textCount] : _startLevelText[_textCount], 2.5f);
+		}
+		else {
+			GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
+			_textCount = 0;
+			_storyTextOn = false;
+			_first = false;
+		}
+	}
+
+	return _storyTextOn;
+}
+
+bool UIManager::showEndText() {
+	static int _textCount = 0;
+	if (!_storyTextOn) {
+		_storyTextOn = true;
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText(_endLevelText[_textCount], 2.5f);
+	}
+	else {
+		_textCount++;
+		if (_textCount < _endLevelText.size()) {
+			GameManager::getSingletonPtr()->getUIManager()->showHUDText(_endLevelText[_textCount], 2.5f);
+		}
+		else {
+			GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
+			_textCount = 0;
+			_storyTextOn = false;
+			_first = false;
+		}
+	}
+
+	return _storyTextOn;
 }
 
 void UIManager::showHUDText(Ogre::String pHUDText) 

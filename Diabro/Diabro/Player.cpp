@@ -23,9 +23,20 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_lightAttackCooldown = 1.2f;
 }
 
+void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
+	_myNode = pMyNode;
+	_myEntity = pMyEntity;
+
+	_inDialog = false;
+	_nearbyNPC = nullptr;
+}
+
 void Player::update(Ogre::Real deltaTime) 
 {
 	if (_inDialog) return;
+	if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
+		GameManager::getSingletonPtr()->goNextState();
+	}
 
 	Character::update(deltaTime);
 

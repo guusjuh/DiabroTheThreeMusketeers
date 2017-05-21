@@ -32,6 +32,37 @@ void LevelManager::initialize()
 	playerNode->setPosition(levelGenerator->getStartPos());
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
+
+	// camera
+	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
+	_camNode->setPosition(Ogre::Vector3(0, 100, 0));
+	_camNode->pitch(Ogre::Degree(15), Ogre::Node::TS_LOCAL);
+	startPitchCam = _camNode->getOrientation().getPitch();
+}
+
+void LevelManager::reset() {
+	while(_friendlyNpcScripts.size() > 0) {
+		detachFriendlyNPC(_friendlyNpcScripts[0]->id);
+	}
+	while (_hostileNpcScripts.size() > 0) {
+		detachFriendlyNPC(_hostileNpcScripts[0]->id);
+	}
+
+	// create level node, the root node for everything in the level
+	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
+
+	levelGenerator->restart();
+
+	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
+	_camNode = playerNode->createChildSceneNode("CameraNode");
+
+	//player
+	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
+	playerNode->createChildSceneNode()->attachObject(_playerEntity);
+	playerNode->setPosition(levelGenerator->getStartPos());
+	playerNode->setScale(0.5f, 0.5f, 0.5f);
+	playerScript->reset(playerNode, _playerEntity);
+
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->setPosition(Ogre::Vector3(0, 100, 0));
@@ -96,7 +127,7 @@ void LevelManager::detachHostileNPC(int id) {
 /// Updates the frame based on the specified fe.
 /// </summary>
 /// <param name="fe">The frame event.</param>
-void LevelManager::update(const Ogre::FrameEvent& pFE)
+void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 {
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);

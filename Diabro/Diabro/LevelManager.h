@@ -15,8 +15,9 @@ public:
 	LevelManager();
 
 	void initialize();
+	void reset();
 
-	void update(const Ogre::FrameEvent&);
+	void inGameUpdate(const Ogre::FrameEvent&);
 
 	static void createGroundMesh();
 

@@ -465,7 +465,7 @@ bool Zone::placeCity(City pC) {
 				setTile(pC.position.x + ix, pC.position.z + iz, pC.id);
 			}
 		}
-		pC.init();
+		//pC.init();
 		cities.push_back(pC);
 		return true;
 	}

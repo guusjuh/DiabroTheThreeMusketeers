@@ -17,6 +17,12 @@ Filename:    GameManager.h
 
 //---------------------------------------------------------------------------
 
+enum GameState {
+	Start = 0, 
+	InGame,
+	End
+};
+
 class GameManager : public BaseApplication, public Ogre::Singleton<GameManager>
 {
 public:
@@ -28,6 +34,10 @@ public:
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
 
+	void goNextState() {
+		if (state == End) reset();
+		state = (GameState)(((int)state + 1) % 3);
+	}
 
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return mCamera; }
@@ -57,11 +67,15 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
 	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 
+	void reset();
+
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	QuestManager* _questManager;
 
 	Ogre::Timer* _gameTimer;
+
+	GameState state;
 };
 
 //---------------------------------------------------------------------------

@@ -12,6 +12,8 @@ public:
 	Player(Ogre::SceneNode*, Ogre::Entity*);
 	~Player(){}
 
+	void reset(Ogre::SceneNode*, Ogre::Entity*);
+
 	float getMaxHealth() { return _maxHealth; }
 	void update(Ogre::Real) override;
 

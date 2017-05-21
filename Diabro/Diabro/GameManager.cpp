@@ -67,11 +67,22 @@ void GameManager::createScene(void)
 
 	_questManager = new QuestManager();
 	_questManager->Initialize();
+
 	// set lights
 	setupLights(mSceneMgr);
 
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+
+	state = Start;
+}
+
+void GameManager::reset() {
+	getSceneManager()->clearScene();
+
+	_levelManager->reset();
+
+	state = Start;
 }
 
 /// <summary>
@@ -81,7 +92,7 @@ void GameManager::createScene(void)
 void GameManager::setupLights(Ogre::SceneManager* pSceneMgr)
 {
 	// set ambient lighting
-	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
+	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.3, 0.3, 0.3));
 
 	// create the main light
 	Ogre::Light* light = pSceneMgr->createLight("MainLight");
@@ -118,7 +129,7 @@ void GameManager::createViewports()
 	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
 
 	// set background viewport
-	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+	vp->setBackgroundColour(Ogre::ColourValue(0.278f, 0.368f, 0.482f));
 
 	// as aspect ratio to avoid distortion
 	mCamera->setAspectRatio(
@@ -143,9 +154,22 @@ void GameManager::createFrameListener(void)
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
-
-	_levelManager->update(pFE);
-	_uiManager->update(pFE);
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << state << std::endl;
+	fclose(fp);
+	switch(state) {
+	case Start:
+		_uiManager->startUpdate(pFE);
+		break;
+	case InGame:
+		_levelManager->inGameUpdate(pFE);
+		_uiManager->inGameUpdate(pFE);
+		break;
+	case End:
+		_uiManager->endUpdate(pFE);
+		break;
+	}
 
 	return ret;
 }
@@ -157,6 +181,8 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
+	if (state == Start|| state == End) return false;
+
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
 	switch (pKE.key)
@@ -209,6 +235,8 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
+	if (state == Start || state == End) return false;
+
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
 	switch (pKE.key)
