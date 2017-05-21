@@ -16,10 +16,47 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
+	_noticeDistance = 100;
+	_nearbyNPC = nullptr;
+	_inDialog = false;
+
 	_lightAttackCooldown = 1.2f;
 }
 
-/// <summary>
+void Player::update(Ogre::Real deltaTime) 
+{
+	if (_inDialog) return;
+
+	Character::update(deltaTime);
+
+	for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs().size(); ++i) {
+		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[i]->getPosition()) < _noticeDistance) {
+			_nearbyNPC = dynamic_cast<Npc*>(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[i]);
+			break;
+		}
+		_nearbyNPC = nullptr;
+	}
+
+	if (_nearbyNPC != nullptr) {
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText("Press 'E' to talk.");
+	}
+	else {
+		GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
+	}
+}
+
+void Player::dialogTriggered() {
+	if (_nearbyNPC == nullptr) return;
+
+	_inDialog = true;
+
+	if (!_nearbyNPC->talk(getPosition())) {
+		_inDialog = false;
+	}
+
+	return;
+}
+
 /// Adjusts the health.
 /// </summary>
 /// <param name="pAdjust">The adjustment of health.</param>

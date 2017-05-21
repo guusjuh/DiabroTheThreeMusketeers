@@ -30,6 +30,7 @@ public:
 	bool dialog(Ogre::Vector3);
 	void toggleDialog();
 	void continueDialog();
+	bool talk(Ogre::Vector3);
 	void die() override;
 
 private: 
@@ -38,6 +39,7 @@ private:
 	int _dialogCount;				//!< The amount of different parts the dialog consists of.
 	Ogre::String _startDialogText;	
 	Ogre::String _endDialogText;
+	std::vector<std::string> _dialog;
 
 	std::string _name;
 	NeedSet* _needs;				//!< A set of needs, when the value of a need is low, this NPC wants something.

@@ -174,7 +174,6 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		_uiManager->showHUDText("I'm going backwards! Omg waaaaaaaaaaaaaaaaaaaah");
 		dirVec.z = 1;
 		break;
 
@@ -187,16 +186,14 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	case OIS::KC_D:
 		dirVec.x = 1;
 		break;
-
-		_uiManager->showHUDText("Run bitch run!");
+		
 	case OIS::KC_E:
 		//TODO: find the closed NPC
-		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-		else dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
+		_levelManager->getPlayer()->dialogTriggered();
 		break;
 
 	case OIS::KC_SPACE:
-		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
+		_levelManager->getPlayer()->dialogTriggered();
 		break;
 
 	default:

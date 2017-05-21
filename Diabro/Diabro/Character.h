@@ -53,6 +53,7 @@ protected:
 	Ogre::Real _attackDistance;
 	Ogre::Real _currAttackCooldown;
 	Ogre::Real _lightAttackCooldown;
+	float _noticeDistance;
 
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);

@@ -21,7 +21,7 @@ protected:
 	float _noticeDistance;
 	bool _playerDetected;
 
-	void detectPlayer(); 
+	virtual void detectPlayer(); 
 	void walkTo(Ogre::Vector3);
 
 private:

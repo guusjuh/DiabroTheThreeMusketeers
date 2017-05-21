@@ -8,7 +8,7 @@
 /// </summary>
 UIManager::UIManager() 
 : _uiNode(0), _healthBarWidget(0), _maxWidthBar(0), _heightBar(0), 
-_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextOn(false), _uiElementMgr(0), _mDialogTextArea(0)
+_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0)
 {
 }
 
@@ -41,7 +41,7 @@ void UIManager::setupUI()
 
 void UIManager::update(const Ogre::FrameEvent& pFE) 
 {
-	if(_hudTextOn) {
+	if(_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
 		if(_hudTimer <= 0) {
@@ -63,17 +63,34 @@ void UIManager::showHUDText(Ogre::String pHUDText)
 
 	_hudTextWidget = _uiElementMgr->createHUDText(DiabroUI::CENTER, "HUDText", pHUDText, width, 40);
 	_hudTextWidget->getOverlayElement()->setTop(-128);
-	_hudTextOn = true;
+}
 
-	_hudTimer = _hudTotalTimer;
+void UIManager::showHUDText(Ogre::String pHUDText, float time)
+{
+	// count the symbols in text
+	int count = pHUDText.length();
+	float width = count * 14.25f;
+
+	if (_hudTextWidget != nullptr)
+		hideHUDText();
+	if (_mDialogTextArea != nullptr)
+		destroyDialog();
+
+	_hudTextWidget = _uiElementMgr->createHUDText(DiabroUI::CENTER, "HUDText", pHUDText, width, 40);
+	_hudTextWidget->getOverlayElement()->setTop(-128);
+	_hudTextWithTimeOn = true;
+
+	_hudTimer = time;
 }
 
 void UIManager::hideHUDText()
 {
-	_hudTextOn = false;
+	_hudTextWithTimeOn = false;
 
-	_uiElementMgr->destroyWidget("HUDText");
-	_hudTextWidget = nullptr;
+	if(_hudTextWidget != nullptr) {
+		_uiElementMgr->destroyWidget("HUDText");
+		_hudTextWidget = nullptr;
+	}
 
 	_hudTimer = 0;
 }
@@ -86,7 +103,7 @@ void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 }
 
 /// <summary>
-/// Destroys the dialog.
+/// Destroys the talk.
 /// </summary>
 void UIManager::destroyDialog() {
 	_uiElementMgr->destroyWidget("DialogTextArea");
@@ -94,9 +111,9 @@ void UIManager::destroyDialog() {
 }
 
 /// <summary>
-/// Appends the dialog text.
+/// Appends the talk text.
 /// </summary>
-/// <param name="pDialogText">The p dialog text.</param>
+/// <param name="pDialogText">The p talk text.</param>
 void UIManager::appendDialogText(Ogre::String pDialogText) {
 	_mDialogTextArea->appendText("\n" + pDialogText);
 }
