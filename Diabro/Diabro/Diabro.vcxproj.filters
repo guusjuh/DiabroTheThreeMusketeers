@@ -13,9 +13,6 @@
     <ClCompile Include="BaseApplication.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>Sources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="QuestItemContainer.cpp">
       <Filter>Sources\Quest\QuestContent</Filter>
     </ClCompile>
@@ -55,7 +52,6 @@
     <ClCompile Include="StrategyContainer.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp" />
     <ClCompile Include="IdleState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
@@ -86,6 +82,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Sources\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -98,9 +97,6 @@
       <Filter>Headers\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Headers\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemManager.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
@@ -182,7 +178,6 @@
     <ClInclude Include="GenericContainer.h">
       <Filter>Headers\Quests\QuestParts</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h" />
     <ClInclude Include="UIElements.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
@@ -191,6 +186,9 @@
     </ClInclude>
     <ClInclude Include="StateMachine.h">
       <Filter>Headers\Finite State Machines</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

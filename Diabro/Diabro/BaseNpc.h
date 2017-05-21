@@ -15,6 +15,8 @@ public:
 	void rotatePivot(Ogre::Vector3);
 
 	void calculateAStar(Ogre::Vector3 targetPos);
+	std::vector<Coordinate> nextPos;
+	Coordinate goalPos;
 	
 protected:
 	Ogre::SceneNode* _myRotationNode;
@@ -22,6 +24,8 @@ protected:
 
 	float _noticeDistance;
 	bool _playerDetected;
+
+	void walkToNextPoint();
 
 	void detectPlayer(); 
 	void walkTo(Ogre::Vector3);
