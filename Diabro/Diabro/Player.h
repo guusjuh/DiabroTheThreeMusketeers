@@ -24,6 +24,8 @@ public:
 	void dialogTriggered();
 
 private:
+	void die() override;
+
 	int _currentXP;
 	int _xpTillNextLevel;
 

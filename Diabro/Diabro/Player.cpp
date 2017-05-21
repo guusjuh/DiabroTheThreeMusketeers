@@ -33,6 +33,17 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_nearbyNPC = nullptr;
 }
 
+void Player::die() {
+	GameManager::getSingletonPtr()->goToState(GameState::Died);
+
+	reset(_myNode, _myEntity);
+
+	_myNode->setPosition(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getStartPos());
+
+	_currentHealth = _maxHealth;
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
+}
+
 void Player::update(Ogre::Real deltaTime) 
 {
 	if (_inDialog) return;

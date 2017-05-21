@@ -36,6 +36,9 @@ void UIManager::init()
 	_endLevelText.push_back("I searched all over the place for you!");
 	_endLevelText.push_back("Now, let's go back home.");	
 
+	_diedText.push_back("You died!");
+	_diedText.push_back("Better luck next time.");
+
 	_first = true;
 }
 
@@ -98,6 +101,23 @@ void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 	}
 }
 
+void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
+{
+	if (_hudTextWithTimeOn) {
+		_hudTimer -= pFE.timeSinceLastFrame;
+
+		if (_hudTimer <= 0) {
+			hideHUDText();
+			if (!showDiedText()) {
+				GameManager::getSingletonPtr()->goToState(GameState::InGame);
+			}
+		}
+	}
+	else {
+		showDiedText();
+	}
+}
+
 bool UIManager::showStartText() {
 	static int _textCount = 0;
 	if (!_storyTextOn) {
@@ -130,6 +150,27 @@ bool UIManager::showEndText() {
 		_textCount++;
 		if (_textCount < _endLevelText.size()) {
 			GameManager::getSingletonPtr()->getUIManager()->showHUDText(_endLevelText[_textCount], 2.5f);
+		}
+		else {
+			GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
+			_textCount = 0;
+			_storyTextOn = false;
+		}
+	}
+
+	return _storyTextOn;
+}
+
+bool UIManager::showDiedText() {
+	static int _textCount = 0;
+	if (!_storyTextOn) {
+		_storyTextOn = true;
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText(_diedText[_textCount], 2.5f);
+	}
+	else {
+		_textCount++;
+		if (_textCount < _diedText.size()) {
+			GameManager::getSingletonPtr()->getUIManager()->showHUDText(_diedText[_textCount], 2.5f);
 		}
 		else {
 			GameManager::getSingletonPtr()->getUIManager()->hideHUDText();

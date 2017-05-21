@@ -161,6 +161,9 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 	case Start:
 		_uiManager->startUpdate(pFE);
 		break;
+	case Died:
+		_uiManager->diedUpdate(pFE);
+		break;
 	case InGame:
 		_levelManager->inGameUpdate(pFE);
 		_uiManager->inGameUpdate(pFE);
@@ -180,7 +183,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
-	if (state == Start|| state == End) return false;
+	if (state != InGame) return false;
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
@@ -234,7 +237,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
-	if (state == Start || state == End) return false;
+	if (state != InGame) return false;
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 

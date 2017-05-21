@@ -18,6 +18,7 @@ public:
 	void startUpdate(const Ogre::FrameEvent&);
 	void inGameUpdate(const Ogre::FrameEvent&);
 	void endUpdate(const Ogre::FrameEvent&);
+	void diedUpdate(const Ogre::FrameEvent&);
 	
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
@@ -48,10 +49,12 @@ private:
 	std::vector<std::string>	_startGameText;
 	std::vector<std::string>	_startLevelText;
 	std::vector<std::string>	_endLevelText;
+	std::vector<std::string>	_diedText;
 	bool						_storyTextOn;
 	bool						_first;
 	bool showStartText();
 	bool showEndText();
+	bool showDiedText();
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;
