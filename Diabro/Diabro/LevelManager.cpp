@@ -42,21 +42,22 @@ void LevelManager::initialize()
 
 void LevelManager::reset() {
 	while(_friendlyNpcScripts.size() > 0) {
-		detachFriendlyNPC(_friendlyNpcScripts[0]->id);
+		detachFriendlyNPC(0);
 	}
 	while (_hostileNpcScripts.size() > 0) {
-		detachFriendlyNPC(_hostileNpcScripts[0]->id);
+		detachHostileNPC(0);
 	}
 
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
-
+	levelGenerator->debug("restarting levelGenerator");
 	levelGenerator->restart();
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
+	levelGenerator->debug("spawning player");
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerNode->setPosition(levelGenerator->getStartPos());

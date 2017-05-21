@@ -154,10 +154,10 @@ void GameManager::createFrameListener(void)
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
-	FILE* fp;
+	/*FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	std::cout << state << std::endl;
-	fclose(fp);
+	fclose(fp);*/
 	switch(state) {
 	case Start:
 		_uiManager->startUpdate(pFE);

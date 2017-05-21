@@ -7,12 +7,15 @@
 LevelGenerator::LevelGenerator():
 scalar(500)
 {
+	debug("Initializing zone");
 	_zone[0] = Zone(18, 18, 5, 5, 10, 500);
 
+	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
-	_zone[0].printGrid();
 
+	debug("determine city types");
 	determineCityTypes();
+	debug("spawning content");
 	spawnCityContent();
 }
 
@@ -22,12 +25,16 @@ LevelGenerator::~LevelGenerator()
 }
 
 void LevelGenerator::restart() {
+	debug("Initializing zone");
 	_zone[0] = Zone(18, 18, 5, 5, 10, 500);
-
+	
+	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
 
+	debug("determine city types");
 	determineCityTypes();
+	debug("spawning content");
 	spawnCityContent();
 }
 
