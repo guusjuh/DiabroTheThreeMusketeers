@@ -4,6 +4,7 @@ class Node
 public:
 	Node(Node* parent, int x, int y, int goalX, int goalY);
 	Node(int x, int y, int goalX, int goalY);
+	Node() {}
 	~Node();
 	Node* parent;
 	int x, y;

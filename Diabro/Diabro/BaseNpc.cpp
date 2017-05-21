@@ -77,16 +77,125 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 
 	Zone zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0);
 	bool* collisionGrid = zone.getCollisionGrid();
+	bool* grid = collisionGrid;
+	int scale = _myCity->scalar;
+	Ogre::Vector2 targetPosition = Ogre::Vector2(targetPos.x / scale, targetPos.z / scale);
 
-	if (!collisionGrid[(int)(targetPos.x / 200 + (targetPos.z / 200 * zone._width))]){
+	if (!collisionGrid[(int)(targetPosition.x + (targetPosition.y * zone._width))]){
 		return;
 	}
 
 	std::vector<Node> openList;
 	std::vector<Node> closedList;
-
+	
 	Ogre::Vector3 currentPos = getPosition();
 
-	Node start = Node(currentPos.x, currentPos.z, targetPos.x, targetPos.z);
+	Node start = Node(currentPos.x / scale, currentPos.z / scale, targetPosition.x, targetPosition.y);
 	openList.push_back(start);
+	collisionGrid[start.x + start.y * zone._width] = false;
+
+	bool targetAdded = false;
+	while (!targetAdded){
+		int lowestF = 1000000000;
+		Node* lowestFNode;
+		int pos = 0;
+		for (size_t i = 0; i < openList.size(); i++)
+		{
+			if (openList[i].f() < lowestF){
+				lowestF = openList[i].f();
+				lowestFNode = &openList[i];
+				pos = i;
+			}
+		}
+		closedList.push_back(*lowestFNode);
+		if (lowestFNode->x == targetPosition.x && lowestFNode->y == targetPosition.y){
+			targetAdded = true;
+		}
+		
+		//remove the closed node from the openlist
+		openList.erase(openList.begin() + pos);
+
+		if (lowestFNode->x - 1 >= 0){
+			if (collisionGrid[lowestFNode->x - 1 + (lowestFNode->y) * zone._width]){
+				collisionGrid[lowestFNode->x - 1 + (lowestFNode->y) * zone._width] = false;
+				openList.push_back(Node(lowestFNode, lowestFNode->x - 1, lowestFNode->y + 0, targetPosition.x, targetPosition.y));
+			}
+			else
+			{
+				for (size_t i = 0; i < openList.size(); i++)
+				{
+					if (openList[i].x == lowestFNode->x - 1 && openList[i].y == lowestFNode->y){
+						openList[i].changeParent(lowestFNode);//checks for more efficient parent
+					}
+				}
+			}
+		}
+		if (lowestFNode->x + 1 <= zone._width){
+			if (collisionGrid[lowestFNode->x + 1 + (lowestFNode->y) * zone._width]){
+				collisionGrid[lowestFNode->x + 1 + (lowestFNode->y) * zone._width] = false;
+				openList.push_back(Node(lowestFNode, lowestFNode->x - 1, lowestFNode->y + 0, targetPosition.x, targetPosition.y));
+			}
+			else
+			{
+				for (size_t i = 0; i < openList.size(); i++)
+				{
+					if (openList[i].x == lowestFNode->x + 1 && openList[i].y == lowestFNode->y){
+						openList[i].changeParent(lowestFNode);//checks for more efficient parent
+					}
+				}
+			}
+		}
+		if (lowestFNode->y - 1 >= 0){
+			if (collisionGrid[lowestFNode->x + (lowestFNode->y - 1) * zone._width]){
+				collisionGrid[lowestFNode->x  + (lowestFNode->y - 1) * zone._width] = false;
+				openList.push_back(Node(lowestFNode, lowestFNode->x - 1, lowestFNode->y + 0, targetPosition.x, targetPosition.y));
+			}
+			else
+			{
+				for (size_t i = 0; i < openList.size(); i++)
+				{
+					if (openList[i].x == lowestFNode->x && openList[i].y == lowestFNode->y - 1){
+						openList[i].changeParent(lowestFNode);//checks for more efficient parent
+					}
+				}
+			}
+		}
+		if (lowestFNode->y + 1 <= zone._depth){
+			if (collisionGrid[lowestFNode->x + (lowestFNode->y + 1) * zone._width]){
+				collisionGrid[lowestFNode->x + (lowestFNode->y + 1) * zone._width] = false;
+				openList.push_back(Node(lowestFNode, lowestFNode->x - 1, lowestFNode->y + 0, targetPosition.x, targetPosition.y));
+			}
+			else
+			{
+				for (size_t i = 0; i < openList.size(); i++)
+				{
+					if (openList[i].x == lowestFNode->x && openList[i].y == lowestFNode->y + 1){
+						openList[i].changeParent(lowestFNode);//checks for more efficient parent
+					}
+				}
+			}
+		}
+		/*
+		//diagonal
+		if (lowestFNode->x - 1 >= 0 && lowestFNode->y - 1 >= 0){
+			if (collisionGrid[lowestFNode->x - 1 + (lowestFNode->y - 1) * zone._width])
+			{
+
+			}
+			else
+			{
+				for (size_t i = 0; i < openList.size(); i++)
+				{
+					if (openList[i].x == lowestFNode->x + i && openList[i].y == lowestFNode->y){
+						openList[i].changeParent(lowestFNode);//checks for more efficient parent
+					}
+				}
+			}
+		}*/
+		//check if openlist is empty
+		if (openList.size() == 0){
+			//break out of the loop target can't be found
+			return;
+		}
+	}
 }
