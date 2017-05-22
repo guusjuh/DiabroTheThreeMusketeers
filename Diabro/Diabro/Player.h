@@ -32,6 +32,10 @@ private:
 	Npc* _nearbyNPC;
 	bool _inDialog;
 
+	bool _inBattle;
+	float _inBattleTime;
+	float _totalInBattleTime;
+
 	int calcXpTillLevel(int);
 	void levelUp();
 	bool _canAttack;

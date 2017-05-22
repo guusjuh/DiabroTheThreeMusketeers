@@ -44,6 +44,7 @@ namespace DiabroUI
 	class DialogTextBox;
 	class MiniMap;
 	class ImageWidget;
+	class Bar;
 
 	//TODO: maybe baby we need a SdkTrayListener
 
@@ -229,6 +230,11 @@ namespace DiabroUI
 		Ogre::Real getPadding()
 		{
 			return mPadding;
+		}
+
+		void setWidth(Ogre::Real width) {
+			mElement->setWidth(width);
+			//refitContents();
 		}
 
 		const Ogre::DisplayString& getText()
@@ -517,7 +523,7 @@ namespace DiabroUI
 	public:
 
 		// Do not instantiate any widgets directly. Use SdkTrayManager.
-		Bar(const Ogre::String& name, Ogre::Real width, Ogre::Real valueBoxWidth, Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
+		Bar(const Ogre::String& pre, const Ogre::String& name, Ogre::Real width, Ogre::Real valueBoxWidth, Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
 			: mDragOffset(0.0f)
 			, mValue(0.0f)
 			, mMinValue(0.0f)
@@ -525,12 +531,12 @@ namespace DiabroUI
 			, mInterval(0.0f)
 		{
 			mFitToContents = false;
-			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/PlayerHealthBar", "BorderPanel", name);
+			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/"+ pre +"HealthBar", "BorderPanel", name);
 			mElement->setWidth(width);
 			Ogre::OverlayContainer* c = (Ogre::OverlayContainer*)mElement;
-			mValueBox = (Ogre::OverlayContainer*)c->getChild(getName() + "/Bar");
+			mValueBox = (Ogre::OverlayContainer*)c->getChild(getName() + "/" + pre + "Bar");
 			mValueBox->setWidth(valueBoxWidth);
-			mValueTextArea = (Ogre::TextAreaOverlayElement*)mValueBox->getChild(mValueBox->getName() + "/ValueText");
+			mValueTextArea = (Ogre::TextAreaOverlayElement*)mValueBox->getChild(mValueBox->getName() + "/" + pre + "ValueText");
 
 			if (width <= 0) mFitToContents = true;
 			
@@ -923,10 +929,10 @@ namespace DiabroUI
 			return dw;
 		}
 
-		Bar* createHealthBar(AnchorLocation trayLoc, const Ogre::String& name, Ogre::Real width,
+		Bar* createHealthBar(AnchorLocation trayLoc, const Ogre::String& pre, const Ogre::String& name, Ogre::Real width,
 			Ogre::Real valueBoxWidth, Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
 		{
-			Bar* tb = new Bar(name, width, valueBoxWidth, minValue, maxValue, snaps);
+			Bar* tb = new Bar(pre, name, width, valueBoxWidth, minValue, maxValue, snaps);
 			moveWidgetToTray(tb, trayLoc);
 			//tb->_assignListener(mListener);
 			return tb;

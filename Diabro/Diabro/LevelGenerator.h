@@ -38,13 +38,13 @@ public:
 
 	int scalar; ///< scales grid position to world positions
 	
-	void debug(std::string pString, int value = 0) {
+	void debug(std::string pString, int value = -1) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf(pString.c_str());
 		
-		if (value) printf("(%d) \n", value);
+		if (value != -1) printf("(%d) \n", value);
 		else printf("\n");
 		fclose(fp);
 #endif

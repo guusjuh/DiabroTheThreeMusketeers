@@ -20,6 +20,10 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_nearbyNPC = nullptr;
 	_inDialog = false;
 
+	_inBattle = false;
+	_inBattleTime = 0;
+	_totalInBattleTime = 10.0f;
+
 	_lightAttackCooldown = 1.2f;
 }
 
@@ -29,8 +33,12 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 
 	setDirVector(Ogre::Vector3(0, 0, 0));
 
+	_target = nullptr;
 	_inDialog = false;
 	_nearbyNPC = nullptr;
+
+	_inBattle = false;
+	_inBattleTime = 0;
 }
 
 void Player::die() {
@@ -46,13 +54,27 @@ void Player::die() {
 
 void Player::update(Ogre::Real deltaTime) 
 {
+	// don't do stuff when in dialog
 	if (_inDialog) return;
+
+	// if player reached the end 
 	if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
 		GameManager::getSingletonPtr()->goNextState();
 	}
 
+	// call basic update
 	Character::update(deltaTime);
 
+	/*if(_inBattle) {
+		_inBattleTime += deltaTime;
+
+		if(_inBattleTime > _totalInBattleTime) {
+			_inBattle = false;
+			_inBattleTime = 0;
+		}
+	}*/
+
+	// find nearby NPC's and handle HUD text
 	for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs().size(); ++i) {
 		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[i]->getPosition()) < _noticeDistance) {
 			_nearbyNPC = dynamic_cast<Npc*>(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[i]);
@@ -109,6 +131,8 @@ bool Player::lightAttack()
 	//deal damage 
 	_target->adjustHealth(_damage);
 	
+	_inBattle = true;
+	_inBattleTime = _totalInBattleTime;
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 

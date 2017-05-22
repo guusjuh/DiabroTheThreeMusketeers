@@ -45,23 +45,7 @@ material UI/TextBox : UI/Base
     }
 }
 
-material UI/Green
-{
-   technique
-   {
-      pass
-      {
-	  	lighting off
-        
-         texture_unit
-         {
-			texture greenBox.jpg
-         }
-      }
-   }
-}
-
-material UI/HealthBar : UI/Base
+material UI/PlayerHealthBar : UI/Base
 {
    technique
    {
@@ -69,11 +53,26 @@ material UI/HealthBar : UI/Base
       {        
          texture_unit
          {
-			texture healthBar.png
+			texture playerHealthBar.png
          }
       }
    }
 }
+
+material UI/EnemyHealthBar : UI/Base
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture enemyHealthBar.png
+         }
+      }
+   }
+}
+
 
 material UI/BarBackground : UI/Base
 {
@@ -83,38 +82,7 @@ material UI/BarBackground : UI/Base
       {
          texture_unit
          {
-			texture barBackground.png
-         }
-      }
-   }
-}
-
-material UI/Yellow
-{
-   technique
-   {
-      pass
-      {
-	  	lighting off
-         texture_unit
-         {
-			texture yellowBox.jpg
-         }
-      }
-   }
-}
-
-material UI/Grey
-{
-   technique
-   {
-      pass
-      {
-		lighting off
-         
-         texture_unit
-         {
-			texture greyBox.jpg
+			texture backgroundBar.png
          }
       }
    }
@@ -139,9 +107,7 @@ material UI/LocatorSister : UI/Base
    technique
    {
       pass
-      {
-		lighting off
-         
+      {         
          texture_unit
          {
 			texture Locator-Sister.png
@@ -155,9 +121,7 @@ material UI/LocatorQuest : UI/Base
    technique
    {
       pass
-      {
-		lighting off
-         
+      {         
          texture_unit
          {
 			texture Locator-Quest.png

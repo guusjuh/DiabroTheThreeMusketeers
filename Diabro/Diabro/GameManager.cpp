@@ -75,6 +75,8 @@ void GameManager::createScene(void)
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	state = Start;
+	//_uiManager->startState();
+
 }
 
 void GameManager::reset() {
@@ -153,11 +155,8 @@ void GameManager::createFrameListener(void)
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
-	/*FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << state << std::endl;
-	fclose(fp);*/
-	switch(state) {
+
+	switch (state) {
 	case Start:
 		_uiManager->startUpdate(pFE);
 		break;
@@ -173,6 +172,12 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		break;
 	}
 
+	/*if (state == InGame) {
+		_levelManager->inGameUpdate(pFE);
+	}
+
+	_uiManager->update(pFE);*/
+
 	return ret;
 }
 
@@ -183,16 +188,14 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
+	if (pKE.key == OIS::KC_ESCAPE) mShutDown = true;
+
 	if (state != InGame) return false;
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
 	switch (pKE.key)
 	{
-		// on esc close app
-	case OIS::KC_ESCAPE:
-		mShutDown = true;
-		break;
 	case OIS::KC_UP:
 	case OIS::KC_W:
 		dirVec.z = -1;

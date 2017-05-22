@@ -35,12 +35,14 @@ public:
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
 
+	GameState getCurrentState() { return state; }
 	void goNextState() {
 		if (state == End) {
 			reset();
 			return;
 		}
 		state = (GameState)(((int)state + 1) % 3);
+		//_uiManager->startState();
 	}
 
 	void goToState(GameState pState) {
