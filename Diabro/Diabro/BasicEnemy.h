@@ -13,11 +13,13 @@ public:
 
 	void update(Ogre::Real) override;
 	void die() override;
-
+	void updateBar(bool val) { _updateBar = val; }
 
 	StateMachine<Character> stateMachine;
+
 private:
 	bool lightAttack() override;
+	bool _updateBar;
 };
 
 #endif

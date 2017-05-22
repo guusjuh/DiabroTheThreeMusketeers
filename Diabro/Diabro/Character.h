@@ -32,6 +32,7 @@ public:
 	Ogre::Vector3 setDirVector(Ogre::Vector3 pMoveVec) { return _dirVec = pMoveVec; }
 
 	Ogre::Real getCurrHealth() { return _currentHealth;  }
+	Ogre::Real getMaxHealth() { return _maxHealth;  }
 	int getLevel() { return _currentLevel; }
 
 protected:

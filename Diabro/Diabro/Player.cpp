@@ -124,8 +124,13 @@ bool Player::lightAttack()
 
 	//deal damage 
 	_target->adjustHealth(_damage);
-	
 	changeInBattle(true);
+	if (_target->getCurrHealth() > 0) {
+		GameManager::getSingletonPtr()->getUIManager()->adjustEnemyHealthBar(_target->getCurrHealth(), _target->getMaxHealth());
+	} else {
+		changeInBattle(false);
+	}
+
 	_inBattleTime = 0;
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
