@@ -65,30 +65,24 @@ void Player::update(Ogre::Real deltaTime)
 	// call basic update
 	Character::update(deltaTime);
 
-	/*if(_inBattle) {
+	if(_inBattle) {
 		_inBattleTime += deltaTime;
 
 		if(_inBattleTime > _totalInBattleTime) {
-			_inBattle = false;
+			changeInBattle(false);
 			_inBattleTime = 0;
 		}
-	}*/
+	}
 
 	// find nearby NPC's and handle HUD text
 	for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs().size(); ++i) {
 		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[i]->getPosition()) < _noticeDistance) {
-			_nearbyNPC = dynamic_cast<Npc*>(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[i]);
+			setNearbyNPC(dynamic_cast<Npc*>(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[i]));
 			break;
 		}
-		_nearbyNPC = nullptr;
+		setNearbyNPC(nullptr);
 	}
 
-	if (_nearbyNPC != nullptr) {
-		GameManager::getSingletonPtr()->getUIManager()->showHUDText("Press 'E' to talk.");
-	}
-	else {
-		GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
-	}
 }
 
 void Player::dialogTriggered() {
@@ -131,8 +125,8 @@ bool Player::lightAttack()
 	//deal damage 
 	_target->adjustHealth(_damage);
 	
-	_inBattle = true;
-	_inBattleTime = _totalInBattleTime;
+	changeInBattle(true);
+	_inBattleTime = 0;
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 
@@ -179,4 +173,30 @@ void Player::levelUp()
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
 	// Increase _stats
+}
+
+void Player::setNearbyNPC(Npc* newNPC) {
+	if (_nearbyNPC == newNPC) return;
+
+	_nearbyNPC = newNPC;
+
+	if (_nearbyNPC != nullptr) {
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText("Press 'E' to talk.");
+	}
+	else {
+		GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
+	}
+}
+
+void Player::changeInBattle(bool val) {
+	if (_inBattle == val) return;
+
+	_inBattle = val;
+
+	if (_inBattle) {
+		GameManager::getSingletonPtr()->getUIManager()->showEnemyHealthBar();
+	}
+	else {
+		GameManager::getSingletonPtr()->getUIManager()->hideEnemyHealthBar();
+	}
 }

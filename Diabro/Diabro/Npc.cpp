@@ -90,7 +90,7 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_dialog[_dialogCount]);
 		}
 		else {
-			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
 			_dialogCount = 0;
 			_inDialog = false;
 		}
