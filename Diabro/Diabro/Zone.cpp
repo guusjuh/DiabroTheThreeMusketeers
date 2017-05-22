@@ -12,15 +12,15 @@ Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pM
 _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
 {	
 	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
+		//zones use uneven sizes, this ensures walls can be created properly
+		_width++;
+		_depth++;
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf("Zone sizes should be uneven! {W: %d, H: %d} used \n", _width, _depth);
 		fclose(fp);
 #endif
-		//zones use uneven sizes, this ensures walls can be created properly
-		_width++;
-		_depth++;
 	}
 	// create an empty grid for dungeon tiles
 	_tiles = new int[_width * _depth];
@@ -30,11 +30,12 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 		}
 	}
 	
+	debug("generating cities");
 	generateCities(pMaxTries, pMaxCities);
-
+	debug("generating pathways");
 	int n = generatePathways(cities.size() + 1);
+	debug("connecting dungeon");
 	connectDungeon(cities.size() + 1 + n, 0.5f);
-
 
 	cleanGrid();
 	printGrid();
@@ -134,11 +135,9 @@ Coordinate Zone::getPosition(int pId, bool pCheckNeighbours) {
 /// \param pMaxId highest value used in the grid
 /// \param pChance the decimal percentage of chance a room has to get an extra connection to the dungeon
 void Zone::connectDungeon(int pMaxId, float pChance) {
-
 	std::vector<std::pair<Coordinate, int>> connections; ///< holds all possible connections
 
 	for (int i = 0; i < cities.size(); ++i) {
-
 		int rndIndex[2] = { 0,0 };
 		int start = connections.size(); // prevents usage of connections of other cities
 		int length = getPossibleConnections(cities[i], &connections);
@@ -183,14 +182,17 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 				connections.erase(connections.begin() + i);
 			}
 		}
-
 		int regions = changeTileValues(pMaxId);
 		
 		while (regions > 1 && options.size() > 0) { // opens options until the whole dungeon is connected
 			int rnd = rand() % options.size();
-			setTile(options[rnd].first, 1);
-			cities[options[rnd].second].connections.push_back(options[rnd].first);
-
+			setTile(options[rnd].first, 1); 
+			debug("test: rnd:", rnd);
+			debug("test: optionSize:", options.size());
+			debug("test: cityID:", options[rnd].second);
+			debug("test: citySize:", cities.size());
+			//TODO: city-id > city.Size()
+			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
 			options.erase(options.begin() + rnd);
 
 			// check if dungeon is connected

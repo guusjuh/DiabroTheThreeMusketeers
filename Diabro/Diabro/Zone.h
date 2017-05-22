@@ -21,6 +21,18 @@ private:
 
 	bool* collisionGrid;
 
+	void debug(std::string pString, int value = 0) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf(pString.c_str());
+
+		if (value) printf("(%d) \n", value);
+		else printf("\n");
+		fclose(fp);
+#endif
+	}
+
 public:
 	std::vector<City> cities; ///< vector containing all cities within the zone
 
