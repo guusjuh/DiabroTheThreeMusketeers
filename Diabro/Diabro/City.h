@@ -61,7 +61,7 @@ public:
 	void init();
 	
 	//TODO: make local position
-	Coordinate getRandomPoint();
+	Coordinate getRandomPointInRoom();
 	Coordinate getCenterTile();
 	Coordinate getRandomTile();
 

@@ -7,7 +7,7 @@
 LevelGenerator::LevelGenerator():
 scalar(500)
 {
-	_zone[0] = Zone(29, 29, 5, 5, 15, 100);
+	_zone[0] = Zone(10, 10, 3, 3, 2, 100);
 
 	spawnCityContent();
 
@@ -73,7 +73,7 @@ void LevelGenerator::spawnCityContent() {
 
 		case HideoutRT:
 			// spawn enemy spawners in the middle of an enemy hideout
-			placeEnemySpawnNode(thisCity, i);
+			placeEnemySpawnNode(&_zone[0].cities[0], i);
 			break;
 
 		default:

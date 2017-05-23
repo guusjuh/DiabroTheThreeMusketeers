@@ -140,11 +140,32 @@ int City::getScaladDepth(int depth, int scalar)
 	return depth*scalar;
 }
 
-Coordinate City::getRandomPoint(){
-	int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * scalar, (width - 1) * scalar);
-	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * scalar, (depth - 1) * scalar);
-
-	return Coordinate(xPos, zPos);
+Coordinate City::getRandomPointInRoom(){
+	/*
+	int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * scalar, (width) * scalar);
+	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * scalar, (depth) * scalar);
+	*/
+	int xPos;
+	int zPos;
+	switch (GameManager::getSingletonPtr()->getRandomInRange(0, 4)){
+	case 0:
+		xPos = position.x;
+		zPos = position.z;
+		break;
+	case 1:
+		xPos = position.x + width - 1;
+		zPos = position.z;
+		break;
+	case 2:
+		xPos = position.x;
+		zPos = position.z + depth - 1;
+		break;
+	case 3:
+		xPos = position.x + width - 1;
+		zPos = position.z + depth - 11;
+		break;
+	}
+	return Coordinate(xPos * scalar, zPos * scalar);
 }
 
 std::vector<Coordinate> City::buildingPositions(){

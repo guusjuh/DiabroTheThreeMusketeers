@@ -537,13 +537,13 @@ bool* Zone::generateCollisionGrid(){
 	{
 		for (size_t j = 0; j < _depth; j++)
 		{
-			if (getTile(i, j)){
+			//if (getTile(i, j)){
 				grid[i + j * _width] = true;
-			}
+			/*}
 			else
 			{
 				grid[i + j * _width] = false;
-			}
+			}*/
 		}
 	}/*
 	for (size_t i = 0; i < cities.size(); i++)
