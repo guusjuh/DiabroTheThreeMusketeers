@@ -42,6 +42,7 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 }
 
 void Player::die() {
+	changeInBattle(false);
 	GameManager::getSingletonPtr()->goToState(GameState::Died);
 
 	reset(_myNode, _myEntity);
