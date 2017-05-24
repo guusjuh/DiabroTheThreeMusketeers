@@ -36,7 +36,7 @@ void Node::changeParent(Node newParent, int newParentId){
 	int newG;
 	if (x - newParent.x != 0 && y - newParent.y != 0)
 	{
-		newG = newParent.g + 14;
+		newG = newParent.g + 16;
 	}
 	else
 	{

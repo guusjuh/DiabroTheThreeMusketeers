@@ -7,17 +7,19 @@
 LevelGenerator::LevelGenerator():
 scalar(500)
 {
-	_zone[0] = Zone(10, 10, 3, 3, 2, 100);
+	_zone[0] = Zone(20, 5, 3, 3, 1, 100);
 
 	spawnCityContent();
 
 	drawDungeonFloor(scalar, _zone[0]);
+	_zone[0].printGrid();
 }
 
 
 LevelGenerator::~LevelGenerator()
 {
 }
+
 /// returns empty position within dungeon
 /// \param pEmptyNeighbours only returns positions with 8 emty neighbours
 Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {

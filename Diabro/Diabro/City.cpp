@@ -11,7 +11,7 @@ position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(500)
 
 void City::init()
 {
-	generateBuildings();
+	//generateBuildings();
 }
 
 City::~City()

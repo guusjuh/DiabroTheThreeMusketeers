@@ -12,16 +12,17 @@ Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pM
 _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
 {	
 	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
+		//zones use uneven sizes, this ensures walls can be created properly
+		if (pWidth % 2 == 0) _width++;
+		if (pDepth % 2 == 0) _depth++;
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf("Zone sizes should be uneven! {W: %d, H: %d} used \n", _width, _depth);
 		fclose(fp);
 #endif
-		//zones use uneven sizes, this ensures walls can be created properly
-		_width++;
-		_depth++;
 	}
+	debug("creating tiles");
 	// create an empty grid for dungeon tiles
 	_tiles = new int[_width * _depth];
 	for (int ix = 0; ix < _width; ++ix) {
@@ -29,15 +30,18 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 			setTile(ix, iy, 0);
 		}
 	}
-	
+	debug("generating cities");
 	generateCities(pMaxTries, pMaxCities);
-
+	debug("generated amount of cities: ", cities.size());
+	debug("carving pathways");
 	int n = generatePathways(cities.size() + 1);
+	debug("connecting dungeon");
 	connectDungeon(cities.size() + 1 + n, 0.5f);
 
-
+	debug("cleaning my shit up");
 	cleanGrid();
-	printGrid();
+	//printGrid();
+	debug("colGrid");
 	collisionGridGenerated = false;
 	//printCollisionGrid();
 }
@@ -46,6 +50,16 @@ Zone::~Zone()
 {
 
 }
+
+void Zone::debug(std::string msg, int val) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("%s (%d)\n", msg.c_str(), val);
+	fclose(fp);
+#endif
+}
+
 /// cleans the grid converting every number either to 1 or 0 based on their current value
 void Zone::cleanGrid()
 {
@@ -190,7 +204,7 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		while (regions > 1 && options.size() > 0) { // opens options until the whole dungeon is connected
 			int rnd = rand() % options.size();
 			setTile(options[rnd].first, 1);
-			cities[options[rnd].second].connections.push_back(options[rnd].first);
+			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
 
 			options.erase(options.begin() + rnd);
 

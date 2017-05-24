@@ -24,6 +24,8 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 	//Character::update(pDeltatime);
 
 	//detectPlayer();
+	//for initialization
+	//TODO: use -1 -1 as values
 	if (goalPos.x == 0 && goalPos.z == 0){
 		calculateAStar(_myCity->getRandomPointInRoom());
 	}
@@ -32,7 +34,11 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 	//if (!_playerDetected) {
 		if (getPosition().distance(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z)) < 50){
 			if (nextPos.size() == 0){
-				calculateAStar(_myCity->getRandomPointInRoom());
+				Ogre::Vector3 pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
+				while(getPosition().distance(pos) < 10) {
+					pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
+				}
+				calculateAStar(pos);
 			}
 			else{
 				walkToNextPoint();
@@ -175,6 +181,12 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 				}
 			}
 			//start the walking
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+			FILE* fp;
+			freopen_s(&fp, "CONOUT$", "w", stdout);
+			printf("newPoint\n");
+			fclose(fp);
+#endif
 			walkToNextPoint();
 			return;
 		}

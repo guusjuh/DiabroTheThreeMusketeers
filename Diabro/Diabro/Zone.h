@@ -63,6 +63,9 @@ private:
 	bool placeCity(City pC);
 
 	bool* generateCollisionGrid();
+
+	void debug(std::string msg, int val = 0);
+
 };
 
 #endif
