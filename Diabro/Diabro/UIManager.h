@@ -26,7 +26,7 @@ public:
 	void showEnemyHealthBar();
 	void hideEnemyHealthBar();
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
-	static Ogre::Real calcLocatorPos(Ogre::Real pAngle, Ogre::Real pMaxValue, Ogre::Real pMinValue, Ogre::Real pMaxSize);
+	static Ogre::Real calcLocatorPos(Ogre::Real pAngle, Ogre::Real pMaxSize);
 
 	void showDialog(Ogre::String, Ogre::String);
 	void hideDialog();

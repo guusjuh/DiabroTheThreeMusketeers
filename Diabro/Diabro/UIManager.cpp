@@ -59,8 +59,10 @@ void UIManager::setupUI()
 	_hudTextWidget = nullptr;
 }
 
-/// update state while the player is starting the game (loading level and intro)
-/// \param pFE ???
+/// <summary>
+/// Update loop in start state (when player is starting the level).
+/// </summary>
+/// <param name="pFE">The frameevent to obtain the passed time.</param>
 void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -81,9 +83,10 @@ void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 	}
 }
 
-//TODO: finish comments
-/// update state while player is playing the game (looking for his sister)
-/// \param pFE ???
+/// <summary>
+/// Update loop in ingame state (when player is playing the game).
+/// </summary>
+/// <param name="pFE">The frameevent to obtain the passed time.</param>
 void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -97,9 +100,10 @@ void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	}
 }
 
-//TODO: finish comments
-/// update state after sister has been found
-/// \param pFE ???
+/// <summary>
+/// Update loop in end state (when player finished the level).
+/// </summary>
+/// <param name="pFE">The frameevent to obtain the passed time.</param>
 void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -119,9 +123,10 @@ void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 	}
 }
 
-//TODO: finish comments
-/// update state after player death
-/// \param pFE ???
+/// <summary>
+/// Update loop in died state (when player is dead).
+/// </summary>
+/// <param name="pFE">The frameevent to obtain the passed time.</param>
 void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -141,10 +146,12 @@ void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
 	}
 }
 
-//TODO: check comments
-/// shows a part of the storyline text
-/// \param pTextVector a vector containing strings of story tekst
-/// \param pTime the time to show the text
+/// <summary>
+/// Shows the next part of the story text.
+/// </summary>
+/// <param name="pTextVector">Vector containing strings of story tekst.</param>
+/// <param name="pTime">The time to show the text.</param>
+/// <returns></returns>
 bool UIManager::showStoryText(std::vector<std::string> pTextVector, float pTime) {
 	static int _textCount = 0;
 	if (!_storyTextOn) {
@@ -213,7 +220,6 @@ void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 	_mDialogTextArea->setText(pDialogText);
 }
 
-//TODO: check comments
 /// adds text to the dialog window
 /// \param pDialogText text to append
 void UIManager::appendDialogText(Ogre::String pDialogText) {
@@ -276,24 +282,22 @@ Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre:
 	return((pValue / pMaxValue) * pMaxSize);
 }
 
-//TODO check comments
 /// updates the position of the locators on the minimap.
 void UIManager::updateMiniMapLocators() {
 	// update sis
 
 	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos());
-	_miniMap->setValueSister(angle, calcLocatorPos(angle, 180, -180, 256));
+	_miniMap->setValueSister(angle, calcLocatorPos(angle, _maxWidthBar));
 
 	// update quest 
 	if (_questOn) {
 		angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[0]->getPosition());
-		_miniMap->setValueQuest(angle, calcLocatorPos(angle, 180, -180, 256));
+		_miniMap->setValueQuest(angle, calcLocatorPos(angle, _maxWidthBar));
 	}
 }
 
-//TODO: check comments
 /// defines whether the quest locator should be visible or not
-/// \param val should the quest locator be shown?
+/// \param val should the quest locator be shown
 void UIManager::setQuestOn(bool val) 
 {
 	if(_questOn == val) {
@@ -309,14 +313,13 @@ void UIManager::setQuestOn(bool val)
 	}
 }
 
-//TODO: comments
-/// calculates the position of the locator as an angle (?)
+/// calculates the position of the locator as an angle
 /// \param pAngle the angle between a player and the locator's object
-/// \param pMaxValue the maximum value in ???
-/// \param pMinValue the minimal value of ???
-/// \param pMaxSize the maximum size of the bar (?)
-Ogre::Real UIManager::calcLocatorPos(Ogre::Real pAngle, Ogre::Real pMaxValue, Ogre::Real pMinValue, Ogre::Real pMaxSize)
+/// \param pMaxValue the maximum value in
+/// \param pMinValue the minimal value of
+/// \param pMaxSize the maximum size of the bar
+Ogre::Real UIManager::calcLocatorPos(Ogre::Real pAngle, Ogre::Real pMaxSize)
 {
-	Ogre::Real returnValue = ((pAngle - pMinValue) / (Ogre::Math::Abs(pMinValue - pMaxValue)) * pMaxSize);
+	Ogre::Real returnValue = ((pAngle - (-180)) / 360 * pMaxSize);
 	return returnValue;
 }
