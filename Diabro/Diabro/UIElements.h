@@ -630,9 +630,9 @@ namespace DiabroUI
 	public:
 
 		// Do not instantiate any widgets directly. Use SdkTrayManager.
-		MiniMap(const Ogre::String& name, Ogre::Real width, Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
+		MiniMap(const Ogre::String& name, Ogre::Real width, Ogre::Real minValue, Ogre::Real maxValue)
 			: mDragOffset(0.0f)
-			, mValue(0.0f)
+			, mValueSister(0.0f)
 			, mMinValue(0.0f)
 			, mMaxValue(0.0f)
 			, mInterval(0.0f)
@@ -641,47 +641,55 @@ namespace DiabroUI
 			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/MiniMap", "BorderPanel", name);
 			mElement->setWidth(width);
 			Ogre::OverlayContainer* c = (Ogre::OverlayContainer*)mElement;
-			mLocator = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorSister");
-			mLocator->setPosition(180, 0);
+			mLocatorSister = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorSister");
+			mLocatorSister->setPosition(width / 2, 0);
+			
+			mLocatorQuest = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorQuest");
+			mLocatorQuest->setPosition(width / 2, 0);
 
 			if (width <= 0) mFitToContents = true;
 
-			setRange(minValue, maxValue, snaps, false);
+			setRange(minValue, maxValue);
 		}
 
 		/*-----------------------------------------------------------------------------
 		| Sets the minimum value, maximum value, and the number of snapping points.
 		-----------------------------------------------------------------------------*/
-		void setRange(Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps, bool notifyListener = true)
+		void setRange(Ogre::Real minValue, Ogre::Real maxValue)
 		{
 			mMinValue = minValue;
 			mMaxValue = maxValue;
 
-			if (snaps <= 1 || mMinValue >= mMaxValue)
-			{
-				mInterval = 0;
-				mValue = mMaxValue;
-				setValue(mMaxValue, notifyListener);
-			}
-			else
-			{
-				mInterval = (maxValue - minValue) / (snaps - 1);
-				setValue(mMaxValue, notifyListener);
-			}
+			setValueSister(0, 128);
+			setValueQuest(0, 128);
 		}
 
-		void setValue(Ogre::Real value, Ogre::Real positionLocator, Locator locator = Sister)
+		void setValueSister(Ogre::Real value, Ogre::Real positionLocator)
 		{
-			mValue = Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
+			mValueSister = Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
 
-			if(locator == Sister) {
-				mLocator->setPosition(positionLocator - (mLocator->getWidth() / 2.0f), 0);
-			}
+			mLocatorSister->setPosition(positionLocator - (mLocatorSister->getWidth() / 2.0f), 0);
 		}
 
-		Ogre::Real getValue()
+		void setValueQuest(Ogre::Real value, Ogre::Real positionLocator)
 		{
-			return mValue;
+			mValueQuest = Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
+
+			mLocatorQuest->setPosition(positionLocator - (mLocatorQuest->getWidth() / 2.0f), 0);
+		}
+
+		Ogre::Real getValueSister()
+		{
+			return mValueSister;
+		}
+
+		Ogre::Real getValueQuest()
+		{
+			return mValueQuest;
+		}
+
+		Ogre::OverlayContainer* getQuestLocator() {
+			return mLocatorQuest;
 		}
 
 	protected:
@@ -699,13 +707,14 @@ namespace DiabroUI
 
 		bool mFitToContents;
 		Ogre::Real mDragOffset;
-		Ogre::Real mValue;
+		Ogre::Real mValueSister;
+		Ogre::Real mValueQuest;
 		Ogre::Real mMinValue;
 		Ogre::Real mMaxValue;
 		Ogre::Real mInterval;
 
-		Ogre::OverlayContainer* mLocator;
-
+		Ogre::OverlayContainer* mLocatorSister;
+		Ogre::OverlayContainer* mLocatorQuest;
 	};
 
 	/*=============================================================================
@@ -1030,9 +1039,9 @@ namespace DiabroUI
 		}
 
 		MiniMap* createMiniMap(AnchorLocation trayLoc, const Ogre::String& name, Ogre::Real width,
-			Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
+			Ogre::Real minValue, Ogre::Real maxValue)
 		{
-			MiniMap* tb = new MiniMap(name, width, minValue, maxValue, snaps);
+			MiniMap* tb = new MiniMap(name, width, minValue, maxValue);
 			moveWidgetToTray(tb, trayLoc);
 			//tb->_assignListener(mListener);
 			return tb;

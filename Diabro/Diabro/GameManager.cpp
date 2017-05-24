@@ -216,8 +216,11 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		dirVec.x = 1;
 		break;
 		
+	case OIS::KC_LSHIFT:
+		_levelManager->getPlayer()->toggleInQuest();
+		break;
+
 	case OIS::KC_E:
-		//TODO: find the closed NPC
 		_levelManager->getPlayer()->dialogTriggered();
 		break;
 

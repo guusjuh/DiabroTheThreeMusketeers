@@ -24,6 +24,9 @@ public:
 	void dialogTriggered();
 	float angleBetween(Ogre::Vector3);
 
+	bool getInQuest() { return _inQuest; }
+	void toggleInQuest();
+
 private:
 	void die() override;
 
@@ -42,6 +45,8 @@ private:
 	int calcXpTillLevel(int);
 	void levelUp();
 	bool _canAttack;
+
+	bool _inQuest;
 
 };
 

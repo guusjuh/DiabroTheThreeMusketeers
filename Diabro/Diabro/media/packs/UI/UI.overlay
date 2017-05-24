@@ -145,6 +145,15 @@ template container BorderPanel(UI/MiniMap)
 		height 32
 		width 24
 	}
+	
+	element Panel(LocatorQuest)
+	{
+		metrics_mode pixels
+		material UI/LocatorQuest
+		horz_align left
+		height 32
+		width 24
+	}
 }
 
 template container Panel(UI/HUDText)

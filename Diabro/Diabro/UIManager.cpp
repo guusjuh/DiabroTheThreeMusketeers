@@ -8,7 +8,7 @@
 /// e.g. the in-game and menu UI.
 /// </summary>
 UIManager::UIManager()
-	: _uiNode(0), _playerHealthBarWidget(0), _maxWidthBar(0), _enemyHealthBarWidget(0),
+	: _uiNode(0), _playerHealthBarWidget(0), _maxWidthBar(0), _enemyHealthBarWidget(0), _questOn(true),
 	_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0), _storyTextOn(false)
 {
 }
@@ -54,7 +54,7 @@ void UIManager::setupUI()
 	_playerHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMLEFT, "Player", "PlayerHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
 	_maxWidthBar = _playerHealthBarWidget->getOverlayElement()->getWidth();
 
-	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -180, 180, false);
+	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -180, 180);
 
 	_hudTextWidget = nullptr;
 }
@@ -245,14 +245,33 @@ void UIManager::updateMiniMapLocators() {
 	// update sis
 
 	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos());
-	_miniMap->setValue(angle, calcLocatorPos(angle, 180, -180, 256));
+	_miniMap->setValueSister(angle, calcLocatorPos(angle, 180, -180, 256));
 
 	// update quest 
+	if (_questOn) {
+		angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[0]->getPosition());
+		_miniMap->setValueQuest(angle, calcLocatorPos(angle, 180, -180, 256));
+	}
 }
+
+void UIManager::setQuestOn(bool val) 
+{
+	if(_questOn == val) {
+		return;
+	}
+
+	_questOn = val;
+
+	if(!_questOn) {
+		_miniMap->getQuestLocator()->hide();
+	}else {
+		_miniMap->getQuestLocator()->show();
+	}
+}
+
 
 Ogre::Real UIManager::calcLocatorPos(Ogre::Real angle, Ogre::Real pMaxValue, Ogre::Real pMinValue, Ogre::Real pMaxSize)
 {
 	Ogre::Real returnValue = ((angle - pMinValue) / (Ogre::Math::Abs(pMinValue - pMaxValue)) * pMaxSize);
-	//GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->debug("loc pos: ", returnValue);
 	return returnValue;
 }

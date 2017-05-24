@@ -25,6 +25,8 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_totalInBattleTime = 10.0f;
 
 	_lightAttackCooldown = 1.2f;
+
+	_inQuest = true;
 }
 
 void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
@@ -221,4 +223,9 @@ float Player::angleBetween(Ogre::Vector3 other) {
 	if(cross.y > 0) angle = -angle;
 
 	return angle;
+}
+
+void Player::toggleInQuest() {
+	_inQuest = !_inQuest; 
+	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(_inQuest);
 }

@@ -38,6 +38,8 @@ public:
 
 	void updateMiniMapLocators();
 
+	void setQuestOn(bool val);
+
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
 	Ogre::SceneNode*			_uiNode;
@@ -45,7 +47,9 @@ private:
 	Ogre::RenderWindow*			_mWindow;
 
 	DiabroUI::DialogTextBox*	_mDialogTextArea;
+	
 	DiabroUI::MiniMap*			_miniMap;
+	bool						_questOn;
 
 	DiabroUI::Bar*				_playerHealthBarWidget;
 	DiabroUI::Bar*				_enemyHealthBarWidget;
