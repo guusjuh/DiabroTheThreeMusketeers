@@ -15,11 +15,33 @@ QuestItemContainer::~QuestItemContainer() {
 	}
 }
 
+/// <summary>
+/// Gets the items of specified type.
+/// </summary>
+/// <param name="pType">Type of the p.</param>
+/// <returns></returns>
 std::vector<QuestItem*> QuestItemContainer::getItemsOfType(QuestItemType pType) {
 	std::vector<QuestItem*> returnVector;
 	
 	for (int i = 0; i < _items.size(); ++i) {
 		if(_items[i]->getItemType() == pType) {
+			returnVector.push_back(_items[i]);
+		}
+	}
+
+	return returnVector;
+}
+
+/// <summary>
+/// Gets the items of specified rarity.
+/// </summary>
+/// <param name="pType">Type of the p.</param>
+/// <returns></returns>
+std::vector<QuestItem*> QuestItemContainer::getItemsOfRarity(int pRarity) {
+	std::vector<QuestItem*> returnVector;
+
+	for (int i = 0; i < _items.size(); ++i) {
+		if (_items[i]->getRarity() == pRarity) {
 			returnVector.push_back(_items[i]);
 		}
 	}

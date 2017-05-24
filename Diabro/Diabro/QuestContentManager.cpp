@@ -11,6 +11,17 @@ QuestContentManager::QuestContentManager() {
 	_itemGenerator = new QuestItemGenerator();
 
 	readFromXML();
+
+	//find all cities and add them to correct list
+	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
+		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == CityRT) {
+			City temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
+			_NPCCities.push_back(&temp);
+		} else if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == HideoutRT) {
+			City temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
+			_enemyCities.push_back(&temp);
+		}
+	}
 }
 
 /// <summary>
@@ -37,11 +48,9 @@ void QuestContentManager::readFromXML() {
 }
 
 /// <summary>
-/// Reads from QuestItems.XML the specified type of items.
+/// Reads from QuestItems.XML the list of items.
 /// </summary>
-/// <param name="pQuestItemType">Quest item type to load in string form.</param>
-/// <param name="pType">Quest item type to load in enum form.</param>
-/// <param name="pRootNode">The root node of the XML.</param>
+/// <param name="listNode">The root node of the XML.</param>
 /// <returns></returns>
 std::vector<QuestItem*> QuestContentManager::readFromXMLQuestItemList(tinyxml2::XMLElement* listNode) {
 	// the vector to return
@@ -72,7 +81,6 @@ std::vector<QuestItem*> QuestContentManager::readFromXMLQuestItemList(tinyxml2::
 					type = it->second;
 				}
 			}
-
 
 			// create the item
 			QuestItem* tempItem = new QuestItem(name, sprName, type);

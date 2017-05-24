@@ -63,6 +63,7 @@ public:
 
 protected:
     virtual void createScene(void);
+	void startScene();
 	virtual void createCamera(void);
 	virtual void createViewports(void);
 	virtual void createFrameListener(void);

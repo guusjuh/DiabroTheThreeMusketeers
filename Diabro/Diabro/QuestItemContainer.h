@@ -15,6 +15,7 @@ public:
 	void setItems(std::vector<QuestItem*> pItems) { _items = pItems; }
 
 	std::vector<QuestItem*> getItemsOfType(QuestItemType pType);
+	std::vector<QuestItem*> getItemsOfRarity(int pRarity);
 
 private:
 	std::vector<QuestItem*> _items;

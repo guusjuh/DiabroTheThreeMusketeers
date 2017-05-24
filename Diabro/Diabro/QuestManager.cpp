@@ -1,6 +1,9 @@
 #include "QuestManager.h"
 #include "ActionContainer.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref="QuestManager"/> class.
+/// </summary>
 QuestManager::QuestManager()
 {
 	stringToActionType.insert(std::pair<std::string, ActionType>("Escort", Escort));

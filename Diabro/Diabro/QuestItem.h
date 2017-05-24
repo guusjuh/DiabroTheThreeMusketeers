@@ -21,33 +21,28 @@ class QuestItem : public IQuestContent
 public:
 	QuestItem() 
 		: _name(""), _sprName(""), _itemType((QuestItemType)0) {
-		switch(_itemType) {
-		case Book:
-			_rarity = 0;
-			break;
-		case Food:
-			_rarity = 0;
-			break;
-		case RareBook:
-			_rarity = 1;
-			break;
-		case RawMaterials:
-			_rarity = 0;
-			break;
-		case Gem:
-			_rarity = 1;
-			break;
-		case Mysterious:
-			_rarity = 1;
-			break;
-		default:
-			_rarity = 0;
-			break;
-		}
+		determineRarity();
 	}
 	
 	QuestItem(std::string pName, std::string pSprName, QuestItemType pType)
 		: _name(pName), _sprName(pSprName), _itemType(pType) {
+		determineRarity();
+	}
+	
+	~QuestItem() {}
+
+	std::string getName() { return _name; }
+	std::string getSpriteName() { return _sprName; }
+	QuestItemType getItemType() { return _itemType; }
+	int getRarity() { return _rarity; }
+
+private:
+	std::string _name;
+	std::string _sprName;
+	QuestItemType _itemType;
+	int _rarity;
+
+	void determineRarity() {
 		switch (_itemType) {
 		case Book:
 			_rarity = 0;
@@ -72,19 +67,6 @@ public:
 			break;
 		}
 	}
-	
-	~QuestItem() {}
-
-	std::string getName() { return _name; }
-	std::string getSpriteName() { return _sprName; }
-	QuestItemType getItemType() { return _itemType; }
-	int getRarity() { return _rarity; }
-
-private:
-	std::string _name;
-	std::string _sprName;
-	QuestItemType _itemType;
-	int _rarity;
 };
 
 #endif

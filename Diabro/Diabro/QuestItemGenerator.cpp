@@ -1,11 +1,10 @@
-/*
 #include "QuestItemGenerator.h"
 #include "GameManager.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestItemGenerator"/> class.
 /// </summary>
-QuestItemGenerator::QuestItemGenerator() : _dropEntity("sphere.mesh") { }
+QuestItemGenerator::QuestItemGenerator() { }
 
 /// <summary>
 /// Finalizes an instance of the <see cref="QuestItemGenerator"/> class.
@@ -13,36 +12,63 @@ QuestItemGenerator::QuestItemGenerator() : _dropEntity("sphere.mesh") { }
 QuestItemGenerator::~QuestItemGenerator() { }
 
 /// <summary>
+/// Generates a random quest item of a specified type.
+/// </summary>
+/// <param name="pNode">The scene node to function as parent for the item.</param>
+/// <returns>A pointer to the quest item.</returns>
+QuestItem* QuestItemGenerator::generateItem(QuestItemType pType) {
+	// the base quest item, contains information for the quest item to be generated. 
+	QuestItem* baseItem;
+
+	// possible items to return
+	std::vector<QuestItem*> possibleItems = GameManager::getSingletonPtr()->getQuestManager()->getQuestContentManager()->getItemContainer()->getItemsOfType(pType);
+
+	// random roll for the item of specified type.
+	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, possibleItems.size());
+
+	// get the random item.
+	baseItem = possibleItems[randomRoll];
+
+	// create and return the item. 
+	return new QuestItem((*baseItem));
+}
+
+/// <summary>
 /// Generates a random quest item.
 /// </summary>
 /// <param name="pNode">The scene node to function as parent for the item.</param>
 /// <returns>A pointer to the quest item.</returns>
-QuestItem* QuestItemGenerator::generateItem(Ogre::SceneNode* pNode, QuestItemType pType) {
+QuestItem* QuestItemGenerator::generateItem() {
+	// random roll the item type
+	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_QUEST_ITEM_TYPES);
+
+	// generates random item of given type and returns
+	return generateItem((QuestItemType)randomRoll);
+}
+
+/// <summary>
+/// Generates a random quest item.
+/// </summary>
+/// <param name="pNode">The scene node to function as parent for the item.</param>
+/// <param name="pRarity">The rarity.</param>
+/// <returns>
+/// A pointer to the quest item.
+/// </returns>
+QuestItem* QuestItemGenerator::generateItem(int pRarity) {
 	// the base quest item, contains information for the quest item to be generated. 
 	QuestItem* baseItem;
-	
-	// the entity of the dropped quest object. 
-	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
 
-	//TODO: shouldn't be a random roll, since certain quests need certain items. 
+	// possible items to return
+	std::vector<QuestItem*> possibleItems = GameManager::getSingletonPtr()->getQuestManager()->getQuestContentManager()->getItemContainer()->getItemsOfRarity(pRarity);
 
-	// random roll for the item type.
-	//int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, QuestItemType::AMOUNT_OF_QUEST_ITEM_TYPES);
-	//int itemType = randomRoll;
+	// random roll for the item of specified type.
+	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, possibleItems.size());
 
-	// random roll for the specific quest item.
-	int randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getQuestManager()->getQuestContentManager()->getItemContainer()->getItemsOfType((QuestItemType)pType).size());
-	baseItem = GameManager::getSingletonPtr()->getQuestManager()->getQuestContentManager()->getItemContainer()->getItemsOfType((QuestItemType)pType)[randomObj];
-
-	//TODO: also shouldn't be a random roll, since certain quests need certain items, will be more specific when actions are defined. 
-	// set the quality by default to normal.
-	QuestItemQuality quality = QuestItemQuality::NormalQI;
-	// random roll for the quality of the item.
-	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, 3);
-	quality = (QuestItemQuality)randomRoll;
+	// get the random item.
+	baseItem = possibleItems[randomRoll];
 
 	// create and return the item. 
-	return new QuestItem(baseItem, quality);
+	return new QuestItem((*baseItem));
 }
 
 /// <summary>
@@ -51,14 +77,14 @@ QuestItem* QuestItemGenerator::generateItem(Ogre::SceneNode* pNode, QuestItemTyp
 /// <param name="pNode">The scene node to function as parent for the item.</param>
 /// <param name="pAmount">The amount of items to generate.</param>
 /// <returns>A vector with pointers to the quest items</returns>
-std::vector<QuestItem*> QuestItemGenerator::generateItem(Ogre::SceneNode* pNode, QuestItemType pType, int pAmount) {
+std::vector<QuestItem*> QuestItemGenerator::generateItems(QuestItemType pType, int pAmount) {
 	// the list to return
 	std::vector<QuestItem*> returnList;
 
 	// generate the x amount of quest items
 	for (int i = 0; i < pAmount; ++i) {
 		// generate 1 quest item and add it to the return list
-		QuestItem* item = generateItem(pNode, pType);
+		QuestItem* item = generateItem(pType);
 		returnList.push_back(item);
 	}
 
@@ -66,6 +92,48 @@ std::vector<QuestItem*> QuestItemGenerator::generateItem(Ogre::SceneNode* pNode,
 	return returnList;
 }
 
+/// <summary>
+/// Generates an amount of random quest items of random types.
+/// </summary>
+/// <param name="pNode">The scene node to function as parent for the item.</param>
+/// <param name="pAmount">The amount of items to generate.</param>
+/// <returns>A vector with pointers to the quest items</returns>
+std::vector<QuestItem*> QuestItemGenerator::generateItems(int pAmount) {
+	// the list to return
+	std::vector<QuestItem*> returnList;
 
+	// generate the x amount of quest items
+	for (int i = 0; i < pAmount; ++i) {
+		// generate 1 quest item and add it to the return list
+		QuestItem* item = generateItem();
+		returnList.push_back(item);
+	}
 
-*/
+	// return the list
+	return returnList;
+}
+
+/// <summary>
+/// Generates an amount of random quest items of random types.
+/// </summary>
+/// <param name="pNode">The scene node to function as parent for the item.</param>
+/// <param name="pRarity">The rarity.</param>
+/// <param name="pAmount">The amount of items to generate.</param>
+/// <returns>
+/// A vector with pointers to the quest items
+/// </returns>
+std::vector<QuestItem*> QuestItemGenerator::generateItems(int pRarity, int pAmount) {
+	// the list to return
+	std::vector<QuestItem*> returnList;
+
+	// generate the x amount of quest items
+	for (int i = 0; i < pAmount; ++i) {
+		// generate 1 quest item and add it to the return list
+		QuestItem* item = generateItem(pRarity);
+		returnList.push_back(item);
+	}
+
+	// return the list
+	return returnList;
+}
+

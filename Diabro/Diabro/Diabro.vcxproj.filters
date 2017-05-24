@@ -82,6 +82,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Sources\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Quest.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -180,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="QuestItem.h">
       <Filter>Headers\Quests\QuestContent</Filter>
+    </ClInclude>
+    <ClInclude Include="Quest.h">
+      <Filter>Headers\Quests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

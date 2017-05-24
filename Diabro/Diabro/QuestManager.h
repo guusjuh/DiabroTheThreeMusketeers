@@ -11,6 +11,8 @@
 class QuestManager {
 public:
 	QuestManager();
+	~QuestManager(){}
+
 	void Initialize()
 	{
 		actionContainer = new ActionContainer();

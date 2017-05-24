@@ -76,7 +76,6 @@ void GameManager::createScene(void)
 
 	state = Start;
 	//_uiManager->startState();
-
 }
 
 void GameManager::reset() {

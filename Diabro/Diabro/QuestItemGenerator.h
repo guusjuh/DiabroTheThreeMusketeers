@@ -7,12 +7,16 @@
 
 class QuestItemGenerator {
 public:
-	QuestItemGenerator() {};
-	~QuestItemGenerator() {};
+	QuestItemGenerator();
+	~QuestItemGenerator();
 
-	//TODO: implement items are put in either inventory or a scenenode
-	std::vector<QuestItem*> generateItem(Ogre::SceneNode*, QuestItemType, int);
-	QuestItem* generateItem(Ogre::SceneNode*, QuestItemType);
+	std::vector<QuestItem*> generateItems(QuestItemType, int);
+	std::vector<QuestItem*> generateItems(int);
+	std::vector<QuestItem*> generateItems(int, int);
+
+	QuestItem* generateItem(QuestItemType);
+	QuestItem* generateItem(int);
+	QuestItem* generateItem();
 };
 
 #endif
