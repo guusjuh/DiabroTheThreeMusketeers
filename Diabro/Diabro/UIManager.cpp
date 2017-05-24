@@ -37,7 +37,7 @@ void UIManager::init()
 	_endLevelText.push_back("Now, let's go back home.");
 
 	_diedText.push_back("You died!");
-	_diedText.push_back("Better luck next time.");
+	_diedText.push_back("Better luck next pTime.");
 
 	_first = true;
 }
@@ -59,6 +59,8 @@ void UIManager::setupUI()
 	_hudTextWidget = nullptr;
 }
 
+/// update state while the player is starting the game (loading level and intro)
+/// \param pFE ???
 void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -78,6 +80,10 @@ void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 		!showStoryText(_startGameText, 2.0f);
 	}
 }
+
+//TODO: finish comments
+/// update state while player is playing the game (looking for his sister)
+/// \param pFE ???
 void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -90,6 +96,10 @@ void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 		}
 	}
 }
+
+//TODO: finish comments
+/// update state after sister has been found
+/// \param pFE ???
 void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -108,6 +118,10 @@ void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 		showStoryText(_endLevelText, 2.0f);
 	}
 }
+
+//TODO: finish comments
+/// update state after player death
+/// \param pFE ???
 void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
 {
 	updateMiniMapLocators();
@@ -127,16 +141,20 @@ void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
 	}
 }
 
-bool UIManager::showStoryText(std::vector<std::string> pTextVector, float timer) {
+//TODO: check comments
+/// shows a part of the storyline text
+/// \param pTextVector a vector containing strings of story tekst
+/// \param pTime the time to show the text
+bool UIManager::showStoryText(std::vector<std::string> pTextVector, float pTime) {
 	static int _textCount = 0;
 	if (!_storyTextOn) {
 		_storyTextOn = true;
-		showHUDText((pTextVector[_textCount]), timer);
+		showHUDText((pTextVector[_textCount]), pTime);
 	}
 	else {
 		_textCount++;
 		if (_textCount < (pTextVector.size())) {
-			showHUDText(pTextVector[_textCount], timer);
+			showHUDText(pTextVector[_textCount], pTime);
 		}
 		else {
 			hideHUDText();
@@ -148,6 +166,8 @@ bool UIManager::showStoryText(std::vector<std::string> pTextVector, float timer)
 	return _storyTextOn;
 }
 
+/// shows a certain text within the HUD
+/// \param pHUDText text that should be shown
 void UIManager::showHUDText(Ogre::String pHUDText)
 {
 	// count the symbols in text
@@ -160,13 +180,19 @@ void UIManager::showHUDText(Ogre::String pHUDText)
 	_hudTextWidget = _uiElementMgr->createHUDText(DiabroUI::TOP, "HUDText", pHUDText, width, 40);
 	_hudTextWidget->getOverlayElement()->setTop(128);
 }
-void UIManager::showHUDText(Ogre::String pHUDText, float time)
+
+///shows a text on the HUD
+/// \param pHUDText text that should be shown
+/// \param pTime
+void UIManager::showHUDText(Ogre::String pHUDText, float pTime)
 {
 	showHUDText(pHUDText);
 
 	_hudTextWithTimeOn = true;
-	_hudTimer = time;
+	_hudTimer = pTime;
 }
+
+///hides the current message shown in the HUD
 void UIManager::hideHUDText()
 {
 	_hudTextWithTimeOn = false;
@@ -179,15 +205,22 @@ void UIManager::hideHUDText()
 	_hudTimer = 0;
 }
 
+/// shows the dialog window
 void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 	if (_hudTextWidget != nullptr) hideHUDText();
 
 	_mDialogTextArea = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "DialogTextArea", pNPCName, 400, 400);
 	_mDialogTextArea->setText(pDialogText);
 }
+
+//TODO: check comments
+/// adds text to the dialog window
+/// \param pDialogText text to append
 void UIManager::appendDialogText(Ogre::String pDialogText) {
 	_mDialogTextArea->appendText("\n" + pDialogText);
 }
+
+/// hides the dialog window
 void UIManager::hideDialog() {
 	if (_mDialogTextArea != nullptr) {
 		_uiElementMgr->destroyWidget("DialogTextArea");
@@ -215,6 +248,7 @@ void UIManager::adjustEnemyHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 	_enemyHealthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
 }
 
+///shows the enemy healthbar
 void UIManager::showEnemyHealthBar()
 {
 	if (_enemyHealthBarWidget != nullptr) { hideEnemyHealthBar(); }
@@ -222,6 +256,7 @@ void UIManager::showEnemyHealthBar()
 	_enemyHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMRIGHT, "Enemy", "EnemyHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
 }
 
+///hides the enemy healthbar
 void UIManager::hideEnemyHealthBar() {
 	if (_enemyHealthBarWidget != nullptr) {
 		_uiElementMgr->destroyWidget("EnemyHealth");
@@ -241,6 +276,8 @@ Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre:
 	return((pValue / pMaxValue) * pMaxSize);
 }
 
+//TODO check comments
+/// updates the position of the locators on the minimap.
 void UIManager::updateMiniMapLocators() {
 	// update sis
 
@@ -254,6 +291,9 @@ void UIManager::updateMiniMapLocators() {
 	}
 }
 
+//TODO: check comments
+/// defines whether the quest locator should be visible or not
+/// \param val should the quest locator be shown?
 void UIManager::setQuestOn(bool val) 
 {
 	if(_questOn == val) {
@@ -269,9 +309,14 @@ void UIManager::setQuestOn(bool val)
 	}
 }
 
-
-Ogre::Real UIManager::calcLocatorPos(Ogre::Real angle, Ogre::Real pMaxValue, Ogre::Real pMinValue, Ogre::Real pMaxSize)
+//TODO: comments
+/// calculates the position of the locator as an angle (?)
+/// \param pAngle the angle between a player and the locator's object
+/// \param pMaxValue the maximum value in ???
+/// \param pMinValue the minimal value of ???
+/// \param pMaxSize the maximum size of the bar (?)
+Ogre::Real UIManager::calcLocatorPos(Ogre::Real pAngle, Ogre::Real pMaxValue, Ogre::Real pMinValue, Ogre::Real pMaxSize)
 {
-	Ogre::Real returnValue = ((angle - pMinValue) / (Ogre::Math::Abs(pMinValue - pMaxValue)) * pMaxSize);
+	Ogre::Real returnValue = ((pAngle - pMinValue) / (Ogre::Math::Abs(pMinValue - pMaxValue)) * pMaxSize);
 	return returnValue;
 }
