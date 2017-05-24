@@ -102,6 +102,20 @@ material UI/Transparent : UI/Base
    }
 }
 
+material UI/MiniMap : UI/Base
+{
+   technique
+   {
+      pass
+      {         
+         texture_unit
+         {
+			texture mini_map.png
+         }
+      }
+   }
+}
+
 material UI/LocatorSister : UI/Base
 {
    technique

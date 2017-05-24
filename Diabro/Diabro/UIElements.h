@@ -618,6 +618,97 @@ namespace DiabroUI
 	};
 
 	/*=============================================================================
+	| Basic slider widget.
+	=============================================================================*/
+	enum Locator {
+		Sister = 0,
+		Quest
+	};
+	
+	class MiniMap : public Widget
+	{
+	public:
+
+		// Do not instantiate any widgets directly. Use SdkTrayManager.
+		MiniMap(const Ogre::String& name, Ogre::Real width, Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
+			: mDragOffset(0.0f)
+			, mValue(0.0f)
+			, mMinValue(0.0f)
+			, mMaxValue(0.0f)
+			, mInterval(0.0f)
+		{
+			mFitToContents = false;
+			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/MiniMap", "BorderPanel", name);
+			mElement->setWidth(width);
+			Ogre::OverlayContainer* c = (Ogre::OverlayContainer*)mElement;
+			mLocator = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorSister");
+			mLocator->setPosition(180, 0);
+
+			if (width <= 0) mFitToContents = true;
+
+			setRange(minValue, maxValue, snaps, false);
+		}
+
+		/*-----------------------------------------------------------------------------
+		| Sets the minimum value, maximum value, and the number of snapping points.
+		-----------------------------------------------------------------------------*/
+		void setRange(Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps, bool notifyListener = true)
+		{
+			mMinValue = minValue;
+			mMaxValue = maxValue;
+
+			if (snaps <= 1 || mMinValue >= mMaxValue)
+			{
+				mInterval = 0;
+				mValue = mMaxValue;
+				setValue(mMaxValue, notifyListener);
+			}
+			else
+			{
+				mInterval = (maxValue - minValue) / (snaps - 1);
+				setValue(mMaxValue, notifyListener);
+			}
+		}
+
+		void setValue(Ogre::Real value, Ogre::Real positionLocator, Locator locator = Sister)
+		{
+			mValue = Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
+
+			if(locator == Sister) {
+				mLocator->setPosition(positionLocator - (mLocator->getWidth() / 2.0f), 0);
+			}
+		}
+
+		Ogre::Real getValue()
+		{
+			return mValue;
+		}
+
+	protected:
+
+		/*-----------------------------------------------------------------------------
+		| Internal method - given a percentage (from left to right), gets the
+		| value of the nearest marker.
+		-----------------------------------------------------------------------------*/
+		Ogre::Real getSnappedValue(Ogre::Real percentage)
+		{
+			percentage = Ogre::Math::Clamp<Ogre::Real>(percentage, 0, 1);
+			unsigned int whichMarker = (unsigned int)(percentage * (mMaxValue - mMinValue) / mInterval + 0.5);
+			return whichMarker * mInterval + mMinValue;
+		}
+
+		bool mFitToContents;
+		Ogre::Real mDragOffset;
+		Ogre::Real mValue;
+		Ogre::Real mMinValue;
+		Ogre::Real mMaxValue;
+		Ogre::Real mInterval;
+
+		Ogre::OverlayContainer* mLocator;
+
+	};
+
+	/*=============================================================================
 	| Main class to manage a cursor, backdrop, trays and widgets.
 	=============================================================================*/
 	class UIElementsManager 
@@ -933,6 +1024,15 @@ namespace DiabroUI
 			Ogre::Real valueBoxWidth, Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
 		{
 			Bar* tb = new Bar(pre, name, width, valueBoxWidth, minValue, maxValue, snaps);
+			moveWidgetToTray(tb, trayLoc);
+			//tb->_assignListener(mListener);
+			return tb;
+		}
+
+		MiniMap* createMiniMap(AnchorLocation trayLoc, const Ogre::String& name, Ogre::Real width,
+			Ogre::Real minValue, Ogre::Real maxValue, unsigned int snaps)
+		{
+			MiniMap* tb = new MiniMap(name, width, minValue, maxValue, snaps);
 			moveWidgetToTray(tb, trayLoc);
 			//tb->_assignListener(mListener);
 			return tb;

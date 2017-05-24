@@ -118,6 +118,34 @@ template container BorderPanel(UI/EnemyHealthBar)
 	}
 }
 
+template container BorderPanel(UI/MiniMap)
+{
+	metrics_mode pixels
+	material UI/MiniMap
+	uv_coords 0.25 0.25 0.75 0.75
+	horz_align center
+	height 32
+	
+	border_material UI/MiniMap
+	border_size 5 5 5 5
+	border_topleft_uv     0.00 0.00 0.25 0.25
+	border_top_uv         0.25 0.00 0.75 0.25
+	border_topright_uv    0.75 0.00 1.00 0.25
+	border_left_uv        0.00 0.25 0.25 0.75
+	border_right_uv       0.75 0.25 1.00 0.75
+	border_bottomleft_uv  0.00 0.75 0.25 1.00
+	border_bottom_uv      0.25 0.75 0.75 1.00
+	border_bottomright_uv 0.75 0.75 1.00 1.00
+	
+	element Panel(LocatorSister)
+	{
+		metrics_mode pixels
+		material UI/LocatorSister
+		horz_align left
+		height 32
+		width 24
+	}
+}
 
 template container Panel(UI/HUDText)
 {

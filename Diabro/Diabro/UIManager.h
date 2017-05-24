@@ -26,6 +26,7 @@ public:
 	void showEnemyHealthBar();
 	void hideEnemyHealthBar();
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
+	static Ogre::Real calcLocatorPos(Ogre::Real, Ogre::Real, Ogre::Real, Ogre::Real);
 
 	void showDialog(Ogre::String, Ogre::String);
 	void hideDialog();
@@ -35,6 +36,8 @@ public:
 	void showHUDText(Ogre::String, float);
 	void hideHUDText();
 
+	void updateMiniMapLocators();
+
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
 	Ogre::SceneNode*			_uiNode;
@@ -42,6 +45,7 @@ private:
 	Ogre::RenderWindow*			_mWindow;
 
 	DiabroUI::DialogTextBox*	_mDialogTextArea;
+	DiabroUI::MiniMap*			_miniMap;
 
 	DiabroUI::Bar*				_playerHealthBarWidget;
 	DiabroUI::Bar*				_enemyHealthBarWidget;

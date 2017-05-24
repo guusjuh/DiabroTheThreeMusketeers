@@ -31,6 +31,9 @@ public:
 		return sqrt(abs(pow((_sisterNode->getPosition() - otherPos).x, 2)
 			+ pow((_sisterNode->getPosition() - otherPos).z, 2)));
 	}
+	Ogre::Vector3 getSisPos() {
+		return _sisterNode->getPosition();
+	}
 
 	Ogre::Vector3 getStartPos() {
 		return getWorldPosition(_startCity->getCenterTile());
@@ -43,7 +46,7 @@ public:
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf(pString.c_str());
-		
+
 		if (value != -1) printf("(%d) \n", value);
 		else printf("\n");
 		fclose(fp);

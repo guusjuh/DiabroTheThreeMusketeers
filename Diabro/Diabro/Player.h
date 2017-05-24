@@ -22,6 +22,7 @@ public:
 	void gainXP(int);
 	
 	void dialogTriggered();
+	float angleBetween(Ogre::Vector3);
 
 private:
 	void die() override;
@@ -41,7 +42,6 @@ private:
 	int calcXpTillLevel(int);
 	void levelUp();
 	bool _canAttack;
-
 
 };
 

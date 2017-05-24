@@ -52,15 +52,17 @@ void UIManager::setupUI()
 
 	// create health bars
 	_playerHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMLEFT, "Player", "PlayerHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
-	//_enemyHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMRIGHT, "Enemy", "EnemyHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
-
 	_maxWidthBar = _playerHealthBarWidget->getOverlayElement()->getWidth();
+
+	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -180, 180, false);
 
 	_hudTextWidget = nullptr;
 }
 
 void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 {
+	updateMiniMapLocators();
+
 	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
@@ -78,6 +80,8 @@ void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 }
 void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 {
+	updateMiniMapLocators();
+
 	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
@@ -88,6 +92,8 @@ void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 }
 void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 {
+	updateMiniMapLocators();
+
 	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
@@ -104,6 +110,8 @@ void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 }
 void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
 {
+	updateMiniMapLocators();
+
 	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
@@ -233,8 +241,18 @@ Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre:
 	return((pValue / pMaxValue) * pMaxSize);
 }
 
-/*
+void UIManager::updateMiniMapLocators() {
+	// update sis
 
+	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos());
+	_miniMap->setValue(angle, calcLocatorPos(angle, 180, -180, 256));
 
-*/
+	// update quest 
+}
 
+Ogre::Real UIManager::calcLocatorPos(Ogre::Real angle, Ogre::Real pMaxValue, Ogre::Real pMinValue, Ogre::Real pMaxSize)
+{
+	Ogre::Real returnValue = ((angle - pMinValue) / (Ogre::Math::Abs(pMinValue - pMaxValue)) * pMaxSize);
+	//GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->debug("loc pos: ", returnValue);
+	return returnValue;
+}
