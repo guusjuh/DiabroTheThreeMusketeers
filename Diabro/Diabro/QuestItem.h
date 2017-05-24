@@ -20,9 +20,7 @@ class QuestItem : public IQuestContent
 {
 public:
 	QuestItem() 
-		: _name(""), _sprName(""), _itemType((QuestItemType)0) {
-		determineRarity();
-	}
+		: _name(""), _sprName(""), _itemType((QuestItemType)0), _rarity(0) { }
 	
 	QuestItem(std::string pName, std::string pSprName, QuestItemType pType)
 		: _name(pName), _sprName(pSprName), _itemType(pType) {

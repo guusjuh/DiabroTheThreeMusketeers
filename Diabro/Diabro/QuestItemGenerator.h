@@ -11,8 +11,8 @@ public:
 	~QuestItemGenerator();
 
 	std::vector<QuestItem*> generateItems(QuestItemType, int);
-	std::vector<QuestItem*> generateItems(int);
 	std::vector<QuestItem*> generateItems(int, int);
+	std::vector<QuestItem*> generateItems(int);
 
 	QuestItem* generateItem(QuestItemType);
 	QuestItem* generateItem(int);

@@ -59,6 +59,7 @@ QuestItem* QuestItemGenerator::generateItem(int pRarity) {
 	QuestItem* baseItem;
 
 	// possible items to return
+	//TODO: could directly obtain random item from item container
 	std::vector<QuestItem*> possibleItems = GameManager::getSingletonPtr()->getQuestManager()->getQuestContentManager()->getItemContainer()->getItemsOfRarity(pRarity);
 
 	// random roll for the item of specified type.
