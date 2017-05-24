@@ -2,7 +2,8 @@
 #define I_QUEST_CONTENT_H
 
 class IQuestContent {
-	
+public:
+	IQuestContent(){}
 };
 
 #endif

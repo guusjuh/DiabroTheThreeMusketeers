@@ -6,10 +6,10 @@
 #include "QuestItemGenerator.h"
 #include "tinyxml2.h"
 #include "City.h"
+#include "QuestItem.h"
 
 enum QuestContent {
 	QuestItemQC = 0,
-	ItemQC = 0,
 	TownQC,
 	HideOutQC,
 	NPCQC,
@@ -23,16 +23,17 @@ public:
 
 	QuestItemContainer* getItemContainer() { return _itemContainer; };
 	QuestItemGenerator* getItemGenerator() { return _itemGenerator; };
-
-	//TODO: create locations and store/ref to them in this content manager
-	std::vector<City*> cities;
+	std::vector<City*> getNPCCities() { return _NPCCities; }
+	std::vector<City*> getEnemyCities() { return _enemyCities; }
 
 private:
 	QuestItemContainer* _itemContainer;
 	QuestItemGenerator* _itemGenerator;
+	std::vector<City*> _NPCCities;
+	std::vector<City*> _enemyCities;
 
 	void readFromXML();
-	std::vector<BaseQuestItem*> readFromXMLQuestItemList(const char*, QuestItemType, tinyxml2::XMLElement*);
+	std::vector<QuestItem*> readFromXMLQuestItemList(tinyxml2::XMLElement*);
 };
 
 #endif

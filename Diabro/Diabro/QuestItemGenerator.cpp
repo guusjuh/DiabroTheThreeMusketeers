@@ -1,3 +1,4 @@
+/*
 #include "QuestItemGenerator.h"
 #include "GameManager.h"
 
@@ -18,8 +19,8 @@ QuestItemGenerator::~QuestItemGenerator() { }
 /// <returns>A pointer to the quest item.</returns>
 QuestItem* QuestItemGenerator::generateItem(Ogre::SceneNode* pNode, QuestItemType pType) {
 	// the base quest item, contains information for the quest item to be generated. 
-	BaseQuestItem* baseItem;
-
+	QuestItem* baseItem;
+	
 	// the entity of the dropped quest object. 
 	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
 
@@ -67,3 +68,4 @@ std::vector<QuestItem*> QuestItemGenerator::generateItem(Ogre::SceneNode* pNode,
 
 
 
+*/

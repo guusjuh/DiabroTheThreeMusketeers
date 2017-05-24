@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<QuestItemContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<BaseQuestItem>
+	<Name>Book of Books</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Book</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Dungeoneering for Dummy's</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Book</Type>
+</BaseQuestItem>
+
+
+<BaseQuestItem>
+	<Name>The Story of Diabro</Name>
+	<SpriteName>/</SpriteName>
+	<Type>RareBook</Type>
+</BaseQuestItem>
+
+
+<BaseQuestItem>
+	<Name>Bread</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Food</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Ale</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Food</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Turkey</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Food</Type>
+</BaseQuestItem>
+
+
+<BaseQuestItem>
+	<Name>Stones</Name>
+	<SpriteName>/</SpriteName>
+	<Type>RawMaterial</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Wood</Name>
+	<SpriteName>/</SpriteName>
+	<Type>RawMaterial</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Iron</Name>
+	<SpriteName>/</SpriteName>
+	<Type>RawMaterial</Type>
+</BaseQuestItem>
+
+
+<BaseQuestItem>
+	<Name>Diamond</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Gem</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Ruby</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Gem</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Sapphire</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Gem</Type>
+</BaseQuestItem>
+
+
+<BaseQuestItem>
+	<Name>Mysterious Book</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Mysterious</Type>
+</BaseQuestItem>
+
+<BaseQuestItem>
+	<Name>Mysterious Stone</Name>
+	<SpriteName>/</SpriteName>
+	<Type>Mysterious</Type>
+</BaseQuestItem>
+
+</QuestItemContainer>

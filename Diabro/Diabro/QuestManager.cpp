@@ -29,8 +29,14 @@ QuestManager::QuestManager()
 	stringToPostconditionType.insert(std::pair<std::string, PostconditionType>("YouThere", YouThere));
 	stringToPostconditionType.insert(std::pair<std::string, PostconditionType>("TheyDead", TheyDead));
 
+	stringToQuestItemType.insert(std::pair<std::string, QuestItemType>("Book", Book));
+	stringToQuestItemType.insert(std::pair<std::string, QuestItemType>("RareBook", RareBook));
+	stringToQuestItemType.insert(std::pair<std::string, QuestItemType>("Food", Food));
+	stringToQuestItemType.insert(std::pair<std::string, QuestItemType>("RawMaterial", RawMaterials));
+	stringToQuestItemType.insert(std::pair<std::string, QuestItemType>("Gem", Gem));
+	stringToQuestItemType.insert(std::pair<std::string, QuestItemType>("Mysterious", Mysterious));
+
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("QuestItemQC", QuestItemQC));
-	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("ItemQC", ItemQC));
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("TownQC", TownQC));
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("HideOutQC", HideOutQC));
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("NPCQC", NPCQC));

@@ -19,7 +19,7 @@ StrategyContainer::~StrategyContainer() {
 void StrategyContainer::readFromXML()
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("../../Strategies.xml");
+	doc.LoadFile("../../XML/Strategies.xml");
 	tinyxml2::XMLElement* rootNode = doc.FirstChildElement("StrategyContainer");
 
 	if (rootNode)

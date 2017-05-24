@@ -19,7 +19,7 @@ ActionContainer::~ActionContainer() {
 void ActionContainer::readFromXML()
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("../../Actions.xml");
+	doc.LoadFile("../../XML/Actions.xml");
 	tinyxml2::XMLElement* rootNode = doc.FirstChildElement("ActionContainer");
 
 	// if the rootnode is not empty
