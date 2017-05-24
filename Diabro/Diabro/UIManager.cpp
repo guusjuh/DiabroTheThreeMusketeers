@@ -37,7 +37,7 @@ void UIManager::init()
 	_endLevelText.push_back("Now, let's go back home.");
 
 	_diedText.push_back("You died!");
-	_diedText.push_back("Better luck next pTime.");
+	_diedText.push_back("Better luck next time.");
 
 	_first = true;
 }

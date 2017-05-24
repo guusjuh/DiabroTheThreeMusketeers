@@ -29,6 +29,8 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_inQuest = true;
 }
 
+//TODO: finish comments
+/// resets the player, for a new level or replay
 void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_myNode = pMyNode;
 	_myEntity = pMyEntity;
@@ -43,6 +45,8 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_inBattleTime = 0;
 }
 
+//TODO: finish comments
+/// called if players health is below 0, resets player within current dungeon
 void Player::die() {
 	changeInBattle(false);
 	GameManager::getSingletonPtr()->goToState(GameState::Died);
@@ -55,7 +59,10 @@ void Player::die() {
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 }
 
-void Player::update(Ogre::Real deltaTime) 
+//TODO: finish comments
+/// players updateloop, updates instance inbetween frames
+/// \param pDeltaTime the time passed since last frame. Obtained from frameEvents
+void Player::update(Ogre::Real pDeltaTime) 
 {
 	// don't do stuff when in dialog
 	if (_inDialog) return;
@@ -66,10 +73,10 @@ void Player::update(Ogre::Real deltaTime)
 	}
 
 	// call basic update
-	Character::update(deltaTime);
+	Character::update(pDeltaTime);
 
 	if(_inBattle) {
-		_inBattleTime += deltaTime;
+		_inBattleTime += pDeltaTime;
 
 		if(_inBattleTime > _totalInBattleTime) {
 			changeInBattle(false);
@@ -89,6 +96,8 @@ void Player::update(Ogre::Real deltaTime)
 	//angleBetween(Ogre::Vector3(0,0,0));
 }
 
+//TODO: finish comments
+/// opens dialog window with nearbyNPC
 void Player::dialogTriggered() {
 	if (_nearbyNPC == nullptr) return;
 
@@ -113,6 +122,8 @@ bool Player::adjustHealth(float pAdjust)
 	return true;
 }
 
+//TODO: finish comments
+/// basic attack for player
 bool Player::lightAttack()
 {
 	if (!Character::lightAttack()) {
@@ -184,10 +195,13 @@ void Player::levelUp()
 	// Increase _stats
 }
 
-void Player::setNearbyNPC(Npc* newNPC) {
-	if (_nearbyNPC == newNPC) return;
+//TODO: finish comments
+/// sets a new NPC as the nearest NPC
+/// \param pNewNPC new NPC to place
+void Player::setNearbyNPC(Npc* pNewNPC) {
+	if (_nearbyNPC == pNewNPC) return;
 
-	_nearbyNPC = newNPC;
+	_nearbyNPC = pNewNPC;
 
 	if (_nearbyNPC != nullptr) {
 		GameManager::getSingletonPtr()->getUIManager()->showHUDText("Press 'E' to talk.");
@@ -197,6 +211,9 @@ void Player::setNearbyNPC(Npc* newNPC) {
 	}
 }
 
+//TODO: finish comments
+/// changes the players inbattle state
+/// \param val new value for inbattle state
 void Player::changeInBattle(bool val) {
 	if (_inBattle == val) return;
 
@@ -210,6 +227,9 @@ void Player::changeInBattle(bool val) {
 	}
 }
 
+//TODO: finish comments
+/// calculates the angle between the player and a vector
+/// \param position of the other objects
 float Player::angleBetween(Ogre::Vector3 other) {
 	Ogre::Vector3 myDir = _myNode->getOrientation() * Ogre::Vector3(0, 0, -1);
 	Ogre::Vector3 dirToSis = other - getPosition();
@@ -225,6 +245,8 @@ float Player::angleBetween(Ogre::Vector3 other) {
 	return angle;
 }
 
+//TODO: finish comments
+/// changes whether the player is doing a quest right now
 void Player::toggleInQuest() {
 	_inQuest = !_inQuest; 
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(_inQuest);
