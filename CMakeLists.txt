@@ -53,6 +53,7 @@ set(HDRS
 	./Diabro/Diabro/tinyxml2.h
 	./Diabro/Diabro/BuildingType.h
 	./Diabro/Diabro/CityManager.h
+	./Diabro/Diabro/Quest.h
 )
  
 set(SRCS
@@ -83,6 +84,7 @@ set(SRCS
 	./Diabro/Diabro/tinyxml2.cpp
 	./Diabro/Diabro/BuildingType.cpp
 	./Diabro/Diabro/CityManager.cpp
+	./Diabro/Diabro/Quest.cpp
 )
  
 include("tools/cmake/common.cmake") 

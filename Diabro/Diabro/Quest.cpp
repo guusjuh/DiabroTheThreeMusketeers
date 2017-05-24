@@ -37,15 +37,15 @@ void Quest::completeAction() {
 			_currrentAction->complete();
 
 			// if it's not the last
-			if(i != _strategy.getActionSequence().size() - 1) {
+			if(i == _strategy.getActionSequence().size() - 1) {
 				completeQuest();
+				return;
 			} else {
 				_currrentAction = _strategy.getActionSequence()[i + 1];
 				return;
 			}
 		}
 	}
-	
 }
 
 /// <summary>
@@ -55,6 +55,8 @@ void Quest::completeQuest() {
 	// give rewards
 	//TODO: also give the upgrade as reward
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(_healthReward);
+
+	//TODO: sound, ui, fancy stuff, hud text
 
 	_completed = true;
 }
