@@ -61,7 +61,7 @@ public:
 	void init();
 	
 	//TODO: make local position
-	Coordinate getRandomPointInRoom();
+	Ogre::Vector3 getRandomPointInRoom();
 	Coordinate getCenterTile();
 	Coordinate getRandomTile();
 

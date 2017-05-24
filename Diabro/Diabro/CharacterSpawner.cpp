@@ -3,7 +3,7 @@
 
 template<class T>
 ::CharacterSpawner<T>::CharacterSpawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns, Ogre::Vector3 pSpawnPosition, City* pMyCity)
-	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nCharacters(pNumOfSpawns), _myCity(pMyCity){
+	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nCharacters(1), _myCity(pMyCity){
 	for (int i = 0; i < _nCharacters; ++i) {
 		spawnInstance();
 	}

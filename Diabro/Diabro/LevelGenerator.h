@@ -12,8 +12,9 @@ public:
 
 	Zone getZone(Coordinate pZoneId);
 	Zone getZone(int pX, int pZ);
+	Zone* getZonePointer(int pX, int pZ);
 	
-	Coordinate getWorldPosition(Coordinate pWorldCoord);
+	Ogre::Vector3 getWorldPosition(Coordinate pWorldCoord);
 	Coordinate getGridPosition(Coordinate pGridCoord);
 	Coordinate getEmptyPosition(bool pEmptyNeighbours);
 	

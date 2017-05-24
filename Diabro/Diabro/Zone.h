@@ -17,6 +17,7 @@ private:
 	unsigned int lastSeed;
 
 	bool* collisionGrid;
+	bool collisionGridGenerated;
 
 public:
 	int _width;

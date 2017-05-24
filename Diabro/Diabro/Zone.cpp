@@ -38,6 +38,7 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 
 	cleanGrid();
 	printGrid();
+	collisionGridGenerated = false;
 	//printCollisionGrid();
 }
 
@@ -522,10 +523,11 @@ void Zone::printGrid() {
 }
 
 bool* Zone::getCollisionGrid(){
-	if (seed != lastSeed){
+	if (!collisionGridGenerated){
 		//create the array
 		collisionGrid = generateCollisionGrid();
-		lastSeed = seed;
+		collisionGridGenerated = true;
+		printCollisionGrid();
 	}
 	return collisionGrid;
 }
@@ -537,13 +539,13 @@ bool* Zone::generateCollisionGrid(){
 	{
 		for (size_t j = 0; j < _depth; j++)
 		{
-			//if (getTile(i, j)){
+			if (getTile(i, j)){
 				grid[i + j * _width] = true;
-			/*}
+			}
 			else
 			{
 				grid[i + j * _width] = false;
-			}*/
+			}
 		}
 	}/*
 	for (size_t i = 0; i < cities.size(); i++)
@@ -555,6 +557,7 @@ bool* Zone::generateCollisionGrid(){
 		}
 	}*/
 	
+
 	return grid;
 }
 
@@ -562,10 +565,9 @@ void Zone::printCollisionGrid(){
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	bool* grid = Zone::getCollisionGrid();
 	for (int ix = 0; ix < _width; ++ix) {
 		for (int iy = 0; iy < _depth; ++iy) {
-			if (grid[ix + iy * _width]){
+			if (collisionGrid[ix + iy * _width]){
 				printf("1 ");
 			}
 			else
@@ -575,6 +577,7 @@ void Zone::printCollisionGrid(){
 		}
 		printf("\n");
 	}
+	printf("\n");
 	fclose(fp);
 #endif
 }

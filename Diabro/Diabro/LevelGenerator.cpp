@@ -35,8 +35,8 @@ Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 
 /// transforms a grid coordinate to a world position
 /// \param pGridCoord grid coordinate
-Coordinate LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
-	return Coordinate(pGridCoord.x * scalar, pGridCoord.z * scalar);
+Ogre::Vector3 LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
+	return Ogre::Vector3((pGridCoord.x - 0.5f) * scalar, 0, (pGridCoord.z - 0.5f) * scalar);
 }
 
 /// retrieve zone
@@ -53,27 +53,35 @@ Zone LevelGenerator::getZone(int pX, int pZ) {
 	//TODO:implement multiple zones
 	return _zone[0];
 }
+
+/// retrieve zone
+/// \param pX x position of the zone
+/// \param pZ z position of the zone
+Zone* LevelGenerator::getZonePointer(int pX, int pZ) {
+	//TODO:implement multiple zones
+	return &_zone[0];
+}
 /// creates a tile for each position in the zone
 void LevelGenerator::spawnCityContent() {
 
 	// loop through all cities
-	for (int i = 0; i < _zone[0].cities.size(); ++i) {
+	for (int i = 0; i < 1; i++){ //_zone[0].cities.size(); ++i) {
 		
 		// set a pointer to the current city 
 		City* thisCity = &_zone[0].cities[i];
+		placeEnemySpawnNode(&_zone[0].cities[0], i);
 
 		// switch on the city type
 		switch(thisCity->typeFlag) {
 		case CityRT:
 			for (int j = 0; j < thisCity->Buildings().size(); ++j) { // for each building
-				spawnNPCs(thisCity, &thisCity->Buildings()[j]);
+				//spawnNPCs(thisCity, &thisCity->Buildings()[j]);
 			}
 			
 			break;
 
 		case HideoutRT:
 			// spawn enemy spawners in the middle of an enemy hideout
-			placeEnemySpawnNode(&_zone[0].cities[0], i);
 			break;
 
 		default:
