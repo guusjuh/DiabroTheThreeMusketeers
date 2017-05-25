@@ -85,6 +85,18 @@
     <ClCompile Include="Quest.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerEquipment.cpp">
+      <Filter>Sources\Decorator</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUpgrade.cpp">
+      <Filter>Sources\Decorator</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHealthUpgrade.cpp">
+      <Filter>Sources\Decorator</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDamageUpgrade.cpp">
+      <Filter>Sources\Decorator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -187,6 +199,24 @@
     <ClInclude Include="Quest.h">
       <Filter>Headers\Quests</Filter>
     </ClInclude>
+    <ClInclude Include="IDecorator.h">
+      <Filter>Headers\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlayerEquipment.h">
+      <Filter>Headers\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEquipment.h">
+      <Filter>Headers\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUpgrade.h">
+      <Filter>Headers\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHealthUpgrade.h">
+      <Filter>Headers\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDamageUpgrade.h">
+      <Filter>Headers\Decorator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -258,6 +288,12 @@
     </Filter>
     <Filter Include="Sources\Characters">
       <UniqueIdentifier>{68400f4b-a3b9-4d34-80e7-855e867963eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Decorator">
+      <UniqueIdentifier>{bf0efc86-d99c-44fa-bf12-f988fea5f0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Decorator">
+      <UniqueIdentifier>{7db18d51-9a60-4101-9c17-5378814fbb31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

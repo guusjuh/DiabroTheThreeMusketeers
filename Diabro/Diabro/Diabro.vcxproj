@@ -127,6 +127,10 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDamageUpgrade.cpp" />
+    <ClCompile Include="PlayerEquipment.cpp" />
+    <ClCompile Include="PlayerHealthUpgrade.cpp" />
+    <ClCompile Include="PlayerUpgrade.cpp" />
     <ClCompile Include="Quest.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
@@ -146,6 +150,12 @@
     <ClInclude Include="ActionContainer.h" />
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
+    <ClInclude Include="IDecorator.h" />
+    <ClInclude Include="IPlayerEquipment.h" />
+    <ClInclude Include="PlayerDamageUpgrade.h" />
+    <ClInclude Include="PlayerEquipment.h" />
+    <ClInclude Include="PlayerHealthUpgrade.h" />
+    <ClInclude Include="PlayerUpgrade.h" />
     <ClInclude Include="Quest.h" />
     <ClInclude Include="QuestItem.h" />
     <ClInclude Include="BasicEnemy.h" />
