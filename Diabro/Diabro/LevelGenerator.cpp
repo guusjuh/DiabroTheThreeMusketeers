@@ -29,8 +29,9 @@ Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {
 /// transfroms a world position to a grid coordinate
 /// \param pWorldCoord coordinate in world position
 Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
-	int x = static_cast<int>(ceil(pWorldCoord.x / scalar + 0.0f));
-	int z = static_cast<int>(ceil(pWorldCoord.z / scalar + 0.0f));
+
+	int x = static_cast<int>((float)pWorldCoord.x / scalar + 0.5f);
+	int z = static_cast<int>((float)pWorldCoord.z / scalar + 0.5f);
 
 	return Coordinate(x,z);
 }

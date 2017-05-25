@@ -30,12 +30,13 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 		calculateAStar(_myCity->getRandomPointInRoom());
 	}
 
-	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
+	_myNode->translate(_dirVec * getSpeed() * 0.01f, Ogre::Node::TS_LOCAL);
 	//if (!_playerDetected) {
 		if (getPosition().distance(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z)) < 50){
 			if (nextPos.size() == 0){
 				Ogre::Vector3 pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
-				while(getPosition().distance(pos) < 10) {
+				Ogre::Vector3 goalPosition = Ogre::Vector3(goalPos.x / _myCity->scalar, getPosition().y, goalPos.z / _myCity->scalar);
+				while(goalPosition.distance(pos) < 1) {
 					pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
 				}
 				calculateAStar(pos);
@@ -112,6 +113,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 
 	//check if target position is viable
 	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->_width))]){
+		debug("The target position is not a valid point in the collision gird\n");
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
 		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));
@@ -130,6 +132,15 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 
 	//get the current position of the npc
 	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(getPosition().x, getPosition().z));
+
+	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z){
+		debug("The goal is the same as the current position\n");
+		//new random point in room
+		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
+		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));
+		//stops method
+		return;
+	}
 
 	//adds a start node to the nodelist(grid point at current position
 	Node start = Node(currentPos.x, currentPos.z, targetPos.x, targetPos.z);
@@ -184,7 +195,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 			FILE* fp;
 			freopen_s(&fp, "CONOUT$", "w", stdout);
-			printf("newPoint\n");
+			printf("newPoint: (%d, %d)\n", goalPos.x / scale, goalPos.z / scale);
 			fclose(fp);
 #endif
 			walkToNextPoint();
@@ -192,191 +203,22 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 		}
 
 		//add its neigbours to the openlist
-
-		// o o o
-		// x O o
-		// o o o
-		if (lowestFNode.x - 1 >= 0){
-			if (collisionGrid[lowestFNode.x - 1 + (lowestFNode.y) * zone->_width]){
-				if (grid[lowestFNode.x - 1 + (lowestFNode.y) * zone->_width]){
-					grid[lowestFNode.x - 1 + (lowestFNode.y) * zone->_width] = false;
-					nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x - 1, lowestFNode.y, targetPos.x, targetPos.z));
-					openList.push_back(nodes.size() - 1);
-				}
-				else
-				{
-					for (size_t i = 0; i < openList.size(); i++)
-					{
-						if (nodes[openList[i]].x == lowestFNode.x - 1 && nodes[openList[i]].y == lowestFNode.y){
-							nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-						}
-					}
-				}
+		std::vector<Coordinate> neighboursPositions = lowestFNode.getNeighbours(collisionGrid, zone->_width);
+		for (size_t i = 0; i < neighboursPositions.size(); i++)
+		{
+			int pX = neighboursPositions[i].x;
+			int pY = neighboursPositions[i].z;
+			if (grid[pX + pY * zone->_width]){
+				grid[pX + pY * zone->_width] = false;
+				nodes.push_back(Node(lowestFNode, lowestFNodeId, pX, pY, targetPos.x, targetPos.z));
+				openList.push_back(nodes.size() - 1);
 			}
-		}
-
-		// o o o
-		// o O x
-		// o o o
-		if (lowestFNode.x + 1 <= zone->_width){
-			if (collisionGrid[lowestFNode.x + 1 + (lowestFNode.y) * zone->_width]){
-				if (grid[lowestFNode.x + 1 + (lowestFNode.y) * zone->_width]){
-					grid[lowestFNode.x + 1 + (lowestFNode.y) * zone->_width] = false;
-					nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x + 1, lowestFNode.y, targetPos.x, targetPos.z));
-					openList.push_back(nodes.size() - 1);
-				}
-				else
-				{
-					for (size_t i = 0; i < openList.size(); i++)
-					{
-						if (nodes[openList[i]].x == lowestFNode.x + 1 && nodes[openList[i]].y == lowestFNode.y){
-							nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-						}
-					}
-				}
-			}
-		}
-
-		// o x o
-		// o O o
-		// o o o
-		if (lowestFNode.y - 1 >= 0){
-			if (collisionGrid[lowestFNode.x + (lowestFNode.y - 1) * zone->_width]){
-				if (grid[lowestFNode.x + (lowestFNode.y - 1) * zone->_width]){
-					grid[lowestFNode.x + (lowestFNode.y - 1) * zone->_width] = false;
-					nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x, lowestFNode.y - 1, targetPos.x, targetPos.z));
-					openList.push_back(nodes.size() - 1);
-				}
-				else
-				{
-					for (size_t i = 0; i < openList.size(); i++)
-					{
-						if (nodes[openList[i]].x == lowestFNode.x && nodes[openList[i]].y == lowestFNode.y - 1){
-							nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-						}
-					}
-				}
-			}
-		}
-
-		// o o o
-		// o O o
-		// o x o
-		if (lowestFNode.y + 1 <= zone->_depth){
-			if (collisionGrid[lowestFNode.x + (lowestFNode.y + 1) * zone->_width]){
-				if (grid[lowestFNode.x + (lowestFNode.y + 1) * zone->_width]){
-					grid[lowestFNode.x + (lowestFNode.y + 1) * zone->_width] = false;
-					nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x, lowestFNode.y + 1, targetPos.x, targetPos.z));
-					openList.push_back(nodes.size() - 1);
-				}
-				else
-				{
-					for (size_t i = 0; i < openList.size(); i++)
-					{
-						if (nodes[openList[i]].x == lowestFNode.x && nodes[openList[i]].y == lowestFNode.y + 1){
-							nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-						}
-					}
-				}
-			}
-		}
-
-		//diagonal
-		// x o o
-		// o O o
-		// o o o
-		if (lowestFNode.x - 1 >= 0 && lowestFNode.y - 1 >= 0){
-			if (collisionGrid[lowestFNode.x - 1 + (lowestFNode.y - 1) * zone->_width])
+			else
 			{
-				if (collisionGrid[lowestFNode.x + (lowestFNode.y - 1) * zone->_width] && collisionGrid[lowestFNode.x - 1 + (lowestFNode.y) * zone->_width]){
-					if (grid[lowestFNode.x - 1 + (lowestFNode.y - 1) * zone->_width]){
-						grid[lowestFNode.x - 1 + (lowestFNode.y - 1) * zone->_width] = false;
-						nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x - 1, lowestFNode.y - 1, targetPos.x, targetPos.z));
-						openList.push_back(nodes.size() - 1);
-					}
-					else
-					{
-						for (size_t i = 0; i < openList.size(); i++)
-						{
-							if (nodes[openList[i]].x == lowestFNode.x - 1 && nodes[openList[i]].y == lowestFNode.y - 1){
-								nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-							}
-						}
-					}
-				}
-			}
-		}
-
-		// o o o
-		// o O o
-		// x o o
-		if (lowestFNode.x - 1 >= 0 && lowestFNode.y + 1 <= zone->_depth){
-			if (collisionGrid[lowestFNode.x - 1 + (lowestFNode.y + 1) * zone->_width])
-			{
-				if (collisionGrid[lowestFNode.x + (lowestFNode.y + 1) * zone->_width] && collisionGrid[lowestFNode.x - 1 + (lowestFNode.y) * zone->_width]){
-					if (grid[lowestFNode.x - 1 + (lowestFNode.y + 1) * zone->_width]){
-						grid[lowestFNode.x - 1 + (lowestFNode.y + 1) * zone->_width] = false;
-						nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x - 1, lowestFNode.y + 1, targetPos.x, targetPos.z));
-						openList.push_back(nodes.size() - 1);
-					}
-					else
-					{
-						for (size_t i = 0; i < openList.size(); i++)
-						{
-							if (nodes[openList[i]].x == lowestFNode.x - 1 && nodes[openList[i]].y == lowestFNode.y + 1){
-								nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-							}
-						}
-					}
-				}
-			}
-		}
-
-		// o o x
-		// o O o
-		// o o o
-		if (lowestFNode.x + 1 >= 0 && lowestFNode.y - 1 >= 0){
-			if (collisionGrid[lowestFNode.x + 1 + (lowestFNode.y - 1) * zone->_width])
-			{
-				if (collisionGrid[lowestFNode.x + (lowestFNode.y - 1) * zone->_width] && collisionGrid[lowestFNode.x + 1 + (lowestFNode.y) * zone->_width]){
-					if (grid[lowestFNode.x + 1 + (lowestFNode.y - 1) * zone->_width]){
-						grid[lowestFNode.x + 1 + (lowestFNode.y - 1) * zone->_width] = false;
-						nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x + 1, lowestFNode.y - 1, targetPos.x, targetPos.z));
-						openList.push_back(nodes.size() - 1);
-					}
-					else
-					{
-						for (size_t i = 0; i < openList.size(); i++)
-						{
-							if (nodes[openList[i]].x == lowestFNode.x + 1 && nodes[openList[i]].y == lowestFNode.y - 1){
-								nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-							}
-						}
-					}
-				}
-			}
-		}
-
-		// o o o
-		// o O o
-		// o o x
-		if (lowestFNode.x + 1 >= 0 && lowestFNode.y + 1 <= zone->_depth){
-			if (collisionGrid[lowestFNode.x + 1 + (lowestFNode.y + 1) * zone->_width])
-			{
-				if (collisionGrid[lowestFNode.x + (lowestFNode.y + 1) * zone->_width] && collisionGrid[lowestFNode.x + 1 + (lowestFNode.y) * zone->_width]){
-					if (grid[lowestFNode.x + 1 + (lowestFNode.y + 1) * zone->_width]){
-						grid[lowestFNode.x + 1 + (lowestFNode.y + 1) * zone->_width] = false;
-						nodes.push_back(Node(lowestFNode, lowestFNodeId, lowestFNode.x + 1, lowestFNode.y + 1, targetPos.x, targetPos.z));
-						openList.push_back(nodes.size() - 1);
-					}
-					else
-					{
-						for (size_t i = 0; i < openList.size(); i++)
-						{
-							if (nodes[openList[i]].x == lowestFNode.x + 1 && nodes[openList[i]].y == lowestFNode.y + 1){
-								nodes[openList[i]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
-							}
-						}
+				for (size_t j = 0; j < openList.size(); j++)
+				{
+					if (nodes[openList[j]].x == pX && nodes[openList[j]].y == pY){
+						nodes[openList[j]].changeParent(lowestFNode, lowestFNodeId);//checks for more efficient parent
 					}
 				}
 			}
@@ -388,4 +230,13 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 			return;
 		}
 	}
+}
+
+void BaseNpc::debug(std::string msg, int val) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("%s (%d)\n", msg.c_str(), val);
+	fclose(fp);
+#endif
 }

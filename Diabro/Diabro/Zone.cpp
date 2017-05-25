@@ -22,7 +22,6 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 		fclose(fp);
 #endif
 	}
-	debug("creating tiles");
 	// create an empty grid for dungeon tiles
 	_tiles = new int[_width * _depth];
 	for (int ix = 0; ix < _width; ++ix) {
@@ -30,18 +29,12 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 			setTile(ix, iy, 0);
 		}
 	}
-	debug("generating cities");
 	generateCities(pMaxTries, pMaxCities);
-	debug("generated amount of cities: ", cities.size());
-	debug("carving pathways");
 	int n = generatePathways(cities.size() + 1);
-	debug("connecting dungeon");
 	connectDungeon(cities.size() + 1 + n, 0.5f);
 
-	debug("cleaning my shit up");
 	cleanGrid();
 	//printGrid();
-	debug("colGrid");
 	collisionGridGenerated = false;
 	//printCollisionGrid();
 }
