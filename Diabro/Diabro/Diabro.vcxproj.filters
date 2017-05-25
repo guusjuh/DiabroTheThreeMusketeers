@@ -13,9 +13,6 @@
     <ClCompile Include="BaseApplication.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>Sources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="QuestItemContainer.cpp">
       <Filter>Sources\Quest\QuestContent</Filter>
     </ClCompile>
@@ -85,6 +82,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Sources\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Quest.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -99,18 +99,12 @@
     <ClInclude Include="GameManager.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="ItemManager.h">
-      <Filter>Headers\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="State.h">
       <Filter>Headers\Finite State Machines</Filter>
     </ClInclude>
     <ClInclude Include="Needs.h">
       <Filter>Headers\Needs</Filter>
-    </ClInclude>
-    <ClInclude Include="QuestItem.h">
-      <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="QuestContentManager.h">
       <Filter>Headers\Quests\QuestContent</Filter>
@@ -119,9 +113,6 @@
       <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="QuestItemContainer.h">
-      <Filter>Headers\Quests\QuestContent</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseQuestItem.h">
       <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
@@ -189,6 +180,12 @@
     </ClInclude>
     <ClInclude Include="StateMachine.h">
       <Filter>Headers\Finite State Machines</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestItem.h">
+      <Filter>Headers\Quests\QuestContent</Filter>
+    </ClInclude>
+    <ClInclude Include="Quest.h">
+      <Filter>Headers\Quests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

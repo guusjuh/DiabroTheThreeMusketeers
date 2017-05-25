@@ -4,10 +4,16 @@
 #include "tinyxml2.h"
 #include <stdio.h>
 
+/// <summary>
+/// Initializes a new instance of the <see cref="ActionContainer"/> class.
+/// </summary>
 ActionContainer::ActionContainer() {
 	readFromXML();
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref="ActionContainer"/> class.
+/// </summary>
 ActionContainer::~ActionContainer() {
 	for (int i = 0; i < _objects.size(); ++i) {
 		if (_objects[i] != nullptr) {
@@ -16,10 +22,13 @@ ActionContainer::~ActionContainer() {
 	}
 }
 
+/// <summary>
+/// Reads all actions from XML.
+/// </summary>
 void ActionContainer::readFromXML()
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("../../Actions.xml");
+	doc.LoadFile("../../XML/Actions.xml");
 	tinyxml2::XMLElement* rootNode = doc.FirstChildElement("ActionContainer");
 
 	// if the rootnode is not empty

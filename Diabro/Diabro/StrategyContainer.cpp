@@ -4,10 +4,16 @@
 #include "tinyxml2.h"
 #include <stdio.h>
 
+/// <summary>
+/// Initializes a new instance of the <see cref="StrategyContainer"/> class.
+/// </summary>
 StrategyContainer::StrategyContainer() {
 	readFromXML();
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref="StrategyContainer"/> class.
+/// </summary>
 StrategyContainer::~StrategyContainer() {
 	for (int i = 0; i < _objects.size(); ++i) {
 		if (_objects[i] != nullptr) {
@@ -16,10 +22,13 @@ StrategyContainer::~StrategyContainer() {
 	}
 }
 
+/// <summary>
+/// Reads all strategies from XML.
+/// </summary>
 void StrategyContainer::readFromXML()
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("../../Strategies.xml");
+	doc.LoadFile("../../XML/Strategies.xml");
 	tinyxml2::XMLElement* rootNode = doc.FirstChildElement("StrategyContainer");
 
 	if (rootNode)
@@ -74,7 +83,7 @@ void StrategyContainer::readFromXML()
 				std::vector<Action*> copy = GameManager::getSingletonPtr()->getQuestManager()->actionContainer->GetObjects();
 				for (int i = 0; i < copy.size(); ++i)
 				{
-					if (copy[i]->GetID() == nrAction)
+					if (copy[i]->getID() == nrAction)
 					{
 						tempAction = new Action((*copy[i]));
 					}

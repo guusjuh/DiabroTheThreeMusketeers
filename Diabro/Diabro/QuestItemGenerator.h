@@ -10,12 +10,13 @@ public:
 	QuestItemGenerator();
 	~QuestItemGenerator();
 
-	//TODO: implement items are put in either inventory or a scenenode
-	std::vector<QuestItem*> generateItem(Ogre::SceneNode*, QuestItemType, int);
-	QuestItem* generateItem(Ogre::SceneNode*, QuestItemType);
+	std::vector<QuestItem*> generateItems(QuestItemType, int);
+	std::vector<QuestItem*> generateItems(int, int);
+	std::vector<QuestItem*> generateItems(int);
 
-private:
-	Ogre::String _dropEntity;
+	QuestItem* generateItem(QuestItemType);
+	QuestItem* generateItem(int);
+	QuestItem* generateItem();
 };
 
 #endif
