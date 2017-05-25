@@ -38,7 +38,6 @@ set(HDRS
 	./Diabro/Diabro/State.h
 	./Diabro/Diabro/IdleState.h
 	./Diabro/Diabro/Needs.h
-	./Diabro/Diabro/BaseQuestItem.h
 	./Diabro/Diabro/IQuestContent.h	
 	./Diabro/Diabro/QuestContentManager.h 
 	./Diabro/Diabro/QuestItem.h 
