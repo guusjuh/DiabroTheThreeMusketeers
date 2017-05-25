@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -61,32 +61,99 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_level_generator-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">LevelGenerator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
+<p>The class that generates and stores the dungeon.  
+ <a href="class_level_generator.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_level_generator_8h_source.html">LevelGenerator.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6fe1f8c5d09aa5f044485770ffe2d818"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a6fe1f8c5d09aa5f044485770ffe2d818">LevelGenerator</a> ()</td></tr>
+<tr class="memdesc:a6fe1f8c5d09aa5f044485770ffe2d818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_level_generator.html" title="The class that generates and stores the dungeon. ">LevelGenerator</a> class.  <a href="#a6fe1f8c5d09aa5f044485770ffe2d818">More...</a><br /></td></tr>
 <tr class="separator:a6fe1f8c5d09aa5f044485770ffe2d818"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bd612e10a3d769537ba042a76c0cb5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a9bd612e10a3d769537ba042a76c0cb5f">~LevelGenerator</a> ()</td></tr>
+<tr class="memdesc:a9bd612e10a3d769537ba042a76c0cb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes an instance of the <a class="el" href="class_level_generator.html" title="The class that generates and stores the dungeon. ">LevelGenerator</a> class.  <a href="#a9bd612e10a3d769537ba042a76c0cb5f">More...</a><br /></td></tr>
 <tr class="separator:a9bd612e10a3d769537ba042a76c0cb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6b7698a465aee3411d7679542fc8f06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#ad6b7698a465aee3411d7679542fc8f06">restart</a> ()</td></tr>
+<tr class="memdesc:ad6b7698a465aee3411d7679542fc8f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restarts the level.  <a href="#ad6b7698a465aee3411d7679542fc8f06">More...</a><br /></td></tr>
+<tr class="separator:ad6b7698a465aee3411d7679542fc8f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1fe7467e748faabbdc178dff25fe128"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_zone.html">Zone</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#ad1fe7467e748faabbdc178dff25fe128">getZone</a> (<a class="el" href="struct_coordinate.html">Coordinate</a> pZoneId)</td></tr>
+<tr class="separator:ad1fe7467e748faabbdc178dff25fe128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72360d9c81a26c4dda03467a9065f8b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_zone.html">Zone</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a72360d9c81a26c4dda03467a9065f8b5">getZone</a> (int pX, int pZ)</td></tr>
+<tr class="separator:a72360d9c81a26c4dda03467a9065f8b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25b18e4666b9ba0a3b69a5239e0380b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_zone.html">Zone</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a25b18e4666b9ba0a3b69a5239e0380b1">getZonePointer</a> (int pX, int pZ)</td></tr>
+<tr class="separator:a25b18e4666b9ba0a3b69a5239e0380b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc1208b76741310bc94b7a4845701246"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#afc1208b76741310bc94b7a4845701246">getWorldPosition</a> (<a class="el" href="struct_coordinate.html">Coordinate</a> pWorldCoord)</td></tr>
+<tr class="separator:afc1208b76741310bc94b7a4845701246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a783387ec391c3904a560e2379d543c25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_coordinate.html">Coordinate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a783387ec391c3904a560e2379d543c25">getGridPosition</a> (<a class="el" href="struct_coordinate.html">Coordinate</a> pGridCoord)</td></tr>
+<tr class="separator:a783387ec391c3904a560e2379d543c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a4f8c5af160ee2c42fbc079da967e5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_coordinate.html">Coordinate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a0a4f8c5af160ee2c42fbc079da967e5d">getEmptyPosition</a> (bool pEmptyNeighbours)</td></tr>
+<tr class="separator:a0a4f8c5af160ee2c42fbc079da967e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c3e86e3bcac506d2e64d42f05bda467"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a6c3e86e3bcac506d2e64d42f05bda467">getDistToSis</a> (Ogre::Vector3 otherPos)</td></tr>
+<tr class="separator:a6c3e86e3bcac506d2e64d42f05bda467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05fd967427bb1cfe341ca7da73946f0d"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a05fd967427bb1cfe341ca7da73946f0d">getSisPos</a> ()</td></tr>
+<tr class="separator:a05fd967427bb1cfe341ca7da73946f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadc7cb714e3d5c1557be580f710a45d5"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#aadc7cb714e3d5c1557be580f710a45d5">getStartPos</a> ()</td></tr>
+<tr class="separator:aadc7cb714e3d5c1557be580f710a45d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19bceda1983bce52ba0f4dbdcf869d9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a19bceda1983bce52ba0f4dbdcf869d9d">debug</a> (std::string pString, int value=-1)</td></tr>
+<tr class="separator:a19bceda1983bce52ba0f4dbdcf869d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a8ab8f4bb67abd46a3f82df0c5b99b0d6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a8ab8f4bb67abd46a3f82df0c5b99b0d6">scalar</a></td></tr>
+<tr class="memdesc:a8ab8f4bb67abd46a3f82df0c5b99b0d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">scales grid position to world positions  <a href="#a8ab8f4bb67abd46a3f82df0c5b99b0d6">More...</a><br /></td></tr>
+<tr class="separator:a8ab8f4bb67abd46a3f82df0c5b99b0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a87b5ddb736a324669f5aec6b02b5dfc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a87b5ddb736a324669f5aec6b02b5dfc1">createCityMesh</a> (int pX, int pY, int pZ, int pWidth, int pHeight, int pDepth, std::string pName, Ogre::ColourValue pColour) const</td></tr>
-<tr class="memdesc:a87b5ddb736a324669f5aec6b02b5dfc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the a 3D mesh, representing the space around the city. (will however still be replaced)  <a href="#a87b5ddb736a324669f5aec6b02b5dfc1">More...</a><br /></td></tr>
-<tr class="separator:a87b5ddb736a324669f5aec6b02b5dfc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca711ca8de5317d46100ab54fb4bfb4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#aca711ca8de5317d46100ab54fb4bfb4a">placeCity</a> (int pX, int pY, int pZ, int pWidth, int pHeight, int pDepth, std::string pName, Ogre::ColourValue pColour) const</td></tr>
-<tr class="memdesc:aca711ca8de5317d46100ab54fb4bfb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places a city-representing mesh.  <a href="#aca711ca8de5317d46100ab54fb4bfb4a">More...</a><br /></td></tr>
-<tr class="separator:aca711ca8de5317d46100ab54fb4bfb4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39c79d8ef4278bc70a8b21498ca5d652"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a39c79d8ef4278bc70a8b21498ca5d652">drawDungeonFloor</a> (<a class="el" href="class_zone.html">Zone</a> pZone, Ogre::ColourValue pCol)</td></tr>
+<tr class="separator:a39c79d8ef4278bc70a8b21498ca5d652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90f26ee5220c63a533f8e506a3c6de80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a90f26ee5220c63a533f8e506a3c6de80">createTileMesh</a> (std::string pName, Ogre::ColourValue pCol) const</td></tr>
+<tr class="memdesc:a90f26ee5220c63a533f8e506a3c6de80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the tile mesh.  <a href="#a90f26ee5220c63a533f8e506a3c6de80">More...</a><br /></td></tr>
+<tr class="separator:a90f26ee5220c63a533f8e506a3c6de80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfff18c04a144fc63ed0030a4e7ba21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a7cfff18c04a144fc63ed0030a4e7ba21">donaldTrump</a> (std::string pName, Ogre::ColourValue pCol) const</td></tr>
+<tr class="separator:a7cfff18c04a144fc63ed0030a4e7ba21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c2631bd184f933e5f3f6955250b782"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#ae7c2631bd184f933e5f3f6955250b782">determineCityTypes</a> ()</td></tr>
+<tr class="memdesc:ae7c2631bd184f933e5f3f6955250b782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the types for the cities.  <a href="#ae7c2631bd184f933e5f3f6955250b782">More...</a><br /></td></tr>
+<tr class="separator:ae7c2631bd184f933e5f3f6955250b782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb7f8c28b28c68d442460cb343188c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a7cb7f8c28b28c68d442460cb343188c3">spawnCityContent</a> ()</td></tr>
+<tr class="memdesc:a7cb7f8c28b28c68d442460cb343188c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns the content of the city.  <a href="#a7cb7f8c28b28c68d442460cb343188c3">More...</a><br /></td></tr>
+<tr class="separator:a7cb7f8c28b28c68d442460cb343188c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7acd3e1fef4f449ae1c2b947d2f26fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#af7acd3e1fef4f449ae1c2b947d2f26fb">placeEnemySpawnNode</a> (<a class="el" href="class_city.html">City</a> *, int)</td></tr>
+<tr class="memdesc:af7acd3e1fef4f449ae1c2b947d2f26fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places the enemy spawn node for the specified city.  <a href="#af7acd3e1fef4f449ae1c2b947d2f26fb">More...</a><br /></td></tr>
+<tr class="separator:af7acd3e1fef4f449ae1c2b947d2f26fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf8a6915ef8e6a12cd3379119372d72a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#acf8a6915ef8e6a12cd3379119372d72a">spawnNPCs</a> (<a class="el" href="class_city.html">City</a> *, <a class="el" href="struct_building.html">Building</a> *)</td></tr>
+<tr class="memdesc:acf8a6915ef8e6a12cd3379119372d72a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns the NPCs for a specified building.  <a href="#acf8a6915ef8e6a12cd3379119372d72a">More...</a><br /></td></tr>
+<tr class="separator:acf8a6915ef8e6a12cd3379119372d72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ada97e6ff78b803a6b6bfb294a4705716"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_zone.html">Zone</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#ada97e6ff78b803a6b6bfb294a4705716">_zone</a> [1]</td></tr>
+<tr class="memdesc:ada97e6ff78b803a6b6bfb294a4705716"><td class="mdescLeft">&#160;</td><td class="mdescRight">holds different zones in level  <a href="#ada97e6ff78b803a6b6bfb294a4705716">More...</a><br /></td></tr>
+<tr class="separator:ada97e6ff78b803a6b6bfb294a4705716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9185635ffdbd3e19586a62ac005a803c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_city.html">City</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a9185635ffdbd3e19586a62ac005a803c">_startCity</a></td></tr>
+<tr class="separator:a9185635ffdbd3e19586a62ac005a803c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a2f03211349fd03e4b896d666c4df88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_city.html">City</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a1a2f03211349fd03e4b896d666c4df88">_endCity</a></td></tr>
+<tr class="separator:a1a2f03211349fd03e4b896d666c4df88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b3344dcae340f45830d41b50f8ab7be"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a1b3344dcae340f45830d41b50f8ab7be">_sisterNode</a></td></tr>
+<tr class="separator:a1b3344dcae340f45830d41b50f8ab7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10b2cb0378e89de3d6d2f9aed62ed229"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a10b2cb0378e89de3d6d2f9aed62ed229">_dungeonNode</a></td></tr>
+<tr class="separator:a10b2cb0378e89de3d6d2f9aed62ed229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a828716ae52ede9d8e9ef0d4479bca687"><td class="memItemLeft" align="right" valign="top">std::vector&lt; Ogre::Entity * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a828716ae52ede9d8e9ef0d4479bca687">_content</a></td></tr>
+<tr class="separator:a828716ae52ede9d8e9ef0d4479bca687"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The class that generates and stores the dungeon. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6fe1f8c5d09aa5f044485770ffe2d818"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6fe1f8c5d09aa5f044485770ffe2d818">&#9670;&nbsp;</a></span>LevelGenerator()</h2>
 
@@ -101,6 +168,8 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="class_level_generator.html" title="The class that generates and stores the dungeon. ">LevelGenerator</a> class. </p>
 
 </div>
 </div>
@@ -119,11 +188,13 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Finalizes an instance of the <a class="el" href="class_level_generator.html" title="The class that generates and stores the dungeon. ">LevelGenerator</a> class. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a87b5ddb736a324669f5aec6b02b5dfc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87b5ddb736a324669f5aec6b02b5dfc1">&#9670;&nbsp;</a></span>createCityMesh()</h2>
+<a id="a90f26ee5220c63a533f8e506a3c6de80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90f26ee5220c63a533f8e506a3c6de80">&#9670;&nbsp;</a></span>createTileMesh()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,44 +203,8 @@ Private Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void LevelGenerator::createCityMesh </td>
+          <td class="memname">void LevelGenerator::createTileMesh </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pX</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pY</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pZ</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pW</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pH</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pD</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>pName</em>, </td>
         </tr>
@@ -177,7 +212,7 @@ Private Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Ogre::ColourValue&#160;</td>
-          <td class="paramname"><em>pColour</em>&#160;</td>
+          <td class="paramname"><em>pCol</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -192,20 +227,19 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates the a 3D mesh, representing the space around the city. (will however still be replaced) </p>
-<p>The pX position of the room.</p>
-<p>The pY position.</p>
-<p>The pZ position.</p>
-<p>The width.</p>
-<p>The height.</p>
-<p>The depth.</p>
-<p>The pName.</p>
-<p>The pColour.</p>
+<p>Creates the tile mesh. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pName</td><td>Name of the p.</td></tr>
+    <tr><td class="paramname">pCol</td><td>The p col.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="aca711ca8de5317d46100ab54fb4bfb4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca711ca8de5317d46100ab54fb4bfb4a">&#9670;&nbsp;</a></span>placeCity()</h2>
+<a id="a19bceda1983bce52ba0f4dbdcf869d9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19bceda1983bce52ba0f4dbdcf869d9d">&#9670;&nbsp;</a></span>debug()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -214,44 +248,71 @@ Private Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void LevelGenerator::placeCity </td>
+          <td class="memname">void LevelGenerator::debug </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pX</em>, </td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>pString</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pY</em>, </td>
+          <td class="paramname"><em>value</em> = <code>-1</code>&#160;</td>
         </tr>
         <tr>
-          <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pZ</em>, </td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7c2631bd184f933e5f3f6955250b782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c2631bd184f933e5f3f6955250b782">&#9670;&nbsp;</a></span>determineCityTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
         <tr>
-          <td class="paramkey"></td>
+          <td class="memname">void LevelGenerator::determineCityTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pW</em>, </td>
         </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determines the types for the cities. </p>
+
+</div>
+</div>
+<a id="a7cfff18c04a144fc63ed0030a4e7ba21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cfff18c04a144fc63ed0030a4e7ba21">&#9670;&nbsp;</a></span>donaldTrump()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
         <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pH</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pD</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
+          <td class="memname">void LevelGenerator::donaldTrump </td>
+          <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>pName</em>, </td>
         </tr>
@@ -259,7 +320,7 @@ Private Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Ogre::ColourValue&#160;</td>
-          <td class="paramname"><em>pColour</em>&#160;</td>
+          <td class="paramname"><em>pCol</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -273,16 +334,584 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>We're gonna build a wall! </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pName</td><td>unique name for retrieving the mesh object </td></tr>
+    <tr><td class="paramname">pCol</td><td>a colour modification to the object (white is normal colours) </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Places a city-representing mesh. </p>
-<p>The pX position of the city.</p>
-<p>The pY position of the city.</p>
-<p>The pZ position of the city.</p>
-<p>The width of the city.</p>
-<p>The height of the city.</p>
-<p>The depth of the city.</p>
-<p>A unique pName for the city.</p>
-<p>The pColour of the drawn cube.</p>
+</div>
+</div>
+<a id="a39c79d8ef4278bc70a8b21498ca5d652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39c79d8ef4278bc70a8b21498ca5d652">&#9670;&nbsp;</a></span>drawDungeonFloor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelGenerator::drawDungeonFloor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_zone.html">Zone</a>&#160;</td>
+          <td class="paramname"><em>pZone</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::ColourValue&#160;</td>
+          <td class="paramname"><em>pCol</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>creates a tile for each position in the zone </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pZone</td><td>zone from which to draw the tiles </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6c3e86e3bcac506d2e64d42f05bda467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c3e86e3bcac506d2e64d42f05bda467">&#9670;&nbsp;</a></span>getDistToSis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float LevelGenerator::getDistToSis </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Vector3&#160;</td>
+          <td class="paramname"><em>otherPos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a4f8c5af160ee2c42fbc079da967e5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a4f8c5af160ee2c42fbc079da967e5d">&#9670;&nbsp;</a></span>getEmptyPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_coordinate.html">Coordinate</a> LevelGenerator::getEmptyPosition </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pEmptyNeighbours</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>returns empty position within dungeon </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pEmptyNeighbours</td><td>only returns positions with 8 emty neighbours </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a783387ec391c3904a560e2379d543c25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a783387ec391c3904a560e2379d543c25">&#9670;&nbsp;</a></span>getGridPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_coordinate.html">Coordinate</a> LevelGenerator::getGridPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_coordinate.html">Coordinate</a>&#160;</td>
+          <td class="paramname"><em>pWorldCoord</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>transfroms a world position to a grid coordinate </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pWorldCoord</td><td>coordinate in world position </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a05fd967427bb1cfe341ca7da73946f0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05fd967427bb1cfe341ca7da73946f0d">&#9670;&nbsp;</a></span>getSisPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector3 LevelGenerator::getSisPos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aadc7cb714e3d5c1557be580f710a45d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadc7cb714e3d5c1557be580f710a45d5">&#9670;&nbsp;</a></span>getStartPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector3 LevelGenerator::getStartPos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc1208b76741310bc94b7a4845701246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc1208b76741310bc94b7a4845701246">&#9670;&nbsp;</a></span>getWorldPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector3 LevelGenerator::getWorldPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_coordinate.html">Coordinate</a>&#160;</td>
+          <td class="paramname"><em>pGridCoord</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>transforms a grid coordinate to a world position </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pGridCoord</td><td>grid coordinate </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad1fe7467e748faabbdc178dff25fe128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1fe7467e748faabbdc178dff25fe128">&#9670;&nbsp;</a></span>getZone() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_zone.html">Zone</a> LevelGenerator::getZone </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_coordinate.html">Coordinate</a>&#160;</td>
+          <td class="paramname"><em>pZoneId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>retrieve zone </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pZoneId</td><td>coordinate of zone, within zone grid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a72360d9c81a26c4dda03467a9065f8b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72360d9c81a26c4dda03467a9065f8b5">&#9670;&nbsp;</a></span>getZone() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_zone.html">Zone</a> LevelGenerator::getZone </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pZ</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>retrieve zone </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pX</td><td>x position of the zone </td></tr>
+    <tr><td class="paramname">pZ</td><td>z position of the zone </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a25b18e4666b9ba0a3b69a5239e0380b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25b18e4666b9ba0a3b69a5239e0380b1">&#9670;&nbsp;</a></span>getZonePointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_zone.html">Zone</a> * LevelGenerator::getZonePointer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pZ</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>retrieve zone </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pX</td><td>x position of the zone </td></tr>
+    <tr><td class="paramname">pZ</td><td>z position of the zone </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af7acd3e1fef4f449ae1c2b947d2f26fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7acd3e1fef4f449ae1c2b947d2f26fb">&#9670;&nbsp;</a></span>placeEnemySpawnNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelGenerator::placeEnemySpawnNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_city.html">City</a> *&#160;</td>
+          <td class="paramname"><em>thisCity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Places the enemy spawn node for the specified city. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thisCity</td><td>The this city.</td></tr>
+    <tr><td class="paramname">i</td><td>The i.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad6b7698a465aee3411d7679542fc8f06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6b7698a465aee3411d7679542fc8f06">&#9670;&nbsp;</a></span>restart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelGenerator::restart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Restarts the level. </p>
+
+</div>
+</div>
+<a id="a7cb7f8c28b28c68d442460cb343188c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cb7f8c28b28c68d442460cb343188c3">&#9670;&nbsp;</a></span>spawnCityContent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelGenerator::spawnCityContent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spawns the content of the city. </p>
+
+</div>
+</div>
+<a id="acf8a6915ef8e6a12cd3379119372d72a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf8a6915ef8e6a12cd3379119372d72a">&#9670;&nbsp;</a></span>spawnNPCs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelGenerator::spawnNPCs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_city.html">City</a> *&#160;</td>
+          <td class="paramname"><em>pCity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_building.html">Building</a> *&#160;</td>
+          <td class="paramname"><em>pThisBuilding</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spawns the NPCs for a specified building. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pCity</td><td>The p city.</td></tr>
+    <tr><td class="paramname">pThisBuilding</td><td>The p this building.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a828716ae52ede9d8e9ef0d4479bca687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a828716ae52ede9d8e9ef0d4479bca687">&#9670;&nbsp;</a></span>_content</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;Ogre::Entity*&gt; LevelGenerator::_content</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a10b2cb0378e89de3d6d2f9aed62ed229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10b2cb0378e89de3d6d2f9aed62ed229">&#9670;&nbsp;</a></span>_dungeonNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::SceneNode* LevelGenerator::_dungeonNode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a2f03211349fd03e4b896d666c4df88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a2f03211349fd03e4b896d666c4df88">&#9670;&nbsp;</a></span>_endCity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_city.html">City</a>* LevelGenerator::_endCity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1b3344dcae340f45830d41b50f8ab7be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b3344dcae340f45830d41b50f8ab7be">&#9670;&nbsp;</a></span>_sisterNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::SceneNode* LevelGenerator::_sisterNode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9185635ffdbd3e19586a62ac005a803c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9185635ffdbd3e19586a62ac005a803c">&#9670;&nbsp;</a></span>_startCity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_city.html">City</a>* LevelGenerator::_startCity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada97e6ff78b803a6b6bfb294a4705716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada97e6ff78b803a6b6bfb294a4705716">&#9670;&nbsp;</a></span>_zone</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_zone.html">Zone</a> LevelGenerator::_zone[1]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>holds different zones in level </p>
+
+</div>
+</div>
+<a id="a8ab8f4bb67abd46a3f82df0c5b99b0d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ab8f4bb67abd46a3f82df0c5b99b0d6">&#9670;&nbsp;</a></span>scalar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LevelGenerator::scalar</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scales grid position to world positions </p>
 
 </div>
 </div>

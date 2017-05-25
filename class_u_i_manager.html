@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -62,6 +62,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_u_i_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -69,12 +70,15 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The manager of the UI.  
+ <a href="class_u_i_manager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_u_i_manager_8h_source.html">UIManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a32b72c377f864f7cd197e6ffe738142f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a32b72c377f864f7cd197e6ffe738142f">UIManager</a> ()</td></tr>
-<tr class="memdesc:a32b72c377f864f7cd197e6ffe738142f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the <a class="el" href="class_u_i_manager.html">UIManager</a> class. This class is created by the <a class="el" href="class_game_manager.html">GameManager</a> and contains all UI information, e.g. the in-game and menu UI.  <a href="#a32b72c377f864f7cd197e6ffe738142f">More...</a><br /></td></tr>
+<tr class="memdesc:a32b72c377f864f7cd197e6ffe738142f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the <a class="el" href="class_u_i_manager.html" title="The manager of the UI. ">UIManager</a> class. This class is created by the <a class="el" href="class_game_manager.html" title="The manager of the game. ">GameManager</a> and contains all UI information, e.g. the in-game and menu UI.  <a href="#a32b72c377f864f7cd197e6ffe738142f">More...</a><br /></td></tr>
 <tr class="separator:a32b72c377f864f7cd197e6ffe738142f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedd9d0577af515a852425dfe414b2968"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#aedd9d0577af515a852425dfe414b2968">init</a> ()</td></tr>
 <tr class="memdesc:aedd9d0577af515a852425dfe414b2968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance and sets up UI.  <a href="#aedd9d0577af515a852425dfe414b2968">More...</a><br /></td></tr>
@@ -82,51 +86,109 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a007dd5816d33ddb9ac7c396bb7a284bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a007dd5816d33ddb9ac7c396bb7a284bb">setupUI</a> ()</td></tr>
 <tr class="memdesc:a007dd5816d33ddb9ac7c396bb7a284bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setups the UI elements.  <a href="#a007dd5816d33ddb9ac7c396bb7a284bb">More...</a><br /></td></tr>
 <tr class="separator:a007dd5816d33ddb9ac7c396bb7a284bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019de9b26b6c89a335afe8a0e4c8eebb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a019de9b26b6c89a335afe8a0e4c8eebb">startUpdate</a> (const Ogre::FrameEvent &amp;)</td></tr>
+<tr class="memdesc:a019de9b26b6c89a335afe8a0e4c8eebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update loop in start state (when player is starting the level).  <a href="#a019de9b26b6c89a335afe8a0e4c8eebb">More...</a><br /></td></tr>
+<tr class="separator:a019de9b26b6c89a335afe8a0e4c8eebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c3d1748b1f6791ae644b36601b849f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a1c3d1748b1f6791ae644b36601b849f1">inGameUpdate</a> (const Ogre::FrameEvent &amp;)</td></tr>
+<tr class="memdesc:a1c3d1748b1f6791ae644b36601b849f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update loop in ingame state (when player is playing the game).  <a href="#a1c3d1748b1f6791ae644b36601b849f1">More...</a><br /></td></tr>
+<tr class="separator:a1c3d1748b1f6791ae644b36601b849f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30fe5e250db4ed01a4a792539ec37d7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a30fe5e250db4ed01a4a792539ec37d7f">endUpdate</a> (const Ogre::FrameEvent &amp;)</td></tr>
+<tr class="memdesc:a30fe5e250db4ed01a4a792539ec37d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update loop in end state (when player finished the level).  <a href="#a30fe5e250db4ed01a4a792539ec37d7f">More...</a><br /></td></tr>
+<tr class="separator:a30fe5e250db4ed01a4a792539ec37d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbf182db149962cf64a55f50a0a4dd77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#abbf182db149962cf64a55f50a0a4dd77">diedUpdate</a> (const Ogre::FrameEvent &amp;)</td></tr>
+<tr class="memdesc:abbf182db149962cf64a55f50a0a4dd77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update loop in died state (when player is dead).  <a href="#abbf182db149962cf64a55f50a0a4dd77">More...</a><br /></td></tr>
+<tr class="separator:abbf182db149962cf64a55f50a0a4dd77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac683e1d5e18af90857be2595f771e6d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ac683e1d5e18af90857be2595f771e6d1">adjustHealthBar</a> (Ogre::Real, Ogre::Real)</td></tr>
 <tr class="memdesc:ac683e1d5e18af90857be2595f771e6d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the health bar pValue.  <a href="#ac683e1d5e18af90857be2595f771e6d1">More...</a><br /></td></tr>
 <tr class="separator:ac683e1d5e18af90857be2595f771e6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaec824bc79167bd9d640fde8e2fc58be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#aaec824bc79167bd9d640fde8e2fc58be">adjustStaminaBar</a> (Ogre::Real, Ogre::Real)</td></tr>
-<tr class="memdesc:aaec824bc79167bd9d640fde8e2fc58be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the stamina bar pValue.  <a href="#aaec824bc79167bd9d640fde8e2fc58be">More...</a><br /></td></tr>
-<tr class="separator:aaec824bc79167bd9d640fde8e2fc58be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47f27e1aec60c9a4afbeb2f35278aa39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a47f27e1aec60c9a4afbeb2f35278aa39">createDialog</a> (Ogre::String)</td></tr>
-<tr class="separator:a47f27e1aec60c9a4afbeb2f35278aa39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f8745b19ef1bacac736e6941d618b89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a5f8745b19ef1bacac736e6941d618b89">destroyDialog</a> ()</td></tr>
-<tr class="memdesc:a5f8745b19ef1bacac736e6941d618b89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the dialog.  <a href="#a5f8745b19ef1bacac736e6941d618b89">More...</a><br /></td></tr>
-<tr class="separator:a5f8745b19ef1bacac736e6941d618b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cf3db9dcee31f6c9102da9e23fb6f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#aa8cf3db9dcee31f6c9102da9e23fb6f5">adjustEnemyHealthBar</a> (Ogre::Real, Ogre::Real)</td></tr>
+<tr class="memdesc:aa8cf3db9dcee31f6c9102da9e23fb6f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the health bar pValue.  <a href="#aa8cf3db9dcee31f6c9102da9e23fb6f5">More...</a><br /></td></tr>
+<tr class="separator:aa8cf3db9dcee31f6c9102da9e23fb6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac31b514a870a1730f7ea468d7194b65b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ac31b514a870a1730f7ea468d7194b65b">showEnemyHealthBar</a> ()</td></tr>
+<tr class="memdesc:ac31b514a870a1730f7ea468d7194b65b"><td class="mdescLeft">&#160;</td><td class="mdescRight">shows the enemy healthbar  <a href="#ac31b514a870a1730f7ea468d7194b65b">More...</a><br /></td></tr>
+<tr class="separator:ac31b514a870a1730f7ea468d7194b65b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ceaad7833d1eb01361f6547bff011a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a3ceaad7833d1eb01361f6547bff011a7">hideEnemyHealthBar</a> ()</td></tr>
+<tr class="memdesc:a3ceaad7833d1eb01361f6547bff011a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">hides the enemy healthbar  <a href="#a3ceaad7833d1eb01361f6547bff011a7">More...</a><br /></td></tr>
+<tr class="separator:a3ceaad7833d1eb01361f6547bff011a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04dac16ce9f0179bab95592af1f97d1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a04dac16ce9f0179bab95592af1f97d1b">showDialog</a> (Ogre::String, Ogre::String)</td></tr>
+<tr class="memdesc:a04dac16ce9f0179bab95592af1f97d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">shows the dialog window  <a href="#a04dac16ce9f0179bab95592af1f97d1b">More...</a><br /></td></tr>
+<tr class="separator:a04dac16ce9f0179bab95592af1f97d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97f48f2c0bebece9e7ad5cbff0de6867"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a97f48f2c0bebece9e7ad5cbff0de6867">hideDialog</a> ()</td></tr>
+<tr class="memdesc:a97f48f2c0bebece9e7ad5cbff0de6867"><td class="mdescLeft">&#160;</td><td class="mdescRight">hides the dialog window  <a href="#a97f48f2c0bebece9e7ad5cbff0de6867">More...</a><br /></td></tr>
+<tr class="separator:a97f48f2c0bebece9e7ad5cbff0de6867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c6662978aa5b0a17e78b3c0ec4a7b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a79c6662978aa5b0a17e78b3c0ec4a7b4">appendDialogText</a> (Ogre::String)</td></tr>
-<tr class="memdesc:a79c6662978aa5b0a17e78b3c0ec4a7b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends the dialog text.  <a href="#a79c6662978aa5b0a17e78b3c0ec4a7b4">More...</a><br /></td></tr>
 <tr class="separator:a79c6662978aa5b0a17e78b3c0ec4a7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c230a4debaf620301b80e749f19a126"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a7c230a4debaf620301b80e749f19a126">showHUDText</a> (Ogre::String)</td></tr>
+<tr class="separator:a7c230a4debaf620301b80e749f19a126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c4d21b9664498af89083329746e85e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a5c4d21b9664498af89083329746e85e1">showHUDText</a> (Ogre::String, float)</td></tr>
+<tr class="separator:a5c4d21b9664498af89083329746e85e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6187155ae37dfb0dc7e1c35a5d947797"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a6187155ae37dfb0dc7e1c35a5d947797">hideHUDText</a> ()</td></tr>
+<tr class="memdesc:a6187155ae37dfb0dc7e1c35a5d947797"><td class="mdescLeft">&#160;</td><td class="mdescRight">hides the current message shown in the HUD  <a href="#a6187155ae37dfb0dc7e1c35a5d947797">More...</a><br /></td></tr>
+<tr class="separator:a6187155ae37dfb0dc7e1c35a5d947797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5eceaa3cba3c0170e5507425879dfcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#aa5eceaa3cba3c0170e5507425879dfcc">updateMiniMapLocators</a> ()</td></tr>
+<tr class="memdesc:aa5eceaa3cba3c0170e5507425879dfcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the position of the locators on the minimap.  <a href="#aa5eceaa3cba3c0170e5507425879dfcc">More...</a><br /></td></tr>
+<tr class="separator:aa5eceaa3cba3c0170e5507425879dfcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a647e53c3420f7555aba327f9c6944cc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a647e53c3420f7555aba327f9c6944cc9">setQuestOn</a> (bool val)</td></tr>
+<tr class="separator:a647e53c3420f7555aba327f9c6944cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ab1362d9a1f8c112d08ebcc60ae461007"><td class="memItemLeft" align="right" valign="top">static Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ab1362d9a1f8c112d08ebcc60ae461007">calcBarSize</a> (Ogre::Real, Ogre::Real, Ogre::Real)</td></tr>
 <tr class="memdesc:ab1362d9a1f8c112d08ebcc60ae461007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the new size of the bar.  <a href="#ab1362d9a1f8c112d08ebcc60ae461007">More...</a><br /></td></tr>
 <tr class="separator:ab1362d9a1f8c112d08ebcc60ae461007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a809620f9cbd323f8070dee2131747e30"><td class="memItemLeft" align="right" valign="top">static Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a809620f9cbd323f8070dee2131747e30">calcLocatorPos</a> (Ogre::Real pAngle, Ogre::Real pMaxSize)</td></tr>
+<tr class="separator:a809620f9cbd323f8070dee2131747e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a8fdb3f3cd8108feed1384a950a48101a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a8fdb3f3cd8108feed1384a950a48101a">showStoryText</a> (std::vector&lt; std::string &gt;, float)</td></tr>
+<tr class="memdesc:a8fdb3f3cd8108feed1384a950a48101a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the next part of the story text.  <a href="#a8fdb3f3cd8108feed1384a950a48101a">More...</a><br /></td></tr>
+<tr class="separator:a8fdb3f3cd8108feed1384a950a48101a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a599d2e5ca6d2943eb419d57084f26c5a"><td class="memItemLeft" align="right" valign="top">OgreBites::SdkTrayManager *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a599d2e5ca6d2943eb419d57084f26c5a">_mSdkTrayMgr</a></td></tr>
-<tr class="separator:a599d2e5ca6d2943eb419d57084f26c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5446302873d82ce400fac79716679e96"><td class="memItemLeft" align="right" valign="top">OgreBites::SdkTrayListener *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a5446302873d82ce400fac79716679e96">_mSdkTrayListener</a></td></tr>
-<tr class="separator:a5446302873d82ce400fac79716679e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbc004f99167c35f09252f73f27716f3"><td class="memItemLeft" align="right" valign="top">Ogre::RenderWindow *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#adbc004f99167c35f09252f73f27716f3">_mWindow</a></td></tr>
-<tr class="separator:adbc004f99167c35f09252f73f27716f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f5bade5fd8d8fbe342298fbc43550d4"><td class="memItemLeft" align="right" valign="top">OgreBites::InputContext&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a7f5bade5fd8d8fbe342298fbc43550d4">_mInputContext</a></td></tr>
-<tr class="separator:a7f5bade5fd8d8fbe342298fbc43550d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e2c55d400686f04075f893fec2c766e"><td class="memItemLeft" align="right" valign="top">OgreBites::TextBox *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a1e2c55d400686f04075f893fec2c766e">_mDialogTextArea</a></td></tr>
-<tr class="separator:a1e2c55d400686f04075f893fec2c766e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62eb706678db96b1f2a7e834deb47f04"><td class="memItemLeft" align="right" valign="top">OgreBites::DecorWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a62eb706678db96b1f2a7e834deb47f04">_healthBarWidget</a></td></tr>
-<tr class="separator:a62eb706678db96b1f2a7e834deb47f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abac26facdbb738a8c21660dd32a77458"><td class="memItemLeft" align="right" valign="top">OgreBites::DecorWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#abac26facdbb738a8c21660dd32a77458">_staminaBarWidget</a></td></tr>
-<tr class="separator:abac26facdbb738a8c21660dd32a77458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e0a1a1e2aadf1ae3686206ad69df13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html">DiabroUI::UIElementsManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a43e0a1a1e2aadf1ae3686206ad69df13">_uiElementMgr</a></td></tr>
+<tr class="separator:a43e0a1a1e2aadf1ae3686206ad69df13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64d52b59e599c6fef5e156a99b4d3ac3"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a64d52b59e599c6fef5e156a99b4d3ac3">_uiNode</a></td></tr>
 <tr class="separator:a64d52b59e599c6fef5e156a99b4d3ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc004f99167c35f09252f73f27716f3"><td class="memItemLeft" align="right" valign="top">Ogre::RenderWindow *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#adbc004f99167c35f09252f73f27716f3">_mWindow</a></td></tr>
+<tr class="separator:adbc004f99167c35f09252f73f27716f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a691047e56cdf90d5e86e59e9843dde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_diabro_u_i_1_1_dialog_text_box.html">DiabroUI::DialogTextBox</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a5a691047e56cdf90d5e86e59e9843dde">_mDialogTextArea</a></td></tr>
+<tr class="separator:a5a691047e56cdf90d5e86e59e9843dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6f52ddbd33f2a5e506a86987fb7bcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_diabro_u_i_1_1_mini_map.html">DiabroUI::MiniMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#abe6f52ddbd33f2a5e506a86987fb7bcf">_miniMap</a></td></tr>
+<tr class="separator:abe6f52ddbd33f2a5e506a86987fb7bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3c675d178ddcfe45bcf99a0338c190d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ae3c675d178ddcfe45bcf99a0338c190d">_questOn</a></td></tr>
+<tr class="separator:ae3c675d178ddcfe45bcf99a0338c190d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadd069a819027b59bfc9cfdea83cfd27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_diabro_u_i_1_1_bar.html">DiabroUI::Bar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#aadd069a819027b59bfc9cfdea83cfd27">_playerHealthBarWidget</a></td></tr>
+<tr class="separator:aadd069a819027b59bfc9cfdea83cfd27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89f10a73c77cb58afb5def1d68583010"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_diabro_u_i_1_1_bar.html">DiabroUI::Bar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a89f10a73c77cb58afb5def1d68583010">_enemyHealthBarWidget</a></td></tr>
+<tr class="separator:a89f10a73c77cb58afb5def1d68583010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f0ddcafd564db43679b1319f349f0f1"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a3f0ddcafd564db43679b1319f349f0f1">_maxWidthBar</a></td></tr>
 <tr class="separator:a3f0ddcafd564db43679b1319f349f0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae376ff1931ba3c91b766595c437f1f25"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ae376ff1931ba3c91b766595c437f1f25">_heightBar</a></td></tr>
-<tr class="separator:ae376ff1931ba3c91b766595c437f1f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8af3c659bba6bd679ad4d3058f7e10b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_diabro_u_i_1_1_h_u_d_text.html">DiabroUI::HUDText</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a8af3c659bba6bd679ad4d3058f7e10b1">_hudTextWidget</a></td></tr>
+<tr class="separator:a8af3c659bba6bd679ad4d3058f7e10b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ad81ca8106763ff6ba7fd545d6f4323"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a9ad81ca8106763ff6ba7fd545d6f4323">_hudTotalTimer</a></td></tr>
+<tr class="separator:a9ad81ca8106763ff6ba7fd545d6f4323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3bbc7b9894942ed73a0c95d66c7ee07"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ae3bbc7b9894942ed73a0c95d66c7ee07">_hudTimer</a></td></tr>
+<tr class="separator:ae3bbc7b9894942ed73a0c95d66c7ee07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94dfa84bbd57067d03681118ef8cc549"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a94dfa84bbd57067d03681118ef8cc549">_hudTextWithTimeOn</a></td></tr>
+<tr class="separator:a94dfa84bbd57067d03681118ef8cc549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab700f1561d5131231ed99bd58b1afabc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ab700f1561d5131231ed99bd58b1afabc">_startGameText</a></td></tr>
+<tr class="separator:ab700f1561d5131231ed99bd58b1afabc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c6600409ce64f1f83c59c770154725f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a2c6600409ce64f1f83c59c770154725f">_startLevelText</a></td></tr>
+<tr class="separator:a2c6600409ce64f1f83c59c770154725f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2cce7b7f2f07474c8e12e58dbc33dcd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#ad2cce7b7f2f07474c8e12e58dbc33dcd">_endLevelText</a></td></tr>
+<tr class="separator:ad2cce7b7f2f07474c8e12e58dbc33dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc11f64c59e0a4ad66553bbebe515b98"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#abc11f64c59e0a4ad66553bbebe515b98">_diedText</a></td></tr>
+<tr class="separator:abc11f64c59e0a4ad66553bbebe515b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a584dae1a9b443783bc534870e3c22396"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#a584dae1a9b443783bc534870e3c22396">_storyTextOn</a></td></tr>
+<tr class="separator:a584dae1a9b443783bc534870e3c22396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad5692d98dba01754c8ae83fdecc4d3d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_u_i_manager.html#aad5692d98dba01754c8ae83fdecc4d3d">_first</a></td></tr>
+<tr class="separator:aad5692d98dba01754c8ae83fdecc4d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The manager of the UI. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a32b72c377f864f7cd197e6ffe738142f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32b72c377f864f7cd197e6ffe738142f">&#9670;&nbsp;</a></span>UIManager()</h2>
 
@@ -142,11 +204,48 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a new instance of the <a class="el" href="class_u_i_manager.html">UIManager</a> class. This class is created by the <a class="el" href="class_game_manager.html">GameManager</a> and contains all UI information, e.g. the in-game and menu UI. </p>
+<p>Creates a new instance of the <a class="el" href="class_u_i_manager.html" title="The manager of the UI. ">UIManager</a> class. This class is created by the <a class="el" href="class_game_manager.html" title="The manager of the game. ">GameManager</a> and contains all UI information, e.g. the in-game and menu UI. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa8cf3db9dcee31f6c9102da9e23fb6f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cf3db9dcee31f6c9102da9e23fb6f5">&#9670;&nbsp;</a></span>adjustEnemyHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::adjustEnemyHealthBar </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>pValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>pMaxValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adjusts the health bar pValue. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pValue</td><td>The pValue.</td></tr>
+    <tr><td class="paramname">pMaxValue</td><td>The maximum pValue.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac683e1d5e18af90857be2595f771e6d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac683e1d5e18af90857be2595f771e6d1">&#9670;&nbsp;</a></span>adjustHealthBar()</h2>
 
@@ -184,43 +283,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aaec824bc79167bd9d640fde8e2fc58be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaec824bc79167bd9d640fde8e2fc58be">&#9670;&nbsp;</a></span>adjustStaminaBar()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UIManager::adjustStaminaBar </td>
-          <td>(</td>
-          <td class="paramtype">Ogre::Real&#160;</td>
-          <td class="paramname"><em>pValue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Ogre::Real&#160;</td>
-          <td class="paramname"><em>pMaxValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Adjusts the stamina bar pValue. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pValue</td><td>The pValue.</td></tr>
-    <tr><td class="paramname">pMaxValue</td><td>The maximum pValue.</td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a79c6662978aa5b0a17e78b3c0ec4a7b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a79c6662978aa5b0a17e78b3c0ec4a7b4">&#9670;&nbsp;</a></span>appendDialogText()</h2>
 
@@ -236,11 +298,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Appends the dialog text. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>adds text to the dialog window </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pDialogText</td><td>The p dialog text.</td></tr>
+    <tr><td class="paramname">pDialogText</td><td>text to append </td></tr>
   </table>
   </dd>
 </dl>
@@ -300,32 +360,111 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a47f27e1aec60c9a4afbeb2f35278aa39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47f27e1aec60c9a4afbeb2f35278aa39">&#9670;&nbsp;</a></span>createDialog()</h2>
+<a id="a809620f9cbd323f8070dee2131747e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a809620f9cbd323f8070dee2131747e30">&#9670;&nbsp;</a></span>calcLocatorPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Real UIManager::calcLocatorPos </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>pAngle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>pMaxSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>calculates the position of the locator as an angle </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pAngle</td><td>the angle between a player and the locator's object </td></tr>
+    <tr><td class="paramname">pMaxValue</td><td>the maximum value in </td></tr>
+    <tr><td class="paramname">pMinValue</td><td>the minimal value of </td></tr>
+    <tr><td class="paramname">pMaxSize</td><td>the maximum size of the bar </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abbf182db149962cf64a55f50a0a4dd77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbf182db149962cf64a55f50a0a4dd77">&#9670;&nbsp;</a></span>diedUpdate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void UIManager::createDialog </td>
+          <td class="memname">void UIManager::diedUpdate </td>
           <td>(</td>
-          <td class="paramtype">Ogre::String&#160;</td>
-          <td class="paramname"><em>pDialogText</em></td><td>)</td>
+          <td class="paramtype">const Ogre::FrameEvent &amp;&#160;</td>
+          <td class="paramname"><em>pFE</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Update loop in died state (when player is dead). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pFE</td><td>The frameevent to obtain the passed time.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="a5f8745b19ef1bacac736e6941d618b89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f8745b19ef1bacac736e6941d618b89">&#9670;&nbsp;</a></span>destroyDialog()</h2>
+<a id="a30fe5e250db4ed01a4a792539ec37d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30fe5e250db4ed01a4a792539ec37d7f">&#9670;&nbsp;</a></span>endUpdate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void UIManager::destroyDialog </td>
+          <td class="memname">void UIManager::endUpdate </td>
+          <td>(</td>
+          <td class="paramtype">const Ogre::FrameEvent &amp;&#160;</td>
+          <td class="paramname"><em>pFE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update loop in end state (when player finished the level). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pFE</td><td>The frameevent to obtain the passed time.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a97f48f2c0bebece9e7ad5cbff0de6867"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97f48f2c0bebece9e7ad5cbff0de6867">&#9670;&nbsp;</a></span>hideDialog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::hideDialog </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -333,7 +472,71 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys the dialog. </p>
+<p>hides the dialog window </p>
+
+</div>
+</div>
+<a id="a3ceaad7833d1eb01361f6547bff011a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ceaad7833d1eb01361f6547bff011a7">&#9670;&nbsp;</a></span>hideEnemyHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::hideEnemyHealthBar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>hides the enemy healthbar </p>
+
+</div>
+</div>
+<a id="a6187155ae37dfb0dc7e1c35a5d947797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6187155ae37dfb0dc7e1c35a5d947797">&#9670;&nbsp;</a></span>hideHUDText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::hideHUDText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>hides the current message shown in the HUD </p>
+
+</div>
+</div>
+<a id="a1c3d1748b1f6791ae644b36601b849f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c3d1748b1f6791ae644b36601b849f1">&#9670;&nbsp;</a></span>inGameUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::inGameUpdate </td>
+          <td>(</td>
+          <td class="paramtype">const Ogre::FrameEvent &amp;&#160;</td>
+          <td class="paramname"><em>pFE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update loop in ingame state (when player is playing the game). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pFE</td><td>The frameevent to obtain the passed time.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -356,6 +559,30 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a647e53c3420f7555aba327f9c6944cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a647e53c3420f7555aba327f9c6944cc9">&#9670;&nbsp;</a></span>setQuestOn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::setQuestOn </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>defines whether the quest locator should be visible or not </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>should the quest locator be shown </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a007dd5816d33ddb9ac7c396bb7a284bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a007dd5816d33ddb9ac7c396bb7a284bb">&#9670;&nbsp;</a></span>setupUI()</h2>
 
@@ -375,9 +602,116 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a62eb706678db96b1f2a7e834deb47f04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62eb706678db96b1f2a7e834deb47f04">&#9670;&nbsp;</a></span>_healthBarWidget</h2>
+<a id="a04dac16ce9f0179bab95592af1f97d1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04dac16ce9f0179bab95592af1f97d1b">&#9670;&nbsp;</a></span>showDialog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::showDialog </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::String&#160;</td>
+          <td class="paramname"><em>pNPCName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::String&#160;</td>
+          <td class="paramname"><em>pDialogText</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>shows the dialog window </p>
+
+</div>
+</div>
+<a id="ac31b514a870a1730f7ea468d7194b65b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac31b514a870a1730f7ea468d7194b65b">&#9670;&nbsp;</a></span>showEnemyHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::showEnemyHealthBar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>shows the enemy healthbar </p>
+
+</div>
+</div>
+<a id="a7c230a4debaf620301b80e749f19a126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c230a4debaf620301b80e749f19a126">&#9670;&nbsp;</a></span>showHUDText() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::showHUDText </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::String&#160;</td>
+          <td class="paramname"><em>pHUDText</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>shows a certain text within the HUD </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pHUDText</td><td>text that should be shown </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5c4d21b9664498af89083329746e85e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c4d21b9664498af89083329746e85e1">&#9670;&nbsp;</a></span>showHUDText() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::showHUDText </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::String&#160;</td>
+          <td class="paramname"><em>pHUDText</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>shows a text on the HUD </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pHUDText</td><td>text that should be shown </td></tr>
+    <tr><td class="paramname">pTime</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8fdb3f3cd8108feed1384a950a48101a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fdb3f3cd8108feed1384a950a48101a">&#9670;&nbsp;</a></span>showStoryText()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -386,7 +720,99 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">OgreBites::DecorWidget* UIManager::_healthBarWidget</td>
+          <td class="memname">bool UIManager::showStoryText </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>pTextVector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shows the next part of the story text. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pTextVector</td><td>Vector containing strings of story tekst.</td></tr>
+    <tr><td class="paramname">pTime</td><td>The time to show the text.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a019de9b26b6c89a335afe8a0e4c8eebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a019de9b26b6c89a335afe8a0e4c8eebb">&#9670;&nbsp;</a></span>startUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::startUpdate </td>
+          <td>(</td>
+          <td class="paramtype">const Ogre::FrameEvent &amp;&#160;</td>
+          <td class="paramname"><em>pFE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update loop in start state (when player is starting the level). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pFE</td><td>The frameevent to obtain the passed time.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5eceaa3cba3c0170e5507425879dfcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5eceaa3cba3c0170e5507425879dfcc">&#9670;&nbsp;</a></span>updateMiniMapLocators()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UIManager::updateMiniMapLocators </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updates the position of the locators on the minimap. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abc11f64c59e0a4ad66553bbebe515b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc11f64c59e0a4ad66553bbebe515b98">&#9670;&nbsp;</a></span>_diedText</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; UIManager::_diedText</td>
         </tr>
       </table>
   </td>
@@ -398,8 +824,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae376ff1931ba3c91b766595c437f1f25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae376ff1931ba3c91b766595c437f1f25">&#9670;&nbsp;</a></span>_heightBar</h2>
+<a id="ad2cce7b7f2f07474c8e12e58dbc33dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2cce7b7f2f07474c8e12e58dbc33dcd">&#9670;&nbsp;</a></span>_endLevelText</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -408,7 +834,139 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Ogre::Real UIManager::_heightBar</td>
+          <td class="memname">std::vector&lt;std::string&gt; UIManager::_endLevelText</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a89f10a73c77cb58afb5def1d68583010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89f10a73c77cb58afb5def1d68583010">&#9670;&nbsp;</a></span>_enemyHealthBarWidget</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_diabro_u_i_1_1_bar.html">DiabroUI::Bar</a>* UIManager::_enemyHealthBarWidget</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aad5692d98dba01754c8ae83fdecc4d3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad5692d98dba01754c8ae83fdecc4d3d">&#9670;&nbsp;</a></span>_first</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UIManager::_first</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8af3c659bba6bd679ad4d3058f7e10b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8af3c659bba6bd679ad4d3058f7e10b1">&#9670;&nbsp;</a></span>_hudTextWidget</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_diabro_u_i_1_1_h_u_d_text.html">DiabroUI::HUDText</a>* UIManager::_hudTextWidget</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a94dfa84bbd57067d03681118ef8cc549"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94dfa84bbd57067d03681118ef8cc549">&#9670;&nbsp;</a></span>_hudTextWithTimeOn</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UIManager::_hudTextWithTimeOn</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3bbc7b9894942ed73a0c95d66c7ee07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3bbc7b9894942ed73a0c95d66c7ee07">&#9670;&nbsp;</a></span>_hudTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float UIManager::_hudTimer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ad81ca8106763ff6ba7fd545d6f4323"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad81ca8106763ff6ba7fd545d6f4323">&#9670;&nbsp;</a></span>_hudTotalTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float UIManager::_hudTotalTimer</td>
         </tr>
       </table>
   </td>
@@ -442,8 +1000,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1e2c55d400686f04075f893fec2c766e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e2c55d400686f04075f893fec2c766e">&#9670;&nbsp;</a></span>_mDialogTextArea</h2>
+<a id="a5a691047e56cdf90d5e86e59e9843dde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a691047e56cdf90d5e86e59e9843dde">&#9670;&nbsp;</a></span>_mDialogTextArea</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -452,7 +1010,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">OgreBites::TextBox* UIManager::_mDialogTextArea</td>
+          <td class="memname"><a class="el" href="class_diabro_u_i_1_1_dialog_text_box.html">DiabroUI::DialogTextBox</a>* UIManager::_mDialogTextArea</td>
         </tr>
       </table>
   </td>
@@ -464,8 +1022,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7f5bade5fd8d8fbe342298fbc43550d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f5bade5fd8d8fbe342298fbc43550d4">&#9670;&nbsp;</a></span>_mInputContext</h2>
+<a id="abe6f52ddbd33f2a5e506a86987fb7bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6f52ddbd33f2a5e506a86987fb7bcf">&#9670;&nbsp;</a></span>_miniMap</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -474,51 +1032,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">OgreBites::InputContext UIManager::_mInputContext</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5446302873d82ce400fac79716679e96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5446302873d82ce400fac79716679e96">&#9670;&nbsp;</a></span>_mSdkTrayListener</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">OgreBites::SdkTrayListener* UIManager::_mSdkTrayListener</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a599d2e5ca6d2943eb419d57084f26c5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a599d2e5ca6d2943eb419d57084f26c5a">&#9670;&nbsp;</a></span>_mSdkTrayMgr</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">OgreBites::SdkTrayManager* UIManager::_mSdkTrayMgr</td>
+          <td class="memname"><a class="el" href="class_diabro_u_i_1_1_mini_map.html">DiabroUI::MiniMap</a>* UIManager::_miniMap</td>
         </tr>
       </table>
   </td>
@@ -552,8 +1066,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abac26facdbb738a8c21660dd32a77458"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abac26facdbb738a8c21660dd32a77458">&#9670;&nbsp;</a></span>_staminaBarWidget</h2>
+<a id="aadd069a819027b59bfc9cfdea83cfd27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd069a819027b59bfc9cfdea83cfd27">&#9670;&nbsp;</a></span>_playerHealthBarWidget</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -562,7 +1076,117 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">OgreBites::DecorWidget* UIManager::_staminaBarWidget</td>
+          <td class="memname"><a class="el" href="class_diabro_u_i_1_1_bar.html">DiabroUI::Bar</a>* UIManager::_playerHealthBarWidget</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3c675d178ddcfe45bcf99a0338c190d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3c675d178ddcfe45bcf99a0338c190d">&#9670;&nbsp;</a></span>_questOn</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UIManager::_questOn</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab700f1561d5131231ed99bd58b1afabc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab700f1561d5131231ed99bd58b1afabc">&#9670;&nbsp;</a></span>_startGameText</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; UIManager::_startGameText</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c6600409ce64f1f83c59c770154725f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c6600409ce64f1f83c59c770154725f">&#9670;&nbsp;</a></span>_startLevelText</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; UIManager::_startLevelText</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a584dae1a9b443783bc534870e3c22396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a584dae1a9b443783bc534870e3c22396">&#9670;&nbsp;</a></span>_storyTextOn</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UIManager::_storyTextOn</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43e0a1a1e2aadf1ae3686206ad69df13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e0a1a1e2aadf1ae3686206ad69df13">&#9670;&nbsp;</a></span>_uiElementMgr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html">DiabroUI::UIElementsManager</a>* UIManager::_uiElementMgr</td>
         </tr>
       </table>
   </td>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['x',['x',['../structconnection.html#a4dc2b4254bf323be30e07e420d02bba8',1,'connection::x()'],['../class_city.html#a218327398be6b6cee514df3513eb9ad4',1,'City::x()']]],
+  ['x',['x',['../struct_coordinate.html#ad462d671f1feb865911333e3ff5f0a5d',1,'Coordinate::x()'],['../class_node.html#aff1029a518bdc2651007b8856f958364',1,'Node::x()']]],
   ['xml_5fcan_5fnot_5fconvert_5ftext',['XML_CAN_NOT_CONVERT_TEXT',['../namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08afdb8840395a7c13dfe6a3e104401c095',1,'tinyxml2']]],
   ['xml_5ferror_5fcount',['XML_ERROR_COUNT',['../namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a9ebb2775c56387353f5b2de94f6ab71d',1,'tinyxml2']]],
   ['xml_5ferror_5felement_5fmismatch',['XML_ERROR_ELEMENT_MISMATCH',['../namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a37759723c0c5e954597654e4eccb4f4d',1,'tinyxml2']]],

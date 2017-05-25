@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -70,7 +70,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class is the superclass for all different kinds of characters. It contains methods and variables for movement and combat. <a class="el" href="class_player.html">Player</a> and BaseNPC both inherit from this class.  
+<p>The <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class is the superclass for all different kinds of characters. It contains methods and variables for movement and combat. <a class="el" href="class_player.html" title="The player character of the game. Only one exists. ">Player</a> and BaseNPC both inherit from this class.  
  <a href="class_character.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_character_8h_source.html">Character.h</a>&gt;</code></p>
@@ -80,61 +80,50 @@ Inheritance diagram for Character:</div>
  <div class="center">
   <img src="class_character.png" usemap="#Character_map" alt=""/>
   <map id="Character_map" name="Character_map">
-<area href="class_base_npc.html" alt="BaseNpc" shape="rect" coords="45,56,126,80"/>
-<area href="class_player.html" alt="Player" shape="rect" coords="136,56,217,80"/>
-<area href="class_basic_enemy.html" alt="BasicEnemy" shape="rect" coords="0,112,81,136"/>
-<area href="class_npc.html" alt="Npc" shape="rect" coords="91,112,172,136"/>
+<area href="class_base_npc.html" title="The super class for all NPC&#39;s in the game " alt="BaseNpc" shape="rect" coords="45,56,126,80"/>
+<area href="class_player.html" title="The player character of the game. Only one exists. " alt="Player" shape="rect" coords="136,56,217,80"/>
+<area href="class_basic_enemy.html" title="The basic class for an enemy. " alt="BasicEnemy" shape="rect" coords="0,112,81,136"/>
+<area href="class_npc.html" title="The firendly NPC class. " alt="Npc" shape="rect" coords="91,112,172,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abeceff67d90e513641f0d56f95713e7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abeceff67d90e513641f0d56f95713e7a">Character</a> (Ogre::SceneNode *, Ogre::Entity *)</td></tr>
-<tr class="memdesc:abeceff67d90e513641f0d56f95713e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class.  <a href="#abeceff67d90e513641f0d56f95713e7a">More...</a><br /></td></tr>
+<tr class="memdesc:abeceff67d90e513641f0d56f95713e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html" title="The manager of the level. ">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class.  <a href="#abeceff67d90e513641f0d56f95713e7a">More...</a><br /></td></tr>
 <tr class="separator:abeceff67d90e513641f0d56f95713e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc27bdd255876169bad2ed0bae0cffb5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#adc27bdd255876169bad2ed0bae0cffb5">Character</a> ()</td></tr>
+<tr class="separator:adc27bdd255876169bad2ed0bae0cffb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e9be564d05ded80962b2045aa70b3fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9e9be564d05ded80962b2045aa70b3fc">~Character</a> ()</td></tr>
 <tr class="separator:a9e9be564d05ded80962b2045aa70b3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7904d80b64f8d880cd64fdf95e228f76"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a7904d80b64f8d880cd64fdf95e228f76">initialize</a> ()</td></tr>
-<tr class="memdesc:a7904d80b64f8d880cd64fdf95e228f76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance.  <a href="#a7904d80b64f8d880cd64fdf95e228f76">More...</a><br /></td></tr>
-<tr class="separator:a7904d80b64f8d880cd64fdf95e228f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accdee6a10407543b3e1e7012965442c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#accdee6a10407543b3e1e7012965442c2">update</a> (Ogre::Real)</td></tr>
 <tr class="memdesc:accdee6a10407543b3e1e7012965442c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the frame based on the specified pDeltatime.  <a href="#accdee6a10407543b3e1e7012965442c2">More...</a><br /></td></tr>
 <tr class="separator:accdee6a10407543b3e1e7012965442c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65599714a51af28bcd27d403e9618c1d"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a65599714a51af28bcd27d403e9618c1d">getDirVector</a> ()</td></tr>
-<tr class="separator:a65599714a51af28bcd27d403e9618c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6dcb69787d9b881b8800ae074039a73"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae6dcb69787d9b881b8800ae074039a73">setDirVector</a> (Ogre::Vector3 pMoveVec)</td></tr>
-<tr class="separator:ae6dcb69787d9b881b8800ae074039a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72091b84c9b77dc1a76463bb1700b618"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a72091b84c9b77dc1a76463bb1700b618">move</a> (Ogre::Vector3 &amp;)</td></tr>
+<tr class="memdesc:a72091b84c9b77dc1a76463bb1700b618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the direction vector of the character with the specified vector.  <a href="#a72091b84c9b77dc1a76463bb1700b618">More...</a><br /></td></tr>
+<tr class="separator:a72091b84c9b77dc1a76463bb1700b618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ed7770303bc5ae537aa83cf3ce917c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac2ed7770303bc5ae537aa83cf3ce917c">adjustHealth</a> (float)</td></tr>
+<tr class="memdesc:ac2ed7770303bc5ae537aa83cf3ce917c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the health.  <a href="#ac2ed7770303bc5ae537aa83cf3ce917c">More...</a><br /></td></tr>
+<tr class="separator:ac2ed7770303bc5ae537aa83cf3ce917c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112ffb75592be9e1e9cf78b1428ffedf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a112ffb75592be9e1e9cf78b1428ffedf">die</a> ()</td></tr>
+<tr class="memdesc:a112ffb75592be9e1e9cf78b1428ffedf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> dies.  <a href="#a112ffb75592be9e1e9cf78b1428ffedf">More...</a><br /></td></tr>
+<tr class="separator:a112ffb75592be9e1e9cf78b1428ffedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7503705c6cbd709ecd0bcde35e300b2"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa7503705c6cbd709ecd0bcde35e300b2">getPosition</a> ()</td></tr>
+<tr class="separator:aa7503705c6cbd709ecd0bcde35e300b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a650546ef32c12b200cd349d4fbda043c"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a650546ef32c12b200cd349d4fbda043c">getSpeed</a> ()</td></tr>
 <tr class="separator:a650546ef32c12b200cd349d4fbda043c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa471cfcde432d71eb44176b5854f2cdc"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa471cfcde432d71eb44176b5854f2cdc">getRotationspeed</a> ()</td></tr>
 <tr class="separator:aa471cfcde432d71eb44176b5854f2cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65599714a51af28bcd27d403e9618c1d"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a65599714a51af28bcd27d403e9618c1d">getDirVector</a> ()</td></tr>
+<tr class="separator:a65599714a51af28bcd27d403e9618c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6dcb69787d9b881b8800ae074039a73"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae6dcb69787d9b881b8800ae074039a73">setDirVector</a> (Ogre::Vector3 pMoveVec)</td></tr>
+<tr class="separator:ae6dcb69787d9b881b8800ae074039a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae30412309c9b29dab530b8b139273da3"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae30412309c9b29dab530b8b139273da3">getCurrHealth</a> ()</td></tr>
 <tr class="separator:ae30412309c9b29dab530b8b139273da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac140ef8835c3b297eb4e80ff9551a4e0"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac140ef8835c3b297eb4e80ff9551a4e0">setCurrHealth</a> (Ogre::Real pHP)</td></tr>
-<tr class="separator:ac140ef8835c3b297eb4e80ff9551a4e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7503705c6cbd709ecd0bcde35e300b2"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa7503705c6cbd709ecd0bcde35e300b2">getPosition</a> ()</td></tr>
-<tr class="separator:aa7503705c6cbd709ecd0bcde35e300b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60714941cdcf3d7772d2848577a98b89"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a60714941cdcf3d7772d2848577a98b89">getMaxHealth</a> ()</td></tr>
+<tr class="separator:a60714941cdcf3d7772d2848577a98b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade8602e9521fc4c1849d1d1026bc0399"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ade8602e9521fc4c1849d1d1026bc0399">getLevel</a> ()</td></tr>
 <tr class="separator:ade8602e9521fc4c1849d1d1026bc0399"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80ab350e4aa4d744167257a16cd6fae0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_weapon_instance.html">WeaponInstance</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a80ab350e4aa4d744167257a16cd6fae0">getCurrentWeapon</a> ()</td></tr>
-<tr class="separator:a80ab350e4aa4d744167257a16cd6fae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72091b84c9b77dc1a76463bb1700b618"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a72091b84c9b77dc1a76463bb1700b618">move</a> (Ogre::Vector3 &amp;)</td></tr>
-<tr class="memdesc:a72091b84c9b77dc1a76463bb1700b618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the direction vector of the character with the specified vector.  <a href="#a72091b84c9b77dc1a76463bb1700b618">More...</a><br /></td></tr>
-<tr class="separator:a72091b84c9b77dc1a76463bb1700b618"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75f9b774ba3ae91ac3f1a6d6e8812631"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a75f9b774ba3ae91ac3f1a6d6e8812631">toggleRun</a> (bool pRun)</td></tr>
-<tr class="separator:a75f9b774ba3ae91ac3f1a6d6e8812631"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2ed7770303bc5ae537aa83cf3ce917c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac2ed7770303bc5ae537aa83cf3ce917c">adjustHealth</a> (float)</td></tr>
-<tr class="memdesc:ac2ed7770303bc5ae537aa83cf3ce917c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the health.  <a href="#ac2ed7770303bc5ae537aa83cf3ce917c">More...</a><br /></td></tr>
-<tr class="separator:ac2ed7770303bc5ae537aa83cf3ce917c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefeb5586e03d03fab13896672697db28"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aefeb5586e03d03fab13896672697db28">adjustStaminaOverTime</a> (Ogre::Real)</td></tr>
-<tr class="memdesc:aefeb5586e03d03fab13896672697db28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the stamina over time.  <a href="#aefeb5586e03d03fab13896672697db28">More...</a><br /></td></tr>
-<tr class="separator:aefeb5586e03d03fab13896672697db28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51e7b093bda706bf4f5dd392f683b257"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a51e7b093bda706bf4f5dd392f683b257">adjustStamina</a> (float)</td></tr>
-<tr class="memdesc:a51e7b093bda706bf4f5dd392f683b257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the stamina.  <a href="#a51e7b093bda706bf4f5dd392f683b257">More...</a><br /></td></tr>
-<tr class="separator:a51e7b093bda706bf4f5dd392f683b257"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a112ffb75592be9e1e9cf78b1428ffedf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a112ffb75592be9e1e9cf78b1428ffedf">die</a> ()</td></tr>
-<tr class="memdesc:a112ffb75592be9e1e9cf78b1428ffedf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> dies.  <a href="#a112ffb75592be9e1e9cf78b1428ffedf">More...</a><br /></td></tr>
-<tr class="separator:a112ffb75592be9e1e9cf78b1428ffedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -143,43 +132,27 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a179ff2871b30babfdd637ed3a576b084"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a179ff2871b30babfdd637ed3a576b084">SetHand</a> (<a class="el" href="class_weapon_instance.html">WeaponInstance</a> *weapon)</td></tr>
-<tr class="separator:a179ff2871b30babfdd637ed3a576b084"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cb8d915a9868b668ec71d15f9d6c620"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8cb8d915a9868b668ec71d15f9d6c620">RemoveFromHand</a> ()</td></tr>
-<tr class="separator:a8cb8d915a9868b668ec71d15f9d6c620"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77852dcf9049fec0310fea7b38c995cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a77852dcf9049fec0310fea7b38c995cb">AddStats</a> (<a class="el" href="class_equipment_instance.html">EquipmentInstance</a> *item)</td></tr>
-<tr class="separator:a77852dcf9049fec0310fea7b38c995cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a106c571377ccf725d7f5243b81f15b6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a106c571377ccf725d7f5243b81f15b6f">RemoveStats</a> (<a class="el" href="class_equipment_instance.html">EquipmentInstance</a> *item)</td></tr>
-<tr class="separator:a106c571377ccf725d7f5243b81f15b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa825a4536d3f788acb5db8622e1d3a13"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa825a4536d3f788acb5db8622e1d3a13">findTarget</a> (std::vector&lt; <a class="el" href="class_character.html">Character</a> *&gt;)</td></tr>
 <tr class="memdesc:aa825a4536d3f788acb5db8622e1d3a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the target.  <a href="#aa825a4536d3f788acb5db8622e1d3a13">More...</a><br /></td></tr>
 <tr class="separator:aa825a4536d3f788acb5db8622e1d3a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3e4c945318f90fc19335603245a221f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae3e4c945318f90fc19335603245a221f">lightAttack</a> ()</td></tr>
+<tr class="memdesc:ae3e4c945318f90fc19335603245a221f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a light attack.  <a href="#ae3e4c945318f90fc19335603245a221f">More...</a><br /></td></tr>
 <tr class="separator:ae3e4c945318f90fc19335603245a221f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a973881098e61234d6bcd742d61f7b31d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a973881098e61234d6bcd742d61f7b31d">setUpStats</a> ()</td></tr>
-<tr class="memdesc:a973881098e61234d6bcd742d61f7b31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up stats to default values.  <a href="#a973881098e61234d6bcd742d61f7b31d">More...</a><br /></td></tr>
-<tr class="separator:a973881098e61234d6bcd742d61f7b31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a6b10b22d745b0a9f84e5765efd25539b"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a6b10b22d745b0a9f84e5765efd25539b">_movespeed</a></td></tr>
 <tr class="separator:a6b10b22d745b0a9f84e5765efd25539b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae21dec2e5dd22901da9017394783e68e"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae21dec2e5dd22901da9017394783e68e">_runspeed</a></td></tr>
-<tr class="separator:ae21dec2e5dd22901da9017394783e68e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c4595355fea6de6488cb81118ed03fe"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a0c4595355fea6de6488cb81118ed03fe">_rotationspeed</a></td></tr>
 <tr class="separator:a0c4595355fea6de6488cb81118ed03fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34b23c6550036c42d3507ebc5ee31403"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a34b23c6550036c42d3507ebc5ee31403">_dirVec</a></td></tr>
 <tr class="separator:a34b23c6550036c42d3507ebc5ee31403"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dafcb97414d3b4c35b9720b4247e68c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a0dafcb97414d3b4c35b9720b4247e68c">_isRunning</a></td></tr>
-<tr class="separator:a0dafcb97414d3b4c35b9720b4247e68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ed77714255bf48b659f76bc6d70f572"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8ed77714255bf48b659f76bc6d70f572">_currentLevel</a></td></tr>
 <tr class="separator:a8ed77714255bf48b659f76bc6d70f572"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbc9722956291ca5212c53aa0a639d68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character_stats.html">CharacterStats</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abbc9722956291ca5212c53aa0a639d68">_stats</a></td></tr>
-<tr class="separator:abbc9722956291ca5212c53aa0a639d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f1cc6a282ef2bb662e75cf9d4c9eef5"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a6f1cc6a282ef2bb662e75cf9d4c9eef5">_currentHealth</a></td></tr>
 <tr class="separator:a6f1cc6a282ef2bb662e75cf9d4c9eef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b86a4e1bd9a107d379a2a3e528f2982"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a2b86a4e1bd9a107d379a2a3e528f2982">_currentStamina</a></td></tr>
-<tr class="separator:a2b86a4e1bd9a107d379a2a3e528f2982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af745c741f31c7676775a4c008f67088f"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af745c741f31c7676775a4c008f67088f">_maxHealth</a></td></tr>
+<tr class="separator:af745c741f31c7676775a4c008f67088f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf77c8fb2636f428ca79adbf344a4a32"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abf77c8fb2636f428ca79adbf344a4a32">_totalHitTime</a></td></tr>
 <tr class="separator:abf77c8fb2636f428ca79adbf344a4a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa783250f206d761b5c54d473746ae168"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa783250f206d761b5c54d473746ae168">_hitTime</a></td></tr>
@@ -188,14 +161,16 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0e9a9fb27aaf3668cf61b01c287a4a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af066e49813e8d88add13ecf24abb12dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af066e49813e8d88add13ecf24abb12dc">_canAttack</a></td></tr>
 <tr class="separator:af066e49813e8d88add13ecf24abb12dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61856db9c8a04e4d4297cd01943d7971"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a61856db9c8a04e4d4297cd01943d7971">_damage</a></td></tr>
+<tr class="separator:a61856db9c8a04e4d4297cd01943d7971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afde41c75401259b785f1eac261de3dee"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#afde41c75401259b785f1eac261de3dee">_attackDistance</a></td></tr>
 <tr class="separator:afde41c75401259b785f1eac261de3dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8f1bdf4f6937190e8b03a70a3e2c7af"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae8f1bdf4f6937190e8b03a70a3e2c7af">_currAttackCooldown</a></td></tr>
 <tr class="separator:ae8f1bdf4f6937190e8b03a70a3e2c7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8173ed8510869e62738545252f978eac"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8173ed8510869e62738545252f978eac">_lightAttackCooldown</a></td></tr>
 <tr class="separator:a8173ed8510869e62738545252f978eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeb686788ef1f2d15e69bcd5520ab7c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_weapon_instance.html">WeaponInstance</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aaeb686788ef1f2d15e69bcd5520ab7c9">_weapon</a></td></tr>
-<tr class="separator:aaeb686788ef1f2d15e69bcd5520ab7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d5cd34e31465ade343ff4070526677"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a97d5cd34e31465ade343ff4070526677">_noticeDistance</a></td></tr>
+<tr class="separator:a97d5cd34e31465ade343ff4070526677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a477f4443bdf423edfb5b16340b61f514"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character.html">Character</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a477f4443bdf423edfb5b16340b61f514">_target</a></td></tr>
 <tr class="separator:a477f4443bdf423edfb5b16340b61f514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ae37af84dc3bf680a754727474a012f"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8ae37af84dc3bf680a754727474a012f">_myNode</a></td></tr>
@@ -204,10 +179,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a56357ebea1a08ed4305d911c12406568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class is the superclass for all different kinds of characters. It contains methods and variables for movement and combat. <a class="el" href="class_player.html">Player</a> and BaseNPC both inherit from this class. </p>
+<div class="textblock"><p>The <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class is the superclass for all different kinds of characters. It contains methods and variables for movement and combat. <a class="el" href="class_player.html" title="The player character of the game. Only one exists. ">Player</a> and BaseNPC both inherit from this class. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abeceff67d90e513641f0d56f95713e7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abeceff67d90e513641f0d56f95713e7a">&#9670;&nbsp;</a></span>Character()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abeceff67d90e513641f0d56f95713e7a">&#9670;&nbsp;</a></span>Character() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -232,7 +207,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class. </p>
+<p>Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html" title="The manager of the level. ">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pMyNode</td><td>My node.</td></tr>
@@ -240,6 +215,31 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="adc27bdd255876169bad2ed0bae0cffb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc27bdd255876169bad2ed0bae0cffb5">&#9670;&nbsp;</a></span>Character() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Character::Character </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -269,32 +269,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a77852dcf9049fec0310fea7b38c995cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77852dcf9049fec0310fea7b38c995cb">&#9670;&nbsp;</a></span>AddStats()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Character::AddStats </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_equipment_instance.html">EquipmentInstance</a> *&#160;</td>
-          <td class="paramname"><em>item</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ac2ed7770303bc5ae537aa83cf3ce917c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac2ed7770303bc5ae537aa83cf3ce917c">&#9670;&nbsp;</a></span>adjustHealth()</h2>
 
@@ -332,80 +306,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a51e7b093bda706bf4f5dd392f683b257"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51e7b093bda706bf4f5dd392f683b257">&#9670;&nbsp;</a></span>adjustStamina()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Character::adjustStamina </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pAdjust</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adjusts the stamina. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pAdjust</td><td>The adjustment in stamina.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>False if the character runs out of statina.</dd></dl>
-
-<p>Reimplemented in <a class="el" href="class_player.html#aa79412b2614823bf5f3c934e2ba82855">Player</a>.</p>
-
-</div>
-</div>
-<a id="aefeb5586e03d03fab13896672697db28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefeb5586e03d03fab13896672697db28">&#9670;&nbsp;</a></span>adjustStaminaOverTime()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Character::adjustStaminaOverTime </td>
-          <td>(</td>
-          <td class="paramtype">Ogre::Real&#160;</td>
-          <td class="paramname"><em>pDeltaTime</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adjusts the stamina over time. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pDeltatime</td><td>The time since last frame.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>False if the character runs out of statina.</dd></dl>
-
-<p>Reimplemented in <a class="el" href="class_player.html#a16b0d94018b01ad6c8fa3a5f1e394be3">Player</a>.</p>
-
-</div>
-</div>
 <a id="a112ffb75592be9e1e9cf78b1428ffedf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a112ffb75592be9e1e9cf78b1428ffedf">&#9670;&nbsp;</a></span>die()</h2>
 
@@ -431,7 +331,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> dies. </p>
 
-<p>Reimplemented in <a class="el" href="class_npc.html#ab22c553f6ac5d6b5caaa2a8794c57540">Npc</a>, and <a class="el" href="class_basic_enemy.html#a1f55ea22a449f7289df10f8272ac9ff0">BasicEnemy</a>.</p>
+<p>Reimplemented in <a class="el" href="class_npc.html#ab22c553f6ac5d6b5caaa2a8794c57540">Npc</a>, <a class="el" href="class_player.html#aa2854fa9a73fdc548f7c0afcdd3367fd">Player</a>, and <a class="el" href="class_basic_enemy.html#a1f55ea22a449f7289df10f8272ac9ff0">BasicEnemy</a>.</p>
 
 </div>
 </div>
@@ -466,31 +366,6 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a80ab350e4aa4d744167257a16cd6fae0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80ab350e4aa4d744167257a16cd6fae0">&#9670;&nbsp;</a></span>getCurrentWeapon()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_weapon_instance.html">WeaponInstance</a>* Character::getCurrentWeapon </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -555,6 +430,31 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int Character::getLevel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60714941cdcf3d7772d2848577a98b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60714941cdcf3d7772d2848577a98b89">&#9670;&nbsp;</a></span>getMaxHealth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Real Character::getMaxHealth </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -644,36 +544,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7904d80b64f8d880cd64fdf95e228f76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7904d80b64f8d880cd64fdf95e228f76">&#9670;&nbsp;</a></span>initialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Character::initialize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Initializes this instance. </p>
-<dl class="section return"><dt>Returns</dt><dd>False if something failed during initialization</dd></dl>
-
-<p>Reimplemented in <a class="el" href="class_player.html#ad3051939df992c34b64c121bf4cbbdca">Player</a>.</p>
-
-</div>
-</div>
 <a id="ae3e4c945318f90fc19335603245a221f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae3e4c945318f90fc19335603245a221f">&#9670;&nbsp;</a></span>lightAttack()</h2>
 
@@ -696,6 +566,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Performs a light attack. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 <p>Reimplemented in <a class="el" href="class_basic_enemy.html#a68c3a15b6a32e03d8aa8d21d97d9cf1c">BasicEnemy</a>, and <a class="el" href="class_player.html#ae9aa14ad817b1b6ee3a69bed77958ee8">Player</a>.</p>
 
@@ -735,83 +608,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8cb8d915a9868b668ec71d15f9d6c620"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cb8d915a9868b668ec71d15f9d6c620">&#9670;&nbsp;</a></span>RemoveFromHand()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Character::RemoveFromHand </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a106c571377ccf725d7f5243b81f15b6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a106c571377ccf725d7f5243b81f15b6f">&#9670;&nbsp;</a></span>RemoveStats()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Character::RemoveStats </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_equipment_instance.html">EquipmentInstance</a> *&#160;</td>
-          <td class="paramname"><em>item</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac140ef8835c3b297eb4e80ff9551a4e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac140ef8835c3b297eb4e80ff9551a4e0">&#9670;&nbsp;</a></span>setCurrHealth()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Ogre::Real Character::setCurrHealth </td>
-          <td>(</td>
-          <td class="paramtype">Ogre::Real&#160;</td>
-          <td class="paramname"><em>pHP</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ae6dcb69787d9b881b8800ae074039a73"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6dcb69787d9b881b8800ae074039a73">&#9670;&nbsp;</a></span>setDirVector()</h2>
 
@@ -826,86 +622,6 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">Ogre::Vector3&#160;</td>
           <td class="paramname"><em>pMoveVec</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a179ff2871b30babfdd637ed3a576b084"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a179ff2871b30babfdd637ed3a576b084">&#9670;&nbsp;</a></span>SetHand()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Character::SetHand </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_weapon_instance.html">WeaponInstance</a> *&#160;</td>
-          <td class="paramname"><em>weapon</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a973881098e61234d6bcd742d61f7b31d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a973881098e61234d6bcd742d61f7b31d">&#9670;&nbsp;</a></span>setUpStats()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Character::setUpStats </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Sets up stats to default values. </p>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
-
-</div>
-</div>
-<a id="a75f9b774ba3ae91ac3f1a6d6e8812631"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75f9b774ba3ae91ac3f1a6d6e8812631">&#9670;&nbsp;</a></span>toggleRun()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Character::toggleRun </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>pRun</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -950,7 +666,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_npc.html#a744e08b519ad470bee70b835e0c531d7">Npc</a>, <a class="el" href="class_base_npc.html#a5da40fcc9bde57f0ed8eb95719c96648">BaseNpc</a>, and <a class="el" href="class_basic_enemy.html#a4f6407152e5d968186312e9e6a582091">BasicEnemy</a>.</p>
+<p>Reimplemented in <a class="el" href="class_npc.html#a744e08b519ad470bee70b835e0c531d7">Npc</a>, <a class="el" href="class_player.html#aca19196d7e2d2ccf7641de48404d34c7">Player</a>, <a class="el" href="class_base_npc.html#a5da40fcc9bde57f0ed8eb95719c96648">BaseNpc</a>, and <a class="el" href="class_basic_enemy.html#a4f6407152e5d968186312e9e6a582091">BasicEnemy</a>.</p>
 
 </div>
 </div>
@@ -1065,8 +781,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2b86a4e1bd9a107d379a2a3e528f2982"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b86a4e1bd9a107d379a2a3e528f2982">&#9670;&nbsp;</a></span>_currentStamina</h2>
+<a id="a61856db9c8a04e4d4297cd01943d7971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61856db9c8a04e4d4297cd01943d7971">&#9670;&nbsp;</a></span>_damage</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1075,7 +791,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Ogre::Real Character::_currentStamina</td>
+          <td class="memname">Ogre::Real Character::_damage</td>
         </tr>
       </table>
   </td>
@@ -1153,28 +869,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0dafcb97414d3b4c35b9720b4247e68c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dafcb97414d3b4c35b9720b4247e68c">&#9670;&nbsp;</a></span>_isRunning</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Character::_isRunning</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a8173ed8510869e62738545252f978eac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8173ed8510869e62738545252f978eac">&#9670;&nbsp;</a></span>_lightAttackCooldown</h2>
 
@@ -1186,6 +880,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">Ogre::Real Character::_lightAttackCooldown</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af745c741f31c7676775a4c008f67088f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af745c741f31c7676775a4c008f67088f">&#9670;&nbsp;</a></span>_maxHealth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Real Character::_maxHealth</td>
         </tr>
       </table>
   </td>
@@ -1263,6 +979,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a97d5cd34e31465ade343ff4070526677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d5cd34e31465ade343ff4070526677">&#9670;&nbsp;</a></span>_noticeDistance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Character::_noticeDistance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0c4595355fea6de6488cb81118ed03fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0c4595355fea6de6488cb81118ed03fe">&#9670;&nbsp;</a></span>_rotationspeed</h2>
 
@@ -1274,50 +1012,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">Ogre::Real Character::_rotationspeed</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae21dec2e5dd22901da9017394783e68e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae21dec2e5dd22901da9017394783e68e">&#9670;&nbsp;</a></span>_runspeed</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Ogre::Real Character::_runspeed</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abbc9722956291ca5212c53aa0a639d68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbc9722956291ca5212c53aa0a639d68">&#9670;&nbsp;</a></span>_stats</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_character_stats.html">CharacterStats</a>* Character::_stats</td>
         </tr>
       </table>
   </td>
@@ -1362,28 +1056,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">Ogre::Real Character::_totalHitTime</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aaeb686788ef1f2d15e69bcd5520ab7c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaeb686788ef1f2d15e69bcd5520ab7c9">&#9670;&nbsp;</a></span>_weapon</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_weapon_instance.html">WeaponInstance</a>* Character::_weapon</td>
         </tr>
       </table>
   </td>

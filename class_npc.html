@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -61,7 +61,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_npc-members.html">List of all members</a>  </div>
@@ -70,6 +69,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The firendly NPC class.  
+ <a href="class_npc.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_npc_8h_source.html">Npc.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Npc:</div>
@@ -77,171 +79,169 @@ Inheritance diagram for Npc:</div>
  <div class="center">
   <img src="class_npc.png" usemap="#Npc_map" alt=""/>
   <map id="Npc_map" name="Npc_map">
-<area href="class_base_npc.html" alt="BaseNpc" shape="rect" coords="0,56,69,80"/>
-<area href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ..." alt="Character" shape="rect" coords="0,0,69,24"/>
+<area href="class_base_npc.html" title="The super class for all NPC&#39;s in the game " alt="BaseNpc" shape="rect" coords="50,56,141,80"/>
+<area href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ..." alt="Character" shape="rect" coords="0,0,91,24"/>
+<area href="class_i_quest_content.html" title="An interface to ensure the content can be used in a quest. " alt="IQuestContent" shape="rect" coords="101,0,192,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac5a651d2b43150c464eede672b23a25a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#ac5a651d2b43150c464eede672b23a25a">Npc</a> (Ogre::SceneNode *, Ogre::SceneNode *, Ogre::Entity *)</td></tr>
-<tr class="memdesc:ac5a651d2b43150c464eede672b23a25a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the <a class="el" href="class_npc.html">Npc</a> class.  <a href="#ac5a651d2b43150c464eede672b23a25a">More...</a><br /></td></tr>
-<tr class="separator:ac5a651d2b43150c464eede672b23a25a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75381216f9f76f50ae502a71022c1c98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a75381216f9f76f50ae502a71022c1c98">Npc</a> (Ogre::SceneNode *, Ogre::SceneNode *, Ogre::Entity *, <a class="el" href="class_city.html">City</a> *, <a class="el" href="struct_building.html">Building</a> *)</td></tr>
+<tr class="memdesc:a75381216f9f76f50ae502a71022c1c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the <a class="el" href="class_npc.html" title="The firendly NPC class. ">Npc</a> class.  <a href="#a75381216f9f76f50ae502a71022c1c98">More...</a><br /></td></tr>
+<tr class="separator:a75381216f9f76f50ae502a71022c1c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2249c5155af3d692e51ff610064e81fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a2249c5155af3d692e51ff610064e81fe">~Npc</a> ()</td></tr>
+<tr class="memdesc:a2249c5155af3d692e51ff610064e81fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes an instance of the  class.  <a href="#a2249c5155af3d692e51ff610064e81fe">More...</a><br /></td></tr>
 <tr class="separator:a2249c5155af3d692e51ff610064e81fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7db08b7e2731a83f463c09854a9ebd92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a7db08b7e2731a83f463c09854a9ebd92">getInDialog</a> ()</td></tr>
 <tr class="separator:a7db08b7e2731a83f463c09854a9ebd92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a744e08b519ad470bee70b835e0c531d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a744e08b519ad470bee70b835e0c531d7">update</a> (Ogre::Real) override</td></tr>
 <tr class="memdesc:a744e08b519ad470bee70b835e0c531d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the frame based on the specified deltatime.  <a href="#a744e08b519ad470bee70b835e0c531d7">More...</a><br /></td></tr>
 <tr class="separator:a744e08b519ad470bee70b835e0c531d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed568775d4138eac003c3cba4db0a95d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#aed568775d4138eac003c3cba4db0a95d">dialog</a> (Ogre::Vector3)</td></tr>
-<tr class="memdesc:aed568775d4138eac003c3cba4db0a95d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts dialogs based on the distance between this instance and the specified player position.  <a href="#aed568775d4138eac003c3cba4db0a95d">More...</a><br /></td></tr>
-<tr class="separator:aed568775d4138eac003c3cba4db0a95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbe4ffc38063536d653469efbcbe3e4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#acbe4ffc38063536d653469efbcbe3e4c">toggleDialog</a> ()</td></tr>
-<tr class="memdesc:acbe4ffc38063536d653469efbcbe3e4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the dialog.  <a href="#acbe4ffc38063536d653469efbcbe3e4c">More...</a><br /></td></tr>
-<tr class="separator:acbe4ffc38063536d653469efbcbe3e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa36873f8f8545bbcd1e12edd1b877e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#aaa36873f8f8545bbcd1e12edd1b877e2">continueDialog</a> ()</td></tr>
-<tr class="memdesc:aaa36873f8f8545bbcd1e12edd1b877e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Continues the dialog.  <a href="#aaa36873f8f8545bbcd1e12edd1b877e2">More...</a><br /></td></tr>
-<tr class="separator:aaa36873f8f8545bbcd1e12edd1b877e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a379e28e63fc20647c52875e9f9951892"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a379e28e63fc20647c52875e9f9951892">talk</a> (Ogre::Vector3)</td></tr>
+<tr class="separator:a379e28e63fc20647c52875e9f9951892"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab22c553f6ac5d6b5caaa2a8794c57540"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#ab22c553f6ac5d6b5caaa2a8794c57540">die</a> () override</td></tr>
 <tr class="memdesc:ab22c553f6ac5d6b5caaa2a8794c57540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dies this instance.  <a href="#ab22c553f6ac5d6b5caaa2a8794c57540">More...</a><br /></td></tr>
 <tr class="separator:ab22c553f6ac5d6b5caaa2a8794c57540"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_base_npc"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_base_npc')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_base_npc.html">BaseNpc</a></td></tr>
-<tr class="memitem:ab385aac148336e07e2e73d7cec83cf20 inherit pub_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#ab385aac148336e07e2e73d7cec83cf20">BaseNpc</a> (Ogre::SceneNode *, Ogre::SceneNode *, Ogre::Entity *)</td></tr>
-<tr class="memdesc:ab385aac148336e07e2e73d7cec83cf20 inherit pub_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the <a class="el" href="class_base_npc.html">BaseNpc</a> class. All NPC's inherit from this class, either friendly and hostile NPC's.  <a href="class_base_npc.html#ab385aac148336e07e2e73d7cec83cf20">More...</a><br /></td></tr>
-<tr class="separator:ab385aac148336e07e2e73d7cec83cf20 inherit pub_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc6b2a0937183aa632e561be0158884e inherit pub_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#acc6b2a0937183aa632e561be0158884e">BaseNpc</a> (Ogre::SceneNode *, Ogre::SceneNode *, Ogre::Entity *, <a class="el" href="class_city.html">City</a> *)</td></tr>
+<tr class="memdesc:acc6b2a0937183aa632e561be0158884e inherit pub_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the <a class="el" href="class_base_npc.html" title="The super class for all NPC&#39;s in the game ">BaseNpc</a> class. All NPC's inherit from this class, either friendly and hostile NPC's.  <a href="class_base_npc.html#acc6b2a0937183aa632e561be0158884e">More...</a><br /></td></tr>
+<tr class="separator:acc6b2a0937183aa632e561be0158884e inherit pub_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39134eaa2b844a24577a719fa1aa6a12 inherit pub_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a39134eaa2b844a24577a719fa1aa6a12">BaseNpc</a> ()</td></tr>
+<tr class="separator:a39134eaa2b844a24577a719fa1aa6a12 inherit pub_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80410163ffb0386ba9cbec3475533d3d inherit pub_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a80410163ffb0386ba9cbec3475533d3d">~BaseNpc</a> ()</td></tr>
+<tr class="separator:a80410163ffb0386ba9cbec3475533d3d inherit pub_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87fa1d9416d2e6f523daec35caab15b7 inherit pub_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a87fa1d9416d2e6f523daec35caab15b7">rotatePivot</a> (Ogre::Vector3)</td></tr>
 <tr class="memdesc:a87fa1d9416d2e6f523daec35caab15b7 inherit pub_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates the pivot (same as rotating the model, doesnt affect movement).  <a href="class_base_npc.html#a87fa1d9416d2e6f523daec35caab15b7">More...</a><br /></td></tr>
 <tr class="separator:a87fa1d9416d2e6f523daec35caab15b7 inherit pub_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a928cf5e513b627ea7eca566e139d60c6 inherit pub_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a928cf5e513b627ea7eca566e139d60c6">calculateAStar</a> (Ogre::Vector3 targetPos)</td></tr>
+<tr class="memdesc:a928cf5e513b627ea7eca566e139d60c6 inherit pub_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the A* route from the current to the target position.  <a href="class_base_npc.html#a928cf5e513b627ea7eca566e139d60c6">More...</a><br /></td></tr>
+<tr class="separator:a928cf5e513b627ea7eca566e139d60c6 inherit pub_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_character"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_character')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_character.html">Character</a></td></tr>
 <tr class="memitem:abeceff67d90e513641f0d56f95713e7a inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abeceff67d90e513641f0d56f95713e7a">Character</a> (Ogre::SceneNode *, Ogre::Entity *)</td></tr>
-<tr class="memdesc:abeceff67d90e513641f0d56f95713e7a inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class.  <a href="class_character.html#abeceff67d90e513641f0d56f95713e7a">More...</a><br /></td></tr>
+<tr class="memdesc:abeceff67d90e513641f0d56f95713e7a inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html" title="The manager of the level. ">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class.  <a href="class_character.html#abeceff67d90e513641f0d56f95713e7a">More...</a><br /></td></tr>
 <tr class="separator:abeceff67d90e513641f0d56f95713e7a inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc27bdd255876169bad2ed0bae0cffb5 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#adc27bdd255876169bad2ed0bae0cffb5">Character</a> ()</td></tr>
+<tr class="separator:adc27bdd255876169bad2ed0bae0cffb5 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e9be564d05ded80962b2045aa70b3fc inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9e9be564d05ded80962b2045aa70b3fc">~Character</a> ()</td></tr>
 <tr class="separator:a9e9be564d05ded80962b2045aa70b3fc inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7904d80b64f8d880cd64fdf95e228f76 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a7904d80b64f8d880cd64fdf95e228f76">initialize</a> ()</td></tr>
-<tr class="memdesc:a7904d80b64f8d880cd64fdf95e228f76 inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance.  <a href="class_character.html#a7904d80b64f8d880cd64fdf95e228f76">More...</a><br /></td></tr>
-<tr class="separator:a7904d80b64f8d880cd64fdf95e228f76 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65599714a51af28bcd27d403e9618c1d inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a65599714a51af28bcd27d403e9618c1d">getDirVector</a> ()</td></tr>
-<tr class="separator:a65599714a51af28bcd27d403e9618c1d inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6dcb69787d9b881b8800ae074039a73 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae6dcb69787d9b881b8800ae074039a73">setDirVector</a> (Ogre::Vector3 pMoveVec)</td></tr>
-<tr class="separator:ae6dcb69787d9b881b8800ae074039a73 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72091b84c9b77dc1a76463bb1700b618 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a72091b84c9b77dc1a76463bb1700b618">move</a> (Ogre::Vector3 &amp;)</td></tr>
+<tr class="memdesc:a72091b84c9b77dc1a76463bb1700b618 inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the direction vector of the character with the specified vector.  <a href="class_character.html#a72091b84c9b77dc1a76463bb1700b618">More...</a><br /></td></tr>
+<tr class="separator:a72091b84c9b77dc1a76463bb1700b618 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ed7770303bc5ae537aa83cf3ce917c inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac2ed7770303bc5ae537aa83cf3ce917c">adjustHealth</a> (float)</td></tr>
+<tr class="memdesc:ac2ed7770303bc5ae537aa83cf3ce917c inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the health.  <a href="class_character.html#ac2ed7770303bc5ae537aa83cf3ce917c">More...</a><br /></td></tr>
+<tr class="separator:ac2ed7770303bc5ae537aa83cf3ce917c inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7503705c6cbd709ecd0bcde35e300b2 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa7503705c6cbd709ecd0bcde35e300b2">getPosition</a> ()</td></tr>
+<tr class="separator:aa7503705c6cbd709ecd0bcde35e300b2 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a650546ef32c12b200cd349d4fbda043c inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a650546ef32c12b200cd349d4fbda043c">getSpeed</a> ()</td></tr>
 <tr class="separator:a650546ef32c12b200cd349d4fbda043c inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa471cfcde432d71eb44176b5854f2cdc inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa471cfcde432d71eb44176b5854f2cdc">getRotationspeed</a> ()</td></tr>
 <tr class="separator:aa471cfcde432d71eb44176b5854f2cdc inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65599714a51af28bcd27d403e9618c1d inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a65599714a51af28bcd27d403e9618c1d">getDirVector</a> ()</td></tr>
+<tr class="separator:a65599714a51af28bcd27d403e9618c1d inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6dcb69787d9b881b8800ae074039a73 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae6dcb69787d9b881b8800ae074039a73">setDirVector</a> (Ogre::Vector3 pMoveVec)</td></tr>
+<tr class="separator:ae6dcb69787d9b881b8800ae074039a73 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae30412309c9b29dab530b8b139273da3 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae30412309c9b29dab530b8b139273da3">getCurrHealth</a> ()</td></tr>
 <tr class="separator:ae30412309c9b29dab530b8b139273da3 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac140ef8835c3b297eb4e80ff9551a4e0 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac140ef8835c3b297eb4e80ff9551a4e0">setCurrHealth</a> (Ogre::Real pHP)</td></tr>
-<tr class="separator:ac140ef8835c3b297eb4e80ff9551a4e0 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7503705c6cbd709ecd0bcde35e300b2 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa7503705c6cbd709ecd0bcde35e300b2">getPosition</a> ()</td></tr>
-<tr class="separator:aa7503705c6cbd709ecd0bcde35e300b2 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60714941cdcf3d7772d2848577a98b89 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a60714941cdcf3d7772d2848577a98b89">getMaxHealth</a> ()</td></tr>
+<tr class="separator:a60714941cdcf3d7772d2848577a98b89 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade8602e9521fc4c1849d1d1026bc0399 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ade8602e9521fc4c1849d1d1026bc0399">getLevel</a> ()</td></tr>
 <tr class="separator:ade8602e9521fc4c1849d1d1026bc0399 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80ab350e4aa4d744167257a16cd6fae0 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_weapon_instance.html">WeaponInstance</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a80ab350e4aa4d744167257a16cd6fae0">getCurrentWeapon</a> ()</td></tr>
-<tr class="separator:a80ab350e4aa4d744167257a16cd6fae0 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72091b84c9b77dc1a76463bb1700b618 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a72091b84c9b77dc1a76463bb1700b618">move</a> (Ogre::Vector3 &amp;)</td></tr>
-<tr class="memdesc:a72091b84c9b77dc1a76463bb1700b618 inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the direction vector of the character with the specified vector.  <a href="class_character.html#a72091b84c9b77dc1a76463bb1700b618">More...</a><br /></td></tr>
-<tr class="separator:a72091b84c9b77dc1a76463bb1700b618 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75f9b774ba3ae91ac3f1a6d6e8812631 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a75f9b774ba3ae91ac3f1a6d6e8812631">toggleRun</a> (bool pRun)</td></tr>
-<tr class="separator:a75f9b774ba3ae91ac3f1a6d6e8812631 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2ed7770303bc5ae537aa83cf3ce917c inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac2ed7770303bc5ae537aa83cf3ce917c">adjustHealth</a> (float)</td></tr>
-<tr class="memdesc:ac2ed7770303bc5ae537aa83cf3ce917c inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the health.  <a href="class_character.html#ac2ed7770303bc5ae537aa83cf3ce917c">More...</a><br /></td></tr>
-<tr class="separator:ac2ed7770303bc5ae537aa83cf3ce917c inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefeb5586e03d03fab13896672697db28 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aefeb5586e03d03fab13896672697db28">adjustStaminaOverTime</a> (Ogre::Real)</td></tr>
-<tr class="memdesc:aefeb5586e03d03fab13896672697db28 inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the stamina over time.  <a href="class_character.html#aefeb5586e03d03fab13896672697db28">More...</a><br /></td></tr>
-<tr class="separator:aefeb5586e03d03fab13896672697db28 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51e7b093bda706bf4f5dd392f683b257 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a51e7b093bda706bf4f5dd392f683b257">adjustStamina</a> (float)</td></tr>
-<tr class="memdesc:a51e7b093bda706bf4f5dd392f683b257 inherit pub_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the stamina.  <a href="class_character.html#a51e7b093bda706bf4f5dd392f683b257">More...</a><br /></td></tr>
-<tr class="separator:a51e7b093bda706bf4f5dd392f683b257 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a177dcaca30670cedf2c4b2b0015e9f63"><td class="memItemLeft" align="right" valign="top">static Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a177dcaca30670cedf2c4b2b0015e9f63">getMeshName</a> ()</td></tr>
-<tr class="separator:a177dcaca30670cedf2c4b2b0015e9f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_i_quest_content"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_i_quest_content')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_i_quest_content.html">IQuestContent</a></td></tr>
+<tr class="memitem:a5affe7b3d4a4b4272a229c53ba86f182 inherit pub_methods_class_i_quest_content"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_quest_content.html#a5affe7b3d4a4b4272a229c53ba86f182">IQuestContent</a> ()</td></tr>
+<tr class="separator:a5affe7b3d4a4b4272a229c53ba86f182 inherit pub_methods_class_i_quest_content"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4674828c68066b25e90f4fb40345a2 inherit pub_methods_class_i_quest_content"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_quest_content.html#aeb4674828c68066b25e90f4fb40345a2">~IQuestContent</a> ()</td></tr>
+<tr class="separator:aeb4674828c68066b25e90f4fb40345a2 inherit pub_methods_class_i_quest_content"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a1aded316ff23d323d4d33588a3517ad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a1aded316ff23d323d4d33588a3517ad7">adjustNeed</a> (<a class="el" href="_needs_8h.html#aee14a8d366fdd1aea93a64ac6aad9dc3">NeedType</a>, int)</td></tr>
 <tr class="memdesc:a1aded316ff23d323d4d33588a3517ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the given need.  <a href="#a1aded316ff23d323d4d33588a3517ad7">More...</a><br /></td></tr>
 <tr class="separator:a1aded316ff23d323d4d33588a3517ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00e789238705b83f8abe0682201f2cb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a00e789238705b83f8abe0682201f2cb7">needNewQuest</a> ()</td></tr>
+<tr class="memdesc:a00e789238705b83f8abe0682201f2cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns new quest based on current needs.  <a href="#a00e789238705b83f8abe0682201f2cb7">More...</a><br /></td></tr>
+<tr class="separator:a00e789238705b83f8abe0682201f2cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc054124f310931e1006b140bbb7b909"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#abc054124f310931e1006b140bbb7b909">getNameOptions</a> ()</td></tr>
+<tr class="memdesc:abc054124f310931e1006b140bbb7b909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name options.  <a href="#abc054124f310931e1006b140bbb7b909">More...</a><br /></td></tr>
+<tr class="separator:abc054124f310931e1006b140bbb7b909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a120bb498c8bec886c6eda0a337276bda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a120bb498c8bec886c6eda0a337276bda">_inDialog</a></td></tr>
 <tr class="memdesc:a120bb498c8bec886c6eda0a337276bda"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the player is currently talking with this NPC.  <a href="#a120bb498c8bec886c6eda0a337276bda">More...</a><br /></td></tr>
 <tr class="separator:a120bb498c8bec886c6eda0a337276bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46937ac88c58b1551e7ecca7cfd4c862"><td class="memItemLeft" align="right" valign="top">std::ifstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a46937ac88c58b1551e7ecca7cfd4c862">_dialogFile</a></td></tr>
-<tr class="memdesc:a46937ac88c58b1551e7ecca7cfd4c862"><td class="mdescLeft">&#160;</td><td class="mdescRight">File containing the dialog text for this NPC.  <a href="#a46937ac88c58b1551e7ecca7cfd4c862">More...</a><br /></td></tr>
-<tr class="separator:a46937ac88c58b1551e7ecca7cfd4c862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa232234bb3189f1d4055c30c37facc3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#afa232234bb3189f1d4055c30c37facc3">_dialogCount</a></td></tr>
 <tr class="memdesc:afa232234bb3189f1d4055c30c37facc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of different parts the dialog consists of.  <a href="#afa232234bb3189f1d4055c30c37facc3">More...</a><br /></td></tr>
 <tr class="separator:afa232234bb3189f1d4055c30c37facc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6606fe91bf07a86516244cd1b989b1cc"><td class="memItemLeft" align="right" valign="top">Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a6606fe91bf07a86516244cd1b989b1cc">_startDialogText</a></td></tr>
-<tr class="separator:a6606fe91bf07a86516244cd1b989b1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20a5c125bfe4648511673fc874ba24f3"><td class="memItemLeft" align="right" valign="top">Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a20a5c125bfe4648511673fc874ba24f3">_endDialogText</a></td></tr>
-<tr class="separator:a20a5c125bfe4648511673fc874ba24f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84151278a1814e13fba9f02eb4b6211c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_need_set.html">NeedSet</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a84151278a1814e13fba9f02eb4b6211c">_needs</a></td></tr>
-<tr class="memdesc:a84151278a1814e13fba9f02eb4b6211c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A set of needs, when the value of a need is low, this NPC wants something.  <a href="#a84151278a1814e13fba9f02eb4b6211c">More...</a><br /></td></tr>
-<tr class="separator:a84151278a1814e13fba9f02eb4b6211c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e7dd95670bc294e550056f1475005b2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a1e7dd95670bc294e550056f1475005b2">_dialog</a></td></tr>
+<tr class="separator:a1e7dd95670bc294e550056f1475005b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10be525b44fc96f04e88f28dea032846"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a10be525b44fc96f04e88f28dea032846">_name</a></td></tr>
+<tr class="separator:a10be525b44fc96f04e88f28dea032846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac357956f37a47ea102ec294e8f411028"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_need_set.html">NeedSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#ac357956f37a47ea102ec294e8f411028">_needs</a></td></tr>
+<tr class="memdesc:ac357956f37a47ea102ec294e8f411028"><td class="mdescLeft">&#160;</td><td class="mdescRight">A set of needs, when the value of a need is low, this NPC wants something.  <a href="#ac357956f37a47ea102ec294e8f411028">More...</a><br /></td></tr>
+<tr class="separator:ac357956f37a47ea102ec294e8f411028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a666098454d29557bff5aac443b2339fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1">Profession</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a666098454d29557bff5aac443b2339fb">_profession</a></td></tr>
 <tr class="memdesc:a666098454d29557bff5aac443b2339fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The profession of the NPC, used to generate relevant quests.  <a href="#a666098454d29557bff5aac443b2339fb">More...</a><br /></td></tr>
 <tr class="separator:a666098454d29557bff5aac443b2339fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdcf96577664136a976a860c58423a0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_city.html">City</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#acdcf96577664136a976a860c58423a0a">_hometown</a></td></tr>
+<tr class="separator:acdcf96577664136a976a860c58423a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90fb3fc0fb6fe87804a3777e97a104b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_building.html">Building</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a90fb3fc0fb6fe87804a3777e97a104b4">_home</a></td></tr>
+<tr class="separator:a90fb3fc0fb6fe87804a3777e97a104b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8210b60593ff64eef64c50efec9f539"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_quest.html">Quest</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#ae8210b60593ff64eef64c50efec9f539">_currentQuest</a></td></tr>
+<tr class="separator:ae8210b60593ff64eef64c50efec9f539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3225126d151edbb1fa708c8618267f30"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a3225126d151edbb1fa708c8618267f30">_hasQuest</a></td></tr>
+<tr class="separator:a3225126d151edbb1fa708c8618267f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_class_base_npc"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_base_npc')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_base_npc.html">BaseNpc</a></td></tr>
+<tr class="memitem:aa7a32d36585fda5f30e1d45862979d88 inherit pub_attribs_class_base_npc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_coordinate.html">Coordinate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#aa7a32d36585fda5f30e1d45862979d88">nextPos</a></td></tr>
+<tr class="separator:aa7a32d36585fda5f30e1d45862979d88 inherit pub_attribs_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a315d75bb13f4fdc47fc6c6e502c1f inherit pub_attribs_class_base_npc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_coordinate.html">Coordinate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a91a315d75bb13f4fdc47fc6c6e502c1f">goalPos</a></td></tr>
+<tr class="separator:a91a315d75bb13f4fdc47fc6c6e502c1f inherit pub_attribs_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_character"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_character')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_character.html">Character</a></td></tr>
 <tr class="memitem:a13f1da42b79a25988f203c53600cfb95 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a13f1da42b79a25988f203c53600cfb95">id</a></td></tr>
 <tr class="separator:a13f1da42b79a25988f203c53600cfb95 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_base_npc"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_base_npc')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_base_npc.html">BaseNpc</a></td></tr>
-<tr class="memitem:ac928a4caac2bff578d82b7663ed478b1 inherit pro_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#ac928a4caac2bff578d82b7663ed478b1">detectPlayer</a> ()</td></tr>
+<tr class="memitem:ac928a4caac2bff578d82b7663ed478b1 inherit pro_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#ac928a4caac2bff578d82b7663ed478b1">detectPlayer</a> ()</td></tr>
 <tr class="memdesc:ac928a4caac2bff578d82b7663ed478b1 inherit pro_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detects the player if he is in range.  <a href="class_base_npc.html#ac928a4caac2bff578d82b7663ed478b1">More...</a><br /></td></tr>
 <tr class="separator:ac928a4caac2bff578d82b7663ed478b1 inherit pro_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fa29abe29e382a1d006a7ac2d63b4fc inherit pro_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a1fa29abe29e382a1d006a7ac2d63b4fc">walkToNextPoint</a> ()</td></tr>
+<tr class="memdesc:a1fa29abe29e382a1d006a7ac2d63b4fc inherit pro_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the BaseNPC walk to next point.  <a href="class_base_npc.html#a1fa29abe29e382a1d006a7ac2d63b4fc">More...</a><br /></td></tr>
+<tr class="separator:a1fa29abe29e382a1d006a7ac2d63b4fc inherit pro_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c78259c615da96a86bc4a7446ea0085 inherit pro_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a6c78259c615da96a86bc4a7446ea0085">walkTo</a> (Ogre::Vector3)</td></tr>
+<tr class="memdesc:a6c78259c615da96a86bc4a7446ea0085 inherit pro_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the BaseNPC walk to the point.  <a href="class_base_npc.html#a6c78259c615da96a86bc4a7446ea0085">More...</a><br /></td></tr>
 <tr class="separator:a6c78259c615da96a86bc4a7446ea0085 inherit pro_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63fc860ff4b32b58c78bfd951b038e67 inherit pro_methods_class_base_npc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a63fc860ff4b32b58c78bfd951b038e67">debug</a> (std::string msg, int val=0)</td></tr>
+<tr class="memdesc:a63fc860ff4b32b58c78bfd951b038e67 inherit pro_methods_class_base_npc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debugs the specified message.  <a href="class_base_npc.html#a63fc860ff4b32b58c78bfd951b038e67">More...</a><br /></td></tr>
+<tr class="separator:a63fc860ff4b32b58c78bfd951b038e67 inherit pro_methods_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_character"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_character')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_character.html">Character</a></td></tr>
-<tr class="memitem:a179ff2871b30babfdd637ed3a576b084 inherit pro_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a179ff2871b30babfdd637ed3a576b084">SetHand</a> (<a class="el" href="class_weapon_instance.html">WeaponInstance</a> *weapon)</td></tr>
-<tr class="separator:a179ff2871b30babfdd637ed3a576b084 inherit pro_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cb8d915a9868b668ec71d15f9d6c620 inherit pro_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8cb8d915a9868b668ec71d15f9d6c620">RemoveFromHand</a> ()</td></tr>
-<tr class="separator:a8cb8d915a9868b668ec71d15f9d6c620 inherit pro_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77852dcf9049fec0310fea7b38c995cb inherit pro_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a77852dcf9049fec0310fea7b38c995cb">AddStats</a> (<a class="el" href="class_equipment_instance.html">EquipmentInstance</a> *item)</td></tr>
-<tr class="separator:a77852dcf9049fec0310fea7b38c995cb inherit pro_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a106c571377ccf725d7f5243b81f15b6f inherit pro_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a106c571377ccf725d7f5243b81f15b6f">RemoveStats</a> (<a class="el" href="class_equipment_instance.html">EquipmentInstance</a> *item)</td></tr>
-<tr class="separator:a106c571377ccf725d7f5243b81f15b6f inherit pro_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa825a4536d3f788acb5db8622e1d3a13 inherit pro_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa825a4536d3f788acb5db8622e1d3a13">findTarget</a> (std::vector&lt; <a class="el" href="class_character.html">Character</a> *&gt;)</td></tr>
 <tr class="memdesc:aa825a4536d3f788acb5db8622e1d3a13 inherit pro_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the target.  <a href="class_character.html#aa825a4536d3f788acb5db8622e1d3a13">More...</a><br /></td></tr>
 <tr class="separator:aa825a4536d3f788acb5db8622e1d3a13 inherit pro_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3e4c945318f90fc19335603245a221f inherit pro_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae3e4c945318f90fc19335603245a221f">lightAttack</a> ()</td></tr>
+<tr class="memdesc:ae3e4c945318f90fc19335603245a221f inherit pro_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a light attack.  <a href="class_character.html#ae3e4c945318f90fc19335603245a221f">More...</a><br /></td></tr>
 <tr class="separator:ae3e4c945318f90fc19335603245a221f inherit pro_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a973881098e61234d6bcd742d61f7b31d inherit pro_methods_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a973881098e61234d6bcd742d61f7b31d">setUpStats</a> ()</td></tr>
-<tr class="memdesc:a973881098e61234d6bcd742d61f7b31d inherit pro_methods_class_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up stats to default values.  <a href="class_character.html#a973881098e61234d6bcd742d61f7b31d">More...</a><br /></td></tr>
-<tr class="separator:a973881098e61234d6bcd742d61f7b31d inherit pro_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_base_npc"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_base_npc')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_base_npc.html">BaseNpc</a></td></tr>
-<tr class="memitem:ab1d0d0cd3103610ddc4fd02b11b69ed4 inherit pro_attribs_class_base_npc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#ab1d0d0cd3103610ddc4fd02b11b69ed4">_noticeDistance</a></td></tr>
-<tr class="separator:ab1d0d0cd3103610ddc4fd02b11b69ed4 inherit pro_attribs_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e17498512adc85a27c875147e642600 inherit pro_attribs_class_base_npc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a2e17498512adc85a27c875147e642600">_playerDetected</a></td></tr>
-<tr class="separator:a2e17498512adc85a27c875147e642600 inherit pro_attribs_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1997dc026ead61dba7f46f6c9d389bc inherit pro_attribs_class_base_npc"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#ae1997dc026ead61dba7f46f6c9d389bc">_myRotationNode</a></td></tr>
 <tr class="separator:ae1997dc026ead61dba7f46f6c9d389bc inherit pro_attribs_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f0aa3c42e7c444d7a4fc7219040fa3 inherit pro_attribs_class_base_npc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_city.html">City</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a39f0aa3c42e7c444d7a4fc7219040fa3">_myCity</a></td></tr>
+<tr class="separator:a39f0aa3c42e7c444d7a4fc7219040fa3 inherit pro_attribs_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e17498512adc85a27c875147e642600 inherit pro_attribs_class_base_npc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_npc.html#a2e17498512adc85a27c875147e642600">_playerDetected</a></td></tr>
+<tr class="separator:a2e17498512adc85a27c875147e642600 inherit pro_attribs_class_base_npc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_character"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_character')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_character.html">Character</a></td></tr>
 <tr class="memitem:a6b10b22d745b0a9f84e5765efd25539b inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a6b10b22d745b0a9f84e5765efd25539b">_movespeed</a></td></tr>
 <tr class="separator:a6b10b22d745b0a9f84e5765efd25539b inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae21dec2e5dd22901da9017394783e68e inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae21dec2e5dd22901da9017394783e68e">_runspeed</a></td></tr>
-<tr class="separator:ae21dec2e5dd22901da9017394783e68e inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c4595355fea6de6488cb81118ed03fe inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a0c4595355fea6de6488cb81118ed03fe">_rotationspeed</a></td></tr>
 <tr class="separator:a0c4595355fea6de6488cb81118ed03fe inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34b23c6550036c42d3507ebc5ee31403 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a34b23c6550036c42d3507ebc5ee31403">_dirVec</a></td></tr>
 <tr class="separator:a34b23c6550036c42d3507ebc5ee31403 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dafcb97414d3b4c35b9720b4247e68c inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a0dafcb97414d3b4c35b9720b4247e68c">_isRunning</a></td></tr>
-<tr class="separator:a0dafcb97414d3b4c35b9720b4247e68c inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ed77714255bf48b659f76bc6d70f572 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8ed77714255bf48b659f76bc6d70f572">_currentLevel</a></td></tr>
 <tr class="separator:a8ed77714255bf48b659f76bc6d70f572 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbc9722956291ca5212c53aa0a639d68 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character_stats.html">CharacterStats</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abbc9722956291ca5212c53aa0a639d68">_stats</a></td></tr>
-<tr class="separator:abbc9722956291ca5212c53aa0a639d68 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f1cc6a282ef2bb662e75cf9d4c9eef5 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a6f1cc6a282ef2bb662e75cf9d4c9eef5">_currentHealth</a></td></tr>
 <tr class="separator:a6f1cc6a282ef2bb662e75cf9d4c9eef5 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b86a4e1bd9a107d379a2a3e528f2982 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a2b86a4e1bd9a107d379a2a3e528f2982">_currentStamina</a></td></tr>
-<tr class="separator:a2b86a4e1bd9a107d379a2a3e528f2982 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af745c741f31c7676775a4c008f67088f inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af745c741f31c7676775a4c008f67088f">_maxHealth</a></td></tr>
+<tr class="separator:af745c741f31c7676775a4c008f67088f inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf77c8fb2636f428ca79adbf344a4a32 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abf77c8fb2636f428ca79adbf344a4a32">_totalHitTime</a></td></tr>
 <tr class="separator:abf77c8fb2636f428ca79adbf344a4a32 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa783250f206d761b5c54d473746ae168 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa783250f206d761b5c54d473746ae168">_hitTime</a></td></tr>
@@ -250,14 +250,16 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a0e9a9fb27aaf3668cf61b01c287a4a9e inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af066e49813e8d88add13ecf24abb12dc inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af066e49813e8d88add13ecf24abb12dc">_canAttack</a></td></tr>
 <tr class="separator:af066e49813e8d88add13ecf24abb12dc inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61856db9c8a04e4d4297cd01943d7971 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a61856db9c8a04e4d4297cd01943d7971">_damage</a></td></tr>
+<tr class="separator:a61856db9c8a04e4d4297cd01943d7971 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afde41c75401259b785f1eac261de3dee inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#afde41c75401259b785f1eac261de3dee">_attackDistance</a></td></tr>
 <tr class="separator:afde41c75401259b785f1eac261de3dee inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8f1bdf4f6937190e8b03a70a3e2c7af inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae8f1bdf4f6937190e8b03a70a3e2c7af">_currAttackCooldown</a></td></tr>
 <tr class="separator:ae8f1bdf4f6937190e8b03a70a3e2c7af inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8173ed8510869e62738545252f978eac inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8173ed8510869e62738545252f978eac">_lightAttackCooldown</a></td></tr>
 <tr class="separator:a8173ed8510869e62738545252f978eac inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeb686788ef1f2d15e69bcd5520ab7c9 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_weapon_instance.html">WeaponInstance</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aaeb686788ef1f2d15e69bcd5520ab7c9">_weapon</a></td></tr>
-<tr class="separator:aaeb686788ef1f2d15e69bcd5520ab7c9 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d5cd34e31465ade343ff4070526677 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a97d5cd34e31465ade343ff4070526677">_noticeDistance</a></td></tr>
+<tr class="separator:a97d5cd34e31465ade343ff4070526677 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a477f4443bdf423edfb5b16340b61f514 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character.html">Character</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a477f4443bdf423edfb5b16340b61f514">_target</a></td></tr>
 <tr class="separator:a477f4443bdf423edfb5b16340b61f514 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ae37af84dc3bf680a754727474a012f inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8ae37af84dc3bf680a754727474a012f">_myNode</a></td></tr>
@@ -265,9 +267,12 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a56357ebea1a08ed4305d911c12406568 inherit pro_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Ogre::Entity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a56357ebea1a08ed4305d911c12406568">_myEntity</a></td></tr>
 <tr class="separator:a56357ebea1a08ed4305d911c12406568 inherit pro_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac5a651d2b43150c464eede672b23a25a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5a651d2b43150c464eede672b23a25a">&#9670;&nbsp;</a></span>Npc()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The firendly NPC class. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_base_npc.html" title="The super class for all NPC&#39;s in the game ">BaseNpc</a></dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a75381216f9f76f50ae502a71022c1c98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75381216f9f76f50ae502a71022c1c98">&#9670;&nbsp;</a></span>Npc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,7 +293,19 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Ogre::Entity *&#160;</td>
-          <td class="paramname"><em>pMyEntity</em>&#160;</td>
+          <td class="paramname"><em>pMyEntity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_city.html">City</a> *&#160;</td>
+          <td class="paramname"><em>pMyCity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_building.html">Building</a> *&#160;</td>
+          <td class="paramname"><em>pBuilding</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -298,7 +315,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a new instance of the <a class="el" href="class_npc.html">Npc</a> class. </p>
+<p>Creates a new instance of the <a class="el" href="class_npc.html" title="The firendly NPC class. ">Npc</a> class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pMyNode</td><td>My node.</td></tr>
@@ -323,6 +340,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Finalizes an instance of the  class. </p>
 
 </div>
 </div>
@@ -369,52 +388,6 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="aaa36873f8f8545bbcd1e12edd1b877e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa36873f8f8545bbcd1e12edd1b877e2">&#9670;&nbsp;</a></span>continueDialog()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Npc::continueDialog </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Continues the dialog. </p>
-
-</div>
-</div>
-<a id="aed568775d4138eac003c3cba4db0a95d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed568775d4138eac003c3cba4db0a95d">&#9670;&nbsp;</a></span>dialog()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Npc::dialog </td>
-          <td>(</td>
-          <td class="paramtype">Ogre::Vector3&#160;</td>
-          <td class="paramname"><em>pPlayerPos</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Starts dialogs based on the distance between this instance and the specified player position. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pPlayerPos</td><td>The current player position.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>False if the player is too far away to start a dialog</dd></dl>
 
 </div>
 </div>
@@ -472,8 +445,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a177dcaca30670cedf2c4b2b0015e9f63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a177dcaca30670cedf2c4b2b0015e9f63">&#9670;&nbsp;</a></span>getMeshName()</h2>
+<a id="abc054124f310931e1006b140bbb7b909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc054124f310931e1006b140bbb7b909">&#9670;&nbsp;</a></span>getNameOptions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -482,7 +455,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static Ogre::String Npc::getMeshName </td>
+          <td class="memname">std::vector&lt; std::string &gt; Npc::getNameOptions </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -490,29 +463,65 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets the name options. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
 </div>
 </div>
-<a id="acbe4ffc38063536d653469efbcbe3e4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbe4ffc38063536d653469efbcbe3e4c">&#9670;&nbsp;</a></span>toggleDialog()</h2>
+<a id="a00e789238705b83f8abe0682201f2cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00e789238705b83f8abe0682201f2cb7">&#9670;&nbsp;</a></span>needNewQuest()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Npc::toggleDialog </td>
+          <td class="memname">void Npc::needNewQuest </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Toggles the dialog. </p>
+<p>Assigns new quest based on current needs. </p>
+
+</div>
+</div>
+<a id="a379e28e63fc20647c52875e9f9951892"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a379e28e63fc20647c52875e9f9951892">&#9670;&nbsp;</a></span>talk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Npc::talk </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Vector3&#160;</td>
+          <td class="paramname"><em>pPlayerPos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pPlayerPos</td><td>The current player position.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>False if the player is too far away to start a talk</dd></dl>
 
 </div>
 </div>
@@ -553,6 +562,50 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae8210b60593ff64eef64c50efec9f539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8210b60593ff64eef64c50efec9f539">&#9670;&nbsp;</a></span>_currentQuest</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_quest.html">Quest</a>* Npc::_currentQuest</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e7dd95670bc294e550056f1475005b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e7dd95670bc294e550056f1475005b2">&#9670;&nbsp;</a></span>_dialog</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; Npc::_dialog</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afa232234bb3189f1d4055c30c37facc3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa232234bb3189f1d4055c30c37facc3">&#9670;&nbsp;</a></span>_dialogCount</h2>
 
@@ -577,8 +630,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a46937ac88c58b1551e7ecca7cfd4c862"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46937ac88c58b1551e7ecca7cfd4c862">&#9670;&nbsp;</a></span>_dialogFile</h2>
+<a id="a3225126d151edbb1fa708c8618267f30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3225126d151edbb1fa708c8618267f30">&#9670;&nbsp;</a></span>_hasQuest</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -587,7 +640,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::ifstream Npc::_dialogFile</td>
+          <td class="memname">bool Npc::_hasQuest</td>
         </tr>
       </table>
   </td>
@@ -597,12 +650,10 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>File containing the dialog text for this NPC. </p>
-
 </div>
 </div>
-<a id="a20a5c125bfe4648511673fc874ba24f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20a5c125bfe4648511673fc874ba24f3">&#9670;&nbsp;</a></span>_endDialogText</h2>
+<a id="a90fb3fc0fb6fe87804a3777e97a104b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90fb3fc0fb6fe87804a3777e97a104b4">&#9670;&nbsp;</a></span>_home</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -611,7 +662,29 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Ogre::String Npc::_endDialogText</td>
+          <td class="memname"><a class="el" href="struct_building.html">Building</a>* Npc::_home</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acdcf96577664136a976a860c58423a0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdcf96577664136a976a860c58423a0a">&#9670;&nbsp;</a></span>_hometown</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_city.html">City</a>* Npc::_hometown</td>
         </tr>
       </table>
   </td>
@@ -647,8 +720,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a84151278a1814e13fba9f02eb4b6211c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84151278a1814e13fba9f02eb4b6211c">&#9670;&nbsp;</a></span>_needs</h2>
+<a id="a10be525b44fc96f04e88f28dea032846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10be525b44fc96f04e88f28dea032846">&#9670;&nbsp;</a></span>_name</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -657,7 +730,29 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_need_set.html">NeedSet</a>* Npc::_needs</td>
+          <td class="memname">std::string Npc::_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac357956f37a47ea102ec294e8f411028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac357956f37a47ea102ec294e8f411028">&#9670;&nbsp;</a></span>_needs</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_need_set.html">NeedSet</a> Npc::_needs</td>
         </tr>
       </table>
   </td>
@@ -692,28 +787,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The profession of the NPC, used to generate relevant quests. </p>
-
-</div>
-</div>
-<a id="a6606fe91bf07a86516244cd1b989b1cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6606fe91bf07a86516244cd1b989b1cc">&#9670;&nbsp;</a></span>_startDialogText</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Ogre::String Npc::_startDialogText</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>

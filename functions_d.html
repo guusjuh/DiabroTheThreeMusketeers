@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -62,6 +62,11 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>debug()
+: <a class="el" href="class_base_npc.html#a63fc860ff4b32b58c78bfd951b038e67">BaseNpc</a>
+, <a class="el" href="class_level_generator.html#a19bceda1983bce52ba0f4dbdcf869d9d">LevelGenerator</a>
+, <a class="el" href="class_zone.html#a5b477757d0479057cd700a36f2e1d120">Zone</a>
+</li>
 <li>DeleteAttribute()
 : <a class="el" href="classtinyxml2_1_1_x_m_l_element.html#aebd45aa7118964c30b32fe12e944628a">tinyxml2::XMLElement</a>
 </li>
@@ -81,11 +86,17 @@ $(function() {
 <li>destroy()
 : <a class="el" href="class_tree_node.html#a8969f8e688f61b279d86721266b52d70">TreeNode&lt; T &gt;</a>
 </li>
-<li>destroyDialog()
-: <a class="el" href="class_u_i_manager.html#a5f8745b19ef1bacac736e6941d618b89">UIManager</a>
+<li>destroyAllWidgets()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a52aa09ef9dc9e64f3494bba92887369c">DiabroUI::UIElementsManager</a>
+</li>
+<li>destroyAllWidgetsInTray()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#add913e747ca5bc5a49e8ec680d359126">DiabroUI::UIElementsManager</a>
 </li>
 <li>destroyScene()
 : <a class="el" href="class_base_application.html#a365146059b25391fe400f5fdb94f011e">BaseApplication</a>
+</li>
+<li>destroyWidget()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a93d797d37b50dedec7e3b0b11b253ecc">DiabroUI::UIElementsManager</a>
 </li>
 <li>detachFriendlyNPC()
 : <a class="el" href="class_level_manager.html#a220ee53531702e960b56ab380f61055a">LevelManager</a>
@@ -96,28 +107,29 @@ $(function() {
 <li>detectPlayer()
 : <a class="el" href="class_base_npc.html#ac928a4caac2bff578d82b7663ed478b1">BaseNpc</a>
 </li>
-<li>DeterminedArmor()
-: <a class="el" href="class_character_stats.html#a0ae5971c6370ea23ed32bfd624bd4805">CharacterStats</a>
+<li>determineCityTypes()
+: <a class="el" href="class_level_generator.html#ae7c2631bd184f933e5f3f6955250b782">LevelGenerator</a>
 </li>
-<li>DeterminedDamage()
-: <a class="el" href="class_character_stats.html#ab0c7d8058e1dd41df29eee838080125e">CharacterStats</a>
+<li>determineRarity()
+: <a class="el" href="class_quest_item.html#a516a1cc83427115994f1cd7a1e3fc1ba">QuestItem</a>
 </li>
-<li>DeterminedDodgeChance()
-: <a class="el" href="class_character_stats.html#a4dd9ea6783501bd896d7e9e0778cfbc8">CharacterStats</a>
+<li>DialogTextBox()
+: <a class="el" href="class_diabro_u_i_1_1_dialog_text_box.html#a095246e4d303b3f47373bf92be95b674">DiabroUI::DialogTextBox</a>
 </li>
-<li>DeterminedResistance()
-: <a class="el" href="class_character_stats.html#ae027678afc9d9716ad236176b02db45e">CharacterStats</a>
-</li>
-<li>dialog()
-: <a class="el" href="class_npc.html#aed568775d4138eac003c3cba4db0a95d">Npc</a>
+<li>dialogTriggered()
+: <a class="el" href="class_player.html#aea201acc4bb941e736a3b4778352cc69">Player</a>
 </li>
 <li>die()
 : <a class="el" href="class_basic_enemy.html#a1f55ea22a449f7289df10f8272ac9ff0">BasicEnemy</a>
 , <a class="el" href="class_character.html#a112ffb75592be9e1e9cf78b1428ffedf">Character</a>
 , <a class="el" href="class_npc.html#ab22c553f6ac5d6b5caaa2a8794c57540">Npc</a>
+, <a class="el" href="class_player.html#aa2854fa9a73fdc548f7c0afcdd3367fd">Player</a>
 </li>
-<li>DogdeToughnessFactor()
-: <a class="el" href="class_character_stats.html#a618998572675e429bc5e6955930bcdfd">CharacterStats</a>
+<li>diedUpdate()
+: <a class="el" href="class_u_i_manager.html#abbf182db149962cf64a55f50a0a4dd77">UIManager</a>
+</li>
+<li>donaldTrump()
+: <a class="el" href="class_level_generator.html#a7cfff18c04a144fc63ed0030a4e7ba21">LevelGenerator</a>
 </li>
 <li>DoubleAttribute()
 : <a class="el" href="classtinyxml2_1_1_x_m_l_element.html#a10a90c505aea716bf073eea1c97f33b5">tinyxml2::XMLElement</a>
@@ -128,8 +140,11 @@ $(function() {
 <li>DoubleValue()
 : <a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html#a4aa73513f54ff0087d3e804f0f54e30f">tinyxml2::XMLAttribute</a>
 </li>
+<li>drawDungeonFloor()
+: <a class="el" href="class_level_generator.html#a39c79d8ef4278bc70a8b21498ca5d652">LevelGenerator</a>
+</li>
 <li>DynArray()
-: <a class="el" href="classtinyxml2_1_1_dyn_array.html#a8e2251588f079f2e7a4080b2c53dabea">tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;</a>
+: <a class="el" href="classtinyxml2_1_1_dyn_array.html#aaad72f384e761c70a4519183eb8fea17">tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->

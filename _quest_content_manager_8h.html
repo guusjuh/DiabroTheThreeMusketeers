@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -64,7 +64,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">QuestContentManager.h File Reference</div>  </div>
 </div><!--header-->
@@ -72,14 +73,55 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="_quest_item_container_8h_source.html">QuestItemContainer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_quest_item_generator_8h_source.html">QuestItemGenerator.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="tinyxml2_8h_source.html">tinyxml2.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_city_8h_source.html">City.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_quest_item_8h_source.html">QuestItem.h</a>&quot;</code><br />
 </div>
 <p><a href="_quest_content_manager_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_content_manager.html">QuestContentManager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The manager of all available content for quests.  <a href="class_quest_content_manager.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a22ed084992233bf3f31b06277f17d6f1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1">QuestContent</a> { <br />
+&#160;&#160;<a class="el" href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1a4eb51a397e54ad576209da3819e9538d">QuestItemQC</a> = 0, 
+<a class="el" href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1abbc49430034e12dfc39ee6855134bcc9">TownQC</a>, 
+<a class="el" href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1a71ac866655bbdd7d762c240243276e54">HideOutQC</a>, 
+<a class="el" href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1a8821ac87c564d988d11b80729d8f5435">NPCQC</a>, 
+<br />
+&#160;&#160;<a class="el" href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1abbb9821976532114b2addd2cef00dcf1">EnemyQC</a>
+<br />
+ }<tr class="memdesc:a22ed084992233bf3f31b06277f17d6f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for the types of content used in a quest.  <a href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a22ed084992233bf3f31b06277f17d6f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a22ed084992233bf3f31b06277f17d6f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22ed084992233bf3f31b06277f17d6f1">&#9670;&nbsp;</a></span>QuestContent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1">QuestContent</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum for the types of content used in a quest. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a22ed084992233bf3f31b06277f17d6f1a4eb51a397e54ad576209da3819e9538d"></a>QuestItemQC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22ed084992233bf3f31b06277f17d6f1abbc49430034e12dfc39ee6855134bcc9"></a>TownQC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22ed084992233bf3f31b06277f17d6f1a71ac866655bbdd7d762c240243276e54"></a>HideOutQC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22ed084992233bf3f31b06277f17d6f1a8821ac87c564d988d11b80729d8f5435"></a>NPCQC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22ed084992233bf3f31b06277f17d6f1abbb9821976532114b2addd2cef00dcf1"></a>EnemyQC&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

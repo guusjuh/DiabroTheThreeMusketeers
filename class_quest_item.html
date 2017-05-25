@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_quest_item-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -68,29 +69,64 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>A item to be used in a quest.  
+ <a href="class_quest_item.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_quest_item_8h_source.html">QuestItem.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for QuestItem:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_quest_item.png" usemap="#QuestItem_map" alt=""/>
+  <map id="QuestItem_map" name="QuestItem_map">
+<area href="class_i_quest_content.html" title="An interface to ensure the content can be used in a quest. " alt="IQuestContent" shape="rect" coords="0,0,91,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adc4734721370d2baf7c58b7610515a19"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#adc4734721370d2baf7c58b7610515a19">QuestItem</a> (<a class="el" href="class_base_quest_item.html">BaseQuestItem</a> *pBaseItem, <a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a> pQuality)</td></tr>
-<tr class="separator:adc4734721370d2baf7c58b7610515a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19650970515e820a9c38014cfb46a560"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a19650970515e820a9c38014cfb46a560">QuestItem</a> ()</td></tr>
+<tr class="separator:a19650970515e820a9c38014cfb46a560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b46bf9e1a846b32b37f257292175688"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a5b46bf9e1a846b32b37f257292175688">QuestItem</a> (std::string pName, std::string pSprName, <a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a> pType)</td></tr>
+<tr class="separator:a5b46bf9e1a846b32b37f257292175688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace74dd4daa891ccede8e29872a417011"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#ace74dd4daa891ccede8e29872a417011">~QuestItem</a> ()</td></tr>
 <tr class="separator:ace74dd4daa891ccede8e29872a417011"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30c89e0f0228410c3b2c923d4a57d249"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_base_quest_item.html">BaseQuestItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a30c89e0f0228410c3b2c923d4a57d249">getInfo</a> ()</td></tr>
-<tr class="separator:a30c89e0f0228410c3b2c923d4a57d249"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3e0b061bc8a9fd3f77196c71d75733a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#ab3e0b061bc8a9fd3f77196c71d75733a">getQuality</a> ()</td></tr>
-<tr class="separator:ab3e0b061bc8a9fd3f77196c71d75733a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8d7302ee96e9d8c7521790eae4f92f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a7d8d7302ee96e9d8c7521790eae4f92f">getName</a> ()</td></tr>
+<tr class="separator:a7d8d7302ee96e9d8c7521790eae4f92f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad501a1e211318c5e6cac8f1f0f2190d9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#ad501a1e211318c5e6cac8f1f0f2190d9">getSpriteName</a> ()</td></tr>
+<tr class="separator:ad501a1e211318c5e6cac8f1f0f2190d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3adaa83a1089e7271d0f0c16b1e42ac5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a3adaa83a1089e7271d0f0c16b1e42ac5">getItemType</a> ()</td></tr>
+<tr class="separator:a3adaa83a1089e7271d0f0c16b1e42ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef9e1e585fce4f05a0feec97e64f857"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a9ef9e1e585fce4f05a0feec97e64f857">getRarity</a> ()</td></tr>
+<tr class="separator:a9ef9e1e585fce4f05a0feec97e64f857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_i_quest_content"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_i_quest_content')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_i_quest_content.html">IQuestContent</a></td></tr>
+<tr class="memitem:a5affe7b3d4a4b4272a229c53ba86f182 inherit pub_methods_class_i_quest_content"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_quest_content.html#a5affe7b3d4a4b4272a229c53ba86f182">IQuestContent</a> ()</td></tr>
+<tr class="separator:a5affe7b3d4a4b4272a229c53ba86f182 inherit pub_methods_class_i_quest_content"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4674828c68066b25e90f4fb40345a2 inherit pub_methods_class_i_quest_content"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_quest_content.html#aeb4674828c68066b25e90f4fb40345a2">~IQuestContent</a> ()</td></tr>
+<tr class="separator:aeb4674828c68066b25e90f4fb40345a2 inherit pub_methods_class_i_quest_content"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a516a1cc83427115994f1cd7a1e3fc1ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a516a1cc83427115994f1cd7a1e3fc1ba">determineRarity</a> ()</td></tr>
+<tr class="separator:a516a1cc83427115994f1cd7a1e3fc1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ae9fabd55bfad97cc673215999fc24300"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_base_quest_item.html">BaseQuestItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#ae9fabd55bfad97cc673215999fc24300">_info</a></td></tr>
-<tr class="separator:ae9fabd55bfad97cc673215999fc24300"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e1d4b82637e82f55560e6fd90ee6e1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a5e1d4b82637e82f55560e6fd90ee6e1d">_quality</a></td></tr>
-<tr class="separator:a5e1d4b82637e82f55560e6fd90ee6e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca5a83f4a348bca841610d42ef8251fc"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#aca5a83f4a348bca841610d42ef8251fc">_name</a></td></tr>
+<tr class="separator:aca5a83f4a348bca841610d42ef8251fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a510a66401eedde6d0cc1f04e589e79ac"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a510a66401eedde6d0cc1f04e589e79ac">_sprName</a></td></tr>
+<tr class="separator:a510a66401eedde6d0cc1f04e589e79ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46f25ea5afbd11607c8a8e464a8e0629"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#a46f25ea5afbd11607c8a8e464a8e0629">_itemType</a></td></tr>
+<tr class="separator:a46f25ea5afbd11607c8a8e464a8e0629"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaff8b1a0ca58b819cf8cab6a93871b3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html#afaff8b1a0ca58b819cf8cab6a93871b3">_rarity</a></td></tr>
+<tr class="separator:afaff8b1a0ca58b819cf8cab6a93871b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adc4734721370d2baf7c58b7610515a19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc4734721370d2baf7c58b7610515a19">&#9670;&nbsp;</a></span>QuestItem()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A item to be used in a quest. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i_quest_content.html" title="An interface to ensure the content can be used in a quest. ">IQuestContent</a></dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a19650970515e820a9c38014cfb46a560"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19650970515e820a9c38014cfb46a560">&#9670;&nbsp;</a></span>QuestItem() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -101,14 +137,45 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">QuestItem::QuestItem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_base_quest_item.html">BaseQuestItem</a> *&#160;</td>
-          <td class="paramname"><em>pBaseItem</em>, </td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b46bf9e1a846b32b37f257292175688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b46bf9e1a846b32b37f257292175688">&#9670;&nbsp;</a></span>QuestItem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QuestItem::QuestItem </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>pName</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a>&#160;</td>
-          <td class="paramname"><em>pQuality</em>&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>pSprName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a>&#160;</td>
+          <td class="paramname"><em>pType</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -130,30 +197,12 @@ Private Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QuestItem::~QuestItem </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a30c89e0f0228410c3b2c923d4a57d249"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30c89e0f0228410c3b2c923d4a57d249">&#9670;&nbsp;</a></span>getInfo()</h2>
-
-<div class="memitem">
-<div class="memproto">
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_base_quest_item.html">BaseQuestItem</a>* QuestItem::getInfo </td>
+          <td class="memname">QuestItem::~QuestItem </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -168,8 +217,9 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab3e0b061bc8a9fd3f77196c71d75733a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3e0b061bc8a9fd3f77196c71d75733a">&#9670;&nbsp;</a></span>getQuality()</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a516a1cc83427115994f1cd7a1e3fc1ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a516a1cc83427115994f1cd7a1e3fc1ba">&#9670;&nbsp;</a></span>determineRarity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,7 +228,107 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a> QuestItem::getQuality </td>
+          <td class="memname">void QuestItem::determineRarity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3adaa83a1089e7271d0f0c16b1e42ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3adaa83a1089e7271d0f0c16b1e42ac5">&#9670;&nbsp;</a></span>getItemType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a> QuestItem::getItemType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d8d7302ee96e9d8c7521790eae4f92f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d8d7302ee96e9d8c7521790eae4f92f">&#9670;&nbsp;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string QuestItem::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ef9e1e585fce4f05a0feec97e64f857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ef9e1e585fce4f05a0feec97e64f857">&#9670;&nbsp;</a></span>getRarity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int QuestItem::getRarity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad501a1e211318c5e6cac8f1f0f2190d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad501a1e211318c5e6cac8f1f0f2190d9">&#9670;&nbsp;</a></span>getSpriteName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string QuestItem::getSpriteName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -194,8 +344,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae9fabd55bfad97cc673215999fc24300"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9fabd55bfad97cc673215999fc24300">&#9670;&nbsp;</a></span>_info</h2>
+<a id="a46f25ea5afbd11607c8a8e464a8e0629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46f25ea5afbd11607c8a8e464a8e0629">&#9670;&nbsp;</a></span>_itemType</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,7 +354,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_base_quest_item.html">BaseQuestItem</a>* QuestItem::_info</td>
+          <td class="memname"><a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a> QuestItem::_itemType</td>
         </tr>
       </table>
   </td>
@@ -216,8 +366,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5e1d4b82637e82f55560e6fd90ee6e1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e1d4b82637e82f55560e6fd90ee6e1d">&#9670;&nbsp;</a></span>_quality</h2>
+<a id="aca5a83f4a348bca841610d42ef8251fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca5a83f4a348bca841610d42ef8251fc">&#9670;&nbsp;</a></span>_name</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,7 +376,51 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a> QuestItem::_quality</td>
+          <td class="memname">std::string QuestItem::_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afaff8b1a0ca58b819cf8cab6a93871b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaff8b1a0ca58b819cf8cab6a93871b3">&#9670;&nbsp;</a></span>_rarity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int QuestItem::_rarity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a510a66401eedde6d0cc1f04e589e79ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a510a66401eedde6d0cc1f04e589e79ac">&#9670;&nbsp;</a></span>_sprName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string QuestItem::_sprName</td>
         </tr>
       </table>
   </td>

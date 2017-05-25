@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['modifiertype',['ModifierType',['../_modifier_8h.html#a4a2d86a201fb2e8c362e88a5167e10d4',1,'Modifier.h']]]
+  ['elementclosingtype',['ElementClosingType',['../classtinyxml2_1_1_x_m_l_element.html#ab5f90e2493c35702175235127e2935b4',1,'tinyxml2::XMLElement']]]
 ];

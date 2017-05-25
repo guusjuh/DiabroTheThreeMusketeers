@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -73,30 +73,30 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="_base_npc_8h_source.html">BaseNpc.h</a>&quot;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &quot;<a class="el" href="_needs_8h_source.html">Needs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_quest_8h_source.html">Quest.h</a>&quot;</code><br />
 </div>
 <p><a href="_npc_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html">Npc</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The firendly NPC class.  <a href="class_npc.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a1698c91a11e2aa9dae386a206abf6ca1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1">Profession</a> { <br />
-&#160;&#160;<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1ac9d3e887722f2bc482bcca9d41c512af">None</a> = 0, 
-<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1aa744c8280b2771476692d76988b7a4e6">Smith</a>, 
+&#160;&#160;<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1aa744c8280b2771476692d76988b7a4e6">Smith</a> = 0, 
 <a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a40739147a75d40bf7e1865cb9369600f">Guard</a>, 
-<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a00221869e50a6e773981f9918542f6aa">Parent</a>, 
-<br />
-&#160;&#160;<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a0fd63319886fab438b16e351a10218c7">Dungeoneer</a>, 
+<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a9bdf59c512622b9dd714e5e26fbd48e9">Priest</a>, 
 <a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1aba675629b24549f652486e92e8065053">Alchemist</a>, 
-<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1afcc922d261b570bdef1c0a2393444d14">Shopkeeper</a>, 
+<br />
+&#160;&#160;<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1afcc922d261b570bdef1c0a2393444d14">Shopkeeper</a>, 
 <a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a5e19c04ab3657ef7735c249bc7d57827">Nobleman</a>, 
+<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a89e328704d28f9380a43960d6f5a60e5">AMOUNT_OF_PROFS</a>
 <br />
-&#160;&#160;<a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a89e328704d28f9380a43960d6f5a60e5">AMOUNT_OF_PROFS</a>
-<br />
- }</td></tr>
+ }<tr class="memdesc:a1698c91a11e2aa9dae386a206abf6ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for the different professions of NPC's. An important variable for the quest system.  <a href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:a1698c91a11e2aa9dae386a206abf6ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -111,12 +111,12 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Enum for the different professions of NPC's. An important variable for the quest system. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1ac9d3e887722f2bc482bcca9d41c512af"></a>None&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1aa744c8280b2771476692d76988b7a4e6"></a>Smith&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1aa744c8280b2771476692d76988b7a4e6"></a>Smith&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1a40739147a75d40bf7e1865cb9369600f"></a>Guard&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1a00221869e50a6e773981f9918542f6aa"></a>Parent&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1a0fd63319886fab438b16e351a10218c7"></a>Dungeoneer&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1a9bdf59c512622b9dd714e5e26fbd48e9"></a>Priest&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1aba675629b24549f652486e92e8065053"></a>Alchemist&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1afcc922d261b570bdef1c0a2393444d14"></a>Shopkeeper&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1698c91a11e2aa9dae386a206abf6ca1a5e19c04ab3657ef7735c249bc7d57827"></a>Nobleman&#160;</td><td class="fielddoc"></td></tr>

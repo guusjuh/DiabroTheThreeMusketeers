@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -64,22 +64,102 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">City.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;OgreSceneNode.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_i_quest_content_8h_source.html">IQuestContent.h</a>&quot;</code><br />
+<code>#include &quot;math.h&quot;</code><br />
 </div>
 <p><a href="_city_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconnection.html">connection</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_coordinate.html">Coordinate</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">integer coordinate representing a 2D position  <a href="struct_coordinate.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_building.html">Building</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct for a building in a city.  <a href="struct_building.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_city.html">City</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The city class containing buildings and inhabitants.  <a href="class_city.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ab540f7414f306325d92272bcef1e34e1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_city_8h.html#ab540f7414f306325d92272bcef1e34e1">RoomType</a> { <a class="el" href="_city_8h.html#ab540f7414f306325d92272bcef1e34e1ae56e0c54a11afb305013e1fec00f3e07">CityRT</a>, 
+<a class="el" href="_city_8h.html#ab540f7414f306325d92272bcef1e34e1a09829efc3cc94de46022389405469cac">HideoutRT</a>, 
+<a class="el" href="_city_8h.html#ab540f7414f306325d92272bcef1e34e1a8bac51fbbc72e7e0ef56b99a23654da4">sizeRT</a>
+ }<tr class="memdesc:ab540f7414f306325d92272bcef1e34e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for the different city types.  <a href="_city_8h.html#ab540f7414f306325d92272bcef1e34e1">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:ab540f7414f306325d92272bcef1e34e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba2b45f536f3c9719aea96bb472784a4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4">BuildingType</a> { <br />
+&#160;&#160;<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4a207479cda42cf4f4d460d84cde290522">Smithery</a> = 0, 
+<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4ac21eb7b9b38e879cee0766512824de83">GuardHouse</a>, 
+<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4a15b109548b568784304bcd69af07f535">Church</a>, 
+<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4a5a758d574f76ae2cf29d82731a2ccdd1">PotionStore</a>, 
+<br />
+&#160;&#160;<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4a0ecdbd26bfda4664ec2ec9ad0b93f34a">Shop</a>, 
+<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4add13e6415467138efc3470c019874c4a">FancyHouse</a>, 
+<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4ade3534d3d7bb244c5728f73c6084a347">HideOutHouse</a>, 
+<a class="el" href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4abd319fc6849b806de33cfc6db81bfd7c">AMOUNT_OF_BUILDINGTYPES</a>
+<br />
+ }<tr class="memdesc:aba2b45f536f3c9719aea96bb472784a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for the different building types. Corresponds to the NPC's professions.  <a href="_city_8h.html#aba2b45f536f3c9719aea96bb472784a4">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:aba2b45f536f3c9719aea96bb472784a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aba2b45f536f3c9719aea96bb472784a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba2b45f536f3c9719aea96bb472784a4">&#9670;&nbsp;</a></span>BuildingType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_building_type.html">BuildingType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum for the different building types. Corresponds to the NPC's professions. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4a207479cda42cf4f4d460d84cde290522"></a>Smithery&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4ac21eb7b9b38e879cee0766512824de83"></a>GuardHouse&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4a15b109548b568784304bcd69af07f535"></a>Church&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4a5a758d574f76ae2cf29d82731a2ccdd1"></a>PotionStore&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4a0ecdbd26bfda4664ec2ec9ad0b93f34a"></a>Shop&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4add13e6415467138efc3470c019874c4a"></a>FancyHouse&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4ade3534d3d7bb244c5728f73c6084a347"></a>HideOutHouse&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aba2b45f536f3c9719aea96bb472784a4abd319fc6849b806de33cfc6db81bfd7c"></a>AMOUNT_OF_BUILDINGTYPES&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ab540f7414f306325d92272bcef1e34e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab540f7414f306325d92272bcef1e34e1">&#9670;&nbsp;</a></span>RoomType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_city_8h.html#ab540f7414f306325d92272bcef1e34e1">RoomType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum for the different city types. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab540f7414f306325d92272bcef1e34e1ae56e0c54a11afb305013e1fec00f3e07"></a>CityRT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab540f7414f306325d92272bcef1e34e1a09829efc3cc94de46022389405469cac"></a>HideoutRT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab540f7414f306325d92272bcef1e34e1a8bac51fbbc72e7e0ef56b99a23654da4"></a>sizeRT&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

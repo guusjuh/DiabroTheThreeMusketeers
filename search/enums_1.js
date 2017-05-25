@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['handedtype',['HandedType',['../_base_weapon_8h.html#ac970cbec51fde7e46dbc741387c91dd3',1,'BaseWeapon.h']]]
+  ['buildingtype',['BuildingType',['../_city_8h.html#aba2b45f536f3c9719aea96bb472784a4',1,'City.h']]]
 ];

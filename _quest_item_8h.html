@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -71,41 +71,54 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;OgrePrerequisites.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="_base_quest_item_8h_source.html">BaseQuestItem.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i_quest_content_8h_source.html">IQuestContent.h</a>&quot;</code><br />
 </div>
 <p><a href="_quest_item_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_item.html">QuestItem</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A item to be used in a quest.  <a href="class_quest_item.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a98cd980d61a569ef9dd81fb04de18612"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a> { <a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612ad0977dfecc2b878171d14b5148538d48">NormalQI</a>, 
-<a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612a90d75bf38f09c5a4af89d4eb5c72e758">MysticalQI</a>, 
-<a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612a51299545f131b82ce18892473a3f91d2">ValuableQI</a>, 
-<a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612a83c6944724acf1df922335e11d21c99b">AMOUNT_OF_QUEST_ITEM_QUALITIES</a>
- }</td></tr>
-<tr class="separator:a98cd980d61a569ef9dd81fb04de18612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31b1a7cde307edbb3ccce3497dd08069"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a> { <br />
+&#160;&#160;<a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069a3a7118c60f80cc12294be6a3a7140f51">Book</a>, 
+<a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069a92df45c86aa47dc3caac92f2c7eded70">RareBook</a>, 
+<a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069a82b89f0b3ba4dac1d89386da86ec22ff">Food</a>, 
+<a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069ac1e6e81229f2f27b4ff9814e39fe1178">RawMaterials</a>, 
+<br />
+&#160;&#160;<a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069af141b810b602efaff188c4cc0d0f7c1f">Gem</a>, 
+<a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069ab00849a75aa6ad083c075e9fcd089750">Mysterious</a>, 
+<a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069ae3480db4a9709dbddc719dde54f4ee49">AMOUNT_OF_QUEST_ITEM_TYPES</a>
+<br />
+ }<tr class="memdesc:a31b1a7cde307edbb3ccce3497dd08069"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for the types of quest items.  <a href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a31b1a7cde307edbb3ccce3497dd08069"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a98cd980d61a569ef9dd81fb04de18612"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98cd980d61a569ef9dd81fb04de18612">&#9670;&nbsp;</a></span>QuestItemQuality</h2>
+<a id="a31b1a7cde307edbb3ccce3497dd08069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31b1a7cde307edbb3ccce3497dd08069">&#9670;&nbsp;</a></span>QuestItemType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612">QuestItemQuality</a></td>
+          <td class="memname">enum <a class="el" href="_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Enum for the types of quest items. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a98cd980d61a569ef9dd81fb04de18612ad0977dfecc2b878171d14b5148538d48"></a>NormalQI&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a98cd980d61a569ef9dd81fb04de18612a90d75bf38f09c5a4af89d4eb5c72e758"></a>MysticalQI&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a98cd980d61a569ef9dd81fb04de18612a51299545f131b82ce18892473a3f91d2"></a>ValuableQI&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a98cd980d61a569ef9dd81fb04de18612a83c6944724acf1df922335e11d21c99b"></a>AMOUNT_OF_QUEST_ITEM_QUALITIES&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a31b1a7cde307edbb3ccce3497dd08069a3a7118c60f80cc12294be6a3a7140f51"></a>Book&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a31b1a7cde307edbb3ccce3497dd08069a92df45c86aa47dc3caac92f2c7eded70"></a>RareBook&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a31b1a7cde307edbb3ccce3497dd08069a82b89f0b3ba4dac1d89386da86ec22ff"></a>Food&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a31b1a7cde307edbb3ccce3497dd08069ac1e6e81229f2f27b4ff9814e39fe1178"></a>RawMaterials&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a31b1a7cde307edbb3ccce3497dd08069af141b810b602efaff188c4cc0d0f7c1f"></a>Gem&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a31b1a7cde307edbb3ccce3497dd08069ab00849a75aa6ad083c075e9fcd089750"></a>Mysterious&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a31b1a7cde307edbb3ccce3497dd08069ae3480db4a9709dbddc719dde54f4ee49"></a>AMOUNT_OF_QUEST_ITEM_TYPES&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

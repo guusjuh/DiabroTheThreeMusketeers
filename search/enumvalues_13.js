@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['valuableqi',['ValuableQI',['../_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612a51299545f131b82ce18892473a3f91d2',1,'QuestItem.h']]],
-  ['vitality',['Vitality',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7acee4f0fa378d68ec2b6c65a75f226e80',1,'CharacterStats.h']]]
+  ['wealthneed',['WealthNeed',['../_needs_8h.html#aee14a8d366fdd1aea93a64ac6aad9dc3ae30ac03819a00c0ee5c9cea624ca5416',1,'Needs.h']]],
+  ['westdt',['WestDT',['../_level_generator_8h.html#a8ef30fa9c08e08c8706653571f9f5b81a142a307ba8922bffe389aba1b8f626af',1,'LevelGenerator.h']]]
 ];

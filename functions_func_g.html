@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -68,28 +68,69 @@ $(function() {
 <li>GameManager()
 : <a class="el" href="class_game_manager.html#a31b0a9749ce9f4317673f9786b5598bc">GameManager</a>
 </li>
-<li>GenerateCities()
-: <a class="el" href="class_zone.html#a97171069b181161776b5c701d45328ad">Zone</a>
+<li>generateAbstractQuest()
+: <a class="el" href="class_quest_generator.html#a23a84459f809de9afe14688ba1e0a4dd">QuestGenerator</a>
 </li>
-<li>generateRandomItem()
-: <a class="el" href="class_item_generator.html#af06fe699d9a464eeeb25d04c38a70e4a">ItemGenerator</a>
-, <a class="el" href="class_quest_item_generator.html#a1fddcb126a79512b0afb6e0dab6a612e">QuestItemGenerator</a>
+<li>generateBuildings()
+: <a class="el" href="class_city.html#a93dd7068d13f3410aa4ff9e4b2508ce1">City</a>
 </li>
-<li>getAbilityValue()
-: <a class="el" href="class_need_set.html#ac761f2040f1a761c6216098c06a5d2a8">NeedSet</a>
+<li>generateCities()
+: <a class="el" href="class_zone.html#a2a3ea86dc9a1e0ccc70af05fdeceed27">Zone</a>
 </li>
-<li>getAffected()
-: <a class="el" href="class_modifier.html#a60c6c513dda965db576d7a43a8835114">Modifier</a>
+<li>generateCity()
+: <a class="el" href="class_city_manager.html#a264bcb16b1af76d334b5f2f3ec27a7aa">CityManager</a>
 </li>
-<li>getBaseStats()
-: <a class="el" href="class_base_equipment.html#abd0794f1a53a5cc27f3ba780adf4b555">BaseEquipment</a>
-, <a class="el" href="class_equipment_instance.html#a7075247c3203a33eb1e5620f9f73d82b">EquipmentInstance</a>
+<li>generateCollisionGrid()
+: <a class="el" href="class_zone.html#a70d791017e97b5fc8042a1ea284a2ea5">Zone</a>
+</li>
+<li>generateConcreteQuest()
+: <a class="el" href="class_quest_generator.html#a99232e9b11e57104835dc48848dc6de7">QuestGenerator</a>
+</li>
+<li>generateItem()
+: <a class="el" href="class_quest_item_generator.html#ac825fe9f73bd9b98435982cdaba94b80">QuestItemGenerator</a>
+</li>
+<li>generateItems()
+: <a class="el" href="class_quest_item_generator.html#a3097001aaf7d0004027cd21a03bf6add">QuestItemGenerator</a>
+</li>
+<li>generatePathways()
+: <a class="el" href="class_zone.html#a936d08f9f461cccd7a6eb310681ba7ec">Zone</a>
+</li>
+<li>generateQuest()
+: <a class="el" href="class_quest_generator.html#a4ef64fbdc38f14514ed27a0dddf0b28c">QuestGenerator</a>
+, <a class="el" href="class_quest_manager.html#a089875b0a028e61ab85dff0a34efa446">QuestManager</a>
+</li>
+<li>GenericContainer()
+: <a class="el" href="class_generic_container.html#a1d2b725c383c4b74cc00d41fee9bcf17">GenericContainer&lt; T &gt;</a>
+</li>
+<li>getActionContainer()
+: <a class="el" href="class_quest_manager.html#a8a6a92b76daecbf14e63435fafa60f76">QuestManager</a>
+</li>
+<li>getActionSequence()
+: <a class="el" href="class_strategy.html#a03a00cf6bea47f000452a4891a1cd331">Strategy</a>
+</li>
+<li>GetAmount()
+: <a class="el" href="class_generic_container.html#a53cb69ce5e2c84d35ae267ea2dc6e365">GenericContainer&lt; T &gt;</a>
+</li>
+<li>getBackdropContainer()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a9a21c044acd8ad56129baac40b7edc5f">DiabroUI::UIElementsManager</a>
+</li>
+<li>getBackdropLayer()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a3b37b862a6ea068dcb4f02fe6c579788">DiabroUI::UIElementsManager</a>
 </li>
 <li>getCamera()
 : <a class="el" href="class_game_manager.html#ad8bb4560faeb57fc31189fb8e23861d8">GameManager</a>
 </li>
 <li>getCamNode()
 : <a class="el" href="class_level_manager.html#ae22bc27de5e93a4f9252f455c336c715">LevelManager</a>
+</li>
+<li>getCaption()
+: <a class="el" href="class_diabro_u_i_1_1_dialog_text_box.html#aefdf0d3cd27f1ac91d769afb25065524">DiabroUI::DialogTextBox</a>
+</li>
+<li>getCaptionWidth()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#aa1baeda3fe1bcb087268a503f778d6be">DiabroUI::Widget</a>
+</li>
+<li>getCenterTile()
+: <a class="el" href="class_city.html#a75914c3ac11bf82bad68a51109121b2e">City</a>
 </li>
 <li>GetCharacterRef()
 : <a class="el" href="classtinyxml2_1_1_x_m_l_util.html#a5a96e5144a8d693dc4bcd783d9964648">tinyxml2::XMLUtil</a>
@@ -100,14 +141,24 @@ $(function() {
 <li>getChildren()
 : <a class="el" href="class_tree_node.html#a1053afac2b4fbc88bbd582fb4fede758">TreeNode&lt; T &gt;</a>
 </li>
+<li>getCollisionGrid()
+: <a class="el" href="class_zone.html#adeecd1b47ec3d20bd43da78ac508654e">Zone</a>
+</li>
 <li>getComfortValue()
 : <a class="el" href="class_need_set.html#a7a4924a7020d3014eceaca3772d8e9c0">NeedSet</a>
+</li>
+<li>getConcreteContent()
+: <a class="el" href="class_action.html#afa8592c7482d7bcd390ac2ea72321232">Action</a>
 </li>
 <li>getConquestValue()
 : <a class="el" href="class_need_set.html#a34aeb22f0c4b4b5e26686a99686c9f0c">NeedSet</a>
 </li>
-<li>getCurrentWeapon()
-: <a class="el" href="class_character.html#a80ab350e4aa4d744167257a16cd6fae0">Character</a>
+<li>getCurrentAction()
+: <a class="el" href="class_strategy.html#a87806c7b148b4d5c3e68ab9ec4188070">Strategy</a>
+</li>
+<li>getCurrentState()
+: <a class="el" href="class_game_manager.html#a80859b9b1c68db8a7234e8523fa69930">GameManager</a>
+, <a class="el" href="class_state_machine.html#a9a1347939d3b8631e873f69d1b5d5d5e">StateMachine&lt; T &gt;</a>
 </li>
 <li>getCurrHealth()
 : <a class="el" href="class_character.html#ae30412309c9b29dab530b8b139273da3">Character</a>
@@ -118,14 +169,20 @@ $(function() {
 <li>getDirVector()
 : <a class="el" href="class_character.html#a65599714a51af28bcd27d403e9618c1d">Character</a>
 </li>
+<li>getDistTo()
+: <a class="el" href="class_city.html#a258bdb41c08d3c79485d5e2f48c3c471">City</a>
+</li>
+<li>getDistToSis()
+: <a class="el" href="class_level_generator.html#a6c3e86e3bcac506d2e64d42f05bda467">LevelGenerator</a>
+</li>
 <li>GetDocument()
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a2de84cfa4ec3fe249bad745069d145f1">tinyxml2::XMLNode</a>
 </li>
-<li>getDropped()
-: <a class="el" href="class_item_instance.html#a307eb48af3e383b10dbe3990bcbbf5d4">ItemInstance</a>
+<li>getEmptyPosition()
+: <a class="el" href="class_level_generator.html#a0a4f8c5af160ee2c42fbc079da967e5d">LevelGenerator</a>
 </li>
-<li>getEquipmentType()
-: <a class="el" href="class_base_equipment.html#aa17108b0674325e2a0d6e575f8a76ae8">BaseEquipment</a>
+<li>getEnemyCities()
+: <a class="el" href="class_quest_content_manager.html#a987251d94555881a38fbb4fcbe0db48d">QuestContentManager</a>
 </li>
 <li>getEquipmentValue()
 : <a class="el" href="class_need_set.html#a1dacf398a384c8eead51efacd31732f3">NeedSet</a>
@@ -139,65 +196,58 @@ $(function() {
 <li>GetErrorStr2()
 : <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a2d952f49c761bffd2903250680a8716b">tinyxml2::XMLDocument</a>
 </li>
-<li>getFloatRange()
-: <a class="el" href="class_stat_range.html#ab91b38406d4ce350e1877c6c20fbfb89">StatRange</a>
-</li>
 <li>getFriendlyNpcs()
 : <a class="el" href="class_level_manager.html#acbda4f5df5d4f90137b80c9551726449">LevelManager</a>
 </li>
 <li>getGameTime()
 : <a class="el" href="class_game_manager.html#a8348f7f8651fbbd535ee188290a75f06">GameManager</a>
 </li>
-<li>getHandedType()
-: <a class="el" href="class_base_weapon.html#a5ef8b002d453395cc77f91e64baa051f">BaseWeapon</a>
+<li>getGridPosition()
+: <a class="el" href="class_level_generator.html#a783387ec391c3904a560e2379d543c25">LevelGenerator</a>
+</li>
+<li>getHeightInLines()
+: <a class="el" href="class_diabro_u_i_1_1_dialog_text_box.html#aed5c38531dec51c00db4b966f678de25">DiabroUI::DialogTextBox</a>
+, <a class="el" href="class_diabro_u_i_1_1_h_u_d_text.html#a94276299bc525f862a1cd6c3645058fa">DiabroUI::HUDText</a>
 </li>
 <li>getHostileNpcs()
 : <a class="el" href="class_level_manager.html#af26762573a896b8d111c8da9b23c044b">LevelManager</a>
 </li>
-<li>getId()
-: <a class="el" href="class_affix.html#ab9b6a2183b76fffef1073ee734bc5907">Affix</a>
+<li>getID()
+: <a class="el" href="class_action.html#a3cef105852e90184a0a30b70e795b875">Action</a>
+, <a class="el" href="class_strategy.html#ac6797009fc33f25c3038176b636af2ca">Strategy</a>
 </li>
 <li>getInDialog()
 : <a class="el" href="class_npc.html#a7db08b7e2731a83f463c09854a9ebd92">Npc</a>
 </li>
 <li>getInfo()
-: <a class="el" href="class_equipment_instance.html#ae8230cec44c5c7a9369a23ec29358bac">EquipmentInstance</a>
-, <a class="el" href="class_item_instance.html#a5861340239b3d32d1395b3d255478344">ItemInstance</a>
-, <a class="el" href="class_quest_item.html#a30c89e0f0228410c3b2c923d4a57d249">QuestItem</a>
-, <a class="el" href="class_weapon_instance.html#afb26dc7d117161942a794026c79dc87a">WeaponInstance</a>
+: <a class="el" href="class_weapon_instance.html#afb26dc7d117161942a794026c79dc87a">WeaponInstance</a>
+</li>
+<li>getInQuest()
+: <a class="el" href="class_player.html#ac28ada9f810b88aa834b715edac2ec76">Player</a>
 </li>
 <li>getItemContainer()
 : <a class="el" href="class_quest_content_manager.html#ae76173c2d3451daa957a9229c1434a07">QuestContentManager</a>
 </li>
-<li>getItemContianer()
-: <a class="el" href="class_item_manager.html#ae9ea95656b6f822b57b88a2b6108817b">ItemManager</a>
-</li>
 <li>getItemGenerator()
-: <a class="el" href="class_item_manager.html#a7e584a30d935ddb4704ede4b20177f7b">ItemManager</a>
-, <a class="el" href="class_quest_content_manager.html#a8e356dc4f8d8cea47734a15d938a3cfc">QuestContentManager</a>
-</li>
-<li>getItemManager()
-: <a class="el" href="class_game_manager.html#a2b4c121fc3f8e37d3a682302749997a3">GameManager</a>
+: <a class="el" href="class_quest_content_manager.html#a8e356dc4f8d8cea47734a15d938a3cfc">QuestContentManager</a>
 </li>
 <li>getItems()
-: <a class="el" href="class_quest_item_container.html#a5f72d8d3fc16e6b36ad5c47937dd91db">QuestItemContainer</a>
+: <a class="el" href="class_quest_item_container.html#a0cb5d16dfbdfeb32c3d67e83392a4a70">QuestItemContainer</a>
+</li>
+<li>getItemsOfRarity()
+: <a class="el" href="class_quest_item_container.html#a90a971d2fa89e3273febf880e5aea637">QuestItemContainer</a>
 </li>
 <li>getItemsOfType()
-: <a class="el" href="class_quest_item_container.html#a8853293294cb47a203a06e6af7d994a4">QuestItemContainer</a>
-</li>
-<li>getItemTier()
-: <a class="el" href="class_base_item.html#aa02081a0e9fd6a6b97af57fe9a72742b">BaseItem</a>
+: <a class="el" href="class_quest_item_container.html#aa1de9e25849a3eda13e42413c89c6204">QuestItemContainer</a>
 </li>
 <li>getItemType()
-: <a class="el" href="class_base_item.html#a9385e434eadeb88ae3fe54329cd27560">BaseItem</a>
-, <a class="el" href="class_base_quest_item.html#ae496314b086d2b24586f2ed81188bc98">BaseQuestItem</a>
+: <a class="el" href="class_quest_item.html#a3adaa83a1089e7271d0f0c16b1e42ac5">QuestItem</a>
 </li>
 <li>getKnowledgeValue()
 : <a class="el" href="class_need_set.html#a3102daf8c5e6cc074796bc45b2a9caf9">NeedSet</a>
 </li>
 <li>getLevel()
 : <a class="el" href="class_character.html#ade8602e9521fc4c1849d1d1026bc0399">Character</a>
-, <a class="el" href="class_equipment_instance.html#a592b5a04c324908999488fc655929f20">EquipmentInstance</a>
 </li>
 <li>getLevelManager()
 : <a class="el" href="class_game_manager.html#a1822cd6c5d98b4c1a96f8aad81d11433">GameManager</a>
@@ -209,36 +259,55 @@ $(function() {
 : <a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html#a02d5ea924586e35f9c13857d1671b765">tinyxml2::XMLAttribute</a>
 , <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a9b5fc636646fda761d342c72e91cb286">tinyxml2::XMLNode</a>
 </li>
-<li>getMainStat()
-: <a class="el" href="class_base_equipment.html#ac0de0da054e6bf13e4056472c27efa29">BaseEquipment</a>
-</li>
 <li>getMax()
 : <a class="el" href="class_float_range.html#a0b17b522eb3e0e4c401ec94c5c2b8db2">FloatRange</a>
 </li>
-<li>getMeshName()
-: <a class="el" href="class_basic_enemy.html#a1829044ab83405ad72da99784ea5e27b">BasicEnemy</a>
-, <a class="el" href="class_npc.html#a177dcaca30670cedf2c4b2b0015e9f63">Npc</a>
+<li>getMaxHealth()
+: <a class="el" href="class_character.html#a60714941cdcf3d7772d2848577a98b89">Character</a>
+, <a class="el" href="class_player.html#af80f32369ed13c24a95a5f735205fd6a">Player</a>
 </li>
 <li>getMin()
 : <a class="el" href="class_float_range.html#a20fd9dc9320d700b45c8460400f6d322">FloatRange</a>
 </li>
-<li>getModelPath()
-: <a class="el" href="class_base_weapon.html#ad86ec3b4ca5bbf4b2b4549ea35ff9bad">BaseWeapon</a>
-</li>
-<li>getModifier()
-: <a class="el" href="class_affix.html#a06695336dd493b01b832b9cf834d24ee">Affix</a>
-</li>
-<li>getModifierType()
-: <a class="el" href="class_modifier.html#a3bfd6fc3245dca7417d64957f8ee755d">Modifier</a>
+<li>getMotivation()
+: <a class="el" href="class_strategy.html#a322f860b2d85f1d3c2712f555038616b">Strategy</a>
 </li>
 <li>getName()
-: <a class="el" href="class_affix.html#a8da90aad84d55f39e7247a023f448a70">Affix</a>
-, <a class="el" href="class_base_item.html#a3d0ade665ad649f6b4eb3da4e38f19ef">BaseItem</a>
-, <a class="el" href="class_base_quest_item.html#adb9848a3b571aff7fa756bdb3c49b856">BaseQuestItem</a>
-, <a class="el" href="class_equipment_instance.html#a4416669355643385888a2b4bc451d318">EquipmentInstance</a>
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#a02e3025b012a60911a07fb2a32d25aae">DiabroUI::Widget</a>
+, <a class="el" href="class_quest_item.html#a7d8d7302ee96e9d8c7521790eae4f92f">QuestItem</a>
+, <a class="el" href="class_strategy.html#a18e4fdac7b55d186fdafd2bf8ab37b2d">Strategy</a>
+</li>
+<li>getNameOptions()
+: <a class="el" href="class_npc.html#abc054124f310931e1006b140bbb7b909">Npc</a>
+</li>
+<li>getNameQuest()
+: <a class="el" href="class_strategy.html#a6469a450830b37a828e466c4503f3d99">Strategy</a>
+</li>
+<li>getNeeds()
+: <a class="el" href="class_need_set.html#a4639b470cc377ef16801e77bb0275c49">NeedSet</a>
+</li>
+<li>getNeighbours()
+: <a class="el" href="class_node.html#abfe87d9d7c2d1513d943d57747b67ff6">Node</a>
+, <a class="el" href="class_zone.html#af5455d972c34d919d29548256ab83c88">Zone</a>
+</li>
+<li>getNPCCities()
+: <a class="el" href="class_quest_content_manager.html#ab30004a94bb740aa9b76081c12dac910">QuestContentManager</a>
+</li>
+<li>getNumWidgets()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#ab704f3ba4ff7abcad8cb0b70ba8bed8c">DiabroUI::UIElementsManager</a>
 </li>
 <li>getObject()
 : <a class="el" href="class_weapon_instance.html#ada28198ea213bf42e17fa84f65a1448f">WeaponInstance</a>
+</li>
+<li>GetObjects()
+: <a class="el" href="class_generic_container.html#abfd4824762c7132a234ae59d82ef8368">GenericContainer&lt; T &gt;</a>
+</li>
+<li>getOverlayElement()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#afc79b95237b330c33f5178f3c370ce60">DiabroUI::Widget</a>
+</li>
+<li>getPadding()
+: <a class="el" href="class_diabro_u_i_1_1_dialog_text_box.html#aacc6cfc87b00d704ecfa868f80fec1fa">DiabroUI::DialogTextBox</a>
+, <a class="el" href="class_diabro_u_i_1_1_h_u_d_text.html#a15c6e32f4763957405e9e5a9602e78bb">DiabroUI::HUDText</a>
 </li>
 <li>getParent()
 : <a class="el" href="class_tree_node.html#a03c5ab064e7aa16fb78eff19014ace0d">TreeNode&lt; T &gt;</a>
@@ -248,22 +317,58 @@ $(function() {
 </li>
 <li>getPosition()
 : <a class="el" href="class_character.html#aa7503705c6cbd709ecd0bcde35e300b2">Character</a>
+, <a class="el" href="class_zone.html#a2c021890de23e7b5518666de6059062a">Zone</a>
+</li>
+<li>getPositionInFrontOf()
+: <a class="el" href="struct_building.html#a2fc58314ffe15a03918203dec8072c52">Building</a>
+</li>
+<li>getPossibleConnections()
+: <a class="el" href="class_zone.html#ae656aa19d37ba4776fd30c82cb3478ef">Zone</a>
+</li>
+<li>getPostcondition()
+: <a class="el" href="class_action.html#a5b1f4c87f021c8ba054e47765c7fb483">Action</a>
+</li>
+<li>getPreconditions()
+: <a class="el" href="class_action.html#a787b840176bf23b43ff6fa1c769bdc8f">Action</a>
 </li>
 <li>getProtectionValue()
 : <a class="el" href="class_need_set.html#abb4ebbb1d62400d51ebd1b20d569f51e">NeedSet</a>
 </li>
-<li>getQuality()
-: <a class="el" href="class_item_instance.html#ae38692f3178a8297c1f5236a38463cab">ItemInstance</a>
-, <a class="el" href="class_quest_item.html#ab3e0b061bc8a9fd3f77196c71d75733a">QuestItem</a>
-</li>
 <li>getQuestContentManager()
-: <a class="el" href="class_game_manager.html#a709d83cb91903443b59c0d578287c4a6">GameManager</a>
+: <a class="el" href="class_quest_manager.html#a678437385179a456e4e585075044e977">QuestManager</a>
 </li>
-<li>getRandomNumberBetween()
-: <a class="el" href="class_game_manager.html#a377a9ae345afe7ff60b88b8e148a75cc">GameManager</a>
+<li>getQuestLocator()
+: <a class="el" href="class_diabro_u_i_1_1_mini_map.html#acb92fbc398f51e363d59b47a9a803518">DiabroUI::MiniMap</a>
+</li>
+<li>getQuestManager()
+: <a class="el" href="class_game_manager.html#a7ed9f365393d807d35da9787709defda">GameManager</a>
+</li>
+<li>getRandomInRange()
+: <a class="el" href="class_game_manager.html#af7b96d5fbcb07f5051a63f1c7c44ad8c">GameManager</a>
+</li>
+<li>getRandomPointInRoom()
+: <a class="el" href="class_city.html#ae4865860db60b7955905b5f6ee44436c">City</a>
+</li>
+<li>getRandomTile()
+: <a class="el" href="class_city.html#a0b241af419e7f1133a96c07a9c04540a">City</a>
+</li>
+<li>getRarity()
+: <a class="el" href="class_quest_item.html#a9ef9e1e585fce4f05a0feec97e64f857">QuestItem</a>
+</li>
+<li>getRarityPref()
+: <a class="el" href="class_strategy.html#a5482b7a83402162f82efac95b06130fd">Strategy</a>
 </li>
 <li>getReputationValue()
 : <a class="el" href="class_need_set.html#a8d9bd2e3dbeff9467d97c9169b66b4d1">NeedSet</a>
+</li>
+<li>getRequiredContent()
+: <a class="el" href="class_action.html#aa7cd2a1f523c9bc56abe6805f50bab62">Action</a>
+</li>
+<li>getResolution()
+: <a class="el" href="class_zone.html#a6be95126272003ffe4f039c2d10f54d3">Zone</a>
+</li>
+<li>getRndNeighbour()
+: <a class="el" href="class_zone.html#a14450ad1f0b1a6cd930d650336b201c2">Zone</a>
 </li>
 <li>getRoot()
 : <a class="el" href="class_tree.html#a5ce5b960f4e3e5ea597acf60c54f91a3">Tree&lt; T &gt;</a>
@@ -273,6 +378,12 @@ $(function() {
 </li>
 <li>getRotationspeed()
 : <a class="el" href="class_character.html#aa471cfcde432d71eb44176b5854f2cdc">Character</a>
+</li>
+<li>getScaledDepth()
+: <a class="el" href="class_city.html#abe195e1bc4cbb42655f05333ec39b068">City</a>
+</li>
+<li>getScaledWidth()
+: <a class="el" href="class_city.html#a9ba757e5fc99def11cd8b81b97484a93">City</a>
 </li>
 <li>getSceneManager()
 : <a class="el" href="class_game_manager.html#a3dfb2e961872d001e932e307604414e8">GameManager</a>
@@ -286,33 +397,55 @@ $(function() {
 <li>getSingletonPtr()
 : <a class="el" href="class_game_manager.html#a5f6d4cd92c27e1d0db342379f31f8e35">GameManager</a>
 </li>
+<li>getSisPos()
+: <a class="el" href="class_level_generator.html#a05fd967427bb1cfe341ca7da73946f0d">LevelGenerator</a>
+</li>
+<li>getSlot()
+: <a class="el" href="class_weapon_instance.html#af3fb1a98afef9309ae8a2cc0b6036a01">WeaponInstance</a>
+</li>
+<li>getSnappedValue()
+: <a class="el" href="class_diabro_u_i_1_1_bar.html#ac5a9e962391cb0c0e35da51192c6fe0c">DiabroUI::Bar</a>
+, <a class="el" href="class_diabro_u_i_1_1_mini_map.html#ad2cf5b9f2bb781898946842711cc165f">DiabroUI::MiniMap</a>
+</li>
 <li>getSpeed()
 : <a class="el" href="class_character.html#a650546ef32c12b200cd349d4fbda043c">Character</a>
 </li>
 <li>getSpriteName()
-: <a class="el" href="class_base_item.html#a90996b91fcc53627ae743f52a77bead2">BaseItem</a>
-, <a class="el" href="class_base_quest_item.html#ac9043e00318655ad286571cb4aa9bb22">BaseQuestItem</a>
+: <a class="el" href="class_quest_item.html#ad501a1e211318c5e6cac8f1f0f2190d9">QuestItem</a>
 </li>
-<li>GetStat()
-: <a class="el" href="class_character_stats.html#a70e4f88cd5f3c85beef8e1356d8cf322">CharacterStats</a>
-</li>
-<li>GetStats()
-: <a class="el" href="class_character_stats.html#ab14281a1ad6cd8bb9137da4380b58747">CharacterStats</a>
-</li>
-<li>getStatType()
-: <a class="el" href="class_stat_range.html#a980c11d1d355562c5476122f14aac7b4">StatRange</a>
+<li>getStartPos()
+: <a class="el" href="class_level_generator.html#aadc7cb714e3d5c1557be580f710a45d5">LevelGenerator</a>
 </li>
 <li>GetStr()
 : <a class="el" href="classtinyxml2_1_1_str_pair.html#ad87e3d11330f5e689ba1e7e54c023b57">tinyxml2::StrPair</a>
 </li>
+<li>getStrategyContainer()
+: <a class="el" href="class_quest_manager.html#ae8cf4d150c4cdddcc2c274ee99d51ee5">QuestManager</a>
+</li>
+<li>getText()
+: <a class="el" href="class_diabro_u_i_1_1_dialog_text_box.html#a0a96bfc834c51114ad2bb9abc73987ad">DiabroUI::DialogTextBox</a>
+, <a class="el" href="class_diabro_u_i_1_1_h_u_d_text.html#af683fcb5038ab8c05e42083e5069448b">DiabroUI::HUDText</a>
+</li>
 <li>GetText()
 : <a class="el" href="classtinyxml2_1_1_x_m_l_element.html#a0fa5bea0a4daf3ddd503dcabb823eba6">tinyxml2::XMLElement</a>
 </li>
-<li>getTier()
-: <a class="el" href="class_affix.html#a02fb62403175508821480df8ab43a535">Affix</a>
-</li>
 <li>getTile()
-: <a class="el" href="class_zone.html#ae3ee34bca9bc6b7fdd74ee933cea2bc2">Zone</a>
+: <a class="el" href="class_zone.html#ac81da8958499c530bc6322d125cf4e34">Zone</a>
+</li>
+<li>getTrayContainer()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a042dd7028e4e4bc1ffb9085ebfe48cfd">DiabroUI::UIElementsManager</a>
+</li>
+<li>getTrayLocation()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#aad5fafca6cb00af09e44ca6eaf8cd211">DiabroUI::Widget</a>
+</li>
+<li>getTrayPadding()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a6508e72b172f1b55534cef0c5d6d8235">DiabroUI::UIElementsManager</a>
+</li>
+<li>getTraysLayer()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a4ae9e0751e2a45e3942138cdb3cdb64c">DiabroUI::UIElementsManager</a>
+</li>
+<li>getType()
+: <a class="el" href="class_action.html#a91b2708306e7a7964a5d82132e75dffa">Action</a>
 </li>
 <li>getUIManager()
 : <a class="el" href="class_game_manager.html#ad1536a9e4589bb68c7364bfd9afcadc5">GameManager</a>
@@ -321,21 +454,49 @@ $(function() {
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a7f0687574afa03bc479dc44f29db0afe">tinyxml2::XMLNode</a>
 </li>
 <li>getValue()
-: <a class="el" href="class_affix.html#aac7ce58e2f0598aa1fe68c6913ebc0e9">Affix</a>
-, <a class="el" href="class_modifier.html#a0179292acc008af56568491289f96395">Modifier</a>
+: <a class="el" href="class_diabro_u_i_1_1_bar.html#afc44c3d08018634228b8eec48180e626">DiabroUI::Bar</a>
 </li>
-<li>getValueOfStat()
-: <a class="el" href="class_base_equipment.html#a795b6e0f21c3c3e85a1840d605afa522">BaseEquipment</a>
-, <a class="el" href="class_equipment_instance.html#a645e48c9ccf24c1037b08dbb77fe100b">EquipmentInstance</a>
+<li>getValueCaption()
+: <a class="el" href="class_diabro_u_i_1_1_bar.html#a7b0c4d9d8f90c9d63f3abfd878b56d1c">DiabroUI::Bar</a>
+</li>
+<li>getValueQuest()
+: <a class="el" href="class_diabro_u_i_1_1_mini_map.html#aab938635d37ec73f6b87d2b34bd33d18">DiabroUI::MiniMap</a>
+</li>
+<li>getValueSister()
+: <a class="el" href="class_diabro_u_i_1_1_mini_map.html#ab373767c4fe096543a40db66c2e31c9d">DiabroUI::MiniMap</a>
 </li>
 <li>getWealthValue()
 : <a class="el" href="class_need_set.html#ab18285bc497575f4e811ba7df1ca9ecc">NeedSet</a>
 </li>
-<li>getWeapons()
-: <a class="el" href="class_item_container.html#acb058b0812ea03e3b735ee0aba1eedca">ItemContainer</a>
+<li>getWidget()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a1139c5690227e7cd09a0765106252c27">DiabroUI::UIElementsManager</a>
+</li>
+<li>getWidgetIterator()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a815e01992f0beb0a8fff10c229b18e3b">DiabroUI::UIElementsManager</a>
+</li>
+<li>getWidgetPadding()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#ab045e8684d03c7dca5583a805ecc0145">DiabroUI::UIElementsManager</a>
+</li>
+<li>getWidgetSpacing()
+: <a class="el" href="class_diabro_u_i_1_1_u_i_elements_manager.html#a2d77f9062c20827b1a7b51df95a33868">DiabroUI::UIElementsManager</a>
+</li>
+<li>getWorldPosition()
+: <a class="el" href="class_level_generator.html#afc1208b76741310bc94b7a4845701246">LevelGenerator</a>
+</li>
+<li>getZone()
+: <a class="el" href="class_level_generator.html#a72360d9c81a26c4dda03467a9065f8b5">LevelGenerator</a>
+</li>
+<li>getZonePointer()
+: <a class="el" href="class_level_generator.html#a25b18e4666b9ba0a3b69a5239e0380b1">LevelGenerator</a>
 </li>
 <li>go()
 : <a class="el" href="class_base_application.html#a8a14a65a29118dd75173aa68678a05e1">BaseApplication</a>
+</li>
+<li>goNextState()
+: <a class="el" href="class_game_manager.html#a2f3d94ef06618a639af22c847715f757">GameManager</a>
+</li>
+<li>goToState()
+: <a class="el" href="class_game_manager.html#a42eacc74c2dc8d87d41dffce2f68dbb1">GameManager</a>
 </li>
 </ul>
 </div><!-- contents -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['profession',['Profession',['../_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1',1,'Npc.h']]]
+  ['locator',['Locator',['../namespace_diabro_u_i.html#abe79308ea19c9ccaf925c6d9bb96cbdb',1,'DiabroUI']]]
 ];

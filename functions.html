@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
+   <div id="projectbrief">by Jasper, Guus &amp; Rosa</div>
   </td>
  </tr>
  </tbody>
@@ -62,30 +62,26 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index__"></a>- _ -</h3><ul>
-<li>_affected
-: <a class="el" href="class_modifier.html#a8c2ea218a657e1da78734d53f316c535">Modifier</a>
+<li>_actionContainer
+: <a class="el" href="class_quest_manager.html#a4ed9e1ea6bb932aa833640b0592549fb">QuestManager</a>
+</li>
+<li>_actionSequence
+: <a class="el" href="class_strategy.html#a6c6d2a863ea263f827eb56a816ba6692">Strategy</a>
 </li>
 <li>_allocated
 : <a class="el" href="classtinyxml2_1_1_dyn_array.html#aee2522b771ca30bc09bff4d5b3176bfc">tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;</a>
 </li>
-<li>_AttackCD
-: <a class="el" href="class_player.html#ac6030de4a8103996d3c5f44347334107">Player</a>
+<li>_amount
+: <a class="el" href="class_generic_container.html#aba6f5f11fd2e05e14512ed92a72dde4d">GenericContainer&lt; T &gt;</a>
+</li>
+<li>_assignToTray()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#a62f292afa0bbf937a6896e6d26019432">DiabroUI::Widget</a>
 </li>
 <li>_attackDistance
 : <a class="el" href="class_character.html#afde41c75401259b785f1eac261de3dee">Character</a>
 </li>
-<li>_attackSpeed
-: <a class="el" href="class_player.html#a727914f987804c9d7bb03a252ca976d0">Player</a>
-</li>
 <li>_attributePool
 : <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a0a57ebeba23bc6cfce88f12b4a946aac">tinyxml2::XMLDocument</a>
-</li>
-<li>_baseStats
-: <a class="el" href="class_base_equipment.html#a5cc17d17c3a514fc63830ef77e3eb263">BaseEquipment</a>
-, <a class="el" href="class_equipment_instance.html#a4638d68fe091e45367150a1719e593ce">EquipmentInstance</a>
-</li>
-<li>_BasicEnemy
-: <a class="el" href="class_player.html#aa5f89ba79bdf8182687c28a86d792387">Player</a>
 </li>
 <li>_basicEnemyEntity
 : <a class="el" href="class_level_manager.html#ab1806760c82bf4e36ed38430a8714aef">LevelManager</a>
@@ -95,6 +91,12 @@ $(function() {
 </li>
 <li>_buffer
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a19fca2e934576a892fefe2f602874d59">tinyxml2::XMLPrinter</a>
+</li>
+<li>_buildings
+: <a class="el" href="class_city.html#aa55c3554a4eab7089cf180a9b313f996">City</a>
+</li>
+<li>_buildingStructs
+: <a class="el" href="class_city.html#a8ab52ac54687ca89121d3216aa77926c">City</a>
 </li>
 <li>_camNode
 : <a class="el" href="class_level_manager.html#a40fa2b3657aa61f925e30454366c1edc">LevelManager</a>
@@ -109,6 +111,9 @@ $(function() {
 <li>_children
 : <a class="el" href="class_tree_node.html#ae522769ee0fc94e4ff13e9aad928865f">TreeNode&lt; T &gt;</a>
 </li>
+<li>_cityNode
+: <a class="el" href="class_city_manager.html#a97f19cd568aa6238e44d0554c488babe">CityManager</a>
+</li>
 <li>_closingType
 : <a class="el" href="classtinyxml2_1_1_x_m_l_element.html#a3f3f8f60bc21aae4c1bb9470d7ab0823">tinyxml2::XMLElement</a>
 </li>
@@ -118,8 +123,21 @@ $(function() {
 <li>_compactMode
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a7bc067aa3f0dcee68e4ac75e19117bd0">tinyxml2::XMLPrinter</a>
 </li>
+<li>_completed
+: <a class="el" href="class_action.html#a3fcdfb656487e5647a9a55856d70e359">Action</a>
+, <a class="el" href="class_quest.html#adbb574e2eabcaa97a2d641c01d9427c0">Quest</a>
+</li>
+<li>_concreteContent
+: <a class="el" href="class_action.html#a5d2ce4303d7e85fa82537a7b21e17868">Action</a>
+</li>
+<li>_content
+: <a class="el" href="class_level_generator.html#a828716ae52ede9d8e9ef0d4479bca687">LevelGenerator</a>
+</li>
 <li>_currAttackCooldown
 : <a class="el" href="class_character.html#ae8f1bdf4f6937190e8b03a70a3e2c7af">Character</a>
+</li>
+<li>_currentAction
+: <a class="el" href="class_strategy.html#a1fe659a9d92b155d90fbff330560dff4">Strategy</a>
 </li>
 <li>_currentAllocs
 : <a class="el" href="classtinyxml2_1_1_mem_pool_t.html#afa908fd62011c6e633d7af196d667e9d">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;</a>
@@ -130,11 +148,26 @@ $(function() {
 <li>_currentLevel
 : <a class="el" href="class_character.html#a8ed77714255bf48b659f76bc6d70f572">Character</a>
 </li>
-<li>_currentStamina
-: <a class="el" href="class_character.html#a2b86a4e1bd9a107d379a2a3e528f2982">Character</a>
+<li>_currentQuest
+: <a class="el" href="class_npc.html#ae8210b60593ff64eef64c50efec9f539">Npc</a>
+</li>
+<li>_currentState
+: <a class="el" href="class_state_machine.html#a693ff8eb93102e296e73576b713ec217">StateMachine&lt; T &gt;</a>
 </li>
 <li>_currentXP
 : <a class="el" href="class_player.html#ab57814db344961cfd97e203abdb62c66">Player</a>
+</li>
+<li>_cursorMoved()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#ae1714bb1d06411dad1923a3b896e1427">DiabroUI::Widget</a>
+</li>
+<li>_cursorPressed()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#a9b098da5cfa2be882eafd352b2e69ad6">DiabroUI::Widget</a>
+</li>
+<li>_cursorReleased()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#a13e213d6d7b060b33a4e7e9575f8a517">DiabroUI::Widget</a>
+</li>
+<li>_damage
+: <a class="el" href="class_character.html#a61856db9c8a04e4d4297cd01943d7971">Character</a>
 </li>
 <li>_data
 : <a class="el" href="class_tree_node.html#a61f7d0e120995a4f18519c9e53ac7c06">TreeNode&lt; T &gt;</a>
@@ -143,11 +176,14 @@ $(function() {
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a19cd59a9dbe4b666264803fb91ac8ec1">tinyxml2::XMLPrinter</a>
 , <a class="el" href="class_zone.html#a88ab39c51c55200c49d9a639f4988161">Zone</a>
 </li>
+<li>_dialog
+: <a class="el" href="class_npc.html#a1e7dd95670bc294e550056f1475005b2">Npc</a>
+</li>
 <li>_dialogCount
 : <a class="el" href="class_npc.html#afa232234bb3189f1d4055c30c37facc3">Npc</a>
 </li>
-<li>_dialogFile
-: <a class="el" href="class_npc.html#a46937ac88c58b1551e7ecca7cfd4c862">Npc</a>
+<li>_diedText
+: <a class="el" href="class_u_i_manager.html#abc11f64c59e0a4ad66553bbebe515b98">UIManager</a>
 </li>
 <li>_dirVec
 : <a class="el" href="class_character.html#a34b23c6550036c42d3507ebc5ee31403">Character</a>
@@ -155,12 +191,8 @@ $(function() {
 <li>_document
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a8d2d2be0bb6797625551eb0e91f0ff62">tinyxml2::XMLNode</a>
 </li>
-<li>_dropEntity
-: <a class="el" href="class_item_generator.html#a2e6663b4611dee7eb0b3dad875cbd52f">ItemGenerator</a>
-, <a class="el" href="class_quest_item_generator.html#a0749b5cca0172573a7a064ac04443a5f">QuestItemGenerator</a>
-</li>
-<li>_dropped
-: <a class="el" href="class_item_instance.html#ae3e2eb87329f403f9286dd7c68981c37">ItemInstance</a>
+<li>_dungeonNode
+: <a class="el" href="class_level_generator.html#a10b2cb0378e89de3d6d2f9aed62ed229">LevelGenerator</a>
 </li>
 <li>_elementJustOpened
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ac07169d58b465214a2b1fa306e617c26">tinyxml2::XMLPrinter</a>
@@ -171,20 +203,20 @@ $(function() {
 <li>_end
 : <a class="el" href="classtinyxml2_1_1_str_pair.html#a855c81f785458d8f84313221f2d4a1eb">tinyxml2::StrPair</a>
 </li>
-<li>_endDialogText
-: <a class="el" href="class_npc.html#a20a5c125bfe4648511673fc874ba24f3">Npc</a>
+<li>_endCity
+: <a class="el" href="class_level_generator.html#a1a2f03211349fd03e4b896d666c4df88">LevelGenerator</a>
+</li>
+<li>_endLevelText
+: <a class="el" href="class_u_i_manager.html#ad2cce7b7f2f07474c8e12e58dbc33dcd">UIManager</a>
+</li>
+<li>_enemyCities
+: <a class="el" href="class_quest_content_manager.html#a8f5c15d4ffc3f9c101ca504dea180b25">QuestContentManager</a>
+</li>
+<li>_enemyHealthBarWidget
+: <a class="el" href="class_u_i_manager.html#a89f10a73c77cb58afb5def1d68583010">UIManager</a>
 </li>
 <li>_entityFlag
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a334eb34c43f21daebef9341b4768c275">tinyxml2::XMLPrinter</a>
-</li>
-<li>_equipmentInfo
-: <a class="el" href="class_equipment_instance.html#a2369138313337ce810b38d42db92a498">EquipmentInstance</a>
-</li>
-<li>_equipmentType
-: <a class="el" href="class_base_equipment.html#aba57e9716c7396f30bb3b63017c47e97">BaseEquipment</a>
-</li>
-<li>_equipped
-: <a class="el" href="class_equipment_instance.html#a7f2e1f3202fe668abe0f59d8f0f560b4">EquipmentInstance</a>
 </li>
 <li>_errorID
 : <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a61270d643f810975656da2054e1e1622">tinyxml2::XMLDocument</a>
@@ -201,6 +233,9 @@ $(function() {
 <li>_errorStr2
 : <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#afb014df551fc08f2fa69eeb9b9686e6f">tinyxml2::XMLDocument</a>
 </li>
+<li>_first
+: <a class="el" href="class_u_i_manager.html#aad5692d98dba01754c8ae83fdecc4d3d">UIManager</a>
+</li>
 <li>_firstChild
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#aa20c91e4213dc930c5bdf420322ca342">tinyxml2::XMLNode</a>
 </li>
@@ -209,6 +244,9 @@ $(function() {
 </li>
 <li>_flags
 : <a class="el" href="classtinyxml2_1_1_str_pair.html#ae6fabc08e7b24b0d41fa5f2fadbda4ed">tinyxml2::StrPair</a>
+</li>
+<li>_focusLost()
+: <a class="el" href="class_diabro_u_i_1_1_widget.html#a6fc0dd229781145bee1797af854d39ae">DiabroUI::Widget</a>
 </li>
 <li>_fp
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a79d91decf17990f7ce18b592f3fdf44e">tinyxml2::XMLPrinter</a>
@@ -219,20 +257,14 @@ $(function() {
 <li>_gameTimer
 : <a class="el" href="class_game_manager.html#a9965da4967a5c98b5faedc879aa20e95">GameManager</a>
 </li>
-<li>_generatedName
-: <a class="el" href="class_equipment_instance.html#a618cd0daa14c6ee00c2eac6875b4b3e7">EquipmentInstance</a>
-</li>
 <li>_groundEntity
 : <a class="el" href="class_level_manager.html#a8171d3d47a20f4085a1b1a296d1905eb">LevelManager</a>
 </li>
-<li>_handed
-: <a class="el" href="class_base_weapon.html#a1dc98e2949bfd64f566d31b1e3676a81">BaseWeapon</a>
+<li>_hasQuest
+: <a class="el" href="class_npc.html#a3225126d151edbb1fa708c8618267f30">Npc</a>
 </li>
-<li>_healthBarWidget
-: <a class="el" href="class_u_i_manager.html#a62eb706678db96b1f2a7e834deb47f04">UIManager</a>
-</li>
-<li>_heightBar
-: <a class="el" href="class_u_i_manager.html#ae376ff1931ba3c91b766595c437f1f25">UIManager</a>
+<li>_healthReward
+: <a class="el" href="class_quest.html#aea361a37ba4dce3539cb15ab4e06e13f">Quest</a>
 </li>
 <li>_hitted
 : <a class="el" href="class_character.html#a0e9a9fb27aaf3668cf61b01c287a4a9e">Character</a>
@@ -240,55 +272,61 @@ $(function() {
 <li>_hitTime
 : <a class="el" href="class_character.html#aa783250f206d761b5c54d473746ae168">Character</a>
 </li>
+<li>_home
+: <a class="el" href="class_npc.html#a90fb3fc0fb6fe87804a3777e97a104b4">Npc</a>
+</li>
+<li>_hometown
+: <a class="el" href="class_npc.html#acdcf96577664136a976a860c58423a0a">Npc</a>
+</li>
 <li>_hostileNpcScripts
 : <a class="el" href="class_level_manager.html#a60fec7fcb8b03ea59f14d702bd9167e6">LevelManager</a>
 </li>
+<li>_hudTextWidget
+: <a class="el" href="class_u_i_manager.html#a8af3c659bba6bd679ad4d3058f7e10b1">UIManager</a>
+</li>
+<li>_hudTextWithTimeOn
+: <a class="el" href="class_u_i_manager.html#a94dfa84bbd57067d03681118ef8cc549">UIManager</a>
+</li>
+<li>_hudTimer
+: <a class="el" href="class_u_i_manager.html#ae3bbc7b9894942ed73a0c95d66c7ee07">UIManager</a>
+</li>
+<li>_hudTotalTimer
+: <a class="el" href="class_u_i_manager.html#a9ad81ca8106763ff6ba7fd545d6f4323">UIManager</a>
+</li>
 <li>_id
-: <a class="el" href="class_affix.html#a58bfe5994e22fd51e5fe7c20f1939fad">Affix</a>
+: <a class="el" href="class_action.html#a7ee1077706df9572cb90b593f7d31c65">Action</a>
+, <a class="el" href="class_strategy.html#a7144f1bc24ae7edba9ea8ba84fe430e5">Strategy</a>
+</li>
+<li>_inBattle
+: <a class="el" href="class_player.html#ac39a4c3edb100f1f32ea380b6a034525">Player</a>
+</li>
+<li>_inBattleTime
+: <a class="el" href="class_player.html#a025f6ade5d21b34e5b2733ed4b8dc809">Player</a>
 </li>
 <li>_inDialog
 : <a class="el" href="class_npc.html#a120bb498c8bec886c6eda0a337276bda">Npc</a>
+, <a class="el" href="class_player.html#a65e5559df871b4236b136884cd4e8ec3">Player</a>
 </li>
-<li>_info
-: <a class="el" href="class_item_instance.html#a0a7dfecf2ce65c92f0b5f60a8a967519">ItemInstance</a>
-, <a class="el" href="class_quest_item.html#ae9fabd55bfad97cc673215999fc24300">QuestItem</a>
+<li>_inQuest
+: <a class="el" href="class_player.html#a25d329696a865d157625579b885e4533">Player</a>
 </li>
 <li>_isCData
 : <a class="el" href="classtinyxml2_1_1_x_m_l_text.html#aae1a8b4117e8c8bb107900a0560d5ab5">tinyxml2::XMLText</a>
 </li>
-<li>_isPresent
-: <a class="el" href="class_affix.html#a4cd85cee5aa9a5708eb2fd85f8c96ce5">Affix</a>
-</li>
-<li>_isRunning
-: <a class="el" href="class_character.html#a0dafcb97414d3b4c35b9720b4247e68c">Character</a>
-</li>
 <li>_itemContainer
-: <a class="el" href="class_item_manager.html#a3b5e3b6dcd3af6ba019da34fecc96a85">ItemManager</a>
-, <a class="el" href="class_quest_content_manager.html#ac941645a8dd629cdcfd3e98b132feb05">QuestContentManager</a>
+: <a class="el" href="class_quest_content_manager.html#ac941645a8dd629cdcfd3e98b132feb05">QuestContentManager</a>
 </li>
 <li>_itemGenerator
-: <a class="el" href="class_item_manager.html#a902457d0e9b44cd527d8fefb057f8ff9">ItemManager</a>
-, <a class="el" href="class_quest_content_manager.html#af695c790004f04d51d8660b276f32705">QuestContentManager</a>
-</li>
-<li>_itemManager
-: <a class="el" href="class_game_manager.html#ac3fa4ce40a89c8367e827660cdbf1358">GameManager</a>
+: <a class="el" href="class_quest_content_manager.html#af695c790004f04d51d8660b276f32705">QuestContentManager</a>
 </li>
 <li>_items
-: <a class="el" href="class_quest_item_container.html#adf10c615cba0c51dc77bd37b856ba040">QuestItemContainer</a>
-</li>
-<li>_itemTier
-: <a class="el" href="class_base_item.html#a5f94fcfb4012569256f42c8262858027">BaseItem</a>
+: <a class="el" href="class_quest_item_container.html#a3f49585461e8b73cbfb15cf1892d6e7f">QuestItemContainer</a>
 </li>
 <li>_itemType
-: <a class="el" href="class_base_item.html#a4306d14e64a8b7810e5e1e9e6dc06111">BaseItem</a>
-, <a class="el" href="class_base_quest_item.html#af4adc1fe471c13886765af2e1536b119">BaseQuestItem</a>
+: <a class="el" href="class_quest_item.html#a46f25ea5afbd11607c8a8e464a8e0629">QuestItem</a>
 </li>
 <li>_lastChild
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a099b6560ae44ab9edb8453aaf1a3747b">tinyxml2::XMLNode</a>
-</li>
-<li>_level
-: <a class="el" href="class_character_stats.html#aff43f657d3bb8e0c312b31df52aa6168">CharacterStats</a>
-, <a class="el" href="class_equipment_instance.html#a3bfd72b9e677e4a14507c9fb5ebaf3df">EquipmentInstance</a>
 </li>
 <li>_levelManager
 : <a class="el" href="class_game_manager.html#a001b2bf19a0a34f8a5fb066793579177">GameManager</a>
@@ -299,17 +337,11 @@ $(function() {
 <li>_lightAttackCooldown
 : <a class="el" href="class_character.html#a8173ed8510869e62738545252f978eac">Character</a>
 </li>
-<li>_mainStat
-: <a class="el" href="class_base_equipment.html#abcb54f7ad0063d6ef3eea76a5ec05432">BaseEquipment</a>
-</li>
 <li>_max
 : <a class="el" href="class_float_range.html#a2c1c5a203f5dcd6265478cf736c222e4">FloatRange</a>
 </li>
 <li>_maxAllocs
 : <a class="el" href="classtinyxml2_1_1_mem_pool_t.html#aaf3960c9e30197aeb1c0af271c297db9">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;</a>
-</li>
-<li>_maxCities
-: <a class="el" href="class_zone.html#a7cde1fe2ac93c4e62d18a53bcd59b6ff">Zone</a>
 </li>
 <li>_maxCityHeight
 : <a class="el" href="class_zone.html#af222a8486e69ae937fcbeba253f5a483">Zone</a>
@@ -317,14 +349,14 @@ $(function() {
 <li>_maxCityWidth
 : <a class="el" href="class_zone.html#aab32385a68e626cc573d41e00ffe6e72">Zone</a>
 </li>
-<li>_maxTries
-: <a class="el" href="class_zone.html#ae44f633a479ea10af89bf23ac4bddd1c">Zone</a>
+<li>_maxHealth
+: <a class="el" href="class_character.html#af745c741f31c7676775a4c008f67088f">Character</a>
 </li>
 <li>_maxWidthBar
 : <a class="el" href="class_u_i_manager.html#a3f0ddcafd564db43679b1319f349f0f1">UIManager</a>
 </li>
 <li>_mDialogTextArea
-: <a class="el" href="class_u_i_manager.html#a1e2c55d400686f04075f893fec2c766e">UIManager</a>
+: <a class="el" href="class_u_i_manager.html#a5a691047e56cdf90d5e86e59e9843dde">UIManager</a>
 </li>
 <li>_mem
 : <a class="el" href="classtinyxml2_1_1_dyn_array.html#ac8511e876d55f3ec64277516273434fd">tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;</a>
@@ -336,39 +368,28 @@ $(function() {
 <li>_min
 : <a class="el" href="class_float_range.html#a3f2014b5f4f83b8c74b682807b83df33">FloatRange</a>
 </li>
-<li>_mInputContext
-: <a class="el" href="class_u_i_manager.html#a7f5bade5fd8d8fbe342298fbc43550d4">UIManager</a>
+<li>_miniMap
+: <a class="el" href="class_u_i_manager.html#abe6f52ddbd33f2a5e506a86987fb7bcf">UIManager</a>
 </li>
-<li>_modelPath
-: <a class="el" href="class_base_weapon.html#ae497375d13c3c99b8a2f251200bc0e27">BaseWeapon</a>
-</li>
-<li>_modifier
-: <a class="el" href="class_affix.html#af09a76c0896712a718bbe72f608306ce">Affix</a>
-</li>
-<li>_modifierType
-: <a class="el" href="class_modifier.html#a48a5ffcb1391515c21559d5c451e1496">Modifier</a>
+<li>_motivation
+: <a class="el" href="class_strategy.html#a2974d3561a6144dc89b3acb814da9ede">Strategy</a>
 </li>
 <li>_movespeed
 : <a class="el" href="class_character.html#a6b10b22d745b0a9f84e5765efd25539b">Character</a>
 </li>
-<li>_mSdkTrayListener
-: <a class="el" href="class_u_i_manager.html#a5446302873d82ce400fac79716679e96">UIManager</a>
-</li>
-<li>_mSdkTrayMgr
-: <a class="el" href="class_u_i_manager.html#a599d2e5ca6d2943eb419d57084f26c5a">UIManager</a>
-</li>
 <li>_mWindow
 : <a class="el" href="class_u_i_manager.html#adbc004f99167c35f09252f73f27716f3">UIManager</a>
 </li>
-<li>_myDroppedEntity
-: <a class="el" href="class_item_instance.html#aae0b0141be8f9ad88cea6934691fe8af">ItemInstance</a>
+<li>_myCity
+: <a class="el" href="class_base_npc.html#a39f0aa3c42e7c444d7a4fc7219040fa3">BaseNpc</a>
+, <a class="el" href="class_spawner.html#a278f15b60f61d4539e1cc09a98851221">Spawner&lt; T &gt;</a>
 </li>
 <li>_myEntity
 : <a class="el" href="class_character.html#a56357ebea1a08ed4305d911c12406568">Character</a>
 </li>
 <li>_myNode
 : <a class="el" href="class_character.html#a8ae37af84dc3bf680a754727474a012f">Character</a>
-, <a class="el" href="class_character_spawner.html#a05ea14190fc95990068fbb55cc309acb">CharacterSpawner&lt; T &gt;</a>
+, <a class="el" href="class_spawner.html#abbe6c4cb580fe4122ebb4123c17f6bfd">Spawner&lt; T &gt;</a>
 </li>
 <li>_myRotationNode
 : <a class="el" href="class_base_npc.html#ae1997dc026ead61dba7f46f6c9d389bc">BaseNpc</a>
@@ -377,37 +398,59 @@ $(function() {
 : <a class="el" href="classtinyxml2_1_1_mem_pool_t.html#acd5867e06ad91a655f3c9f95ca163e9b">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;</a>
 </li>
 <li>_name
-: <a class="el" href="class_affix.html#a85ec8f526b4129c877e62f48eb75fa5a">Affix</a>
-, <a class="el" href="class_base_item.html#a22b456910fc6a76152f83cdc601945dc">BaseItem</a>
-, <a class="el" href="class_base_quest_item.html#af74f1212c603ce3e68b4df9a8d4bd750">BaseQuestItem</a>
+: <a class="el" href="class_city.html#ae052fe14b2ffebec6133ab081849ea5a">City</a>
+, <a class="el" href="class_npc.html#a10be525b44fc96f04e88f28dea032846">Npc</a>
+, <a class="el" href="class_quest_item.html#aca5a83f4a348bca841610d42ef8251fc">QuestItem</a>
 , <a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html#a80850208963b536e9254a7fa1d4abe67">tinyxml2::XMLAttribute</a>
 </li>
-<li>_nCharacters
-: <a class="el" href="class_character_spawner.html#a7a0e89c84547f82a855934e1801a93c8">CharacterSpawner&lt; T &gt;</a>
+<li>_nameQuest
+: <a class="el" href="class_strategy.html#adf3c8c695b7bd4322c336a1ffd501691">Strategy</a>
+</li>
+<li>_nameStrategy
+: <a class="el" href="class_strategy.html#afdeacea6f23d324c3ab59338e2e2a720">Strategy</a>
+</li>
+<li>_nearbyNPC
+: <a class="el" href="class_player.html#a72eeedafc82780df5795cc1136e0b34c">Player</a>
 </li>
 <li>_needs
 : <a class="el" href="class_need_set.html#a0061433149b8a9edff7aea4caeb21142">NeedSet</a>
-, <a class="el" href="class_npc.html#a84151278a1814e13fba9f02eb4b6211c">Npc</a>
+, <a class="el" href="class_npc.html#ac357956f37a47ea102ec294e8f411028">Npc</a>
 </li>
 <li>_next
 : <a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html#a3bbf00f77131a8e83d648d32d090c564">tinyxml2::XMLAttribute</a>
 , <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a27e985496b37dd00eb5b9cf59b9e3fb1">tinyxml2::XMLNode</a>
+</li>
+<li>_nInstances
+: <a class="el" href="class_spawner.html#af2af185967bb46125e78562a4011bce9">Spawner&lt; T &gt;</a>
 </li>
 <li>_node
 : <a class="el" href="classtinyxml2_1_1_x_m_l_const_handle.html#ad4d8db839660ef730adfa2439945c4da">tinyxml2::XMLConstHandle</a>
 , <a class="el" href="classtinyxml2_1_1_x_m_l_handle.html#a65449d71b75d8aeb40a54224c954c138">tinyxml2::XMLHandle</a>
 </li>
 <li>_noticeDistance
-: <a class="el" href="class_base_npc.html#ab1d0d0cd3103610ddc4fd02b11b69ed4">BaseNpc</a>
+: <a class="el" href="class_character.html#a97d5cd34e31465ade343ff4070526677">Character</a>
+</li>
+<li>_NPCCities
+: <a class="el" href="class_quest_content_manager.html#aef307e5f8d84c9ef27bf9ea2418b7d21">QuestContentManager</a>
 </li>
 <li>_npcEntity
 : <a class="el" href="class_level_manager.html#a34716152b27ea41fc034fe725b79134e">LevelManager</a>
+</li>
+<li>_numberOfBuildings
+: <a class="el" href="class_city.html#adbc875c1b54c2a95df22b9bd3ec6ac0d">City</a>
+, <a class="el" href="class_city_manager.html#af9a3dca9cf6ed4bb111cb13540406000">CityManager</a>
 </li>
 <li>_numberOfRegions
 : <a class="el" href="class_zone.html#a460231305435ce3620e59393c6487337">Zone</a>
 </li>
 <li>_nUntracked
 : <a class="el" href="classtinyxml2_1_1_mem_pool_t.html#a5048ad99f7350f7224b13cf85fbff151">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;</a>
+</li>
+<li>_objects
+: <a class="el" href="class_generic_container.html#a7747dc399e86b673841d46b5d7799ff6">GenericContainer&lt; T &gt;</a>
+</li>
+<li>_owner
+: <a class="el" href="class_state_machine.html#a76ee94f6c8327cbc96e0fa421b47a6da">StateMachine&lt; T &gt;</a>
 </li>
 <li>_parent
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a176dd1c4965c21c366de192164aa2c13">tinyxml2::XMLNode</a>
@@ -426,11 +469,26 @@ $(function() {
 <li>_playerEntity
 : <a class="el" href="class_level_manager.html#a7d7335abaa090aa8a94637440c5eeebe">LevelManager</a>
 </li>
+<li>_playerHealthBarWidget
+: <a class="el" href="class_u_i_manager.html#aadd069a819027b59bfc9cfdea83cfd27">UIManager</a>
+</li>
 <li>_pool
 : <a class="el" href="classtinyxml2_1_1_dyn_array.html#a26ed1f7dab98229d2ed867a07ee427df">tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;</a>
 </li>
+<li>_possibleStates
+: <a class="el" href="class_state_machine.html#ac588f28fe3c2d9c09f64567b2cd242d3">StateMachine&lt; T &gt;</a>
+</li>
+<li>_postcondition
+: <a class="el" href="class_action.html#af7f45c833bdac835c37afe554e2fc6a9">Action</a>
+</li>
+<li>_preconditions
+: <a class="el" href="class_action.html#a88d32eaf2df8a0ab7dac011147d0a890">Action</a>
+</li>
 <li>_prev
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a9739eb0fb9a1188266052055e7a6bf6b">tinyxml2::XMLNode</a>
+</li>
+<li>_previous
+: <a class="el" href="class_state_machine.html#a1dad7f894f57d0c2645cec62d5d7d057">StateMachine&lt; T &gt;</a>
 </li>
 <li>_processEntities
 : <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a9f768cb74fb5ccbadeffa436916f0194">tinyxml2::XMLDocument</a>
@@ -439,21 +497,36 @@ $(function() {
 <li>_profession
 : <a class="el" href="class_npc.html#a666098454d29557bff5aac443b2339fb">Npc</a>
 </li>
-<li>_quality
-: <a class="el" href="class_item_instance.html#aa23ba98452be983c85855f5c5a4f2e5a">ItemInstance</a>
-, <a class="el" href="class_quest_item.html#a5e1d4b82637e82f55560e6fd90ee6e1d">QuestItem</a>
-</li>
-<li>_qualityProbablity
-: <a class="el" href="class_item_generator.html#a035204471018f6e624edd59cc3cd8dff">ItemGenerator</a>
-</li>
 <li>_questContentManager
-: <a class="el" href="class_game_manager.html#a0e6a093c19a2e8839fe6a386af274284">GameManager</a>
+: <a class="el" href="class_quest_manager.html#a369b9d02826fc5cbbfdfcd7f74d880eb">QuestManager</a>
 </li>
-<li>_range
-: <a class="el" href="class_stat_range.html#acd1859247e14f166929de744a839b0f5">StatRange</a>
+<li>_questGenerator
+: <a class="el" href="class_quest_manager.html#aaafad5e8720f258fff1d3b6d41d75472">QuestManager</a>
+</li>
+<li>_questManager
+: <a class="el" href="class_game_manager.html#a432075eff36e3a0404f95fa20578aebb">GameManager</a>
+</li>
+<li>_questOn
+: <a class="el" href="class_u_i_manager.html#ae3c675d178ddcfe45bcf99a0338c190d">UIManager</a>
+</li>
+<li>_quests
+: <a class="el" href="class_quest_manager.html#a538fdf97be30a6d71427f90ccac7a191">QuestManager</a>
+</li>
+<li>_rarity
+: <a class="el" href="class_quest_item.html#afaff8b1a0ca58b819cf8cab6a93871b3">QuestItem</a>
+</li>
+<li>_rarityPref
+: <a class="el" href="class_strategy.html#ae8ceeb06949763afa3c4d3443df5065b">Strategy</a>
+</li>
+<li>_requiredContent
+: <a class="el" href="class_action.html#a67f288e424d50bf97144ce473c8a9961">Action</a>
 </li>
 <li>_restrictedEntityFlag
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a5df242509d42ae1c9128924121ebe093">tinyxml2::XMLPrinter</a>
+</li>
+<li>_roleNode
+: <a class="el" href="class_city.html#a03190e89ed0366232f33beb6233d76d7">City</a>
+, <a class="el" href="class_city_manager.html#af794901204a168511cc8e565f58ff789">CityManager</a>
 </li>
 <li>_root
 : <a class="el" href="classtinyxml2_1_1_mem_pool_t.html#aff60ad785be00814e442e53fb4462688">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;</a>
@@ -462,46 +535,68 @@ $(function() {
 <li>_rootAttribute
 : <a class="el" href="classtinyxml2_1_1_x_m_l_element.html#ad067115a9f42b2df1fcdf3e0355f2789">tinyxml2::XMLElement</a>
 </li>
+<li>_rootNode
+: <a class="el" href="class_city.html#aeb7244a8b40b9990d0ea0397ceb2d5ee">City</a>
+, <a class="el" href="class_city_manager.html#a8b34ffc745d1064dfeb1b0aa9e09b592">CityManager</a>
+</li>
 <li>_rotationspeed
 : <a class="el" href="class_character.html#a0c4595355fea6de6488cb81118ed03fe">Character</a>
 </li>
-<li>_runspeed
-: <a class="el" href="class_character.html#ae21dec2e5dd22901da9017394783e68e">Character</a>
+<li>_scalar
+: <a class="el" href="class_zone.html#a83b6949ad2ec6fc66c56011bc11c147d">Zone</a>
+</li>
+<li>_scaledDepth
+: <a class="el" href="class_city.html#a141d39a0719155462275029b11c44698">City</a>
+</li>
+<li>_scaledWidth
+: <a class="el" href="class_city.html#a6c1dbe7344a57e6a46ba42d4607f3460">City</a>
+</li>
+<li>_signEntity
+: <a class="el" href="class_city.html#a8367859e73c46e3c460c7c312a672f22">City</a>
+, <a class="el" href="class_city_manager.html#a9a1d97a971f534367deedbb266ff6a4c">CityManager</a>
+</li>
+<li>_sisterNode
+: <a class="el" href="class_level_generator.html#a1b3344dcae340f45830d41b50f8ab7be">LevelGenerator</a>
 </li>
 <li>_size
 : <a class="el" href="classtinyxml2_1_1_dyn_array.html#a40f0578cc1912eed17fb29f64daf6ae9">tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;</a>
 , <a class="el" href="class_tree.html#aebfe8b84625fb907b38714399315586c">Tree&lt; T &gt;</a>
 </li>
-<li>_spawnPosition
-: <a class="el" href="class_character_spawner.html#acb682d027065cc1d4f66636977a92fdb">CharacterSpawner&lt; T &gt;</a>
+<li>_slotNumber
+: <a class="el" href="class_weapon_instance.html#acea014700bc70e796825f030440a44ab">WeaponInstance</a>
 </li>
-<li>_spriteName
-: <a class="el" href="class_base_item.html#aec3aebba70e75e955f0509169db77152">BaseItem</a>
+<li>_sourceNPC
+: <a class="el" href="class_quest.html#a7a48720bb81548e61af8b904c22ba860">Quest</a>
+</li>
+<li>_spawnPosition
+: <a class="el" href="class_spawner.html#a341af5af4c9d23b495b372f3d51ac824">Spawner&lt; T &gt;</a>
 </li>
 <li>_sprName
-: <a class="el" href="class_base_quest_item.html#a192a9066955f401f92da0564d1bebf64">BaseQuestItem</a>
+: <a class="el" href="class_quest_item.html#a510a66401eedde6d0cc1f04e589e79ac">QuestItem</a>
 </li>
 <li>_stack
 : <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a99d59e67e084714541bee3ae43884bef">tinyxml2::XMLPrinter</a>
 </li>
-<li>_staminaBarWidget
-: <a class="el" href="class_u_i_manager.html#abac26facdbb738a8c21660dd32a77458">UIManager</a>
-</li>
 <li>_start
 : <a class="el" href="classtinyxml2_1_1_str_pair.html#acfd8687916a02833cc55c279460d2f4a">tinyxml2::StrPair</a>
 </li>
-<li>_startDialogText
-: <a class="el" href="class_npc.html#a6606fe91bf07a86516244cd1b989b1cc">Npc</a>
+<li>_startCity
+: <a class="el" href="class_level_generator.html#a9185635ffdbd3e19586a62ac005a803c">LevelGenerator</a>
 </li>
-<li>_stats
-: <a class="el" href="class_character.html#abbc9722956291ca5212c53aa0a639d68">Character</a>
-, <a class="el" href="class_character_stats.html#a9f0fc4ed231a2981d50f50ae4c64801a">CharacterStats</a>
+<li>_startGameText
+: <a class="el" href="class_u_i_manager.html#ab700f1561d5131231ed99bd58b1afabc">UIManager</a>
 </li>
-<li>_statType
-: <a class="el" href="class_stat_range.html#a839e2faa73a2cbc125d50f2e8c714893">StatRange</a>
+<li>_startLevelText
+: <a class="el" href="class_u_i_manager.html#a2c6600409ce64f1f83c59c770154725f">UIManager</a>
 </li>
-<li>_summedQualityProbability
-: <a class="el" href="class_item_generator.html#afc6bc636d81b33a6bb9b4e8d7e4a6a17">ItemGenerator</a>
+<li>_storyTextOn
+: <a class="el" href="class_u_i_manager.html#a584dae1a9b443783bc534870e3c22396">UIManager</a>
+</li>
+<li>_strategy
+: <a class="el" href="class_quest.html#a3e77eb88b83f326b4af8591ad049aaff">Quest</a>
+</li>
+<li>_strategyContainer
+: <a class="el" href="class_quest_manager.html#a3a9c95a62a12e886b7daa8c2a0d1f373">QuestManager</a>
 </li>
 <li>_target
 : <a class="el" href="class_character.html#a477f4443bdf423edfb5b16340b61f514">Character</a>
@@ -512,17 +607,26 @@ $(function() {
 <li>_textPool
 : <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#afe8ac410aaa53cf1f2142a4c2fd958c7">tinyxml2::XMLDocument</a>
 </li>
-<li>_tier
-: <a class="el" href="class_affix.html#a59e578cb01ff86a89a3fbd0e472f619e">Affix</a>
-</li>
 <li>_tiles
 : <a class="el" href="class_zone.html#ae1f2cab40c4a6601d50e936cfd129e81">Zone</a>
 </li>
-<li>_timeSince
-: <a class="el" href="class_base_npc.html#accec990b095bc533ec3b3cb1b0933402">BaseNpc</a>
+<li>_tiles2
+: <a class="el" href="class_city.html#a67a387fdbc768ff94c1e99f5827e66d9">City</a>
+</li>
+<li>_timer
+: <a class="el" href="class_base_npc.html#a2d02e676ad82ab0db2d0624cd5001bf3">BaseNpc</a>
 </li>
 <li>_totalHitTime
 : <a class="el" href="class_character.html#abf77c8fb2636f428ca79adbf344a4a32">Character</a>
+</li>
+<li>_totalInBattleTime
+: <a class="el" href="class_player.html#a94e3b8e5cdb67ca8f10fa5a8d7bda7aa">Player</a>
+</li>
+<li>_type
+: <a class="el" href="class_action.html#a32128da9259c5d7652e3a878a0329edf">Action</a>
+</li>
+<li>_uiElementMgr
+: <a class="el" href="class_u_i_manager.html#a43e0a1a1e2aadf1ae3686206ad69df13">UIManager</a>
 </li>
 <li>_uiManager
 : <a class="el" href="class_game_manager.html#a9d577e81a6099e225f3cd68cbf5c3fb2">GameManager</a>
@@ -530,26 +634,24 @@ $(function() {
 <li>_uiNode
 : <a class="el" href="class_u_i_manager.html#a64d52b59e599c6fef5e156a99b4d3ac3">UIManager</a>
 </li>
+<li>_updateBar
+: <a class="el" href="class_basic_enemy.html#a86fb298fecb66ff0475b0330e9d47e19">BasicEnemy</a>
+</li>
 <li>_userData
 : <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#ac2d5cc463a6c95ec5907d57a119c56da">tinyxml2::XMLNode</a>
 </li>
 <li>_value
-: <a class="el" href="class_affix.html#ae8b6810c8128a234a9cfb37eddbb6234">Affix</a>
-, <a class="el" href="class_modifier.html#a1af5f8314efe51e622197860e025573f">Modifier</a>
-, <a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html#abcf5c9b7f040ed71ed2a66557584b5b0">tinyxml2::XMLAttribute</a>
+: <a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html#abcf5c9b7f040ed71ed2a66557584b5b0">tinyxml2::XMLAttribute</a>
 , <a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a3ea9884098b8379de2bb5ab3fc85c0fc">tinyxml2::XMLNode</a>
-</li>
-<li>_weapon
-: <a class="el" href="class_character.html#aaeb686788ef1f2d15e69bcd5520ab7c9">Character</a>
 </li>
 <li>_weaponInfo
 : <a class="el" href="class_weapon_instance.html#a0266ffdd193b193bdb657f18c21227ae">WeaponInstance</a>
 </li>
+<li>_weaponNode
+: <a class="el" href="class_weapon_instance.html#aca4df8145affecd4ab066c62a56803ac">WeaponInstance</a>
+</li>
 <li>_weaponObject
 : <a class="el" href="class_weapon_instance.html#a74940ef2bb264199cd8ff03c2b02df49">WeaponInstance</a>
-</li>
-<li>_weapons
-: <a class="el" href="class_item_container.html#ad9ad1387b88e78058a1f3ee8a0503cca">ItemContainer</a>
 </li>
 <li>_whitespaceMode
 : <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#afec08bf4b1c57b487ba3c6855cfe5478">tinyxml2::XMLDocument</a>
@@ -562,6 +664,9 @@ $(function() {
 </li>
 <li>_xpTillNextLevel
 : <a class="el" href="class_player.html#aa7e0c4e387bed01056a46499aa0f269e">Player</a>
+</li>
+<li>_zone
+: <a class="el" href="class_level_generator.html#ada97e6ff78b803a6b6bfb294a4705716">LevelGenerator</a>
 </li>
 </ul>
 </div><!-- contents -->

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['healthperhit',['HealthPerHit',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a2dd0040b4986e913299853ee244ebbec',1,'CharacterStats.h']]],
-  ['healthperkill',['HealthPerKill',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a7831c2f120e49ae93df80d6f7c6dbab5',1,'CharacterStats.h']]],
-  ['healthpersec',['HealthPerSec',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a3cc9aa27d216e265e17f6a0fd5885f6c',1,'CharacterStats.h']]]
+  ['hideouthouse',['HideOutHouse',['../_city_8h.html#aba2b45f536f3c9719aea96bb472784a4ade3534d3d7bb244c5728f73c6084a347',1,'City.h']]],
+  ['hideoutqc',['HideOutQC',['../_quest_content_manager_8h.html#a22ed084992233bf3f31b06277f17d6f1a71ac866655bbdd7d762c240243276e54',1,'QuestContentManager.h']]],
+  ['hideoutrt',['HideoutRT',['../_city_8h.html#ab540f7414f306325d92272bcef1e34e1a09829efc3cc94de46022389405469cac',1,'City.h']]]
 ];

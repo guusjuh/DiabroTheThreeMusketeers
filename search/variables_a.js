@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['tixml2_5fmajor_5fversion',['TIXML2_MAJOR_VERSION',['../tinyxml2_8h.html#a53acdb84a871ed12b99d5f4aff209bf4',1,'tinyxml2.h']]],
-  ['tixml2_5fminor_5fversion',['TIXML2_MINOR_VERSION',['../tinyxml2_8h.html#ac94d4b856d14f3c3a8c1dcdbd6ee13b4',1,'tinyxml2.h']]],
-  ['tixml2_5fpatch_5fversion',['TIXML2_PATCH_VERSION',['../tinyxml2_8h.html#a1406cb43e9d84251509e069b6cb21781',1,'tinyxml2.h']]],
-  ['tixml_5futf_5flead_5f0',['TIXML_UTF_LEAD_0',['../tinyxml2_8cpp.html#a37999e32163e2a3280bc0b8e1999774e',1,'tinyxml2.cpp']]],
-  ['tixml_5futf_5flead_5f1',['TIXML_UTF_LEAD_1',['../tinyxml2_8cpp.html#a3cda92a178036c812663a7b75c5e04d0',1,'tinyxml2.cpp']]],
-  ['tixml_5futf_5flead_5f2',['TIXML_UTF_LEAD_2',['../tinyxml2_8cpp.html#a8e36ce25f81f009c066037e937da3a6a',1,'tinyxml2.cpp']]],
-  ['type',['type',['../struct_stat.html#a1ced1ef2a745d7b12d5240b2007a1fb4',1,'Stat::type()'],['../struct_need.html#a512e969c579b9c0c4456e9eb26927fe3',1,'Need::type()']]]
+  ['next',['next',['../uniontinyxml2_1_1_mem_pool_t_1_1_item.html#a5620107f518c60d6619e8662d4c9d643',1,'tinyxml2::MemPoolT::Item']]],
+  ['nextpos',['nextPos',['../class_base_npc.html#aa7a32d36585fda5f30e1d45862979d88',1,'BaseNpc']]],
+  ['nodeofscenexml',['nodeOfSceneXML',['../class_game_manager.html#ac4127d864f5cfcacd6ae043c7a522df5',1,'GameManager']]],
+  ['npcnames',['npcNames',['../class_level_manager.html#afdff672e82192fe8d2e4342cd4875766',1,'LevelManager']]],
+  ['npcspawner',['npcSpawner',['../class_level_manager.html#af5ecedbafd0223d6766e9b5048f02c27',1,'LevelManager']]],
+  ['num_5fentities',['NUM_ENTITIES',['../namespacetinyxml2.html#aef74bfad4850ed3181f00f86b03c7b45',1,'tinyxml2']]]
 ];
