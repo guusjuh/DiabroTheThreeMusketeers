@@ -66,6 +66,10 @@ void Character::move(Ogre::Vector3& pMoveVec)
 	_dirVec = pMoveVec;
 }
 
+/// <summary>
+/// Performs a light attack.
+/// </summary>
+/// <returns></returns>
 bool Character::lightAttack()
 {
 	if (!_canAttack || _hitted)

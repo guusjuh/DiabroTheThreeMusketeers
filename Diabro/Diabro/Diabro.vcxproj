@@ -117,7 +117,7 @@
     <ClCompile Include="BaseNpc.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="CharacterSpawner.cpp" />
+    <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="City.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -153,7 +153,7 @@
     <ClInclude Include="QuestItem.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="CharacterSpawner.h" />
+    <ClInclude Include="Spawner.h" />
     <ClInclude Include="City.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericContainer.h" />

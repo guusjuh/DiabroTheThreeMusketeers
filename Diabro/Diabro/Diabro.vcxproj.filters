@@ -70,9 +70,6 @@
     <ClCompile Include="StateMachine.cpp">
       <Filter>Sources\Finite State Machines</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterSpawner.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
     <ClCompile Include="FloatRange.cpp">
       <Filter>Sources\Characters</Filter>
     </ClCompile>
@@ -90,6 +87,9 @@
     </ClCompile>
     <ClCompile Include="QuestGenerator.cpp">
       <Filter>Sources\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Sources\Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,9 +154,6 @@
     <ClInclude Include="Character.h">
       <Filter>Headers\Characters</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterSpawner.h">
-      <Filter>Headers\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="Npc.h">
       <Filter>Headers\Characters</Filter>
     </ClInclude>
@@ -198,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Spawner.h">
+      <Filter>Headers\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

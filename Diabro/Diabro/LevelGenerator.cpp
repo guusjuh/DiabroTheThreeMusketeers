@@ -288,7 +288,7 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 }
 void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
 	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-	CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
+	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
 }
 
 void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) const {

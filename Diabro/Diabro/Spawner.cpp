@@ -1,16 +1,19 @@
-#include "CharacterSpawner.h"
+#include "Spawner.h"
 #include "GameManager.h"
 
 template<class T>
-::CharacterSpawner<T>::CharacterSpawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns, Ogre::Vector3 pSpawnPosition, City* pMyCity)
-	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nCharacters(pNumOfSpawns), _myCity(pMyCity){
-	for (int i = 0; i < _nCharacters; ++i) {
+::Spawner<T>::Spawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns, Ogre::Vector3 pSpawnPosition, City* pMyCity)
+	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nInstances(pNumOfSpawns), _myCity(pMyCity){
+	for (int i = 0; i < _nInstances; ++i) {
 		spawnInstance();
 	}
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref="Spawner"/> class.
+/// </summary>
 template<class T>
-CharacterSpawner<T>::~CharacterSpawner() {
+Spawner<T>::~Spawner() {
 
 }
 
@@ -18,7 +21,7 @@ CharacterSpawner<T>::~CharacterSpawner() {
 /// called when an <T> instance dies (does not kill instance).
 /// </summary>
 template<class T>
-void CharacterSpawner<T>::instanceDeath() {
+void Spawner<T>::instanceDeath() {
 	spawnInstance();
 }
 
@@ -26,7 +29,7 @@ void CharacterSpawner<T>::instanceDeath() {
 /// Spawns an instance of <T>.
 /// </summary>
 template<class T>
-void CharacterSpawner<T>::spawnInstance() {
+void Spawner<T>::spawnInstance() {
 	
 	Ogre::SceneNode* instanceNode = _myNode->createChildSceneNode();
 	//random offset
@@ -42,5 +45,4 @@ void CharacterSpawner<T>::spawnInstance() {
 	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity, _myCity);
 }
 
-//template class CharacterSpawner < Npc >;
-template class CharacterSpawner < BasicEnemy >;
+template class Spawner < BasicEnemy >;
