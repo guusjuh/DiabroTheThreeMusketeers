@@ -7,45 +7,37 @@
 /// <param name="strategy">The strategy.</param>
 /// <param name="sourceNPC">The source NPC.</param>
 /// <param name="healthReward">The health reward.</param>
-Quest::Quest(Strategy strategy, Npc* sourceNPC, int healthReward)
-	: _strategy(strategy), _sourceNPC(sourceNPC), _healthReward(healthReward) {
-	_currrentAction = _strategy.getActionSequence()[0];
+Quest::Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward)
+	: _strategy(strategy), _sourceNPC(sourceNPC), _healthReward(healthReward), _completed(false) {
 }
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Quest"/> class.
 /// </summary>
 Quest::Quest()
-	: _strategy(), _sourceNPC(nullptr), _healthReward(0), _currrentAction(nullptr) { }
+	: _strategy(), _sourceNPC(nullptr), _healthReward(0), _completed(false) { }
 
 /// <summary>
 /// Finalizes an instance of the <see cref="Quest"/> class.
 /// </summary>
-Quest::~Quest() { }
+Quest::~Quest() {}
 
 /// <summary>
 /// Completes the current action and sets the next.
 /// </summary>
 void Quest::completeAction() {
-	// find which action is the current
-	for (int i = 0; i < _strategy.getActionSequence().size(); ++i) {
+	// complete the action
+	_strategy.getCurrentAction()->complete();
 
-		// if we found the current
-		if(_currrentAction == _strategy.getActionSequence()[i]) {
-			
-			// complete the action
-			_currrentAction->complete();
-
-			// if it's not the last
-			if(i == _strategy.getActionSequence().size() - 1) {
-				completeQuest();
-				return;
-			} else {
-				_currrentAction = _strategy.getActionSequence()[i + 1];
-				return;
-			}
-		}
+	// if it's not the last
+	if(_strategy.getCurrentAction() == &_strategy.getActionSequence()[_strategy.getActionSequence().size() - 1]) {
+		completeQuest();
+		return;
+	} else {
+		_strategy.increaseAction();
+		return;
 	}
+		
 }
 
 /// <summary>

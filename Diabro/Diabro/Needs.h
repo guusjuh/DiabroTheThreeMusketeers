@@ -12,7 +12,6 @@ enum NeedType {
 	ProtectionNeed,
 	ConquestNeed,
 	WealthNeed,
-	AbilityNeed,
 	EquipmentNeed,
 
 	AMOUNT_OF_NEEDTYPES
@@ -47,6 +46,8 @@ public:
 
 	NeedSet(std::vector<Need> pNeeds) : _needs(pNeeds) {};
 
+	std::vector<Need> getNeeds() { return _needs; }
+
 	int getKnowledgeValue() { return _needs[(int)NeedType::KnowledgeNeed].value; };
 	int getComfortValue() { return _needs[(int)NeedType::ComfortNeed].value; };
 	int getReputationValue() { return _needs[(int)NeedType::ReputationNeed].value; };
@@ -54,7 +55,6 @@ public:
 	int getProtectionValue() { return _needs[(int)NeedType::ProtectionNeed].value; };
 	int getConquestValue() { return _needs[(int)NeedType::ConquestNeed].value; };
 	int getWealthValue() { return _needs[(int)NeedType::WealthNeed].value; };
-	int getAbilityValue() { return _needs[(int)NeedType::AbilityNeed].value; };
 	int getEquipmentValue() { return _needs[(int)NeedType::EquipmentNeed].value; };
 
 	/// <summary>

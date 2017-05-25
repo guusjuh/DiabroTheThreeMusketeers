@@ -4,7 +4,7 @@
 #include "GenericContainer.h"
 #include "Strategy.h"
 
-class StrategyContainer : GenericContainer<Strategy> {
+class StrategyContainer : public GenericContainer<Strategy> {
 public:
 	StrategyContainer();
 	~StrategyContainer();

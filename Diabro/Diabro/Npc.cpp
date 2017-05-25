@@ -32,11 +32,12 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	};
 
 	_name = getNameOptions()[GameManager::getSingletonPtr()->getRandomInRange(0, getNameOptions().size())];
-	_needs = new NeedSet(tempNeeds);
+	_needs = NeedSet(tempNeeds);
+
+	_hasQuest = false;
 }
 
 Npc::~Npc() {
-	delete _needs;
 }
 
 std::vector<std::string> Npc::getNameOptions() {
@@ -60,6 +61,11 @@ std::vector<std::string> Npc::getNameOptions() {
 void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
+
+	if (!_hasQuest) {
+		needNewQuest();
+		_hasQuest = true;
+	}
 
 	if(_playerDetected)
 	{
@@ -105,6 +111,27 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 /// <param name="pNeedType">Type of the need.</param>
 /// <param name="pAdjust">The adjustment value.</param>
 void Npc::adjustNeed(NeedType pNeedType, int pAdjust) {
-	_needs->adjustValueOf(pAdjust, pNeedType);
+	_needs.adjustValueOf(pAdjust, pNeedType);
 	return;
 }
+
+/// <summary>
+/// Assigns new quest based on current needs.
+/// </summary>
+void Npc::needNewQuest() {
+	// set the lowest need by default to the first
+	Need lowestNeed = _needs.getNeeds()[0];
+
+	// find the lowest need
+	for(int i = 1; i < _needs.getNeeds().size(); ++i) {
+		if(_needs.getNeeds()[i].value < lowestNeed.value) {
+			lowestNeed = _needs.getNeeds()[i];
+		}
+	}
+
+	// set the current quest to a new random quest 
+	GameManager::getSingletonPtr()->getQuestManager()->generateQuest(this, lowestNeed.type);
+
+	lowestNeed.adjustValue(50);
+}
+

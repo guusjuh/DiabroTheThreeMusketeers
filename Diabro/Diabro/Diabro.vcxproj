@@ -129,6 +129,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Quest.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
+    <ClCompile Include="QuestGenerator.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="State.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
     <ClInclude Include="Quest.h" />
+    <ClInclude Include="QuestGenerator.h" />
     <ClInclude Include="QuestItem.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Character.h" />

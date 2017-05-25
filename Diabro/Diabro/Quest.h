@@ -1,7 +1,9 @@
-#pragma once
+#ifndef QUEST_H
+#define QUEST_H
+
 #include "Action.h"
 #include "Strategy.h"
-#include "Npc.h"
+#include "BaseNpc.h"
 
 /// <summary>
 /// A linear Quest instance.
@@ -9,19 +11,23 @@
 class Quest
 {
 public:
-	Quest(Strategy strategy, Npc* sourceNPC, int healthReward);
+	Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward);
 	Quest();
 	~Quest();
 
 	void completeAction();
 	void completeQuest();
+
+	bool isAbstract() { return _strategy.isAbstract(); }
+
 	bool completed() { return _completed; }
 
 private:
 	Strategy _strategy;
-	Action* _currrentAction;
-	Npc* _sourceNPC;
+	BaseNpc* _sourceNPC;
 	int _healthReward;
+
 	bool _completed;
 };
 
+#endif

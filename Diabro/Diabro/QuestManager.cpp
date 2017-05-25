@@ -45,14 +45,19 @@ QuestManager::QuestManager()
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("NPCQC", NPCQC));
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("EnemyQC", EnemyQC));
 
-	stringToNeedType.insert(std::pair<std::string, NeedType>("KnowledgeNeed", KnowledgeNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("ComfortNeed", ComfortNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("ReputationNeed", ReputationNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("SerenityNeed", SerenityNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("ProtectionNeed", ProtectionNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("ConquestNeed", ConquestNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("WealthNeed", WealthNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("AbilityNeed", AbilityNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("EquipmentNeed", EquipmentNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Knowledge", KnowledgeNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Comfort", ComfortNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Serenity", SerenityNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Protection", ProtectionNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Conquest", ConquestNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Wealth", WealthNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Equipment", EquipmentNeed));
 
+}
+
+Quest* QuestManager::generateQuest(BaseNpc* pSourceNpc, NeedType pMotivation) {
+	_quests.push_back(_questGenerator->generateQuest(pSourceNpc, pMotivation));
+
+	return &_quests[_quests.size() - 1];
 }
