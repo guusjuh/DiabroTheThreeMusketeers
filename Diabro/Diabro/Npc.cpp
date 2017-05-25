@@ -130,7 +130,7 @@ void Npc::needNewQuest() {
 	}
 
 	// set the current quest to a new random quest 
-	GameManager::getSingletonPtr()->getQuestManager()->generateQuest(this, lowestNeed.type);
+	_currentQuest = GameManager::getSingletonPtr()->getQuestManager()->generateQuest(this, lowestNeed.type);
 
 	lowestNeed.adjustValue(50);
 }

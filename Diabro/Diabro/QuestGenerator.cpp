@@ -46,13 +46,6 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, BaseNpc* pSourceNpc,
 	std::vector<Strategy*> possibleStrategies;
 
 	for (int i = 0; i < GameManager::getSingletonPtr()->getQuestManager()->getStrategyContainer()->GetObjects().size(); ++i) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		Strategy* strat = GameManager::getSingletonPtr()->getQuestManager()->getStrategyContainer()->GetObjects()[i];
-		std::cout << "strat: " << strat->getMotivation() << std::endl;
-		fclose(fp);
-#endif
 		if(GameManager::getSingletonPtr()->getQuestManager()->getStrategyContainer()->GetObjects()[i]->getMotivation() == pMotivation) {
 			possibleStrategies.push_back(GameManager::getSingletonPtr()->getQuestManager()->getStrategyContainer()->GetObjects()[i]);
 		}
