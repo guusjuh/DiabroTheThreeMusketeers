@@ -89,10 +89,10 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
-				Ogre::SceneNode* thisSceneNode = _dungeonNode->createChildSceneNode();
-				thisSceneNode->setPosition(ix * scalar, 0, iz * scalar);
-				Ogre::SceneNode* wallNode = thisSceneNode->createChildSceneNode();
-				wallNode->setPosition(Ogre::Vector3(scalar / 2.0f, 0, scalar / 2.0f));
+				Ogre::SceneNode* tileNode = _dungeonNode->createChildSceneNode();
+				tileNode->setPosition(ix * scalar, 0, iz * scalar);
+				Ogre::SceneNode* wallNode = tileNode->createChildSceneNode();
+				wallNode->setPosition((scalar / 2.0f), 0.0f, (scalar / 2.0f));
 
 				std::stringstream name;
 				name << "tile_" << ix << "-" << iz;
@@ -126,10 +126,10 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 					west->yaw(Ogre::Radian(-90 * Ogre::Math::PI / 180));
 				}
 
-				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), "tileMesh");
+				Ogre::Entity* tileEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), "tileMesh");
 				//testCity->setMaterialName("Test/ColourTest");
-				zoneEntity->setMaterialName("Examples/Rockwall");
-				thisSceneNode->attachObject(zoneEntity);
+				tileEntity->setMaterialName("Examples/Rockwall");
+				tileNode->attachObject(tileEntity);
 			}
 		}
 	}
@@ -228,7 +228,7 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol) cons
 	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
-	mesh->_setBounds(Ogre::AxisAlignedBox(Ogre::AxisAlignedBox::EXTENT_INFINITE));
+	mesh->_setBounds(Ogre::AxisAlignedBox(Ogre::AxisAlignedBox(-(scalar / 2.0f), 0.0f, -(scalar / 2.0f), scalar / 2.0f, scalar, -(scalar / 2.0f))));
 
 	mesh->load();
 }
