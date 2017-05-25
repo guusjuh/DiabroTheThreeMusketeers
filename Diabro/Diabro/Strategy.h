@@ -27,14 +27,16 @@ public:
 	/// <param name="pActions">The actions that must be completed for the quest.</param>
 	Strategy(int pid, std::string pName, QuestName pNameQuest, NeedType pMotivation, std::vector<Action> pActions, int pRarityPref)
 		: _id(pid), _nameStrategy(pName), _nameQuest(pNameQuest), _motivation(pMotivation), _actionSequence(pActions), _rarityPref(pRarityPref) {
-		_currrentAction = &_actionSequence[0];
+		_currentAction = 0;
 	}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Strategy"/> class.
 	/// </summary>
 	Strategy()
-		: _id(0), _nameStrategy(""), _nameQuest(), _motivation((NeedType)0), _actionSequence(0), _rarityPref(0) {}
+		: _id(0), _nameStrategy(""), _nameQuest(), _motivation((NeedType)0), _actionSequence(0), _rarityPref(0) {
+		_currentAction = -1;
+	}
 
 	/// <summary>
 	/// Finalizes an instance of the <see cref="Strategy"/> class.
@@ -52,10 +54,12 @@ public:
 		return _actionSequence;
 	}
 	Action* getCurrentAction() {
-		return _currrentAction;
+		return &_actionSequence[_currentAction];
 	}
 
 	void increaseAction() {
+		_currentAction++;
+		/*
 		// find which action is the current
 		for (int i = 0; i < getActionSequence().size(); ++i) {
 
@@ -64,7 +68,7 @@ public:
 				_currrentAction = &getActionSequence()[i + 1];
 				return;
 			}
-		}
+		}*/
 	}
 
 	int getRarityPref() { return _rarityPref; }
@@ -78,7 +82,7 @@ private:
 	NeedType _motivation;
 
 	std::vector<Action> _actionSequence;
-	Action* _currrentAction;
+	int _currentAction;
 
 	int _rarityPref;
 };
