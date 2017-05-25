@@ -2,6 +2,17 @@
 #define _PLAYER_EQUIPMENT_H_
 #include "IPlayerEquipment.h"
 
+enum UpgradeModifierType {
+	Health,
+	Damage
+};
+
+struct PlayerUpgradeType {
+	int value;
+	UpgradeModifierType modifier;
+	PlayerUpgradeType(int v, UpgradeModifierType t) : value(v), modifier(t) {}
+};
+
 class PlayerEquipment : public IPlayerEquipment
 {
 public:
@@ -11,7 +22,9 @@ public:
 	float getDamage() override;
 	float getHealth() override;
 
-	bool IsBase() override{ return true; }
+	bool isBase() override{ return true; }
+
+	IPlayerEquipment* removeUpgrades() override { return this; }
 
 private:
 	float health;

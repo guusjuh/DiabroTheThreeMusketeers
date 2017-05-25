@@ -1,7 +1,7 @@
 #include "PlayerUpgrade.h"
 
 
-PlayerUpgrade::PlayerUpgrade(IPlayerEquipment base, float healthMod = 0, float damageMod = 0)
+PlayerUpgrade::PlayerUpgrade(IPlayerEquipment* base, float healthMod, float damageMod)
 	: equipment(base), healthMod(healthMod), damageMod(damageMod)
 {
 }
@@ -10,20 +10,26 @@ PlayerUpgrade::~PlayerUpgrade()
 {
 }
 
-bool PlayerUpgrade::IsBase()
+bool PlayerUpgrade::isBase()
 {
 	return false;
 }
 
 float PlayerUpgrade::getHealth()
 {
-	return equipment.getHealth() + healthMod;
+	return equipment->getHealth() + healthMod;
 }
 
 float PlayerUpgrade::getDamage()
 {
-	return equipment.getDamage() + damageMod;
+	return equipment->getDamage() + damageMod;
 }
 
-
-
+IPlayerEquipment* PlayerUpgrade::removeUpgrades() {
+	if (equipment->isBase()) {
+		return equipment;
+	}
+	else {
+		return equipment->removeUpgrades();
+	}
+}

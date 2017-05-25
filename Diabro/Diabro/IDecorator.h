@@ -2,10 +2,9 @@
 class IDecorator
 {
 public:
-	IDecorator();
-	~IDecorator();
+	IDecorator() {}
+	~IDecorator() {}
 
-	virtual bool IsBase();
-	virtual IDecorator removeUpgrades();
+	virtual bool isBase() { return false; }
 };
 

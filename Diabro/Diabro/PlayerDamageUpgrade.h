@@ -2,10 +2,10 @@
 #include "PlayerUpgrade.h"
 #include "IPlayerEquipment.h"
 
-class PlayerDamageUpgrade : PlayerUpgrade
+class PlayerDamageUpgrade : public PlayerUpgrade
 {
 public:
-	PlayerDamageUpgrade(IPlayerEquipment equipment, float damageMod);
+	PlayerDamageUpgrade(IPlayerEquipment* equipment, float damageMod);
 	~PlayerDamageUpgrade();
 
 	float getDamage() override;

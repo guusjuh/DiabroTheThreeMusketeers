@@ -1,5 +1,8 @@
 #include "Player.h"
 #include "GameManager.h"
+#include "PlayerEquipment.h"
+#include "PlayerHealthUpgrade.h"
+#include "PlayerDamageUpgrade.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
@@ -10,6 +13,13 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 {
 	// override default speeds
 	_movespeed = 450;
+
+	equipment = new PlayerEquipment(40.0f, 3.0f);
+	_maxHealth = equipment->getHealth();
+	_damage = equipment->getDamage();
+
+	upgradeEquipment(PlayerUpgradeType(10, Health));
+	upgradeEquipment(PlayerUpgradeType(1, Damage));
 
 	// initialize pLevel vars
 	_currentLevel = 1;
@@ -59,8 +69,40 @@ void Player::die() {
 
 	_myNode->setPosition(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getStartPos());
 
+	equipment = equipment->removeUpgrades();
+	_maxHealth = equipment->getHealth();
+	_damage = equipment->getDamage();
 	_currentHealth = _maxHealth;
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("H: %f D: %f \n", _maxHealth, _damage);
+	fclose(fp);
+#endif
+}
+
+void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
+	switch(upgrade.modifier) {
+	case Health:
+		equipment = new PlayerHealthUpgrade(equipment, upgrade.value);
+		_maxHealth = equipment->getHealth();
+		_currentHealth = equipment->getHealth();
+		break;
+	case Damage:
+		equipment = new PlayerDamageUpgrade(equipment, upgrade.value);
+		_damage = equipment->getDamage();
+		break;
+	default:
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("wrong upgrade type\n");
+		fclose(fp);
+#endif
+		break;
+	}
 }
 
 /// <summary>
