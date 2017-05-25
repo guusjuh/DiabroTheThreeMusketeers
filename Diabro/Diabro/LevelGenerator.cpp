@@ -5,9 +5,9 @@
 #include "math.h"
 
 LevelGenerator::LevelGenerator():
-scalar(500)
+scalar(200)
 {
-	_zone[0] = Zone(20, 5, 3, 3, 1, 100);
+	_zone[0] = Zone(30, 30, 6, 6, 10, 100, scalar);
 
 	spawnCityContent();
 
@@ -68,23 +68,23 @@ Zone* LevelGenerator::getZonePointer(int pX, int pZ) {
 void LevelGenerator::spawnCityContent() {
 
 	// loop through all cities
-	for (int i = 0; i < 1; i++){ //_zone[0].cities.size(); ++i) {
+	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 		
 		// set a pointer to the current city 
 		City* thisCity = &_zone[0].cities[i];
-		placeEnemySpawnNode(&_zone[0].cities[0], i);
 
 		// switch on the city type
 		switch(thisCity->typeFlag) {
 		case CityRT:
 			for (int j = 0; j < thisCity->Buildings().size(); ++j) { // for each building
-				//spawnNPCs(thisCity, &thisCity->Buildings()[j]);
+				spawnNPCs(thisCity, &thisCity->Buildings()[j]);
 			}
 			
 			break;
 
 		case HideoutRT:
 			// spawn enemy spawners in the middle of an enemy hideout
+			placeEnemySpawnNode(thisCity, i);
 			break;
 
 		default:

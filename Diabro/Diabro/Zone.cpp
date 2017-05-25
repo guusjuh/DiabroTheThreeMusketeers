@@ -8,8 +8,8 @@ Zone::Zone() {
 	
 }
 
-Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries):
-_width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
+Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar):
+_width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight), _scalar(pScalar)
 {	
 	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
 		//zones use uneven sizes, this ensures walls can be created properly
@@ -503,7 +503,7 @@ void Zone::generateCities(int pMaxTries, int pMaxCities) {
 		(z % 2 == 0) ? z++ : z;
 
 		//try to place the city
-		if (placeCity(City(x, z, width, depth, nCities + 1))) {
+		if (placeCity(City(x, z, width, depth, nCities + 1, _scalar))) {
 			++nCities;
 		}
 		if (nCities >= pMaxCities) {
@@ -554,7 +554,7 @@ bool* Zone::generateCollisionGrid(){
 				grid[i + j * _width] = false;
 			}
 		}
-	}/*
+	}
 	for (size_t i = 0; i < cities.size(); i++)
 	{
 		std::vector<Coordinate> buildings = cities[i].buildingPositions();
@@ -562,7 +562,7 @@ bool* Zone::generateCollisionGrid(){
 		{
 			grid[buildings[j].x + buildings[j].z * _width] = false;// set tiles at building pos false
 		}
-	}*/
+	}
 	
 
 	return grid;
