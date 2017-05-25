@@ -9,6 +9,9 @@
 #include "Spawner.h"
 #include "LevelGenerator.h"
 
+/// <summary>
+/// The manager of the level. 
+/// </summary>
 class LevelManager
 {
 public:

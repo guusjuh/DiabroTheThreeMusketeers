@@ -4,6 +4,9 @@
 #include "City.h"
 #include <vector>
 
+/// <summary>
+/// A part of the dungeon. 
+/// </summary>
 class Zone
 {
 private:

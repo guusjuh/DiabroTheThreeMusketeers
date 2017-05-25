@@ -2,6 +2,15 @@
 #include <vector>
 #include "City.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref="Node"/> class.
+/// </summary>
+/// <param name="parent">The parent.</param>
+/// <param name="parentId">The parents id.</param>
+/// <param name="x">The x pos.</param>
+/// <param name="y">The y pos.</param>
+/// <param name="goalX">The goal x pos for this path.</param>
+/// <param name="goalY">The goal y pos for this path.</param>
 Node::Node(Node parent, int parentId, int x, int y, int goalX, int goalY) :
 parentId(parentId), x(x), y(y)
 {
@@ -17,7 +26,14 @@ parentId(parentId), x(x), y(y)
 	h = (std::abs(x - goalX) + std::abs(y - goalY)) * 10;
 }
 
-Node::Node(int x, int y, int goalX, int goalY) : 
+/// <summary>
+/// Initializes a new instance of the <see cref="Node"/> class.
+/// </summary>
+/// <param name="x">The x pos.</param>
+/// <param name="y">The y pos.</param>
+/// <param name="goalX">The goal x pos for this path.</param>
+/// <param name="goalY">The goal y pos for this path.</param>
+Node::Node(int x, int y, int goalX, int goalY) :
 x(x), y(y){
 	hasParent = false;
 	g = 0;
@@ -25,15 +41,27 @@ x(x), y(y){
 }
 
 
+/// <summary>
+/// Finalizes an instance of the <see cref="Node"/> class.
+/// </summary>
 Node::~Node()
 {
 }
 
-int Node::f(){
+/// <summary>
+/// Returns the f value of this node given the current path.
+/// </summary>
+/// <returns></returns>
+int Node::f() {
 	return g + h;
 }
 
-void Node::changeParent(Node newParent, int newParentId){
+/// <summary>
+/// Changes the parent.
+/// </summary>
+/// <param name="newParent">The new parent.</param>
+/// <param name="newParentId">The new parents id.</param>
+void Node::changeParent(Node newParent, int newParentId) {
 	int newG;
 	if (x - newParent.x != 0 && y - newParent.y != 0)
 	{
@@ -48,7 +76,13 @@ void Node::changeParent(Node newParent, int newParentId){
 	}
 }
 
-std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth){
+/// <summary>
+/// Gets the neighbours of this node.
+/// </summary>
+/// <param name="pCollisionGrid">The collision grid.</param>
+/// <param name="pWidth">Width of the nodes in the grid.</param>
+/// <returns></returns>
+std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth) {
 	std::vector<Coordinate> neighbours;
 	neighbours.clear();
 	/*

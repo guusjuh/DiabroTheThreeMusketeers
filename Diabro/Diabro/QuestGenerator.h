@@ -2,6 +2,9 @@
 #define QUEST_GENERATOR
 #include "Quest.h"
 
+/// <summary>
+/// The generator for new quests. 
+/// </summary>
 class QuestGenerator {
 public:
 	QuestGenerator();

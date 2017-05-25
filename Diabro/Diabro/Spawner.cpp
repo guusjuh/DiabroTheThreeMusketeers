@@ -1,6 +1,13 @@
 #include "Spawner.h"
 #include "GameManager.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref="Spawner"/> class.
+/// </summary>
+/// <param name="pMyNode">The my node.</param>
+/// <param name="pNumOfSpawns">The number of spawns.</param>
+/// <param name="pSpawnPosition">The spawn position.</param>
+/// <param name="pMyCity">The my city.</param>
 template<class T>
 ::Spawner<T>::Spawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns, Ogre::Vector3 pSpawnPosition, City* pMyCity)
 	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nInstances(pNumOfSpawns), _myCity(pMyCity){

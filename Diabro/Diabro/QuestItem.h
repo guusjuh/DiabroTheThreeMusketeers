@@ -5,6 +5,9 @@
 #include <OgrePrerequisites.h>
 #include "IQuestContent.h"
 
+/// <summary>
+/// Enum for the types of quest items. 
+/// </summary>
 enum QuestItemType {
 	Book,
 	RareBook,
@@ -16,6 +19,10 @@ enum QuestItemType {
 	AMOUNT_OF_QUEST_ITEM_TYPES
 };
 
+/// <summary>
+/// A item to be used in a quest. 
+/// </summary>
+/// <seealso cref="IQuestContent" />
 class QuestItem : public IQuestContent
 {
 public:

@@ -17,6 +17,9 @@ Filename:    GameManager.h
 
 //---------------------------------------------------------------------------
 
+/// <summary>
+/// Enum for the game states. 
+/// </summary>
 enum GameState {
 	Start = 0, 
 	InGame,
@@ -24,6 +27,11 @@ enum GameState {
 	Died
 };
 
+/// <summary>
+/// The manager of the game.
+/// </summary>
+/// <seealso cref="BaseApplication" />
+/// <seealso cref="Ogre::Singleton{GameManager}" />
 class GameManager : public BaseApplication, public Ogre::Singleton<GameManager>
 {
 public:

@@ -4,11 +4,24 @@
 #include <OgreConfigFile.h>
 #include <OgreMath.h>
 
+/// <summary>
+/// Initializes a new instance of the <see cref="Zone"/> class.
+/// </summary>
 Zone::Zone() {
 	
 }
 
-Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar):
+/// <summary>
+/// Initializes a new instance of the <see cref="Zone"/> class.
+/// </summary>
+/// <param name="pWidth">Width of the zone.</param>
+/// <param name="pDepth">The zone depth.</param>
+/// <param name="pMaxCityWidth">Maximum width for the cities.</param>
+/// <param name="pMaxCityHeight">Maximum height for the cities.</param>
+/// <param name="pMaxCities">The maximum amount of cities.</param>
+/// <param name="pMaxTries">The maximum amount of tries.</param>
+/// <param name="pScalar">The scalar value.</param>
+Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar) :
 _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight), _scalar(pScalar)
 {	
 	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
@@ -42,6 +55,9 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 	//printCollisionGrid();
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref="Zone"/> class.
+/// </summary>
 Zone::~Zone()
 {
 
@@ -524,7 +540,11 @@ void Zone::printGrid() {
 #endif
 }
 
-bool* Zone::getCollisionGrid(){
+/// <summary>
+/// Obtains the collision grid.
+/// </summary>
+/// <returns></returns>
+bool* Zone::getCollisionGrid() {
 	if (!collisionGridGenerated){
 		//create the array
 		collisionGrid = generateCollisionGrid();
@@ -534,7 +554,11 @@ bool* Zone::getCollisionGrid(){
 	return collisionGrid;
 }
 
-bool* Zone::generateCollisionGrid(){
+/// <summary>
+/// Generates the collision grid.
+/// </summary>
+/// <returns></returns>
+bool* Zone::generateCollisionGrid() {
 	bool* grid = new bool[(_width * _depth)];
 
 	for (size_t i = 0; i < _width; i++)
@@ -563,7 +587,10 @@ bool* Zone::generateCollisionGrid(){
 	return grid;
 }
 
-void Zone::printCollisionGrid(){
+/// <summary>
+/// Prints the collision grid.
+/// </summary>
+void Zone::printCollisionGrid() {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);

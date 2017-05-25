@@ -40,6 +40,9 @@ void LevelManager::initialize()
 	startPitchCam = _camNode->getOrientation().getPitch();
 }
 
+/// <summary>
+/// Resets the level.
+/// </summary>
 void LevelManager::reset() {
 	while(_friendlyNpcScripts.size() > 0) {
 		detachFriendlyNPC(0);
@@ -97,15 +100,12 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 /// Detaches the friendly NPC.
 /// </summary>
 /// <param name="id">The identifier.</param>
-void LevelManager::detachFriendlyNPC(int id) {
-	//reinterpret_cast<Npc*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
-	
+void LevelManager::detachFriendlyNPC(int id) {	
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
 	//reset id values
 	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it) {
 		(*it)->id -= 1;
 	}
-	//npcSpawner->instanceDeath();
 }
 
 /// <summary>
@@ -113,14 +113,11 @@ void LevelManager::detachFriendlyNPC(int id) {
 /// </summary>
 /// <param name="id">The identifier.</param>
 void LevelManager::detachHostileNPC(int id) {
-	//reinterpret_cast<BasicEnemy*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
-
 	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
 	//reset id values
 	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it) {
 		(*it)->id -= 1;
 	}
-	//enemySpawner->instanceDeath();
 }
 
 
@@ -162,7 +159,3 @@ void LevelManager::createGroundMesh()
 	return;
 }
 
-int LevelManager::testunittwo(int i)
-{
-	return ++i;
-}

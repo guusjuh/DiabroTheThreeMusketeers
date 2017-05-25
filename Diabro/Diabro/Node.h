@@ -2,6 +2,9 @@
 #include <vector>
 #include "City.h"
 
+/// <summary>
+/// A node from the grid used by A*.
+/// </summary>
 class Node
 {
 public:

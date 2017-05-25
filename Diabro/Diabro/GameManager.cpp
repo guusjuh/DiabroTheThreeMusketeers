@@ -78,6 +78,9 @@ void GameManager::createScene(void)
 	//_uiManager->startState();
 }
 
+/// <summary>
+/// Resets the game.
+/// </summary>
 void GameManager::reset() {
 	getSceneManager()->clearScene();
 	_levelManager->reset();
@@ -170,12 +173,6 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		_uiManager->endUpdate(pFE);
 		break;
 	}
-
-	/*if (state == InGame) {
-		_levelManager->inGameUpdate(pFE);
-	}
-
-	_uiManager->update(pFE);*/
 
 	return ret;
 }
@@ -276,7 +273,6 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	return true;
 }
 
-//TODO: where/how should the turning be handled? 
 /// <summary>
 /// Called when the mouse is moved.
 /// </summary>
