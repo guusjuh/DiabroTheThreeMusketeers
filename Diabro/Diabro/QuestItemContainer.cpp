@@ -10,9 +10,11 @@ QuestItemContainer::QuestItemContainer() { }
 /// </summary>
 QuestItemContainer::~QuestItemContainer() {
 	// delete each item
-	for (int i = 0; i < _items.size(); ++i) {
-		delete _items[i];
+	for (std::vector<QuestItem*>::iterator it = _items.begin(); it != _items.end(); ++it)
+	{
+		delete (*it);
 	}
+	_items.clear();
 }
 
 /// <summary>

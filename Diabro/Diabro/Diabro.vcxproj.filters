@@ -88,6 +88,9 @@
     <ClCompile Include="Node.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="QuestGenerator.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -188,6 +191,9 @@
       <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="Quest.h">
+      <Filter>Headers\Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestGenerator.h">
       <Filter>Headers\Quests</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">

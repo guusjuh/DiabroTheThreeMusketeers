@@ -25,37 +25,66 @@ public:
 	/// <param name="pNameQuest">The template name of the quest.</param>
 	/// <param name="pMotivation">The motivation for the quest.</param>
 	/// <param name="pActions">The actions that must be completed for the quest.</param>
-	Strategy(int pid, std::string pName, QuestName pNameQuest, NeedType pMotivation, std::vector<Action*> pActions)
-		: _id(pid), _nameStrategy(pName), _nameQuest(pNameQuest), _motivation(pMotivation), _actionSequence(pActions) { }
+	Strategy(int pid, std::string pName, QuestName pNameQuest, NeedType pMotivation, std::vector<Action> pActions, int pRarityPref)
+		: _id(pid), _nameStrategy(pName), _nameQuest(pNameQuest), _motivation(pMotivation), _actionSequence(pActions), _rarityPref(pRarityPref) {
+		_currentAction = 0;
+	}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Strategy"/> class.
 	/// </summary>
-	Strategy() {}
+	Strategy()
+		: _id(0), _nameStrategy(""), _nameQuest(), _motivation((NeedType)0), _actionSequence(0), _rarityPref(0) {
+		_currentAction = -1;
+	}
 
 	/// <summary>
 	/// Finalizes an instance of the <see cref="Strategy"/> class.
 	/// </summary>
 	~Strategy() {
-		for (int i = 0; i < _actionSequence.size(); ++i) {
-			if (_actionSequence[i] != nullptr) {
-				delete _actionSequence[i];
-			}
-		}
+		_actionSequence.clear();
 	}
 
 	int getID() { return _id; }
 	std::string getName() { return _nameStrategy; }
 	QuestName getNameQuest() { return _nameQuest; }
 	NeedType getMotivation() { return _motivation; }
-	std::vector<Action*> getActionSequence() { return _actionSequence; }
+
+	std::vector<Action> getActionSequence() {
+		return _actionSequence;
+	}
+	Action* getCurrentAction() {
+		return &_actionSequence[_currentAction];
+	}
+
+	void increaseAction() {
+		_currentAction++;
+		/*
+		// find which action is the current
+		for (int i = 0; i < getActionSequence().size(); ++i) {
+
+			// if we found the current
+			if (_currrentAction == &getActionSequence()[i]) {
+				_currrentAction = &getActionSequence()[i + 1];
+				return;
+			}
+		}*/
+	}
+
+	int getRarityPref() { return _rarityPref; }
+
+	bool isAbstract() { return _actionSequence[0].getConcreteContent().size() == 0 ? true : false; }
 
 private:
 	int _id;
 	std::string _nameStrategy;
 	QuestName _nameQuest;
 	NeedType _motivation;
-	std::vector<Action*> _actionSequence;
+
+	std::vector<Action> _actionSequence;
+	int _currentAction;
+
+	int _rarityPref;
 };
 
 #endif 

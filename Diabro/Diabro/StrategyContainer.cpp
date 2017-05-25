@@ -72,26 +72,30 @@ void StrategyContainer::readFromXML()
 			}
 
 			// action list
-			std::vector<Action*> actions;
+			std::vector<Action> actions;
 			tinyxml2::XMLElement* actionsNode = stratNode->FirstChildElement("Actions");
 			tinyxml2::XMLElement* actionNode = actionsNode->FirstChildElement("Action");
 			for (actionNode; actionNode; actionNode = actionNode->NextSiblingElement())
 			{
-				Action* tempAction;
+				Action tempAction;
 				int nrAction = actionNode->IntText();
 				
-				std::vector<Action*> copy = GameManager::getSingletonPtr()->getQuestManager()->actionContainer->GetObjects();
+				std::vector<Action*> copy = GameManager::getSingletonPtr()->getQuestManager()->getActionContainer()->GetObjects();
 				for (int i = 0; i < copy.size(); ++i)
 				{
 					if (copy[i]->getID() == nrAction)
 					{
-						tempAction = new Action((*copy[i]));
+						tempAction = Action((*copy[i]));
 					}
 				}
 
 				actions.push_back(tempAction);
 			}
-			Strategy* strategy = new Strategy(id, nameStrat, questName, needType, actions);
+
+			// rarity pref
+			int rarityPref = stratNode->FirstChildElement("RarityPref")->IntText();
+
+			Strategy* strategy = new Strategy(id, nameStrat, questName, needType, actions, rarityPref);
 			_objects.push_back(strategy);
 		}
 

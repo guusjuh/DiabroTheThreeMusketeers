@@ -7,6 +7,8 @@
 #include "ActionContainer.h"
 #include "Needs.h"
 #include "StrategyContainer.h"
+#include "Quest.h"
+#include "QuestGenerator.h"
 
 class QuestManager {
 public:
@@ -15,14 +17,16 @@ public:
 
 	void Initialize()
 	{
-		actionContainer = new ActionContainer();
-		strategyContainer = new StrategyContainer();
+		_actionContainer = new ActionContainer();
+		_strategyContainer = new StrategyContainer();
 		_questContentManager = new QuestContentManager();
+		_questGenerator = new QuestGenerator();
 	}
 
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
-	ActionContainer* actionContainer;
-	StrategyContainer* strategyContainer;
+	ActionContainer* getActionContainer(void) { return _actionContainer; }
+	StrategyContainer* getStrategyContainer(void) { return _strategyContainer; }
+	Quest* generateQuest(BaseNpc* pSourceNpc, NeedType pMotivation);
 
 	std::map<std::string, ActionType> stringToActionType;
 	std::map<std::string, PreconditionsType> stringToPreconditionType;
@@ -33,7 +37,11 @@ public:
 
 private:
 	QuestContentManager* _questContentManager;
+	ActionContainer* _actionContainer;
+	StrategyContainer* _strategyContainer;
+	QuestGenerator* _questGenerator;
 
+	std::vector<Quest> _quests;
 };
 
 #endif

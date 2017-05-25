@@ -54,6 +54,7 @@ set(HDRS
 	./Diabro/Diabro/CityManager.h
 	./Diabro/Diabro/Quest.h
 	./Diabro/Diabro/Node.h
+	./Diabro/Diabro/QuestGenerator.h
 )
  
 set(SRCS
@@ -86,6 +87,7 @@ set(SRCS
 	./Diabro/Diabro/CityManager.cpp
 	./Diabro/Diabro/Quest.cpp
 	./Diabro/Diabro/Node.cpp
+	./Diabro/Diabro/QuestGenerator.cpp
 )
  
 include("tools/cmake/common.cmake") 
