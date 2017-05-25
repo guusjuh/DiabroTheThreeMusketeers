@@ -30,7 +30,7 @@ set(HDRS
 	./Diabro/Diabro/Character.h
 	./Diabro/Diabro/BaseNpc.h
 	./Diabro/Diabro/UIManager.h
-	./Diabro/Diabro/CharacterSpawner.h
+	./Diabro/Diabro/Spawner.h
 	./Diabro/Diabro/LevelGenerator.h
 	./Diabro/Diabro/Zone.h
 	./Diabro/Diabro/City.h
@@ -68,7 +68,7 @@ set(SRCS
 	./Diabro/Diabro/BaseNpc.cpp
 	./Diabro/Diabro/Npc.cpp
 	./Diabro/Diabro/UIManager.cpp
-	./Diabro/Diabro/CharacterSpawner.cpp
+	./Diabro/Diabro/Spawner.cpp
 	./Diabro/Diabro/QuestContentManager.cpp
 	./Diabro/Diabro/GenericContainer.cpp
 	./Diabro/Diabro/QuestItemContainer.cpp
