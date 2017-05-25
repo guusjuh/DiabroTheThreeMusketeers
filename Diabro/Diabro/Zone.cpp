@@ -8,13 +8,13 @@ Zone::Zone() {
 	
 }
 
-Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries):
-_width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
+Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar):
+_width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight), _scalar(pScalar)
 {	
 	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
 		//zones use uneven sizes, this ensures walls can be created properly
-		_width++;
-		_depth++;
+		if (pWidth % 2 == 0) _width++;
+		if (pDepth % 2 == 0) _depth++;
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
@@ -29,7 +29,6 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 			setTile(ix, iy, 0);
 		}
 	}
-	
 	debug("generating cities");
 	generateCities(pMaxTries, pMaxCities);
 	debug("generating pathways");
@@ -38,7 +37,8 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 	connectDungeon(cities.size() + 1 + n, 0.5f);
 
 	cleanGrid();
-	printGrid();
+	//printGrid();
+	collisionGridGenerated = false;
 	//printCollisionGrid();
 }
 
@@ -46,6 +46,7 @@ Zone::~Zone()
 {
 
 }
+
 /// cleans the grid converting every number either to 1 or 0 based on their current value
 void Zone::cleanGrid()
 {
@@ -187,7 +188,7 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		while (regions > 1 && options.size() > 0) { // opens options until the whole dungeon is connected
 			int rnd = rand() % options.size();
 			setTile(options[rnd].first, 1); 
-			debug("test: rnd:", rnd);
+			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
 			debug("test: optionSize:", options.size());
 			debug("test: cityID:", options[rnd].second);
 			debug("test: citySize:", cities.size());
@@ -497,7 +498,7 @@ void Zone::generateCities(int pMaxTries, int pMaxCities) {
 		(z % 2 == 0) ? z++ : z;
 
 		//try to place the city
-		if (placeCity(City(x, z, width, depth, nCities + 1))) {
+		if (placeCity(City(x, z, width, depth, nCities + 1, _scalar))) {
 			++nCities;
 		}
 		if (nCities >= pMaxCities) {
@@ -524,10 +525,11 @@ void Zone::printGrid() {
 }
 
 bool* Zone::getCollisionGrid(){
-	if (seed != lastSeed){
+	if (!collisionGridGenerated){
 		//create the array
 		collisionGrid = generateCollisionGrid();
-		lastSeed = seed;
+		collisionGridGenerated = true;
+		printCollisionGrid();
 	}
 	return collisionGrid;
 }
@@ -557,6 +559,7 @@ bool* Zone::generateCollisionGrid(){
 		}
 	}
 	
+
 	return grid;
 }
 
@@ -564,10 +567,9 @@ void Zone::printCollisionGrid(){
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	bool* grid = Zone::getCollisionGrid();
 	for (int ix = 0; ix < _width; ++ix) {
 		for (int iy = 0; iy < _depth; ++iy) {
-			if (grid[ix + iy * _width]){
+			if (collisionGrid[ix + iy * _width]){
 				printf("1 ");
 			}
 			else
@@ -577,6 +579,7 @@ void Zone::printCollisionGrid(){
 		}
 		printf("\n");
 	}
+	printf("\n");
 	fclose(fp);
 #endif
 }

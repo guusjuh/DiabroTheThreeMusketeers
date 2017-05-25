@@ -22,6 +22,7 @@ public:
 
 	Zone getZone(Coordinate pZoneId);
 	Zone getZone(int pX, int pZ);
+	Zone* getZonePointer(int pX, int pZ);
 	
 	Ogre::Vector3 getWorldPosition(Coordinate pWorldCoord);
 	Coordinate getGridPosition(Coordinate pGridCoord);
@@ -70,7 +71,7 @@ private:
 	void spawnCityContent();
 	void placeEnemySpawnNode(City*, int);
 	void spawnNPCs(City*, Building*);
-
+	
 	Ogre::SceneNode* _dungeonNode;
 	std::vector<Ogre::Entity*> _content;
 };

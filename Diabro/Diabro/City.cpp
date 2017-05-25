@@ -3,8 +3,8 @@
 #include "GameManager.h"
 #include "math.h"
 
-City::City(int pX, int pZ, int pWidth, int pDepth, int pId) :
-position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(500)
+City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
+position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar)
 {
 	//setType();
 }
@@ -50,7 +50,7 @@ void City::generateBuildings()
 	manager = GameManager::getSingletonPtr()->getSceneManager();
 		
 	std::vector<Ogre::Entity*> buildingEntities;
-	int random = GameManager::getSingletonPtr()->getRandomInRange(5, 7);
+	int random = GameManager::getSingletonPtr()->getRandomInRange(1, 2);
 	for (int i = 0; i < random; i++)
 	{
 		//TODO: make it an ID
@@ -59,8 +59,8 @@ void City::generateBuildings()
 		buildingNode->setScale(1, 3, 1);
 		buildingNode->attachObject(_buildingEntity);
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * scalar, (width - 1) * scalar);
-		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * scalar, (depth - 1) * scalar);
+		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x, (width - 1)) * scalar;
+		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z, (depth - 1)) * scalar;
 		buildingNode->setPosition(xPos, 100, zPos); 
 
 		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES-1);
@@ -143,11 +143,32 @@ int City::getScaladDepth(int depth, int scalar)
 	return depth*scalar;
 }
 
-Coordinate City::getRandomPoint(){
-	int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * scalar, (width - 1) * scalar);
-	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * scalar, (depth - 1) * scalar);
-
-	return Coordinate(xPos, zPos);
+Ogre::Vector3 City::getRandomPointInRoom(){
+	/*
+	int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * scalar, (width) * scalar);
+	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * scalar, (depth) * scalar);
+	*/
+	int xPos;
+	int zPos;
+	switch (GameManager::getSingletonPtr()->getRandomInRange(0, 4)){
+	case 0:
+		xPos = position.x;
+		zPos = position.z;
+		break;
+	case 1:
+		xPos = position.x + width - 1;
+		zPos = position.z;
+		break;
+	case 2:
+		xPos = position.x;
+		zPos = position.z + depth - 1;
+		break;
+	case 3:
+		xPos = position.x + width - 1;
+		zPos = position.z + depth - 1;
+		break;
+	}
+	return Ogre::Vector3(xPos, 0, zPos);
 }
 
 std::vector<Coordinate> City::buildingPositions(){
@@ -155,7 +176,7 @@ std::vector<Coordinate> City::buildingPositions(){
 	positions.clear();
 	for (int i = 0; i < _buildings.size(); i++) {
 		Ogre::Vector3 buildingPos = _buildings[i]->getPosition();
-		positions.push_back(Coordinate(buildingPos.x / 200, buildingPos.z / 200));
+		positions.push_back(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(buildingPos.x, buildingPos.z)));
 	}
 
 	return positions;

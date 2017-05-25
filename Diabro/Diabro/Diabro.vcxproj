@@ -124,6 +124,7 @@
     <ClCompile Include="GenericContainer.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="IQuestContent.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="Needs.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Player.h" />

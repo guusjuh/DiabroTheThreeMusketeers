@@ -5,16 +5,17 @@
 #include "math.h"
 
 LevelGenerator::LevelGenerator():
-scalar(500)
+scalar(200)
 {
 	debug("Initializing zone");
-	_zone[0] = Zone(18, 18, 5, 5, 10, 500);
+	_zone[0] = Zone(30, 30, 6, 6, 10, 100, scalar);
 
 	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	debug("determine city types");
 	determineCityTypes();
+	_zone[0].printGrid();
 	debug("spawning content");
 	spawnCityContent();
 }
@@ -26,7 +27,7 @@ LevelGenerator::~LevelGenerator()
 
 void LevelGenerator::restart() {
 	debug("Initializing zone");
-	_zone[0] = Zone(18, 18, 5, 5, 10, 500);
+	_zone[0] = Zone(30, 30, 6, 6, 10, 100, scalar);
 	
 	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
@@ -48,8 +49,9 @@ Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {
 /// transfroms a world position to a grid coordinate
 /// \param pWorldCoord coordinate in world position
 Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
-	int x = static_cast<int>(ceil(pWorldCoord.x / scalar + 0.0f));
-	int z = static_cast<int>(ceil(pWorldCoord.z / scalar + 0.0f));
+
+	int x = static_cast<int>((float)pWorldCoord.x / scalar + 0.5f);
+	int z = static_cast<int>((float)pWorldCoord.z / scalar + 0.5f);
 
 	return Coordinate(x,z);
 }
@@ -73,6 +75,14 @@ Zone LevelGenerator::getZone(Coordinate pZoneId) {
 Zone LevelGenerator::getZone(int pX, int pZ) {
 	//TODO:implement multiple zones
 	return _zone[0];
+}
+
+/// retrieve zone
+/// \param pX x position of the zone
+/// \param pZ z position of the zone
+Zone* LevelGenerator::getZonePointer(int pX, int pZ) {
+	//TODO:implement multiple zones
+	return &_zone[0];
 }
 
 /// creates a tile for each position in the zone

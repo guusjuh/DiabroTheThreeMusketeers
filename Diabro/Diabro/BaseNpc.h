@@ -13,6 +13,10 @@ public:
 
 	void update(Ogre::Real) override;
 	void rotatePivot(Ogre::Vector3);
+
+	void calculateAStar(Ogre::Vector3 targetPos);
+	std::vector<Coordinate> nextPos;
+	Coordinate goalPos;
 	
 protected:
 	Ogre::SceneNode* _myRotationNode;
@@ -20,7 +24,10 @@ protected:
 	bool _playerDetected;
 
 	virtual void detectPlayer(); 
+	void walkToNextPoint();
+
 	void walkTo(Ogre::Vector3);
+	void debug(std::string msg, int val = 0);
 
 private:
 	float _timer;

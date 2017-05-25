@@ -85,6 +85,9 @@
     <ClCompile Include="Quest.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -186,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="Quest.h">
       <Filter>Headers\Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

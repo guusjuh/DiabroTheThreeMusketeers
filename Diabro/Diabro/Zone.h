@@ -7,9 +7,6 @@
 class Zone
 {
 private:
-	int _width;
-	int _depth;
-	
 	int _maxCityWidth;
 	int _maxCityHeight;
 
@@ -20,6 +17,9 @@ private:
 	unsigned int lastSeed;
 
 	bool* collisionGrid;
+	bool collisionGridGenerated;
+
+	int _scalar;
 
 	void debug(std::string pString, int value = 0) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -34,9 +34,12 @@ private:
 	}
 
 public:
+	int _width;
+	int _depth;
+
 	std::vector<City> cities; ///< vector containing all cities within the zone
 
-	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries);
+	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar);
 	Zone();
 	~Zone();
 

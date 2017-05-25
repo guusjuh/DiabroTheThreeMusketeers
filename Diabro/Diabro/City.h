@@ -62,12 +62,12 @@ public:
 	void init();
 	
 	//TODO: make local position
-	Coordinate getRandomPoint();
+	Ogre::Vector3 getRandomPointInRoom();
 	Coordinate getCenterTile();
 	Coordinate getRandomTile();
 
 	std::vector<Coordinate> connections;
-	City(int pX, int pZ, int pWidth, int pDepth, int pId);
+	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
 	~City();
 
 	std::vector<Building> Buildings() { return _buildingStructs; };
