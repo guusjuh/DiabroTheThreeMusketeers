@@ -55,6 +55,7 @@ set(HDRS
 	./Diabro/Diabro/Quest.h
 	./Diabro/Diabro/Node.h
 	./Diabro/Diabro/QuestGenerator.h
+	./Diabro/Diabro/SoundManager.h
 )
  
 set(SRCS
@@ -88,6 +89,7 @@ set(SRCS
 	./Diabro/Diabro/Quest.cpp
 	./Diabro/Diabro/Node.cpp
 	./Diabro/Diabro/QuestGenerator.cpp
+	./Diabro/Diabro/SoundManager.cpp
 )
  
 include("tools/cmake/common.cmake") 

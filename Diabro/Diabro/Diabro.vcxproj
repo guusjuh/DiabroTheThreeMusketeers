@@ -42,11 +42,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Supernat0r\Documents\Common;D:\Program Files %28x86%29\DirectX-SDK\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Program Files %28x86%29\DirectX-SDK\Lib\x86;C:\Users\Supernat0r\Documents\Common;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(OGRE_HOME)\irrKlang-1.5.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(OGRE_HOME)\irrKlang-1.5.0\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>E:\Programmatuur\irrKlang-64bit-1.5.0\irrKlang-64bit-1.5.0\lib\Winx64-visualStudio;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Programmatuur\irrKlang-64bit-1.5.0\irrKlang-64bit-1.5.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -55,14 +58,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\irrKlang-1.5.0\include;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;libboost_thread-vc100-mt-gd-1_55.lib;libboost_system-vc100-mt-gd-1_55.lib;libboost_date_time-vc100-mt-gd-1_55.lib;libboost_chrono-vc100-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\irrKlang-1.5.0\lib\Win32-visualStudio;$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>irrKlang.lib;OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;libboost_thread-vc100-mt-gd-1_55.lib;libboost_system-vc100-mt-gd-1_55.lib;libboost_date_time-vc100-mt-gd-1_55.lib;libboost_chrono-vc100-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"</Command>
@@ -133,6 +136,7 @@
     <ClCompile Include="QuestGenerator.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="QuestManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="StrategyContainer.cpp" />
@@ -157,6 +161,7 @@
     <ClInclude Include="City.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericContainer.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="IQuestContent.h" />

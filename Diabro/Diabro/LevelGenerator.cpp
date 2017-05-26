@@ -5,10 +5,10 @@
 #include "math.h"
 
 LevelGenerator::LevelGenerator():
-scalar(200)
+scalar(400)
 {
 	debug("Initializing zone");
-	_zone[0] = Zone(30, 30, 6, 6, 10, 100, scalar);
+	_zone[0] = Zone(20, 20, 5, 5, 10, 100, scalar);
 
 	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));

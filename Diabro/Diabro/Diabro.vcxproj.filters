@@ -91,6 +91,9 @@
     <ClCompile Include="QuestGenerator.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -199,6 +202,9 @@
     <ClInclude Include="Node.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Headers\Sounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -270,6 +276,9 @@
     </Filter>
     <Filter Include="Sources\Characters">
       <UniqueIdentifier>{68400f4b-a3b9-4d34-80e7-855e867963eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Sounds">
+      <UniqueIdentifier>{478b5cf5-cd79-4dd9-a892-b38a48467cb2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

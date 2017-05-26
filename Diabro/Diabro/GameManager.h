@@ -14,6 +14,7 @@ Filename:    GameManager.h
 #include "QuestContentManager.h"
 #include <ctime>
 #include "QuestManager.h"
+#include "SoundManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -82,6 +83,7 @@ private:
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	QuestManager* _questManager;
+	SoundManager* _soundManager;
 
 	Ogre::Timer* _gameTimer;
 
