@@ -57,6 +57,7 @@ public:
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
 	QuestManager* getQuestManager(void) { return _questManager; }
+	SoundManager* getSoundManager(void) { return _soundManager; }
 
 	int getRandomInRange(int pLO, int pHI) {
 		return rand() % pHI + pLO;

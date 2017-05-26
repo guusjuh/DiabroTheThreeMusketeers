@@ -23,7 +23,7 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 {
 	//Character::update(pDeltatime);
 
-	//detectPlayer();
+	detectPlayer();
 	//for initialization
 	//TODO: use -1 -1 as values
 	if (goalPos.x == 0 && goalPos.z == 0){
@@ -31,7 +31,7 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 	}
 
 	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
-	//if (!_playerDetected) {
+	if (!_playerDetected) {
 		if (getPosition().distance(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z)) < 50){
 			if (nextPos.size() == 0){
 				Ogre::Vector3 pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
@@ -45,7 +45,7 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 				walkToNextPoint();
 			}
 		}
-	//}
+	}
 }
 
 /// <summary>

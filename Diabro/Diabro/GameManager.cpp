@@ -66,7 +66,6 @@ void GameManager::createScene(void)
 	_uiManager->init();
 
 	_soundManager = new SoundManager();
-	_soundManager->initialize();
 
 	_questManager = new QuestManager();
 	_questManager->Initialize();
