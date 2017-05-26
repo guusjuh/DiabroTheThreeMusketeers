@@ -180,7 +180,8 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 			//build up the nextPos list
 			bool nextIteration = true;
 			while (nextIteration){
-				nextPos.push_back(Coordinate(lowestFNode.x * scale, lowestFNode.y * scale));
+				Ogre::Vector3 pos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getWorldPosition(Coordinate(lowestFNode.x, lowestFNode.y));
+				nextPos.push_back(Coordinate(pos.x, lowestFNode.y));
 				if (lowestFNode.hasParent){
 					//make the lowestFNode become its parent
 					lowestFNode = nodes[lowestFNode.parentId];
@@ -191,13 +192,6 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 					nextIteration = false;
 				}
 			}
-			//start the walking
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			FILE* fp;
-			freopen_s(&fp, "CONOUT$", "w", stdout);
-			printf("newPoint: (%d, %d)\n", goalPos.x / scale, goalPos.z / scale);
-			fclose(fp);
-#endif
 			walkToNextPoint();
 			return;
 		}
@@ -233,6 +227,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 }
 
 void BaseNpc::debug(std::string msg, int val) {
+	return;
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
