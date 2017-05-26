@@ -5,6 +5,8 @@
 #include "Character.h"
 #include "BasicEnemy.h"
 #include "Npc.h"
+#include "IPlayerEquipment.h"
+#include "PlayerEquipment.h"
 
 class Player : public Character
 {
@@ -26,12 +28,15 @@ public:
 
 	bool getInQuest() { return _inQuest; }
 	void toggleInQuest();
+	void upgradeEquipment(PlayerUpgradeType type);
 
 private:
 	void die() override;
 
 	int _currentXP;
 	int _xpTillNextLevel;
+
+	IPlayerEquipment* equipment;
 
 	Npc* _nearbyNPC;
 	bool _inDialog;

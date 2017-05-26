@@ -55,6 +55,12 @@ set(HDRS
 	./Diabro/Diabro/Quest.h
 	./Diabro/Diabro/Node.h
 	./Diabro/Diabro/QuestGenerator.h
+	./Diabro/Diabro/IDecorator.h
+	./Diabro/Diabro/IPlayerEquipment.h
+	./Diabro/Diabro/PlayerEquipment.h
+	./Diabro/Diabro/PlayerUpgrade.h
+	./Diabro/Diabro/PlayerHealthUpgrade.h
+	./Diabro/Diabro/PlayerDamageUpgrade.h
 )
  
 set(SRCS
@@ -88,6 +94,10 @@ set(SRCS
 	./Diabro/Diabro/Quest.cpp
 	./Diabro/Diabro/Node.cpp
 	./Diabro/Diabro/QuestGenerator.cpp
+	./Diabro/Diabro/PlayerEquipment.cpp
+	./Diabro/Diabro/PlayerUpgrade.cpp
+	./Diabro/Diabro/PlayerHealthUpgrade.cpp
+	./Diabro/Diabro/PlayerDamageUpgrade.cpp
 )
  
 include("tools/cmake/common.cmake") 
