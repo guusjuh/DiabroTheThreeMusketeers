@@ -74,6 +74,7 @@ private:
 	
 	Ogre::SceneNode* _dungeonNode;
 	std::vector<Ogre::Entity*> _content;
+
 };
 
 #endif

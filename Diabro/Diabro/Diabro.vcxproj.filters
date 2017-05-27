@@ -91,17 +91,23 @@
     <ClCompile Include="QuestGenerator.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerEquipment.cpp">
-      <Filter>Sources\Decorator</Filter>
+    <ClCompile Include="PlayerDamageUpgrade.cpp">
+      <Filter>Sources\Decorator\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerUpgrade.cpp">
-      <Filter>Sources\Decorator</Filter>
+    <ClCompile Include="PlayerEquipment.cpp">
+      <Filter>Sources\Decorator\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHealthUpgrade.cpp">
-      <Filter>Sources\Decorator</Filter>
+      <Filter>Sources\Decorator\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerDamageUpgrade.cpp">
-      <Filter>Sources\Decorator</Filter>
+    <ClCompile Include="PlayerUpgrade.cpp">
+      <Filter>Sources\Decorator\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyUpgrade.cpp">
+      <Filter>Sources\Decorator\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEquipment.cpp">
+      <Filter>Sources\Decorator\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,19 +221,28 @@
       <Filter>Headers\Decorator</Filter>
     </ClInclude>
     <ClInclude Include="IPlayerEquipment.h">
-      <Filter>Headers\Decorator</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerEquipment.h">
-      <Filter>Headers\Decorator</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerUpgrade.h">
-      <Filter>Headers\Decorator</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHealthUpgrade.h">
-      <Filter>Headers\Decorator</Filter>
+      <Filter>Headers\Decorator\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerDamageUpgrade.h">
-      <Filter>Headers\Decorator</Filter>
+      <Filter>Headers\Decorator\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEquipment.h">
+      <Filter>Headers\Decorator\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHealthUpgrade.h">
+      <Filter>Headers\Decorator\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUpgrade.h">
+      <Filter>Headers\Decorator\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemyEquipment.h">
+      <Filter>Headers\Decorator\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEquipment.h">
+      <Filter>Headers\Decorator\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyUpgrade.h">
+      <Filter>Headers\Decorator\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +321,18 @@
     </Filter>
     <Filter Include="Sources\Decorator">
       <UniqueIdentifier>{7db18d51-9a60-4101-9c17-5378814fbb31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Decorator\Enemy">
+      <UniqueIdentifier>{f754d37d-3531-4b53-acbf-0c6f19bcf871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Decorator\Player">
+      <UniqueIdentifier>{eb3b6379-a0db-4048-acb8-6e70e37478be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Decorator\Enemy">
+      <UniqueIdentifier>{22abe195-1cb8-40b8-b975-999a77ee670c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Decorator\Player">
+      <UniqueIdentifier>{ce14ca4a-d22c-404e-b5f9-b7988d54b704}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -119,6 +119,8 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterSpawner.cpp" />
     <ClCompile Include="City.cpp" />
+    <ClCompile Include="EnemyEquipment.cpp" />
+    <ClCompile Include="EnemyUpgrade.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GenericContainer.cpp" />
@@ -152,7 +154,10 @@
     <ClInclude Include="ActionContainer.h" />
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
+    <ClInclude Include="EnemyEquipment.h" />
+    <ClInclude Include="EnemyUpgrade.h" />
     <ClInclude Include="IDecorator.h" />
+    <ClInclude Include="IEnemyEquipment.h" />
     <ClInclude Include="IPlayerEquipment.h" />
     <ClInclude Include="PlayerDamageUpgrade.h" />
     <ClInclude Include="PlayerEquipment.h" />

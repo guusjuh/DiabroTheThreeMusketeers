@@ -18,6 +18,8 @@ playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 /// </summary>
 void LevelManager::initialize()
 {
+	_level = 1;
+
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
 
@@ -41,6 +43,8 @@ void LevelManager::initialize()
 }
 
 void LevelManager::reset() {
+	_level++;
+
 	while(_friendlyNpcScripts.size() > 0) {
 		detachFriendlyNPC(0);
 	}
@@ -133,7 +137,7 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);
 
-	for(int i = 0; i < _friendlyNpcScripts.size(); i++)
+	/*for(int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
 		_friendlyNpcScripts[i]->update(pFE.timeSinceLastFrame);
 	}
@@ -141,7 +145,7 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	for (int i = 0; i < _hostileNpcScripts.size(); i++)
 	{
 		_hostileNpcScripts[i]->update(pFE.timeSinceLastFrame);
-	}
+	}*/
 }
 
 /// <summary>
@@ -160,9 +164,4 @@ void LevelManager::createGroundMesh()
 		Ogre::Vector3::UNIT_Z);
 
 	return;
-}
-
-int LevelManager::testunittwo(int i)
-{
-	return ++i;
 }

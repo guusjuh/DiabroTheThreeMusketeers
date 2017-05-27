@@ -58,7 +58,7 @@ public:
 	QuestManager* getQuestManager(void) { return _questManager; }
 
 	int getRandomInRange(int pLO, int pHI) {
-		return rand() % pHI + pLO;
+		return rand() % (pHI-pLO) + pLO;
 	}
 
 protected:
