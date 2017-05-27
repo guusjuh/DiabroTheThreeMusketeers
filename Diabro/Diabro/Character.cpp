@@ -37,7 +37,14 @@ void Character::update(Ogre::Real pDeltatime)
 		_hitted = false;
 	}
 
-	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
+	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
+	Coordinate temp = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x, newPos.z));
+	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
+	if (zone->getCollisionGrid()[temp.x + temp.z * zone->_width])
+	{
+		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
+	}
+
 }
 
 //TODO: these methods should be generic
