@@ -27,8 +27,12 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 	
-	if(_playerDetected) {
-		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
+	if (_playerDetected) {
+		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
+		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
+		playerPos.x = playerPos.x / scale;
+		playerPos.z = playerPos.z / scale;
+		calculateAStar(playerPos);
 
 		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
 			lightAttack();
