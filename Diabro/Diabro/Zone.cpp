@@ -153,7 +153,7 @@ Coordinate Zone::getPosition(int pId, bool pCheckNeighbours) {
 /// \param pChance the decimal percentage of chance a room has to get an extra connection to the dungeon
 void Zone::connectDungeon(int pMaxId, float pChance) {
 	std::vector<std::pair<Coordinate, int>> connections; ///< holds all possible connections
-
+	debug("city loop");
 	for (int i = 0; i < cities.size(); ++i) {
 		int rndIndex[2] = { 0,0 };
 		int start = connections.size(); // prevents usage of connections of other cities
@@ -183,6 +183,7 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		}
 	}
 	//check if the each room/path is connected to the dungeon
+	debug("changeTileValues 1");
 	int regions = changeTileValues(pMaxId);
 	
 	if (!connections.empty() && regions > 1){
@@ -199,20 +200,20 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 				connections.erase(connections.begin() + i);
 			}
 		}
+		debug("changeTileValues 2");
 		int regions = changeTileValues(pMaxId);
 		
 		while (regions > 1 && options.size() > 0) { // opens options until the whole dungeon is connected
+			debug("openConnection");
 			int rnd = rand() % options.size();
 			setTile(options[rnd].first, 1); 
 			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
-			debug("test: optionSize:", options.size());
-			debug("test: cityID:", options[rnd].second);
-			debug("test: citySize:", cities.size());
 			//TODO: city-id > city.Size()
 			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
 			options.erase(options.begin() + rnd);
 
 			// check if dungeon is connected
+			debug("changeTileValues 3");
 			regions = changeTileValues(pMaxId);
 		}
 	}
@@ -260,12 +261,10 @@ int Zone::changeTileValues(int pMaxIndex) {
 		//pick random cell for current region
 		positions.push_back(getPosition(currentRegion, false));
 		
-		if (inGrid(positions[0])) {
-			if (getTile(positions[0]) != currentRegion) { //continue if no options are found for this id
-				positions.clear();
-				currentRegion++;
-				continue;
-			}
+		if (!inGrid(positions[0]) || getTile(positions[0]) != currentRegion) { //continue if no options are found for this id
+			positions.clear();
+			currentRegion++;
+			continue;
 		}
 
 		if (positions[0].x >= 0 && positions[0].z >= 0) {
