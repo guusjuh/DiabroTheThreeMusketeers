@@ -1,6 +1,6 @@
 #ifndef SOUNDMANAGER_H
 #define SOUNDMANAGER_H
-#include <irrklang.h>
+#include "irrklang.h"
 
 class SoundManager {
 public:
