@@ -12,8 +12,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	Debug("Initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 3, 100, scalar);
-
+	_zone[0] = Zone(20, 20, 6, 6, 10, 100, scalar);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -35,7 +34,7 @@ LevelGenerator::~LevelGenerator()
 /// </summary>
 void LevelGenerator::restart() {
 	Debug("initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 3, 100, scalar);
+	_zone[0] = Zone(20, 20, 6, 6, 10, 100, scalar);
 	
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
