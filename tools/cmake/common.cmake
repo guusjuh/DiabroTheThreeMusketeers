@@ -108,11 +108,12 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
 
+message(STATUS "Irrklang includes: ${CMAKE_CURRENT_SOURCE_DIR}/tools/irrklang/include")
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
 	${OGRE_Overlay_INCLUDE_DIRS}
-	${IRRKLANG_INCLUDE_DIRS}
+	${CMAKE_CURRENT_SOURCE_DIR}/tools/irrklang/include
 )
 
 add_executable(${APP} WIN32 ${HDRS} ${SRCS})
