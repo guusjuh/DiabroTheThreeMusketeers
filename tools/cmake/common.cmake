@@ -16,7 +16,7 @@
 #*/
 
 project(${APP})
-
+dfghjfghjfghjfghjfghjfghjfg
 if(WIN32)
 	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
 	set(OGRE_SAMPLES_INCLUDEPATH "$ENV{OGRE_HOME}/Samples/include")
