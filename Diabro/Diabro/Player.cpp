@@ -19,6 +19,10 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 
+	pMyNode->setScale(0.4f, 0.4f, 0.4f);
+	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
+	pMyEntity->setMaterialName("InGame/BlueHouse");
+
 	upgradeEquipment(PlayerUpgradeType(10, Health));
 	upgradeEquipment(PlayerUpgradeType(1, Damage));
 
@@ -50,6 +54,9 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_myEntity = pMyEntity;
 
 	setDirVector(Ogre::Vector3(0, 0, 0));
+	pMyNode->setScale(0.3f, 0.3f, 0.3f);
+	pMyNode->setPosition(pMyNode->getPosition().x, 22.0f, pMyNode->getPosition().z);
+	pMyEntity->setMaterialName("InGame/BlueHouse");
 
 	_target = nullptr;
 	_inDialog = false;
@@ -190,14 +197,14 @@ bool Player::lightAttack()
 	if (_target == nullptr) {
 		return false;
 	}
-
+	
 	//deal damage 
-	_target->adjustHealth(_damage);
-
 	changeInBattle(true);
-	if (_target->getCurrHealth() > 0) {
+
+	if (_target->adjustHealth(_damage)) {
 		GameManager::getSingletonPtr()->getUIManager()->adjustEnemyHealthBar(_target->getCurrHealth(), _target->getMaxHealth());
-	} else {
+	}
+	else {
 		changeInBattle(false);
 	}
 

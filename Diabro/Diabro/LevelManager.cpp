@@ -30,10 +30,10 @@ void LevelManager::initialize()
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
-	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
+	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerNode->setPosition(levelGenerator->getStartPos());
-	playerNode->setScale(0.5f, 0.5f, 0.5f);
+	playerNode->setScale(0.75f, 0.75f, 0.75f);
 	playerScript = new Player(playerNode, _playerEntity);
 
 	// camera
@@ -66,10 +66,9 @@ void LevelManager::reset() {
 
 	//player
 	Debug("spawning player");
-	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
+	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerNode->setPosition(levelGenerator->getStartPos());
-	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript->reset(playerNode, _playerEntity);
 
 	// camera

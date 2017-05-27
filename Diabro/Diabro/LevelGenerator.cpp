@@ -93,7 +93,7 @@ Zone* LevelGenerator::getZonePointer(int pX, int pZ) {
 /// \param pZone zone from which to draw the tiles
 void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 	createTileMesh("tileMesh", pCol);
-	donaldTrump("wallMesh", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f));
+	donaldTrump("wallMesh", Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	_dungeonNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("DungeonNode");
 
@@ -112,34 +112,34 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 					Ogre::SceneNode* north = wallNode->createChildSceneNode();
 					Ogre::Entity* nWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("northWall" + name.str(), "wallMesh");
 					//north->yaw(Ogre::Radian(90 * Ogre::Math::PI / 180));
-					nWallEntity->setMaterialName("Examples/Rockwall");
+					nWallEntity->setMaterialName("InGame/Wall");
 					north->attachObject(nWallEntity);
 				}
 				if (!pZone.getTile(ix - 1, iz)) {
 					Ogre::SceneNode* east = wallNode->createChildSceneNode();
 					Ogre::Entity* eWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("eastWall" + name.str(), "wallMesh");
-					eWallEntity->setMaterialName("Examples/Rockwall");
+					eWallEntity->setMaterialName("InGame/Wall");
 					east->attachObject(eWallEntity);
 					east->yaw(Ogre::Radian(90 * Ogre::Math::PI / 180));
 				}
 				if (!pZone.getTile(ix, iz + 1)) {
 					Ogre::SceneNode* south = wallNode->createChildSceneNode();
 					Ogre::Entity* sWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("southWall" + name.str(), "wallMesh");
-					sWallEntity->setMaterialName("Examples/Rockwall");
+					sWallEntity->setMaterialName("InGame/Wall");
 					south->attachObject(sWallEntity);
 					south->yaw(Ogre::Radian(180 * Ogre::Math::PI / 180));
 				}
 				if (!pZone.getTile(ix + 1, iz)) {
 					Ogre::SceneNode* west = wallNode->createChildSceneNode();
 					Ogre::Entity* wWallEntity = GameManager::getSingleton().getSceneManager()->createEntity("westWall" + name.str(), "wallMesh");
-					wWallEntity->setMaterialName("Examples/Rockwall");
+					wWallEntity->setMaterialName("InGame/Wall");
 					west->attachObject(wWallEntity);
 					west->yaw(Ogre::Radian(-90 * Ogre::Math::PI / 180));
 				}
 
 				Ogre::Entity* tileEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), "tileMesh");
 				//testCity->setMaterialName("Test/ColourTest");
-				tileEntity->setMaterialName("Examples/Rockwall");
+				tileEntity->setMaterialName("InGame/Floor");
 				tileNode->attachObject(tileEntity);
 			}
 		}
@@ -281,15 +281,15 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 	// catch the buildings position
 	Ogre::Vector3 buildingPosition = pThisBuilding->getPositionInFrontOf();
 	Ogre::Vector3 offsets[3];
-	offsets[0] = Ogre::Vector3(-100, 25, -50);
-	offsets[1] = Ogre::Vector3(-100, 25, 0);
-	offsets[2] = Ogre::Vector3(-100, 25, 50);
+	offsets[0] = Ogre::Vector3(-100, 0, -50);
+	offsets[1] = Ogre::Vector3(-100, 0, 0);
+	offsets[2] = Ogre::Vector3(-100, 0, 50);
 	// for each resident
 	for (int i = 0; i < pThisBuilding->residents; ++i) {
 		// the scene node for the resident
 		Ogre::SceneNode* instanceNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode();
 		instanceNode->translate(buildingPosition + offsets[i], Ogre::Node::TS_WORLD);
-		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
+		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		rotationNode->attachObject(instanceEntity);
 		Npc* instanceScript = new Npc(instanceNode, rotationNode, instanceEntity, pCity, pThisBuilding);
@@ -437,10 +437,13 @@ void LevelGenerator::determineCityTypes() {
 
 	furtherstCity->setType((int)HideoutRT);
 
-	_sisterNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("TesterNode");
-	Ogre::Entity* _sis = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
+	_sisterNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("SisterNode");
+	Ogre::Entity* _sis = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
+	_sisterNode->setScale(0.25f, 0.25f, 0.25f);
+	_sisterNode->setPosition((furtherstCity->getCenterTile().x - 1) * scalar, 18.0f, (furtherstCity->getCenterTile().z) * scalar);
+	_sis->setMaterialName("InGame/PinkHouse");
+
 	_sisterNode->createChildSceneNode()->attachObject(_sis);
-	_sisterNode->setPosition(Ogre::Vector3(furtherstCity->getCenterTile().x * scalar, 0, furtherstCity->getCenterTile().z* scalar));
 
 	_endCity = furtherstCity;
 

@@ -52,7 +52,7 @@ Coordinate City::getRandomTile() {
 void City::setType(int type)
 {
 	if(type == -1) {
-		srand(355 * id);
+		srand(355*id);
 		typeFlag = (RoomType)(rand() % (int)(sizeRT));
 	} else {
 		typeFlag = type < (int)sizeRT ? (RoomType)type : (RoomType)0;
@@ -77,11 +77,11 @@ void City::generateBuildings()
 		buildingNode->setScale(1, 3, 1);
 		buildingNode->attachObject(_buildingEntity);
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x, (position.x + width - 1)) * scalar;
-		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z, (position.z + depth - 1)) * scalar;
+		int xPos = (position.x + i) * scalar;
+		int zPos = (position.z + i) * scalar;
 		buildingNode->setPosition(xPos, 100, zPos); 
 
-		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES);
+		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1);
 		int residents = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
 		Building thisBuilding = Building((BuildingType)buildingType, residents, Ogre::Vector2(xPos, zPos));
 		_buildingStructs.push_back(thisBuilding);
@@ -107,26 +107,26 @@ int City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre:
 		switch (buildings[i].type) // assign building random professions by giving them a rolenode
 		{
 		case Smithery:
-			pEntities[i]->setMaterialName("Houses/Yellow");
+			pEntities[i]->setMaterialName("InGame/YellowHouse");
 			break;
 		case GuardHouse:
-			pEntities[i]->setMaterialName("Houses/Pink");
+			pEntities[i]->setMaterialName("InGame/PinkHouse");
 			break;
 		case Church:
-			pEntities[i]->setMaterialName("Houses/Green");
+			pEntities[i]->setMaterialName("InGame/GreenHouse");
 			break;
 		case PotionStore:
-			pEntities[i]->setMaterialName("Houses/Purple");
+			pEntities[i]->setMaterialName("InGame/PurpleHouse");
 			break;
 		case Shop:
-			pEntities[i]->setMaterialName("Houses/Blue");
+			pEntities[i]->setMaterialName("InGame/BlueHouse");
 			break;
 		case FancyHouse:
-			pEntities[i]->setMaterialName("Houses/Pink");
+			pEntities[i]->setMaterialName("InGame/RedHouse");
 			break;
 
 		case HideOutHouse:
-			pEntities[i]->setMaterialName("Houses/Grey");
+			pEntities[i]->setMaterialName("InGame/GreyEnemy");
 			break;
 		default:
 			break;
