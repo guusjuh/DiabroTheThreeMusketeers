@@ -66,12 +66,18 @@ class City : public IQuestContent
 public:
 	Coordinate position; ///< upper left corner position of room
 	RoomType typeFlag;
+	bool* _tiles;
 	int width;
 	int depth;
 	int id; ///< unique id
 	int scalar;
 	void init();
 	
+	bool getTile(Coordinate pos);
+	bool getTile(int x, int z);
+	int scaledWidth() { return width * gridScalar; }
+	int scaledDepth() { return depth * gridScalar; }
+
 	//TODO: make local position
 	Ogre::Vector3 getRandomPointInRoom();
 	Coordinate getCenterTile();
@@ -81,7 +87,7 @@ public:
 	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
 	~City();
 
-	std::vector<Building> Buildings() { return _buildingStructs; };
+	std::vector<Building> Buildings() { return _buildings; };
 
 	std::vector<Coordinate> buildingPositions();
 
@@ -97,12 +103,15 @@ protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
 	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
 	bool checkEntryWay(Ogre::SceneNode *); //Checks if the buildings are blocking entryways
-	int assignBuildingRole(std::vector<Building> , std::vector<Ogre::Entity*>); //Assign roles to buildings in the city
+	void assignBuildingRole(std::vector<Building> , std::vector<Ogre::Entity*>); //Assign roles to buildings in the city
 	int getScaledWidth(int width, int scalar);
 	int getScaledDepth(int depth, int scalar);
+	void setTile(int x, int z, bool value);
+	void setTile(Coordinate pos, bool value);
 	std::vector<Ogre::SceneNode*> nodeList(Ogre::SceneNode* pBuildingNode);
 	
 private:
+	static int gridScalar;
 	std::string _name;
 
 	int buildingId;
@@ -111,16 +120,9 @@ private:
 
 	void generateBuildings();
 
-	int _scaledWidth;
-	int _scaledDepth;
-	int *_tiles2;
-	std::vector <Ogre::SceneNode*> _buildings;
-	std::vector<Building> _buildingStructs;
-	Ogre::SceneManager *manager;
-	Ogre::Entity* _signEntity;
-	Ogre::SceneNode* _rootNode;
-	Ogre::SceneNode* _roleNode;
+	std::vector<Coordinate> getBuildingPositions(int width, int height);
+	std::vector <Ogre::SceneNode*> _buildingNodes;
+	std::vector<Building> _buildings;
 	int _numberOfBuildings;
-	int role;
 };
 #endif

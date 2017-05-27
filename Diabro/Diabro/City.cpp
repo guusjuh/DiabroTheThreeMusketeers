@@ -3,6 +3,8 @@
 #include "GameManager.h"
 #include "math.h"
 
+int City::gridScalar = 2;
+
 /// <summary>
 /// Initializes a new instance of the <see cref="City"/> class.
 /// </summary>
@@ -15,8 +17,44 @@
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar)
 {
-	//setType();
+	_tiles = new bool[scaledWidth() * scaledDepth()];
+	for (int x = 0; x < scaledWidth(); x++) {
+		for (int z = 0; z < scaledDepth(); z++) {
+			setTile(x, z, false);
+		}
+	}
 }
+
+bool City::getTile(Coordinate pos) {
+	if (pos.x < 0 || pos.z < 0 || pos.x > width || pos.z > depth) {
+		return false;
+	}
+	return _tiles[pos.x + pos.z * scaledWidth()];
+}
+
+bool City::getTile(int x, int z) {
+	if (x < 0 || z < 0 || x > width || z > depth) {
+		return false;
+	}
+	return _tiles[x + z * scaledWidth()];
+}
+
+void City::setTile(Coordinate pos, bool value) {
+	if (pos.x < 0 || pos.z < 0 || pos.x > width || pos.z > depth) {
+		//Debug("Coordinate out of range", pos)
+	} else {
+		_tiles[pos.x + pos.z * scaledWidth()] = value;
+	}
+}
+
+void City::setTile(int x, int z, bool value) {
+	if (x < 0 || z < 0 || x > width || z > depth) {
+		//Debug("position out of range", Coordinate(pos.x, pos.y))
+	} else {
+		_tiles[x + z * scaledWidth()] = value;
+	}
+}
+
 
 /// <summary>
 /// Initializes this instance.
@@ -64,34 +102,71 @@ void City::setType(int type)
 /// </summary>
 void City::generateBuildings()
 {
-	_rootNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode();
-	manager = GameManager::getSingletonPtr()->getSceneManager();
-		
 	std::vector<Ogre::Entity*> buildingEntities;
-	int random = GameManager::getSingletonPtr()->getRandomInRange(1, 2);
-	for (int i = 0; i < random; i++)
-	{
-		//TODO: make it an ID
-		Ogre::SceneNode* buildingNode = _rootNode->createChildSceneNode();
-		Ogre::Entity* _buildingEntity = manager->createEntity("cube.mesh");
-		buildingNode->setScale(1, 3, 1);
-		buildingNode->attachObject(_buildingEntity);
-		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x, (position.x + width - 1)) * scalar;
-		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z, (position.z + depth - 1)) * scalar;
-		buildingNode->setPosition(xPos, 100, zPos); 
+	std::vector<Coordinate> buildingLocations = getBuildingPositions(1, 1);
 
-		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES);
-		int residents = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
-		Building thisBuilding = Building((BuildingType)buildingType, residents, Ogre::Vector2(xPos, zPos));
-		_buildingStructs.push_back(thisBuilding);
+	int buildingAmount = rand() %(width * depth - width) + width;
+	//Get al possible positions
+
+	for (int n = 0; n < buildingAmount; n++) {
+		//TODO: make it an ID
+		Ogre::SceneNode* buildingNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+		_buildingNodes.push_back(buildingNode);
+
+		Ogre::Entity* buildingEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
+		buildingNode->setScale(1, 3, 1);
+		buildingNode->attachObject(buildingEntity);
+		
+		//calculate building positions
+		//TODO: Change the numbers here to match those provided by levelgen CHECK
+		buildingNode->setPosition(0, 100, 0);
+
+		BuildingType buildingType = (BuildingType)(typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1));
+		int residents = rand() % 4;
+		//TODO: generate cities
+		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2(0, 0));
+		//TODO: fill _buildings
+		_buildings.push_back(thisBuilding);
 
 		nodeList(buildingNode);
-		buildingEntities.push_back(_buildingEntity);
+		buildingEntities.push_back(buildingEntity);		
 	}
 
-	assignBuildingRole(_buildingStructs, buildingEntities);
+	//assign material, based on buildingtype
+	assignBuildingRole(_buildings, buildingEntities);
 }
+
+std::vector<Coordinate> City::getBuildingPositions(int width, int height) {
+	std::vector<Coordinate> buildingLocations;
+	for (int x = 1; x < scaledWidth() - 1; x++) {
+		for (int z = 1; z < scaledDepth() - 1; z++) {
+			if(x == 1) {
+				//left layer
+				//TODO: find connections
+				//1: scale current position to world coordinates
+				//2: check if distance to connection is < 1
+			} else if (x == scaledWidth() - 1) {
+				//right layer
+				//TODO: find connections
+				//1: scale current position to world coordinates
+				//2: check if distance to connection is < 1
+			}
+			if (z == 1) {
+				//upper layer
+				//TODO: find connections
+				//1: scale current position to world coordinates
+				//2: check if distance to connection is < 1
+			} else if (z == scaledWidth() - 1) {
+				//lower layer
+				//TODO: find connections
+				//1: scale current position to world coordinates
+				//2: check if distance to connection is < 1
+			}
+		}
+	}
+	return buildingLocations;
+}
+
 
 /// <summary>
 /// Assigns the building role.
@@ -99,7 +174,7 @@ void City::generateBuildings()
 /// <param name="buildings">The buildings.</param>
 /// <param name="pEntities">The p entities.</param>
 /// <returns></returns>
-int City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre::Entity*> pEntities)
+void City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre::Entity*> pEntities)
 {
 	std::stringstream nodename("buildingRoleNode");
 	
@@ -132,8 +207,6 @@ int City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre:
 			break;
 		}
 	}
-
-	return role;
 }
 
 /// <summary>
@@ -143,8 +216,8 @@ int City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre:
 /// <returns></returns>
 std::vector<Ogre::SceneNode*> City::nodeList(Ogre::SceneNode* pBuildingNode)
 {
-	_buildings.push_back(pBuildingNode);
-	return _buildings;
+	_buildingNodes.push_back(pBuildingNode);
+	return _buildingNodes;
 }
 
 /**std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *pNodeName)
@@ -213,8 +286,8 @@ Ogre::Vector3 City::getRandomPointInRoom() {
 std::vector<Coordinate> City::buildingPositions() {
 	std::vector<Coordinate> positions;
 	positions.clear();
-	for (int i = 0; i < _buildings.size(); i++) {
-		Ogre::Vector3 buildingPos = _buildings[i]->getPosition();
+	for (int i = 0; i < _buildingNodes.size(); i++) {
+		Ogre::Vector3 buildingPos = _buildingNodes[i]->getPosition();
 		positions.push_back(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(buildingPos.x, buildingPos.z)));
 	}
 
