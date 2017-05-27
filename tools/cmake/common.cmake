@@ -100,6 +100,12 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
  
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake/modules)
+
+find_package(IrrKlang REQUIRED)
+
+set(HDRS ${HDRS} ${IRRKLANG_INCLUDE_DIRS})
+
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
@@ -108,9 +114,9 @@ include_directories( ${OIS_INCLUDE_DIRS}
  
 add_executable(${APP} WIN32 ${HDRS} ${SRCS})
  
-set_target_properties(${APP} PROPERTIES DEBUG_POSTFIX _d)
+set_target_properties(${APP} PROPERTIES DEBUG_POSTFIX _d ${IRRKLANG_DEFINITIONS})
  
-target_link_libraries(${APP} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(${APP} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES} ${IRRKLANG_LIBRARIES})
  
 file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/build/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/build/dist/media)
@@ -206,4 +212,3 @@ if(UNIX)
 	)
  
 endif(UNIX)
- 
