@@ -64,13 +64,9 @@ else (IRRKLANG_LIBRARIES AND IRRKLANG_INCLUDE_DIRS)
   endif (IRRKLANG_INCLUDE_DIRS AND IRRKLANG_LIBRARIES)
 
   if (IRRKLANG_FOUND)
-    if (NOT IRRKLANG_FIND_QUIETLY)
-      message(STATUS "Found irrKlang: ${IRRKLANG_LIBRARIES}")
-    endif (NOT IRRKLANG_FIND_QUIETLY)
+	message(STATUS "Found irrKlang: ${IRRKLANG_LIBRARIES}")
   else (IRRKLANG_FOUND)
-    if (IRRKLANG_FIND_REQUIRED)
-      message(FATAL_ERROR "Could not find irrKlang")
-    endif (IRRKLANG_FIND_REQUIRED)
+    message(FATAL_ERROR "Could not find irrKlang")
   endif (IRRKLANG_FOUND)
 
   # show the IRRKLANG_INCLUDE_DIRS and IRRKLANG_LIBRARIES variables only in the advanced view

@@ -71,7 +71,7 @@ if(NOT OIS_FOUND)
 endif()
  
 if(NOT IRRKLANG_FOUND)
-	message(SEND_ERROR "Failed to find IrrKlang.")
+	message(SEND_ERROR "Failed to find IrrKlang. Include: ${IRRKLANG_INCLUDE_DIRS} Lib: ${IRRKLANG_LIBRARIES}")
 endif()
 
 # Find Boost
