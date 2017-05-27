@@ -22,14 +22,14 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
-	/*
+	
 	if(_playerDetected) {
 		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
 
 		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
 			lightAttack();
 		}
-	}*/
+	}
 }
 
 

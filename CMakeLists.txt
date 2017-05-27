@@ -55,6 +55,7 @@ set(HDRS
 	./Diabro/Diabro/Quest.h
 	./Diabro/Diabro/Node.h
 	./Diabro/Diabro/QuestGenerator.h
+	./Diabro/Diabro/SoundManager.h
 	./Diabro/Diabro/IDecorator.h
 	./Diabro/Diabro/IPlayerEquipment.h
 	./Diabro/Diabro/PlayerEquipment.h
@@ -95,6 +96,7 @@ set(SRCS
 	./Diabro/Diabro/Node.cpp
 	./Diabro/Diabro/QuestGenerator.cpp
 	./Diabro/Diabro/PlayerEquipment.cpp
+	./Diabro/Diabro/SoundManager.cpp
 	./Diabro/Diabro/PlayerUpgrade.cpp
 	./Diabro/Diabro/PlayerHealthUpgrade.cpp
 	./Diabro/Diabro/PlayerDamageUpgrade.cpp

@@ -82,6 +82,8 @@ bool Character::lightAttack()
 /// <returns>False if the character runs out of health.</returns>
 bool Character::adjustHealth(float pAdjust)
 {
+	GameManager::getSingletonPtr()->getSoundManager()->hit();
+
 	_hitTime = _totalHitTime;
 	_hitted = true;
 

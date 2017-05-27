@@ -63,6 +63,8 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 /// </summary>
 void Player::die() {
 	changeInBattle(false);
+	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+	GameManager::getSingletonPtr()->getSoundManager()->playerDead();
 	GameManager::getSingletonPtr()->goToState(GameState::Died);
 
 	reset(_myNode, _myEntity);
@@ -114,9 +116,18 @@ void Player::update(Ogre::Real pDeltaTime)
 	// don't do stuff when in dialog
 	if (_inDialog) return;
 
-	// if player reached the end 
-	if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
-		GameManager::getSingletonPtr()->goNextState();
+	// set epic music when close to sis
+	if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar * 3) {
+		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom();
+		// if player reached the end 
+		if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
+			GameManager::getSingletonPtr()->goNextState();
+			GameManager::getSingletonPtr()->getSoundManager()->completed();
+			GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+		}
+	}
+	else {
+		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
 	}
 
 	// call basic update
@@ -148,6 +159,8 @@ void Player::update(Ogre::Real pDeltaTime)
 /// </summary>
 void Player::dialogTriggered() {
 	if (_nearbyNPC == nullptr) return;
+
+	if(!_inDialog) 	GameManager::getSingletonPtr()->getSoundManager()->dialog();
 
 	_inDialog = true;
 
@@ -189,6 +202,7 @@ bool Player::lightAttack()
 
 	//deal damage 
 	_target->adjustHealth(_damage);
+
 	changeInBattle(true);
 	if (_target->getCurrHealth() > 0) {
 		GameManager::getSingletonPtr()->getUIManager()->adjustEnemyHealthBar(_target->getCurrHealth(), _target->getMaxHealth());

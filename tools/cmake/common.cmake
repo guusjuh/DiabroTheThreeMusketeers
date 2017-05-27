@@ -57,15 +57,23 @@ endif ()
 set(CMAKE_DEBUG_POSTFIX "_d")
  
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake/modules)
  
 find_package(OGRE REQUIRED)
  
 find_package(OIS REQUIRED)
+
+find_package(IrrKlang REQUIRED)
  
 if(NOT OIS_FOUND)
 	message(SEND_ERROR "Failed to find OIS.")
 endif()
  
+if(NOT IRRKLANG_FOUND)
+	message(SEND_ERROR "Failed to find IrrKlang. Include: ${IRRKLANG_INCLUDE_DIRS} Lib: ${IRRKLANG_LIBRARIES}")
+endif()
+
 # Find Boost
 if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	if (WIN32 OR APPLE)
@@ -99,18 +107,20 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	add_definitions(-DBOOST_ALL_NO_LIB -DBOOST_SYSTEM_NO_DEPRECATED)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
- 
+
+message(STATUS "Irrklang includes: ${CMAKE_CURRENT_SOURCE_DIR}/tools/irrklang/include")
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
 	${OGRE_Overlay_INCLUDE_DIRS}
+	${CMAKE_CURRENT_SOURCE_DIR}/tools/irrklang/include
 )
- 
+
 add_executable(${APP} WIN32 ${HDRS} ${SRCS})
  
 set_target_properties(${APP} PROPERTIES DEBUG_POSTFIX _d)
  
-target_link_libraries(${APP} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(${APP} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES} ${IRRKLANG_LIBRARIES})
  
 file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/build/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/build/dist/media)
@@ -206,4 +216,3 @@ if(UNIX)
 	)
  
 endif(UNIX)
- 

@@ -94,6 +94,9 @@
     <ClCompile Include="PlayerEquipment.cpp">
       <Filter>Sources\Decorator</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerUpgrade.cpp">
       <Filter>Sources\Decorator</Filter>
     </ClCompile>
@@ -214,6 +217,9 @@
     <ClInclude Include="IDecorator.h">
       <Filter>Headers\Decorator</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Headers\Sounds</Filter>
+    </ClInclude>
     <ClInclude Include="IPlayerEquipment.h">
       <Filter>Headers\Decorator</Filter>
     </ClInclude>
@@ -306,6 +312,9 @@
     </Filter>
     <Filter Include="Sources\Decorator">
       <UniqueIdentifier>{7db18d51-9a60-4101-9c17-5378814fbb31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Sounds">
+      <UniqueIdentifier>{478b5cf5-cd79-4dd9-a892-b38a48467cb2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
