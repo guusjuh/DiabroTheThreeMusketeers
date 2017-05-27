@@ -5,6 +5,9 @@
 #include <vector>
 #include "QuestItem.h"
 
+/// <summary>
+/// The generator for quest items. 
+/// </summary>
 class QuestItemGenerator {
 public:
 	QuestItemGenerator();

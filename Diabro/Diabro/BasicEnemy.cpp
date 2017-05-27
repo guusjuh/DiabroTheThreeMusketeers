@@ -19,6 +19,10 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 }
 
+/// <summary>
+/// Updates the enemey for deltatime.
+/// </summary>
+/// <param name="pDeltatime">The deltatime.</param>
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
@@ -33,6 +37,10 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 }
 
 
+/// <summary>
+/// Performs a light attack.
+/// </summary>
+/// <returns></returns>
 bool BasicEnemy::lightAttack()
 {
 	if (!Character::lightAttack()) {
@@ -55,6 +63,9 @@ bool BasicEnemy::lightAttack()
 	return true;
 }
 
+/// <summary>
+/// Called when the enemy dies, e.g. runs out of health.
+/// </summary>
 void BasicEnemy::die() {
 	Character::die();
 	

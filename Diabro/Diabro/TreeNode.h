@@ -4,6 +4,9 @@
 #include <vector>
 
 
+/// <summary>
+/// A generic class to store the nodes in the generic tree class. 
+/// </summary>
 template<typename T>
 class TreeNode {
 public:

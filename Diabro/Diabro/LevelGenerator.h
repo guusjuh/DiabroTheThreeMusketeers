@@ -12,6 +12,9 @@ enum DirectionType
 	WestDT
 };
 
+/// <summary>
+/// The class that generates and stores the dungeon. 
+/// </summary>
 class LevelGenerator
 {
 public:

@@ -3,6 +3,9 @@
 
 #include <vector>
 
+/// <summary>
+/// A generic class to contain objects. 
+/// </summary>
 template<typename T>
 class GenericContainer {
 public:

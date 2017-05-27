@@ -4,6 +4,11 @@
 #include "Character.h"
 #include "City.h"
 
+/// <summary>
+/// The super class for all NPC's in the game
+/// </summary>
+/// <seealso cref="Character" />
+/// <seealso cref="IQuestContent" />
 class BaseNpc : public Character, public IQuestContent
 {
 public:

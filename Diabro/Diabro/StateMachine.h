@@ -3,6 +3,9 @@
 #include "State.h"
 #include <iostream>
 
+/// <summary>
+/// A generic Finite State Machine.
+/// </summary>
 template<typename T>
 class StateMachine
 {

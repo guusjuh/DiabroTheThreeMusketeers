@@ -7,6 +7,9 @@
 #include "SdkTrays.h"
 #include "UIElements.h"
 
+/// <summary>
+/// The manager of the UI. 
+/// </summary>
 class UIManager
 {
 public:

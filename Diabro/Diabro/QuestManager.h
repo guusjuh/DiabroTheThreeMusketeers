@@ -10,6 +10,9 @@
 #include "Quest.h"
 #include "QuestGenerator.h"
 
+/// <summary>
+/// The manager for the quests. 
+/// </summary>
 class QuestManager {
 public:
 	QuestManager();

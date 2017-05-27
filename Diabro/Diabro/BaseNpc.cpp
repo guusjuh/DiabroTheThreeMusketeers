@@ -12,7 +12,6 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 {
 	_myRotationNode = pMyRotationNode;
 	goalPos = Coordinate(0, 0);
-	//wander();
 }
 
 /// <summary>
@@ -72,30 +71,31 @@ void BaseNpc::detectPlayer()
 }
 
 /// <summary>
-/// Lets this instance wander randomly.
+/// Makes the BaseNPC walk to next point.
 /// </summary>
-void BaseNpc::wander() 
-{
-	//Coordinate coord = _myCity->getRandomPoint();
-	//walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
-}
-
-void BaseNpc::walkToNextPoint(){
+void BaseNpc::walkToNextPoint() {
 	goalPos = nextPos[nextPos.size() - 1];
 	nextPos.pop_back();
 	_myNode->lookAt(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
-	//_myNode->setPosition(goalPos.x, _myNode->getPosition().y, goalPos.z);
 
 	_dirVec = Ogre::Vector3(1, 0, 0);
 }
 
-void BaseNpc::walkTo(Ogre::Vector3 targetPos) 
+/// <summary>
+/// Makes the BaseNPC walk to the point.
+/// </summary>
+/// <param name="targetPos">The target position.</param>
+void BaseNpc::walkTo(Ogre::Vector3 targetPos)
 {
 	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
 	_dirVec = Ogre::Vector3(1, 0, 0);
 }
 
-void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
+/// <summary>
+/// Calculates the A* route from the current to the target position.
+/// </summary>
+/// <param name="targetPos">The target position.</param>
+void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	//get the zoe from the levelmanager
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
 
@@ -192,12 +192,6 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 				}
 			}
 			//start the walking
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			FILE* fp;
-			freopen_s(&fp, "CONOUT$", "w", stdout);
-			printf("newPoint: (%d, %d)\n", goalPos.x / scale, goalPos.z / scale);
-			fclose(fp);
-#endif
 			walkToNextPoint();
 			return;
 		}
@@ -232,6 +226,11 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos){
 	}
 }
 
+/// <summary>
+/// Debugs the specified message.
+/// </summary>
+/// <param name="msg">The message.</param>
+/// <param name="val">The value.</param>
 void BaseNpc::debug(std::string msg, int val) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;

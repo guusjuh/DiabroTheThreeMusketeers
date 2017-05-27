@@ -56,6 +56,12 @@ QuestManager::QuestManager()
 
 }
 
+/// <summary>
+/// Generates a quest.
+/// </summary>
+/// <param name="pSourceNpc">The source NPC.</param>
+/// <param name="pMotivation">The motivation.</param>
+/// <returns></returns>
 Quest* QuestManager::generateQuest(BaseNpc* pSourceNpc, NeedType pMotivation) {
 	_quests.push_back(_questGenerator->generateQuest(pSourceNpc, pMotivation));
 

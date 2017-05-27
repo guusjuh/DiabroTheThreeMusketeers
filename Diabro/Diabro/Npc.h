@@ -6,6 +6,9 @@
 #include "Needs.h"
 #include "Quest.h"
 
+/// <summary>
+/// Enum for the different professions of NPC's. An important variable for the quest system. 
+/// </summary>
 enum Profession {
 	Smith = 0,
 	Guard,
@@ -17,6 +20,10 @@ enum Profession {
 	AMOUNT_OF_PROFS
 };
 
+/// <summary>
+/// The firendly NPC class. 
+/// </summary>
+/// <seealso cref="BaseNpc" />
 class Npc : public BaseNpc
 {
 public:
@@ -35,7 +42,7 @@ private:
 	std::vector<std::string> _dialog;
 
 	std::string _name;
-	NeedSet _needs;				//!< A set of needs, when the value of a need is low, this NPC wants something.
+	NeedSet _needs;					//!< A set of needs, when the value of a need is low, this NPC wants something.
 	Profession _profession;			//!< The profession of the NPC, used to generate relevant quests.
 	City* _hometown;
 	Building* _home;

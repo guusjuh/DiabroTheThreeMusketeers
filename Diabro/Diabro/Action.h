@@ -5,6 +5,9 @@
 #include <map>
 #include "QuestContentManager.h"
 
+/// <summary>
+/// The types of actions.
+/// </summary>
 enum ActionType {
 	Escort = 0,
 	Exchange,
@@ -17,6 +20,9 @@ enum ActionType {
 	Report,
 };
 
+/// <summary>
+/// The types of preconditions.
+/// </summary>
 enum PreconditionsType {
 	SomebodyThere = 0,
 	SomethingThere,
@@ -26,6 +32,9 @@ enum PreconditionsType {
 	BothItemOfInterest,
 };
 
+/// <summary>
+/// The types of postconditions.
+/// </summary>
 enum PostconditionType {
 	Accompanied,
 	YouHaveTheItem,
@@ -37,6 +46,9 @@ enum PostconditionType {
 	TheyDead,
 };
 
+/// <summary>
+/// An action to be in a quest. 
+/// </summary>
 class Action {
 public:
 	/// <summary>

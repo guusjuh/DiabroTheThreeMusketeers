@@ -5,6 +5,9 @@
 #include <vector>
 #include "QuestItem.h"
 
+/// <summary>
+/// The container for the quest items. 
+/// </summary>
 class QuestItemContainer {
 public:
 	QuestItemContainer();

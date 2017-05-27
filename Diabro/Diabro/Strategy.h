@@ -6,6 +6,9 @@
 #include "Action.h"
 #include "QuestContentManager.h"
 
+/// <summary>
+/// A structure to store a quest template name. 
+/// </summary>
 struct QuestName {
 	std::string preString;
 	QuestContent templateContent;
@@ -59,16 +62,6 @@ public:
 
 	void increaseAction() {
 		_currentAction++;
-		/*
-		// find which action is the current
-		for (int i = 0; i < getActionSequence().size(); ++i) {
-
-			// if we found the current
-			if (_currrentAction == &getActionSequence()[i]) {
-				_currrentAction = &getActionSequence()[i + 1];
-				return;
-			}
-		}*/
 	}
 
 	int getRarityPref() { return _rarityPref; }

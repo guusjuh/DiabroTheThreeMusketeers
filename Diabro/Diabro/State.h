@@ -2,6 +2,9 @@
 #define STATE_H_
 #include <OgrePrerequisites.h>
 
+/// <summary>
+/// A generic state class.
+/// </summary>
 template <typename T>
 class State
 {

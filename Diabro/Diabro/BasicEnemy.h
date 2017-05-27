@@ -5,6 +5,10 @@
 #include "StateMachine.h"
 #include "IdleState.h"
 
+/// <summary>
+/// The basic class for an enemy.
+/// </summary>
+/// <seealso cref="BaseNpc" />
 class BasicEnemy : public BaseNpc
 {
 public:

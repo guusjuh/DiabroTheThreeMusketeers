@@ -5,11 +5,14 @@
 #include "Npc.h"
 #include "BasicEnemy.h"
 
-template <class T> 
-class CharacterSpawner {
+/// <summary>
+/// A generic spawner class.
+/// </summary>
+template <class T>
+class Spawner {
 public:
-	CharacterSpawner<T>(Ogre::SceneNode*, int, Ogre::Vector3, City*);
-	~CharacterSpawner();
+	Spawner<T>(Ogre::SceneNode*, int, Ogre::Vector3, City*);
+	~Spawner();
 
 	void instanceDeath();
 private:
@@ -19,7 +22,7 @@ private:
 	Ogre::Vector3 _spawnPosition;
 
 	//amount of characters to spawn
-	int _nCharacters;
+	int _nInstances;
 
 	City* _myCity;
 };

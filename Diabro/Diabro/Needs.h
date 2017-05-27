@@ -4,6 +4,9 @@
 #pragma once
 #include <OgrePrerequisites.h>
 
+/// <summary>
+/// Enum for the types of needs. 
+/// </summary>
 enum NeedType {
 	KnowledgeNeed = 0,
 	ComfortNeed,
@@ -17,6 +20,9 @@ enum NeedType {
 	AMOUNT_OF_NEEDTYPES
 };
 
+/// <summary>
+/// A strucuture containing all data relevant to a need. 
+/// </summary>
 struct Need {
 	Need() : type(NeedType::ComfortNeed), value(0) {};
 	Need(NeedType pType, Ogre::Real pValue) : type(pType), value(pValue) {};
@@ -27,6 +33,9 @@ struct Need {
 	void adjustValue(int pAdjustment) { value += pAdjustment; };
 };
 
+/// <summary>
+/// A data class containing a set of needs. 
+/// </summary>
 class NeedSet {
 public:
 	/// <summary>

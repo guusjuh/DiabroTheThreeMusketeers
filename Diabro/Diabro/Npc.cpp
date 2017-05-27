@@ -37,9 +37,16 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	_hasQuest = false;
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref=""/> class.
+/// </summary>
 Npc::~Npc() {
 }
 
+/// <summary>
+/// Gets the name options.
+/// </summary>
+/// <returns></returns>
 std::vector<std::string> Npc::getNameOptions() {
 	std::vector<std::string> _nameOptions;
 	_nameOptions.push_back("Gleann");

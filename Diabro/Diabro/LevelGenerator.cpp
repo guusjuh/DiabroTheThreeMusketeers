@@ -4,7 +4,10 @@
 #include "GameManager.h"
 #include "math.h"
 
-LevelGenerator::LevelGenerator():
+/// <summary>
+/// Initializes a new instance of the <see cref="LevelGenerator"/> class.
+/// </summary>
+LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	debug("Initializing zone");
@@ -21,10 +24,16 @@ scalar(500)
 }
 
 
+/// <summary>
+/// Finalizes an instance of the <see cref="LevelGenerator"/> class.
+/// </summary>
 LevelGenerator::~LevelGenerator()
 {
 }
 
+/// <summary>
+/// Restarts the level.
+/// </summary>
 void LevelGenerator::restart() {
 	debug("Initializing zone");
 	_zone[0] = Zone(20, 20, 6, 6, 10, 100, scalar);
@@ -243,6 +252,9 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol) cons
 	mesh->load();
 }
 
+/// <summary>
+/// Spawns the content of the city.
+/// </summary>
 void LevelGenerator::spawnCityContent() {
 	// loop through all cities
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
@@ -267,6 +279,12 @@ void LevelGenerator::spawnCityContent() {
 	}
 	return;
 }
+
+/// <summary>
+/// Spawns the NPCs for a specified building.
+/// </summary>
+/// <param name="pCity">The p city.</param>
+/// <param name="pThisBuilding">The p this building.</param>
 void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 	// catch the buildings position
 	Ogre::Vector3 buildingPosition = pThisBuilding->getPositionInFrontOf();
@@ -286,11 +304,22 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 		//instanceScript->initialize();
 	}
 }
+
+/// <summary>
+/// Places the enemy spawn node for the specified city.
+/// </summary>
+/// <param name="thisCity">The this city.</param>
+/// <param name="i">The i.</param>
 void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
 	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-	CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
+	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
 }
 
+/// <summary>
+/// Creates the tile mesh.
+/// </summary>
+/// <param name="pName">Name of the p.</param>
+/// <param name="pCol">The p col.</param>
 void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) const {
 	//TODO: add uv coordinates
 
@@ -388,6 +417,9 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 	mesh->load();
 }
 
+/// <summary>
+/// Determines the types for the cities.
+/// </summary>
 void LevelGenerator::determineCityTypes() {
 	// if not two cities: problems!
 	if(_zone[0].cities.size() < 2) {

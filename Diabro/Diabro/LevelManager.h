@@ -6,9 +6,12 @@
 #include "BaseApplication.h"
 #include "BasicEnemy.h"
 #include <OgreSceneManager.h>
-#include "CharacterSpawner.h"
+#include "Spawner.h"
 #include "LevelGenerator.h"
 
+/// <summary>
+/// The manager of the level. 
+/// </summary>
 class LevelManager
 {
 public:
@@ -50,8 +53,8 @@ private:
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
 
-	CharacterSpawner<Npc>* npcSpawner;
-	CharacterSpawner<BasicEnemy>* enemySpawner;
+	Spawner<Npc>* npcSpawner;
+	Spawner<BasicEnemy>* enemySpawner;
 
 	Ogre::Entity* _groundEntity;
 

@@ -14,16 +14,20 @@ struct Coordinate {
 	~Coordinate() { }
 };
 
-// Rosa: commented out empty and hub since i didn't see good use for it and i needed the cities and hideouts
+/// <summary>
+/// Enum for the different city types. 
+/// </summary>
 enum RoomType
 {
-	//EmptyRT,
 	CityRT,
 	HideoutRT,
-	//HubRT,
+
 	sizeRT
 };
 
+/// <summary>
+/// Enum for the different building types. Corresponds to the NPC's professions. 
+/// </summary>
 enum BuildingType {
 	Smithery = 0,
 	GuardHouse,
@@ -37,6 +41,9 @@ enum BuildingType {
 	AMOUNT_OF_BUILDINGTYPES
 };
 
+/// <summary>
+/// Struct for a building in a city.
+/// </summary>
 struct Building {
 	Building(BuildingType pType, int pResidents, Ogre::Vector2 pPosition) 
 	: type(pType), residents(pResidents), position(pPosition) {}
@@ -50,6 +57,10 @@ struct Building {
 	}
 };
 
+/// <summary>
+/// The city class containing buildings and inhabitants. 
+/// </summary>
+/// <seealso cref="IQuestContent" />
 class City : public IQuestContent
 {
 public:
@@ -87,8 +98,8 @@ protected:
 	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
 	bool checkEntryWay(Ogre::SceneNode *); //Checks if the buildings are blocking entryways
 	int assignBuildingRole(std::vector<Building> , std::vector<Ogre::Entity*>); //Assign roles to buildings in the city
-	int getScaladWidth(int width, int scalar);
-	int getScaladDepth(int depth, int scalar);
+	int getScaledWidth(int width, int scalar);
+	int getScaledDepth(int depth, int scalar);
 	std::vector<Ogre::SceneNode*> nodeList(Ogre::SceneNode* pBuildingNode);
 	
 private:
