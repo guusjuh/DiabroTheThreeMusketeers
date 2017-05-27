@@ -62,6 +62,7 @@ set(HDRS
 	./Diabro/Diabro/PlayerUpgrade.h
 	./Diabro/Diabro/PlayerHealthUpgrade.h
 	./Diabro/Diabro/PlayerDamageUpgrade.h
+	./Diabro/Diabro/Debug.h
 )
  
 set(SRCS
@@ -100,6 +101,7 @@ set(SRCS
 	./Diabro/Diabro/PlayerUpgrade.cpp
 	./Diabro/Diabro/PlayerHealthUpgrade.cpp
 	./Diabro/Diabro/PlayerDamageUpgrade.cpp
+	./Diabro/Diabro/Debug.cpp
 )
  
 include("tools/cmake/common.cmake") 
