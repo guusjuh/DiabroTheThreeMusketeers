@@ -3,20 +3,19 @@
 #include <OgreSubMesh.h>
 #include "GameManager.h"
 #include "math.h"
+#include "Debug.h"
 
 LevelGenerator::LevelGenerator():
 scalar(500)
 {
-	debug("Initializing zone");
+	Debug("Initializing zone");
 	_zone[0] = Zone(20, 20, 6, 6, 10, 100, scalar);
 
-	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
-	debug("determine city types");
 	determineCityTypes();
 	_zone[0].printGrid();
-	debug("spawning content");
+	
 	spawnCityContent();
 }
 
@@ -26,16 +25,13 @@ LevelGenerator::~LevelGenerator()
 }
 
 void LevelGenerator::restart() {
-	debug("Initializing zone");
+	Debug("initializing zone");
 	_zone[0] = Zone(20, 20, 6, 6, 10, 100, scalar);
 	
-	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
 
-	debug("determine city types");
 	determineCityTypes();
-	debug("spawning content");
 	spawnCityContent();
 }
 
@@ -92,9 +88,6 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 	donaldTrump("wallMesh", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f));
 
 	_dungeonNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("DungeonNode");
-	debug("dungeonx:", _dungeonNode->getPosition().x);
-	debug("dungeony:", _dungeonNode->getPosition().y);
-	debug("dungeonz:", _dungeonNode->getPosition().z);
 
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
@@ -391,12 +384,7 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 void LevelGenerator::determineCityTypes() {
 	// if not two cities: problems!
 	if(_zone[0].cities.size() < 2) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("Not enough cities to play this dungeon!");
-		fclose(fp);
-#endif
+		Debug("not enough cities to play this dungeon");
 		return;
 	}
 	
@@ -424,8 +412,6 @@ void LevelGenerator::determineCityTypes() {
 	_sisterNode->setPosition(Ogre::Vector3(furtherstCity->getCenterTile().x * scalar, 0, furtherstCity->getCenterTile().z* scalar));
 
 	_endCity = furtherstCity;
-	debug("end pos x:", furtherstCity->position.x);
-	debug("end pos z:", furtherstCity->position.z);
 
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 		_zone[0].cities[i].init();

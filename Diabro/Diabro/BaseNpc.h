@@ -27,7 +27,6 @@ protected:
 	void walkToNextPoint();
 
 	void walkTo(Ogre::Vector3);
-	void debug(std::string msg, int val = 0);
 
 private:
 	float _timer;

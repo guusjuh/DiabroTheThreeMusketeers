@@ -1,4 +1,5 @@
 #include "Tree.h"
+#include "Debug.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Tree"/> class.
@@ -81,12 +82,7 @@ void Tree<T>::addNodes(std::vector<T> pData, TreeNode<T>* pNode = nullptr) {
 	// as long as the root is null you cant add multiple children
 	if (_root == NULL) {
 		// error occured
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		std::cout << "ERROR occured, as long as the root is null you cant add multiple children." << std::endl;
-		fclose(fp);
-#endif
+		Debug("ERROR occured, as long as the root is null you cant add multiple children.");
 		return;
 	}
 

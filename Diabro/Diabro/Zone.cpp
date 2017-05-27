@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include <OgreConfigFile.h>
 #include <OgreMath.h>
+#include "Debug.h"
 
 Zone::Zone() {
 	
@@ -15,12 +16,7 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 		//zones use uneven sizes, this ensures walls can be created properly
 		if (pWidth % 2 == 0) _width++;
 		if (pDepth % 2 == 0) _depth++;
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("Zone sizes should be uneven! {W: %d, H: %d} used \n", _width, _depth);
-		fclose(fp);
-#endif
+		Debug("zone sizes should be uneven, used: ", getResolution());
 	}
 	// create an empty grid for dungeon tiles
 	_tiles = new int[_width * _depth];
@@ -29,17 +25,13 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 			setTile(ix, iy, 0);
 		}
 	}
-	debug("generating cities");
 	generateCities(pMaxTries, pMaxCities);
-	debug("generating pathways");
 	int n = generatePathways(cities.size() + 1);
-	debug("connecting dungeon");
+	Debug("connecting dungeon");
 	connectDungeon(cities.size() + 1 + n, 0.5f);
 
 	cleanGrid();
-	//printGrid();
 	collisionGridGenerated = false;
-	//printCollisionGrid();
 }
 
 Zone::~Zone()
@@ -189,9 +181,6 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 			int rnd = rand() % options.size();
 			setTile(options[rnd].first, 1); 
 			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
-			debug("test: optionSize:", options.size());
-			debug("test: cityID:", options[rnd].second);
-			debug("test: citySize:", cities.size());
 			//TODO: city-id > city.Size()
 			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
 			options.erase(options.begin() + rnd);
@@ -204,9 +193,6 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 
 ///prints all values used in the grid (Windows only method)
 void Zone::printValues() {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
 	int values[100];
 
 	for (int ix = 0; ix < _width; ++ix) {
@@ -219,13 +205,10 @@ void Zone::printValues() {
 	}
 	for (int i = 1; i < 100; ++i) {
 		if (values[i] > 0) {
-			printf("%d, ", values[i]);
+			Debug(static_cast<float>(values[i]));
 		}
 		
 	}
-	printf("\n");
-	fclose(fp);
-#endif
 }
 
 /// returns the width and depth of the zone
@@ -509,19 +492,9 @@ void Zone::generateCities(int pMaxTries, int pMaxCities) {
 
 /// prints all values of the grid (windows only method)
 void Zone::printGrid() {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	for (int ix = 0; ix < _width; ++ix) {
-		for (int iz = 0; iz < _depth; ++iz) {
-			printf((getTile(iz, ix) < 10 && getTile(iz, ix) >= 0)?"| " : "|");
-			printf("%d|", getTile(iz, ix));
-		}
-		printf("\n");
-	}
-	fclose(fp);
-	//printValues();
-#endif
+
+	Debug d = Debug();
+	d.printArray(_tiles, _width, _width * _depth);
 }
 
 bool* Zone::getCollisionGrid(){
@@ -564,22 +537,6 @@ bool* Zone::generateCollisionGrid(){
 }
 
 void Zone::printCollisionGrid(){
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	for (int ix = 0; ix < _width; ++ix) {
-		for (int iy = 0; iy < _depth; ++iy) {
-			if (collisionGrid[ix + iy * _width]){
-				printf("1 ");
-			}
-			else
-			{
-				printf("0 ");
-			}
-		}
-		printf("\n");
-	}
-	printf("\n");
-	fclose(fp);
-#endif
+	Debug d = Debug();
+	d.printArray(collisionGrid, _width, _width * _depth);
 }
