@@ -3,6 +3,7 @@
 #include "PlayerEquipment.h"
 #include "PlayerHealthUpgrade.h"
 #include "PlayerDamageUpgrade.h"
+#include "Debug.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
@@ -77,12 +78,7 @@ void Player::die() {
 	_currentHealth = _maxHealth;
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("H: %f D: %f \n", _maxHealth, _damage);
-	fclose(fp);
-#endif
+	Debug("player: (Health, Damage)", Coordinate(_maxHealth, _damage));
 }
 
 void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
@@ -97,12 +93,7 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 		_damage = equipment->getDamage();
 		break;
 	default:
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("wrong upgrade type\n");
-		fclose(fp);
-#endif
+		Debug("Wrong upgrade type");
 		break;
 	}
 }

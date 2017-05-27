@@ -2,6 +2,7 @@
 #include "tinyxml2.h"
 #include <stdio.h>
 #include "GameManager.h"
+#include "Debug.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestContentManager"/> class.
@@ -91,12 +92,7 @@ std::vector<QuestItem*> QuestContentManager::readFromXMLQuestItemList(tinyxml2::
 	}
 	// the rootnode was empty
 	else {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("Failed loading.\n");
-		fclose(fp);
-#endif
+		Debug("Failed loading.");
 	}
 
 	// return the list of items 

@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "LevelManager.h"
+#include "Debug.h"
 
 
 /// <summary>
@@ -57,14 +58,14 @@ void LevelManager::reset() {
 
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
-	levelGenerator->debug("restarting levelGenerator");
+	Debug("restarting levelGenerator");
 	levelGenerator->restart();
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
-	levelGenerator->debug("spawning player");
+	Debug("spawning player");
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerNode->setPosition(levelGenerator->getStartPos());

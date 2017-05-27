@@ -112,6 +112,9 @@
     <ClCompile Include="EnemyEquipment.cpp">
       <Filter>Sources\Decorator\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Sources\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -250,6 +253,9 @@
     <ClInclude Include="EnemyUpgrade.h">
       <Filter>Headers\Decorator\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Headers\Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -334,6 +340,9 @@
     <Filter Include="Headers\Decorator\Enemy">
       <UniqueIdentifier>{f754d37d-3531-4b53-acbf-0c6f19bcf871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Debug">
+      <UniqueIdentifier>{57138a32-2d17-4364-89f4-eb550dde5eab}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\Decorator\Player">
       <UniqueIdentifier>{eb3b6379-a0db-4048-acb8-6e70e37478be}</UniqueIdentifier>
     </Filter>
@@ -342,6 +351,9 @@
     </Filter>
     <Filter Include="Sources\Decorator\Player">
       <UniqueIdentifier>{ce14ca4a-d22c-404e-b5f9-b7988d54b704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Debug">
+      <UniqueIdentifier>{131fd51a-6c70-4a4d-a237-63b47a9046bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

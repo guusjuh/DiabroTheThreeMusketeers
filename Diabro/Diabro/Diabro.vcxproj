@@ -122,6 +122,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="City.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EnemyEquipment.cpp" />
     <ClCompile Include="EnemyUpgrade.cpp" />
     <ClCompile Include="FloatRange.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="ActionContainer.h" />
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="EnemyEquipment.h" />
     <ClInclude Include="EnemyUpgrade.h" />
     <ClInclude Include="IDecorator.h" />

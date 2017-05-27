@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "GameManager.h"
+#include "Debug.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Character"/> class.
@@ -96,14 +97,7 @@ bool Character::adjustHealth(float pAdjust)
 		die();
 		return false;
 	}
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("I got hit... %f \n", _currentHealth);
-	fclose(fp);
-#endif
-
+	Debug("I got hit...", _currentHealth);
 	return true;
 }
 
