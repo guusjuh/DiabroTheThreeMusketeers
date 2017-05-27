@@ -11,7 +11,7 @@
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity),  _dirVec(0, 0, 0),
 _movespeed(100), _rotationspeed(0.13), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(40),
-_attackDistance(20), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _damage(3), _noticeDistance(400.0f)
+_attackDistance(250), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _damage(3), _noticeDistance(400.0f)
 {
 	_currentHealth = _maxHealth;
 
@@ -37,6 +37,7 @@ void Character::update(Ogre::Real pDeltatime)
 		_hitted = false;
 	}
 
+	_dirVec.normalise();
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
 	Coordinate temp = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x, newPos.z));
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
