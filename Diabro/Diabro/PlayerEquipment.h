@@ -2,11 +2,6 @@
 #define _PLAYER_EQUIPMENT_H_
 #include "IPlayerEquipment.h"
 
-enum UpgradeModifierType {
-	Health,
-	Damage
-};
-
 struct PlayerUpgradeType {
 	int value;
 	UpgradeModifierType modifier;

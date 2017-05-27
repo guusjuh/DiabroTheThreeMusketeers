@@ -49,7 +49,7 @@ void Spawner<T>::spawnInstance() {
 	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		
 	rotationNode->attachObject(instanceEntity);
-	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity, _myCity);
+	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity, _myCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
 }
 
 template class Spawner < BasicEnemy >;

@@ -77,11 +77,11 @@ void City::generateBuildings()
 		buildingNode->setScale(1, 3, 1);
 		buildingNode->attachObject(_buildingEntity);
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x, (width - 1)) * scalar;
-		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z, (depth - 1)) * scalar;
+		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x, (position.x + width - 1)) * scalar;
+		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z, (position.z + depth - 1)) * scalar;
 		buildingNode->setPosition(xPos, 100, zPos); 
 
-		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES-1);
+		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES);
 		int residents = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
 		Building thisBuilding = Building((BuildingType)buildingType, residents, Ogre::Vector2(xPos, zPos));
 		_buildingStructs.push_back(thisBuilding);

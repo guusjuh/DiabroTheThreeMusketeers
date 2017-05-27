@@ -62,6 +62,9 @@ set(HDRS
 	./Diabro/Diabro/PlayerUpgrade.h
 	./Diabro/Diabro/PlayerHealthUpgrade.h
 	./Diabro/Diabro/PlayerDamageUpgrade.h
+	./Diabro/Diabro/EnemyEquipment.h
+	./Diabro/Diabro/EnemyUpgrade.h
+	./Diabro/Diabro/IEnemyEquipment.h
 )
  
 set(SRCS
@@ -100,6 +103,8 @@ set(SRCS
 	./Diabro/Diabro/PlayerUpgrade.cpp
 	./Diabro/Diabro/PlayerHealthUpgrade.cpp
 	./Diabro/Diabro/PlayerDamageUpgrade.cpp
+	./Diabro/Diabro/EnemyEquipment.cpp
+	./Diabro/Diabro/EnemyUpgrade.cpp
 )
  
 include("tools/cmake/common.cmake") 

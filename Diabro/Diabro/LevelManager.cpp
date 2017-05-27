@@ -18,6 +18,8 @@ playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 /// </summary>
 void LevelManager::initialize()
 {
+	_level = 1;
+
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
 
@@ -44,6 +46,8 @@ void LevelManager::initialize()
 /// Resets the level.
 /// </summary>
 void LevelManager::reset() {
+	_level++;
+
 	while(_friendlyNpcScripts.size() > 0) {
 		detachFriendlyNPC(0);
 	}
@@ -158,4 +162,3 @@ void LevelManager::createGroundMesh()
 
 	return;
 }
-

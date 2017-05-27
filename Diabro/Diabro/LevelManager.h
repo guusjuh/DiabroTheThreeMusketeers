@@ -19,6 +19,7 @@ public:
 
 	void initialize();
 	void reset();
+	int getCurrentLevel() { return _level; }
 
 	void inGameUpdate(const Ogre::FrameEvent&);
 
@@ -36,8 +37,6 @@ public:
 
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
-	static int testunit(int i) { return ++i; };
-	static int testunittwo(int i);
 	
 	LevelGenerator* levelGenerator;
 	// for now public so that game manager can access it. 
@@ -64,6 +63,8 @@ private:
 	std::vector<Character*> _friendlyNpcScripts;
 	std::vector<Character*> _hostileNpcScripts;
 	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
+
+	int _level;
 };
 
 #endif

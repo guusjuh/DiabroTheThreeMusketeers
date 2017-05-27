@@ -68,7 +68,7 @@ public:
 	SoundManager* getSoundManager(void) { return _soundManager; }
 
 	int getRandomInRange(int pLO, int pHI) {
-		return rand() % pHI + pLO;
+		return rand() % (pHI-pLO) + pLO;
 	}
 
 protected:
