@@ -36,7 +36,7 @@ void Character::update(Ogre::Real pDeltatime)
 		_hitted = false;
 	}
 
-	Ogre::Vector3 newPos = _myNode->getPosition() - (_dirVec * getSpeed() * pDeltatime * (_myNode->getOrientation() * Ogre::Vector3(0, 0, -1)));
+	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
 	Coordinate temp = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x, newPos.z));
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
 	if (zone->getCollisionGrid()[temp.x + temp.z * zone->_width])

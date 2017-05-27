@@ -20,7 +20,7 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 /// <param name="pDeltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
-	//Character::update(pDeltatime);
+	Character::update(pDeltatime);
 
 	detectPlayer();
 	//for initialization
@@ -29,7 +29,7 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 		calculateAStar(_myCity->getRandomPointInRoom());
 	}
 
-	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
+	//_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	if (!_playerDetected) {
 		if (getPosition().distance(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z)) < 50){
 			if (nextPos.size() == 0){
