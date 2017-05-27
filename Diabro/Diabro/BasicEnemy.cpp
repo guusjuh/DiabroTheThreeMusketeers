@@ -68,6 +68,9 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 
 	delete tempEquipment;
 
+	pMyNode->setScale(0.5f, 0.5f, 0.5f);
+	pMyNode->setPosition(pMyNode->getPosition().x, 18.0f, pMyNode->getPosition().z);
+
 	Ogre::ColourValue myCol = COL_HP;
 	if(damageUpgrades > healthUpgrades) {
 		if(damageUpgrades > noticeDistUpgrades) {
@@ -81,11 +84,11 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 
 	//set color
 	if(myCol == COL_HP) {
-		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("InGame/GreenEnemy"));
 	} else if (myCol == COL_DMG) {
-		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("InGame/RedEnemy"));
 	} else if (myCol == COL_NDIST) {
-		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Blue"));
+		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("InGame/BlueEnemy"));
 	}
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

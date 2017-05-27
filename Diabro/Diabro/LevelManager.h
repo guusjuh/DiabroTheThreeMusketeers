@@ -24,6 +24,9 @@ public:
 	void inGameUpdate(const Ogre::FrameEvent&);
 
 	static void createGroundMesh();
+	static void createNPCMesh();
+	static void createEnemyMesh();
+	static void createPlayerMesh();
 
 	Ogre::SceneNode* getLevelNode() { return _levelNode; }
 	Ogre::SceneNode* getCamNode() { return _camNode; }

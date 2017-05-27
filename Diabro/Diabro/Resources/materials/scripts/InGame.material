@@ -1,0 +1,254 @@
+material InGame/Floor
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture floor.jpg
+         }
+      }
+   }
+}
+
+material InGame/Wall
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture wall.jpg
+         }
+      }
+   }
+}
+
+material InGame/PinkNPC
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture NPCs/pink.jpg
+         }
+      }
+   }
+}
+
+material InGame/RedNPC
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture NPCs/red.jpg
+         }
+      }
+   }
+}
+
+material InGame/YellowNPC
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture NPCs/yellow.jpg
+         }
+      }
+   }
+}
+
+material InGame/BlueNPC
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture NPCs/blue.jpg
+         }
+      }
+   }
+}
+
+material InGame/GreenNPC
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture NPCs/green.jpg
+         }
+      }
+   }
+}
+
+material InGame/PurpleNPC
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture NPCs/purple.jpg
+         }
+      }
+   }
+}
+
+
+material InGame/PinkHouse
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Houses/pinkBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/RedHouse
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Houses/redBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/YellowHouse
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture Houses/yellowBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/BlueHouse
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture Houses/blueBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/GreenHouse
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture Houses/greenBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/PurpleHouse
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Houses/purpleBox.jpg
+         }
+      }
+   }
+}
+
+
+
+material InGame/GreyEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture greyBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/BlueEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/blueDarkBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/GreenEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/greenDarkBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/RedEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/redDarkBox.jpg
+         }
+      }
+   }
+}

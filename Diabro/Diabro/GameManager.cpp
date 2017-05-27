@@ -86,6 +86,7 @@ void GameManager::createScene(void)
 void GameManager::reset() {
 	getSceneManager()->clearScene();
 	_levelManager->reset();
+	setupLights(mSceneMgr);
 
 	state = Start;
 }
@@ -97,7 +98,7 @@ void GameManager::reset() {
 void GameManager::setupLights(Ogre::SceneManager* pSceneMgr)
 {
 	// set ambient lighting
-	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.3, 0.3, 0.3));
+	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.4, 0.4, 0.4));
 
 	// create the main light
 	Ogre::Light* light = pSceneMgr->createLight("MainLight");

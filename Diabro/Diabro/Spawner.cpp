@@ -44,7 +44,7 @@ void Spawner<T>::spawnInstance() {
 	int randomZ = rand() % (100 - -100 + 1) + -100;
 	instanceNode->translate(_spawnPosition + Ogre::Vector3(randomX, 0, randomZ), Ogre::Node::TS_WORLD);
 
-	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "penguin.mesh" : "robot.mesh");
+	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "uv_sphere.mesh" : "cube.mesh");
 	//rotateNode
 	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		

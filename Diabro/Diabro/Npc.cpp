@@ -20,6 +20,33 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	// randomly assign a profession based on the bui;ding type of its home
 	_profession = (Profession)_home->type;
 
+	pMyNode->setScale(0.25f, 0.25f, 0.25f);
+	pMyNode->setPosition(pMyNode->getPosition().x, 18.0f, pMyNode->getPosition().z);
+
+	switch (_home->type) // assign building random professions by giving them a rolenode
+	{
+	case Smithery:
+		pMyEntity->setMaterialName("InGame/YellowNPC");
+		break;
+	case GuardHouse:
+		pMyEntity->setMaterialName("InGame/PinkNPC");
+		break;
+	case Church:
+		pMyEntity->setMaterialName("InGame/GreenNPC");
+		break;
+	case PotionStore:
+		pMyEntity->setMaterialName("InGame/PurpleNPC");
+		break;
+	case Shop:
+		pMyEntity->setMaterialName("InGame/BlueNPC");
+		break;
+	case FancyHouse:
+		pMyEntity->setMaterialName("InGame/RedNPC");
+		break;
+	default:
+		break;
+	}
+
 	// randomly assign needs
 	Need tempNeed;
 	std::vector<Need> tempNeeds;
