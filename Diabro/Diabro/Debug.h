@@ -2,7 +2,7 @@
 #define DEBUG_H_
 #include <cstdio>
 #include <string>
-#include "city.h"
+#include "City.h"
 
 class Debug
 {
