@@ -29,6 +29,9 @@
     <ClCompile Include="LevelGenerationTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TreeTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="CollisionGridTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

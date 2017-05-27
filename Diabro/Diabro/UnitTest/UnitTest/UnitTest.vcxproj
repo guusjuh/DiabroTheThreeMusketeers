@@ -94,6 +94,7 @@
     <ClCompile Include="MainTest.cpp" />
     <ClCompile Include="PlayerClassTest.cpp" />
     <ClCompile Include="CollisionGridTest.cpp" />
+    <ClCompile Include="TreeTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\DiabloLib\DiabloLib.vcxproj">

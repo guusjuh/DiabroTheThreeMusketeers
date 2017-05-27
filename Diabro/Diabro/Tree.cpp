@@ -115,7 +115,8 @@ void Tree<T>::removeNode(TreeNode<T>* pNode) {
 	// if the node exists
 	if (pNode) {
 		// call its destory method
-		pNode->destroy();
+		int removedNodes = pNode->destroy();
+		_size -= removedNodes;
 	}
 }
 
@@ -193,3 +194,7 @@ std::vector<TreeNode<T>*> Tree<T>::postorder(TreeNode<T>* pNode = nullptr) {
 }
 
 template class Tree < int >;
+template class Tree < char >;
+template class Tree < float >;
+template class Tree < bool >;
+template class Tree < double >;
