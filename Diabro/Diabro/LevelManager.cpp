@@ -137,7 +137,7 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);
 
-	/*for(int i = 0; i < _friendlyNpcScripts.size(); i++)
+	for(int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
 		_friendlyNpcScripts[i]->update(pFE.timeSinceLastFrame);
 	}
@@ -145,7 +145,7 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	for (int i = 0; i < _hostileNpcScripts.size(); i++)
 	{
 		_hostileNpcScripts[i]->update(pFE.timeSinceLastFrame);
-	}*/
+	}
 }
 
 /// <summary>

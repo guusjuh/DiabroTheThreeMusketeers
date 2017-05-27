@@ -40,6 +40,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	_noticeDistance = equipment->getNoticeDist();
 
 	assignUpgrades(level);
+	_currentHealth = _maxHealth;
 
 	IEnemyEquipment* tempEquipment = equipment;
 	while(tempEquipment != nullptr) {
