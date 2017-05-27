@@ -40,8 +40,34 @@ void Character::update(Ogre::Real pDeltatime)
 	_dirVec.normalise();
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
 	Coordinate temp = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x, newPos.z));
+
+
+	Ogre::Real DistanceToClosestTarget = 1000;
+	std::vector<Character*> hostileNpcs = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
+	for (size_t i = 0; i < hostileNpcs.size(); i++)
+	{
+		if (hostileNpcs[i] != this){
+			Ogre::Real distance = newPos.distance(hostileNpcs[i]->getPosition());
+
+			if (distance < DistanceToClosestTarget){
+				DistanceToClosestTarget = distance;
+			}
+		}
+	}
+	std::vector<Character*> friendlyNpcs = GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs();
+	for (size_t i = 0; i < friendlyNpcs.size(); i++)
+	{
+		if (friendlyNpcs[i] != this){
+			Ogre::Real distance = newPos.distance(friendlyNpcs[i]->getPosition());
+
+			if (distance < DistanceToClosestTarget){
+				DistanceToClosestTarget = distance;
+			}
+		}
+	}
+	
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
-	if (zone->getCollisionGrid()[temp.x + temp.z * zone->_width])
+	if (zone->getCollisionGrid()[temp.x + temp.z * zone->_width] && DistanceToClosestTarget > 50)
 	{
 		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	}
