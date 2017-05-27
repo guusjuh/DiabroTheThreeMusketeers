@@ -16,7 +16,7 @@
 #*/
 
 project(${APP})
-dfghjfghjfghjfghjfghjfghjfg
+
 if(WIN32)
 	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
 	set(OGRE_SAMPLES_INCLUDEPATH "$ENV{OGRE_HOME}/Samples/include")
@@ -70,6 +70,10 @@ if(NOT OIS_FOUND)
 	message(SEND_ERROR "Failed to find OIS.")
 endif()
  
+if(NOT IRRKLANG_FOUND)
+	message(SEND_ERROR "Failed to find IrrKlang.")
+endif()
+
 # Find Boost
 if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	if (WIN32 OR APPLE)
