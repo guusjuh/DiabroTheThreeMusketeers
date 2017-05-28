@@ -9,9 +9,19 @@
 struct Coordinate {
 	int x;
 	int z;
-	Coordinate(int pX, int pZ) : x(pX), z(pZ) {	}
+	Coordinate(int x, int z) : x(x), z(z) {	}
 	Coordinate() : x(0), z(0) {	}
 	~Coordinate() { }
+};
+struct RealCoordinate {
+	float rx;
+	float rz;
+	RealCoordinate(float x, float z) : rx(x), rz(z) {	}
+	RealCoordinate() : rx(0), rz(0) {	}
+	~RealCoordinate() { }
+	RealCoordinate &operator=(const Coordinate &value);
+	void operator+= (Coordinate &rhs);
+	void operator+= (RealCoordinate &rhs);
 };
 
 
@@ -89,7 +99,6 @@ public:
 	~City();
 
 	std::vector<Building> Buildings() { return _buildings; };
-
 	std::vector<Coordinate> buildingPositions();
 
 	float getDistTo(City* other) {
@@ -105,10 +114,7 @@ protected:
 	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
 	bool checkEntryWay(Ogre::SceneNode *); //Checks if the buildings are blocking entryways
 	void assignBuildingRole(std::vector<Building> , std::vector<Ogre::Entity*>); //Assign roles to buildings in the city
-	int getScaledWidth(int width, int scalar);
-	int getScaledDepth(int depth, int scalar);
-	void setTile(int x, int z, bool value);
-	void setTile(Coordinate pos, bool value);
+	
 	std::vector<Ogre::SceneNode*> nodeList(Ogre::SceneNode* pBuildingNode);
 	
 private:
@@ -120,8 +126,13 @@ private:
 	int childIteration;
 
 	void generateBuildings();
+	int getScaledWidth(int width, int scalar);
+	int getScaledDepth(int depth, int scalar);
+	void setTile(int x, int z, bool value);
+	void setTile(Coordinate pos, bool value);
+	std::vector<RealCoordinate> getBuildingPositions();
+	
 
-	std::vector<Coordinate> getBuildingPositions();
 	std::vector <Ogre::SceneNode*> _buildingNodes;
 	std::vector<Building> _buildings;
 	int _numberOfBuildings;

@@ -5,7 +5,6 @@
 
 int City::gridScalar = 2;
 
-
 Coordinate operator+ (Coordinate &lhs, Coordinate &rhs) {
 	return (Coordinate(lhs.x + rhs.x, lhs.z + rhs.z));
 }
@@ -22,12 +21,67 @@ Coordinate operator/ (Coordinate &lhs, int &rhs) {
 	if(rhs == 0) {
 		return Coordinate();
 	}
-	return Coordinate((lhs.x == 0) ? 0 : lhs.x / rhs, (lhs.z == 0) ? 0 : lhs.z / rhs);
+	return Coordinate((lhs.x <= 0) ? 0 : lhs.x / rhs, (lhs.z <= 0) ? 0 : lhs.z / rhs);
 }
 
 bool operator== (Coordinate &lhs, Coordinate &rhs) {
 	return (lhs.x == rhs.x && lhs.z == rhs.z);
 }
+
+RealCoordinate operator/ (RealCoordinate &lhs, float &rhs) {
+	if (rhs == 0) {
+		return RealCoordinate();
+	}
+	return RealCoordinate((lhs.rx <= 0) ? 0 : lhs.rx / rhs, (lhs.rz <= 0) ? 0 : lhs.rz / rhs);
+}
+
+RealCoordinate operator* (RealCoordinate &lhs, float &rhs) {
+	return RealCoordinate(lhs.rx * rhs, lhs.rz * rhs);
+}
+
+RealCoordinate operator* (RealCoordinate &lhs, int &rhs) {
+	return RealCoordinate(lhs.rx * rhs, lhs.rz * rhs);
+}
+
+RealCoordinate operator- (RealCoordinate &lhs, RealCoordinate &rhs) {
+	return RealCoordinate(lhs.rx - rhs.rx, lhs.rz - rhs.rz);
+}
+
+RealCoordinate operator+ (RealCoordinate &lhs, RealCoordinate &rhs) {
+	return RealCoordinate(lhs.rx + rhs.rx, lhs.rz + rhs.rz);
+}
+
+RealCoordinate operator+ (RealCoordinate &lhs, Coordinate &rhs) {
+	return RealCoordinate(lhs.rx + rhs.x, lhs.rz + rhs.z);
+}
+RealCoordinate operator- (RealCoordinate &lhs, Coordinate &rhs) {
+	return RealCoordinate(lhs.rx - rhs.x, lhs.rz - rhs.z);
+}
+
+void RealCoordinate::operator+= (Coordinate &rhs) {
+	rx += rhs.x;
+	rz += rhs.z;
+}
+
+void RealCoordinate::operator+= (RealCoordinate &rhs) {
+	rx += rhs.rx;
+	rz += rhs.rz;
+}
+
+
+
+RealCoordinate& RealCoordinate::operator= (const Coordinate &value) {
+	return RealCoordinate(value.x, value.z);
+}
+
+bool operator== (RealCoordinate &lhs, RealCoordinate &rhs) {
+	return (lhs.rx == rhs.rx && lhs.rz == rhs.rz);
+}
+
+bool operator== (RealCoordinate &lhs, Coordinate &rhs) {
+	return (lhs.rx - rhs.x < 0.01f && lhs.rz - rhs.z < 0.01f);
+}
+
 
 
 
@@ -129,7 +183,7 @@ void City::setType(int type)
 void City::generateBuildings()
 {
 	std::vector<Ogre::Entity*> buildingEntities;
-	std::vector<Coordinate> buildingLocations = getBuildingPositions();
+	std::vector<RealCoordinate> buildingLocations = getBuildingPositions();
 
 	int buildingAmount = rand() %(width * depth - width) + width;
 	//Get al possible positions
@@ -145,12 +199,14 @@ void City::generateBuildings()
 		
 		//calculate building positions
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		buildingNode->setPosition(buildingLocations[n].x, 100, buildingLocations[n].z);
+		RealCoordinate transl = RealCoordinate((buildingNode->getScale().x / gridScalar) * -scalar, (buildingNode->getScale().z / gridScalar) * -scalar);
+		RealCoordinate pos = transl + buildingLocations[n];
+		buildingNode->setPosition(pos.rx, 100, pos.rz);
 
 		BuildingType buildingType = (BuildingType)(typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1));
 		int residents = rand() % 4;
 		//TODO: generate cities
-		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2(buildingLocations[n].x, buildingLocations[n].z));
+		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2((buildingLocations[n].rx), (buildingLocations[n].rz)));
 		//TODO: fill _buildings
 		_buildings.push_back(thisBuilding);
 
@@ -162,70 +218,129 @@ void City::generateBuildings()
 	assignBuildingRole(_buildings, buildingEntities);
 }
 
-std::vector<Coordinate> City::getBuildingPositions() {
-	std::vector<Coordinate> buildingLocations;
-	for (int x = 1; x < scaledWidth(); x++) {
-		for (int z = 1; z < scaledDepth(); z++) {
-			if(x == 1) {
+std::vector<RealCoordinate> City::getBuildingPositions() {
+	std::vector<RealCoordinate> buildingLocations;
+	for (int x = 1; x < scaledWidth() - 1; x++) {
+		for (int z = 1; z < scaledDepth() - 1; z++) {
+			Coordinate upperPos; // zone grid
+			Coordinate lowerPos = Coordinate(x,z); // city grid
+			RealCoordinate worldPos; // world positions
+
+			worldPos = RealCoordinate(static_cast<float>(x) / static_cast<float>(gridScalar), static_cast<float>(z) / static_cast<float>(gridScalar));
+			worldPos += position;
+			upperPos = Coordinate(static_cast<int>(worldPos.rx), static_cast<int>(worldPos.rz));
+			worldPos = worldPos * scalar;
+
+			Coordinate translation = Coordinate(0, 0);
+
+			if (x == 1) {
+				translation.x = -1;
+			} else if (x == scaledWidth() - 1) {
+				translation.x = 1;
+			}
+
+			if (z == 1) {
+				translation.z = -1;
+			} else if (z == scaledDepth() - 1){
+				translation.z = 1;
+			}
+			
+			if (translation.x == 0 && translation.z == 0) {
+				
+			} else {
+				std::vector<Coordinate> temp;
+				if (translation.x != 0) {
+					temp.push_back(Coordinate(upperPos.x + translation.x, upperPos.z));
+				}
+				if (translation.z != 0) {
+					temp.push_back(Coordinate(upperPos.x, upperPos.z + translation.z));
+				}
+				bool add = true;
+				for (int i = 0; i < connections.size(); i++) {
+					for (int j = 0; j < temp.size(); j++) {
+						if (temp[j] == connections[i]) {
+							add = false;
+						}
+					}
+				}
+				if (add) {
+					buildingLocations.push_back(worldPos);
+				}
+				else {
+					int i = 0;
+				}
+			}
+			/*if(x == 1) {
 				//left layer
 				//1: scale current position to world coordinates
 				//TODO: enable floating points
-				Coordinate scaled =position + Coordinate(std::floor(x / static_cast<float>(gridScalar)),std::floor(z / static_cast<float>(gridScalar)));
-				scaled.x -= 1;
+				Coordinate cLocation = upperPos;
+				cLocation.z -= 1;
 				bool add = true;
 				//2: check if distance to connection is < 1
 				for (int i = 0; i < connections.size(); i++) {
-					if (scaled == connections[i]) {
+					if (cLocation == connections[i]) {
 						add = false;
 					}
+					int A = 0;
 				}
-				if (add)
-					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
-				
+				if (add) {
+					buildingLocations.push_back(worldPos);
+				}
+
 			} else if (x == scaledWidth() - 1) {
-				//right layer
+				//left layer
 				//1: scale current position to world coordinates
-				Coordinate scaled = position + Coordinate(std::floor(x / static_cast<float>(gridScalar)), std::floor(z / static_cast<float>(gridScalar)));
-				scaled.x += 1;
+				//TODO: enable floating points
+				Coordinate cLocation = upperPos;
+				cLocation.z += 1;
 				bool add = true;
 				//2: check if distance to connection is < 1
 				for (int i = 0; i < connections.size(); i++) {
-					if (scaled == connections[i]) {
+					if (cLocation == connections[i]) {
 						add = false;
 					}
+					int A = 0;
 				}
-				if (add)
-					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
+				if (add) {
+					buildingLocations.push_back(worldPos);
+				}
 			}
 			if (z == 1 && x != 1 && x != scaledWidth() - 1) {
-				//upper layer
+				//left layer
 				//1: scale current position to world coordinates
-				Coordinate scaled = position + Coordinate(std::floor(x / static_cast<float>(gridScalar)), std::floor(z / static_cast<float>(gridScalar)));
-				scaled.z -= 1;
+				//TODO: enable floating points
+				Coordinate cLocation = upperPos;
+				cLocation.x -= 1;
 				bool add = true;
 				//2: check if distance to connection is < 1
 				for (int i = 0; i < connections.size(); i++) {
-					if (scaled == connections[i]) {
+					if (cLocation == connections[i]) {
 						add = false;
 					}
+					int A = 0;
 				}
-				if (add)
-					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
+				if (add) {
+					buildingLocations.push_back(worldPos);
+				}
 			} else if (z == scaledWidth() - 1 && x != scaledWidth() - 1 && x != 1) {
-				//lower layer
+				//left layer
 				//1: scale current position to world coordinates
-				Coordinate scaled = position + Coordinate(std::floor(x / static_cast<float>(gridScalar)), std::floor(z / static_cast<float>(gridScalar)));
-				scaled.z -= 1;
+				//TODO: enable floating points
+				Coordinate cLocation = upperPos;
+				cLocation.x += 1;
 				bool add = true;
 				//2: check if distance to connection is < 1
 				for (int i = 0; i < connections.size(); i++) {
-					if (scaled == connections[i]) {
+					if (cLocation == connections[i]) {
 						add = false;
 					}
+					int A = 0;
 				}
-				if (add)
-					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
-			}
+				if (add) {
+					buildingLocations.push_back(worldPos);
+				}
+			}*/
 		}
 	}
 	return buildingLocations;
