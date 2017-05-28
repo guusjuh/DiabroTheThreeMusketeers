@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "GameManager.h"
 #include "Debug.h"
+#include <math.h>
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Character"/> class.
@@ -39,12 +40,17 @@ void Character::update(Ogre::Real pDeltatime)
 
 	_dirVec.normalise();
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
-	int range = 40;
+	float range = 40;
+	float cornerRange = cos(45.0f) * range ;
 	//4 positions each with an offset for checking the collision with the wall
 	Coordinate temp0 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x - range, newPos.z));
 	Coordinate temp1 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x + range, newPos.z));
 	Coordinate temp2 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x, newPos.z - range));
 	Coordinate temp3 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x, newPos.z + range));
+	Coordinate temp4 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x - cornerRange, newPos.z - cornerRange));
+	Coordinate temp5 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x + cornerRange, newPos.z - cornerRange));
+	Coordinate temp6 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x - cornerRange, newPos.z + cornerRange));
+	Coordinate temp7 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(newPos.x + cornerRange, newPos.z + cornerRange));
 
 
 	Ogre::Real DistanceToClosestTarget = 1000;
@@ -74,8 +80,12 @@ void Character::update(Ogre::Real pDeltatime)
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
 	if (zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width] && 
 		zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width] && 
-		zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width] && 
+		zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width] &&
 		zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width] &&
+		zone->getCollisionGrid()[temp4.x + temp4.z * zone->_width] &&
+		zone->getCollisionGrid()[temp5.x + temp5.z * zone->_width] &&
+		zone->getCollisionGrid()[temp6.x + temp6.z * zone->_width] &&
+		zone->getCollisionGrid()[temp7.x + temp7.z * zone->_width] &&
 		DistanceToClosestTarget > 50)
 	{
 		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
