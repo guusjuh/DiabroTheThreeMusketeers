@@ -14,13 +14,13 @@ QuestContentManager::QuestContentManager() {
 	readFromXML();
 
 	//find all cities and add them to correct list
-	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
-		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == CityRT) {
-			City temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
-			_NPCCities.push_back(&temp);
-		} else if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == HideoutRT) {
-			City temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
-			_enemyCities.push_back(&temp);
+	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).getCities().size(); ++i) {
+		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).getCities()[i]->typeFlag == CityRT) {
+			City* temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).getCities()[i]);
+			_NPCCities.push_back(temp);
+		} else if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).getCities()[i]->typeFlag == HideoutRT) {
+			City* temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).getCities()[i]);
+			_enemyCities.push_back(temp);
 		}
 	}
 }

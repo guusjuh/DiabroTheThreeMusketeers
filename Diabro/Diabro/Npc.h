@@ -36,6 +36,10 @@ public:
 	bool talk(Ogre::Vector3);
 	void die() override;
 
+	City* getHomeTown() { return _hometown; }
+
+	QuestContent getType() override { return NPCQC; }
+
 private: 
 	bool _inDialog;					//!< True if the player is currently talking with this NPC.
 	int _dialogCount;				//!< The amount of different parts the dialog consists of.

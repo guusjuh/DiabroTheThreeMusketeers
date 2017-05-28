@@ -29,7 +29,7 @@ public:
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 	ActionContainer* getActionContainer(void) { return _actionContainer; }
 	StrategyContainer* getStrategyContainer(void) { return _strategyContainer; }
-	Quest* generateQuest(BaseNpc* pSourceNpc, NeedType pMotivation);
+	Quest* generateQuest(Npc* pSourceNpc, NeedType pMotivation);
 
 	std::map<std::string, ActionType> stringToActionType;
 	std::map<std::string, PreconditionsType> stringToPreconditionType;

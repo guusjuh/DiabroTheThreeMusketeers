@@ -28,7 +28,15 @@ public:
 	int _width;
 	int _depth;
 
-	std::vector<City> cities; ///< vector containing all cities within the zone
+	std::vector<City*> getCities() {
+		std::vector<City*> cityPointers;
+
+		for (int i = 0; i < cities.size(); ++i) {
+			cityPointers.push_back(&cities[i]);
+		}
+
+		return cityPointers;
+	}
 
 	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar);
 	Zone();
@@ -68,6 +76,8 @@ private:
 	bool placeCity(City pC);
 
 	bool* generateCollisionGrid();
+
+	std::vector<City> cities; ///< vector containing all cities within the zone
 };
 
 #endif

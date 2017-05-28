@@ -41,6 +41,8 @@ public:
 	QuestItemType getItemType() { return _itemType; }
 	int getRarity() { return _rarity; }
 
+	QuestContent getType() override { return QuestItemQC; }
+
 private:
 	std::string _name;
 	std::string _sprName;

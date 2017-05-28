@@ -8,16 +8,6 @@
 #include "City.h"
 #include "QuestItem.h"
 
-/// <summary>
-/// Enum for the types of content used in a quest. 
-/// </summary>
-enum QuestContent {
-	QuestItemQC = 0,
-	TownQC,
-	HideOutQC,
-	NPCQC,
-	EnemyQC
-};
 
 /// <summary>
 /// The manager of all available content for quests. 

@@ -10,6 +10,7 @@
 /// </summary>
 class Quest
 {
+	friend class QuestGenerator;
 public:
 	Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward);
 	Quest();

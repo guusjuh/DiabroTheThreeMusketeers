@@ -91,7 +91,10 @@ public:
 
 		return sqrt(abs(pow(xDist, 2) + pow(yDist, 2)));
 	}
+
 	void setType(int type = -1);
+
+	QuestContent getType() override { return typeFlag == CityRT ? TownQC : HideOutQC; }
 
 protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)

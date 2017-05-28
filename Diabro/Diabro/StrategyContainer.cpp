@@ -78,7 +78,7 @@ void StrategyContainer::readFromXML()
 			for (actionNode; actionNode; actionNode = actionNode->NextSiblingElement())
 			{
 				Action tempAction;
-				int nrAction = actionNode->IntText();
+				int nrAction = actionNode->FirstChildElement("ID")->IntText();
 				
 				std::vector<Action*> copy = GameManager::getSingletonPtr()->getQuestManager()->getActionContainer()->GetObjects();
 				for (int i = 0; i < copy.size(); ++i)
@@ -89,6 +89,22 @@ void StrategyContainer::readFromXML()
 					}
 				}
 
+				// get content node
+				tinyxml2::XMLElement* contentNode = actionNode->FirstChildElement("Content");
+				int counter = 0;
+
+				// for loop till no next element
+				for (contentNode; contentNode; contentNode = contentNode->NextSiblingElement()) 
+				{
+					// get content from node
+					int id = contentNode->IntText();
+
+					// store content in required content map
+					tempAction._requiredContent[counter].second = id;
+
+					counter++;
+				}
+				
 				actions.push_back(tempAction);
 			}
 

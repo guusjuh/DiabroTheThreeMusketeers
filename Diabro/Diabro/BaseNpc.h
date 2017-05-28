@@ -22,7 +22,9 @@ public:
 	void calculateAStar(Ogre::Vector3 targetPos);
 	std::vector<Coordinate> nextPos;
 	Coordinate goalPos;
-	
+
+	using IQuestContent::getType;
+
 protected:
 	Ogre::SceneNode* _myRotationNode;
 	City* _myCity;

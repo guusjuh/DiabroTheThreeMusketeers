@@ -20,6 +20,8 @@ public:
 	void die() override;
 	void updateBar(bool val) { _updateBar = val; }
 
+	QuestContent getType() override { return EnemyQC; }
+
 	StateMachine<Character> stateMachine;
 
 private:

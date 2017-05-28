@@ -1,7 +1,7 @@
 #ifndef QUEST_GENERATOR
 #define QUEST_GENERATOR
 #include "Quest.h"
-
+#include "Npc.h"
 /// <summary>
 /// The generator for new quests. 
 /// </summary>
@@ -10,11 +10,13 @@ public:
 	QuestGenerator();
 	~QuestGenerator();
 
-	Quest generateQuest(BaseNpc* pSourceNpc, NeedType pMotivation);
+	Quest generateQuest(Npc* pSourceNpc, NeedType pMotivation);
 
 private:
-	Quest* generateAbstractQuest(Quest* pQuest, BaseNpc* pSourceNpc, NeedType pMotivation);
-	Quest* generateConcreteQuest(Quest* pQuest, BaseNpc* pSourceNpc);
+	Quest* generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, NeedType pMotivation);
+	Quest* generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc);
+
+	Npc* getRandomNPC();
 };
 
 #endif
