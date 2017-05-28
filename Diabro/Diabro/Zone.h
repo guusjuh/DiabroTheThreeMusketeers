@@ -28,11 +28,9 @@ public:
 	int _width;
 	int _depth;
 
-/*	std::vector<City> getCities() {
-		return cities;
-	}*/
+	City* getRandomCity(RoomType type);// { return &cities[0]; }
+
 	std::vector<City> cities; ///< vector containing all cities within the zone
-	std::vector<City*> pointerCities;
 
 	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar);
 	Zone();

@@ -7,7 +7,7 @@
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestContentManager"/> class.
 /// </summary>
-QuestContentManager::QuestContentManager() {
+QuestContentManager::QuestContentManager(/*std::vector<City*> cities*/) {
 	_itemContainer = new QuestItemContainer();
 	_itemGenerator = new QuestItemGenerator();
 
