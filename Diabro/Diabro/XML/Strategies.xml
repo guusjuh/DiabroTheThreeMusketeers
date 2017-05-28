@@ -11,9 +11,21 @@
 	</QuestName>
 	<NeedType>Knowledge</NeedType>
 	<Actions>
-		<Action>4</Action>
-		<Action>7</Action>
-		<Action>6</Action>
+		<Action>
+			<ID>4</ID>
+			<Content>2</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>1</RarityPref>
 </Strategy>

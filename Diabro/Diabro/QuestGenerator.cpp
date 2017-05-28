@@ -29,7 +29,7 @@ Quest QuestGenerator::generateQuest(BaseNpc* pSourceNpc, NeedType pMotivation) {
 	returnQuest = (*generateAbstractQuest(&returnQuest, pSourceNpc, pMotivation));
 
 	// returns a concrete quest
-	//returnQuest = generateConcreteQuest(returnQuest, pSourceNpc);
+	returnQuest = (*generateConcreteQuest(&returnQuest, pSourceNpc));
 	
 	return returnQuest;
 }
@@ -81,7 +81,11 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, BaseNpc* pSourceNpc,
 /// <param name="pQuest">The quest to return.</param>
 /// <param name="pSourceNpc">The source NPC for the quest.</param>
 /// <returns></returns>
-Quest QuestGenerator::generateConcreteQuest(Quest pQuest, BaseNpc* pSourceNpc) {
+Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, BaseNpc* pSourceNpc) {
+
+
+
+
 	return pQuest;
 }
 

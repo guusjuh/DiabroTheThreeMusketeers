@@ -14,7 +14,7 @@ public:
 
 private:
 	Quest* generateAbstractQuest(Quest* pQuest, BaseNpc* pSourceNpc, NeedType pMotivation);
-	Quest generateConcreteQuest(Quest pQuest, BaseNpc* pSourceNpc);
+	Quest* generateConcreteQuest(Quest* pQuest, BaseNpc* pSourceNpc);
 };
 
 #endif
