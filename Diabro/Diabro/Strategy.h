@@ -19,6 +19,8 @@ struct QuestName {
 /// A strategy forms the basis for a quest by defining it's actions and content.
 /// </summary>
 class Strategy {
+	friend class QuestGenerator;
+
 public:
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Strategy"/> class.

@@ -112,6 +112,18 @@ public:
 		_completed = false;
 	}
 
+	/// <summary>
+	/// Initializes a new abstract instance of the <see cref="Action"/> class.
+	/// </summary>
+	/// <param name="pID">The id.</param>
+	/// <param name="pType">Type of the action.</param>
+	/// <param name="pPreconditions">The preconditions.</param>
+	/// <param name="pPostcondition">The postcondition.</param>
+	/// <param name="pQuestContent">Required content for this action.</param>
+	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<std::pair<QuestContent, int>> pQuestContent) :
+		_id(pID), _type(pType), _preconditions(pPreconditions), _postcondition(pPostcondition), _requiredContent(pQuestContent), _concreteContent(0) {
+		_completed = false;
+	}
 
 	/// <summary>
 	/// Finalizes an instance of the <see cref="Action"/> class.

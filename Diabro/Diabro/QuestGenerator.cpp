@@ -63,7 +63,7 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 	for (int i = 0; i < tempActions.size(); ++i) {
 		newActions.push_back(Action(tempActions[i].getID(), tempActions[i].getType(), 
 			tempActions[i].getPreconditions(), 
-			tempActions[i].getPostcondition(), tempActions[i].getRequiredContentTypes()));
+			tempActions[i].getPostcondition(), tempActions[i].getRequiredContent()));
 	}
 
 	Strategy choosenStrat = Strategy(possibleStrategies[randomRoll]->getID(), possibleStrategies[randomRoll]->getName(), 
@@ -88,7 +88,11 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 	// define lists to keep track of id's
 	std::vector<std::pair<IQuestContent*, int>> contentIDs;
-	int friendlies, enemies, cities, hideouts, items = 1;
+	int friendlies = 1;
+	int enemies = 1;
+	int cities = 1;
+	int hideouts = 1;
+	int items = 1;
 
 	contentIDs.push_back(std::pair<IQuestContent*, int>(pSourceNpc, friendlies));
 	friendlies++;
@@ -100,12 +104,12 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 	std::vector<Action> actions = pQuest->_strategy.getActionSequence();
 	for (int i = 0; i < actions.size(); ++i) {
 		std::vector<std::pair<IQuestContent*, int>> concreteActionContent;
-		Action* thisAction = &(actions[i]);
+		Action& thisAction = actions[i];
 
 		// for each content required by the action
-		for (int j = 0; j < thisAction->_requiredContent.size(); ++j) {
-			QuestContent type = thisAction->_requiredContent[j].first;
-			int id = thisAction->_requiredContent[j].second;
+		for (int j = 0; j < thisAction._requiredContent.size(); ++j) {
+			QuestContent type = thisAction._requiredContent[j].first;
+			int id = thisAction._requiredContent[j].second;
 
 			// switch on the given item type
 			switch (type) {
@@ -142,6 +146,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 					int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, possNPCs.size());
 					randomNpc = possNPCs[randomroll];
 
+					concreteActionContent.push_back(std::pair<IQuestContent*, int>(randomNpc, friendlies));
 					contentIDs.push_back(std::pair<IQuestContent*, int>(randomNpc, friendlies));
 					friendlies++;
 				}
@@ -165,13 +170,13 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 			}
 		}
 
-
-
 		// dialog
-		thisAction->_concreteContent = concreteActionContent;
+		thisAction._concreteContent = concreteActionContent;
 	}
 
 	// rewards / maybe in abstract
+
+	pQuest->_strategy._actionSequence = actions;
 
 	return pQuest;
 }
