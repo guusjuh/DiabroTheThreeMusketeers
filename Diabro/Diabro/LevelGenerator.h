@@ -40,7 +40,8 @@ public:
 	}
 
 	Ogre::Vector3 getStartPos() {
-		return getWorldPosition(_startCity->getCenterTile());
+		//_startCity
+		return getWorldPosition(_zone[0].cities[0].getCenterTile());
 	}
 
 	int scalar; ///< scales grid position to world positions

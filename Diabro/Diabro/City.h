@@ -14,6 +14,7 @@ struct Coordinate {
 	~Coordinate() { }
 };
 
+
 /// <summary>
 /// Enum for the different city types. 
 /// </summary>
@@ -120,7 +121,7 @@ private:
 
 	void generateBuildings();
 
-	std::vector<Coordinate> getBuildingPositions(int width, int height);
+	std::vector<Coordinate> getBuildingPositions();
 	std::vector <Ogre::SceneNode*> _buildingNodes;
 	std::vector<Building> _buildings;
 	int _numberOfBuildings;

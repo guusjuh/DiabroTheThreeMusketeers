@@ -5,6 +5,32 @@
 
 int City::gridScalar = 2;
 
+
+Coordinate operator+ (Coordinate &lhs, Coordinate &rhs) {
+	return (Coordinate(lhs.x + rhs.x, lhs.z + rhs.z));
+}
+
+Coordinate operator- (Coordinate &lhs, Coordinate &rhs) {
+	return (Coordinate(lhs.x - rhs.x, lhs.z - rhs.z));
+}
+
+Coordinate operator* (Coordinate &lhs, int &rhs) {
+	return Coordinate(lhs.x * rhs, lhs.z * rhs);
+}
+
+Coordinate operator/ (Coordinate &lhs, int &rhs) {
+	if(rhs == 0) {
+		return Coordinate();
+	}
+	return Coordinate((lhs.x == 0) ? 0 : lhs.x / rhs, (lhs.z == 0) ? 0 : lhs.z / rhs);
+}
+
+bool operator== (Coordinate &lhs, Coordinate &rhs) {
+	return (lhs.x == rhs.x && lhs.z == rhs.z);
+}
+
+
+
 /// <summary>
 /// Initializes a new instance of the <see cref="City"/> class.
 /// </summary>
@@ -103,12 +129,12 @@ void City::setType(int type)
 void City::generateBuildings()
 {
 	std::vector<Ogre::Entity*> buildingEntities;
-	std::vector<Coordinate> buildingLocations = getBuildingPositions(1, 1);
+	std::vector<Coordinate> buildingLocations = getBuildingPositions();
 
 	int buildingAmount = rand() %(width * depth - width) + width;
 	//Get al possible positions
 
-	for (int n = 0; n < buildingAmount; n++) {
+	for (int n = 0; n < buildingLocations.size(); n++) {
 		//TODO: make it an ID
 		Ogre::SceneNode* buildingNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 		_buildingNodes.push_back(buildingNode);
@@ -119,12 +145,12 @@ void City::generateBuildings()
 		
 		//calculate building positions
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		buildingNode->setPosition(0, 100, 0);
+		buildingNode->setPosition(buildingLocations[n].x, 100, buildingLocations[n].z);
 
 		BuildingType buildingType = (BuildingType)(typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1));
 		int residents = rand() % 4;
 		//TODO: generate cities
-		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2(0, 0));
+		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2(buildingLocations[n].x, buildingLocations[n].z));
 		//TODO: fill _buildings
 		_buildings.push_back(thisBuilding);
 
@@ -136,31 +162,69 @@ void City::generateBuildings()
 	assignBuildingRole(_buildings, buildingEntities);
 }
 
-std::vector<Coordinate> City::getBuildingPositions(int width, int height) {
+std::vector<Coordinate> City::getBuildingPositions() {
 	std::vector<Coordinate> buildingLocations;
-	for (int x = 1; x < scaledWidth() - 1; x++) {
-		for (int z = 1; z < scaledDepth() - 1; z++) {
+	for (int x = 1; x < scaledWidth(); x++) {
+		for (int z = 1; z < scaledDepth(); z++) {
 			if(x == 1) {
 				//left layer
-				//TODO: find connections
 				//1: scale current position to world coordinates
+				//TODO: enable floating points
+				Coordinate scaled =position + Coordinate(std::floor(x / static_cast<float>(gridScalar)),std::floor(z / static_cast<float>(gridScalar)));
+				scaled.x -= 1;
+				bool add = true;
 				//2: check if distance to connection is < 1
+				for (int i = 0; i < connections.size(); i++) {
+					if (scaled == connections[i]) {
+						add = false;
+					}
+				}
+				if (add)
+					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
+				
 			} else if (x == scaledWidth() - 1) {
 				//right layer
-				//TODO: find connections
 				//1: scale current position to world coordinates
+				Coordinate scaled = position + Coordinate(std::floor(x / static_cast<float>(gridScalar)), std::floor(z / static_cast<float>(gridScalar)));
+				scaled.x += 1;
+				bool add = true;
 				//2: check if distance to connection is < 1
+				for (int i = 0; i < connections.size(); i++) {
+					if (scaled == connections[i]) {
+						add = false;
+					}
+				}
+				if (add)
+					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
 			}
-			if (z == 1) {
+			if (z == 1 && x != 1 && x != scaledWidth() - 1) {
 				//upper layer
-				//TODO: find connections
 				//1: scale current position to world coordinates
+				Coordinate scaled = position + Coordinate(std::floor(x / static_cast<float>(gridScalar)), std::floor(z / static_cast<float>(gridScalar)));
+				scaled.z -= 1;
+				bool add = true;
 				//2: check if distance to connection is < 1
-			} else if (z == scaledWidth() - 1) {
+				for (int i = 0; i < connections.size(); i++) {
+					if (scaled == connections[i]) {
+						add = false;
+					}
+				}
+				if (add)
+					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
+			} else if (z == scaledWidth() - 1 && x != scaledWidth() - 1 && x != 1) {
 				//lower layer
-				//TODO: find connections
 				//1: scale current position to world coordinates
+				Coordinate scaled = position + Coordinate(std::floor(x / static_cast<float>(gridScalar)), std::floor(z / static_cast<float>(gridScalar)));
+				scaled.z -= 1;
+				bool add = true;
 				//2: check if distance to connection is < 1
+				for (int i = 0; i < connections.size(); i++) {
+					if (scaled == connections[i]) {
+						add = false;
+					}
+				}
+				if (add)
+					buildingLocations.push_back((position * scalar) + (Coordinate(x, z) / gridScalar));
 			}
 		}
 	}
