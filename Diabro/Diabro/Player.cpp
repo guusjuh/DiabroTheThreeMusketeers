@@ -77,7 +77,9 @@ void Player::die() {
 
 	reset(_myNode, _myEntity);
 
-	_myNode->setPosition(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getStartPos());
+	Ogre::Vector3 startPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getStartPos();
+	startPos.y = 27.0f;
+	_myNode->setPosition(startPos);
 
 	equipment = equipment->removeUpgrades();
 	_maxHealth = equipment->getHealth();
