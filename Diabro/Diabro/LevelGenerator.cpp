@@ -249,10 +249,10 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol) cons
 /// </summary>
 void LevelGenerator::spawnCityContent() {
 	// loop through all cities
-	for (int i = 0; i < _zone[0].getCities().size(); ++i) {
+	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 
 		// set a pointer to the current city 
-		City* thisCity = _zone[0].getCities()[i];
+		City* thisCity = &_zone[0].cities[i];
 		// switch on the city type
 		switch (thisCity->typeFlag) {
 		case CityRT:
@@ -304,7 +304,7 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 /// <param name="i">The i.</param>
 void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
 	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), _zone[0].getCities()[i]);
+	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
 }
 
 /// <summary>
@@ -414,24 +414,24 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 /// </summary>
 void LevelGenerator::determineCityTypes() {
 	// if not two cities: problems!
-	if(_zone[0].getCities().size() < 2) {
+	if(_zone[0].cities.size() < 2) {
 		Debug("not enough cities to play this dungeon");
 		return;
 	}
 	
 	// start
-	_startCity = _zone[0].getCities()[0];
+	_startCity = &_zone[0].cities[0];
 	_startCity->setType((int)CityRT);
 
 	// end
-	City* furtherstCity = _zone[0].getCities()[1];
+	City* furtherstCity = &_zone[0].cities[1];
 	float dist = _startCity->getDistTo(furtherstCity);
-	for (int i = 1; i < _zone[0].getCities().size(); ++i) {
-		_zone[0].getCities()[i]->setType();
+	for (int i = 1; i < _zone[0].cities.size(); ++i) {
+		_zone[0].cities[i].setType();
 
-		if(_startCity->getDistTo(_zone[0].getCities()[i]) > dist) {
-			furtherstCity = _zone[0].getCities()[i];
-			dist = _startCity->getDistTo(_zone[0].getCities()[i]);
+		if(_startCity->getDistTo(&_zone[0].cities[i]) > dist) {
+			furtherstCity = &_zone[0].cities[i];
+			dist = _startCity->getDistTo(&_zone[0].cities[i]);
 		}
 	}
 
@@ -447,7 +447,7 @@ void LevelGenerator::determineCityTypes() {
 
 	_endCity = furtherstCity;
 
-	for (int i = 0; i < _zone[0].getCities().size(); ++i) {
-		_zone[0].getCities()[i]->init();
+	for (int i = 0; i < _zone[0].cities.size(); ++i) {
+		_zone[0].cities[i].init();
 	}
 }

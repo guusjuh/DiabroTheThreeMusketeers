@@ -78,6 +78,7 @@ public:
 	Coordinate getRandomTile();
 
 	std::vector<Coordinate> connections;
+	City(){}
 	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
 	~City();
 

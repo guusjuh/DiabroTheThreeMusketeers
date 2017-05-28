@@ -115,54 +115,134 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 			switch (type) {
 			case NPCQC:
 				// if this id is already used in this quest
-				if(id < friendlies) {
-					for (int k = 0; k < contentIDs.size(); ++k) {
-						if(contentIDs[k].first->getType() == NPCQC && contentIDs[k].second == id) {
-							concreteActionContent.push_back(contentIDs[k]);
-						}
-					}
+				if (id < friendlies) {
+					concreteActionContent.push_back(findTypeAndID(contentIDs, NPCQC, id));
 				}
 				// else, a new npc has to be found is a different city
 				else {
-					Npc* randomNpc;
+					//TODO: prefer other npcs based on their profession and the current strategy
+					Npc* chosenNPC = getRandomNPC(pSourceNpc);
+					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenNPC, friendlies));
+					contentIDs.push_back(std::pair<IQuestContent*, int>(chosenNPC, friendlies));
+					friendlies++;
 
-					std::vector<Npc*> allNPCs;
-					std::vector<Npc*> possNPCs;
+					// check for an hideout already being chosen so the NPC can be placed there. 
+					if (j > 0) {
+						for (int k = 0; k < j; ++k) {
+							if (thisAction._requiredContent[k].first == HideOutQC) {
+								//TODO: actually place the NPC there and set its fsm accordingly
+							}
+						}
+					}
+				}
 
-					// cast all npcs to the NPC class (they are stored as characters)
-					for (int k = 0; k < GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs().size(); ++k) {
-						allNPCs.push_back((Npc*)(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[k]));
+				break;
+
+				// pick a random enemy that hasn't been chosen yet.
+			case EnemyQC:
+				// if this id is already used in this quest
+				if (id < enemies) {
+					concreteActionContent.push_back(findTypeAndID(contentIDs, EnemyQC, id));
+				}
+				// else, a new npc has to be found is a different city
+				else {
+					BasicEnemy* chosenEnemy = getRandomEnemy();
+					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenEnemy, enemies));
+					contentIDs.push_back(std::pair<IQuestContent*, int>(chosenEnemy, enemies));
+					enemies++;
+				}
+
+				break;
+			case TownQC:
+				// if this id is already used in this quest
+				if (id < cities) {
+					concreteActionContent.push_back(findTypeAndID(contentIDs, TownQC, id));
+				}
+				// else, a new npc has to be found is a different city
+				else {
+					City* chosenCity = nullptr;
+
+					// check for a npc already chosen. 
+					if (j > 0) {
+						for (int k = 0; k < j; ++k) {
+							if (thisAction._requiredContent[k].first == NPCQC) {
+								Npc* temp = (Npc*)concreteActionContent[k].first;
+								chosenCity = temp->getHomeTown();
+								concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, cities));
+								contentIDs.push_back(std::pair<IQuestContent*, int>(chosenCity, cities));
+								cities++;
+								break;
+							}
+						}
+
+						if (chosenCity == nullptr) break;
 					}
 
-					// find all relevant npcs
-					for (int k = 0; k < allNPCs.size(); ++k) {
-						// if this npc doesn't live in the start town
-						if(pSourceNpc->getHomeTown()->id != allNPCs[k]->getHomeTown()->id) {
-							possNPCs.push_back(allNPCs[k]);
+					std::vector<City*> possCities;
+					City* oneCity;
+					for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
+						if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == type) {
+							oneCity = &(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
+							possCities.push_back(&(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]));
 						}
 					}
 
 					// do a random roll to chose a npc
-					int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, possNPCs.size());
-					randomNpc = possNPCs[randomroll];
+					int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, possCities.size());
+					chosenCity = possCities[randomroll];
 
-					concreteActionContent.push_back(std::pair<IQuestContent*, int>(randomNpc, friendlies));
-					contentIDs.push_back(std::pair<IQuestContent*, int>(randomNpc, friendlies));
-					friendlies++;
+					//chosenCity = getRandomCity(CityRT);
+
+					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, cities));
+					contentIDs.push_back(std::pair<IQuestContent*, int>(chosenCity, cities));
+					cities++;
 				}
 
 				break;
-			case EnemyQC:
-				// pick a random enemy that hasn't been chosen yet.
-
-				break;
-			case TownQC:
-
-
-				break;
 			case HideOutQC:
+				/*// if this id is already used in this quest
+				if (id < hideouts) {
+					concreteActionContent.push_back(findTypeAndID(contentIDs, HideOutQC, id));
+				}
+				// else, a new npc has to be found is a different city
+				else {
+					City* chosenCity = nullptr;
+
+					// check for a npc already chosen. 
+					if (j > 0) {
+						for (int k = 0; k < j; ++k) {
+							if (thisAction._requiredContent[k].first == EnemyQC) {
+								BasicEnemy* temp = (BasicEnemy*)concreteActionContent[k].first;
+								chosenCity = temp->getMyCity();
+								concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
+								contentIDs.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
+								hideouts++;
+
+								break;
+							}
+						}
+
+						if (chosenCity == nullptr) break;
+					}
+
+					chosenCity = getRandomCity(HideoutRT);
+					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
+					contentIDs.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
+					hideouts++;
+				}*/
+
 				break;
 			case QuestItemQC:
+				if (id < items) {
+					concreteActionContent.push_back(findTypeAndID(contentIDs, QuestItemQC, id));
+				}
+				else {
+					QuestItem* item = GameManager::getSingletonPtr()->getQuestManager()->getQuestContentManager()->getItemGenerator()->generateItem(pQuest->_strategy.getRarityPref());
+					concreteActionContent.push_back(std::pair<IQuestContent*, int>(item, items));
+					contentIDs.push_back(std::pair<IQuestContent*, int>(item, items));
+					items++;
+				}
+
 				break;
 			default:
 				Debug("Unknown quest item type occured while generating concrete quest.");
@@ -181,5 +261,67 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 	return pQuest;
 }
 
+Npc* QuestGenerator::getRandomNPC(Npc* pSourceNpc) {
+	Npc* randomNpc;
+	std::vector<Npc*> allNPCs;
+	std::vector<Npc*> possNPCs;
 
+	// cast all npcs to the NPC class (they are stored as characters)
+	for (int k = 0; k < GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs().size(); ++k) {
+		allNPCs.push_back((Npc*)(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[k]));
+	}
+
+	// find all relevant npcs
+	for (int k = 0; k < allNPCs.size(); ++k) {
+		// if this npc doesn't live in the start town
+		if (pSourceNpc->getHomeTown()->id != allNPCs[k]->getHomeTown()->id) {
+			possNPCs.push_back(allNPCs[k]);
+		}
+	}
+
+	// do a random roll to chose a npc
+	int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, possNPCs.size());
+	randomNpc = possNPCs[randomroll];
+
+	return randomNpc;
+}
+
+BasicEnemy* QuestGenerator::getRandomEnemy() {
+	BasicEnemy* randomEnemy;
+	std::vector<BasicEnemy*> allEnemies;
+
+	// cast all npcs to the NPC class (they are stored as characters)
+	for (int k = 0; k < GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs().size(); ++k) {
+		allEnemies.push_back((BasicEnemy*)(GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs()[k]));
+	}
+
+	// do a random roll to chose an enemy
+	int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, allEnemies.size());
+	randomEnemy = allEnemies[randomroll];
+
+	return randomEnemy;
+}
+
+City* QuestGenerator::getRandomCity(RoomType type) {
+	std::vector<City*> possCities;
+
+	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
+		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == type) {
+			possCities.push_back(&GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
+		}
+	}
+
+	// do a random roll to chose a npc
+	int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, possCities.size());
+	return possCities[randomroll];
+}
+
+std::pair<IQuestContent*, int> QuestGenerator::findTypeAndID(std::vector<std::pair<IQuestContent*, int>> searchSpace, QuestContent type, int id) {
+	for (int k = 0; k < searchSpace.size(); ++k) {
+		IQuestContent* temp = searchSpace[k].first;
+		if (searchSpace[k].first->getType() == type && searchSpace[k].second == id) {
+			return searchSpace[k];
+		}
+	}
+}
 

@@ -23,6 +23,8 @@ public:
 	std::vector<Coordinate> nextPos;
 	Coordinate goalPos;
 
+	City* getMyCity() { return _myCity; }
+
 	using IQuestContent::getType;
 
 protected:

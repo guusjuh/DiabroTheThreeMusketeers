@@ -28,16 +28,16 @@
 	<Postcondition>BothHaveTheItem</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>QuestItemQC</Type>
-		</Pair>
-		<Pair>
-			<Type>QuestItemQC</Type>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
 			<Type>TownQC</Type>
 		</Pair>
 		<Pair>
-			<Type>NPCQC</Type>
+			<Type>QuestItemQC</Type>
+		</Pair>
+		<Pair>
+			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -96,7 +96,7 @@
 	<Postcondition>YouHaveTheItem</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>HideOutQC</Type>
+			<Type>EnemyQC</Type>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
@@ -177,10 +177,10 @@
 	<Postcondition>YouInfo</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>TownQC</Type>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
-			<Type>NPCQC</Type>
+			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -194,10 +194,10 @@
 	<Postcondition>TheyInfo</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>TownQC</Type>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
-			<Type>NPCQC</Type>
+			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
 </Action>

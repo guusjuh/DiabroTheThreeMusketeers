@@ -45,6 +45,12 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 
 	cleanGrid();
 	collisionGridGenerated = false;
+
+	for (int i = 0; i < cities.size(); ++i) {
+		pointerCities.push_back(&cities[i]);
+	}
+
+	int i = 0;
 }
 
 /// <summary>
