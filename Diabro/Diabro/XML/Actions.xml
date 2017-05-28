@@ -83,7 +83,7 @@
 	<Postcondition>YouHaveTheItem</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>TownQC</Type>
+			<Type>NPCQC</Type>
 			<Nr>1</Nr>
 		</Pair>
 		<Pair>
@@ -124,10 +124,6 @@
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
-			<Nr>1</Nr>
-		</Pair>
-		<Pair>
-			<Type>TownQC</Type>
 			<Nr>1</Nr>
 		</Pair>
 		<Pair>

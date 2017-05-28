@@ -1,0 +1,224 @@
+
+<Strategy>
+	<ID>3</ID>
+	<NameStrat>Kill pests</NameStrat>
+	<QuestName>
+		<pre>The harrassement of </pre>
+		<template>NPCQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Comfort</NeedType>
+	<Actions>
+		<Action>8</Action>
+		<Action>9</Action>
+		<Action>7</Action>
+		<Action>11</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>4</ID>
+	<NameStrat>Obtain rare item</NameStrat>
+	<QuestName>
+		<pre>The exceptional </pre>
+		<template>QuestItemQC</template>
+		<post> returns</post>
+	</QuestName>
+	<NeedType>Reputation</NeedType>
+	<Actions>
+		<Action>5</Action>
+		<Action>7</Action>
+		<Action>6</Action>
+	</Actions>
+	<RarityPref>1</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>5</ID>
+	<NameStrat>Kill enemies</NameStrat>
+	<QuestName>
+		<pre>The slaughter of </pre>
+		<template>EnemyQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Reputation</NeedType>
+	<Actions>
+		<Action>8</Action>
+		<Action>9</Action>
+		<Action>7</Action>
+		<Action>11</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>6</ID>
+	<NameStrat>Visit a dangerous place</NameStrat>
+	<QuestName>
+		<pre>The dangerous journey to </pre>
+		<template>HideOutQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Reputation</NeedType>
+	<Actions>
+		<Action>8</Action>
+		<Action>7</Action>
+		<Action>11</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>7</ID>
+	<NameStrat>Revenge, Justice</NameStrat>
+	<QuestName>
+		<pre></pre>
+		<template>NPCQC</template>
+		<post>'s vendetta</post>
+	</QuestName>
+	<NeedType>Serenity</NeedType>
+	<Actions>
+		<Action>8</Action>
+		<Action>9</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>8</ID>
+	<NameStrat>Check on NPC</NameStrat>
+	<QuestName>
+		<pre>Worries about </pre>
+		<template>NPCQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Serenity</NeedType>
+	<Actions>
+		<Action>7</Action>
+		<Action>10</Action>
+		<Action>7</Action>
+		<Action>11</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>9</ID>
+	<NameStrat>Recover lost item</NameStrat>
+	<QuestName>
+		<pre>Finding </pre>
+		<template>QuestItemQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Serenity</NeedType>
+	<Actions>
+		<Action>4</Action>
+		<Action>7</Action>
+		<Action>6</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>10</ID>
+	<NameStrat>Attack threatening entities</NameStrat>
+	<QuestName>
+		<pre>Upholding against </pre>
+		<template>EnemyQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Protection</NeedType>
+	<Actions>
+		<Action>8</Action>
+		<Action>9</Action>
+		<Action>7</Action>
+		<Action>11</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>11</ID>
+	<NameStrat>Attack enemy</NameStrat>
+	<QuestName>
+		<pre>The battle against </pre>
+		<template>EnemyQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Conquest</NeedType>
+	<Actions>
+		<Action>8</Action>
+		<Action>9</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>12</ID>
+	<NameStrat>Gather materials</NameStrat>
+	<QuestName>
+		<pre>The journey for </pre>
+		<template>QuestItemQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Wealth</NeedType>
+	<Actions>
+		<Action>8</Action>
+		<Action>5</Action>
+		<Action>7</Action>
+		<Action>6</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>13</ID>
+	<NameStrat>Deliver supplies</NameStrat>
+	<QuestName>
+		<pre>Dropping of </pre>
+		<template>QuestItemQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Equipment</NeedType>
+	<Actions>
+		<Action>4</Action>
+		<Action>7</Action>
+		<Action>6</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>14</ID>
+	<NameStrat>Deliver supplies</NameStrat>
+	<QuestName>
+		<pre>The delivery of </pre>
+		<template>QuestItemQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Equipment</NeedType>
+	<Actions>
+		<Action>7</Action>
+		<Action>4</Action>
+		<Action>7</Action>
+		<Action>6</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>15</ID>
+	<NameStrat>Trade for supplies</NameStrat>
+	<QuestName>
+		<pre>Interesting trade deal with </pre>
+		<template>NPCQC</template>
+		<post></post>
+	</QuestName>
+	<NeedType>Equipment</NeedType>
+	<Actions>
+		<Action>7</Action>
+		<Action>1</Action>
+	</Actions>
+	<RarityPref>1</RarityPref>
+</Strategy>
