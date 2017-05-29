@@ -24,6 +24,8 @@ position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pSca
 void City::init()
 {
 	generateBuildings();
+
+	name = getNameOptions(typeFlag)[rand() % getNameOptions(typeFlag).size()];
 }
 
 /// <summary>
@@ -31,6 +33,21 @@ void City::init()
 /// </summary>
 City::~City()
 {
+}
+
+std::vector<std::string> City::getNameOptions(RoomType type) {
+	std::vector<std::string> _nameOptions;
+
+	if (type == CityRT) {
+		_nameOptions.push_back("Zeist");
+		_nameOptions.push_back("Amsterdam");
+	}
+	else {
+		_nameOptions.push_back("Limburg");
+		_nameOptions.push_back("Gend");
+	}
+
+	return _nameOptions;
 }
 
 /// returns the center tile of the room

@@ -350,47 +350,57 @@ std::pair<IQuestContent*, int> QuestGenerator::findTypeAndID(std::vector<std::pa
 }
 
 std::string QuestGenerator::getFilledTemplate(std::string templateString, std::vector<std::pair<IQuestContent*, int>> concreteContent) {
+	// info to replace templates from string
+	QuestContent contentType;
 	std::pair<IQuestContent*, int> thisTemplate;
-	QuestContent contentType = (QuestContent)0;
-	int id = 0;
-	std::string typeString = "";
 
-	std::regex expr("\'([A-Z||a-z]+)([0-9]+)\'");	 // the template to match
-	std::smatch match;				 // the matches to be found
+	std::string toReturn = "";
+	int id;
+	std::string typeString;
 
-	if (std::regex_search(templateString, match, expr, std::regex_constants::match_default)) {
-		if (match.size() > 0) {
-			typeString = match[1].str().c_str();
-			id = atoi(match[2].str().c_str());
+	std::regex expr("\'([A-Z||a-z]+)([0-9]+)\'([^ ]*)");	 // the template to match
+	std::smatch match;										 // the matches to be found
+
+	while (std::regex_search(templateString, match, expr)) {
+		// add everything before the found pattern to the return string
+		toReturn += match.prefix().str();
+
+		typeString = match[1].str();
+		id = atoi(match[2].str().c_str());
+
+		// find the enums for all the type strings found
+		for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin();
+			it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
+			if (typeString == it->first) {
+				contentType = it->second;
+			}
 		}
-	} else { /* error occurred, string should contain a template but it doesnt */ }
-	
-	if(id == 0 || typeString == "") { /* aaaand another error. */ }
 
-	for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin();
-		it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
-		if (typeString == it->first) {
-			contentType = it->second;
+		thisTemplate = findTypeAndID(concreteContent, contentType, id);
+
+		std::string replaceString = "";
+		switch (thisTemplate.first->getType()) {
+		case NPCQC:
+			replaceString = ((Npc*)thisTemplate.first)->_name;
+			break;
+		case EnemyQC:
+			replaceString = ((BasicEnemy*)thisTemplate.first)->getName();
+			break;
+		case TownQC:
+			replaceString = ((City*)thisTemplate.first)->getName();
+			break;
+		case HideOutQC:
+			replaceString = ((City*)thisTemplate.first)->getName();
+			break;
+		case QuestItemQC:
+			replaceString = ((QuestItem*)thisTemplate.first)->getName();
+			break;
 		}
+
+		toReturn += replaceString;
+		
+		templateString = match.suffix().str();
 	}
 
-	thisTemplate = findTypeAndID(concreteContent, contentType, id);
-
-	std::string replaceString = "";
-	switch(thisTemplate.first->getType()) {
-	case NPCQC:
-		replaceString = ((Npc*)thisTemplate.first)->_name;
-		break;
-	case EnemyQC:
-		break;
-	case TownQC:
-		break;
-	case HideOutQC:
-		break;
-	case QuestItemQC:
-		replaceString = ((QuestItem*)thisTemplate.first)->getName();
-		break;
-	}
-
-	return templateString;
+	return toReturn;
 }

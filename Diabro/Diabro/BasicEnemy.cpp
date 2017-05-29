@@ -91,6 +91,8 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("InGame/BlueEnemy"));
 	}
 
+	name = getNameOptions()[rand() % getNameOptions().size()];
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
@@ -139,6 +141,15 @@ void BasicEnemy::assignUpgrades(int level) {
 
 		upgradeEquipment(EnemyUpgradeType(value, type));
 	}
+}
+
+
+std::vector<std::string> BasicEnemy::getNameOptions() {
+	std::vector<std::string> _nameOptions;
+	_nameOptions.push_back("Damien");
+	_nameOptions.push_back("Eldritch");
+
+	return _nameOptions;
 }
 
 void BasicEnemy::upgradeEquipment(EnemyUpgradeType upgrade) {
