@@ -6,6 +6,7 @@
 #include "IdleState.h"
 #include "WanderState.h"
 #include "EnemyFollowState.h"
+#include "EnemyAttackState.h"
 #include "EnemyEquipment.h"
 
 /// <summary>

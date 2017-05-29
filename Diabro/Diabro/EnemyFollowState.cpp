@@ -22,6 +22,11 @@ void EnemyFollowState::Enter(BaseNpc* agent){
 }
 
 void EnemyFollowState::Execute(BaseNpc* agent){
+	//check if state transition is needed
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->_myCity->scalar / 2) {
+		agent->stateMachine.setState("Attack");
+	}
+
 	if (agent->getPosition().distance(Ogre::Vector3(agent->goalPos.x, agent->getPosition().y, agent->goalPos.z)) < 50 || agent->nextPos.size() == 0){
 		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
 		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
@@ -31,9 +36,6 @@ void EnemyFollowState::Execute(BaseNpc* agent){
 		playerPos.z = player.z;
 		agent->calculateAStar(playerPos);
 
-		if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getAttackDistance()) {
-			agent->lightAttack();
-		}
 		if (agent->nextPos.size() > 0){
 			agent->walkToNextPoint();
 		}

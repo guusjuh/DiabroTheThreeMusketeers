@@ -120,6 +120,7 @@
     <ClCompile Include="BaseNpc.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="EnemyAttackState.cpp" />
     <ClCompile Include="EnemyFollowState.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="City.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="EnemyAttackState.h" />
     <ClInclude Include="EnemyEquipment.h" />
     <ClInclude Include="EnemyFollowState.h" />
     <ClInclude Include="EnemyUpgrade.h" />

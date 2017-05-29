@@ -27,9 +27,11 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	IdleState* idle = new IdleState();
 	WanderState* wander = new WanderState();
 	EnemyFollowState* followPlayer = new EnemyFollowState();
+	EnemyAttackState* attack = new EnemyAttackState();
 	possibleStates["Idle"] = idle;
 	possibleStates["Wander"] = wander;
 	possibleStates["Follow"] = followPlayer;
+	possibleStates["Attack"] = attack;
 	_initialized = false;
 
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);

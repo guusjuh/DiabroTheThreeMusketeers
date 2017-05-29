@@ -22,6 +22,7 @@ public:
 
 	void calculateAStar(Ogre::Vector3 targetPos);
 	void walkToNextPoint();
+	void walkTo(Ogre::Vector3);
 
 	//were protected
 	StateMachine<BaseNpc> stateMachine;
@@ -35,7 +36,6 @@ protected:
 
 	virtual void detectPlayer(); 
 
-	void walkTo(Ogre::Vector3);
 
 private:
 	float _timer;
