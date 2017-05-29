@@ -90,7 +90,11 @@ void ActionContainer::readFromXML()
 				questContent.push_back(content);
 			}
 
-			Action* action = new Action(id, type, preconditions, postcondition, questContent);
+			std::string dialog = "";
+			tinyxml2::XMLNode* dialogNode = actionNode->FirstChildElement("Dialog")->FirstChild();
+			dialog = dialogNode == nullptr ? "" : dialogNode->ToText()->Value();
+
+			Action* action = new Action(id, type, preconditions, postcondition, questContent, dialog);
 			_objects.push_back(action);
 		}
 	}

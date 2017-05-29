@@ -64,7 +64,7 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 	for (int i = 0; i < tempActions.size(); ++i) {
 		newActions.push_back(Action(tempActions[i].getID(), tempActions[i].getType(), 
 			tempActions[i].getPreconditions(), 
-			tempActions[i].getPostcondition(), tempActions[i].getRequiredContent()));
+			tempActions[i].getPostcondition(), tempActions[i].getRequiredContent(), tempActions[i].getDialog()));
 	}
 
 	Strategy choosenStrat = Strategy(possibleStrategies[randomRoll]->getID(), possibleStrategies[randomRoll]->getName(), possibleStrategies[randomRoll]->getDialog(),
@@ -281,6 +281,12 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 	// generate start dialog based on chosen content
 	pQuest->_strategy._startDialog = getFilledTemplate(pQuest->_strategy._startDialog, contentIDs);
 
+	// generate dialog for all actions
+	for (int i = 0; i < actions.size(); ++i) {
+		actions[i]._dialog = getFilledTemplate(actions[i]._dialog, actions[i]._concreteContent);
+	}
+
+	// set the action sequence
 	pQuest->_strategy._actionSequence = actions;
 
 	return pQuest;
@@ -409,7 +415,6 @@ std::string QuestGenerator::getFilledTemplate(std::string templateString, std::v
 
 	return toReturn;
 }
-
 
 PlayerUpgradeType QuestGenerator::generateRandomUpgrade() {
 	UpgradeModifierType type = (UpgradeModifierType)GameManager::getSingletonPtr()->getRandomInRange(1, AMOUNT_OF_UPGRADE_TYPES - 1);

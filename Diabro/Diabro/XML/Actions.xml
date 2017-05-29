@@ -16,6 +16,7 @@
 			<Type>NPCQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>I'm so scared of those monsters. Please take me home.</Dialog>
 </Action>
 
 <Action>
@@ -40,6 +41,7 @@
 			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>I see you brought me 'QuestItemQC1'. I'll give you QuestItemQC2' for it. Is that a deal?</Dialog>
 </Action>
 
 <Action>
@@ -54,6 +56,7 @@
 			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -68,6 +71,7 @@
 			<Type>HideOutQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -85,6 +89,7 @@
 			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>Is 'QuestItemQC1' what you were searching for? ... \n Good!</Dialog>
 </Action>
 
 <Action>
@@ -102,6 +107,7 @@
 			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>*You found 'QuestItemQC1' in 'EnemyQC1' his remains.*</Dialog>
 </Action>
 
 
@@ -121,6 +127,7 @@
 			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>Oh, you got 'QuestItemQC1'! \n Give it to me now.</Dialog>
 </Action>
 
 <Action>
@@ -135,6 +142,7 @@
 			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -149,6 +157,7 @@
 			<Type>HideOutQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -166,6 +175,7 @@
 			<Type>EnemyQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -183,6 +193,7 @@
 			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>*Wispers*</Dialog>
 </Action>
 
 <Action>
@@ -200,5 +211,7 @@
 			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>Oh really? I didn't know that. Interesting...</Dialog>
 </Action>
+
 </ActionContainer>
