@@ -15,7 +15,7 @@ _movespeed(100), _rotationspeed(0.13), _currentLevel(1), _currentHealth(0), _can
 _attackDistance(250), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _damage(3), _noticeDistance(400.0f)
 {
 	_currentHealth = _maxHealth;
-
+	isPlayer = false;
 }
 
 /// <summary>
@@ -90,7 +90,9 @@ void Character::update(Ogre::Real pDeltatime)
 	{
 		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	}
-
+	else if(!isPlayer){
+		_myNode->translate(-10 * _dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
+	}
 }
 
 //TODO: these methods should be generic

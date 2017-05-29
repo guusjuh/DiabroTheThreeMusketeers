@@ -22,7 +22,6 @@ public:
 	void die() override;
 	void updateBar(bool val) { _updateBar = val; }
 
-	StateMachine<BaseNpc> stateMachine;
 	bool lightAttack() override;
 
 private:

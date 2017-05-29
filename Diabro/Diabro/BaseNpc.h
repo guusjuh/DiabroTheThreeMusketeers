@@ -3,6 +3,7 @@
 
 #include "Character.h"
 #include "City.h"
+#include "StateMachine.h"
 
 /// <summary>
 /// The super class for all NPC's in the game
@@ -22,7 +23,8 @@ public:
 	void calculateAStar(Ogre::Vector3 targetPos);
 	void walkToNextPoint();
 
-	//waren protected
+	//were protected
+	StateMachine<BaseNpc> stateMachine;
 	std::vector<Coordinate> nextPos;
 	Coordinate goalPos;
 	City* _myCity;

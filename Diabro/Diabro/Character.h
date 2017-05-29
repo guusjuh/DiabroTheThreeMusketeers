@@ -36,6 +36,8 @@ public:
 	int getLevel() { return _currentLevel; }
 	virtual bool lightAttack();
 	Ogre::Real getAttackDistance() { return _attackDistance; }
+	float getNoticeDistance() { return _noticeDistance; }
+	bool isPlayer;
 
 protected:
 	Ogre::Real _movespeed;

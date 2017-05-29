@@ -42,6 +42,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_lightAttackCooldown = 1.2f;
 
 	_inQuest = true;
+	isPlayer = true;
 }
 
 /// <summary>

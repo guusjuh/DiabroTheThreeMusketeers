@@ -1,5 +1,6 @@
 #include "StateMachine.h"
 #include "BaseNpc.h"
+#include "Debug.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="StateMachine"/> class.
@@ -13,7 +14,7 @@ StateMachine<T>::StateMachine(T* owner, std::string startState, std::map<std::st
 	_owner = owner;
 	_possibleStates = possibleStates;
 	_currentState = "";
-	this->setState(startState);
+	setState(startState);
 }
 
 /// <summary>
@@ -39,8 +40,8 @@ template<typename T>
 void StateMachine<T>::update()
 {
 	if (this->getCurrentState() != ""){
-		State<T>* currentState = _possibleStates[this->getCurrentState()];
-		currentState->Execute(_owner);
+		State<T>* current = _possibleStates[this->getCurrentState()];
+		current->Execute(_owner);
 	}
 }
 
@@ -63,8 +64,9 @@ void StateMachine<T>::setState(std::string newState){
 	if (_currentState != ""){
 		_possibleStates[_currentState]->Exit(_owner);
 	}
-	_currentState = newState;
+	_currentState = newState.c_str();
 	_possibleStates[_currentState]->Enter(_owner);
+	Debug(_currentState.c_str());
 }
 
 template class StateMachine <BaseNpc> ;
