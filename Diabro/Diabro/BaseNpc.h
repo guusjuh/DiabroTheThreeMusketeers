@@ -17,6 +17,7 @@ public:
 	BaseNpc() {}
 	~BaseNpc() {}
 
+	void collide() override;
 	void update(Ogre::Real) override;
 	void rotatePivot(Ogre::Vector3);
 

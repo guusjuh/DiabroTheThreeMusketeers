@@ -15,6 +15,10 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 	goalPos = Coordinate(0, 0);
 }
 
+void BaseNpc::collide(){
+	stateMachine.collide();
+}
+
 /// <summary>
 /// Updates the frame based on the specified pDeltatime.
 /// </summary>
@@ -53,6 +57,10 @@ void BaseNpc::detectPlayer()
 /// Makes the BaseNPC walk to next point.
 /// </summary>
 void BaseNpc::walkToNextPoint() {
+	if (nextPos.size() == 0){
+		_dirVec = Ogre::Vector3().ZERO;
+		return;
+	}
 	goalPos = nextPos[nextPos.size() - 1];
 	nextPos.pop_back();
 	_myNode->lookAt(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);

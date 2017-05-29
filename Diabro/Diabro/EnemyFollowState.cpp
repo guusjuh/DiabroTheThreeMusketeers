@@ -23,7 +23,7 @@ void EnemyFollowState::Enter(BaseNpc* agent){
 
 void EnemyFollowState::Execute(BaseNpc* agent){
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->_myCity->scalar / 2) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->_myCity->scalar) {
 		agent->stateMachine.setState("Attack");
 	}
 	//check if state transition is needed
