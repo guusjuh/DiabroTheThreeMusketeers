@@ -220,8 +220,8 @@ void City::generateBuildings()
 
 std::vector<RealCoordinate> City::getBuildingPositions() {
 	std::vector<RealCoordinate> buildingLocations;
-	for (int x = 1; x < scaledWidth() - 1; x++) {
-		for (int z = 1; z < scaledDepth() - 1; z++) {
+	for (int x = 1; x < scaledWidth(); x++) {
+		for (int z = 1; z < scaledDepth(); z++) {
 			Coordinate upperPos; // zone grid
 			Coordinate lowerPos = Coordinate(x,z); // city grid
 			RealCoordinate worldPos; // world positions
@@ -270,77 +270,6 @@ std::vector<RealCoordinate> City::getBuildingPositions() {
 					int i = 0;
 				}
 			}
-			/*if(x == 1) {
-				//left layer
-				//1: scale current position to world coordinates
-				//TODO: enable floating points
-				Coordinate cLocation = upperPos;
-				cLocation.z -= 1;
-				bool add = true;
-				//2: check if distance to connection is < 1
-				for (int i = 0; i < connections.size(); i++) {
-					if (cLocation == connections[i]) {
-						add = false;
-					}
-					int A = 0;
-				}
-				if (add) {
-					buildingLocations.push_back(worldPos);
-				}
-
-			} else if (x == scaledWidth() - 1) {
-				//left layer
-				//1: scale current position to world coordinates
-				//TODO: enable floating points
-				Coordinate cLocation = upperPos;
-				cLocation.z += 1;
-				bool add = true;
-				//2: check if distance to connection is < 1
-				for (int i = 0; i < connections.size(); i++) {
-					if (cLocation == connections[i]) {
-						add = false;
-					}
-					int A = 0;
-				}
-				if (add) {
-					buildingLocations.push_back(worldPos);
-				}
-			}
-			if (z == 1 && x != 1 && x != scaledWidth() - 1) {
-				//left layer
-				//1: scale current position to world coordinates
-				//TODO: enable floating points
-				Coordinate cLocation = upperPos;
-				cLocation.x -= 1;
-				bool add = true;
-				//2: check if distance to connection is < 1
-				for (int i = 0; i < connections.size(); i++) {
-					if (cLocation == connections[i]) {
-						add = false;
-					}
-					int A = 0;
-				}
-				if (add) {
-					buildingLocations.push_back(worldPos);
-				}
-			} else if (z == scaledWidth() - 1 && x != scaledWidth() - 1 && x != 1) {
-				//left layer
-				//1: scale current position to world coordinates
-				//TODO: enable floating points
-				Coordinate cLocation = upperPos;
-				cLocation.x += 1;
-				bool add = true;
-				//2: check if distance to connection is < 1
-				for (int i = 0; i < connections.size(); i++) {
-					if (cLocation == connections[i]) {
-						add = false;
-					}
-					int A = 0;
-				}
-				if (add) {
-					buildingLocations.push_back(worldPos);
-				}
-			}*/
 		}
 	}
 	return buildingLocations;
