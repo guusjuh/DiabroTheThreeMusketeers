@@ -124,6 +124,9 @@
     <ClCompile Include="EnemyAttackState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyMoveAroundCenterState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -272,6 +275,9 @@
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAttackState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMoveAroundCenterState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
   </ItemGroup>

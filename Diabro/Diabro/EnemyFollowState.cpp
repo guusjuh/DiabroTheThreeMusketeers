@@ -26,6 +26,10 @@ void EnemyFollowState::Execute(BaseNpc* agent){
 	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->_myCity->scalar / 2) {
 		agent->stateMachine.setState("Attack");
 	}
+	//check if state transition is needed
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) > agent->_myCity->scalar * 3) {
+		agent->stateMachine.setState("AroundCenter");
+	}
 
 	if (agent->getPosition().distance(Ogre::Vector3(agent->goalPos.x, agent->getPosition().y, agent->goalPos.z)) < 50 || agent->nextPos.size() == 0){
 		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;

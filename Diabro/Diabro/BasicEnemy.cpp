@@ -24,14 +24,12 @@ const Ogre::ColourValue BasicEnemy::COL_NDIST = Ogre::ColourValue(0, 0, 1);
 /// <param name="pMyEntity">My entity.</param>
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
-	IdleState* idle = new IdleState();
-	WanderState* wander = new WanderState();
 	EnemyFollowState* followPlayer = new EnemyFollowState();
 	EnemyAttackState* attack = new EnemyAttackState();
-	possibleStates["Idle"] = idle;
-	possibleStates["Wander"] = wander;
+	EnemyMoveAroundCenterState* moveAroundCenter = new EnemyMoveAroundCenterState();
 	possibleStates["Follow"] = followPlayer;
 	possibleStates["Attack"] = attack;
+	possibleStates["AroundCenter"] = moveAroundCenter;
 	_initialized = false;
 
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
@@ -180,7 +178,7 @@ void BasicEnemy::upgradeEquipment(EnemyUpgradeType upgrade) {
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	if (!_initialized){
-		stateMachine = StateMachine<BaseNpc>(this, "Follow", possibleStates);
+		stateMachine = StateMachine<BaseNpc>(this, "AroundCenter", possibleStates);
 		_initialized = true;
 	}
 	stateMachine.update();

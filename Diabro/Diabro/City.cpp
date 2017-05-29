@@ -35,8 +35,8 @@ City::~City()
 
 /// returns the center tile of the room
 Coordinate City::getCenterTile() {
-	int x = ceil(position.x + width / 2.0f);
-	int z = ceil(position.z + depth / 2.0f);
+	int x = floor(position.x + width / 2.0f);
+	int z = floor(position.z + depth / 2.0f);
 	return Coordinate(x, z);
 }
 
