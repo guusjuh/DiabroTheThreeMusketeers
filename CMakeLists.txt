@@ -37,6 +37,10 @@ set(HDRS
 	./Diabro/Diabro/StateMachine.h
 	./Diabro/Diabro/State.h
 	./Diabro/Diabro/IdleState.h
+	./Diabro/Diabro/WanderState.h
+	./Diabro/Diabro/EnemyFollowState.h
+	./Diabro/Diabro/EnemyMoveAroundCenterState.h
+	./Diabro/Diabro/EnemyAttackState.h
 	./Diabro/Diabro/Needs.h
 	./Diabro/Diabro/IQuestContent.h	
 	./Diabro/Diabro/QuestContentManager.h 
@@ -93,6 +97,10 @@ set(SRCS
 	./Diabro/Diabro/StateMachine.cpp
 	./Diabro/Diabro/State.cpp
 	./Diabro/Diabro/IdleState.cpp
+	./Diabro/Diabro/WanderState.cpp
+	./Diabro/Diabro/EnemyFollowState.cpp
+	./Diabro/Diabro/EnemyMoveAroundCenterState.cpp
+	./Diabro/Diabro/EnemyAttackState.cpp
 	./Diabro/Diabro/tinyxml2.cpp
 	./Diabro/Diabro/BuildingType.cpp
 	./Diabro/Diabro/CityManager.cpp
