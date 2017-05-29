@@ -26,6 +26,8 @@ enum Profession {
 /// <seealso cref="BaseNpc" />
 class Npc : public BaseNpc
 {
+	friend class QuestGenerator;
+
 public:
 	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, Building*);
 	~Npc();

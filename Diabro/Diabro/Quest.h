@@ -26,6 +26,7 @@ public:
 private:
 	Strategy _strategy;
 	BaseNpc* _sourceNPC;
+
 	int _healthReward;
 
 	bool _completed;

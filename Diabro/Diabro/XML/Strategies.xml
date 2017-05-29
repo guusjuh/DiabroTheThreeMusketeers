@@ -4,7 +4,7 @@
 <Strategy>
 	<ID>0</ID>
 	<NameStrat>Deliver item for study</NameStrat>
-	<QuestName> The [QuestItemQC1] of Mystery </QuestName>
+	<QuestName> The 'QuestItemQC1' of Mystery </QuestName>
 	<NeedType>Knowledge</NeedType>
 	<Actions>
 		<Action>
@@ -28,7 +28,7 @@
 <Strategy>
 	<ID>1</ID>
 	<NameStrat>Interview NPC</NameStrat>
-	<QuestName> The [NPCQC2] that knew </QuestName>
+	<QuestName> The 'NPCQC2' that knew </QuestName>
 	<NeedType>Knowledge</NeedType>
 	<Actions>
 		<Action>
@@ -56,7 +56,7 @@
 <Strategy>
 	<ID>2</ID>
 	<NameStrat>Obtain luxuries</NameStrat>
-	<QuestName> The journey for the beautiful [QuestItemQC1] </QuestName>
+	<QuestName> The journey for the beautiful 'QuestItemQC1' </QuestName>
 	<NeedType>Comfort</NeedType>
 	<Actions>
 		<Action>
@@ -82,7 +82,7 @@
 <Strategy>
 	<ID>3</ID>
 	<NameStrat>Kill pests</NameStrat>
-	<QuestName> The harrassement of [NPCQC1] </QuestName>
+	<QuestName> The harrassement of 'NPCQC1' </QuestName>
 	<NeedType>Comfort</NeedType>
 	<Actions>
 		<Action>

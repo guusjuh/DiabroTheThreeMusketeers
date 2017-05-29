@@ -1,6 +1,7 @@
 #include "QuestGenerator.h"
 #include "GameManager.h"
 #include "Debug.h"
+#include <regex>
 
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestGenerator"/> class.
@@ -274,6 +275,9 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 		thisAction._concreteContent = concreteActionContent;
 	}
 
+	// generate name
+	pQuest->_strategy._nameQuest = getFilledTemplate(pQuest->_strategy._nameQuest, contentIDs);
+
 	// rewards / maybe in abstract
 
 	pQuest->_strategy._actionSequence = actions;
@@ -345,3 +349,48 @@ std::pair<IQuestContent*, int> QuestGenerator::findTypeAndID(std::vector<std::pa
 	}
 }
 
+std::string QuestGenerator::getFilledTemplate(std::string templateString, std::vector<std::pair<IQuestContent*, int>> concreteContent) {
+	std::pair<IQuestContent*, int> thisTemplate;
+	QuestContent contentType = (QuestContent)0;
+	int id = 0;
+	std::string typeString = "";
+
+	std::regex expr("\'([A-Z||a-z]+)([0-9]+)\'");	 // the template to match
+	std::smatch match;				 // the matches to be found
+
+	if (std::regex_search(templateString, match, expr, std::regex_constants::match_default)) {
+		if (match.size() > 0) {
+			typeString = match[1].str().c_str();
+			id = atoi(match[2].str().c_str());
+		}
+	} else { /* error occurred, string should contain a template but it doesnt */ }
+	
+	if(id == 0 || typeString == "") { /* aaaand another error. */ }
+
+	for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin();
+		it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
+		if (typeString == it->first) {
+			contentType = it->second;
+		}
+	}
+
+	thisTemplate = findTypeAndID(concreteContent, contentType, id);
+
+	std::string replaceString = "";
+	switch(thisTemplate.first->getType()) {
+	case NPCQC:
+		replaceString = ((Npc*)thisTemplate.first)->_name;
+		break;
+	case EnemyQC:
+		break;
+	case TownQC:
+		break;
+	case HideOutQC:
+		break;
+	case QuestItemQC:
+		replaceString = ((QuestItem*)thisTemplate.first)->getName();
+		break;
+	}
+
+	return templateString;
+}
