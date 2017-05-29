@@ -21,8 +21,8 @@ public:
 	/// <param name="pNameQuest">The template name of the quest.</param>
 	/// <param name="pMotivation">The motivation for the quest.</param>
 	/// <param name="pActions">The actions that must be completed for the quest.</param>
-	Strategy(int pid, std::string pName, std::string pNameQuest, NeedType pMotivation, std::vector<Action> pActions, int pRarityPref)
-		: _id(pid), _nameStrategy(pName), _nameQuest(pNameQuest), _motivation(pMotivation), _actionSequence(pActions), _rarityPref(pRarityPref) {
+	Strategy(int pid, std::string pName, std::string pNameQuest, std::string pStartDialog, NeedType pMotivation, std::vector<Action> pActions, int pRarityPref)
+		: _id(pid), _nameStrategy(pName), _nameQuest(pNameQuest), _startDialog(pStartDialog), _motivation(pMotivation), _actionSequence(pActions), _rarityPref(pRarityPref) {
 		_currentAction = 0;
 	}
 
@@ -44,6 +44,8 @@ public:
 	int getID() { return _id; }
 	std::string getName() { return _nameStrategy; }
 	std::string getNameQuest() { return _nameQuest; }
+	std::string getDialog() { return _startDialog; }
+
 	NeedType getMotivation() { return _motivation; }
 
 	std::vector<Action> getActionSequence() {
@@ -53,9 +55,7 @@ public:
 		return &_actionSequence[_currentAction];
 	}
 
-	void increaseAction() {
-		_currentAction++;
-	}
+	void increaseAction() {	_currentAction++; }
 
 	int getRarityPref() { return _rarityPref; }
 
@@ -66,6 +66,7 @@ private:
 	std::string _nameStrategy;
 	std::string _nameQuest;
 	NeedType _motivation;
+	std::string _startDialog;
 
 	std::vector<Action> _actionSequence;
 	int _currentAction;

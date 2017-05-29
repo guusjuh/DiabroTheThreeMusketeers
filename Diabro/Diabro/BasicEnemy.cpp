@@ -4,10 +4,10 @@
 #include "StateMachine.h"
 #include "EnemyUpgrade.h"
 
-const int BasicEnemy::LOW_HP = 2;
-const int BasicEnemy::HIGH_HP = 5;
-const int BasicEnemy::LOW_DMG = 2;
-const int BasicEnemy::HIGH_DMG = 7;
+const int BasicEnemy::LOW_HP = 5;
+const int BasicEnemy::HIGH_HP = 10;
+const int BasicEnemy::LOW_DMG = 4;
+const int BasicEnemy::HIGH_DMG = 8;
 const int BasicEnemy::LOW_NDIST = 10;
 const int BasicEnemy::HIGH_NDIST = 30;
 

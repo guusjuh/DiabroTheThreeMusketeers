@@ -5,6 +5,7 @@
 	<ID>0</ID>
 	<NameStrat>Deliver item for study</NameStrat>
 	<QuestName> The 'QuestItemQC1' of Mystery </QuestName>
+	<StartDialog>I know of 'QuestItemQC1', but I don't know what it does. Can you retrieve it from 'NPCQC2' and figure it out what it does for me? \n Great! Tell me what you have learned afterwards.</StartDialog>
 	<NeedType>Knowledge</NeedType>
 	<Actions>
 		<Action>
@@ -29,6 +30,7 @@
 	<ID>1</ID>
 	<NameStrat>Interview NPC</NameStrat>
 	<QuestName> The 'NPCQC2' that knew </QuestName>
+	<StartDialog>'NPCQC2' know something, but he won't tell me. Can you go talk to him? Maybe he will tell you. \n Thank you! Don't tell him you know me.</StartDialog>
 	<NeedType>Knowledge</NeedType>
 	<Actions>
 		<Action>
@@ -57,6 +59,7 @@
 	<ID>2</ID>
 	<NameStrat>Obtain luxuries</NameStrat>
 	<QuestName> The journey for the beautiful 'QuestItemQC1' </QuestName>
+	<StartDialog>I have heard about this beautiful 'QuestItemQC1'. I desire to have it. \n Bring it to me, peasant!</StartDialog>
 	<NeedType>Comfort</NeedType>
 	<Actions>
 		<Action>
@@ -83,6 +86,7 @@
 	<ID>3</ID>
 	<NameStrat>Kill pests</NameStrat>
 	<QuestName> The harrassement of 'NPCQC1' </QuestName>
+	<StartDialog>'EnemyQC1' and 'EnemyQC2' have been harrassing me forever, but I can't do anything about it. Please kill them for me. \n Thank you so much, now be on your way.</StartDialog>
 	<NeedType>Comfort</NeedType>
 	<Actions>
 		<Action>

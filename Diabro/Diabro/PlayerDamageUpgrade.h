@@ -9,5 +9,7 @@ public:
 	~PlayerDamageUpgrade();
 
 	float getDamage() override;
+
+	std::string getSprName() override { return "UI/upgradeDmg"; }
 };
 

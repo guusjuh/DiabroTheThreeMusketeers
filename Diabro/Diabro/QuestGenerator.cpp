@@ -67,15 +67,15 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 			tempActions[i].getPostcondition(), tempActions[i].getRequiredContent()));
 	}
 
-	Strategy choosenStrat = Strategy(possibleStrategies[randomRoll]->getID(), possibleStrategies[randomRoll]->getName(), 
+	Strategy choosenStrat = Strategy(possibleStrategies[randomRoll]->getID(), possibleStrategies[randomRoll]->getName(), possibleStrategies[randomRoll]->getDialog(),
 		possibleStrategies[randomRoll]->getNameQuest(), possibleStrategies[randomRoll]->getMotivation(),
 		newActions, possibleStrategies[randomRoll]->getRarityPref());
 
-	//TODO: improve selection of rewards
 	float healthReward = (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth() / 100) * 10;
+	PlayerUpgradeType upgradeReward = generateRandomUpgrade(); 
 
 	// assign values to the quest
-	pQuest = new Quest(choosenStrat, pSourceNpc, healthReward);
+	pQuest = new Quest(choosenStrat, pSourceNpc, healthReward, upgradeReward);
 
 	return pQuest;
 }
@@ -275,10 +275,11 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 		thisAction._concreteContent = concreteActionContent;
 	}
 
-	// generate name
+	// generate quest name based on chosen content
 	pQuest->_strategy._nameQuest = getFilledTemplate(pQuest->_strategy._nameQuest, contentIDs);
 
-	// rewards / maybe in abstract
+	// generate start dialog based on chosen content
+	pQuest->_strategy._startDialog = getFilledTemplate(pQuest->_strategy._startDialog, contentIDs);
 
 	pQuest->_strategy._actionSequence = actions;
 
@@ -402,5 +403,36 @@ std::string QuestGenerator::getFilledTemplate(std::string templateString, std::v
 		templateString = match.suffix().str();
 	}
 
+	if(templateString != "") {
+		toReturn += templateString;
+	}
+
 	return toReturn;
+}
+
+
+PlayerUpgradeType QuestGenerator::generateRandomUpgrade() {
+	UpgradeModifierType type = (UpgradeModifierType)GameManager::getSingletonPtr()->getRandomInRange(1, AMOUNT_OF_UPGRADE_TYPES - 1);
+
+	int low = 0;
+	int high = 1;
+	int value = low;
+
+	switch (type) {
+	case Health:
+		low = Player::LOW_HP;
+		high = Player::HIGH_HP;
+		break;
+	case Damage:
+		low = Player::LOW_DMG;
+		high = Player::HIGH_DMG;
+		break;
+	default:
+		break;
+	}
+
+	// random value between low and high
+	value = GameManager::getSingletonPtr()->getRandomInRange(low, high);
+
+	return PlayerUpgradeType(value, type);
 }

@@ -4,6 +4,7 @@
 #include "Action.h"
 #include "Strategy.h"
 #include "BaseNpc.h"
+#include "PlayerEquipment.h"
 
 /// <summary>
 /// A linear Quest instance.
@@ -12,7 +13,7 @@ class Quest
 {
 	friend class QuestGenerator;
 public:
-	Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward);
+	Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward, PlayerUpgradeType upgrade);
 	Quest();
 	~Quest();
 
@@ -28,6 +29,7 @@ private:
 	BaseNpc* _sourceNPC;
 
 	int _healthReward;
+	PlayerUpgradeType _upgradeReward;
 
 	bool _completed;
 };

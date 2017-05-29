@@ -23,6 +23,8 @@ private:
 	BasicEnemy* getRandomEnemy();
 	City* getRandomCity(RoomType type);
 
+	PlayerUpgradeType generateRandomUpgrade();
+
 	std::string getFilledTemplate(std::string templateString, 
 		std::vector<std::pair<IQuestContent*, int>> concreteContent);
 

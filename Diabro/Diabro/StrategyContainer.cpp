@@ -46,6 +46,8 @@ void StrategyContainer::readFromXML()
 			// quest name
 			std::string questName = stratNode->FirstChildElement("QuestName")->FirstChild()->ToText()->Value();
 
+			std::string startDialog = stratNode->FirstChildElement("StartDialog")->FirstChild()->ToText()->Value();
+
 			// need type
 			NeedType needType = (NeedType)0;
 			for (std::map<std::string, NeedType>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToNeedType.begin(); 
@@ -96,7 +98,7 @@ void StrategyContainer::readFromXML()
 			// rarity pref
 			int rarityPref = stratNode->FirstChildElement("RarityPref")->IntText();
 
-			Strategy* strategy = new Strategy(id, nameStrat, questName, needType, actions, rarityPref);
+			Strategy* strategy = new Strategy(id, nameStrat, questName, startDialog, needType, actions, rarityPref);
 			_objects.push_back(strategy);
 		}
 

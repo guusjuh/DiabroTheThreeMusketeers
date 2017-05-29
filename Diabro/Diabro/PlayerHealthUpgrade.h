@@ -8,5 +8,7 @@ public:
 	~PlayerHealthUpgrade();
 
 	float getHealth() override;
+
+	std::string getSprName() override { return "UI/upgradeHp"; }
 };
 

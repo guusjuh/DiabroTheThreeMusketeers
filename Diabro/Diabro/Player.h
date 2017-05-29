@@ -14,6 +14,8 @@
 /// <seealso cref="Character" />
 class Player : public Character
 {
+	friend class QuestGenerator;
+
 public:
 	Player(Ogre::SceneNode*, Ogre::Entity*);
 	~Player(){}
@@ -57,6 +59,10 @@ private:
 
 	bool _inQuest;
 
+	static const int LOW_HP;
+	static const int HIGH_HP;
+	static const int LOW_DMG;
+	static const int HIGH_DMG;
 };
 
 #endif
