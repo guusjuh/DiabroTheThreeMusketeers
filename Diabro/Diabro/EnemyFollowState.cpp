@@ -19,6 +19,7 @@ void EnemyFollowState::Enter(BaseNpc* agent){
 	playerPos.x = player.x;
 	playerPos.z = player.z;
 	agent->calculateAStar(playerPos);
+	agent->walkToNextPoint();
 }
 
 void EnemyFollowState::Execute(BaseNpc* agent){
@@ -48,4 +49,22 @@ void EnemyFollowState::Execute(BaseNpc* agent){
 
 void EnemyFollowState::Exit(BaseNpc* agent){
 
+}
+
+void EnemyFollowState::Collide(BaseNpc* agent){
+	if (agent->nextPos.size() > 0)
+	{
+		agent->walkToNextPoint();
+	}
+	else
+	{
+		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
+		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
+		Coordinate player = Coordinate(playerPos.x, playerPos.z);
+		player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(player);
+		playerPos.x = player.x;
+		playerPos.z = player.z;
+		agent->calculateAStar(playerPos);
+		agent->walkToNextPoint();
+	}
 }

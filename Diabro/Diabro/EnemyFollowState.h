@@ -17,5 +17,6 @@ public:
 	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;
 	void Exit(BaseNpc* agent) override;
+	void Collide(BaseNpc* agent) override;
 };
 #endif
