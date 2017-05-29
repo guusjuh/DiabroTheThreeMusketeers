@@ -12,9 +12,9 @@ public:
 	State();
 	~State();
 
-	void Enter(T* agent) {}
-	void Execute(T* agent) {}
-	void Exit(T* agent) {}
+	virtual void Enter(T* agent) {}
+	virtual void Execute(T* agent) {}
+	virtual void Exit(T* agent) {}
 };
 
 #endif

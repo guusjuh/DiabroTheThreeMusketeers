@@ -34,6 +34,8 @@ public:
 	Ogre::Real getCurrHealth() { return _currentHealth;  }
 	Ogre::Real getMaxHealth() { return _maxHealth;  }
 	int getLevel() { return _currentLevel; }
+	virtual bool lightAttack();
+	Ogre::Real getAttackDistance() { return _attackDistance; }
 
 protected:
 	Ogre::Real _movespeed;
@@ -58,7 +60,6 @@ protected:
 
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);
-	virtual bool lightAttack();
 
 	Ogre::SceneNode* _myNode;
 	Ogre::Entity* _myEntity;

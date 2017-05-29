@@ -4,6 +4,8 @@
 #include "BaseNpc.h"
 #include "StateMachine.h"
 #include "IdleState.h"
+#include "WanderState.h"
+#include "EnemyFollowState.h"
 #include "EnemyEquipment.h"
 
 /// <summary>
@@ -20,10 +22,10 @@ public:
 	void die() override;
 	void updateBar(bool val) { _updateBar = val; }
 
-	StateMachine<Character> stateMachine;
+	StateMachine<BaseNpc> stateMachine;
+	bool lightAttack() override;
 
 private:
-	bool lightAttack() override;
 	bool _updateBar;
 
 	void assignUpgrades(int level);
@@ -31,6 +33,9 @@ private:
 	IEnemyEquipment* equipment;
 
 	int healthUpgrades, damageUpgrades, noticeDistUpgrades;
+
+	std::map<std::string, State<BaseNpc>*> possibleStates;
+	bool _initialized;
 
 	static const int LOW_HP;
 	static const int HIGH_HP;

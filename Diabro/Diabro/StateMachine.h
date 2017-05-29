@@ -10,21 +10,21 @@ template<typename T>
 class StateMachine
 {
 public:
-	StateMachine(T* owner, State<T> startState, std::map<std::string, State<T>> possibleStates);
+	StateMachine(T* owner, std::string startState, std::map<std::string, State<T>*> possibleStates);
 	StateMachine();
 	~StateMachine();
 
-	std::map<std::string, State<T>> _possibleStates;
+	std::map<std::string, State<T>*> _possibleStates;
 
-	State<T>* getCurrentState();
+	std::string getCurrentState();
 
-	void setState(State<T> newState);
+	void setState(std::string newState);
 
 	void update();
 
 private:
-	State<T>* _currentState;
-	State<T>* _previous;
+	std::string _currentState;
+	std::string _previous;
 	T* _owner;
 	
 };

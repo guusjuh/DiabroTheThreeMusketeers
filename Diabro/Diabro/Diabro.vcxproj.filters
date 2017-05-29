@@ -115,6 +115,12 @@
     <ClCompile Include="Debug.cpp">
       <Filter>Sources\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="WanderState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFollowState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -255,6 +261,12 @@
     </ClInclude>
     <ClInclude Include="Debug.h">
       <Filter>Headers\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFollowState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

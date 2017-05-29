@@ -10,14 +10,14 @@ IdleState::~IdleState()
 	
 }
 
-void IdleState::Enter(Character* agent){
+void IdleState::Enter(BaseNpc* agent){
 
 }
 
-void IdleState::Execute(Character* agent){
-
+void IdleState::Execute(BaseNpc* agent){
+	agent->setDirVector(Ogre::Vector3(0,0,0));
 }
 
-void IdleState::Exit(Character* agent){
+void IdleState::Exit(BaseNpc* agent){
 
 }

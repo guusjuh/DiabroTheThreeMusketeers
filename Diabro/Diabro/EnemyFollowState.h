@@ -1,5 +1,5 @@
-#ifndef IDLE_STATE_H
-#define IDLE_STATE_H
+#ifndef ENEMY_FOLLOW_STATE_H
+#define ENEMY_FOLLOW_STATE_H
 
 #include "State.h"
 #include "BaseNpc.h"
@@ -8,11 +8,11 @@
 /// The concrete idle implementation for characters. 
 /// </summary>
 /// <seealso cref="State{Character}" />
-class IdleState : public State<BaseNpc>
+class EnemyFollowState : public State<BaseNpc>
 {
 public:
-	IdleState();
-	~IdleState();
+	EnemyFollowState();
+	~EnemyFollowState();
 
 	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;

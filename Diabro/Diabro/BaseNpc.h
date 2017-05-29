@@ -20,16 +20,18 @@ public:
 	void rotatePivot(Ogre::Vector3);
 
 	void calculateAStar(Ogre::Vector3 targetPos);
+	void walkToNextPoint();
+
+	//waren protected
 	std::vector<Coordinate> nextPos;
 	Coordinate goalPos;
+	City* _myCity;
+	bool _playerDetected;
 	
 protected:
 	Ogre::SceneNode* _myRotationNode;
-	City* _myCity;
-	bool _playerDetected;
 
 	virtual void detectPlayer(); 
-	void walkToNextPoint();
 
 	void walkTo(Ogre::Vector3);
 
