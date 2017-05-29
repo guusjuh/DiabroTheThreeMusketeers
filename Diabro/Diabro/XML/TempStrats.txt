@@ -1,22 +1,3 @@
-
-<Strategy>
-	<ID>3</ID>
-	<NameStrat>Kill pests</NameStrat>
-	<QuestName>
-		<pre>The harrassement of </pre>
-		<template>NPCQC</template>
-		<post></post>
-	</QuestName>
-	<NeedType>Comfort</NeedType>
-	<Actions>
-		<Action>8</Action>
-		<Action>9</Action>
-		<Action>7</Action>
-		<Action>11</Action>
-	</Actions>
-	<RarityPref>0</RarityPref>
-</Strategy>
-
 <Strategy>
 	<ID>4</ID>
 	<NameStrat>Obtain rare item</NameStrat>
@@ -27,9 +8,20 @@
 	</QuestName>
 	<NeedType>Reputation</NeedType>
 	<Actions>
-		<Action>5</Action>
-		<Action>7</Action>
-		<Action>6</Action>
+		<Action>
+			<ID>5</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>		
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>1</RarityPref>
 </Strategy>
@@ -44,10 +36,24 @@
 	</QuestName>
 	<NeedType>Reputation</NeedType>
 	<Actions>
-		<Action>8</Action>
-		<Action>9</Action>
-		<Action>7</Action>
-		<Action>11</Action>
+		<Action>
+			<ID>8</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Content>1</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>11</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -62,9 +68,19 @@
 	</QuestName>
 	<NeedType>Reputation</NeedType>
 	<Actions>
-		<Action>8</Action>
-		<Action>7</Action>
-		<Action>11</Action>
+		<Action>
+			<ID>8</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>11</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -79,8 +95,15 @@
 	</QuestName>
 	<NeedType>Serenity</NeedType>
 	<Actions>
-		<Action>8</Action>
-		<Action>9</Action>
+		<Action>
+			<ID>8</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Content>1</Content>
+			<Content>2</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -95,10 +118,24 @@
 	</QuestName>
 	<NeedType>Serenity</NeedType>
 	<Actions>
-		<Action>7</Action>
-		<Action>10</Action>
-		<Action>7</Action>
-		<Action>11</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>10</ID>
+			<Content>2</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>11</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -113,9 +150,20 @@
 	</QuestName>
 	<NeedType>Serenity</NeedType>
 	<Actions>
-		<Action>4</Action>
-		<Action>7</Action>
-		<Action>6</Action>
+		<Action>
+			<ID>4</ID>
+			<Content>2</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -130,10 +178,24 @@
 	</QuestName>
 	<NeedType>Protection</NeedType>
 	<Actions>
-		<Action>8</Action>
-		<Action>9</Action>
-		<Action>7</Action>
-		<Action>11</Action>
+		<Action>
+			<ID>8</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Content>1</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>11</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -148,8 +210,15 @@
 	</QuestName>
 	<NeedType>Conquest</NeedType>
 	<Actions>
-		<Action>8</Action>
-		<Action>9</Action>
+		<Action>
+			<ID>8</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Content>1</Content>
+			<Content>2</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -164,10 +233,24 @@
 	</QuestName>
 	<NeedType>Wealth</NeedType>
 	<Actions>
-		<Action>8</Action>
-		<Action>5</Action>
-		<Action>7</Action>
-		<Action>6</Action>
+		<Action>
+			<ID>8</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>5</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -182,9 +265,20 @@
 	</QuestName>
 	<NeedType>Equipment</NeedType>
 	<Actions>
-		<Action>4</Action>
-		<Action>7</Action>
-		<Action>6</Action>
+		<Action>
+			<ID>4</ID>
+			<Content>2</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -199,10 +293,24 @@
 	</QuestName>
 	<NeedType>Equipment</NeedType>
 	<Actions>
-		<Action>7</Action>
-		<Action>4</Action>
-		<Action>7</Action>
-		<Action>6</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>4</ID>
+			<Content>2</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
 </Strategy>
@@ -217,8 +325,27 @@
 	</QuestName>
 	<NeedType>Equipment</NeedType>
 	<Actions>
-		<Action>7</Action>
-		<Action>1</Action>
+		<Action>
+			<ID>4</ID>
+			<Content>2</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>1</ID>
+			<Content>3</Content>
+			<Content>2</Content>
+			<Content>1</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>2</Content>
+		</Action>
 	</Actions>
 	<RarityPref>1</RarityPref>
 </Strategy>
