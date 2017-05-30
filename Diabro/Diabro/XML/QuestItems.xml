@@ -13,13 +13,11 @@
 	<Type>Book</Type>
 </BaseQuestItem>
 
-
 <BaseQuestItem>
 	<Name>The Story of Diabro</Name>
 	<SpriteName>/</SpriteName>
 	<Type>RareBook</Type>
 </BaseQuestItem>
-
 
 <BaseQuestItem>
 	<Name>Bread</Name>

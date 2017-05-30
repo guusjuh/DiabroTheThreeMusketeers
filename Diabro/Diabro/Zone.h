@@ -28,6 +28,8 @@ public:
 	int _width;
 	int _depth;
 
+	City* getRandomCity(RoomType type);// { return &cities[0]; }
+
 	std::vector<City> cities; ///< vector containing all cities within the zone
 
 	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar);
@@ -68,6 +70,7 @@ private:
 	bool placeCity(City pC);
 
 	bool* generateCollisionGrid();
+
 };
 
 #endif

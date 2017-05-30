@@ -115,6 +115,12 @@
     <ClCompile Include="Debug.cpp">
       <Filter>Sources\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="IQuestContent.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestItem.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">

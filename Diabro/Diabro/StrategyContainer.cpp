@@ -44,22 +44,9 @@ void StrategyContainer::readFromXML()
 			std::string nameStrat = stratNode->FirstChildElement("NameStrat")->FirstChild()->ToText()->Value();
 
 			// quest name
-			QuestName questName;
-			tinyxml2::XMLElement* questNameNode = stratNode->FirstChildElement("QuestName");
+			std::string questName = stratNode->FirstChildElement("QuestName")->FirstChild()->ToText()->Value();
 
-			// since the pre or post string can be null, first check for that 
-			tinyxml2::XMLNode* preNode = questNameNode->FirstChildElement("pre")->FirstChild();
-			questName.preString = preNode == nullptr ? "" : preNode->ToText()->Value();
-
-			tinyxml2::XMLNode* postNode = questNameNode->FirstChildElement("post")->FirstChild();
-			questName.postString = postNode == nullptr ? "" : postNode->ToText()->Value();
-			for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin();
-				it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
-				std::string tempTemplate = questNameNode->FirstChildElement("template")->FirstChild()->ToText()->Value();
-				if (tempTemplate == it->first) {
-					questName.templateContent = it->second;
-				}
-			}			
+			std::string startDialog = stratNode->FirstChildElement("StartDialog")->FirstChild()->ToText()->Value();
 
 			// need type
 			NeedType needType = (NeedType)0;
@@ -78,7 +65,7 @@ void StrategyContainer::readFromXML()
 			for (actionNode; actionNode; actionNode = actionNode->NextSiblingElement())
 			{
 				Action tempAction;
-				int nrAction = actionNode->IntText();
+				int nrAction = actionNode->FirstChildElement("ID")->IntText();
 				
 				std::vector<Action*> copy = GameManager::getSingletonPtr()->getQuestManager()->getActionContainer()->GetObjects();
 				for (int i = 0; i < copy.size(); ++i)
@@ -89,13 +76,29 @@ void StrategyContainer::readFromXML()
 					}
 				}
 
+				// get content node
+				tinyxml2::XMLElement* contentNode = actionNode->FirstChildElement("Content");
+				int counter = 0;
+
+				// for loop till no next element
+				for (contentNode; contentNode; contentNode = contentNode->NextSiblingElement()) 
+				{
+					// get content from node
+					int id = contentNode->IntText();
+
+					// store content in required content map
+					tempAction._requiredContent[counter].second = id;
+
+					counter++;
+				}
+				
 				actions.push_back(tempAction);
 			}
 
 			// rarity pref
 			int rarityPref = stratNode->FirstChildElement("RarityPref")->IntText();
 
-			Strategy* strategy = new Strategy(id, nameStrat, questName, needType, actions, rarityPref);
+			Strategy* strategy = new Strategy(id, nameStrat, questName, startDialog, needType, actions, rarityPref);
 			_objects.push_back(strategy);
 		}
 

@@ -73,14 +73,12 @@ void ActionContainer::readFromXML()
 			}
 
 			//required content
-			std::map<QuestContent, int> questContent;
+			std::vector<QuestContent> questContent;
 			listNode = actionNode->FirstChildElement("RequiredContent");
 			tinyxml2::XMLElement* pairNode = listNode->FirstChildElement("Pair");
 			for (pairNode; pairNode; pairNode = pairNode->NextSiblingElement())
 			{
 				std::string typeString = pairNode->FirstChildElement("Type")->FirstChild()->ToText()->Value();
-				int nr = pairNode->FirstChildElement("Nr")->IntText();
-
 				QuestContent content = (QuestContent)0;
 				for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin(); 
 					it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
@@ -89,10 +87,14 @@ void ActionContainer::readFromXML()
 					}
 				}
 
-				questContent.insert(std::pair<QuestContent, int>(content, nr));
+				questContent.push_back(content);
 			}
 
-			Action* action = new Action(id, type, preconditions, postcondition, questContent);
+			std::string dialog = "";
+			tinyxml2::XMLNode* dialogNode = actionNode->FirstChildElement("Dialog")->FirstChild();
+			dialog = dialogNode == nullptr ? "" : dialogNode->ToText()->Value();
+
+			Action* action = new Action(id, type, preconditions, postcondition, questContent, dialog);
 			_objects.push_back(action);
 		}
 	}

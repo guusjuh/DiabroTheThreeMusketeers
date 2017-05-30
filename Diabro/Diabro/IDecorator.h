@@ -5,7 +5,6 @@ enum UpgradeModifierType {
 	Health,
 	Damage,
 	NoticeDist,
-	
 	AMOUNT_OF_UPGRADE_TYPES
 };
 

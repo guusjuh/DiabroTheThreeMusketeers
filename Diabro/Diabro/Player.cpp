@@ -5,6 +5,11 @@
 #include "PlayerDamageUpgrade.h"
 #include "Debug.h"
 
+const int Player::LOW_HP = 2;
+const int Player::HIGH_HP = 4;
+const int Player::LOW_DMG = 2;
+const int Player::HIGH_DMG = 5;
+
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
 /// </summary>

@@ -5,6 +5,7 @@
 struct PlayerUpgradeType {
 	int value;
 	UpgradeModifierType modifier;
+	PlayerUpgradeType() : value(0), modifier((UpgradeModifierType)0) {}
 	PlayerUpgradeType(int v, UpgradeModifierType t) : value(v), modifier(t) {}
 };
 

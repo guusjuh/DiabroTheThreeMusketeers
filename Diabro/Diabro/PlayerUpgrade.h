@@ -1,5 +1,6 @@
 #pragma once
 #include "IPlayerEquipment.h"
+#include <string>
 
 class PlayerUpgrade : public IPlayerEquipment
 {
@@ -13,8 +14,12 @@ public:
 	float getHealth() override;
 	float getDamage() override;
 	bool isBase() override;
+
+	virtual std::string getSprName() { return ""; }
+
 protected:
 	IPlayerEquipment* equipment;
+
 	IPlayerEquipment* removeUpgrades() override;
 };
 

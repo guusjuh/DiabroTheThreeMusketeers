@@ -11,13 +11,12 @@
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 		<Pair>
 			<Type>NPCQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog>I'm so scared of those monsters. Please take me home.</Dialog>
 </Action>
 
 <Action>
@@ -30,18 +29,19 @@
 	<Postcondition>BothHaveTheItem</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>QuestItemQC</Type>
-			<Nr>2</Nr>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
 			<Type>TownQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 		<Pair>
-			<Type>NPCQC</Type>
-			<Nr>1</Nr>
+			<Type>QuestItemQC</Type>
+		</Pair>
+		<Pair>
+			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>I see you brought me 'QuestItemQC1'. I'll give you QuestItemQC2' for it. Is that a deal?</Dialog>
 </Action>
 
 <Action>
@@ -54,9 +54,9 @@
 	<RequiredContent>
 		<Pair>
 			<Type>TownQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -69,9 +69,9 @@
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -83,14 +83,13 @@
 	<Postcondition>YouHaveTheItem</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>TownQC</Type>
-			<Nr>1</Nr>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog>Is 'QuestItemQC1' what you were searching for? ... \n Good!</Dialog>
 </Action>
 
 <Action>
@@ -102,14 +101,13 @@
 	<Postcondition>YouHaveTheItem</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>HideOutQC</Type>
-			<Nr>1</Nr>
+			<Type>EnemyQC</Type>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog>*You found 'QuestItemQC1' in 'EnemyQC1' his remains.*</Dialog>
 </Action>
 
 
@@ -123,14 +121,13 @@
 	<Postcondition>TheyHaveTheItem</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>TownQC</Type>
-			<Nr>1</Nr>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog>Oh, you got 'QuestItemQC1'! \n Give it to me now.</Dialog>
 </Action>
 
 <Action>
@@ -143,9 +140,9 @@
 	<RequiredContent>
 		<Pair>
 			<Type>TownQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -158,9 +155,9 @@
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
-			<Nr>1</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -172,14 +169,13 @@
 	<Postcondition>TheyDead</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>HideOutQC</Type>
-			<Nr>1</Nr>
+			<Type>EnemyQC</Type>
 		</Pair>
 		<Pair>
 			<Type>EnemyQC</Type>
-			<Nr>2</Nr>
 		</Pair>
 	</RequiredContent>
+	<Dialog></Dialog>
 </Action>
 
 <Action>
@@ -191,14 +187,13 @@
 	<Postcondition>YouInfo</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>TownQC</Type>
-			<Nr>1</Nr>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
-			<Type>NPCQC</Type>
-			<Nr>1</Nr>
+			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>*Wispers*</Dialog>
 </Action>
 
 <Action>
@@ -210,13 +205,13 @@
 	<Postcondition>TheyInfo</Postcondition>
 	<RequiredContent>
 		<Pair>
-			<Type>TownQC</Type>
-			<Nr>1</Nr>
+			<Type>NPCQC</Type>
 		</Pair>
 		<Pair>
-			<Type>NPCQC</Type>
-			<Nr>1</Nr>
+			<Type>TownQC</Type>
 		</Pair>
 	</RequiredContent>
+	<Dialog>Oh really? I didn't know that. Interesting...</Dialog>
 </Action>
+
 </ActionContainer>

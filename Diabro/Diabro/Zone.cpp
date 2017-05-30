@@ -55,6 +55,20 @@ Zone::~Zone()
 
 }
 
+City* Zone::getRandomCity(RoomType type) {
+	std::vector<int> id;
+
+	for (int i = 0; i < cities.size(); ++i) {
+		if (cities[i].typeFlag == type) {
+			id.push_back(i);
+		}
+	}
+
+	int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, id.size() - 1);
+	int x = id[randomroll];
+	return &cities[x];
+}
+
 /// cleans the grid converting every number either to 1 or 0 based on their current value
 void Zone::cleanGrid()
 {

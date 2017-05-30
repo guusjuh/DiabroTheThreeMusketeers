@@ -20,7 +20,10 @@ public:
 	void die() override;
 	void updateBar(bool val) { _updateBar = val; }
 
+	QuestContent getType() override { return EnemyQC; }
+
 	StateMachine<Character> stateMachine;
+	std::string getName() { return name; }
 
 private:
 	bool lightAttack() override;
@@ -31,6 +34,8 @@ private:
 	IEnemyEquipment* equipment;
 
 	int healthUpgrades, damageUpgrades, noticeDistUpgrades;
+	std::vector<std::string> getNameOptions();
+	std::string name;
 
 	static const int LOW_HP;
 	static const int HIGH_HP;

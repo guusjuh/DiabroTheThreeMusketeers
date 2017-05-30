@@ -7,7 +7,7 @@
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestContentManager"/> class.
 /// </summary>
-QuestContentManager::QuestContentManager() {
+QuestContentManager::QuestContentManager(/*std::vector<City*> cities*/) {
 	_itemContainer = new QuestItemContainer();
 	_itemGenerator = new QuestItemGenerator();
 
@@ -16,11 +16,9 @@ QuestContentManager::QuestContentManager() {
 	//find all cities and add them to correct list
 	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
 		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == CityRT) {
-			City temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
-			_NPCCities.push_back(&temp);
+			_NPCCities.push_back(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
 		} else if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == HideoutRT) {
-			City temp = (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
-			_enemyCities.push_back(&temp);
+			_enemyCities.push_back(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
 		}
 	}
 }

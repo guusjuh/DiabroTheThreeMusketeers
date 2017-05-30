@@ -8,14 +8,14 @@
 /// Enum for the types of needs. 
 /// </summary>
 enum NeedType {
-	KnowledgeNeed = 0,
+	KnowledgeNeed = 0, //
 	ComfortNeed,
-	ReputationNeed,
-	SerenityNeed,
-	ProtectionNeed,
-	ConquestNeed,
-	WealthNeed,
-	EquipmentNeed,
+	//ReputationNeed,
+	//SerenityNeed,
+	//ProtectionNeed,
+	//ConquestNeed,
+	//WealthNeed,
+	//EquipmentNeed,
 
 	AMOUNT_OF_NEEDTYPES
 };
@@ -59,12 +59,12 @@ public:
 
 	int getKnowledgeValue() { return _needs[(int)NeedType::KnowledgeNeed].value; };
 	int getComfortValue() { return _needs[(int)NeedType::ComfortNeed].value; };
-	int getReputationValue() { return _needs[(int)NeedType::ReputationNeed].value; };
-	int getSerenityValue() { return _needs[(int)NeedType::SerenityNeed].value; };
-	int getProtectionValue() { return _needs[(int)NeedType::ProtectionNeed].value; };
-	int getConquestValue() { return _needs[(int)NeedType::ConquestNeed].value; };
-	int getWealthValue() { return _needs[(int)NeedType::WealthNeed].value; };
-	int getEquipmentValue() { return _needs[(int)NeedType::EquipmentNeed].value; };
+	//int getReputationValue() { return _needs[(int)NeedType::ReputationNeed].value; };
+	//int getSerenityValue() { return _needs[(int)NeedType::SerenityNeed].value; };
+	//int getProtectionValue() { return _needs[(int)NeedType::ProtectionNeed].value; };
+	//int getConquestValue() { return _needs[(int)NeedType::ConquestNeed].value; };
+	//int getWealthValue() { return _needs[(int)NeedType::WealthNeed].value; };
+	//int getEquipmentValue() { return _needs[(int)NeedType::EquipmentNeed].value; };
 
 	/// <summary>
 	/// Adjusts the value of the given need.

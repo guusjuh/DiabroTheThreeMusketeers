@@ -22,11 +22,22 @@ public:
 	void calculateAStar(Ogre::Vector3 targetPos);
 	std::vector<Coordinate> nextPos;
 	Coordinate goalPos;
-	
+
+	City* getMyCity() { return _myCity; }
+
+	using IQuestContent::getType;
+
 protected:
 	Ogre::SceneNode* _myRotationNode;
 	City* _myCity;
 	bool _playerDetected;
+
+	//TODO: implement a pointer so the npc can keep track of the current quest
+	//Quest* _currentQuest;
+
+	//TODO: move the dialog variables/methods from NPC to here and change a few things so enemies can handle this too.
+	// 1. make sure enemy dialog can still end (since they actually died)
+	// 2. switch between
 
 	virtual void detectPlayer(); 
 	void walkToNextPoint();

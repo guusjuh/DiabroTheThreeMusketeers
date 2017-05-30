@@ -7,15 +7,15 @@
 /// <param name="strategy">The strategy.</param>
 /// <param name="sourceNPC">The source NPC.</param>
 /// <param name="healthReward">The health reward.</param>
-Quest::Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward)
-	: _strategy(strategy), _sourceNPC(sourceNPC), _healthReward(healthReward), _completed(false) {
+Quest::Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward, PlayerUpgradeType upgrade)
+	: _strategy(strategy), _sourceNPC(sourceNPC), _healthReward(healthReward), _upgradeReward(upgrade), _completed(false) {
 }
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Quest"/> class.
 /// </summary>
 Quest::Quest()
-	: _strategy(), _sourceNPC(nullptr), _healthReward(0), _completed(false) { }
+	: _strategy(), _sourceNPC(nullptr), _healthReward(0), _upgradeReward(), _completed(false) { }
 
 /// <summary>
 /// Finalizes an instance of the <see cref="Quest"/> class.
