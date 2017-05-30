@@ -6,6 +6,8 @@
 /// </summary>
 QuestManager::QuestManager()
 {
+	_currentQuest = nullptr;
+
 	stringToActionType.insert(std::pair<std::string, ActionType>("Escort", Escort));
 	stringToActionType.insert(std::pair<std::string, ActionType>("Exchange", Exchange));
 	stringToActionType.insert(std::pair<std::string, ActionType>("Explore", Explore));
@@ -53,7 +55,6 @@ QuestManager::QuestManager()
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Conquest", ConquestNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Wealth", WealthNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Equipment", EquipmentNeed));
-
 }
 
 /// <summary>
@@ -66,4 +67,48 @@ Quest* QuestManager::generateQuest(Npc* pSourceNpc, NeedType pMotivation) {
 	_quests.push_back(_questGenerator->generateQuest(pSourceNpc, pMotivation));
 
 	return &_quests[_quests.size() - 1];
+}
+
+/// <summary>
+/// Starts a new quest if possible.
+/// </summary>
+/// <param name="pSourceNpc">The source NPC so that the quest to start can be found.</param>
+/// <returns></returns>
+std::string QuestManager::startQuest(Npc* sourceNpc) {
+	// find the quest to start (the quest with this source npc)
+	for (int i = 0; i < _quests.size(); ++i) {
+		if (_quests[i]._sourceNPC == sourceNpc) {
+			_currentQuest = &_quests[i];
+		}
+	}
+
+	// start method on quest (still needs to be implemented)
+	// 1. needs to set the current action, etc.
+	// 2. idk
+	// prepare action 1
+
+	Ogre::Vector3 targetPos = Ogre::Vector3(0,0,0); // should be pos of target based on current action.
+
+	// update the locator
+	GameManager::getSingletonPtr()->getUIManager()->setQuestTarget();
+
+	return _currentQuest->_strategy.getDialog();
+}
+
+/// <summary>
+/// Generates a quest.
+/// </summary>
+/// <param name="pSourceNpc">The source NPC.</param>
+/// <param name="pMotivation">The motivation.</param>
+/// <returns></returns>
+std::string QuestManager::obtainDialog(IQuestContent* client) {
+	// is there even an active action?
+	if (_currentQuest == nullptr) return "";
+
+	// check if this client is relevant to the current active action
+	for (int i = 0; i < _currentQuest->_strategy.getCurrentAction()->getConcreteContent().size(); ++i) {
+		if (_currentQuest->_strategy.getCurrentAction()->getConcreteContent()[i].first == client) {
+			return _currentQuest->_strategy.getCurrentAction()->getDialog();
+		}
+	}
 }

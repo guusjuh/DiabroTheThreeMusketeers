@@ -67,8 +67,8 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 			tempActions[i].getPostcondition(), tempActions[i].getRequiredContent(), tempActions[i].getDialog()));
 	}
 
-	Strategy choosenStrat = Strategy(possibleStrategies[randomRoll]->getID(), possibleStrategies[randomRoll]->getName(), possibleStrategies[randomRoll]->getDialog(),
-		possibleStrategies[randomRoll]->getNameQuest(), possibleStrategies[randomRoll]->getMotivation(),
+	Strategy choosenStrat = Strategy(possibleStrategies[randomRoll]->getID(), possibleStrategies[randomRoll]->getName(), 
+		possibleStrategies[randomRoll]->getNameQuest(), possibleStrategies[randomRoll]->getDialog(), possibleStrategies[randomRoll]->getMotivation(),
 		newActions, possibleStrategies[randomRoll]->getRarityPref());
 
 	float healthReward = (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth() / 100) * 10;

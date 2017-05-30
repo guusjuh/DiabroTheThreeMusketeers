@@ -28,6 +28,8 @@ public:
 	using IQuestContent::getType;
 
 protected:
+	bool _inCurrentQuest;
+
 	Ogre::SceneNode* _myRotationNode;
 	City* _myCity;
 	bool _playerDetected;

@@ -42,6 +42,7 @@ public:
 	void updateMiniMapLocators();
 
 	void setQuestOn(bool val);
+	void setQuestTarget(Ogre::Vector3 position);
 
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
@@ -53,6 +54,7 @@ private:
 	
 	DiabroUI::MiniMap*			_miniMap;
 	bool						_questOn;
+	Ogre::Vector3				_questTargetPos;
 
 	DiabroUI::Bar*				_playerHealthBarWidget;
 	DiabroUI::Bar*				_enemyHealthBarWidget;

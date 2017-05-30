@@ -120,8 +120,27 @@ void Npc::die() {
 /// <returns>False if the player is too far away to start a talk</returns>
 bool Npc::talk(Ogre::Vector3 pPlayerPos)
 {
+	// start the dialog if it wasn't started already
 	if (!_inDialog) {
+		// this npc is currently in dialog
 		_inDialog = true;
+
+		// if this NPC has a quest 
+		if (_hasQuest) {
+			// if this quest can be started
+			if (GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
+				// get the dialog for starting the quest
+				setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
+				
+				//setDialog(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this));
+			}
+		} 
+		// else if // do i have text in the current quest?
+		else {
+			_dialog = getStndrtDialog();
+		}
+
+		// show the first line of the dialog
 		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, _dialog[_dialogCount]);
 	}
 	else {

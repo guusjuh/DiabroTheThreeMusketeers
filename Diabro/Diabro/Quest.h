@@ -12,6 +12,8 @@
 class Quest
 {
 	friend class QuestGenerator;
+	friend class QuestManager;
+
 public:
 	Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward, PlayerUpgradeType upgrade);
 	Quest();
