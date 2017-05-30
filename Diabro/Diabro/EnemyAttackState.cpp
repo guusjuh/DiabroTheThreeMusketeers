@@ -19,7 +19,7 @@ void EnemyAttackState::Execute(BaseNpc* agent){
 	Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
 
 	//check if state transition is needed
-	if (agent->getPosition().distance(playerPos) > agent->_myCity->scalar) {
+	if (agent->getPosition().distance(playerPos) > agent->getCity()->scalar) {
 		agent->stateMachine.setState("Follow");
 		return;
 	}

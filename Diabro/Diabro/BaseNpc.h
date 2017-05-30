@@ -25,15 +25,20 @@ public:
 	void walkToNextPoint();
 	void walkTo(Ogre::Vector3);
 
-	//were protected
 	StateMachine<BaseNpc> stateMachine;
+
+	int getNextPosSize() { return nextPos.size(); }
+	Coordinate getGoalPos() { return goalPos; }
+	City* getCity() { return _myCity; }
+	bool isPlayerDetected() { return _playerDetected; }
+	
+protected:
 	std::vector<Coordinate> nextPos;
+	Ogre::SceneNode* _myRotationNode;
+
 	Coordinate goalPos;
 	City* _myCity;
 	bool _playerDetected;
-	
-protected:
-	Ogre::SceneNode* _myRotationNode;
 
 	virtual void detectPlayer(); 
 

@@ -12,7 +12,7 @@ WanderState::~WanderState()
 }
 
 void WanderState::Enter(BaseNpc* agent){
-	agent->calculateAStar(agent->_myCity->getRandomPointInRoom());
+	agent->calculateAStar(agent->getCity()->getRandomPointInRoom());
 }
 
 void WanderState::Execute(BaseNpc* agent){    
@@ -21,12 +21,12 @@ void WanderState::Execute(BaseNpc* agent){
 		agent->stateMachine.setState("Follow");
 	}
 
-	if (agent->getPosition().distance(Ogre::Vector3(agent->goalPos.x, agent->getPosition().y, agent->goalPos.z)) < 50){
-		if (agent->nextPos.size() == 0){
-			Ogre::Vector3 pos = Ogre::Vector3(agent->_myCity->getRandomPointInRoom());
-			Ogre::Vector3 goalPosition = Ogre::Vector3(agent->goalPos.x / agent->_myCity->scalar, agent->getPosition().y, agent->goalPos.z / agent->_myCity->scalar);
+	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < 50){
+		if (agent->getNextPosSize() == 0){
+			Ogre::Vector3 pos = Ogre::Vector3(agent->getCity()->getRandomPointInRoom());
+			Ogre::Vector3 goalPosition = Ogre::Vector3(agent->getGoalPos().x / agent->getCity()->scalar, agent->getPosition().y, agent->getGoalPos().z / agent->getCity()->scalar);
 			while (goalPosition.distance(pos) < 1) {
-				pos = Ogre::Vector3(agent->_myCity->getRandomPointInRoom());
+				pos = Ogre::Vector3(agent->getCity()->getRandomPointInRoom());
 			}
 			agent->calculateAStar(pos);
 		}
