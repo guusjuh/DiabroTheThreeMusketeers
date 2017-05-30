@@ -74,7 +74,7 @@ struct Building {
 /// <seealso cref="IQuestContent" />
 class City : public IQuestContent
 {
-public:
+private:
 	Coordinate position; ///< upper left corner position of room
 	RoomType typeFlag;
 	bool* _tiles;
@@ -82,10 +82,24 @@ public:
 	int depth;
 	int id; ///< unique id
 	int scalar;
+	std::vector<Coordinate> connections;
+
+public:
 	void init();
 	
+	int Width() { return width; }
+	int Depth() { return depth; }
+	int ID(){ return id; }
+	RoomType TypeFlag(){ return typeFlag; }
+	Coordinate Position() { return position; }
+	void addConnection(Coordinate coord){ connections.push_back(coord);}
+	int nConnections(){ return connections.size(); }
+	void clearConnections();
+	Coordinate getConnection(int index) { return connections[index]; }
+
 	bool getTile(Coordinate pos);
 	bool getTile(int x, int z);
+	int Scalar(){ return scalar; }
 	int scaledWidth() { return width * gridScalar; }
 	int scaledDepth() { return depth * gridScalar; }
 
@@ -94,7 +108,6 @@ public:
 	Coordinate getCenterTile();
 	Coordinate getRandomTile();
 
-	std::vector<Coordinate> connections;
 	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
 	~City();
 

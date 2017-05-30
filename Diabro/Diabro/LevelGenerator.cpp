@@ -11,7 +11,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	debug("Initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 3, 100, scalar);
+	_zone[0] = Zone(10, 10, 3, 3, 2, 100, scalar);
 
 	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
@@ -262,7 +262,7 @@ void LevelGenerator::spawnCityContent() {
 		// set a pointer to the current city 
 		City* thisCity = &_zone[0].cities[i];
 		// switch on the city type
-		switch (thisCity->typeFlag) {
+		switch (thisCity->TypeFlag()) {
 		case CityRT:
 			for (int j = 0; j < thisCity->Buildings().size(); ++j) { // for each building
 				spawnNPCs(thisCity, &thisCity->Buildings()[j]);
@@ -312,7 +312,7 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 /// <param name="i">The i.</param>
 void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
 	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
+	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->Position().x + thisCity->Width() / 2) * scalar, 0, (thisCity->Position().z + thisCity->Depth() / 2) * scalar), &_zone[0].cities[i]);
 }
 
 /// <summary>
@@ -456,8 +456,6 @@ void LevelGenerator::determineCityTypes() {
 	_sisterNode->setPosition(Ogre::Vector3(furtherstCity->getCenterTile().x * scalar, 0, furtherstCity->getCenterTile().z* scalar));
 
 	_endCity = furtherstCity;
-	debug("end pos x:", furtherstCity->position.x);
-	debug("end pos z:", furtherstCity->position.z);
 
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 		_zone[0].cities[i].init();

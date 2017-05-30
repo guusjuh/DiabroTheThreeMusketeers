@@ -68,8 +68,6 @@ void RealCoordinate::operator+= (RealCoordinate &rhs) {
 	rz += rhs.rz;
 }
 
-
-
 RealCoordinate& RealCoordinate::operator= (const Coordinate &value) {
 	return RealCoordinate(value.x, value.z);
 }
@@ -81,9 +79,6 @@ bool operator== (RealCoordinate &lhs, RealCoordinate &rhs) {
 bool operator== (RealCoordinate &lhs, Coordinate &rhs) {
 	return (lhs.rx - rhs.x < 0.01f && lhs.rz - rhs.z < 0.01f);
 }
-
-
-
 
 /// <summary>
 /// Initializes a new instance of the <see cref="City"/> class.
@@ -357,6 +352,11 @@ int City::getScaledWidth(int width, int scalar)
 int City::getScaledDepth(int depth, int scalar)
 {
 	return depth*scalar;
+}
+
+void City::clearConnections()
+{
+	connections.clear();
 }
 
 /// <summary>

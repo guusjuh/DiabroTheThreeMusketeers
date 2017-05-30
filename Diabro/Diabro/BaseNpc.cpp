@@ -34,7 +34,7 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 		if (getPosition().distance(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z)) < 50){
 			if (nextPos.size() == 0){
 				Ogre::Vector3 pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
-				Ogre::Vector3 goalPosition = Ogre::Vector3(goalPos.x / _myCity->scalar, getPosition().y, goalPos.z / _myCity->scalar);
+				Ogre::Vector3 goalPosition = Ogre::Vector3(goalPos.x / _myCity->Scalar(), getPosition().y, goalPos.z / _myCity->Scalar());
 				while(goalPosition.distance(pos) < 1) {
 					pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
 				}
@@ -109,11 +109,11 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 		}
 	}
 	//get scale 
-	int scale = _myCity->scalar;
+	int scale = _myCity->Scalar();
 
 	//check if target position is viable
 	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->_width))]){
-		debug("The target position is not a valid point in the collision gird\n");
+		//debug("The target position is not a valid point in the collision gird\n");
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
 		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));
@@ -134,7 +134,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(getPosition().x, getPosition().z));
 
 	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z){
-		debug("The goal is the same as the current position\n");
+		//debug("The goal is the same as the current position\n");
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
 		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));

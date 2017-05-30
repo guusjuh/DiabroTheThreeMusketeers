@@ -62,6 +62,8 @@ private:
 	void cleanGrid();
 	bool inGrid(Coordinate pCoord);
 
+	int findPossibleConnections(City &c);
+	int findUsedConnections(City &c);
 	void connectDungeon(int pId, float pChance);
 	int getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, int>> *pConnections);
 	int changeTileValues(int pMaxIndex);
