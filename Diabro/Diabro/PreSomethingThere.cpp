@@ -16,4 +16,7 @@ void PreSomethingThere::start() {
 
 	character->setRelevantForAction(true);
 	item->setRelevantForAction(true);
+
+	_isMet = true;
+	Debug("Pre - something there - done");
 }

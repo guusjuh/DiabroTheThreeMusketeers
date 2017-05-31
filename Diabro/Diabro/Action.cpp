@@ -3,6 +3,7 @@
 #include "PreSomethingThere.h"
 #include "GameManager.h"
 #include "PostYouHaveItem.h"
+#include "PreKnowWhereToGo.h"
 
 const std::string Action::msgCityReached = "City reached";
 const std::string Action::msgPlayerItem = "Player received item";
@@ -83,6 +84,11 @@ void Action::update() {
 
 void Action::end() {
 	// finalize the action.
+	for (int i = 0; i < _concreteContent.size(); ++i) {
+		if (_concreteContent[i].first == nullptr) 
+			return;
+		_concreteContent[i].first->setRelevantForAction(false);
+	}
 }
 
 std::vector<QuestContent> Action::getRequiredContentTypes() {
@@ -136,10 +142,10 @@ void Action::createPreConditions(std::vector<PreconditionsType> precontypes) {
 		case SomethingThere:
 			precondition = new PreSomethingThere();
 			break;
-/*		case KnowWhereToGo:
-			precondition = new PreSomethingThere();
+		case KnowWhereToGo:
+			precondition = new PreKnowWhereToGo();
 			break;
-		case YouItemOfInterest:
+		/*case YouItemOfInterest:
 			precondition = new PreSomethingThere();
 			break;*/
 		}
@@ -148,10 +154,10 @@ void Action::createPreConditions(std::vector<PreconditionsType> precontypes) {
 	}
 }
 
-void Action::createPostConditions(PostconditionType precontype) {
+void Action::createPostConditions(PostconditionType postType) {
 	PostCondition* postcondition = nullptr;
 
-	switch (precontype) {
+	switch (postType) {
 		/*		case SomebodyThere:
 		precondition = new PreSomethingThere();
 		break;*/
@@ -166,7 +172,7 @@ void Action::createPostConditions(PostconditionType precontype) {
 		break;*/
 	}
 
-	_postcondition = std::pair<PostconditionType, PostCondition*>(precontype, postcondition);
+	_postcondition = std::pair<PostconditionType, PostCondition*>(postType, postcondition);
 }
 
 void Action::setPreConditionsContent() {
@@ -180,7 +186,6 @@ void Action::setPreConditionsContent() {
 			for (int j = 0; j < _concreteContent.size(); ++j) {
 				if (_concreteContent[j].first->getType() == EnemyQC || _concreteContent[j].first->getType() == NPCQC) {
 					((PreSomethingThere*)it->second)->character = _concreteContent[j].first;
-					//typeCharacter = character->getType();
 				}
 				if (_concreteContent[j].first->getType() == QuestItemQC) {
 					((PreSomethingThere*)it->second)->item = _concreteContent[j].first;
@@ -188,12 +193,18 @@ void Action::setPreConditionsContent() {
 			}
 
 			break;
-			/*		case KnowWhereToGo:
-			precondition = new PreSomethingThere();
+		case KnowWhereToGo:
+			for (int j = 0; j < _concreteContent.size(); ++j) {
+				if (_concreteContent[j].first->getType() == NPCQC) {
+					((PreSomethingThere*)it->second)->character = _concreteContent[j].first;
+				}
+			}			
 			break;
-			case YouItemOfInterest:
+		/*	case YouItemOfInterest:
 			precondition = new PreSomethingThere();
 			break;*/
+		default:
+			break;
 		}
 	}
 	

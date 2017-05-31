@@ -4,10 +4,10 @@
 #include "IQuestContent.h"
 
 //TODO: types to implement:
-// 1. something there
+//		1. something there
 // 2. somebody there
 // 3. you have item of interest
-// 4. know where to go
+//		4. know where to go
 
 class PreCondition {
 public:

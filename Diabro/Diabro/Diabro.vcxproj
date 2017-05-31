@@ -124,6 +124,7 @@
     <ClCompile Include="IQuestContent.cpp" />
     <ClCompile Include="PostCondition.cpp" />
     <ClCompile Include="PostYouHaveItem.cpp" />
+    <ClCompile Include="PreKnowWhereToGo.cpp" />
     <ClCompile Include="PreSomethingThere.cpp" />
     <ClCompile Include="QuestItem.cpp" />
     <ClCompile Include="Spawner.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="PostCondition.h" />
     <ClInclude Include="PostYouHaveItem.h" />
     <ClInclude Include="PreCondition.h" />
+    <ClInclude Include="PreKnowWhereToGo.h" />
     <ClInclude Include="PreSomethingThere.h" />
     <ClInclude Include="Quest.h" />
     <ClInclude Include="QuestGenerator.h" />
