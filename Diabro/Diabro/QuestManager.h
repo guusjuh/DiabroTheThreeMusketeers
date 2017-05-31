@@ -31,6 +31,7 @@ public:
 	StrategyContainer* getStrategyContainer(void) { return _strategyContainer; }
 	Quest* generateQuest(Npc* pSourceNpc, NeedType pMotivation);
 
+	Quest* getCurrentQuest() { return _currentQuest; }
 	bool questCanStart() { return _currentQuest == nullptr ? true : false; }
 	std::string startQuest(Npc* sourceNpc);
 

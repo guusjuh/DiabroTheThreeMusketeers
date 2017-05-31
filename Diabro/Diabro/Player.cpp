@@ -18,7 +18,7 @@ const int Player::HIGH_DMG = 5;
 Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
 	// override default speeds
-	_movespeed = 450;
+	_movespeed = 560;
 
 	equipment = new PlayerEquipment(40.0f, 3.0f);
 	_maxHealth = equipment->getHealth();
@@ -155,8 +155,6 @@ void Player::update(Ogre::Real pDeltaTime)
 		}
 		setNearbyNPC(nullptr);
 	}
-
-	//angleBetween(Ogre::Vector3(0,0,0));
 }
 
 /// <summary>
@@ -324,4 +322,10 @@ float Player::angleBetween(Ogre::Vector3 other) {
 void Player::toggleInQuest() {
 	_inQuest = !_inQuest; 
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(_inQuest);
+}
+
+void Player::recieveItem() {
+	Character::recieveItem();
+
+	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgPlayerItem);
 }

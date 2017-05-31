@@ -273,6 +273,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 
 		// dialog
 		thisAction._concreteContent = concreteActionContent;
+		thisAction.setPreConditionsContent();
 	}
 
 	// generate quest name based on chosen content

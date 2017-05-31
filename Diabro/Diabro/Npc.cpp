@@ -62,6 +62,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	_needs = NeedSet(tempNeeds);
 
 	_hasQuest = false;
+	_relevantForAction = false;
 }
 
 /// <summary>
@@ -126,15 +127,17 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 		_inDialog = true;
 
 		// if this NPC has a quest 
-		if (_hasQuest) {
-			// if this quest can be started
-			if (GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
-				// get the dialog for starting the quest
-				setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
-				
-				//setDialog(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this));
+		if (_relevantForAction) {
+			setDialog(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this));
+			if(_hasItem) {
+				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
 			}
-		} 
+		}
+		else if (_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
+			// if this quest can be started
+				// get the dialog for starting the quest
+			setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
+		}
 		// else if // do i have text in the current quest?
 		else {
 			_dialog = getStndrtDialog();
@@ -186,5 +189,12 @@ void Npc::needNewQuest() {
 	_currentQuest = GameManager::getSingletonPtr()->getQuestManager()->generateQuest(this, lowestNeed.type);
 
 	lowestNeed.adjustValue(50);
+}
+
+
+void Npc::recieveItem() {
+	Character::recieveItem();
+
+	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgNpcItem);
 }
 

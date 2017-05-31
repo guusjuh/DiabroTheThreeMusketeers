@@ -97,6 +97,7 @@ public:
 
 	QuestContent getType() override { return typeFlag == CityRT ? TownQC : HideOutQC; }
 	std::string getName() { return name; }
+	Ogre::Vector3 getQuestPosition() override;
 
 protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)

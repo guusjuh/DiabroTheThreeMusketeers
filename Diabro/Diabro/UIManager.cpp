@@ -55,6 +55,7 @@ void UIManager::setupUI()
 	_maxWidthBar = _playerHealthBarWidget->getOverlayElement()->getWidth();
 
 	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -180, 180);
+	setQuestOn(false);
 
 	_hudTextWidget = nullptr;
 }
@@ -291,7 +292,7 @@ void UIManager::updateMiniMapLocators() {
 
 	// update quest 
 	if (_questOn) {
-		angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs()[0]->getPosition());
+		angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(_questTargetPos);
 		_miniMap->setValueQuest(angle, calcLocatorPos(angle, _maxWidthBar));
 	}
 }
@@ -311,6 +312,10 @@ void UIManager::setQuestOn(bool val)
 	}else {
 		_miniMap->getQuestLocator()->show();
 	}
+}
+
+void UIManager::setQuestTarget(Ogre::Vector3 position) {
+	_questTargetPos = position;
 }
 
 /// calculates the position of the locator as an angle

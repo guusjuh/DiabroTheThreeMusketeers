@@ -19,12 +19,15 @@ public:
 	Quest();
 	~Quest();
 
-	void completeAction();
-	void completeQuest();
+	void start();
+	void update();
+	void end();
 
 	bool isAbstract() { return _strategy.isAbstract(); }
 
 	bool completed() { return _completed; }
+
+	void sendMsg(std::string msg);
 
 private:
 	Strategy _strategy;
@@ -33,7 +36,12 @@ private:
 	int _healthReward;
 	PlayerUpgradeType _upgradeReward;
 
+	IQuestContent* _currentTarget;
+
 	bool _completed;
+	bool _initialized;
+
+	void updateLocatorPos();
 };
 
 #endif

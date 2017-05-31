@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 #include "QuestContentManager.h"
+#include "PreCondition.h"
+#include "PostCondition.h"
 
 /// <summary>
 /// The types of actions.
@@ -56,81 +58,60 @@ class Action {
 	friend class QuestGenerator;
 
 public:
-	/// <summary>
-	/// Initializes a new instance of the <see cref="Action"/> class.
-	/// </summary>
-	Action() : _id(0), _type((ActionType)0), _preconditions(0), _postcondition((PostconditionType)0), _requiredContent(), _concreteContent(0) {
-		_completed = false;
-	}
+	Action();
+	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<QuestContent> pQuestContent, std::string dialog);
+	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<std::pair<QuestContent, int>> pQuestContent, std::string dialog);
+	~Action();
 
-	/// <summary>
-	/// Initializes a new abstract instance of the <see cref="Action"/> class.
-	/// </summary>
-	/// <param name="pID">The id.</param>
-	/// <param name="pType">Type of the action.</param>
-	/// <param name="pPreconditions">The preconditions.</param>
-	/// <param name="pPostcondition">The postcondition.</param>
-	/// <param name="pQuestContent">Required content for this action.</param>
-	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<QuestContent> pQuestContent, std::string dialog) :
-		_id(pID), _type(pType), _preconditions(pPreconditions), _postcondition(pPostcondition), _concreteContent(0), _dialog(dialog) {
-		std::vector<std::pair<QuestContent, int>>	tempRequiredContent;
-
-		for (int i = 0; i < pQuestContent.size(); ++i) {
-			tempRequiredContent.push_back(std::pair<QuestContent, int>(pQuestContent[i], 0));
-		}
-
-		_requiredContent = tempRequiredContent;
-
-		_completed = false;
-	}
-
-	/// Initializes a new abstract instance of the <see cref="Action"/> class.
-	/// </summary>
-	/// <param name="pID">The id.</param>
-	/// <param name="pType">Type of the action.</param>
-	/// <param name="pPreconditions">The preconditions.</param>
-	/// <param name="pPostcondition">The postcondition.</param>
-	/// <param name="pQuestContent">Required content for this action.</param>
-	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<std::pair<QuestContent, int>> pQuestContent, std::string dialog) :
-		_id(pID), _type(pType), _preconditions(pPreconditions), _postcondition(pPostcondition), _requiredContent(pQuestContent), _concreteContent(0), _dialog(dialog) {
-		_completed = false;
-	}
-
-
-	/// <summary>
-	/// Finalizes an instance of the <see cref="Action"/> class.
-	/// </summary>
-	~Action() {}
+	void start();
+	void update();
+	void end();
 
 	int getID() { return _id; }
 	ActionType getType() { return _type; }
+	std::string getDialog() { return _dialog; }
+	std::vector<PreconditionsType> getPreconditions() {
+		std::vector<PreconditionsType> returnVector;
 
-	std::vector<PreconditionsType> getPreconditions() { return _preconditions; }
-	PostconditionType getPostcondition() { return _postcondition; }
-
-	std::vector<std::pair<QuestContent, int>> getRequiredContent() { return _requiredContent; }
-	std::vector<QuestContent> getRequiredContentTypes() {
-		std::vector<QuestContent> returnVector;
-		for (int i = 0; i < getRequiredContent().size(); ++i) {
-			returnVector.push_back(_requiredContent[i].first);
+		std::map<PreconditionsType, PreCondition*>::iterator it;
+		for (it = _preconditions.begin(); it != _preconditions.end(); it++) {
+			returnVector.push_back(it->first);
 		}
+
 		return returnVector;
 	}
+	PostconditionType getPostcondition() { return _postcondition.first; }
+	std::vector<std::pair<QuestContent, int>> getRequiredContent() { return _requiredContent; }
 	std::vector<std::pair<IQuestContent*, int>> getConcreteContent() { return _concreteContent; }
+
+	std::vector<QuestContent> getRequiredContentTypes();
+	IQuestContent* getTarget();
+	int contentContains(QuestContent type);
 
 	bool isAbstract() { return getConcreteContent().size() == 0 ? true : false; }
 
 	bool completed() { return _completed; }
 	void complete() { if (!_completed) _completed = true; }
 
-	std::string getDialog() { return _dialog; }
+	static const std::string msgCityReached;
+	static const std::string msgPlayerItem;
+	static const std::string msgNpcItem;
+
+	void sendMsg(std::string msg);
 
 private:
+
 	int _id;
 	ActionType _type;
 
-	std::vector<PreconditionsType> _preconditions;
-	PostconditionType _postcondition;
+	std::map<PreconditionsType, PreCondition*> _preconditions;
+	std::pair<PostconditionType, PostCondition*> _postcondition;
+	
+	void createPreConditions(std::vector<PreconditionsType> precontypes);
+	void setPreConditionsContent();
+
+	void createPostConditions(PostconditionType precontype);
+	void setPostConditionsContent();
 
 	std::vector<std::pair<QuestContent, int>> _requiredContent;
 	std::vector<std::pair<IQuestContent*, int>> _concreteContent;

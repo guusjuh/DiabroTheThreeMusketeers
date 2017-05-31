@@ -1,0 +1,210 @@
+#include "Action.h"
+#include "Debug.h"
+#include "PreSomethingThere.h"
+#include "GameManager.h"
+#include "PostYouHaveItem.h"
+
+const std::string Action::msgCityReached = "City reached";
+const std::string Action::msgPlayerItem = "Player received item";
+const std::string Action::msgNpcItem = "Npc received item";
+
+/// <summary>
+/// Initializes a new instance of the <see cref="Action"/> class.
+/// </summary>
+Action::Action() : _id(0), _type((ActionType)0), _preconditions(), _postcondition(), _requiredContent(), _concreteContent(0) {
+	_completed = false;
+}
+
+/// <summary>
+/// Initializes a new abstract instance of the <see cref="Action"/> class.
+/// </summary>
+/// <param name="pID">The id.</param>
+/// <param name="pType">Type of the action.</param>
+/// <param name="pPreconditions">The preconditions.</param>
+/// <param name="pPostcondition">The postcondition.</param>
+/// <param name="pQuestContent">Required content for this action.</param>
+Action::Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<QuestContent> pQuestContent, std::string dialog) :
+	_id(pID), _type(pType), _concreteContent(0), _dialog(dialog) {
+	std::vector<std::pair<QuestContent, int>>	tempRequiredContent;
+	createPreConditions(pPreconditions);
+	createPostConditions(pPostcondition);
+
+	for (int i = 0; i < pQuestContent.size(); ++i) {
+		tempRequiredContent.push_back(std::pair<QuestContent, int>(pQuestContent[i], 0));
+	}
+
+	_requiredContent = tempRequiredContent;
+
+	_completed = false;
+}
+
+/// Initializes a new abstract instance of the <see cref="Action"/> class.
+/// </summary>
+/// <param name="pID">The id.</param>
+/// <param name="pType">Type of the action.</param>
+/// <param name="pPreconditions">The preconditions.</param>
+/// <param name="pPostcondition">The postcondition.</param>
+/// <param name="pQuestContent">Required content for this action.</param>
+Action::Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<std::pair<QuestContent, int>> pQuestContent, std::string dialog) :
+	_id(pID), _type(pType), _requiredContent(pQuestContent), _concreteContent(0), _dialog(dialog) {
+	createPreConditions(pPreconditions);
+	createPostConditions(pPostcondition);
+
+	_completed = false;
+}
+
+/// <summary>
+/// Finalizes an instance of the <see cref="Action"/> class.
+/// </summary>
+Action::~Action() {}
+
+void Action::start() {
+	// make pre conditions happen
+	std::map<PreconditionsType, PreCondition*>::iterator it;
+	for (it = _preconditions.begin(); it != _preconditions.end(); it++) {
+		if(it->second == nullptr) continue;
+		it->second->start();
+	}
+
+	// check for pre conditions being true
+}
+
+void Action::update() {
+	// update postcondition
+	if (_postcondition.second == nullptr) return;
+
+	_postcondition.second->update();
+
+	// check for condition being met
+	if(_postcondition.second->isMet()) {
+		complete();
+	}
+}
+
+void Action::end() {
+	// finalize the action.
+}
+
+std::vector<QuestContent> Action::getRequiredContentTypes() {
+	std::vector<QuestContent> returnVector;
+	for (int i = 0; i < getRequiredContent().size(); ++i) {
+		returnVector.push_back(_requiredContent[i].first);
+	}
+	return returnVector;
+}
+
+IQuestContent* Action::getTarget() {
+	int idTarget = -1;
+
+	idTarget = contentContains(NPCQC);
+	if(idTarget < 0) {
+		idTarget = contentContains(EnemyQC);
+		if (idTarget < 0) {
+			idTarget = contentContains(TownQC);
+			if (idTarget < 0) {
+				idTarget = contentContains(HideOutQC);
+				if (idTarget < 0) {
+					// something wrong.
+				}
+			}
+		}
+	}
+
+	Debug("\tA: I found a target, with id ", idTarget);
+
+	return _concreteContent[idTarget].first;
+}
+
+int Action::contentContains(QuestContent type) {
+	for (int i = 0; i < _concreteContent.size(); ++i) {
+		if(_concreteContent[i].first->getType() == type) {
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+void Action::createPreConditions(std::vector<PreconditionsType> precontypes) {
+	for (int i = 0; i < precontypes.size(); ++i) {
+		PreCondition* precondition = nullptr;
+
+		switch(precontypes[i]) {
+/*		case SomebodyThere:
+			precondition = new PreSomethingThere();
+			break;*/
+		case SomethingThere:
+			precondition = new PreSomethingThere();
+			break;
+/*		case KnowWhereToGo:
+			precondition = new PreSomethingThere();
+			break;
+		case YouItemOfInterest:
+			precondition = new PreSomethingThere();
+			break;*/
+		}
+
+		_preconditions[precontypes[i]] = precondition;
+	}
+}
+
+void Action::createPostConditions(PostconditionType precontype) {
+	PostCondition* postcondition = nullptr;
+
+	switch (precontype) {
+		/*		case SomebodyThere:
+		precondition = new PreSomethingThere();
+		break;*/
+	case SomethingThere:
+		postcondition = new PostYouHaveItem();
+		break;
+		/*		case KnowWhereToGo:
+		precondition = new PreSomethingThere();
+		break;
+		case YouItemOfInterest:
+		precondition = new PreSomethingThere();
+		break;*/
+	}
+
+	_postcondition = std::pair<PostconditionType, PostCondition*>(precontype, postcondition);
+}
+
+void Action::setPreConditionsContent() {
+	std::map<PreconditionsType, PreCondition*>::iterator it;
+	for (it = _preconditions.begin(); it != _preconditions.end(); it++) {
+		switch (it->first) {
+			/*		case SomebodyThere:
+			precondition = new PreSomethingThere();
+			break;*/
+		case SomethingThere:
+			for (int j = 0; j < _concreteContent.size(); ++j) {
+				if (_concreteContent[j].first->getType() == EnemyQC || _concreteContent[j].first->getType() == NPCQC) {
+					((PreSomethingThere*)it->second)->character = _concreteContent[j].first;
+					//typeCharacter = character->getType();
+				}
+				if (_concreteContent[j].first->getType() == QuestItemQC) {
+					((PreSomethingThere*)it->second)->item = _concreteContent[j].first;
+				}
+			}
+
+			break;
+			/*		case KnowWhereToGo:
+			precondition = new PreSomethingThere();
+			break;
+			case YouItemOfInterest:
+			precondition = new PreSomethingThere();
+			break;*/
+		}
+	}
+	
+}
+
+void Action::setPostConditionsContent() {
+	
+}
+
+void Action::sendMsg(std::string msg) {
+	if(_postcondition.second != nullptr) {
+		_postcondition.second->receiveMsg(msg);
+	}
+}

@@ -5,6 +5,8 @@
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
 #include "BaseApplication.h"
+#include "QuestItem.h"
+#include "Debug.h"
 
 /// <summary>
 /// The Character class is the superclass for all different kinds of characters.
@@ -15,7 +17,7 @@ class Character
 {
 public:
 	Character(Ogre::SceneNode*, Ogre::Entity*);
-	Character() {}
+	Character() : _hasItem(false) {}
 	~Character() {}
 
 	int id; //may only be changed by levelmanager, death scenario 
@@ -34,6 +36,8 @@ public:
 	Ogre::Real getCurrHealth() { return _currentHealth;  }
 	Ogre::Real getMaxHealth() { return _maxHealth;  }
 	int getLevel() { return _currentLevel; }
+
+	virtual void recieveItem();
 
 protected:
 	Ogre::Real _movespeed;
@@ -59,6 +63,12 @@ protected:
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);
 	virtual bool lightAttack();
+
+	bool _hasItem;
+	virtual void giveItem(Character* reciever) {
+		_hasItem = false;
+		reciever->recieveItem();
+	}
 
 	Ogre::SceneNode* _myNode;
 	Ogre::Entity* _myEntity;

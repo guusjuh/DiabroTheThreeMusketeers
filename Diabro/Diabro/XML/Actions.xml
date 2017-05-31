@@ -89,7 +89,7 @@
 			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
-	<Dialog>Is 'QuestItemQC1' what you were searching for? ... \n Good!</Dialog>
+	<Dialog>Is 'QuestItemQC1' what you were searching for? ... \nGood!</Dialog>
 </Action>
 
 <Action>
@@ -127,7 +127,7 @@
 			<Type>QuestItemQC</Type>
 		</Pair>
 	</RequiredContent>
-	<Dialog>Oh, you got 'QuestItemQC1'! \n Give it to me now.</Dialog>
+	<Dialog>Oh, you got 'QuestItemQC1'! \nGive it to me now.</Dialog>
 </Action>
 
 <Action>

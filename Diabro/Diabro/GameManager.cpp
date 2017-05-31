@@ -170,6 +170,9 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		break;
 	case InGame:
 		_levelManager->inGameUpdate(pFE);
+		if(_questManager->getCurrentQuest() != nullptr) {
+			_questManager->getCurrentQuest()->update();
+		}
 		_uiManager->inGameUpdate(pFE);
 		break;
 	case End:

@@ -1,5 +1,7 @@
 #include "QuestManager.h"
 #include "ActionContainer.h"
+#include "GameManager.h"
+#include "Debug.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestManager"/> class.
@@ -48,7 +50,7 @@ QuestManager::QuestManager()
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("EnemyQC", EnemyQC));
 
 	stringToNeedType.insert(std::pair<std::string, NeedType>("Knowledge", KnowledgeNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("Comfort", ComfortNeed));
+	//stringToNeedType.insert(std::pair<std::string, NeedType>("Comfort", ComfortNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Serenity", SerenityNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Protection", ProtectionNeed));
@@ -82,15 +84,12 @@ std::string QuestManager::startQuest(Npc* sourceNpc) {
 		}
 	}
 
+	Debug("\tQM: Current quest has been found.");
+
 	// start method on quest (still needs to be implemented)
-	// 1. needs to set the current action, etc.
-	// 2. idk
-	// prepare action 1
+	_currentQuest->start();
 
-	Ogre::Vector3 targetPos = Ogre::Vector3(0,0,0); // should be pos of target based on current action.
-
-	// update the locator
-	GameManager::getSingletonPtr()->getUIManager()->setQuestTarget();
+	Debug("\tQM: Current quest has been started.");
 
 	return _currentQuest->_strategy.getDialog();
 }

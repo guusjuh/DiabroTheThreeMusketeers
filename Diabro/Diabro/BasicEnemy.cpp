@@ -92,6 +92,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	}
 
 	name = getNameOptions()[rand() % getNameOptions().size()];
+	_relevantForAction = false;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;

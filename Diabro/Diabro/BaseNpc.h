@@ -27,6 +27,8 @@ public:
 
 	using IQuestContent::getType;
 
+	Ogre::Vector3 getQuestPosition() override { return getPosition(); }
+
 protected:
 	bool _inCurrentQuest;
 

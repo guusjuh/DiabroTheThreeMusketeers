@@ -41,6 +41,7 @@ public:
 	City* getHomeTown() { return _hometown; }
 
 	QuestContent getType() override { return NPCQC; }
+	void recieveItem() override;
 
 private: 
 	bool _hasQuest;
@@ -59,9 +60,22 @@ private:
 		return dialog;
 	}
 
-	void setDialog(std::string oneSentenceDialog) {
+	void setDialog(std::string s) {
 		_dialog.clear();
-		_dialog.push_back(oneSentenceDialog);
+
+		std::string delimiter = "\\n";
+		std::string token;// = s.substr(0, s.find(delimiter));
+		size_t pos = 0;
+		while ((pos = s.find(delimiter)) != std::string::npos) {
+			token = s.substr(0, pos);
+			std::cout << token << std::endl;
+			_dialog.push_back(token);
+			s.erase(0, pos + delimiter.length());
+		}
+
+		if (s != "") _dialog.push_back(s);
+
+		int i = 0;
 	}
 
 	std::string _name;
@@ -74,6 +88,7 @@ private:
 	void needNewQuest();
 
 	std::vector<std::string> getNameOptions();
+
 };
 
 #endif
