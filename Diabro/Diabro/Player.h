@@ -36,6 +36,8 @@ public:
 	void toggleInQuest();
 	void upgradeEquipment(PlayerUpgradeType type);
 
+	void recieveItem() override;
+
 private:
 	void die() override;
 

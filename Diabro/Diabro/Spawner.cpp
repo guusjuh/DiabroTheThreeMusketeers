@@ -1,5 +1,6 @@
 #include "Spawner.h"
 #include "GameManager.h"
+#include "BasicEnemy.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Spawner"/> class.
@@ -49,7 +50,7 @@ void Spawner<T>::spawnInstance() {
 	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		
 	rotationNode->attachObject(instanceEntity);
-	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity, _myCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
+	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity, _myCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel(), this);
 }
 
 template class Spawner < BasicEnemy >;

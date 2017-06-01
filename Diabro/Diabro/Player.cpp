@@ -18,7 +18,7 @@ const int Player::HIGH_DMG = 5;
 Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
 	// override default speeds
-	_movespeed = 450;
+	_movespeed = 560;
 
 	equipment = new PlayerEquipment(40.0f, 3.0f);
 	_maxHealth = equipment->getHealth();
@@ -113,6 +113,7 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 		Debug("Wrong upgrade type");
 		break;
 	}
+	int i = 0;
 }
 
 /// <summary>
@@ -158,8 +159,6 @@ void Player::update(Ogre::Real pDeltaTime)
 		}
 		setNearbyNPC(nullptr);
 	}
-
-	//angleBetween(Ogre::Vector3(0,0,0));
 }
 
 /// <summary>
@@ -168,12 +167,16 @@ void Player::update(Ogre::Real pDeltaTime)
 void Player::dialogTriggered() {
 	if (_nearbyNPC == nullptr) return;
 
-	if(!_inDialog) 	GameManager::getSingletonPtr()->getSoundManager()->dialog();
-
+	if (!_inDialog) {
+		GameManager::getSingletonPtr()->getSoundManager()->dialog();
+	}
 	_inDialog = true;
 
 	if (!_nearbyNPC->talk(getPosition())) {
 		_inDialog = false;
+		if (_hasItem && _needToGiveItem && _nearbyNPC->relevantForAction()) {
+			giveItem(_nearbyNPC);
+		}
 	}
 
 	return;
@@ -327,4 +330,10 @@ float Player::angleBetween(Ogre::Vector3 other) {
 void Player::toggleInQuest() {
 	_inQuest = !_inQuest; 
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(_inQuest);
+}
+
+void Player::recieveItem() {
+	Character::recieveItem();
+
+	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgPlayerItem);
 }

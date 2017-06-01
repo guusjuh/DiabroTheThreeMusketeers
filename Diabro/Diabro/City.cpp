@@ -15,6 +15,8 @@
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar)
 {
+	_relevantForAction = false;
+
 	//setType();
 }
 
@@ -34,6 +36,24 @@ void City::init()
 City::~City()
 {
 }
+
+void City::update() {
+	if(_relevantForAction) {
+		if(inThisCity(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition())) {
+			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgCityReached);
+		}
+	}
+}
+
+bool City::inThisCity(Ogre::Vector3 worldCoord) {
+	// x as
+	if(position.x * scalar < worldCoord.x && position.x * scalar + (width * scalar) > worldCoord.x &&
+		position.z * scalar < worldCoord.z && position.z * scalar + (depth * scalar) > worldCoord.z) {
+		return true;
+	} 
+	return false;
+}
+
 
 std::vector<std::string> City::getNameOptions(RoomType type) {
 	std::vector<std::string> _nameOptions;
@@ -94,12 +114,12 @@ void City::generateBuildings()
 		buildingNode->setScale(1, 3, 1);
 		buildingNode->attachObject(_buildingEntity);
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = (position.x + i) * scalar;
-		int zPos = (position.z + i) * scalar;
+		int xPos = (position.x + 1) * scalar;
+		int zPos = (position.z + 1) * scalar;
 		buildingNode->setPosition(xPos, 100, zPos); 
 
 		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1);
-		int residents = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
+		int residents = GameManager::getSingletonPtr()->getRandomInRange(1, 3);
 		Building thisBuilding = Building((BuildingType)buildingType, residents, Ogre::Vector2(xPos, zPos));
 		_buildingStructs.push_back(thisBuilding);
 
@@ -236,4 +256,8 @@ std::vector<Coordinate> City::buildingPositions() {
 	}
 
 	return positions;
+}
+
+Ogre::Vector3 City::getQuestPosition() {
+	return GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getWorldPosition(getCenterTile()); 
 }

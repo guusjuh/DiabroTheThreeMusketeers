@@ -86,6 +86,8 @@ void GameManager::createScene(void)
 void GameManager::reset() {
 	getSceneManager()->clearScene();
 	_levelManager->reset();
+	_questManager->reset();
+
 	setupLights(mSceneMgr);
 
 	state = Start;
@@ -169,6 +171,9 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		_uiManager->diedUpdate(pFE);
 		break;
 	case InGame:
+		if (_questManager->getCurrentQuest() != nullptr) {
+			_questManager->getCurrentQuest()->update();
+		}
 		_levelManager->inGameUpdate(pFE);
 		_uiManager->inGameUpdate(pFE);
 		break;

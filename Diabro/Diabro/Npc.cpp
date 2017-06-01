@@ -7,7 +7,7 @@
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
-: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding)
+: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding), _initialized(false)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
@@ -62,6 +62,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	_needs = NeedSet(tempNeeds);
 
 	_hasQuest = false;
+	_relevantForAction = false;
 }
 
 /// <summary>
@@ -96,9 +97,10 @@ void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 
-	if (!_hasQuest) {
+	if (!_hasQuest && !_initialized) {
 		needNewQuest();
 		_hasQuest = true;
+		_initialized = true;
 	}
 
 	if(_playerDetected)
@@ -120,8 +122,27 @@ void Npc::die() {
 /// <returns>False if the player is too far away to start a talk</returns>
 bool Npc::talk(Ogre::Vector3 pPlayerPos)
 {
+	// start the dialog if it wasn't started already
 	if (!_inDialog) {
+		// this npc is currently in dialog
 		_inDialog = true;
+
+		// if this NPC has a quest 
+		if (_relevantForAction) {
+			setDialog(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this));
+		}
+		else if (_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
+			// if this quest can be started
+				// get the dialog for starting the quest
+			setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
+			_hasQuest = false;
+		}
+		// else if // do i have text in the current quest?
+		else {
+			_dialog = getStndrtDialog();
+		}
+
+		// show the first line of the dialog
 		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, _dialog[_dialogCount]);
 	}
 	else {
@@ -130,6 +151,10 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_dialog[_dialogCount]);
 		}
 		else {
+			if (_hasItem && _needToGiveItem) {
+				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+			}
+
 			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
 			_dialogCount = 0;
 			_inDialog = false;
@@ -167,5 +192,12 @@ void Npc::needNewQuest() {
 	_currentQuest = GameManager::getSingletonPtr()->getQuestManager()->generateQuest(this, lowestNeed.type);
 
 	lowestNeed.adjustValue(50);
+}
+
+
+void Npc::recieveItem() {
+	Character::recieveItem();
+
+	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgNpcItem);
 }
 

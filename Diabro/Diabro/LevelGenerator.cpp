@@ -12,7 +12,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	Debug("Initializing zone");
-	_zone[0] = Zone(20, 20, 6, 6, 10, 100, scalar);
+	_zone[0] = Zone(19, 19, 3, 3, 10, 100, scalar);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -281,9 +281,9 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 	// catch the buildings position
 	Ogre::Vector3 buildingPosition = pThisBuilding->getPositionInFrontOf();
 	Ogre::Vector3 offsets[3];
-	offsets[0] = Ogre::Vector3(-250, 0, -50);
-	offsets[1] = Ogre::Vector3(-250, 0, 0);
-	offsets[2] = Ogre::Vector3(-250, 0, 50);
+	offsets[0] = Ogre::Vector3(250, 0, -50);
+	offsets[1] = Ogre::Vector3(250, 0, 0);
+	offsets[2] = Ogre::Vector3(250, 0, 50);
 	// for each resident
 	for (int i = 0; i < pThisBuilding->residents; ++i) {
 		// the scene node for the resident

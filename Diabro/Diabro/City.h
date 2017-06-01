@@ -70,8 +70,10 @@ public:
 	int depth;
 	int id; ///< unique id
 	int scalar;
+
 	void init();
-	
+	void update();
+
 	//TODO: make local position
 	Ogre::Vector3 getRandomPointInRoom();
 	Coordinate getCenterTile();
@@ -97,6 +99,10 @@ public:
 
 	QuestContent getType() override { return typeFlag == CityRT ? TownQC : HideOutQC; }
 	std::string getName() { return name; }
+	Ogre::Vector3 getQuestPosition() override;
+
+	bool inThisCity(Ogre::Vector3 worldCoord);// { return false; }
+	//bool inThisCity(Coordinate gridCoord);// { return false; }
 
 protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)

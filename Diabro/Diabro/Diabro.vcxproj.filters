@@ -133,6 +133,33 @@
     <ClCompile Include="EnemyMoveAroundCenterState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Sources\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="PreSomethingThere.cpp">
+      <Filter>Sources\Quest\Conditions\Pre</Filter>
+    </ClCompile>
+    <ClCompile Include="PostCondition.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
+    <ClCompile Include="PostYouHaveItem.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
+    <ClCompile Include="PreKnowWhereToGo.cpp">
+      <Filter>Sources\Quest\Conditions\Pre</Filter>
+    </ClCompile>
+    <ClCompile Include="PostYouThere.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
+    <ClCompile Include="PreSomebodyThere.cpp">
+      <Filter>Sources\Quest\Conditions\Pre</Filter>
+    </ClCompile>
+    <ClCompile Include="PreYouItemOfInterest.cpp">
+      <Filter>Sources\Quest\Conditions\Pre</Filter>
+    </ClCompile>
+    <ClCompile Include="PostTheyHaveItem.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -286,6 +313,33 @@
     <ClInclude Include="EnemyMoveAroundCenterState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
+    <ClInclude Include="PostCondition.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCondition.h">
+      <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="PreSomethingThere.h">
+      <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="PostYouHaveItem.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
+    </ClInclude>
+    <ClInclude Include="PreKnowWhereToGo.h">
+      <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="PostYouThere.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
+    </ClInclude>
+    <ClInclude Include="PreSomebodyThere.h">
+      <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="PreYouItemOfInterest.h">
+      <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="PostTheyHaveItem.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -384,6 +438,24 @@
     </Filter>
     <Filter Include="Sources\Debug">
       <UniqueIdentifier>{131fd51a-6c70-4a4d-a237-63b47a9046bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Quest\Conditions">
+      <UniqueIdentifier>{3afe0aec-f614-4347-9caf-f287f0512ad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Quests\Conditions">
+      <UniqueIdentifier>{a38153e5-3dc8-4eb5-b303-220b73a965e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Quests\Conditions\Pre">
+      <UniqueIdentifier>{fbb2e245-a175-477f-9f2d-13ce345d3831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Quests\Conditions\Post">
+      <UniqueIdentifier>{a27962c8-c276-4980-b196-8a0aa70e1235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Quest\Conditions\Pre">
+      <UniqueIdentifier>{474f030c-8f84-448f-a36d-d0fa7b9b90fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Quest\Conditions\Post">
+      <UniqueIdentifier>{840be4a2-36b6-41df-9c67-e1af9f35c10a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

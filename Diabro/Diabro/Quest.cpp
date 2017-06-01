@@ -1,5 +1,6 @@
 #include "Quest.h"
 #include "GameManager.h"
+#include "Debug.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Quest"/> class.
@@ -8,14 +9,14 @@
 /// <param name="sourceNPC">The source NPC.</param>
 /// <param name="healthReward">The health reward.</param>
 Quest::Quest(Strategy strategy, BaseNpc* sourceNPC, int healthReward, PlayerUpgradeType upgrade)
-	: _strategy(strategy), _sourceNPC(sourceNPC), _healthReward(healthReward), _upgradeReward(upgrade), _completed(false) {
+	: _strategy(strategy), _sourceNPC(sourceNPC), _healthReward(healthReward), _upgradeReward(upgrade), _completed(false), _initialized(false){
 }
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Quest"/> class.
 /// </summary>
 Quest::Quest()
-	: _strategy(), _sourceNPC(nullptr), _healthReward(0), _upgradeReward(), _completed(false) { }
+	: _strategy(), _sourceNPC(nullptr), _healthReward(0), _upgradeReward(), _completed(false), _initialized(false) { }
 
 /// <summary>
 /// Finalizes an instance of the <see cref="Quest"/> class.
@@ -23,33 +24,69 @@ Quest::Quest()
 Quest::~Quest() {}
 
 /// <summary>
-/// Completes the current action and sets the next.
+/// Starts the quest.
 /// </summary>
-void Quest::completeAction() {
-	// complete the action
-	_strategy.getCurrentAction()->complete();
+void Quest::start() {	
+	// set the first action as current
+	_strategy.increaseAction();
 
-	// if it's not the last
-	if(_strategy.getCurrentAction() == &_strategy.getActionSequence()[_strategy.getActionSequence().size() - 1]) {
-		completeQuest();
-		return;
-	} else {
-		_strategy.increaseAction();
-		return;
+	Debug("\tQ: active action is set to ", _strategy._currentAction);
+
+	// set the target for player/ui
+	_currentTarget = _strategy._actionSequence[_strategy._currentAction].getTarget();
+
+	Debug("\tQ: I have set a target for the locator.");
+
+	// notify the ui
+	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(true);
+
+	_initialized = true;
+}
+
+void Quest::update() {
+	if (!_initialized) return;
+
+	_strategy._actionSequence[_strategy._currentAction].update();
+
+	if(_strategy._actionSequence[_strategy._currentAction].completed()) {
+		if(!_strategy.increaseAction()) {
+			end();
+			return;
+		} else {
+			_currentTarget = _strategy._actionSequence[_strategy._currentAction].getTarget();
+		}
 	}
-		
+
+	updateLocatorPos();
 }
 
 /// <summary>
-/// Completes the quest.
+/// Ends the quest, assigns rewards.
 /// </summary>
-void Quest::completeQuest() {
-	// give rewards
-	//TODO: also give the upgrade as reward
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(_healthReward);
+void Quest::end() {
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->upgradeEquipment(_upgradeReward);
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-_healthReward);
 
-	//TODO: sound, ui, fancy stuff, hud text
+	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
 
 	_completed = true;
 }
 
+/// <summary>
+/// Abondons the quest.
+/// </summary>
+void Quest::abondon() {
+	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
+}
+
+/// <summary>
+/// Updates the locator position.
+/// </summary>
+void Quest::updateLocatorPos() {
+	// update the locator
+	GameManager::getSingletonPtr()->getUIManager()->setQuestTarget(_currentTarget->getQuestPosition());
+}
+
+void Quest::sendMsg(std::string msg) {
+	_strategy._actionSequence[_strategy._currentAction].sendMsg(msg);
+}

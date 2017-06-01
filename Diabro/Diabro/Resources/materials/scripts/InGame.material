@@ -26,6 +26,20 @@ material InGame/Wall
    }
 }
 
+material InGame/Hit
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture hit.jpg
+         }
+      }
+   }
+}
+
 material InGame/PinkNPC
 {
    technique

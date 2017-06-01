@@ -539,6 +539,7 @@ bool* Zone::getCollisionGrid() {
 		collisionGrid = generateCollisionGrid();
 		collisionGridGenerated = true;
 		printCollisionGrid();
+		int i = 0;
 	}
 	return collisionGrid;
 }

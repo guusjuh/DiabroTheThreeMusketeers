@@ -9,6 +9,7 @@
 #include "EnemyAttackState.h"
 #include "EnemyMoveAroundCenterState.h"
 #include "EnemyEquipment.h"
+#include "Spawner.h"
 
 /// <summary>
 /// The basic class for an enemy.
@@ -17,7 +18,7 @@
 class BasicEnemy : public BaseNpc
 {
 public:
-	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int);
+	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int, Spawner<BasicEnemy>* mySpawner);
 	~BasicEnemy() {}
 
 	void update(Ogre::Real) override;
@@ -41,6 +42,7 @@ private:
 	std::string name;
 
 	std::map<std::string, State<BaseNpc>*> possibleStates;
+	Spawner<BasicEnemy>* mySpawner;
 	bool _initialized;
 
 	static const int LOW_HP;

@@ -5,7 +5,9 @@
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
 #include "BaseApplication.h"
+#include "QuestItem.h"
 #include "Zone.h"
+#include "Debug.h"
 
 /// <summary>
 /// The Character class is the superclass for all different kinds of characters.
@@ -16,7 +18,7 @@ class Character
 {
 public:
 	Character(Ogre::SceneNode*, Ogre::Entity*);
-	Character() {}
+	Character() : _hasItem(false), _needToGiveItem(false) {}
 	~Character() {}
 
 	int id; //may only be changed by levelmanager, death scenario 
@@ -44,6 +46,13 @@ public:
 	Ogre::Real closestDistanceToNpc(Ogre::Vector3 pos);
 	bool collidesWithGrid(Ogre::Vector3, Zone* zone, int cornerRange);
 
+	virtual void recieveItem();
+	void needToGiveItem() {
+		_needToGiveItem = true;
+	}
+
+	bool hasItem() { return _hasItem; }
+
 protected:
 	Ogre::Real _movespeed;
 	Ogre::Real _rotationspeed;
@@ -67,6 +76,15 @@ protected:
 
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);
+
+	bool _hasItem;
+	bool _needToGiveItem;
+
+	virtual void giveItem(Character* reciever) {
+		_hasItem = false;
+		_needToGiveItem = false;
+		reciever->recieveItem();
+	}
 
 	Ogre::SceneNode* _myNode;
 	Ogre::Entity* _myEntity;

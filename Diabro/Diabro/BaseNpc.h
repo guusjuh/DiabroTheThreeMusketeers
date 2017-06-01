@@ -36,8 +36,12 @@ public:
 
 	using IQuestContent::getType;
 
+	Ogre::Vector3 getQuestPosition() override { return getPosition(); }
+
 protected:
 	std::vector<Coordinate> nextPos;
+	bool _inCurrentQuest;
+
 	Ogre::SceneNode* _myRotationNode;
 
 	Coordinate goalPos;

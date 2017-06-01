@@ -9,7 +9,7 @@
 /// </summary>
 enum NeedType {
 	KnowledgeNeed = 0, //
-	ComfortNeed,
+	//ComfortNeed,
 	//ReputationNeed,
 	//SerenityNeed,
 	//ProtectionNeed,
@@ -24,7 +24,7 @@ enum NeedType {
 /// A strucuture containing all data relevant to a need. 
 /// </summary>
 struct Need {
-	Need() : type(NeedType::ComfortNeed), value(0) {};
+	Need() : type(NeedType::KnowledgeNeed), value(0) {};
 	Need(NeedType pType, Ogre::Real pValue) : type(pType), value(pValue) {};
 
 	NeedType type;
@@ -58,7 +58,7 @@ public:
 	std::vector<Need> getNeeds() { return _needs; }
 
 	int getKnowledgeValue() { return _needs[(int)NeedType::KnowledgeNeed].value; };
-	int getComfortValue() { return _needs[(int)NeedType::ComfortNeed].value; };
+	//int getComfortValue() { return _needs[(int)NeedType::ComfortNeed].value; };
 	//int getReputationValue() { return _needs[(int)NeedType::ReputationNeed].value; };
 	//int getSerenityValue() { return _needs[(int)NeedType::SerenityNeed].value; };
 	//int getProtectionValue() { return _needs[(int)NeedType::ProtectionNeed].value; };

@@ -11,7 +11,7 @@
 /// </summary>
 class Strategy {
 	friend class QuestGenerator;
-
+	friend class Quest;
 public:
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Strategy"/> class.
@@ -23,7 +23,7 @@ public:
 	/// <param name="pActions">The actions that must be completed for the quest.</param>
 	Strategy(int pid, std::string pName, std::string pNameQuest, std::string pStartDialog, NeedType pMotivation, std::vector<Action> pActions, int pRarityPref)
 		: _id(pid), _nameStrategy(pName), _nameQuest(pNameQuest), _startDialog(pStartDialog), _motivation(pMotivation), _actionSequence(pActions), _rarityPref(pRarityPref) {
-		_currentAction = 0;
+		_currentAction = -1;
 	}
 
 	/// <summary>
@@ -45,8 +45,8 @@ public:
 	std::string getName() { return _nameStrategy; }
 	std::string getNameQuest() { return _nameQuest; }
 	std::string getDialog() { return _startDialog; }
-
 	NeedType getMotivation() { return _motivation; }
+	int getRarityPref() { return _rarityPref; }
 
 	std::vector<Action> getActionSequence() {
 		return _actionSequence;
@@ -55,10 +55,6 @@ public:
 		return &_actionSequence[_currentAction];
 	}
 
-	void increaseAction() {	_currentAction++; }
-
-	int getRarityPref() { return _rarityPref; }
-
 	bool isAbstract() { return _actionSequence[0].getConcreteContent().size() == 0 ? true : false; }
 
 private:
@@ -66,12 +62,31 @@ private:
 	std::string _nameStrategy;
 	std::string _nameQuest;
 	NeedType _motivation;
+	int _rarityPref;
+
 	std::string _startDialog;
 
 	std::vector<Action> _actionSequence;
 	int _currentAction;
 
-	int _rarityPref;
+	bool increaseAction() {
+		// finish current
+		if(_currentAction >= 0) {
+			_actionSequence[_currentAction].end();
+		}
+
+		// set next
+		_currentAction++;
+
+		if(_currentAction >= _actionSequence.size()) {
+			return false;
+		}
+
+		// start new current
+		_actionSequence[_currentAction].start();
+
+		return true;
+	}
 };
 
 #endif 

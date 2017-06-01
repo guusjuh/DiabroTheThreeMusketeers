@@ -24,6 +24,16 @@ public:
 		_strategyContainer = new StrategyContainer();
 		_questContentManager = new QuestContentManager();
 		_questGenerator = new QuestGenerator();
+	}  
+
+	void reset() {
+		if(_currentQuest != nullptr) {
+			// abondon quet
+			_currentQuest->abondon();
+			_currentQuest = nullptr;
+		}
+
+		_quests.clear();
 	}
 
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
@@ -31,6 +41,21 @@ public:
 	StrategyContainer* getStrategyContainer(void) { return _strategyContainer; }
 	Quest* generateQuest(Npc* pSourceNpc, NeedType pMotivation);
 
+	Quest* getCurrentQuest() {
+		if(_currentQuest != nullptr) {
+			if (_currentQuest->completed()) {
+				_currentQuest = nullptr;
+			}
+		}
+
+		return _currentQuest;
+	}
+	bool questCanStart() { return _currentQuest == nullptr ? true : false; }
+	std::string startQuest(Npc* sourceNpc);
+
+	std::string obtainDialog(IQuestContent* client);
+
+	// maps a string to an enum to enable parsing of xml files. 
 	std::map<std::string, ActionType> stringToActionType;
 	std::map<std::string, PreconditionsType> stringToPreconditionType;
 	std::map<std::string, PostconditionType> stringToPostconditionType;
@@ -44,6 +69,7 @@ private:
 	StrategyContainer* _strategyContainer;
 	QuestGenerator* _questGenerator;
 
+	Quest* _currentQuest;
 	std::vector<Quest> _quests;
 };
 

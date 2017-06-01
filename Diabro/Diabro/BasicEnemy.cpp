@@ -22,7 +22,8 @@ const Ogre::ColourValue BasicEnemy::COL_NDIST = Ogre::ColourValue(0, 0, 1);
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
+BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level, Spawner<BasicEnemy>* mySpawner) 
+: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), mySpawner(mySpawner)
 {
 	EnemyFollowState* followPlayer = new EnemyFollowState();
 	EnemyAttackState* attack = new EnemyAttackState();
@@ -96,6 +97,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	}
 
 	name = getNameOptions()[rand() % getNameOptions().size()];
+	_relevantForAction = false;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
@@ -240,6 +242,8 @@ void BasicEnemy::die() {
 
 	Character::die();
 	
+	mySpawner->instanceDeath();
+
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 }

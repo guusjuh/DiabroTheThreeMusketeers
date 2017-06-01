@@ -31,6 +31,8 @@ public:
 	
 	QuestItem(std::string pName, std::string pSprName, QuestItemType pType)
 		: _name(pName), _sprName(pSprName), _itemType(pType) {
+		_relevantForAction = false;
+
 		determineRarity();
 	}
 	
@@ -42,6 +44,7 @@ public:
 	int getRarity() { return _rarity; }
 
 	QuestContent getType() override { return QuestItemQC; }
+	Ogre::Vector3 getQuestPosition() override { return Ogre::Vector3(0, 0, 0); }
 
 private:
 	std::string _name;

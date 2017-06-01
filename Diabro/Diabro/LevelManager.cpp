@@ -147,6 +147,10 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	{
 		_hostileNpcScripts[i]->update(deltaTime);
 	}
+
+	for (int i = 0; i < levelGenerator->getZone(0, 0).cities.size(); ++i) {
+		levelGenerator->getZone(0, 0).cities[i].update();
+	}
 }
 
 /// <summary>
