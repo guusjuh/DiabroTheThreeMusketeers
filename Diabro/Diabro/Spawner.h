@@ -2,8 +2,6 @@
 #define CHARACTER_SPAWNER_H_
 
 #include "Character.h"
-#include "Npc.h"
-#include "BasicEnemy.h"
 
 /// <summary>
 /// A generic spawner class.

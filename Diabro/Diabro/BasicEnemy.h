@@ -5,6 +5,7 @@
 #include "StateMachine.h"
 #include "IdleState.h"
 #include "EnemyEquipment.h"
+#include "Spawner.h"
 
 /// <summary>
 /// The basic class for an enemy.
@@ -13,7 +14,7 @@
 class BasicEnemy : public BaseNpc
 {
 public:
-	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int);
+	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int, Spawner<BasicEnemy>* mySpawner);
 	~BasicEnemy() {}
 
 	void update(Ogre::Real) override;
@@ -36,6 +37,8 @@ private:
 	int healthUpgrades, damageUpgrades, noticeDistUpgrades;
 	std::vector<std::string> getNameOptions();
 	std::string name;
+
+	Spawner<BasicEnemy>* mySpawner;
 
 	static const int LOW_HP;
 	static const int HIGH_HP;

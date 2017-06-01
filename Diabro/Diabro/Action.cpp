@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "PostYouHaveItem.h"
 #include "PreKnowWhereToGo.h"
+#include "PostYouThere.h"
 
 const std::string Action::msgCityReached = "City reached";
 const std::string Action::msgPlayerItem = "Player received item";
@@ -78,7 +79,7 @@ void Action::update() {
 
 	// check for condition being met
 	if(_postcondition.second->isMet()) {
-		complete();
+ 		complete();
 	}
 }
 
@@ -164,10 +165,10 @@ void Action::createPostConditions(PostconditionType postType) {
 	case SomethingThere:
 		postcondition = new PostYouHaveItem();
 		break;
-		/*		case KnowWhereToGo:
-		precondition = new PreSomethingThere();
+	case YouThere:
+		postcondition = new PostYouThere();
 		break;
-		case YouItemOfInterest:
+		/*case YouItemOfInterest:
 		precondition = new PreSomethingThere();
 		break;*/
 	}
@@ -195,8 +196,8 @@ void Action::setPreConditionsContent() {
 			break;
 		case KnowWhereToGo:
 			for (int j = 0; j < _concreteContent.size(); ++j) {
-				if (_concreteContent[j].first->getType() == NPCQC) {
-					((PreSomethingThere*)it->second)->character = _concreteContent[j].first;
+				if (_concreteContent[j].first->getType() == TownQC) {
+					((PreKnowWhereToGo*)it->second)->city = _concreteContent[j].first;
 				}
 			}			
 			break;

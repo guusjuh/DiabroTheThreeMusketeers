@@ -37,6 +37,24 @@ City::~City()
 {
 }
 
+void City::update() {
+	if(_relevantForAction) {
+		if(inThisCity(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition())) {
+			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgCityReached);
+		}
+	}
+}
+
+bool City::inThisCity(Ogre::Vector3 worldCoord) {
+	// x as
+	if(position.x * scalar < worldCoord.x && position.x * scalar + (width * scalar) > worldCoord.x &&
+		position.z * scalar < worldCoord.z && position.z * scalar + (depth * scalar) > worldCoord.z) {
+		return true;
+	} 
+	return false;
+}
+
+
 std::vector<std::string> City::getNameOptions(RoomType type) {
 	std::vector<std::string> _nameOptions;
 

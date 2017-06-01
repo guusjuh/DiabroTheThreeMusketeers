@@ -9,6 +9,9 @@ public:
 	~PreKnowWhereToGo() {}
 
 	void start() override;
+
+private:
+	IQuestContent* city;
 };
 
 #endif

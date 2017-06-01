@@ -136,6 +136,9 @@
     <ClCompile Include="PreKnowWhereToGo.cpp">
       <Filter>Sources\Quest\Conditions\Pre</Filter>
     </ClCompile>
+    <ClCompile Include="PostYouThere.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -291,6 +294,9 @@
     </ClInclude>
     <ClInclude Include="PreKnowWhereToGo.h">
       <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="PostYouThere.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

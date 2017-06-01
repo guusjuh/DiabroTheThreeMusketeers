@@ -124,6 +124,7 @@
     <ClCompile Include="IQuestContent.cpp" />
     <ClCompile Include="PostCondition.cpp" />
     <ClCompile Include="PostYouHaveItem.cpp" />
+    <ClCompile Include="PostYouThere.cpp" />
     <ClCompile Include="PreKnowWhereToGo.cpp" />
     <ClCompile Include="PreSomethingThere.cpp" />
     <ClCompile Include="QuestItem.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="PlayerUpgrade.h" />
     <ClInclude Include="PostCondition.h" />
     <ClInclude Include="PostYouHaveItem.h" />
+    <ClInclude Include="PostYouThere.h" />
     <ClInclude Include="PreCondition.h" />
     <ClInclude Include="PreKnowWhereToGo.h" />
     <ClInclude Include="PreSomethingThere.h" />
