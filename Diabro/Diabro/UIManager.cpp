@@ -242,6 +242,8 @@ void UIManager::hideDialog() {
 /// <param name="pMaxValue">The maximum pValue.</param>
 void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
+	pValue = Ogre::Math::Clamp<Ogre::Real>(pValue, 0, pMaxValue);
+
 	_playerHealthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
 }
 

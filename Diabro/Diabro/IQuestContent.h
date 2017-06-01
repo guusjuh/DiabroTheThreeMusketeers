@@ -31,6 +31,8 @@ public:
 		_relevantForAction = val;
 	}
 
+	bool relevantForAction() { return _relevantForAction; }
+
 protected:
 	bool _relevantForAction;
 	

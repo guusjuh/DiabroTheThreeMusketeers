@@ -9,9 +9,10 @@ void PreSomethingThere::start() {
 
 	if(character->getType() == NPCQC) {
 		((Npc*)character)->recieveItem();
-
+		((Npc*)character)->needToGiveItem();
 	} else {
 		((BasicEnemy*)character)->recieveItem();
+		((BasicEnemy*)character)->needToGiveItem();
 	}
 
 	character->setRelevantForAction(true);

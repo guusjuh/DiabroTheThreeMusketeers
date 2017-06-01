@@ -11,7 +11,7 @@
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity),  _dirVec(0, 0, 0),
-_movespeed(100), _rotationspeed(0.13), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(40), _hasItem(false),
+_movespeed(100), _rotationspeed(0.13), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(40), _hasItem(false), _needToGiveItem(false),
 _attackDistance(250), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _damage(3), _noticeDistance(400.0f)
 {
 	_currentHealth = _maxHealth;
@@ -144,13 +144,17 @@ bool Character::adjustHealth(float pAdjust)
 
 	_hitTime = _totalHitTime;
 	_hitted = true;
+	Debug("I got hit...", _currentHealth);
 
 	if ((_currentHealth -= pAdjust) <= 0)
 	{
 		die();
 		return false;
 	}
-	Debug("I got hit...", _currentHealth);
+	else if(_currentHealth > _maxHealth) {
+		_currentHealth = _maxHealth;
+	}
+
 	return true;
 }
 

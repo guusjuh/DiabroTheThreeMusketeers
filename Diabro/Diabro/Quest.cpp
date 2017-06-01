@@ -64,14 +64,19 @@ void Quest::update() {
 /// Ends the quest, assigns rewards.
 /// </summary>
 void Quest::end() {
-	// finish quest
-	// make sure update isn't called anymore
-	// remove blue thingie in ui
-	//TODO: give rewards to the player
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->upgradeEquipment(_upgradeReward);
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-_healthReward);
 
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(_healthReward);
+	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
+
 	_completed = true;
+}
 
+/// <summary>
+/// Abondons the quest.
+/// </summary>
+void Quest::abondon() {
+	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
 }
 
 /// <summary>

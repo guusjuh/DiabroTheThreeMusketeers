@@ -11,6 +11,7 @@ void PreYouItemOfInterest::start() {
 		return;
 	}
 
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->needToGiveItem();
 	item->setRelevantForAction(true);
 
 	_isMet = true;

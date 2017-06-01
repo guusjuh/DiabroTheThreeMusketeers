@@ -145,6 +145,9 @@
     <ClCompile Include="PreYouItemOfInterest.cpp">
       <Filter>Sources\Quest\Conditions\Pre</Filter>
     </ClCompile>
+    <ClCompile Include="PostTheyHaveItem.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -309,6 +312,9 @@
     </ClInclude>
     <ClInclude Include="PreYouItemOfInterest.h">
       <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="PostTheyHaveItem.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

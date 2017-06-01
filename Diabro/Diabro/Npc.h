@@ -44,6 +44,7 @@ public:
 	void recieveItem() override;
 
 private: 
+	bool _initialized;
 	bool _hasQuest;
 	Quest* _currentQuest;
 
@@ -64,7 +65,7 @@ private:
 		_dialog.clear();
 
 		std::string delimiter = "\\n";
-		std::string token;// = s.substr(0, s.find(delimiter));
+		std::string token;
 		size_t pos = 0;
 		while ((pos = s.find(delimiter)) != std::string::npos) {
 			token = s.substr(0, pos);
@@ -74,8 +75,6 @@ private:
 		}
 
 		if (s != "") _dialog.push_back(s);
-
-		int i = 0;
 	}
 
 	std::string _name;

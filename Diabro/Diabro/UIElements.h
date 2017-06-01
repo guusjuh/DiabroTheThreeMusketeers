@@ -577,7 +577,7 @@ namespace DiabroUI
 		{
 			//if (mInterval == 0) return;
 
-			mValue = Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
+			mValue = value;// Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
 
 			setValueCaption(Ogre::StringConverter::toString(mValue));
 			mValueBox->setWidth(valueBoxWidth);

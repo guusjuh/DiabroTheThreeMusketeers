@@ -123,6 +123,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="IQuestContent.cpp" />
     <ClCompile Include="PostCondition.cpp" />
+    <ClCompile Include="PostTheyHaveItem.cpp" />
     <ClCompile Include="PostYouHaveItem.cpp" />
     <ClCompile Include="PostYouThere.cpp" />
     <ClCompile Include="PreKnowWhereToGo.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="PlayerHealthUpgrade.h" />
     <ClInclude Include="PlayerUpgrade.h" />
     <ClInclude Include="PostCondition.h" />
+    <ClInclude Include="PostTheyHaveItem.h" />
     <ClInclude Include="PostYouHaveItem.h" />
     <ClInclude Include="PostYouThere.h" />
     <ClInclude Include="PreCondition.h" />

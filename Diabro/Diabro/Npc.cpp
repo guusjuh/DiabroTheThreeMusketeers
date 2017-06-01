@@ -7,7 +7,7 @@
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
-: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding)
+: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding), _initialized(false)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
@@ -97,9 +97,10 @@ void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 
-	if (!_hasQuest) {
+	if (!_hasQuest && !_initialized) {
 		needNewQuest();
 		_hasQuest = true;
+		_initialized = true;
 	}
 
 	if(_playerDetected)
@@ -129,14 +130,12 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 		// if this NPC has a quest 
 		if (_relevantForAction) {
 			setDialog(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this));
-			if(_hasItem) {
-				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
-			}
 		}
 		else if (_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
 			// if this quest can be started
 				// get the dialog for starting the quest
 			setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
+			_hasQuest = false;
 		}
 		// else if // do i have text in the current quest?
 		else {
@@ -152,6 +151,10 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_dialog[_dialogCount]);
 		}
 		else {
+			if (_hasItem && _needToGiveItem) {
+				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+			}
+
 			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
 			_dialogCount = 0;
 			_inDialog = false;

@@ -7,6 +7,7 @@
 #include "PostYouThere.h"
 #include "PreSomebodyThere.h"
 #include "PreYouItemOfInterest.h"
+#include "PostTheyHaveItem.h"
 
 const std::string Action::msgCityReached = "City reached";
 const std::string Action::msgPlayerItem = "Player received item";
@@ -161,9 +162,9 @@ void Action::createPostConditions(PostconditionType postType) {
 	PostCondition* postcondition = nullptr;
 
 	switch (postType) {
-		/*		case SomebodyThere:
-		precondition = new PreSomethingThere();
-		break;*/
+	case TheyHaveTheItem:
+		postcondition = new PostTheyHaveItem();
+		break;
 	case SomethingThere:
 		postcondition = new PostYouHaveItem();
 		break;

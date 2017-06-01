@@ -17,7 +17,7 @@ class Character
 {
 public:
 	Character(Ogre::SceneNode*, Ogre::Entity*);
-	Character() : _hasItem(false) {}
+	Character() : _hasItem(false), _needToGiveItem(false) {}
 	~Character() {}
 
 	int id; //may only be changed by levelmanager, death scenario 
@@ -38,6 +38,9 @@ public:
 	int getLevel() { return _currentLevel; }
 
 	virtual void recieveItem();
+	void needToGiveItem() {
+		_needToGiveItem = true;
+	}
 
 	bool hasItem() { return _hasItem; }
 
@@ -67,8 +70,11 @@ protected:
 	virtual bool lightAttack();
 
 	bool _hasItem;
+	bool _needToGiveItem;
+
 	virtual void giveItem(Character* reciever) {
 		_hasItem = false;
+		_needToGiveItem = false;
 		reciever->recieveItem();
 	}
 

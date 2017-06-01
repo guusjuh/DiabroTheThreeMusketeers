@@ -26,12 +26,30 @@ public:
 		_questGenerator = new QuestGenerator();
 	}  
 
+	void reset() {
+		if(_currentQuest != nullptr) {
+			// abondon quet
+			_currentQuest->abondon();
+			_currentQuest = nullptr;
+		}
+
+		_quests.clear();
+	}
+
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 	ActionContainer* getActionContainer(void) { return _actionContainer; }
 	StrategyContainer* getStrategyContainer(void) { return _strategyContainer; }
 	Quest* generateQuest(Npc* pSourceNpc, NeedType pMotivation);
 
-	Quest* getCurrentQuest() { return _currentQuest; }
+	Quest* getCurrentQuest() {
+		if(_currentQuest != nullptr) {
+			if (_currentQuest->completed()) {
+				_currentQuest = nullptr;
+			}
+		}
+
+		return _currentQuest;
+	}
 	bool questCanStart() { return _currentQuest == nullptr ? true : false; }
 	std::string startQuest(Npc* sourceNpc);
 
