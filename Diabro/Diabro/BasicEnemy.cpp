@@ -89,12 +89,13 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 
 	//set color
 	if(myCol == COL_HP) {
-		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("InGame/GreenEnemy"));
+		_originalMaterialName = "InGame/GreenEnemy";
 	} else if (myCol == COL_DMG) {
-		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("InGame/RedEnemy"));
+		_originalMaterialName = "InGame/RedEnemy";
 	} else if (myCol == COL_NDIST) {
-		pMyEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("InGame/BlueEnemy"));
+		_originalMaterialName = "InGame/BlueEnemy";
 	}
+	pMyEntity->setMaterialName(_originalMaterialName);
 
 	name = getNameOptions()[rand() % getNameOptions().size()];
 	_relevantForAction = false;

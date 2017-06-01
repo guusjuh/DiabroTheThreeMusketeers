@@ -24,6 +24,13 @@ _attackDistance(100), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitte
 /// <param name="pDeltatime">The time since last frame.</param>
 void Character::update(Ogre::Real pDeltatime)
 {
+	if (gotHitTimerActive){
+		timeSinceHit += pDeltatime;
+		if (timeSinceHit > 0.5f){
+			_myEntity->setMaterialName(_originalMaterialName);
+			gotHitTimerActive = false;
+		}
+	}
 	if (_currAttackCooldown > 0) {
 		_currAttackCooldown -= pDeltatime;
 	}else {
@@ -158,6 +165,11 @@ bool Character::adjustHealth(float pAdjust)
 	_hitTime = _totalHitTime;
 	_hitted = true;
 	Debug("I got hit...", _currentHealth);
+	if (pAdjust > 0){
+		_myEntity->setMaterialName("InGame/Hit");
+		gotHitTimerActive = true;
+		timeSinceHit = 0;
+	}
 
 	if ((_currentHealth -= pAdjust) <= 0)
 	{

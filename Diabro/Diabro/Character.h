@@ -89,6 +89,10 @@ protected:
 	Ogre::SceneNode* _myNode;
 	Ogre::Entity* _myEntity;
 
+	std::string _originalMaterialName;
+	float timeSinceHit;
+	bool gotHitTimerActive;
+
 private:
 };
 
