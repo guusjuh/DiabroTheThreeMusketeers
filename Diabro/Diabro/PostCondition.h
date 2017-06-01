@@ -1,6 +1,7 @@
 #ifndef POST_CONDITION_H
 #define POST_CONDITION_H
 #include <vector>
+#include <string>
 
 //TODO: implement
 // 1. you have the item
