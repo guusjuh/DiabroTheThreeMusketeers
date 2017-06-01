@@ -49,15 +49,15 @@ set(HDRS
 	./Diabro/Diabro/QuestItemGenerator.h
 	./Diabro/Diabro/Action.h
 	./Diabro/Diabro/ActionContainer.h
-	./Diabro/Diabro/PostCondition.cpp
-	./Diabro/Diabro/PostTheyHaveItem.cpp
-	./Diabro/Diabro/PostYouHaveItem.cpp
-	./Diabro/Diabro/PostYouThere.cpp
-	./Diabro/Diabro/PreCondition.cpp
-	./Diabro/Diabro/PreKnowWhereToGo.cpp
-	./Diabro/Diabro/PreSomebodyThere.cpp
-	./Diabro/Diabro/PreSomethingThere.cpp
-	./Diabro/Diabro/PreYouItemOfInterest.cpp
+	./Diabro/Diabro/PostCondition.h
+	./Diabro/Diabro/PostTheyHaveItem.h
+	./Diabro/Diabro/PostYouHaveItem.h
+	./Diabro/Diabro/PostYouThere.h
+	./Diabro/Diabro/PreCondition.h
+	./Diabro/Diabro/PreKnowWhereToGo.h
+	./Diabro/Diabro/PreSomebodyThere.h
+	./Diabro/Diabro/PreSomethingThere.h
+	./Diabro/Diabro/PreYouItemOfInterest.h
 	./Diabro/Diabro/GenericContainer.h
 	./Diabro/Diabro/Strategy.h
 	./Diabro/Diabro/StrategyContainer.h
