@@ -158,6 +158,7 @@
     <ClInclude Include="ActionContainer.h" />
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
+    <ClInclude Include="Coordinate.h" />
     <ClInclude Include="EnemyEquipment.h" />
     <ClInclude Include="EnemyUpgrade.h" />
     <ClInclude Include="IDecorator.h" />

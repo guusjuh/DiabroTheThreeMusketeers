@@ -250,6 +250,9 @@
     <ClInclude Include="EnemyUpgrade.h">
       <Filter>Headers\Decorator\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Coordinate.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />

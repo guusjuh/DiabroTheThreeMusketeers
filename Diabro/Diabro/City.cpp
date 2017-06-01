@@ -5,9 +5,10 @@
 
 int City::gridScalar = 2;
 
-Coordinate operator+ (Coordinate &lhs, Coordinate &rhs) {
+/*Coordinate operator+ (Coordinate &lhs, Coordinate &rhs)
+{
 	return (Coordinate(lhs.x + rhs.x, lhs.z + rhs.z));
-}
+}*/
 
 Coordinate operator- (Coordinate &lhs, Coordinate &rhs) {
 	return (Coordinate(lhs.x - rhs.x, lhs.z - rhs.z));
@@ -18,7 +19,7 @@ Coordinate operator* (Coordinate &lhs, int &rhs) {
 }
 
 Coordinate operator/ (Coordinate &lhs, int &rhs) {
-	if(rhs == 0) {
+	if (rhs == 0) {
 		return Coordinate();
 	}
 	return Coordinate((lhs.x <= 0) ? 0 : lhs.x / rhs, (lhs.z <= 0) ? 0 : lhs.z / rhs);
@@ -68,8 +69,9 @@ void RealCoordinate::operator+= (RealCoordinate &rhs) {
 	rz += rhs.rz;
 }
 
-RealCoordinate& RealCoordinate::operator= (const Coordinate &value) {
-	return RealCoordinate(value.x, value.z);
+void RealCoordinate::operator= (const Coordinate &value) {
+	rx = static_cast<float>(value.x);
+	rz = static_cast<float>(value.z);
 }
 
 bool operator== (RealCoordinate &lhs, RealCoordinate &rhs) {
@@ -148,8 +150,8 @@ City::~City()
 
 /// returns the center tile of the room
 Coordinate City::getCenterTile() {
-	int x = ceil(position.x + width / 2.0f);
-	int z = ceil(position.z + depth / 2.0f);
+	int x = floor(position.x + width / 2.0f);
+	int z = floor(position.z + depth / 2.0f);
 	return Coordinate(x, z);
 }
 
@@ -180,35 +182,55 @@ void City::generateBuildings()
 	std::vector<Ogre::Entity*> buildingEntities;
 	std::vector<RealCoordinate> buildingLocations = getBuildingPositions();
 
-	int buildingAmount = rand() %(width * depth - width) + width;
+	int buildingAmount = rand() % (width * depth - width) + width - 2;
+	if (typeFlag == HideoutRT) buildingAmount = 1;
 	//Get al possible positions
 
-	for (int n = 0; n < buildingLocations.size(); n++) {
+	for (int n = 0; n < buildingAmount; n++) {
 		//TODO: make it an ID
 		Ogre::SceneNode* buildingNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 		_buildingNodes.push_back(buildingNode);
 
 		Ogre::Entity* buildingEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
-		buildingNode->setScale(1, 3, 1);
+		if (typeFlag == CityRT) buildingNode->setScale(1, 3, 1);
+		else buildingNode->setScale(2.0f, 5, 2.0f);
 		buildingNode->attachObject(buildingEntity);
-		
+
 		//calculate building positions
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		RealCoordinate transl = RealCoordinate((buildingNode->getScale().x / gridScalar) * -scalar, (buildingNode->getScale().z / gridScalar) * -scalar);
-		RealCoordinate pos = transl + buildingLocations[n];
+		int rnd = 0;
+		rnd = rand() % buildingLocations.size();
+		
+		RealCoordinate pos;
+
+		if (typeFlag == HideoutRT){
+			pos = getCenterTile();
+			pos = pos * scalar;
+		}
+		else {
+			//translate object half a tile in the positive direction because the pivot of the object is at center
+			RealCoordinate transl = RealCoordinate(-250.0f, -250.0f);//RealCoordinate(RealCoordinate((buildingNode->getScale().x / gridScalar) * -scalar, (buildingNode->getScale().z / gridScalar) * -scalar));
+			pos = buildingLocations[rnd];
+			pos += transl;
+		}
+
 		buildingNode->setPosition(pos.rx, 100, pos.rz);
 
-		BuildingType buildingType = (BuildingType)(typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1));
-		int residents = rand() % 4;
+		BuildingType buildingType = (BuildingType)GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1);
+		int residents = rand() % 3 + 1;
+		if (typeFlag == HideoutRT)
+		{
+			residents += 2;
+			buildingType = HideOutHouse;
+		}
 		//TODO: generate cities
 		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2((buildingLocations[n].rx), (buildingLocations[n].rz)));
 		//TODO: fill _buildings
 		_buildings.push_back(thisBuilding);
 
 		nodeList(buildingNode);
-		buildingEntities.push_back(buildingEntity);		
+		buildingEntities.push_back(buildingEntity);
 	}
-
 	//assign material, based on buildingtype
 	assignBuildingRole(_buildings, buildingEntities);
 }

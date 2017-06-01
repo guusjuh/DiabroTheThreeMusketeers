@@ -13,10 +13,19 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\LevelGeneration">
+      <UniqueIdentifier>{f384d3c2-dd74-4b19-be27-2112e6a538cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelGeneration">
+      <UniqueIdentifier>{743b49ae-91ab-4660-97b7-a78bfc528a29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Catch.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelAccess.h">
+      <Filter>Header Files\LevelGeneration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -26,14 +35,17 @@
     <ClCompile Include="PlayerClassTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelGenerationTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TreeTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CollisionGridTest.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelGenerationTest.cpp">
+      <Filter>Source Files\LevelGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelAccess.cpp">
+      <Filter>Source Files\LevelGeneration</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

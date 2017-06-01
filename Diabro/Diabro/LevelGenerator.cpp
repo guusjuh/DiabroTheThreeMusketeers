@@ -11,7 +11,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	debug("Initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 2, 100, scalar);
+	_zone[0] = Zone(13, 13, 5, 5, 15, 500, scalar);
 
 	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
@@ -36,7 +36,7 @@ LevelGenerator::~LevelGenerator()
 /// </summary>
 void LevelGenerator::restart() {
 	debug("Initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 3, 100, scalar);
+	_zone[0] = Zone(19, 19, 5, 5, 10, 500, scalar);
 	
 	debug("generating geometry", 1);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
@@ -101,9 +101,6 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 	donaldTrump("wallMesh", Ogre::ColourValue(0.0f, 1.0f, 0.0f, 1.0f));
 
 	_dungeonNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("DungeonNode");
-	debug("dungeonx:", _dungeonNode->getPosition().x);
-	debug("dungeony:", _dungeonNode->getPosition().y);
-	debug("dungeonz:", _dungeonNode->getPosition().z);
 
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {

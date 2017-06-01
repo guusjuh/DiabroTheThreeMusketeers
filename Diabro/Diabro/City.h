@@ -3,26 +3,9 @@
 #include <vector>
 #include <OgreSceneNode.h>
 #include "IQuestContent.h"
+#include "Coordinate.h"
 #include "math.h"
 
-/// integer coordinate representing a 2D position
-struct Coordinate {
-	int x;
-	int z;
-	Coordinate(int x, int z) : x(x), z(z) {	}
-	Coordinate() : x(0), z(0) {	}
-	~Coordinate() { }
-};
-struct RealCoordinate {
-	float rx;
-	float rz;
-	RealCoordinate(float x, float z) : rx(x), rz(z) {	}
-	RealCoordinate() : rx(0), rz(0) {	}
-	~RealCoordinate() { }
-	RealCoordinate &operator=(const Coordinate &value);
-	void operator+= (Coordinate &rhs);
-	void operator+= (RealCoordinate &rhs);
-};
 
 
 /// <summary>
