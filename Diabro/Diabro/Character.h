@@ -39,6 +39,8 @@ public:
 
 	virtual void recieveItem();
 
+	bool hasItem() { return _hasItem; }
+
 protected:
 	Ogre::Real _movespeed;
 	Ogre::Real _rotationspeed;

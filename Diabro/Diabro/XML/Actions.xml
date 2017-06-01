@@ -126,6 +126,9 @@
 		<Pair>
 			<Type>QuestItemQC</Type>
 		</Pair>
+		<Pair>
+			<Type>TownQC</Type>
+		</Pair>
 	</RequiredContent>
 	<Dialog>Oh, you got 'QuestItemQC1'! \nGive it to me now.</Dialog>
 </Action>
@@ -172,7 +175,7 @@
 			<Type>EnemyQC</Type>
 		</Pair>
 		<Pair>
-			<Type>EnemyQC</Type>
+			<Type>HideOutQC</Type>
 		</Pair>
 	</RequiredContent>
 	<Dialog></Dialog>

@@ -1,4 +1,19 @@
 
+
+
+VOOR ACTION 6
+
+
+
+
+
+
+
+
+
+
+
+
 <Strategy>
 	<ID>2</ID>
 	<NameStrat>Obtain luxuries</NameStrat>
