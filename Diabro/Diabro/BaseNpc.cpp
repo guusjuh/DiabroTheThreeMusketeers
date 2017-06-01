@@ -15,37 +15,19 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 	goalPos = Coordinate(0, 0);
 }
 
+void BaseNpc::collide(){
+	stateMachine.collide();
+}
+
 /// <summary>
 /// Updates the frame based on the specified pDeltatime.
 /// </summary>
 /// <param name="pDeltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
-	Character::update(pDeltatime);
-
 	detectPlayer();
-	//for initialization
-	//TODO: use -1 -1 as values
-	if (goalPos.x == 0 && goalPos.z == 0){
-		calculateAStar(_myCity->getRandomPointInRoom());
-	}
 
-	//_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
-	if (!_playerDetected) {
-		if (getPosition().distance(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z)) < 50){
-			if (nextPos.size() == 0){
-				Ogre::Vector3 pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
-				Ogre::Vector3 goalPosition = Ogre::Vector3(goalPos.x / _myCity->scalar, getPosition().y, goalPos.z / _myCity->scalar);
-				while(goalPosition.distance(pos) < 1) {
-					pos = Ogre::Vector3(_myCity->getRandomPointInRoom());
-				}
-				calculateAStar(pos);
-			}
-			else{
-				walkToNextPoint();
-			}
-		}
-	}
+	Character::update(pDeltatime);
 }
 
 /// <summary>
@@ -75,6 +57,10 @@ void BaseNpc::detectPlayer()
 /// Makes the BaseNPC walk to next point.
 /// </summary>
 void BaseNpc::walkToNextPoint() {
+	if (nextPos.size() == 0){
+		_dirVec = Ogre::Vector3().ZERO;
+		return;
+	}
 	goalPos = nextPos[nextPos.size() - 1];
 	nextPos.pop_back();
 	_myNode->lookAt(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
@@ -178,6 +164,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 
 		//last node found
 		if (lowestFNode.x == (int)targetPos.x && lowestFNode.y == (int)targetPos.z){
+			nextPos.clear();
 			//build up the nextPos list
 			bool nextIteration = true;
 			while (nextIteration){

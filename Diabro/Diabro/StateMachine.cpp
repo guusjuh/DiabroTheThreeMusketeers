@@ -1,5 +1,6 @@
 #include "StateMachine.h"
-#include "Character.h"
+#include "BaseNpc.h"
+#include "Debug.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="StateMachine"/> class.
@@ -8,12 +9,12 @@
 /// <param name="startState">The start state.</param>
 /// <param name="possibleStates">The possible states.</param>
 template<typename T>
-StateMachine<T>::StateMachine(T* owner, State<T> startState, std::map<std::string, State<T>> possibleStates)
+StateMachine<T>::StateMachine(T* owner, std::string startState, std::map<std::string, State<T>*> possibleStates)
 {
 	_owner = owner;
 	_possibleStates = possibleStates;
-	_currentState = nullptr;
-	this->setState(startState);
+	_currentState = "";
+	setState(startState);
 }
 
 /// <summary>
@@ -38,8 +39,21 @@ StateMachine<T>::~StateMachine(){
 template<typename T>
 void StateMachine<T>::update()
 {
-	if (this->getCurrentState() != nullptr){
-		this->getCurrentState()->Execute(_owner);
+	if (this->getCurrentState() != ""){
+		State<T>* current = _possibleStates[this->getCurrentState()];
+		current->Execute(_owner);
+	}
+}
+
+/// <summary>
+/// Updates collision for the current state of the fsm.
+/// </summary>
+template<typename T>
+void StateMachine<T>::collide()
+{
+	if (this->getCurrentState() != ""){
+		State<T>* current = _possibleStates[this->getCurrentState()];
+		current->Collide(_owner);
 	}
 }
 
@@ -48,7 +62,7 @@ void StateMachine<T>::update()
 /// </summary>
 /// <returns></returns>
 template<typename T>
-State<T>* StateMachine<T>::getCurrentState(){
+std::string StateMachine<T>::getCurrentState(){
 	return _currentState;
 }
 
@@ -57,13 +71,14 @@ State<T>* StateMachine<T>::getCurrentState(){
 /// </summary>
 /// <param name="newState">The new state.</param>
 template<typename T>
-void StateMachine<T>::setState(State<T> newState){
+void StateMachine<T>::setState(std::string newState){
 	_previous = _currentState;
-	if (_currentState != nullptr){
-		_currentState->Exit(_owner);
+	if (_currentState != ""){
+		_possibleStates[_currentState]->Exit(_owner);
 	}
-	_currentState = &newState;
-	_currentState->Enter(_owner);
+	_currentState = newState.c_str();
+	_possibleStates[_currentState]->Enter(_owner);
+	Debug(_currentState.c_str());
 }
 
-template class StateMachine < Character > ;
+template class StateMachine <BaseNpc> ;

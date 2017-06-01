@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "StateMachine.h"
 #include "EnemyUpgrade.h"
+#include "BaseNpc.h"
 
 const int BasicEnemy::LOW_HP = 5;
 const int BasicEnemy::HIGH_HP = 10;
@@ -23,10 +24,13 @@ const Ogre::ColourValue BasicEnemy::COL_NDIST = Ogre::ColourValue(0, 0, 1);
 /// <param name="pMyEntity">My entity.</param>
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
-	State<Character> startState = IdleState();
-	std::map<std::string, State<Character>> possibleStates;
-	possibleStates["Idle"] = startState;
-	stateMachine = StateMachine<Character>(this, startState, possibleStates);
+	EnemyFollowState* followPlayer = new EnemyFollowState();
+	EnemyAttackState* attack = new EnemyAttackState();
+	EnemyMoveAroundCenterState* moveAroundCenter = new EnemyMoveAroundCenterState();
+	possibleStates["Follow"] = followPlayer;
+	possibleStates["Attack"] = attack;
+	possibleStates["AroundCenter"] = moveAroundCenter;
+	_initialized = false;
 
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 
@@ -184,19 +188,15 @@ void BasicEnemy::upgradeEquipment(EnemyUpgradeType upgrade) {
 /// <param name="pDeltatime">The deltatime.</param>
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
-	BaseNpc::update(pDeltatime);
+	if (!_initialized){
+		stateMachine = StateMachine<BaseNpc>(this, "AroundCenter", possibleStates);
+		_initialized = true;
+	}
+	stateMachine.update();
 	
 	if (_playerDetected) {
-		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
-		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
-		playerPos.x = playerPos.x / scale;
-		playerPos.z = playerPos.z / scale;
-		calculateAStar(playerPos);
-
-		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
-			lightAttack();
-		}
 	}
+	BaseNpc::update(pDeltatime);
 }
 
 /// <summary>

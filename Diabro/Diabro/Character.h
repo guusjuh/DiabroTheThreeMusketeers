@@ -5,6 +5,7 @@
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
 #include "BaseApplication.h"
+#include "Zone.h"
 
 /// <summary>
 /// The Character class is the superclass for all different kinds of characters.
@@ -20,6 +21,7 @@ public:
 
 	int id; //may only be changed by levelmanager, death scenario 
 
+	virtual void collide();
 	virtual void update(Ogre::Real);
 	virtual void move(Ogre::Vector3&);
 	virtual bool adjustHealth(float);
@@ -34,6 +36,13 @@ public:
 	Ogre::Real getCurrHealth() { return _currentHealth;  }
 	Ogre::Real getMaxHealth() { return _maxHealth;  }
 	int getLevel() { return _currentLevel; }
+	virtual bool lightAttack();
+	Ogre::Real getAttackDistance() { return _attackDistance; }
+	float getNoticeDistance() { return _noticeDistance; }
+	bool isPlayer;
+
+	Ogre::Real closestDistanceToNpc(Ogre::Vector3 pos);
+	bool collidesWithGrid(Ogre::Vector3, Zone* zone, int cornerRange);
 
 protected:
 	Ogre::Real _movespeed;
@@ -58,7 +67,6 @@ protected:
 
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);
-	virtual bool lightAttack();
 
 	Ogre::SceneNode* _myNode;
 	Ogre::Entity* _myEntity;

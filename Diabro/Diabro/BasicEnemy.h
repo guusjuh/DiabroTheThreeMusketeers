@@ -4,6 +4,10 @@
 #include "BaseNpc.h"
 #include "StateMachine.h"
 #include "IdleState.h"
+#include "WanderState.h"
+#include "EnemyFollowState.h"
+#include "EnemyAttackState.h"
+#include "EnemyMoveAroundCenterState.h"
 #include "EnemyEquipment.h"
 
 /// <summary>
@@ -21,12 +25,11 @@ public:
 	void updateBar(bool val) { _updateBar = val; }
 
 	QuestContent getType() override { return EnemyQC; }
+	bool lightAttack() override;
 
-	StateMachine<Character> stateMachine;
 	std::string getName() { return name; }
 
 private:
-	bool lightAttack() override;
 	bool _updateBar;
 
 	void assignUpgrades(int level);
@@ -36,6 +39,9 @@ private:
 	int healthUpgrades, damageUpgrades, noticeDistUpgrades;
 	std::vector<std::string> getNameOptions();
 	std::string name;
+
+	std::map<std::string, State<BaseNpc>*> possibleStates;
+	bool _initialized;
 
 	static const int LOW_HP;
 	static const int HIGH_HP;

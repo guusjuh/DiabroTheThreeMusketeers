@@ -3,6 +3,7 @@
 
 #include "Character.h"
 #include "City.h"
+#include "StateMachine.h"
 
 /// <summary>
 /// The super class for all NPC's in the game
@@ -16,19 +17,30 @@ public:
 	BaseNpc() {}
 	~BaseNpc() {}
 
+	void collide() override;
 	void update(Ogre::Real) override;
 	void rotatePivot(Ogre::Vector3);
 
 	void calculateAStar(Ogre::Vector3 targetPos);
-	std::vector<Coordinate> nextPos;
-	Coordinate goalPos;
+	void walkToNextPoint();
+	void walkTo(Ogre::Vector3);
+
+	StateMachine<BaseNpc> stateMachine;
+
+	int getNextPosSize() { return nextPos.size(); }
+	Coordinate getGoalPos() { return goalPos; }
+	City* getCity() { return _myCity; }
+	bool isPlayerDetected() { return _playerDetected; }
 
 	City* getMyCity() { return _myCity; }
 
 	using IQuestContent::getType;
 
 protected:
+	std::vector<Coordinate> nextPos;
 	Ogre::SceneNode* _myRotationNode;
+
+	Coordinate goalPos;
 	City* _myCity;
 	bool _playerDetected;
 
@@ -40,9 +52,7 @@ protected:
 	// 2. switch between
 
 	virtual void detectPlayer(); 
-	void walkToNextPoint();
 
-	void walkTo(Ogre::Vector3);
 
 private:
 	float _timer;

@@ -131,17 +131,21 @@ void LevelManager::detachHostileNPC(int id) {
 /// <param name="fe">The frame event.</param>
 void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 {
+	Ogre::Real deltaTime = pFE.timeSinceLastFrame;
+	if (deltaTime > 0.1f){
+		deltaTime = 0.1f;
+	}
 	// update characters
-	playerScript->update(pFE.timeSinceLastFrame);
+	playerScript->update(deltaTime);
 
 	for(int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
-		_friendlyNpcScripts[i]->update(pFE.timeSinceLastFrame);
+		_friendlyNpcScripts[i]->update(deltaTime);
 	}
 
 	for (int i = 0; i < _hostileNpcScripts.size(); i++)
 	{
-		_hostileNpcScripts[i]->update(pFE.timeSinceLastFrame);
+		_hostileNpcScripts[i]->update(deltaTime);
 	}
 }
 

@@ -122,6 +122,9 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="IQuestContent.cpp" />
     <ClCompile Include="QuestItem.cpp" />
+    <ClCompile Include="EnemyAttackState.cpp" />
+    <ClCompile Include="EnemyFollowState.cpp" />
+    <ClCompile Include="EnemyMoveAroundCenterState.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="City.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -154,6 +157,7 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="WanderState.cpp" />
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +166,10 @@
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="EnemyAttackState.h" />
     <ClInclude Include="EnemyEquipment.h" />
+    <ClInclude Include="EnemyFollowState.h" />
+    <ClInclude Include="EnemyMoveAroundCenterState.h" />
     <ClInclude Include="EnemyUpgrade.h" />
     <ClInclude Include="IDecorator.h" />
     <ClInclude Include="IEnemyEquipment.h" />
@@ -203,6 +210,7 @@
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="UIElements.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="WanderState.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
