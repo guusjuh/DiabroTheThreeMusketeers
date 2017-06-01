@@ -43,6 +43,7 @@ public:
 
 	Ogre::Real closestDistanceToNpc(Ogre::Vector3 pos);
 	bool collidesWithGrid(Ogre::Vector3, Zone* zone, int cornerRange);
+	bool correctRotation(Ogre::Vector3, Zone* zone, int cornerRange);
 
 protected:
 	Ogre::Real _movespeed;

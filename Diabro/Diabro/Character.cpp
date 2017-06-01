@@ -42,8 +42,11 @@ void Character::update(Ogre::Real pDeltatime)
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
 	float range = 40;
 
-	
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
+
+	correctRotation(newPos, zone, range);
+	newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
+
 	if (collidesWithGrid(newPos, zone, range) && closestDistanceToNpc(newPos) > 50)
 	{
 		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
@@ -83,6 +86,65 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 	}
 	return DistanceToClosestTarget;
 }
+
+bool Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
+	//4 positions each with an offset for checking the collision with the wall
+	float cornerRange = cos(45.0f) * range;
+	Ogre::Vector3 tempPos = pos;
+	Coordinate temp0 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x - range, tempPos.z));
+	Coordinate temp1 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x + range, tempPos.z));
+	Coordinate temp2 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x, tempPos.z - range));
+	Coordinate temp3 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x, tempPos.z + range));
+	Coordinate temp4 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x - cornerRange, tempPos.z - cornerRange));
+	Coordinate temp5 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x + cornerRange, tempPos.z - cornerRange));
+	Coordinate temp6 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x - cornerRange, tempPos.z + cornerRange));
+	Coordinate temp7 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(tempPos.x + cornerRange, tempPos.z + cornerRange));
+
+	Ogre::Vector3 newDirection = _myNode->getOrientation() * _dirVec;
+	if (!(zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width]) ||
+		!(zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width])){
+		newDirection.x = 0;
+	}
+	if (!(zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width]) ||
+		!(zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width])){
+		newDirection.z = 0;
+	}
+	if (!(zone->getCollisionGrid()[temp4.x + temp4.z * zone->_width]) ||
+		!(zone->getCollisionGrid()[temp5.x + temp5.z * zone->_width]) ||
+		!(zone->getCollisionGrid()[temp6.x + temp6.z * zone->_width]) ||
+		!(zone->getCollisionGrid()[temp7.x + temp7.z * zone->_width])){
+		newDirection.x = 0;
+		newDirection.z = 0;
+	}
+	newDirection.normalise();
+
+	Ogre::Quaternion tempQ = _myNode->getOrientation();
+	Ogre::Matrix3 m;
+	tempQ.ToRotationMatrix(m);
+
+	Ogre::Radian eulerX;
+	Ogre::Radian eulerY;
+	Ogre::Radian eulerZ;
+	m.ToEulerAnglesXYZ(eulerX, eulerY, eulerZ);
+	eulerX = 0;
+	eulerZ = 0;
+	m.FromEulerAnglesXYZ(eulerX, -eulerY, eulerZ);
+
+	Ogre::Quaternion rotation;
+	rotation.FromRotationMatrix(m);
+		
+	_dirVec = rotation * newDirection;
+	
+	return true;/*(zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width] &&
+				zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width] &&
+				zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width] &&
+				zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width] &&
+				zone->getCollisionGrid()[temp4.x + temp4.z * zone->_width] &&
+				zone->getCollisionGrid()[temp5.x + temp5.z * zone->_width] &&
+				zone->getCollisionGrid()[temp6.x + temp6.z * zone->_width] &&
+				zone->getCollisionGrid()[temp7.x + temp7.z * zone->_width]);*/
+}
+
 
 bool Character::collidesWithGrid(Ogre::Vector3 pos, Zone* zone, int range){
 	//4 positions each with an offset for checking the collision with the wall
