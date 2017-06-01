@@ -49,6 +49,15 @@ set(HDRS
 	./Diabro/Diabro/QuestItemGenerator.h
 	./Diabro/Diabro/Action.h
 	./Diabro/Diabro/ActionContainer.h
+	./Diabro/Diabro/PostCondition.cpp
+	./Diabro/Diabro/PostTheyHaveItem.cpp
+	./Diabro/Diabro/PostYouHaveItem.cpp
+	./Diabro/Diabro/PostYouThere.cpp
+	./Diabro/Diabro/PreCondition.cpp
+	./Diabro/Diabro/PreKnowWhereToGo.cpp
+	./Diabro/Diabro/PreSomebodyThere.cpp
+	./Diabro/Diabro/PreSomethingThere.cpp
+	./Diabro/Diabro/PreYouItemOfInterest.cpp
 	./Diabro/Diabro/GenericContainer.h
 	./Diabro/Diabro/Strategy.h
 	./Diabro/Diabro/StrategyContainer.h
@@ -88,7 +97,16 @@ set(SRCS
 	./Diabro/Diabro/GenericContainer.cpp
 	./Diabro/Diabro/QuestItemContainer.cpp
 	./Diabro/Diabro/QuestItemGenerator.cpp
+	./Diabro/Diabro/Action.cpp
 	./Diabro/Diabro/ActionContainer.cpp
+	./Diabro/Diabro/PostCondition.cpp
+	./Diabro/Diabro/PostTheyHaveItem.cpp
+	./Diabro/Diabro/PostYouHaveItem.cpp
+	./Diabro/Diabro/PostYouThere.cpp
+	./Diabro/Diabro/PreKnowWhereToGo.cpp
+	./Diabro/Diabro/PreSomebodyThere.cpp
+	./Diabro/Diabro/PreSomethingThere.cpp
+	./Diabro/Diabro/PreYouItemOfInterest.cpp
 	./Diabro/Diabro/StrategyContainer.cpp
 	./Diabro/Diabro/QuestManager.cpp
 	./Diabro/Diabro/LevelGenerator.cpp
