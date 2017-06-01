@@ -124,7 +124,9 @@
     <ClCompile Include="IQuestContent.cpp" />
     <ClCompile Include="PostCondition.cpp" />
     <ClCompile Include="PostTheyHaveItem.cpp" />
+    <ClCompile Include="PostTheyInfo.cpp" />
     <ClCompile Include="PostYouHaveItem.cpp" />
+    <ClCompile Include="PostYouInfo.cpp" />
     <ClCompile Include="PostYouThere.cpp" />
     <ClCompile Include="PreKnowWhereToGo.cpp" />
     <ClCompile Include="PreSomebodyThere.cpp" />
@@ -159,6 +161,7 @@
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="StrategyContainer.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
+    <ClCompile Include="PostTheyDead.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
@@ -182,7 +185,9 @@
     <ClInclude Include="PlayerUpgrade.h" />
     <ClInclude Include="PostCondition.h" />
     <ClInclude Include="PostTheyHaveItem.h" />
+    <ClInclude Include="PostTheyInfo.h" />
     <ClInclude Include="PostYouHaveItem.h" />
+    <ClInclude Include="PostYouInfo.h" />
     <ClInclude Include="PostYouThere.h" />
     <ClInclude Include="PreCondition.h" />
     <ClInclude Include="PreKnowWhereToGo.h" />
@@ -216,6 +221,7 @@
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="Strategy.h" />
     <ClInclude Include="StrategyContainer.h" />
+    <ClInclude Include="PostTheyDead.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />

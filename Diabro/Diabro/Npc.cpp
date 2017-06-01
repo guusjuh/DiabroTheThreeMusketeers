@@ -154,6 +154,9 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 			if (_hasItem && _needToGiveItem) {
 				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
 			}
+			else if (_relevantForAction) {
+				GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgPlayerInfo);
+			}
 
 			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
 			_dialogCount = 0;

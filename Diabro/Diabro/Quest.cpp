@@ -68,7 +68,7 @@ void Quest::end() {
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-_healthReward);
 
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
-
+	Debug("\tQuest: I am complete!");
 	_completed = true;
 }
 

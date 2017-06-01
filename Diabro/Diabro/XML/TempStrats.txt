@@ -1,7 +1,60 @@
+<Strategy>
+	<ID>0</ID>
+	<NameStrat>Deliver item for study</NameStrat>
+	<QuestName> The 'QuestItemQC1' of Mystery </QuestName>
+	<StartDialog>I know of the 'QuestItemQC1', but I don't know what it does. Can you retrieve it from 'NPCQC2' and see what you can learn? \nGreat! Tell me what you have learned afterwards.</StartDialog>
+	<NeedType>Knowledge</NeedType>
+	<Actions>
+		<Action>
+			<ID>4</ID>
+			<Content>2</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+	</Actions>
+	<RarityPref>1</RarityPref>
+</Strategy>
 
 
 
-VOOR ACTION 6
+
+
+<Strategy>
+	<ID>1</ID>
+	<NameStrat>Interview NPC</NameStrat>
+	<QuestName> The 'NPCQC2' that knew </QuestName>
+	<StartDialog>'NPCQC2' knows something, but he won't tell me. Can you go talk to him? Maybe he will tell you. \n Thank you! Don't tell him you know me.</StartDialog>
+	<NeedType>Knowledge</NeedType>
+	<Actions>
+		<Action>			
+			<ID>10</ID>
+			<Content>2</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>7</ID>
+			<Content>1</Content>
+		</Action>	
+		<Action>
+			<ID>11</ID>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>	
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+
+
 
 
 
@@ -38,36 +91,6 @@ VOOR ACTION 6
 	</Actions>
 	<RarityPref>1</RarityPref>
 </Strategy>
-
-<Strategy>
-	<ID>1</ID>
-	<NameStrat>Interview NPC</NameStrat>
-	<QuestName> The 'NPCQC2' that knew </QuestName>
-	<StartDialog>'NPCQC2' know something, but he won't tell me. Can you go talk to him? Maybe he will tell you. \n Thank you! Don't tell him you know me.</StartDialog>
-	<NeedType>Knowledge</NeedType>
-	<Actions>
-		<Action>
-			<ID>7</ID>
-			<Content>2</Content>
-		</Action>
-		<Action>			
-			<ID>10</ID>
-			<Content>2</Content>
-			<Content>2</Content>
-		</Action>
-		<Action>
-			<ID>7</ID>
-			<Content>1</Content>
-		</Action>	
-		<Action>
-			<ID>11</ID>
-			<Content>1</Content>
-			<Content>1</Content>
-		</Action>	
-	</Actions>
-	<RarityPref>0</RarityPref>
-</Strategy>
-
 
 <Strategy>
 	<ID>3</ID>
@@ -126,37 +149,7 @@ VOOR ACTION 6
 	<RarityPref>1</RarityPref>
 </Strategy>
 
-<Strategy>
-	<ID>5</ID>
-	<NameStrat>Kill enemies</NameStrat>
-	<QuestName>
-		<pre>The slaughter of </pre>
-		<template>EnemyQC</template>
-		<post></post>
-	</QuestName>
-	<NeedType>Reputation</NeedType>
-	<Actions>
-		<Action>
-			<ID>8</ID>
-			<Content>1</Content>
-		</Action>
-		<Action>
-			<ID>9</ID>
-			<Content>1</Content>
-			<Content>2</Content>
-		</Action>
-		<Action>
-			<ID>7</ID>
-			<Content>1</Content>
-		</Action>
-		<Action>
-			<ID>11</ID>
-			<Content>1</Content>
-			<Content>1</Content>
-		</Action>
-	</Actions>
-	<RarityPref>0</RarityPref>
-</Strategy>
+
 
 <Strategy>
 	<ID>6</ID>

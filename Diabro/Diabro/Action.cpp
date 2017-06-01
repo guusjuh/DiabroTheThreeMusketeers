@@ -8,10 +8,16 @@
 #include "PreSomebodyThere.h"
 #include "PreYouItemOfInterest.h"
 #include "PostTheyHaveItem.h"
+#include "PostYouInfo.h"
+#include "PostTheyInfo.h"
+#include "PostTheyDead.h"
 
 const std::string Action::msgCityReached = "City reached";
 const std::string Action::msgPlayerItem = "Player received item";
 const std::string Action::msgNpcItem = "Npc received item";
+const std::string Action::msgPlayerInfo = "Player has info";
+const std::string Action::msgNpcInfo = "Npc has info";
+const std::string Action::msgEnemyDead = "Enemy dead";
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Action"/> class.
@@ -120,8 +126,6 @@ IQuestContent* Action::getTarget() {
 		}
 	}
 
-	Debug("\tA: I found a target, with id ", idTarget);
-
 	return _concreteContent[idTarget].first;
 }
 
@@ -165,15 +169,21 @@ void Action::createPostConditions(PostconditionType postType) {
 	case TheyHaveTheItem:
 		postcondition = new PostTheyHaveItem();
 		break;
-	case SomethingThere:
+	case YouHaveTheItem:
 		postcondition = new PostYouHaveItem();
 		break;
 	case YouThere:
 		postcondition = new PostYouThere();
 		break;
-		/*case YouItemOfInterest:
-		precondition = new PreSomethingThere();
-		break;*/
+	case YouInfo:
+		postcondition = new PostYouInfo();
+		break;
+	case TheyInfo:
+		postcondition = new PostTheyInfo();
+		break;
+	case TheyDead:
+		postcondition = new PostTheyDead();
+		break;
 	}
 
 	_postcondition = std::pair<PostconditionType, PostCondition*>(postType, postcondition);

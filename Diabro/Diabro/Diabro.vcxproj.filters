@@ -148,6 +148,15 @@
     <ClCompile Include="PostTheyHaveItem.cpp">
       <Filter>Sources\Quest\Conditions\Post</Filter>
     </ClCompile>
+    <ClCompile Include="PostYouInfo.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
+    <ClCompile Include="PostTheyInfo.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
+    <ClCompile Include="PostTheyDead.cpp">
+      <Filter>Sources\Quest\Conditions\Post</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -314,6 +323,15 @@
       <Filter>Headers\Quests\Conditions\Pre</Filter>
     </ClInclude>
     <ClInclude Include="PostTheyHaveItem.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
+    </ClInclude>
+    <ClInclude Include="PostYouInfo.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
+    </ClInclude>
+    <ClInclude Include="PostTheyInfo.h">
+      <Filter>Headers\Quests\Conditions\Post</Filter>
+    </ClInclude>
+    <ClInclude Include="PostTheyDead.h">
       <Filter>Headers\Quests\Conditions\Post</Filter>
     </ClInclude>
   </ItemGroup>

@@ -96,6 +96,9 @@ public:
 	static const std::string msgCityReached;
 	static const std::string msgPlayerItem;
 	static const std::string msgNpcItem;
+	static const std::string msgNpcInfo;
+	static const std::string msgPlayerInfo;
+	static const std::string msgEnemyDead;
 
 	void sendMsg(std::string msg);
 

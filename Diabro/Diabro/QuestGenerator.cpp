@@ -175,10 +175,11 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 								break;
 							}
 						}
-
+						
 						if (chosenCity == nullptr) break;
-					}
 
+						continue;
+					}
 
 					//TODO: optimize this.
 					int notWantedCityID = pSourceNpc->getHomeTown()->id;
@@ -227,8 +228,9 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 						}
 
 						if (chosenCity == nullptr) break;
-					}
 
+						continue;
+					}
 
 					//TODO: optimize this.
 					int notWantedCityID = -1;//pSourceNpc->getHomeTown()->id;

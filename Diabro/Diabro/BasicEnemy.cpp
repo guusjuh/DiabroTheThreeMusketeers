@@ -244,6 +244,10 @@ void BasicEnemy::die() {
 	
 	mySpawner->instanceDeath();
 
+	if (_relevantForAction) {
+		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgEnemyDead);
+	}
+
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 }
