@@ -14,6 +14,8 @@ struct Coordinate {
 		n.z = z + other.z;
 		return n;
 	}
+	void operator += (Coordinate &rhs);
+	void operator -= (Coordinate &rhs);
 };
 struct RealCoordinate {
 	float rx;
@@ -24,5 +26,7 @@ struct RealCoordinate {
 	void operator=(const Coordinate &value);
 	void operator+= (Coordinate &rhs);
 	void operator+= (RealCoordinate &rhs);
+	void operator-= (RealCoordinate &rhs);
+	void operator-= (Coordinate &rhs);
 };
 #endif

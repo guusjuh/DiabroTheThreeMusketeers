@@ -127,7 +127,7 @@ private:
 	void setTile(int x, int z, bool value);
 	void setTile(Coordinate pos, bool value);
 	std::vector<RealCoordinate> getBuildingPositions();
-	
+	void printGrid();
 
 	std::vector <Ogre::SceneNode*> _buildingNodes;
 	std::vector<Building> _buildings;

@@ -5,11 +5,6 @@
 
 int City::gridScalar = 2;
 
-/*Coordinate operator+ (Coordinate &lhs, Coordinate &rhs)
-{
-	return (Coordinate(lhs.x + rhs.x, lhs.z + rhs.z));
-}*/
-
 Coordinate operator- (Coordinate &lhs, Coordinate &rhs) {
 	return (Coordinate(lhs.x - rhs.x, lhs.z - rhs.z));
 }
@@ -59,6 +54,17 @@ RealCoordinate operator- (RealCoordinate &lhs, Coordinate &rhs) {
 	return RealCoordinate(lhs.rx - rhs.x, lhs.rz - rhs.z);
 }
 
+void Coordinate::operator+=(Coordinate& rhs) {
+	x += rhs.x;
+	z += rhs.x;
+}
+
+void Coordinate::operator-=(Coordinate& rhs){
+	x -= rhs.x;
+	z -= rhs.z;
+}
+
+
 void RealCoordinate::operator+= (Coordinate &rhs) {
 	rx += rhs.x;
 	rz += rhs.z;
@@ -73,6 +79,17 @@ void RealCoordinate::operator= (const Coordinate &value) {
 	rx = static_cast<float>(value.x);
 	rz = static_cast<float>(value.z);
 }
+
+void RealCoordinate::operator-= (RealCoordinate &rhs){
+	rx -= rhs.rx;
+	rz -= rhs.rz;
+}
+
+void RealCoordinate::operator-=(Coordinate& rhs) {
+	rx -= rhs.x;
+	rz -= rhs.z;
+}
+
 
 bool operator== (RealCoordinate &lhs, RealCoordinate &rhs) {
 	return (lhs.rx == rhs.rx && lhs.rz == rhs.rz);
@@ -95,29 +112,31 @@ City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar)
 {
 	_tiles = new bool[scaledWidth() * scaledDepth()];
+	int mx = scaledWidth();
+	int mz = scaledDepth();
 	for (int x = 0; x < scaledWidth(); x++) {
 		for (int z = 0; z < scaledDepth(); z++) {
-			setTile(x, z, false);
+			setTile(x, z, true);
 		}
 	}
 }
 
 bool City::getTile(Coordinate pos) {
-	if (pos.x < 0 || pos.z < 0 || pos.x > width || pos.z > depth) {
+	if (pos.x < 0 || pos.z < 0 || pos.x >= scaledWidth() || pos.z >= scaledDepth()) {
 		return false;
 	}
 	return _tiles[pos.x + pos.z * scaledWidth()];
 }
 
 bool City::getTile(int x, int z) {
-	if (x < 0 || z < 0 || x > width || z > depth) {
+	if (x < 0 || z < 0 || x >= scaledWidth() || z >= scaledDepth()) {
 		return false;
 	}
 	return _tiles[x + z * scaledWidth()];
 }
 
 void City::setTile(Coordinate pos, bool value) {
-	if (pos.x < 0 || pos.z < 0 || pos.x > width || pos.z > depth) {
+	if (pos.x < 0 || pos.z < 0 || pos.x >= scaledWidth() || pos.z >= scaledDepth()) {
 		//Debug("Coordinate out of range", pos)
 	} else {
 		_tiles[pos.x + pos.z * scaledWidth()] = value;
@@ -125,7 +144,7 @@ void City::setTile(Coordinate pos, bool value) {
 }
 
 void City::setTile(int x, int z, bool value) {
-	if (x < 0 || z < 0 || x > width || z > depth) {
+	if (x < 0 || z < 0 || x >= scaledWidth() || z >= scaledDepth()) {
 		//Debug("position out of range", Coordinate(pos.x, pos.y))
 	} else {
 		_tiles[x + z * scaledWidth()] = value;
@@ -187,6 +206,8 @@ void City::generateBuildings()
 	//Get al possible positions
 
 	for (int n = 0; n < buildingAmount; n++) {
+	//for (int n = 0; n < buildingLocations.size(); n++) {
+		if (buildingLocations.size() < 1) continue;
 		//TODO: make it an ID
 		Ogre::SceneNode* buildingNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 		_buildingNodes.push_back(buildingNode);
@@ -206,12 +227,46 @@ void City::generateBuildings()
 		if (typeFlag == HideoutRT){
 			pos = getCenterTile();
 			pos = pos * scalar;
+			
+			Coordinate enemyCoord = getCenterTile();
+			enemyCoord -= position;
+			
+			for (int x = 0; x < 2; x++) {
+				for (int z = 0; z < 2; z++) {
+					setTile(enemyCoord + Coordinate(x, z), false);
+				}
+			}
 		}
 		else {
 			//translate object half a tile in the positive direction because the pivot of the object is at center
-			RealCoordinate transl = RealCoordinate(-250.0f, -250.0f);//RealCoordinate(RealCoordinate((buildingNode->getScale().x / gridScalar) * -scalar, (buildingNode->getScale().z / gridScalar) * -scalar));
-			pos = buildingLocations[rnd];
+			// scalar (1 zone unit in world size) / GridScalar (now one city tile) / 2 (half a city tile as buildings have their pivot centered)
+			RealCoordinate transl = RealCoordinate(-125.0f, -125.0f);
+			pos = buildingLocations[n];
+			//buildingLocations.erase(buildingLocations.begin() + rnd);
+			RealCoordinate rc = RealCoordinate((pos.rx / scalar), (pos.rz / scalar));
+			rc -= position;
+			rc = rc * gridScalar;
+			Coordinate friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
+			if (!getTile(friendlyCoord)) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+				FILE* fp;
+				freopen_s(&fp, "CONOUT$", "w", stdout);
+				printf("ohhh noeeesss!!!! \n");
+				fclose(fp);
+#endif
+			}
+			while(!getTile(friendlyCoord)) {
+				rnd = rand() % buildingLocations.size();
+				RealCoordinate rc = RealCoordinate((buildingLocations[rnd].rx / scalar), (buildingLocations[rnd].rz / scalar));
+				buildingLocations.erase(buildingLocations.begin() + rnd);
+				rc -= position;
+				rc = rc * gridScalar;
+				friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
+			}
 			pos += transl;
+			setTile(friendlyCoord, false);
+			printGrid();
+			int i = 0;
 		}
 
 		buildingNode->setPosition(pos.rx, 100, pos.rz);
@@ -237,8 +292,8 @@ void City::generateBuildings()
 
 std::vector<RealCoordinate> City::getBuildingPositions() {
 	std::vector<RealCoordinate> buildingLocations;
-	for (int x = 1; x < scaledWidth(); x++) {
-		for (int z = 1; z < scaledDepth(); z++) {
+	for (int x = 1; x < scaledWidth() - 1; x++) {
+		for (int z = 1; z < scaledDepth() - 1; z++) {
 			Coordinate upperPos; // zone grid
 			Coordinate lowerPos = Coordinate(x,z); // city grid
 			RealCoordinate worldPos; // world positions
@@ -252,13 +307,13 @@ std::vector<RealCoordinate> City::getBuildingPositions() {
 
 			if (x == 1) {
 				translation.x = -1;
-			} else if (x == scaledWidth() - 1) {
+			} else if (x == scaledWidth() - 2) {
 				translation.x = 1;
 			}
 
 			if (z == 1) {
 				translation.z = -1;
-			} else if (z == scaledDepth() - 1){
+			} else if (z == scaledDepth() - 2){
 				translation.z = 1;
 			}
 			
@@ -292,6 +347,21 @@ std::vector<RealCoordinate> City::getBuildingPositions() {
 	return buildingLocations;
 }
 
+void City::printGrid() {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	for (int ix = 0; ix < scaledWidth(); ++ix) {
+		for (int iz = 0; iz < scaledDepth(); ++iz) {
+			printf("|%s|", getTile(ix, iz)?".":"0");
+		}
+		printf("\n");
+	}
+	printf("\n");
+	fclose(fp);
+	//printValues();
+#endif
+}
 
 /// <summary>
 /// Assigns the building role.
@@ -344,15 +414,6 @@ std::vector<Ogre::SceneNode*> City::nodeList(Ogre::SceneNode* pBuildingNode)
 	_buildingNodes.push_back(pBuildingNode);
 	return _buildingNodes;
 }
-
-/**std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *pNodeName)
-{
-	Ogre::SceneNode::ChildNodeIterator cNode = pNodeName->getChildIterator();
-	while (cNode.hasMoreElements()) {
-		buildings.push_back((Ogre::SceneNode *)cNode.getNext());
-	}
-	return buildings;
-}**/
 
 /// <summary>
 /// Gets the scaled width.
