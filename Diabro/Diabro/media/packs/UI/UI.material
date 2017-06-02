@@ -143,3 +143,32 @@ material UI/LocatorQuest : UI/Base
       }
    }
 }
+
+material UI/HealthUpgrade : UI/Base
+{
+   technique
+   {
+      pass
+      {         
+         texture_unit
+         {
+			texture upgradeHp.png
+         }
+      }
+   }
+}
+
+material UI/DamageUpgrade : UI/Base
+{
+   technique
+   {
+      pass
+      {         
+         texture_unit
+         {
+			texture upgradeDmg.png
+         }
+      }
+   }
+}
+
