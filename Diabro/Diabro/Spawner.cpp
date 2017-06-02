@@ -41,8 +41,8 @@ void Spawner<T>::spawnInstance() {
 	
 	Ogre::SceneNode* instanceNode = _myNode->createChildSceneNode();
 	//random offset
-	int randomX = rand() % (100 - -100 + 1) + -100;
-	int randomZ = rand() % (100 - -100 + 1) + -100;
+	int randomX = rand() % 250 + 250; //(100 - -100 + 1) + -100;
+	int randomZ = rand() % 250 + 250; //(100 - -100 + 1) + -100;
 	instanceNode->translate(_spawnPosition + Ogre::Vector3(randomX, 0, randomZ), Ogre::Node::TS_WORLD);
 
 	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "uv_sphere.mesh" : "cube.mesh");

@@ -8,9 +8,9 @@
 /// Enum for the types of needs. 
 /// </summary>
 enum NeedType {
-	KnowledgeNeed = 0, //
+	KnowledgeNeed = 0, 
 	//ComfortNeed,
-	//ReputationNeed,
+	ReputationNeed,
 	//SerenityNeed,
 	//ProtectionNeed,
 	//ConquestNeed,

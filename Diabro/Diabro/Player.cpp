@@ -42,7 +42,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 
 	_inBattle = false;
 	_inBattleTime = 0;
-	_totalInBattleTime = 10.0f;
+	_totalInBattleTime = 5.0f;
 
 	_lightAttackCooldown = 1.2f;
 
@@ -85,6 +85,7 @@ void Player::die() {
 
 	reset(_myNode, _myEntity);
 
+	//TODO: generate new level!
 	Ogre::Vector3 startPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getStartPos();
 	startPos.y = 27.0f;
 	_myNode->setPosition(startPos);
@@ -169,14 +170,19 @@ void Player::dialogTriggered() {
 
 	if (!_inDialog) {
 		GameManager::getSingletonPtr()->getSoundManager()->dialog();
+
 	}
 	_inDialog = true;
 
 	if (!_nearbyNPC->talk(getPosition())) {
-		_inDialog = false;
 		if (_hasItem && _needToGiveItem && _nearbyNPC->relevantForAction()) {
 			giveItem(_nearbyNPC);
+		} 
+		if (_nearbyNPC->relevantForAction()) {
+			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgNpcInfo);
 		}
+
+		_inDialog = false;
 	}
 
 	return;
