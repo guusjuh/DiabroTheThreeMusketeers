@@ -26,26 +26,27 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	switch (_home->type) // assign building random professions by giving them a rolenode
 	{
 	case Smithery:
-		pMyEntity->setMaterialName("InGame/YellowNPC");
+		_originalMaterialName = "InGame/YellowNPC";
 		break;
 	case GuardHouse:
-		pMyEntity->setMaterialName("InGame/PinkNPC");
+		_originalMaterialName = "InGame/PinkNPC";
 		break;
 	case Church:
-		pMyEntity->setMaterialName("InGame/GreenNPC");
+		_originalMaterialName = "InGame/GreenNPC";
 		break;
 	case PotionStore:
-		pMyEntity->setMaterialName("InGame/PurpleNPC");
+		_originalMaterialName = "InGame/PurpleNPC";
 		break;
 	case Shop:
-		pMyEntity->setMaterialName("InGame/BlueNPC");
+		_originalMaterialName = "InGame/BlueNPC";
 		break;
 	case FancyHouse:
-		pMyEntity->setMaterialName("InGame/RedNPC");
+		_originalMaterialName = "InGame/RedNPC";
 		break;
 	default:
 		break;
 	}
+	pMyEntity->setMaterialName(_originalMaterialName);
 
 	// randomly assign needs
 	Need tempNeed;

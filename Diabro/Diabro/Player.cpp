@@ -26,7 +26,8 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
-	pMyEntity->setMaterialName("InGame/BlueHouse");
+	_originalMaterialName = "InGame/BlueHouse";
+	pMyEntity->setMaterialName(_originalMaterialName);
 
 	upgradeEquipment(PlayerUpgradeType(10, Health));
 	upgradeEquipment(PlayerUpgradeType(1, Damage));
