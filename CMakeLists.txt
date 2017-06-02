@@ -53,6 +53,9 @@ set(HDRS
 	./Diabro/Diabro/PostTheyHaveItem.h
 	./Diabro/Diabro/PostYouHaveItem.h
 	./Diabro/Diabro/PostYouThere.h
+	./Diabro/Diabro/PostTheyDead.h
+	./Diabro/Diabro/PostTheyInfo.h
+	./Diabro/Diabro/PostYouInfo.h
 	./Diabro/Diabro/PreCondition.h
 	./Diabro/Diabro/PreKnowWhereToGo.h
 	./Diabro/Diabro/PreSomebodyThere.h
@@ -103,6 +106,9 @@ set(SRCS
 	./Diabro/Diabro/PostTheyHaveItem.cpp
 	./Diabro/Diabro/PostYouHaveItem.cpp
 	./Diabro/Diabro/PostYouThere.cpp
+	./Diabro/Diabro/PostTheyDead.cpp
+	./Diabro/Diabro/PostTheyInfo.cpp
+	./Diabro/Diabro/PostYouInfo.cpp
 	./Diabro/Diabro/PreKnowWhereToGo.cpp
 	./Diabro/Diabro/PreSomebodyThere.cpp
 	./Diabro/Diabro/PreSomethingThere.cpp
