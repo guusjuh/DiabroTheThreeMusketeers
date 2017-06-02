@@ -32,10 +32,14 @@ void SoundManager::completed() {
 }
 
 void SoundManager::dialog() {
-	_engine->play2D("../../media/sounds/dialog.mp3");
+	_dialogSound = _engine->play2D("../../media/sounds/dialog.mp3", false, false, true);
 }
 
-
+void SoundManager::exitDialog() {
+	if(_dialogSound != nullptr) {
+		_dialogSound->stop();
+	}
+}
 
 
 

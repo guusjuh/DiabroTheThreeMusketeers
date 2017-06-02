@@ -189,6 +189,7 @@ void Player::dialogTriggered() {
 		}
 
 		_inDialog = false;
+		GameManager::getSingletonPtr()->getSoundManager()->exitDialog();
 	}
 
 	return;
