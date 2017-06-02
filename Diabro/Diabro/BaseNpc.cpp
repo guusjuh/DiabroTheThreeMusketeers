@@ -20,7 +20,7 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 /// <param name="pDeltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
-	//Character::update(pDeltatime);
+	/*Character::update(pDeltatime);
 
 	detectPlayer();
 	//for initialization
@@ -44,7 +44,7 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 				walkToNextPoint();
 			}
 		}
-	}
+	}*/
 }
 
 /// <summary>

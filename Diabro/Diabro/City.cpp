@@ -111,31 +111,31 @@ bool operator== (RealCoordinate &lhs, Coordinate &rhs) {
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar)
 {
-	_tiles = new bool[scaledWidth() * scaledDepth()];
+	_tiles = new int[scaledWidth() * scaledDepth()];
 	int mx = scaledWidth();
 	int mz = scaledDepth();
 	for (int x = 0; x < scaledWidth(); x++) {
 		for (int z = 0; z < scaledDepth(); z++) {
-			setTile(x, z, true);
+			setTile(x, z, 0);
 		}
 	}
 }
 
-bool City::getTile(Coordinate pos) {
+int City::getTile(Coordinate pos) {
 	if (pos.x < 0 || pos.z < 0 || pos.x >= scaledWidth() || pos.z >= scaledDepth()) {
 		return false;
 	}
 	return _tiles[pos.x + pos.z * scaledWidth()];
 }
 
-bool City::getTile(int x, int z) {
+int City::getTile(int x, int z) {
 	if (x < 0 || z < 0 || x >= scaledWidth() || z >= scaledDepth()) {
 		return false;
 	}
 	return _tiles[x + z * scaledWidth()];
 }
 
-void City::setTile(Coordinate pos, bool value) {
+void City::setTile(Coordinate pos, int value) {
 	if (pos.x < 0 || pos.z < 0 || pos.x >= scaledWidth() || pos.z >= scaledDepth()) {
 		//Debug("Coordinate out of range", pos)
 	} else {
@@ -143,7 +143,7 @@ void City::setTile(Coordinate pos, bool value) {
 	}
 }
 
-void City::setTile(int x, int z, bool value) {
+void City::setTile(int x, int z, int value) {
 	if (x < 0 || z < 0 || x >= scaledWidth() || z >= scaledDepth()) {
 		//Debug("position out of range", Coordinate(pos.x, pos.y))
 	} else {
@@ -193,6 +193,44 @@ void City::setType(int type)
 	}
 }
 
+std::vector<Coordinate> City::getFreePositions() {
+	std::vector<Coordinate> freePositions = std::vector<Coordinate>();
+	for (int x = 0; x < scaledWidth(); x++) {
+		for (int z = 0; z < scaledDepth(); z++) {
+			if (!getTile(x,z)) {
+				freePositions.push_back(Coordinate(x, z));
+			}
+		}
+	}
+	return freePositions;
+}
+
+void City::removeNpcTiles() {
+	for (int x = 0; x < scaledWidth(); x++) {
+		for (int z = 0; z < scaledDepth(); z++) {
+			if (getTile(x, z) == 2) {
+				setTile(x, z, 0);
+			}
+		}
+	}
+}
+
+
+RealCoordinate City::getNpcPosition() {
+	std::vector<Coordinate> positions = getFreePositions();
+	if (positions.size() > 0) {
+		int rnd = rand() % positions.size();
+		setTile(positions[rnd], 2);
+		RealCoordinate returnPos = RealCoordinate(position.x - 0.25f, position.z - 0.25f);
+		if (positions[rnd].x != 0) returnPos.rx += static_cast<float>(positions[rnd].x) / gridScalar;
+		if (positions[rnd].z != 0) returnPos.rz += static_cast<float>(positions[rnd].z) / gridScalar;
+		returnPos = returnPos * scalar;
+		return returnPos;
+	} else {
+		return RealCoordinate(-1, -1);
+	}
+}
+
 /// <summary>
 /// Generates the buildings for the city.
 /// </summary>
@@ -233,7 +271,7 @@ void City::generateBuildings()
 			
 			for (int x = 0; x < 2; x++) {
 				for (int z = 0; z < 2; z++) {
-					setTile(enemyCoord + Coordinate(x, z), false);
+					setTile(enemyCoord + Coordinate(x, z), 1);
 				}
 			}
 		}
@@ -247,15 +285,15 @@ void City::generateBuildings()
 			rc -= position;
 			rc = rc * gridScalar;
 			Coordinate friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
-			if (!getTile(friendlyCoord)) {
+			if (getTile(friendlyCoord)) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 				FILE* fp;
 				freopen_s(&fp, "CONOUT$", "w", stdout);
-				printf("ohhh noeeesss!!!! \n");
+				printf("check city.cpp 292 jasper \n");
 				fclose(fp);
 #endif
 			}
-			while(!getTile(friendlyCoord)) {
+			while(getTile(friendlyCoord)) {
 				rnd = rand() % buildingLocations.size();
 				RealCoordinate rc = RealCoordinate((buildingLocations[rnd].rx / scalar), (buildingLocations[rnd].rz / scalar));
 				buildingLocations.erase(buildingLocations.begin() + rnd);
@@ -264,7 +302,7 @@ void City::generateBuildings()
 				friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
 			}
 			pos += transl;
-			setTile(friendlyCoord, false);
+			setTile(friendlyCoord, 1);
 			printGrid();
 			int i = 0;
 		}

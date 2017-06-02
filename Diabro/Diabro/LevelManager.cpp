@@ -105,6 +105,17 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 	return _hostileNpcScripts.size() - 1;
 }
 
+void LevelManager::spawnEnemy(City *pCity, float pTimer) {
+	if (pCity != nullptr) {
+		if (pTimer <= 0.0f) {
+			levelGenerator->spawnEnemy(pCity, 1);
+		}
+		else {
+			enemySpawnTimers.push_back(std::make_pair(Timer(pTimer), pCity));
+		}
+	}
+}
+
 /// <summary>
 /// Detaches the friendly NPC.
 /// </summary>
@@ -147,6 +158,17 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	for (int i = 0; i < _hostileNpcScripts.size(); i++)
 	{
 		_hostileNpcScripts[i]->update(pFE.timeSinceLastFrame);
+	}
+	if (enemySpawnTimers.size() > 0) {
+		for (int i = 0; i < enemySpawnTimers.size(); i++) {
+			if (enemySpawnTimers[i].first.isFinished) {
+				spawnEnemy(enemySpawnTimers[i].second, 0.0f);
+				enemySpawnTimers.erase(enemySpawnTimers.begin() + i);
+				i--;
+			} else {
+				enemySpawnTimers[i].first.update(pFE.timeSinceLastFrame);
+			}
+		}
 	}
 }
 

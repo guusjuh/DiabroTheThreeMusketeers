@@ -13,7 +13,7 @@
 class BasicEnemy : public BaseNpc
 {
 public:
-	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int);
+	BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level);
 	~BasicEnemy() {}
 
 	void update(Ogre::Real) override;

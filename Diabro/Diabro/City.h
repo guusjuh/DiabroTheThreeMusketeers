@@ -7,7 +7,6 @@
 #include "math.h"
 
 
-
 /// <summary>
 /// Enum for the different city types. 
 /// </summary>
@@ -46,7 +45,7 @@ struct Building {
 	int residents;
 	Ogre::Vector2 position;
 
-	Ogre::Vector3 getPositionInFrontOf() {
+	Ogre::Vector3 getPosition() {
 		return Ogre::Vector3(position.x, 0, position.y);
 	}
 };
@@ -60,7 +59,7 @@ class City : public IQuestContent
 private:
 	Coordinate position; ///< upper left corner position of room
 	RoomType typeFlag;
-	bool* _tiles;
+	int* _tiles;
 	int width;
 	int depth;
 	int id; ///< unique id
@@ -80,16 +79,19 @@ public:
 	void clearConnections();
 	Coordinate getConnection(int index) { return connections[index]; }
 
-	bool getTile(Coordinate pos);
-	bool getTile(int x, int z);
+	int getTile(Coordinate pos);
+	int getTile(int x, int z);
 	int Scalar(){ return scalar; }
 	int scaledWidth() { return width * gridScalar; }
 	int scaledDepth() { return depth * gridScalar; }
+	void removeNpcTiles();
 
 	//TODO: make local position
 	Ogre::Vector3 getRandomPointInRoom();
 	Coordinate getCenterTile();
 	Coordinate getRandomTile();
+	std::vector<Coordinate> getFreePositions();
+	RealCoordinate getNpcPosition();
 
 	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
 	~City();
@@ -124,8 +126,8 @@ private:
 	void generateBuildings();
 	int getScaledWidth(int width, int scalar);
 	int getScaledDepth(int depth, int scalar);
-	void setTile(int x, int z, bool value);
-	void setTile(Coordinate pos, bool value);
+	void setTile(int x, int z, int value);
+	void setTile(Coordinate pos, int value);
 	std::vector<RealCoordinate> getBuildingPositions();
 	void printGrid();
 

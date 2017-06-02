@@ -222,6 +222,8 @@ void BasicEnemy::die() {
 
 	Character::die();
 	
+	GameManager::getSingletonPtr()->getLevelManager()->spawnEnemy(_myCity, 5.0f);
+
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 }
