@@ -152,7 +152,7 @@ material UI/HealthUpgrade : UI/Base
       {         
          texture_unit
          {
-			texture upgradeHp.png
+			texture upgradeHealth.png
          }
       }
    }
@@ -166,7 +166,7 @@ material UI/DamageUpgrade : UI/Base
       {         
          texture_unit
          {
-			texture upgradeDmg.png
+			texture upgradeDamage.png
          }
       }
    }

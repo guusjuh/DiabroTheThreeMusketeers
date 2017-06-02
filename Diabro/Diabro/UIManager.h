@@ -6,6 +6,7 @@
 #include "BaseApplication.h"
 #include "SdkTrays.h"
 #include "UIElements.h"
+#include "EnemyUpgrade.h"
 
 /// <summary>
 /// The manager of the UI. 
@@ -44,6 +45,12 @@ public:
 	void setQuestOn(bool val);
 	void setQuestTarget(Ogre::Vector3 position);
 
+	void increaseFloorText();
+	void resetFloorText();
+
+	void increaseUpgradeText(UpgradeModifierType type);
+	void resetUpgradeText();
+
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
 	Ogre::SceneNode*			_uiNode;
@@ -59,6 +66,11 @@ private:
 	DiabroUI::Bar*				_playerHealthBarWidget;
 	DiabroUI::Bar*				_enemyHealthBarWidget;
 	Ogre::Real					_maxWidthBar;
+
+	DiabroUI::FloorText*		_floorTextWidget;
+
+	DiabroUI::UpgradeIcon*		_healthUpgradeIcon;
+	DiabroUI::UpgradeIcon*		_dmgUpgradeIcon;
 
 	DiabroUI::HUDText*			_hudTextWidget;
 	float						_hudTotalTimer;
