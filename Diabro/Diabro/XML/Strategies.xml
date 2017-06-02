@@ -12,16 +12,19 @@
 			<ID>4</ID>
 			<Content>2</Content>
 			<Content>1</Content>
+			<Dialog>Is the 'QuestItemQC1' what you're looking for? Ah, yes the 'QuestItemQC1' is very mysterious. I could tell you how it works, but it's way to complicated. \nYou're smart, you say? Well.. -wispers- \nSo that's all there is to it.</Dialog>
 		</Action>
 		<Action>
 			<ID>7</ID>
 			<Content>1</Content>
+			<Dialog></Dialog>
 		</Action>
 		<Action>
 			<ID>6</ID>
 			<Content>1</Content>
 			<Content>1</Content>
 			<Content>1</Content>
+			<Dialog>Oh, that very interesting. I should use  'QuestItemQC1' wisely! \nGive it to me now, your work is done.</Dialog>
 		</Action>
 	</Actions>
 	<RarityPref>1</RarityPref>
@@ -38,15 +41,18 @@
 			<ID>10</ID>
 			<Content>2</Content>
 			<Content>2</Content>
+			<Dialog>Hmm.. why should I trust you? \nOh, why didn't you say at once that you didn't know 'NPCQC1'? I'll tell you then. \n-wispers-</Dialog>
 		</Action>
 		<Action>
 			<ID>7</ID>
 			<Content>1</Content>
+			<Dialog></Dialog>
 		</Action>	
 		<Action>
 			<ID>11</ID>
 			<Content>1</Content>
 			<Content>1</Content>
+			<Dialog>Really? I didn't know that... That sneaky bastard.</Dialog>
 		</Action>	
 	</Actions>
 	<RarityPref>0</RarityPref>
@@ -63,15 +69,18 @@
 			<ID>9</ID>
 			<Content>1</Content>
 			<Content>1</Content>
+			<Dialog></Dialog>
 		</Action>
 		<Action>
 			<ID>7</ID>
 			<Content>1</Content>
+			<Dialog></Dialog>
 		</Action>
 		<Action>
 			<ID>11</ID>
 			<Content>1</Content>
 			<Content>1</Content>
+			<Dialog>Thank you so much! I was so scared of 'EnemyQC1'.. \nHe's better of dead.</Dialog>
 		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
