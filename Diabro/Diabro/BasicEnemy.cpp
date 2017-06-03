@@ -247,6 +247,7 @@ void BasicEnemy::die() {
 		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgEnemyDead);
 	}
 
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth() / 100) * 2);
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 }
 
