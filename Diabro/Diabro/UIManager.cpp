@@ -54,8 +54,12 @@ void UIManager::setupUI()
 	_playerHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMLEFT, "Player", "PlayerHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
 	_maxWidthBar = _playerHealthBarWidget->getOverlayElement()->getWidth();
 
-	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -180, 180);
+	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -90, 90);
 	setQuestOn(false);
+	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getNorth());
+	_miniMap->setValueNorth(angle, calcLocatorPos(angle, _maxWidthBar));
+	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSouth());
+	_miniMap->setValueSouth(angle, calcLocatorPos(angle, _maxWidthBar));
 
 	_hudTextWidget = nullptr;
 }
@@ -288,9 +292,14 @@ Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre:
 /// updates the position of the locators on the minimap.
 void UIManager::updateMiniMapLocators() {
 	// update sis
-
 	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos());
 	_miniMap->setValueSister(angle, calcLocatorPos(angle, _maxWidthBar));
+
+	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getNorth());
+	_miniMap->setValueNorth(angle, calcLocatorPos(angle, _maxWidthBar));
+
+	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSouth());
+	_miniMap->setValueSouth(angle, calcLocatorPos(angle, _maxWidthBar));
 
 	// update quest 
 	if (_questOn) {
@@ -327,6 +336,9 @@ void UIManager::setQuestTarget(Ogre::Vector3 position) {
 /// \param pMaxSize the maximum size of the bar
 Ogre::Real UIManager::calcLocatorPos(Ogre::Real pAngle, Ogre::Real pMaxSize)
 {
-	Ogre::Real returnValue = ((pAngle - (-180)) / 360 * pMaxSize);
+	if (pAngle < -90) pAngle = -90;
+	if (pAngle > 90) pAngle = 90;
+		
+	Ogre::Real returnValue = ((pAngle + 90) / 180 * pMaxSize);
 	return returnValue;
 }

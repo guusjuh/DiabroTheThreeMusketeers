@@ -39,6 +39,14 @@ public:
 		return _sisterNode->getPosition();
 	}
 
+	Ogre::Vector3 getNorth() {
+		return getZone(0, 0).getCenterZone() + Ogre::Vector3(0, 0, -100000000.0f);
+	}
+	
+	Ogre::Vector3 getSouth() {
+		return getZone(0, 0).getCenterZone() + Ogre::Vector3(0, 0, +100000000.0f);
+	}
+
 	Ogre::Vector3 getStartPos() {
 		return getWorldPosition(_startCity->position) + Ogre::Vector3(250, 0, 250);
 	}

@@ -143,3 +143,31 @@ material UI/LocatorQuest : UI/Base
       }
    }
 }
+
+material UI/LocatorNorth : UI/Base
+{
+   technique
+   {
+      pass
+      {         
+         texture_unit
+         {
+			texture north.png
+         }
+      }
+   }
+}
+
+material UI/LocatorSouth : UI/Base
+{
+   technique
+   {
+      pass
+      {         
+         texture_unit
+         {
+			texture south.png
+         }
+      }
+   }
+}
