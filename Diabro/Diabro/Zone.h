@@ -74,7 +74,6 @@ protected:
 	bool placeCity(City pC);
 
 	bool* generateCollisionGrid();
-
 };
 
 #endif

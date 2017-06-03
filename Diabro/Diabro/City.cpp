@@ -270,7 +270,7 @@ RealCoordinate City::getNpcPosition() {
 	if (positions.size() > 0) {
 		int rnd = rand() % positions.size();
 		setTile(positions[rnd], 2);
-		RealCoordinate returnPos = RealCoordinate(position.x - 0.25f, position.z - 0.25f);
+		RealCoordinate returnPos = RealCoordinate(position.x, position.z);
 		if (positions[rnd].x != 0) returnPos.rx += static_cast<float>(positions[rnd].x) / gridScalar;
 		if (positions[rnd].z != 0) returnPos.rz += static_cast<float>(positions[rnd].z) / gridScalar;
 		returnPos = returnPos * scalar;
@@ -300,8 +300,8 @@ void City::generateBuildings()
 		_buildingNodes.push_back(buildingNode);
 
 		Ogre::Entity* buildingEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
-		if (typeFlag == CityRT) buildingNode->setScale(2, 3, 2);
-		else buildingNode->setScale(2.0f, 5, 2.0f);
+		if (typeFlag == CityRT) buildingNode->setScale(2.5f, 3, 2.5f);
+		else buildingNode->setScale(5.0f, 5, 5.0f);
 		buildingNode->attachObject(buildingEntity);
 
 		//calculate building positions
@@ -310,11 +310,11 @@ void City::generateBuildings()
 		rnd = rand() % buildingLocations.size();
 		
 		RealCoordinate pos;
-
+		int y = 100;
 		if (typeFlag == HideoutRT){
 			pos = getCenterTile();
 			pos = pos * scalar;
-			
+			y = 250;
 			Coordinate enemyCoord = getCenterTile();
 			enemyCoord -= position;
 			
@@ -327,7 +327,6 @@ void City::generateBuildings()
 		else {
 			//translate object half a tile in the positive direction because the pivot of the object is at center
 			// scalar (1 zone unit in world size) / GridScalar (now one city tile) / 2 (half a city tile as buildings have their pivot centered)
-			RealCoordinate transl = RealCoordinate(-125.0f, -125.0f);
 			pos = buildingLocations[n];
 			//buildingLocations.erase(buildingLocations.begin() + rnd);
 			RealCoordinate rc = RealCoordinate((pos.rx / scalar), (pos.rz / scalar));
@@ -350,13 +349,11 @@ void City::generateBuildings()
 				rc = rc * gridScalar;
 				friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
 			}
-			pos += transl;
 			setTile(friendlyCoord, 1);
 			printGrid();
-			int i = 0;
 		}
 
-		buildingNode->setPosition(pos.rx, 100, pos.rz);
+		buildingNode->setPosition(pos.rx, y, pos.rz);
 
 		BuildingType buildingType = (BuildingType)GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1);
 		int residents = rand() % 3 + 1;

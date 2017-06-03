@@ -12,7 +12,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	Debug("Initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 10, 100, scalar);
+	_zone[0] = Zone(19, 19, 3, 3, 10, 750, scalar);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -34,7 +34,7 @@ LevelGenerator::~LevelGenerator()
 /// </summary>
 void LevelGenerator::restart() {
 	Debug("initializing zone");
-	_zone[0] = Zone(19, 19, 5, 5, 10, 500, scalar);
+	_zone[0] = Zone(19, 19, 3, 3, 10, 750, scalar);
 	
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
@@ -117,7 +117,7 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
 				Ogre::SceneNode* tileNode = _dungeonNode->createChildSceneNode();
-				tileNode->setPosition(ix * scalar - (scalar / 2.0f), 0, iz * scalar - (scalar / 2.0f));
+				tileNode->setPosition(ix * scalar - (scalar / 4.0f), 0, iz * scalar - (scalar / 4.0f));
 				Ogre::SceneNode* wallNode = tileNode->createChildSceneNode();
 				wallNode->setPosition((scalar / 2.0f), 0.0f, (scalar / 2.0f));
 
