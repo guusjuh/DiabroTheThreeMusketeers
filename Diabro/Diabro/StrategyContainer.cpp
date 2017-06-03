@@ -76,6 +76,11 @@ void StrategyContainer::readFromXML()
 					}
 				}
 
+				// get dialog node
+				tinyxml2::XMLElement* dialogNode = actionNode->FirstChildElement("Dialog");
+				tinyxml2::XMLNode* dialogChild = dialogNode->FirstChild();
+				tempAction._dialog = dialogChild == nullptr ? "" : dialogChild->ToText()->Value();
+
 				// get content node
 				tinyxml2::XMLElement* contentNode = actionNode->FirstChildElement("Content");
 				int counter = 0;

@@ -286,7 +286,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 
 	// generate dialog for all actions
 	for (int i = 0; i < actions.size(); ++i) {
-		actions[i]._dialog = getFilledTemplate(actions[i]._dialog, actions[i]._concreteContent);
+		actions[i]._dialog = getFilledTemplate(actions[i]._dialog, contentIDs);
 	}
 
 	// set the action sequence

@@ -154,6 +154,24 @@ template container BorderPanel(UI/MiniMap)
 		height 32
 		width 24
 	}
+	
+	element Panel(LocatorNorth)
+	{
+		metrics_mode pixels
+		material UI/LocatorNorth
+		horz_align left
+		height 32
+		width 24
+	}
+	
+	element Panel(LocatorSouth)
+	{
+		metrics_mode pixels
+		material UI/LocatorSouth
+		horz_align left
+		height 32
+		width 24
+	}
 }
 
 template container Panel(UI/HUDText)

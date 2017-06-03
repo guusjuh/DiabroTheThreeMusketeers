@@ -98,9 +98,17 @@ void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 
+	// if we don't have a quest yet and we arn't initialized
+	// this is contained in the update due to order problems when done in constructor
 	if (!_hasQuest && !_initialized) {
-		needNewQuest();
-		_hasQuest = true;
+		// generate a random number
+		int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
+		Debug("Random roll was ", randomroll);
+		if(randomroll < 1) {
+			Debug("I got a quest! ", randomroll);
+			needNewQuest();
+			_hasQuest = true;
+		}
 		_initialized = true;
 	}
 

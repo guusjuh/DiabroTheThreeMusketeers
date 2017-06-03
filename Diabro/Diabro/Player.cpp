@@ -39,6 +39,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_noticeDistance = 300;
 	_nearbyNPC = nullptr;
 	_inDialog = false;
+	_sisNearby = false;
 
 	_inBattle = false;
 	_inBattleTime = 0;
@@ -69,38 +70,34 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_target = nullptr;
 	_inDialog = false;
 	_nearbyNPC = nullptr;
+	_sisNearby = false;
 
 	_inBattle = false;
 	_inBattleTime = 0;
+
+	_currentHealth = _maxHealth;
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 }
 
 /// <summary>
 /// Called if players health is below 0, resets player within current dungeon
 /// </summary>
 void Player::die() {
+	_myEntity->setMaterialName(_originalMaterialName);
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(0, _maxHealth);
+
 	changeInBattle(false);
 	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
 	GameManager::getSingletonPtr()->getSoundManager()->playerDead();
 	GameManager::getSingletonPtr()->goToState(GameState::Died);
 
-	reset(_myNode, _myEntity);
-
-	//TODO: generate new level!
-	Ogre::Vector3 startPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getStartPos();
-	startPos.y = 27.0f;
-	_myNode->setPosition(startPos);
-
 	equipment = equipment->removeUpgrades();
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
-	_currentHealth = _maxHealth;
 	_healthUpgrades = 0;
 	_damageUpgrades = 0;
 	GameManager::getSingleton().getUIManager()->resetUpgradeText();
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 	GameManager::getSingletonPtr()->getUIManager()->resetFloorText();
-
-	Debug("player: (Health, Damage)", Coordinate(_maxHealth, _damage));
 }
 
 void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
@@ -137,13 +134,15 @@ void Player::update(Ogre::Real pDeltaTime)
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom();
 		// if player reached the end 
 		if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
-			GameManager::getSingletonPtr()->goNextState();
-			GameManager::getSingletonPtr()->getSoundManager()->completed();
-			GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+			setSisterNearby(true);
+		}
+		else {
+			setSisterNearby(false);
 		}
 	}
 	else {
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+		setSisterNearby(false);
 	}
 
 	// call basic update
@@ -165,6 +164,32 @@ void Player::update(Ogre::Real pDeltaTime)
 			break;
 		}
 		setNearbyNPC(nullptr);
+	}
+}
+
+void Player::interactionTriggered() {
+	if(_sisNearby) {
+		findSister();
+	} else if(_nearbyNPC != nullptr) {
+		dialogTriggered();
+	}
+}
+
+void Player::findSister() {
+	GameManager::getSingletonPtr()->goNextState();
+	GameManager::getSingletonPtr()->getSoundManager()->completed();
+	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+}
+
+void Player::setSisterNearby(bool val) {
+	if (_sisNearby == val) return;
+
+	_sisNearby = val;
+
+	if(_sisNearby) {
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText("Press 'E' to talk to your sister.");
+	} else {
+		GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
 	}
 }
 

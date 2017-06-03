@@ -30,6 +30,7 @@ public:
 	int _depth;
 
 	City* getRandomCity(RoomType type);// { return &cities[0]; }
+	Ogre::Vector3 getCenterZone() { return Ogre::Vector3(_width * _scalar / 2.0f, 0, _depth * _scalar / 2.0f); }
 
 	std::vector<City> cities; ///< vector containing all cities within the zone
 

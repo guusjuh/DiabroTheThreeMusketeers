@@ -29,7 +29,10 @@ public:
 	bool lightAttack() override;
 	void gainXP(int);
 	
+	bool isInDialog() { return _inDialog; }
 	void dialogTriggered();
+
+	void interactionTriggered();
 	float angleBetween(Ogre::Vector3);
 
 	bool getInQuest() { return _inQuest; }
@@ -54,6 +57,10 @@ private:
 	Npc* _nearbyNPC;
 	bool _inDialog;
 	void setNearbyNPC(Npc* newNPC);
+
+	bool _sisNearby;
+	void setSisterNearby(bool val);
+	void findSister();
 
 	bool _inBattle;
 	float _inBattleTime;

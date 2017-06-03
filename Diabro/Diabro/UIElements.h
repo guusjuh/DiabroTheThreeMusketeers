@@ -762,11 +762,18 @@ namespace DiabroUI
 			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/MiniMap", "BorderPanel", name);
 			mElement->setWidth(width);
 			Ogre::OverlayContainer* c = (Ogre::OverlayContainer*)mElement;
+
 			mLocatorSister = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorSister");
 			mLocatorSister->setPosition(width / 2, 0);
 			
 			mLocatorQuest = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorQuest");
 			mLocatorQuest->setPosition(width / 2, 0);
+
+			mLocatorNorth = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorNorth");
+			mLocatorNorth->setPosition(width / 2, 0);
+
+			mLocatorSouth = (Ogre::OverlayContainer*)c->getChild(getName() + "/LocatorSouth");
+			mLocatorSouth->setPosition(width / 2, 0);
 
 			if (width <= 0) mFitToContents = true;
 
@@ -799,6 +806,33 @@ namespace DiabroUI
 			mLocatorQuest->setPosition(positionLocator - (mLocatorQuest->getWidth() / 2.0f), 0);
 		}
 
+		void setValueNorth(Ogre::Real value, Ogre::Real positionLocator)
+		{
+			if (value < mMinValue || value > mMaxValue) {
+				mLocatorNorth->hide();
+			}
+			else {
+				mLocatorNorth->show();
+			}
+
+			mValueNorth = Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
+
+			mLocatorNorth->setPosition(positionLocator - (mLocatorNorth->getWidth() / 2.0f), 0);
+		}
+
+		void setValueSouth(Ogre::Real value, Ogre::Real positionLocator)
+		{
+			if(value < mMinValue || value > mMaxValue) {
+				mLocatorSouth->hide();
+			} else {
+				mLocatorSouth->show();
+			}
+
+			mValueSouth = Ogre::Math::Clamp<Ogre::Real>(value, mMinValue, mMaxValue);
+
+			mLocatorSouth->setPosition(positionLocator - (mLocatorSouth->getWidth() / 2.0f), 0);
+		}
+
 		Ogre::Real getValueSister()
 		{
 			return mValueSister;
@@ -809,8 +843,26 @@ namespace DiabroUI
 			return mValueQuest;
 		}
 
+		Ogre::Real getValueNorth()
+		{
+			return mValueNorth;
+		}
+
+		Ogre::Real getValueSouth()
+		{
+			return mValueSouth;
+		}
+
 		Ogre::OverlayContainer* getQuestLocator() {
 			return mLocatorQuest;
+		}
+
+		Ogre::OverlayContainer* getNorthLocator() {
+			return mLocatorNorth;
+		}
+
+		Ogre::OverlayContainer* getSouthLocator() {
+			return mLocatorSouth;
 		}
 
 	protected:
@@ -828,14 +880,20 @@ namespace DiabroUI
 
 		bool mFitToContents;
 		Ogre::Real mDragOffset;
+
 		Ogre::Real mValueSister;
 		Ogre::Real mValueQuest;
+		Ogre::Real mValueNorth;
+		Ogre::Real mValueSouth;
+
 		Ogre::Real mMinValue;
 		Ogre::Real mMaxValue;
 		Ogre::Real mInterval;
 
 		Ogre::OverlayContainer* mLocatorSister;
 		Ogre::OverlayContainer* mLocatorQuest;
+		Ogre::OverlayContainer* mLocatorNorth;
+		Ogre::OverlayContainer* mLocatorSouth;
 	};
 
 	/*=============================================================================

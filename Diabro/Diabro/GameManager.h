@@ -47,7 +47,7 @@ public:
 	GameState getCurrentState() { return state; }
 	void goNextState() {
 		if (state == End) {
-			reset();
+			nextFloor();
 			return;
 		}
 		state = (GameState)(((int)state + 1) % 3);
@@ -55,6 +55,11 @@ public:
 	}
 
 	void goToState(GameState pState) {
+		//check for player died before going to ingame so you can reset stuff
+		if(state == Died && pState == InGame) {
+			restartGame();
+		}
+
 		state = pState;
 	}
 
@@ -72,6 +77,8 @@ public:
 		return rand() % (pHI-pLO) + pLO;
 	}
 
+	void restartGame();
+
 protected:
     virtual void createScene(void);
 	virtual void createCamera(void);
@@ -88,7 +95,7 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
 	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 	
-	void reset();
+	void nextFloor();
 
 	LevelManager* _levelManager;
 	UIManager* _uiManager;

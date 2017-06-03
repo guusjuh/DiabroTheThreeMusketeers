@@ -83,9 +83,25 @@ void GameManager::createScene(void)
 /// <summary>
 /// Resets the game.
 /// </summary>
-void GameManager::reset() {
+void GameManager::nextFloor() {
+	Debug("\tG: spawning next floor, player succeeded.");
 	getSceneManager()->clearScene();
-	_levelManager->reset();
+	_levelManager->nextFloor();
+	_questManager->reset();
+
+	setupLights(mSceneMgr);
+
+	state = Start;
+}
+
+
+/// <summary>
+/// Resets the game.
+/// </summary>
+void GameManager::restartGame() {
+	Debug("\tG: restarting the game, player died.");
+	getSceneManager()->clearScene();
+	_levelManager->restartGame();
 	_questManager->reset();
 
 	setupLights(mSceneMgr);
@@ -225,11 +241,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 
 	case OIS::KC_E:
-		_levelManager->getPlayer()->dialogTriggered();
+		_levelManager->getPlayer()->interactionTriggered();
 		break;
 
 	case OIS::KC_SPACE:
-		_levelManager->getPlayer()->dialogTriggered();
+		if(_levelManager->getPlayer()->isInDialog()) {
+			_levelManager->getPlayer()->dialogTriggered();
+		}
 		break;
 
 	default:
