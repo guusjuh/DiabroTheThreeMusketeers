@@ -38,6 +38,9 @@ public:
 
 	void recieveItem() override;
 
+	int healthUpgradeAmount() { return _healthUpgrades; }
+	int damageUpgradeAmount() { return _damageUpgrades; }
+
 private:
 	void die() override;
 
@@ -45,6 +48,8 @@ private:
 	int _xpTillNextLevel;
 
 	IPlayerEquipment* equipment;
+	int _healthUpgrades;
+	int _damageUpgrades;
 
 	Npc* _nearbyNPC;
 	bool _inDialog;

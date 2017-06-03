@@ -23,14 +23,13 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	equipment = new PlayerEquipment(40.0f, 3.0f);
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
+	_healthUpgrades = 0;
+	_damageUpgrades = 0;
 
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
 	_originalMaterialName = "InGame/BlueHouse";
 	pMyEntity->setMaterialName(_originalMaterialName);
-
-	upgradeEquipment(PlayerUpgradeType(10, Health));
-	upgradeEquipment(PlayerUpgradeType(1, Damage));
 
 	// initialize pLevel vars
 	_currentLevel = 1;
@@ -95,7 +94,11 @@ void Player::die() {
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_currentHealth = _maxHealth;
+	_healthUpgrades = 0;
+	_damageUpgrades = 0;
+	GameManager::getSingleton().getUIManager()->resetUpgradeText();
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
+	GameManager::getSingletonPtr()->getUIManager()->resetFloorText();
 
 	Debug("player: (Health, Damage)", Coordinate(_maxHealth, _damage));
 }
@@ -105,17 +108,19 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 	case Health:
 		equipment = new PlayerHealthUpgrade(equipment, upgrade.value);
 		_maxHealth = equipment->getHealth();
-		_currentHealth = equipment->getHealth();
+		_healthUpgrades++;
+		GameManager::getSingletonPtr()->getUIManager()->increaseUpgradeText(Health);
 		break;
 	case Damage:
 		equipment = new PlayerDamageUpgrade(equipment, upgrade.value);
 		_damage = equipment->getDamage();
+		_damageUpgrades++;
+		GameManager::getSingletonPtr()->getUIManager()->increaseUpgradeText(Damage);
 		break;
 	default:
 		Debug("Wrong upgrade type");
 		break;
 	}
-	int i = 0;
 }
 
 /// <summary>
@@ -184,6 +189,7 @@ void Player::dialogTriggered() {
 		}
 
 		_inDialog = false;
+		GameManager::getSingletonPtr()->getSoundManager()->exitDialog();
 	}
 
 	return;

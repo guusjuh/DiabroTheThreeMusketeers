@@ -89,6 +89,7 @@ void Action::update() {
 	// check for condition being met
 	if(_postcondition.second->isMet()) {
  		complete();
+		GameManager::getSingletonPtr()->getSoundManager()->completed();
 	}
 }
 

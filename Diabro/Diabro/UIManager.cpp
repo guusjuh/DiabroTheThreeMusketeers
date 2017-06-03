@@ -57,6 +57,11 @@ void UIManager::setupUI()
 	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -180, 180);
 	setQuestOn(false);
 
+	_floorTextWidget = _uiElementMgr->createFloorText(DiabroUI::TOPLEFT, "FLOORTEXT", "Floor " + Ogre::StringConverter::toString(1), 40, 40);
+
+	_healthUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Health", "HealthUpgrade", 64, 56);
+	_dmgUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Damage", "DamageUpgrade", 64, 56);
+
 	_hudTextWidget = nullptr;
 }
 
@@ -329,4 +334,30 @@ Ogre::Real UIManager::calcLocatorPos(Ogre::Real pAngle, Ogre::Real pMaxSize)
 {
 	Ogre::Real returnValue = ((pAngle - (-180)) / 360 * pMaxSize);
 	return returnValue;
+}
+
+void UIManager::increaseFloorText() {
+	_floorTextWidget->setText("Floor " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel()));
+}
+
+void UIManager::resetFloorText() {
+	_floorTextWidget->setText("Floor " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel()));
+}
+
+void UIManager::increaseUpgradeText(UpgradeModifierType type) {
+	switch(type) {
+	case Health:
+		_healthUpgradeIcon->setValue(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->healthUpgradeAmount());
+		break;
+	case Damage:
+		_dmgUpgradeIcon->setValue(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->damageUpgradeAmount());
+		break;
+	default:
+		break;
+	}
+}
+
+void UIManager::resetUpgradeText() {
+	_healthUpgradeIcon->setValue(0);
+	_dmgUpgradeIcon->setValue(0);
 }

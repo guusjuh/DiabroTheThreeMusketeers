@@ -53,6 +53,7 @@ void LevelManager::initialize()
 /// </summary>
 void LevelManager::reset() {
 	_level++;
+	GameManager::getSingletonPtr()->getUIManager()->increaseFloorText();
 
 	while(_friendlyNpcScripts.size() > 0) {
 		detachFriendlyNPC(0);

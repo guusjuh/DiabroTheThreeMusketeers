@@ -32,16 +32,12 @@ namespace DiabroUI
 		NONE
 	};
 
-	//TODO: implement buttonstates when menu is gonna be build
-
 	class Widget;
 	class HUDText;
 	class DialogTextBox;
 	class MiniMap;
 	class ImageWidget;
 	class Bar;
-
-	//TODO: maybe baby we need a SdkTrayListener
 
 	/*=============================================================================
 	| Abstract base class for all widgets.
@@ -329,7 +325,137 @@ namespace DiabroUI
 	};
 
 	/*=============================================================================
-	| Scrollable text box widget.
+	| Floor text widget.
+	=============================================================================*/
+	class FloorText : public Widget
+	{
+	public:
+
+		// Do not instantiate any widgets directly. Use UIElementsManager.
+		FloorText(const Ogre::String& name, const Ogre::DisplayString& text, Ogre::Real width, Ogre::Real height)
+		{
+			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/FloorIndicator", "Panel", name);
+			mElement->setWidth(width);
+			mElement->setHeight(height);
+			Ogre::OverlayContainer* container = (Ogre::OverlayContainer*)mElement;
+			mTextArea = (Ogre::TextAreaOverlayElement*)container->getChild(getName() + "/FloorValue");
+			mPadding = 15;
+			mText = text;
+			refitContents();
+		}
+
+		void setPadding(Ogre::Real padding)
+		{
+			mPadding = padding;
+			refitContents();
+		}
+
+		Ogre::Real getPadding()
+		{
+			return mPadding;
+		}
+
+		void setWidth(Ogre::Real width) {
+			mElement->setWidth(width);
+		}
+
+		const Ogre::DisplayString& getText()
+		{
+			return mText;
+		}
+
+		/*-----------------------------------------------------------------------------
+		| Sets text box content. Most of this method is for wordwrap.
+		-----------------------------------------------------------------------------*/
+		void setText(const Ogre::DisplayString& text)
+		{
+			mText = text;
+			mLines.clear();
+
+			Ogre::Font* font = (Ogre::Font*)Ogre::FontManager::getSingleton().getByName(mTextArea->getFontName()).getPointer();
+
+			Ogre::String current = DISPLAY_STRING_TO_STRING(text);
+			bool firstWord = true;
+			unsigned int lastSpace = 0;
+			unsigned int lineBegin = 0;
+			Ogre::Real lineWidth = 0;
+
+			for (unsigned int i = 0; i < current.length(); i++)
+			{
+				if (current[i] == ' ')
+				{
+					if (mTextArea->getSpaceWidth() != 0) lineWidth += mTextArea->getSpaceWidth();
+					else lineWidth += font->getGlyphAspectRatio(' ') * mTextArea->getCharHeight();
+					firstWord = false;
+					lastSpace = i;
+				}
+				else if (current[i] == '\n')
+				{
+					firstWord = true;
+					lineWidth = 0;
+					mLines.push_back(current.substr(lineBegin, i - lineBegin));
+					lineBegin = i + 1;
+				}
+				else
+				{
+					// use glyph information to calculate line width
+					lineWidth += font->getGlyphAspectRatio(current[i]) * mTextArea->getCharHeight();
+
+				}
+			}
+
+			mLines.push_back(current.substr(lineBegin));
+
+			mTextArea->setCaption(current);
+		}
+
+		/*-----------------------------------------------------------------------------
+		| Sets text box content horizontal alignment.
+		-----------------------------------------------------------------------------*/
+		void setTextAlignment(Ogre::TextAreaOverlayElement::Alignment ta)
+		{
+			if (ta == Ogre::TextAreaOverlayElement::Left) mTextArea->setHorizontalAlignment(Ogre::GHA_LEFT);
+			else if (ta == Ogre::TextAreaOverlayElement::Center) mTextArea->setHorizontalAlignment(Ogre::GHA_CENTER);
+			else mTextArea->setHorizontalAlignment(Ogre::GHA_RIGHT);
+			refitContents();
+		}
+
+		void clearText()
+		{
+			setText("");
+		}
+
+		void appendText(const Ogre::DisplayString& text)
+		{
+			setText(getText() + text);
+		}
+
+		/*-----------------------------------------------------------------------------
+		| Makes adjustments based on new padding, size, or alignment info.
+		-----------------------------------------------------------------------------*/
+		void refitContents()
+		{
+			setText(getText());
+		}
+
+		/*-----------------------------------------------------------------------------
+		| Gets how many lines of text can fit in this window.
+		-----------------------------------------------------------------------------*/
+		unsigned int getHeightInLines()
+		{
+			return (unsigned int)((mElement->getHeight() - 2 * mPadding /*- mCaptionBar->getHeight() + 5)*/) / mTextArea->getCharHeight());
+		}
+
+	protected:
+		Ogre::TextAreaOverlayElement* mTextArea;
+		Ogre::DisplayString mText;
+		Ogre::StringVector mLines;
+		Ogre::Real mPadding;
+		unsigned int mStartingLine;
+	};
+
+	/*=============================================================================
+	| Text box widget.
 	=============================================================================*/
 	class DialogTextBox : public Widget
 	{
@@ -511,7 +637,7 @@ namespace DiabroUI
 	};
 
 	/*=============================================================================
-	| Basic slider widget.
+	| Basic bar widget.
 	=============================================================================*/
 	class Bar : public Widget
 	{
@@ -613,7 +739,7 @@ namespace DiabroUI
 	};
 
 	/*=============================================================================
-	| Basic slider widget.
+	| Mini map widget.
 	=============================================================================*/
 	enum Locator {
 		Sister = 0,
@@ -710,6 +836,61 @@ namespace DiabroUI
 
 		Ogre::OverlayContainer* mLocatorSister;
 		Ogre::OverlayContainer* mLocatorQuest;
+	};
+
+	/*=============================================================================
+	| Upgrade icon.
+	=============================================================================*/
+	class UpgradeIcon : public Widget
+	{
+	public:
+		// Do not instantiate any widgets directly. Use SdkTrayManager.
+		UpgradeIcon(const Ogre::String& pre, const Ogre::String& name, Ogre::Real width, Ogre::Real valueBoxWidth)
+			: mValue(0.0f)
+		{
+			mFitToContents = false;
+			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/" + pre + "UpgradeIcon", "BorderPanel", name);
+			mElement->setWidth(width);
+			Ogre::OverlayContainer* c = (Ogre::OverlayContainer*)mElement;
+			mValueBox = (Ogre::OverlayContainer*)c->getChild(getName() + "/Sprite" + pre);
+			mValueBox->setWidth(valueBoxWidth);
+			mValueTextArea = (Ogre::TextAreaOverlayElement*)mValueBox->getChild(mValueBox->getName() + "/Text" + pre);
+
+			if (width <= 0) mFitToContents = true;
+
+			setValue(0);
+		}
+
+		const Ogre::DisplayString& getValueCaption()
+		{
+			return mValueTextArea->getCaption();
+		}
+
+		/*-----------------------------------------------------------------------------
+		| You can use this method to manually format how the value is displayed.
+		-----------------------------------------------------------------------------*/
+		void setValueCaption(const Ogre::DisplayString& caption)
+		{
+			mValueTextArea->setCaption(caption);
+		}
+
+		void setValue(Ogre::Real value)
+		{
+			mValue = value;
+
+			setValueCaption(Ogre::StringConverter::toString(mValue));
+		}
+
+		Ogre::Real getValue()
+		{
+			return mValue;
+		}
+
+	protected:
+		Ogre::TextAreaOverlayElement* mValueTextArea;
+		Ogre::OverlayContainer* mValueBox;
+		bool mFitToContents;
+		Ogre::Real mValue;
 	};
 
 	/*=============================================================================
@@ -1004,7 +1185,6 @@ namespace DiabroUI
 		{
 			HUDText* tb = new HUDText(name, caption, width, height);
 			moveWidgetToTray(tb, trayLoc);
-			//tb->_assignListener(mListener);
 			return tb;
 		}
 
@@ -1013,7 +1193,6 @@ namespace DiabroUI
 		{
 			DialogTextBox* tb = new DialogTextBox(name, caption, width, height);
 			moveWidgetToTray(tb, trayLoc);
-			//tb->_assignListener(mListener);
 			return tb;
 		}
 
@@ -1029,7 +1208,13 @@ namespace DiabroUI
 		{
 			Bar* tb = new Bar(pre, name, width, valueBoxWidth, minValue, maxValue, snaps);
 			moveWidgetToTray(tb, trayLoc);
-			//tb->_assignListener(mListener);
+			return tb;
+		}
+
+		UpgradeIcon* createUpgradeIcon(AnchorLocation trayLoc, const Ogre::String& pre, const Ogre::String& name, Ogre::Real width, Ogre::Real valueBoxWidth)
+		{
+			UpgradeIcon* tb = new UpgradeIcon(pre, name, width, valueBoxWidth);
+			moveWidgetToTray(tb, trayLoc);
 			return tb;
 		}
 
@@ -1038,33 +1223,16 @@ namespace DiabroUI
 		{
 			MiniMap* tb = new MiniMap(name, width, minValue, maxValue);
 			moveWidgetToTray(tb, trayLoc);
-			//tb->_assignListener(mListener);
 			return tb;
 		}
 
-		/* 
-		/*-----------------------------------------------------------------------------
-		| Shows logo in the specified location.
-		-----------------------------------------------------------------------------#1#
-		void showLogo(AnchorLocation trayLoc, int place = -1)
+		FloorText* createFloorText(AnchorLocation trayLoc, const Ogre::String& name, const Ogre::DisplayString& caption,
+			Ogre::Real width, Ogre::Real height)
 		{
-			if (!isLogoVisible()) mLogo = createDecorWidget(NONE, mName + "/Logo", "SdkTrays/Logo");
-			moveWidgetToTray(mLogo, trayLoc, place);
+			FloorText* tb = new FloorText(name, caption, width, height);
+			moveWidgetToTray(tb, trayLoc);
+			return tb;
 		}
-
-		void hideLogo()
-		{
-			if (isLogoVisible())
-			{
-				destroyWidget(mLogo);
-				mLogo = 0;
-			}
-		}
-
-		bool isLogoVisible()
-		{
-			return mLogo != 0;
-		}*/
 
 		/*-----------------------------------------------------------------------------
 		| Gets a widget from a tray by place.

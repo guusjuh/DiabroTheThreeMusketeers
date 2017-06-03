@@ -252,3 +252,110 @@ template container BorderPanel(UI/DialogBox)
 		colour 1 1 1
 	}
 }
+
+template container Panel(UI/FloorIndicator)
+{
+	metrics_mode pixels
+	transparent true
+
+	element TextArea(FloorValue)
+	{
+        metrics_mode pixels
+        horz_align center
+        alignment left
+        top 20
+        font_name UI/Caption
+        char_height 30
+        space_width 7
+        colour 0.9 0.9 0.9
+	}
+}
+
+template container BorderPanel(UI/HealthUpgradeIcon)
+{
+	metrics_mode pixels
+	material UI/BarBackground
+	uv_coords 0.25 0.25 0.75 0.75
+	horz_align center
+	height 62
+	
+	border_material UI/BarBackground
+	border_size 5 5 5 5
+	border_topleft_uv     0.00 0.00 0.25 0.25
+	border_top_uv         0.25 0.00 0.75 0.25
+	border_topright_uv    0.75 0.00 1.00 0.25
+	border_left_uv        0.00 0.25 0.25 0.75
+	border_right_uv       0.75 0.25 1.00 0.75
+	border_bottomleft_uv  0.00 0.75 0.25 1.00
+	border_bottom_uv      0.25 0.75 0.75 1.00
+	border_bottomright_uv 0.75 0.75 1.00 1.00
+	
+	element Panel(SpriteHealth)
+	{
+		metrics_mode pixels
+		material UI/HealthUpgrade
+		uv_coords 0 0 1 1
+		horz_align left
+		left 5
+		top 4
+		height 56
+		
+		element TextArea(TextHealth)
+		{
+			metrics_mode pixels
+			horz_align right
+			vert_align bottom
+			left -11
+			top -16
+			font_name UI/Value
+			char_height 20
+			space_width 8
+			colour 0 0 0
+		}
+	}
+}
+
+template container BorderPanel(UI/DamageUpgradeIcon)
+{
+	metrics_mode pixels
+	material UI/BarBackground
+	uv_coords 0.25 0.25 0.75 0.75
+	horz_align center
+	height 62
+	
+	border_material UI/BarBackground
+	border_size 5 5 5 5
+	border_topleft_uv     0.00 0.00 0.25 0.25
+	border_top_uv         0.25 0.00 0.75 0.25
+	border_topright_uv    0.75 0.00 1.00 0.25
+	border_left_uv        0.00 0.25 0.25 0.75
+	border_right_uv       0.75 0.25 1.00 0.75
+	border_bottomleft_uv  0.00 0.75 0.25 1.00
+	border_bottom_uv      0.25 0.75 0.75 1.00
+	border_bottomright_uv 0.75 0.75 1.00 1.00
+	
+	element Panel(SpriteDamage)
+	{
+		metrics_mode pixels
+		material UI/DamageUpgrade
+		uv_coords 0 0 1 1
+		horz_align left
+		left 5
+		top 4
+		height 56
+		
+		element TextArea(TextDamage)
+		{
+			metrics_mode pixels
+			horz_align right
+			vert_align bottom
+			left -11
+			top -16
+			font_name UI/Value
+			char_height 20
+			space_width 8
+			colour 0 0 0
+		}
+	}
+}
+

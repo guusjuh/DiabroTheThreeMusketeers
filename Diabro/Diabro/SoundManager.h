@@ -32,12 +32,14 @@ public:
 	void playerDead();
 	void completed();
 	void dialog();
+	void exitDialog();
 
 private:
 	irrklang::ISoundEngine* _engine;
 
 	irrklang::ISound* _backgroundMusic;
 	irrklang::ISound* _epicBackgroundMusic;
+	irrklang::ISound* _dialogSound;
 
 	bool _inEndRoom;
 };
