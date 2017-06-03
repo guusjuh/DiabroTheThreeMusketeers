@@ -46,7 +46,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_noticeDistance = 200;
-	_attackDistance = 200;
+	_attackDistance = 220;
 	_lightAttackCooldown = 2.0f;
 	_totalHitTime = 0.2f;
 

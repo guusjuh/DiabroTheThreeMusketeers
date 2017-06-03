@@ -39,7 +39,7 @@ void EnemyMoveAroundCenterState::Execute(BaseNpc* agent){
 		}
 	}
 
-	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < 50){
+	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < agent->getSpeed() / 2){
 		if (agent->getNextPosSize() == 0){
 			while (agent->getNextPosSize() == 0)
 			{

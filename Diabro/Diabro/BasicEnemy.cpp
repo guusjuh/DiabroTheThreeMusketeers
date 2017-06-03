@@ -96,22 +96,22 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	pMyNode->setScale(0.5f, 0.5f, 0.5f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 18.0f, pMyNode->getPosition().z);
 
-	_movespeed = 300;
+	_movespeed = 320;
 	_rotationspeed = 0.13f;
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_noticeDistance = equipment->getNoticeDist();
-	_attackDistance = 150;
-	_lightAttackCooldown = 2.5f;
-	_totalHitTime = 0.5f;
+	_attackDistance = 180;
+	_lightAttackCooldown = 2.3f;
+	_totalHitTime = 0.3f;
 
 	_currentHealth = _maxHealth;
 }
 
 void BasicEnemy::assignUpgrades(int level) {
 	// random amount based on level
-	level = GameManager::getSingletonPtr()->getRandomInRange(level - 1, level + 2);
-	if (level < 1) level = 1;
+	level = GameManager::getSingletonPtr()->getRandomInRange(level - 2, level + 1);
+	if (level < 0) level = 0;
 
 	// set variables used for creation of each upgrade.
 	UpgradeModifierType type = (UpgradeModifierType)0;

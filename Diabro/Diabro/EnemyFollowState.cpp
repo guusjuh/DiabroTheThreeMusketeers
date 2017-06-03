@@ -32,7 +32,7 @@ void EnemyFollowState::Execute(BaseNpc* agent){
 		agent->stateMachine.setState("AroundCenter");
 	}
 
-	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < 50 || agent->getNextPosSize() == 0){
+	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < agent->getSpeed() / 2.0f || agent->getNextPosSize() == 0){
 		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
 		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
 		Coordinate player = Coordinate(playerPos.x, playerPos.z);
