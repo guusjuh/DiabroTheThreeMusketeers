@@ -15,11 +15,6 @@
 			<Content>1</Content>
 		</Action>
 		<Action>
-			<ID>7</ID>
-			<Dialog></Dialog>
-			<Content>1</Content>
-		</Action>
-		<Action>
 			<ID>6</ID>
 			<Dialog>Oh, that very interesting. I should use 'QuestItemQC1' wisely! \nGive it to me now, your work is done.</Dialog>
 			<Content>1</Content>
@@ -44,11 +39,6 @@
 			<Content>2</Content>
 		</Action>
 		<Action>
-			<ID>7</ID>
-			<Dialog></Dialog>
-			<Content>1</Content>
-		</Action>	
-		<Action>
 			<ID>11</ID>
 			<Dialog>Really? I didn't know that... That sneaky bastard.</Dialog>
 			<Content>1</Content>
@@ -69,11 +59,6 @@
 			<ID>9</ID>
 			<Dialog></Dialog>
 			<Content>1</Content>
-			<Content>1</Content>
-		</Action>
-		<Action>
-			<ID>7</ID>
-			<Dialog></Dialog>
 			<Content>1</Content>
 		</Action>
 		<Action>
