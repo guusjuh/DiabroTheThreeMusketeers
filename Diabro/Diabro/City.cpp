@@ -289,31 +289,26 @@ RealCoordinate City::getNpcPosition() {
 void City::generateBuildings()
 {
 	std::vector<Ogre::Entity*> buildingEntities;
+
+	// get all possible positions (for cities, not hideouts)
 	std::vector<RealCoordinate> buildingLocations = getBuildingPositions();
 
+	// get a random amount of buildings
 	int buildingAmount = rand() % (width * depth - width) + width - 2;
 	if (typeFlag == HideoutRT) buildingAmount = 1;
-	//Get al possible positions
-
+	
+	// for each building to be generated
 	for (int n = 0; n < buildingAmount; n++) {
-	//for (int n = 0; n < buildingLocations.size(); n++) {
-		if (buildingLocations.size() < 1) continue;
-		//TODO: make it an ID
-		Ogre::SceneNode* buildingNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-		_buildingNodes.push_back(buildingNode);
+		// if no locations, continue
+		if (buildingLocations.size() < 1) break;
 
-		Ogre::Entity* buildingEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
-		if (typeFlag == CityRT) buildingNode->setScale(2.5f, 3, 2.5f);
-		else buildingNode->setScale(5.0f, 5, 5.0f);
-		buildingNode->attachObject(buildingEntity);
-
-		//calculate building positions
-		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int rnd = 0;
-		rnd = rand() % buildingLocations.size();
+		// get random building position
+		int rnd = rand() % buildingLocations.size();
 		
 		RealCoordinate pos;
 		int y = 100;
+
+		// spawn enemy building
 		if (typeFlag == HideoutRT){
 			pos = getCenterTile();
 			pos = pos * scalar;
@@ -328,10 +323,9 @@ void City::generateBuildings()
 					setTile((enemyCoord * gridScalar) + Coordinate(x, z), 1);
 				}
 			}
-
-			printGrid();
-			int jippie = 0;
 		}
+		
+		// spawn npc building
 		else {
 			//translate object half a tile in the positive direction because the pivot of the object is at center
 			// scalar (1 zone unit in world size) / GridScalar (now one city tile) / 2 (half a city tile as buildings have their pivot centered)
@@ -352,15 +346,24 @@ void City::generateBuildings()
 
 			while(getTile(friendlyCoord)) {
 				rnd = rand() % buildingLocations.size();
-				RealCoordinate rc = RealCoordinate((buildingLocations[rnd].rx / scalar), (buildingLocations[rnd].rz / scalar));
+				pos = buildingLocations[rnd];
+				RealCoordinate rc = RealCoordinate((pos.rx / scalar), (pos.rz / scalar));
 				buildingLocations.erase(buildingLocations.begin() + rnd);
 				rc -= position;
 				rc = rc * gridScalar;
 				friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
 			}
 			setTile(friendlyCoord, 1);
-			printGrid();
+
 		}
+
+		// create the node + entity for the building
+		Ogre::SceneNode* buildingNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+		_buildingNodes.push_back(buildingNode);
+		Ogre::Entity* buildingEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
+		if (typeFlag == CityRT) buildingNode->setScale(2.5f, 3, 2.5f);
+		else buildingNode->setScale(5.0f, 5, 5.0f);
+		buildingNode->attachObject(buildingEntity);
 
 		buildingNode->setPosition(pos.rx, y, pos.rz);
 
@@ -372,7 +375,7 @@ void City::generateBuildings()
 			buildingType = HideOutHouse;
 		}
 		//TODO: generate cities
-		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2((buildingLocations[n].rx), (buildingLocations[n].rz)));
+		Building thisBuilding = Building(buildingType, residents, Ogre::Vector2((pos.rx), (pos.rz)));
 		//TODO: fill _buildings
 		_buildings.push_back(thisBuilding);
 
@@ -467,7 +470,8 @@ void City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre
 	std::stringstream nodename("buildingRoleNode");
 	
 	for (int i = 0; i < buildings.size(); i++) {
-		switch (buildings[i].type) // assign building random professions by giving them a rolenode
+		pEntities[i]->setMaterialName("InGame/BlueHouse");
+/*		switch (buildings[i].type) // assign building random professions by giving them a rolenode
 		{
 		case Smithery:
 			pEntities[i]->setMaterialName("InGame/YellowHouse");
@@ -493,7 +497,7 @@ void City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre
 			break;
 		default:
 			break;
-		}
+		}*/
 	}
 }
 
