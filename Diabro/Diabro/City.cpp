@@ -274,8 +274,8 @@ RealCoordinate City::getNpcPosition() {
 		int rnd = rand() % positions.size();
 		setTile(positions[rnd], 2);
 		RealCoordinate returnPos = RealCoordinate(position.x, position.z);
-		if (positions[rnd].x != 0) returnPos.rx += static_cast<float>(positions[rnd].x) / gridScalar;
-		if (positions[rnd].z != 0) returnPos.rz += static_cast<float>(positions[rnd].z) / gridScalar;
+		if (positions[rnd].x != 0) returnPos.rx += static_cast<float>(positions[rnd].x) / static_cast<float>(gridScalar);
+		if (positions[rnd].z != 0) returnPos.rz += static_cast<float>(positions[rnd].z) / static_cast<float>(gridScalar);
 		returnPos = returnPos * scalar;
 		return returnPos;
 	} else {
@@ -330,15 +330,6 @@ void City::generateBuildings()
 			//translate object half a tile in the positive direction because the pivot of the object is at center
 			// scalar (1 zone unit in world size) / GridScalar (now one city tile) / 2 (half a city tile as buildings have their pivot centered)
 			pos = buildingLocations[rnd];
-			/*while (getTile(pos.rx + 1, pos.rz) || getTile(pos.rx - 1, pos.rz) ||
-				getTile(pos.rx, pos.rz + 1) || getTile(pos.rx, pos.rz - 1))
-			{
-				buildingLocations.erase(buildingLocations.begin() + rnd);
-				rnd = rand() % buildingLocations.size();
-				pos = buildingLocations[rnd];
-				//building
-			}*/
-			//buildingLocations.erase(buildingLocations.begin() + rnd);
 			RealCoordinate rc = RealCoordinate((pos.rx / scalar), (pos.rz / scalar));
 			rc -= position;
 			rc = rc * gridScalar;
@@ -368,7 +359,7 @@ void City::generateBuildings()
 		buildingNode->setPosition(pos.rx, y, pos.rz);
 
 		BuildingType buildingType = (BuildingType)GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES - 1);
-		int residents = rand() % 3 + 1;
+		int residents = rand() % 2 + 1;
 		if (typeFlag == HideoutRT)
 		{
 			residents += 2;
@@ -470,8 +461,7 @@ void City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre
 	std::stringstream nodename("buildingRoleNode");
 	
 	for (int i = 0; i < buildings.size(); i++) {
-		pEntities[i]->setMaterialName("InGame/BlueHouse");
-/*		switch (buildings[i].type) // assign building random professions by giving them a rolenode
+		switch (buildings[i].type) // assign building random professions by giving them a rolenode
 		{
 		case Smithery:
 			pEntities[i]->setMaterialName("InGame/YellowHouse");
@@ -497,7 +487,7 @@ void City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre
 			break;
 		default:
 			break;
-		}*/
+		}
 	}
 }
 

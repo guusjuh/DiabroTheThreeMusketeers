@@ -609,28 +609,41 @@ void Zone::generateCities(int pMaxTries, int pMaxCities) {
 
 	srand(seed);
 
+	// this method will ensure there are at least 3 cities
+	int min = 3;
+	while (nCities < 3) {
+		generateCity(nCities);
+		pMaxTries--;
+	}
+
 	for (int iTry = 0; iTry < pMaxTries; ++iTry) {
-		//generate width, depth, should be uneven for wall creation
-		int width = rand() % (_maxCityWidth - 2) + 2;
-		int depth = rand() % (_maxCityHeight - 2) + 2;
-		(width % 2 == 0) ? width++ : width;
-		(depth % 2 == 0) ? depth++ : depth;
+		generateCity(nCities);
 
-		//generate position, should be uneven for wall creation
-		int x = rand() % (_width - width - 1) + 1;
-		int z = rand() % (_depth - depth - 1) + 1;
-		(x % 2 == 0) ? x++ : x;
-		(z % 2 == 0) ? z++ : z;
-
-		//try to place the city
-		if (placeCity(City(x, z, width, depth, nCities + 1, _scalar))) {
-			++nCities;
-		}
 		if (nCities >= pMaxCities) {
 			break;
 		}
 	}
 }
+
+void Zone::generateCity(int& nCities) {
+	//generate width, depth, should be uneven for wall creation
+	int width = rand() % (_maxCityWidth - 2) + 2;
+	int depth = rand() % (_maxCityHeight - 2) + 2;
+	(width % 2 == 0) ? width++ : width;
+	(depth % 2 == 0) ? depth++ : depth;
+
+	//generate position, should be uneven for wall creation
+	int x = rand() % (_width - width - 1) + 1;
+	int z = rand() % (_depth - depth - 1) + 1;
+	(x % 2 == 0) ? x++ : x;
+	(z % 2 == 0) ? z++ : z;
+
+	//try to place the city
+	if (placeCity(City(x, z, width, depth, nCities + 1, _scalar))) {
+		++nCities;
+	}
+}
+
 
 /// prints all values of the grid (windows only method)
 void Zone::printGrid() {

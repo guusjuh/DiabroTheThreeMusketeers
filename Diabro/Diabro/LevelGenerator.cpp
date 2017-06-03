@@ -12,7 +12,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	Debug("Initializing zone");
-	_zone[0] = Zone(12, 12, 3, 3, 10, 750, scalar);
+	_zone[0] = Zone(10, 10, 3, 3, 10, 750, scalar);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -297,14 +297,14 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pBuilding) {
 	for (int i = 0; i < pBuilding->residents; i++) {
 		RealCoordinate npcCoord = pCity->getNpcPosition();
 		if (npcCoord.rx < 0 || npcCoord.rz < 0) {
-			//Debug("not enough free space in city")Z
+			Debug("not enough free space in city");
 			break;
 		}
 		Ogre::Vector3 npcPos = Ogre::Vector3(npcCoord.rx, 18.0f, npcCoord.rz);
 
 		//assign position to NPC
 		Ogre::SceneNode* instanceNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode();
-		instanceNode->translate(npcPos, Ogre::Node::TS_WORLD);
+		instanceNode->setPosition(npcPos);
 		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		rotationNode->attachObject(instanceEntity);
@@ -445,7 +445,7 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 /// </summary>
 void LevelGenerator::determineCityTypes() {
 	// if not two cities: problems!
-	if(_zone[0].cities.size() < 2) {
+	if(_zone[0].cities.size() < 3) {
 		Debug("not enough cities to play this dungeon");
 		return;
 	}
@@ -453,11 +453,12 @@ void LevelGenerator::determineCityTypes() {
 	// start
 	_startCity = &_zone[0].cities[0];
 	_startCity->setType((int)CityRT);
+	_zone[0].cities[1].setType((int)CityRT);
 
 	// end
-	City* furtherstCity = &_zone[0].cities[1];
+	City* furtherstCity = &_zone[0].cities[2];
 	float dist = _startCity->getDistTo(furtherstCity);
-	for (int i = 1; i < _zone[0].cities.size(); ++i) {
+	for (int i = 2; i < _zone[0].cities.size(); ++i) {
 		_zone[0].cities[i].setType();
 
 		if(_startCity->getDistTo(&_zone[0].cities[i]) > dist) {

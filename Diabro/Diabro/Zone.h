@@ -69,6 +69,7 @@ protected:
 	
 
 	void generateCities(int pMaxTries, int pMaxCities);
+	void generateCity(int& nCities);
 	bool hasCollision(Coordinate pPosition);
 	bool hasCollision(City pC);
 	bool placeCity(City pC);
