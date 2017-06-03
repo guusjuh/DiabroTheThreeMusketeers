@@ -10,21 +10,21 @@
 	<Actions>
 		<Action>
 			<ID>4</ID>
+			<Dialog>Is the 'QuestItemQC1' what you're looking for? Ah, yes the 'QuestItemQC1' is very mysterious. I could tell you how it works, but it's way to complicated. \nYou're smart, you say? Well.. -wispers- \nSo that's all there is to it.</Dialog>
 			<Content>2</Content>
 			<Content>1</Content>
-			<Dialog>Is the 'QuestItemQC1' what you're looking for? Ah, yes the 'QuestItemQC1' is very mysterious. I could tell you how it works, but it's way to complicated. \nYou're smart, you say? Well.. -wispers- \nSo that's all there is to it.</Dialog>
 		</Action>
 		<Action>
 			<ID>7</ID>
-			<Content>1</Content>
 			<Dialog></Dialog>
+			<Content>1</Content>
 		</Action>
 		<Action>
 			<ID>6</ID>
+			<Dialog>Oh, that very interesting. I should use 'QuestItemQC1' wisely! \nGive it to me now, your work is done.</Dialog>
 			<Content>1</Content>
 			<Content>1</Content>
 			<Content>1</Content>
-			<Dialog>Oh, that very interesting. I should use  'QuestItemQC1' wisely! \nGive it to me now, your work is done.</Dialog>
 		</Action>
 	</Actions>
 	<RarityPref>1</RarityPref>
@@ -39,20 +39,20 @@
 	<Actions>
 		<Action>			
 			<ID>10</ID>
-			<Content>2</Content>
-			<Content>2</Content>
 			<Dialog>Hmm.. why should I trust you? \nOh, why didn't you say at once that you didn't know 'NPCQC1'? I'll tell you then. \n-wispers-</Dialog>
+			<Content>2</Content>
+			<Content>2</Content>
 		</Action>
 		<Action>
 			<ID>7</ID>
-			<Content>1</Content>
 			<Dialog></Dialog>
+			<Content>1</Content>
 		</Action>	
 		<Action>
 			<ID>11</ID>
-			<Content>1</Content>
-			<Content>1</Content>
 			<Dialog>Really? I didn't know that... That sneaky bastard.</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
 		</Action>	
 	</Actions>
 	<RarityPref>0</RarityPref>
@@ -62,25 +62,25 @@
 	<ID>5</ID>
 	<NameStrat>Kill enemies</NameStrat>
 	<QuestName>The slaughter of 'EnemyQC1'</QuestName>
-	<StartDialog>'EnemyQC1' has been harrassing me forever, but I can't do anything about it. \nPlease kill them for me.</StartDialog>
+	<StartDialog>'EnemyQC1' has been harrassing me forever, but I can't do anything about it. \nPlease kill him for me.</StartDialog>
 	<NeedType>Reputation</NeedType>
 	<Actions>
 		<Action>
 			<ID>9</ID>
-			<Content>1</Content>
-			<Content>1</Content>
 			<Dialog></Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
 		</Action>
 		<Action>
 			<ID>7</ID>
-			<Content>1</Content>
 			<Dialog></Dialog>
+			<Content>1</Content>
 		</Action>
 		<Action>
 			<ID>11</ID>
-			<Content>1</Content>
-			<Content>1</Content>
 			<Dialog>Thank you so much! I was so scared of 'EnemyQC1'.. \nHe's better of dead.</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
 		</Action>
 	</Actions>
 	<RarityPref>0</RarityPref>
