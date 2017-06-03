@@ -22,7 +22,6 @@ void Coordinate::operator=(RealCoordinate& rhs) {
 	z = static_cast<int>(rhs.rz);
 }
 
-
 Coordinate operator/ (Coordinate &lhs, int &rhs) {
 	if (rhs == 0) {
 		return Coordinate();
@@ -74,7 +73,6 @@ void Coordinate::operator-=(Coordinate& rhs){
 	z -= rhs.z;
 }
 
-
 void RealCoordinate::operator+= (Coordinate &rhs) {
 	rx += rhs.x;
 	rz += rhs.z;
@@ -99,7 +97,6 @@ void RealCoordinate::operator-=(Coordinate& rhs) {
 	rx -= rhs.x;
 	rz -= rhs.z;
 }
-
 
 bool operator== (RealCoordinate &lhs, RealCoordinate &rhs) {
 	return (lhs.rx == rhs.rx && lhs.rz == rhs.rz);
@@ -142,7 +139,7 @@ int City::getTile(Coordinate pos) {
 
 int City::getTile(int x, int z) {
 	if (x < 0 || z < 0 || x >= scaledWidth() || z >= scaledDepth()) {
-		return false;
+		return -1;
 	}
 	return _tiles[x + z * scaledWidth()];
 }
@@ -163,7 +160,6 @@ void City::setTile(int x, int z, int value) {
 	}
 }
 
-
 /// <summary>
 /// Initializes this instance.
 /// </summary>
@@ -177,9 +173,7 @@ void City::init()
 /// <summary>
 /// Finalizes an instance of the <see cref="City"/> class.
 /// </summary>
-City::~City()
-{
-}
+City::~City() { }
 
 void City::update() {
 	if(_relevantForAction) {
@@ -197,7 +191,6 @@ bool City::inThisCity(Ogre::Vector3 worldCoord) {
 	} 
 	return false;
 }
-
 
 std::vector<std::string> City::getNameOptions(RoomType type) {
 	std::vector<std::string> _nameOptions;
@@ -247,10 +240,13 @@ void City::setType(int type)
 }
 
 std::vector<Coordinate> City::getFreePositions() {
-	Coordinate temp = getCenterTile();
-	temp -= position;
-	temp = temp * gridScalar;
-	setTile(temp, 2);
+	if (typeFlag == CityRT) {
+		Coordinate temp = getCenterTile();
+		temp -= position;
+		temp = temp * gridScalar;
+		setTile(temp, 2);
+	}
+	
 	std::vector<Coordinate> freePositions = std::vector<Coordinate>();
 	for (int x = 0; x < scaledWidth(); x++) {
 		for (int z = 0; z < scaledDepth(); z++) {
@@ -271,7 +267,6 @@ void City::removeNpcTiles() {
 		}
 	}
 }
-
 
 RealCoordinate City::getNpcPosition() {
 	std::vector<Coordinate> positions = getFreePositions();
@@ -333,6 +328,9 @@ void City::generateBuildings()
 					setTile((enemyCoord * gridScalar) + Coordinate(x, z), 1);
 				}
 			}
+
+			printGrid();
+			int jippie = 0;
 		}
 		else {
 			//translate object half a tile in the positive direction because the pivot of the object is at center

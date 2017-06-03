@@ -684,7 +684,9 @@ bool* Zone::generateCollisionGrid() {
 		{
 			for (int z = 0; z < cities[i].scaledDepth(); z++)
 			{
-				if (cities[i].getTile(x, z))
+				int temp = cities[i].getTile(x, z);
+				cities[i].printGrid();
+				if (temp)
 				{
 					Coordinate position = cities[i].Position();
 					position.x *= City::gridScalar;

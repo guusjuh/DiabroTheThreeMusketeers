@@ -118,6 +118,7 @@ public:
 
 	bool inThisCity(Ogre::Vector3 worldCoord);// { return false; }
 	//bool inThisCity(Coordinate gridCoord);// { return false; }
+	void printGrid();
 
 protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
@@ -140,7 +141,6 @@ private:
 	void setTile(int x, int z, int value);
 	void setTile(Coordinate pos, int value);
 	std::vector<RealCoordinate> getBuildingPositions();
-	void printGrid();
 
 	std::vector <Ogre::SceneNode*> _buildingNodes;
 	std::vector<Building> _buildings;
