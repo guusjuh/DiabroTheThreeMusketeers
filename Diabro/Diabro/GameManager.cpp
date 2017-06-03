@@ -83,9 +83,25 @@ void GameManager::createScene(void)
 /// <summary>
 /// Resets the game.
 /// </summary>
-void GameManager::reset() {
+void GameManager::nextFloor() {
+	Debug("\tG: spawning next floor, player succeeded.");
 	getSceneManager()->clearScene();
-	_levelManager->reset();
+	_levelManager->nextFloor();
+	_questManager->reset();
+
+	setupLights(mSceneMgr);
+
+	state = Start;
+}
+
+
+/// <summary>
+/// Resets the game.
+/// </summary>
+void GameManager::restartGame() {
+	Debug("\tG: restarting the game, player died.");
+	getSceneManager()->clearScene();
+	_levelManager->restartGame();
 	_questManager->reset();
 
 	setupLights(mSceneMgr);

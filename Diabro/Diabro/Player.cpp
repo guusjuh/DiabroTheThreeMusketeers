@@ -75,31 +75,26 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 
 	_inBattle = false;
 	_inBattleTime = 0;
+
+	_currentHealth = _maxHealth;
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 }
 
 /// <summary>
 /// Called if players health is below 0, resets player within current dungeon
 /// </summary>
 void Player::die() {
+	_myEntity->setMaterialName(_originalMaterialName);
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(0, _maxHealth);
+
 	changeInBattle(false);
 	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
 	GameManager::getSingletonPtr()->getSoundManager()->playerDead();
 	GameManager::getSingletonPtr()->goToState(GameState::Died);
 
-	reset(_myNode, _myEntity);
-
-	//TODO: generate new level!
-	Ogre::Vector3 startPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getStartPos();
-	startPos.y = 27.0f;
-	_myNode->setPosition(startPos);
-
 	equipment = equipment->removeUpgrades();
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
-	_currentHealth = _maxHealth;
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
-
-	Debug("player: (Health, Damage)", Coordinate(_maxHealth, _damage));
 }
 
 void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
@@ -192,7 +187,6 @@ void Player::setSisterNearby(bool val) {
 		GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
 	}
 }
-
 
 /// <summary>
 /// Triggers dialog. Either starts, continues or exits the dialog based on current status of the dialog.

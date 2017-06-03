@@ -46,10 +46,29 @@ void LevelManager::initialize()
 /// <summary>
 /// Resets the level.
 /// </summary>
-void LevelManager::reset() {
+void LevelManager::nextFloor() {
+	Debug("\tL: spawning next floor, player succeeded.");
 	_level++;
 
-	while(_friendlyNpcScripts.size() > 0) {
+	generateNewDungeon();
+}
+
+/// <summary>
+/// Resets the level.
+/// </summary>
+void LevelManager::restartGame() {
+	Debug("\tL: restarting the game, player died.");
+	_level = 1;
+
+	generateNewDungeon();
+}
+
+/// <summary>
+/// Resets the level.
+/// </summary>
+void LevelManager::generateNewDungeon() {
+	Debug("\tL: generating new dungeon.");
+	while (_friendlyNpcScripts.size() > 0) {
 		detachFriendlyNPC(0);
 	}
 	while (_hostileNpcScripts.size() > 0) {
@@ -106,7 +125,7 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 /// <param name="id">The identifier.</param>
 void LevelManager::detachFriendlyNPC(int id) {	
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
-	//reset id values
+	//nextFloor id values
 	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it) {
 		(*it)->id -= 1;
 	}
@@ -118,7 +137,7 @@ void LevelManager::detachFriendlyNPC(int id) {
 /// <param name="id">The identifier.</param>
 void LevelManager::detachHostileNPC(int id) {
 	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
-	//reset id values
+	//nextFloor id values
 	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it) {
 		(*it)->id -= 1;
 	}

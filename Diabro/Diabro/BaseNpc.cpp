@@ -100,7 +100,6 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 
 	//check if target position is viable
 	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->_width))]){
-		Debug("The target position is not a valid point in the collision grid");
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
 		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));
@@ -121,7 +120,6 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(getPosition().x, getPosition().z));
 
 	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z){
-		Debug("The goal is the same as the current position");
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
 		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));

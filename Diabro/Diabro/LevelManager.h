@@ -18,7 +18,10 @@ public:
 	LevelManager();
 
 	void initialize();
-	void reset();
+	void nextFloor();
+	void restartGame();
+	void generateNewDungeon();
+
 	int getCurrentLevel() { return _level; }
 
 	void inGameUpdate(const Ogre::FrameEvent&);
