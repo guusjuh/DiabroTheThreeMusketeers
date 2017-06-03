@@ -40,6 +40,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_noticeDistance = 300;
 	_nearbyNPC = nullptr;
 	_inDialog = false;
+	_sisNearby = false;
 
 	_inBattle = false;
 	_inBattleTime = 0;
@@ -70,6 +71,7 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_target = nullptr;
 	_inDialog = false;
 	_nearbyNPC = nullptr;
+	_sisNearby = false;
 
 	_inBattle = false;
 	_inBattleTime = 0;
@@ -132,13 +134,15 @@ void Player::update(Ogre::Real pDeltaTime)
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom();
 		// if player reached the end 
 		if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
-			GameManager::getSingletonPtr()->goNextState();
-			GameManager::getSingletonPtr()->getSoundManager()->completed();
-			GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+			setSisterNearby(true);
+		}
+		else {
+			setSisterNearby(false);
 		}
 	}
 	else {
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+		setSisterNearby(false);
 	}
 
 	// call basic update
@@ -162,6 +166,33 @@ void Player::update(Ogre::Real pDeltaTime)
 		setNearbyNPC(nullptr);
 	}
 }
+
+void Player::interactionTriggered() {
+	if(_sisNearby) {
+		findSister();
+	} else if(_nearbyNPC != nullptr) {
+		dialogTriggered();
+	}
+}
+
+void Player::findSister() {
+	GameManager::getSingletonPtr()->goNextState();
+	GameManager::getSingletonPtr()->getSoundManager()->completed();
+	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
+}
+
+void Player::setSisterNearby(bool val) {
+	if (_sisNearby == val) return;
+
+	_sisNearby = val;
+
+	if(_sisNearby) {
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText("Press 'E' to talk to your sister.");
+	} else {
+		GameManager::getSingletonPtr()->getUIManager()->hideHUDText();
+	}
+}
+
 
 /// <summary>
 /// Triggers dialog. Either starts, continues or exits the dialog based on current status of the dialog.

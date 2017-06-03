@@ -225,11 +225,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 
 	case OIS::KC_E:
-		_levelManager->getPlayer()->dialogTriggered();
+		_levelManager->getPlayer()->interactionTriggered();
 		break;
 
 	case OIS::KC_SPACE:
-		_levelManager->getPlayer()->dialogTriggered();
+		if(_levelManager->getPlayer()->isInDialog()) {
+			_levelManager->getPlayer()->dialogTriggered();
+		}
 		break;
 
 	default:
