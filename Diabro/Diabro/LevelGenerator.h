@@ -29,6 +29,7 @@ public:
 	Zone* getZonePointer(int pX, int pZ);
 	
 	Ogre::Vector3 getWorldPosition(Coordinate pWorldCoord);
+	Ogre::Vector3 getWorldPosition(RealCoordinate pWorldCoord);
 	Coordinate getGridPosition(Coordinate pGridCoord);
 	Coordinate getCollisionGridPosition(Coordinate pGridCoord);
 	Coordinate getEmptyPosition(bool pEmptyNeighbours);
@@ -42,7 +43,8 @@ public:
 	}
 
 	Ogre::Vector3 getStartPos() {
-		return getWorldPosition(_startCity->getCenterTile());
+		
+		return getWorldPosition(_startCity->getCenterPosition());
 	}
 
 	int scalar; ///< scales grid position to world positions

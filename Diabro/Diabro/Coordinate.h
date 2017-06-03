@@ -1,6 +1,8 @@
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
+struct RealCoordinate;
+
 struct Coordinate {
 	int x;
 	int z;
@@ -16,6 +18,7 @@ struct Coordinate {
 	}
 	void operator += (Coordinate &rhs);
 	void operator -= (Coordinate &rhs);
+	void operator = (RealCoordinate &rhs);
 };
 struct RealCoordinate {
 	float rx;

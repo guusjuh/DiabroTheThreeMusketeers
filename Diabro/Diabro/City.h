@@ -91,6 +91,7 @@ public:
 	//TODO: make local position
 	Ogre::Vector3 getRandomPointInRoom();
 	Coordinate getCenterTile();
+	RealCoordinate getCenterPosition();
 	Coordinate getRandomTile();
 	std::vector<Coordinate> getFreePositions();
 	RealCoordinate getNpcPosition();

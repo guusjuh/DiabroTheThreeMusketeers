@@ -12,7 +12,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	Debug("Initializing zone");
-	_zone[0] = Zone(19, 19, 3, 3, 10, 100, scalar);
+	_zone[0] = Zone(10, 10, 3, 3, 10, 100, scalar);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -74,6 +74,12 @@ Coordinate LevelGenerator::getCollisionGridPosition(Coordinate pWorldCoord) {
 /// \param pGridCoord grid coordinate
 Ogre::Vector3 LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
 	return Ogre::Vector3((pGridCoord.x - 0.5f) * scalar, 0, (pGridCoord.z - 0.5f) * scalar);
+}
+
+/// transforms a grid coordinate to a world position
+/// \param pGridCoord grid coordinate
+Ogre::Vector3 LevelGenerator::getWorldPosition(RealCoordinate pGridCoord) {
+	return Ogre::Vector3((pGridCoord.rx - 0.5f) * scalar, 0, (pGridCoord.rz - 0.5f) * scalar);
 }
 
 /// retrieve zone

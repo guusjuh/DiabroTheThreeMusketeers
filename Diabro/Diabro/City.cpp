@@ -13,6 +13,12 @@ Coordinate operator* (Coordinate &lhs, int &rhs) {
 	return Coordinate(lhs.x * rhs, lhs.z * rhs);
 }
 
+void Coordinate::operator=(RealCoordinate& rhs) {
+	x = static_cast<int>(rhs.rx);
+	z = static_cast<int>(rhs.rz);
+}
+
+
 Coordinate operator/ (Coordinate &lhs, int &rhs) {
 	if (rhs == 0) {
 		return Coordinate();
@@ -206,9 +212,15 @@ std::vector<std::string> City::getNameOptions(RoomType type) {
 
 /// returns the center tile of the room
 Coordinate City::getCenterTile() {
-	int x = floor(position.x + width / 2.0f);
+	int x = floor(position.x + width / 2.0f);	
 	int z = floor(position.z + depth / 2.0f);
 	return Coordinate(x, z);
+}
+
+RealCoordinate City::getCenterPosition() {
+	float x = position.x + width / 2.0f;
+	float z = position.z + depth / 2.0f;
+	return RealCoordinate(x, z);
 }
 
 /// returns a random tile coordinate within the city
@@ -288,7 +300,7 @@ void City::generateBuildings()
 		_buildingNodes.push_back(buildingNode);
 
 		Ogre::Entity* buildingEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
-		if (typeFlag == CityRT) buildingNode->setScale(1, 3, 1);
+		if (typeFlag == CityRT) buildingNode->setScale(2, 3, 2);
 		else buildingNode->setScale(2.0f, 5, 2.0f);
 		buildingNode->attachObject(buildingEntity);
 
@@ -561,5 +573,5 @@ std::vector<Coordinate> City::buildingPositions() {
 }
 
 Ogre::Vector3 City::getQuestPosition() {
-	return GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getWorldPosition(getCenterTile()); 
+	return GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getWorldPosition(getCenterTile());
 }

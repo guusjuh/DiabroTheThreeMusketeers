@@ -45,6 +45,7 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 
 	cleanGrid();
 	collisionGridGenerated = false;
+	
 }
 
 /// <summary>
@@ -647,6 +648,7 @@ bool* Zone::getCollisionGrid() {
 		//create the array
 		collisionGrid = generateCollisionGrid();
 		collisionGridGenerated = true;
+		Debug("Collision grid:");
 		printCollisionGrid();
 		int i = 0;
 	}

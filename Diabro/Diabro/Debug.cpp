@@ -99,7 +99,7 @@ void Debug::printArray(bool* boolArray, int width, int size) const {
 		if (width < size && width != 0 && i % width == 0) {
 			printf("\n");
 		}
-		printf("|%c", boolArray[i]?'T':'F');
+		printf("|%c", boolArray[i]?'.':'0');
 		printf("|");
 	}
 	printf("\n");
