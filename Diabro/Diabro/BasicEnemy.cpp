@@ -9,8 +9,8 @@ const int BasicEnemy::LOW_HP = 5;
 const int BasicEnemy::HIGH_HP = 10;
 const int BasicEnemy::LOW_DMG = 4;
 const int BasicEnemy::HIGH_DMG = 8;
-const int BasicEnemy::LOW_NDIST = 10;
-const int BasicEnemy::HIGH_NDIST = 30;
+const int BasicEnemy::LOW_NDIST = 5;
+const int BasicEnemy::HIGH_NDIST = 20;
 
 const Ogre::ColourValue BasicEnemy::COL_HP = Ogre::ColourValue(0, 1, 0);
 const Ogre::ColourValue BasicEnemy::COL_DMG = Ogre::ColourValue(1, 0, 0);
@@ -25,6 +25,7 @@ const Ogre::ColourValue BasicEnemy::COL_NDIST = Ogre::ColourValue(0, 0, 1);
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level) 
 : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
+	// set the states of the FSM
 	EnemyFollowState* followPlayer = new EnemyFollowState();
 	EnemyAttackState* attack = new EnemyAttackState();
 	EnemyMoveAroundCenterState* moveAroundCenter = new EnemyMoveAroundCenterState();
@@ -33,20 +34,16 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	possibleStates["AroundCenter"] = moveAroundCenter;
 	_initialized = false;
 
+	// subscribe @ levelmanager
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 
+	// set upgrades
 	healthUpgrades = 0;
 	damageUpgrades = 0;
 	noticeDistUpgrades = 0;
-
 	equipment = new EnemyEquipment(20.0f, 2.0f, 200.0f);
-	_maxHealth = equipment->getHealth();
-	_damage = equipment->getDamage();
-	_noticeDistance = equipment->getNoticeDist();
 
 	assignUpgrades(level);
-	_currentHealth = _maxHealth;
-
 	IEnemyEquipment* tempEquipment = equipment;
 	while(tempEquipment != nullptr) {
 		if(tempEquipment->isBase()) {
@@ -70,11 +67,6 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 
 		tempEquipment = tempEquipment->getBase();
 	}
-
-	delete tempEquipment;
-
-	pMyNode->setScale(0.5f, 0.5f, 0.5f);
-	pMyNode->setPosition(pMyNode->getPosition().x, 18.0f, pMyNode->getPosition().z);
 
 	Ogre::ColourValue myCol = COL_HP;
 	if(damageUpgrades > healthUpgrades) {
@@ -100,14 +92,20 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	name = getNameOptions()[rand() % getNameOptions().size()];
 	_relevantForAction = false;
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("Level: %d \n", level);
-	printf("H: %f D: %f ND: %f \n", _maxHealth, _damage, _noticeDistance);
-	printf("H nr: %d D nr: %d ND nr: %d \n", healthUpgrades, damageUpgrades, noticeDistUpgrades);
-	fclose(fp);
-#endif
+	// set node
+	pMyNode->setScale(0.5f, 0.5f, 0.5f);
+	pMyNode->setPosition(pMyNode->getPosition().x, 18.0f, pMyNode->getPosition().z);
+
+	_movespeed = 300;
+	_rotationspeed = 0.13f;
+	_maxHealth = equipment->getHealth();
+	_damage = equipment->getDamage();
+	_noticeDistance = equipment->getNoticeDist();
+	_attackDistance = 150;
+	_lightAttackCooldown = 2.5f;
+	_totalHitTime = 0.5f;
+
+	_currentHealth = _maxHealth;
 }
 
 void BasicEnemy::assignUpgrades(int level) {
@@ -250,7 +248,6 @@ void BasicEnemy::die() {
 	}
 
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 }
 
 

@@ -11,8 +11,8 @@
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity),  _dirVec(0, 0, 0),
-_movespeed(100), _rotationspeed(0.13), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(40), _hasItem(false), _needToGiveItem(false),
-_attackDistance(100), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _damage(3), _noticeDistance(400.0f)
+_movespeed(0), _rotationspeed(0), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(1), _hasItem(false), _needToGiveItem(false),
+_attackDistance(0), _currAttackCooldown(0), _lightAttackCooldown(0), _hitted(false), _totalHitTime(0), _damage(0), _noticeDistance(0)
 {
 	_currentHealth = _maxHealth;
 	isPlayer = false;
@@ -160,12 +160,11 @@ bool Character::lightAttack()
 /// <returns>False if the character runs out of health.</returns>
 bool Character::adjustHealth(float pAdjust)
 {
-	GameManager::getSingletonPtr()->getSoundManager()->hit();
-
 	_hitTime = _totalHitTime;
 	_hitted = true;
 	Debug("I got hit...", _currentHealth);
 	if (pAdjust > 0){
+		GameManager::getSingletonPtr()->getSoundManager()->hit();
 		_myEntity->setMaterialName("InGame/Hit");
 		gotHitTimerActive = true;
 		timeSinceHit = 0;

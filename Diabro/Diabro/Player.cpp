@@ -17,26 +17,19 @@ const int Player::HIGH_DMG = 5;
 /// <param name="pMyEntity">My entity.</param>
 Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
-	// override default speeds
-	_movespeed = 560;
-
-	equipment = new PlayerEquipment(40.0f, 3.0f);
+	// set equipment
+	equipment = new PlayerEquipment(25.0f, 3.0f);
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_healthUpgrades = 0;
 	_damageUpgrades = 0;
 
+	// set node vars
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
 	_originalMaterialName = "InGame/BlueHouse";
 	pMyEntity->setMaterialName(_originalMaterialName);
 
-	// initialize pLevel vars
-	_currentLevel = 1;
-	_currentXP = 0;
-	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
-
-	_noticeDistance = 300;
 	_nearbyNPC = nullptr;
 	_inDialog = false;
 	_sisNearby = false;
@@ -45,12 +38,19 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_inBattleTime = 0;
 	_totalInBattleTime = 5.0f;
 
-	_lightAttackCooldown = 1.2f;
-
-	_attackDistance = 250;
-
 	_inQuest = true;
 	isPlayer = true;
+
+	_movespeed = 550;
+	_rotationspeed = 0.13f;
+	_maxHealth = equipment->getHealth();
+	_damage = equipment->getDamage();
+	_noticeDistance = 200;
+	_attackDistance = 200;
+	_lightAttackCooldown = 2.0f;
+	_totalHitTime = 0.2f;
+
+	_currentHealth = _maxHealth;
 }
 
 /// <summary>
@@ -264,48 +264,6 @@ bool Player::lightAttack()
 	_currAttackCooldown = _lightAttackCooldown;
 
 	return true;
-}
-
-/// <summary>
-/// Calculates the pXP need to reach the next pLevel.
-/// </summary>
-/// <param name="pLevel">The next pLevel.</param>
-/// <returns></returns>
-int Player::calcXpTillLevel(int pLevel)
-{
-	int newXP = 0;
-
-	for (int i = 1; i < pLevel; ++i)
-	{
-		newXP += Ogre::Math::Floor(i + 300 * Ogre::Math::Pow(2, i / 7.0f));
-	}
-
-	newXP = Ogre::Math::Floor(newXP / 4);
-
-	return newXP;
-}
-
-/// <summary>
-/// Increases the pXP of the player.
-/// </summary>
-/// <param name="pXP">The pXP gained.</param>
-void Player::gainXP(int pXP)
-{
-	if ((_currentXP += pXP) >= _xpTillNextLevel)
-	{
-		levelUp();
-	}
-}
-
-/// <summary>
-/// Levels up the player.
-/// </summary>
-void Player::levelUp()
-{
-	++_currentLevel;
-	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
-
-	// Increase _stats
 }
 
 /// <summary>

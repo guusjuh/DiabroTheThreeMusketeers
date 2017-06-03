@@ -120,10 +120,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	//get the current position of the npc
 	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
 
-	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z){
-		//new random point in room
-		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
-		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));
+	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z) {
 		//stops method
 		return;
 	}

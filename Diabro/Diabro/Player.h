@@ -47,9 +47,6 @@ public:
 private:
 	void die() override;
 
-	int _currentXP;
-	int _xpTillNextLevel;
-
 	IPlayerEquipment* equipment;
 	int _healthUpgrades;
 	int _damageUpgrades;
@@ -66,9 +63,6 @@ private:
 	float _inBattleTime;
 	float _totalInBattleTime;
 	void changeInBattle(bool val);
-
-	int calcXpTillLevel(int);
-	void levelUp();
 	bool _canAttack;
 
 	bool _inQuest;
