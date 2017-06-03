@@ -24,7 +24,7 @@ void WanderState::Execute(BaseNpc* agent){
 	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < 50){
 		if (agent->getNextPosSize() == 0){
 			Ogre::Vector3 pos = Ogre::Vector3(agent->getCity()->getRandomPointInRoom());
-			Ogre::Vector3 goalPosition = Ogre::Vector3(agent->getGoalPos().x / agent->getCity()->scalar, agent->getPosition().y, agent->getGoalPos().z / agent->getCity()->scalar);
+			Ogre::Vector3 goalPosition = Ogre::Vector3(agent->getGoalPos().x / agent->getCity()->Scalar(), agent->getPosition().y, agent->getGoalPos().z / agent->getCity()->Scalar());
 			while (goalPosition.distance(pos) < 1) {
 				pos = Ogre::Vector3(agent->getCity()->getRandomPointInRoom());
 			}

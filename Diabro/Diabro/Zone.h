@@ -9,7 +9,8 @@
 /// </summary>
 class Zone
 {
-private:
+	friend class LevelAccess;
+protected:
 	int _maxCityWidth;
 	int _maxCityHeight;
 
@@ -48,13 +49,16 @@ public:
 	void printCollisionGrid();
 
 	bool* getCollisionGrid();
-private:
+protected:
 	void cleanGrid();
 	bool inGrid(Coordinate pCoord);
 
+	int findPossibleConnections(City &c);
+	int findUsedConnections(City &c);
 	void connectDungeon(int pId, float pChance);
-	int getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, int>> *pConnections);
+	int getPossibleConnections(City pCity, std::vector<Coordinate> *pConnections);
 	int changeTileValues(int pMaxIndex);
+	int getMaxValue();
 	void printValues();
 	
 	int generatePathways(int pPathId);

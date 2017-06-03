@@ -19,6 +19,6 @@ public:
 	int g;//the movement cost to move from the starting point A to a given square on the grid, following the path generated to get there.
 	int h;//the estimated movement cost 
 	void changeParent(Node newParent, int newParentId);
-	std::vector<Coordinate> getNeighbours(bool* pCollisionGrid, int pWidth);
+	std::vector<Coordinate> getNeighbours(bool* pCollisionGrid, int pWidth, int pHeight);
 };
 

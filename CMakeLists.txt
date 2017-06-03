@@ -82,6 +82,7 @@ set(HDRS
 	./Diabro/Diabro/EnemyEquipment.h
 	./Diabro/Diabro/EnemyUpgrade.h
 	./Diabro/Diabro/IEnemyEquipment.h
+	./Diabro/Diabro/Coordinate.h
 )
  
 set(SRCS

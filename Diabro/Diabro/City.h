@@ -3,16 +3,10 @@
 #include <vector>
 #include <OgreSceneNode.h>
 #include "IQuestContent.h"
+#include "Coordinate.h"
 #include "math.h"
 
-/// integer coordinate representing a 2D position
-struct Coordinate {
-	int x;
-	int z;
-	Coordinate(int pX, int pZ) : x(pX), z(pZ) {	}
-	Coordinate() : x(0), z(0) {	}
-	~Coordinate() { }
-};
+
 
 /// <summary>
 /// Enum for the different city types. 
@@ -63,29 +57,47 @@ struct Building {
 /// <seealso cref="IQuestContent" />
 class City : public IQuestContent
 {
-public:
+private:
 	Coordinate position; ///< upper left corner position of room
 	RoomType typeFlag;
+	bool* _tiles;
 	int width;
 	int depth;
 	int id; ///< unique id
 	int scalar;
+	std::vector<Coordinate> connections;
 
+public:
 	void init();
 	void update();
+
+	int Width() { return width; }
+	int Depth() { return depth; }
+	int ID(){ return id; }
+	RoomType TypeFlag(){ return typeFlag; }
+	Coordinate Position() { return position; }
+	void addConnection(Coordinate coord){ connections.push_back(coord);}
+	int nConnections(){ return connections.size(); }
+	void clearConnections();
+	Coordinate getConnection(int index) { return connections[index]; }
+
+	bool getTile(Coordinate pos);
+	bool getTile(int x, int z);
+	int Scalar(){ return scalar; }
+	static int gridScalar;
+	int scaledWidth() { return width * gridScalar; }
+	int scaledDepth() { return depth * gridScalar; }
 
 	//TODO: make local position
 	Ogre::Vector3 getRandomPointInRoom();
 	Coordinate getCenterTile();
 	Coordinate getRandomTile();
 
-	std::vector<Coordinate> connections;
 	City(){}
 	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
 	~City();
 
-	std::vector<Building> Buildings() { return _buildingStructs; };
-
+	std::vector<Building> Buildings() { return _buildings; };
 	std::vector<Coordinate> buildingPositions();
 
 	float getDistTo(City* other) {
@@ -108,9 +120,8 @@ protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
 	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
 	bool checkEntryWay(Ogre::SceneNode *); //Checks if the buildings are blocking entryways
-	int assignBuildingRole(std::vector<Building> , std::vector<Ogre::Entity*>); //Assign roles to buildings in the city
-	int getScaledWidth(int width, int scalar);
-	int getScaledDepth(int depth, int scalar);
+	void assignBuildingRole(std::vector<Building> , std::vector<Ogre::Entity*>); //Assign roles to buildings in the city
+	
 	std::vector<Ogre::SceneNode*> nodeList(Ogre::SceneNode* pBuildingNode);
 	
 private:
@@ -121,18 +132,16 @@ private:
 	int childIteration;
 
 	void generateBuildings();
+	int getScaledWidth(int width, int scalar);
+	int getScaledDepth(int depth, int scalar);
+	void setTile(int x, int z, bool value);
+	void setTile(Coordinate pos, bool value);
+	std::vector<RealCoordinate> getBuildingPositions();
+	void printGrid();
 
-	int _scaledWidth;
-	int _scaledDepth;
-	int *_tiles2;
-	std::vector <Ogre::SceneNode*> _buildings;
-	std::vector<Building> _buildingStructs;
-	Ogre::SceneManager *manager;
-	Ogre::Entity* _signEntity;
-	Ogre::SceneNode* _rootNode;
-	Ogre::SceneNode* _roleNode;
+	std::vector <Ogre::SceneNode*> _buildingNodes;
+	std::vector<Building> _buildings;
 	int _numberOfBuildings;
-	int role;
 
 	std::vector<std::string> getNameOptions(RoomType type);
 	std::string name;

@@ -24,11 +24,11 @@ void EnemyFollowState::Enter(BaseNpc* agent){
 
 void EnemyFollowState::Execute(BaseNpc* agent){
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getCity()->scalar) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getCity()->Scalar()) {
 		agent->stateMachine.setState("Attack");
 	}
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) > agent->getCity()->scalar * 3) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) > agent->getCity()->Scalar() * 3) {
 		agent->stateMachine.setState("AroundCenter");
 	}
 
@@ -61,7 +61,7 @@ void EnemyFollowState::Collide(BaseNpc* agent){
 		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
 		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
 		Coordinate player = Coordinate(playerPos.x, playerPos.z);
-		player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(player);
+		player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(player);
 		playerPos.x = player.x;
 		playerPos.z = player.z;
 		agent->calculateAStar(playerPos);

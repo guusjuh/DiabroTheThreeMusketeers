@@ -310,6 +310,9 @@
     <ClInclude Include="Debug.h">
       <Filter>Headers\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="Coordinate.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
     <ClInclude Include="WanderState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>

@@ -82,7 +82,7 @@ void Node::changeParent(Node newParent, int newParentId) {
 /// <param name="pCollisionGrid">The collision grid.</param>
 /// <param name="pWidth">Width of the nodes in the grid.</param>
 /// <returns></returns>
-std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth) {
+std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth, int pHeight) {
 	std::vector<Coordinate> neighbours;
 	neighbours.clear();
 	/*
@@ -90,47 +90,57 @@ std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth) {
 	0*x
 	000
 	*/
-	if (pCollisionGrid[x + 1 + y * pWidth])
-	{
-		neighbours.push_back(Coordinate(x + 1, y));
+	if (x + 1 < pWidth){
+		if (pCollisionGrid[x + 1 + y * pWidth])
+		{
+			neighbours.push_back(Coordinate(x + 1, y));
+		}
 	}
 	/*
 	000
 	X*0
 	000
 	*/
-	if (pCollisionGrid[x - 1 + y * pWidth])
-	{
-		neighbours.push_back(Coordinate(x - 1, y));
+	if (x - 1 >= 0){
+		if (pCollisionGrid[x - 1 + y * pWidth])
+		{
+			neighbours.push_back(Coordinate(x - 1, y));
+		}
 	}
 	/*
 	000
 	0*0
 	0X0
 	*/
-	if (pCollisionGrid[x + (y + 1) * pWidth])
-	{
-		neighbours.push_back(Coordinate(x, y + 1));
+	if (y + 1 < pHeight){
+		if (pCollisionGrid[x + (y + 1) * pWidth])
+		{
+			neighbours.push_back(Coordinate(x, y + 1));
+		}
 	}
 	/*
 	0X0
 	0*0
 	000
 	*/
-	if (pCollisionGrid[x + (y - 1) * pWidth])
-	{
-		neighbours.push_back(Coordinate(x, y - 1));
+	if (y - 1 >= 0){
+		if (pCollisionGrid[x + (y - 1) * pWidth])
+		{
+			neighbours.push_back(Coordinate(x, y - 1));
+		}
 	}
 	/*
 	000
 	0*0
 	00X
 	*/
-	if (pCollisionGrid[x + 1 + (y + 1) * pWidth])
-	{
-		if (pCollisionGrid[x + 1 + y * pWidth] && pCollisionGrid[x + (y + 1) * pWidth])
+	if (x + 1 < pWidth && y + 1 < pHeight){
+		if (pCollisionGrid[x + 1 + (y + 1) * pWidth])
 		{
-			neighbours.push_back(Coordinate(x + 1, y + 1));
+			if (pCollisionGrid[x + 1 + y * pWidth] && pCollisionGrid[x + (y + 1) * pWidth])
+			{
+				neighbours.push_back(Coordinate(x + 1, y + 1));
+			}
 		}
 	}
 	/*
@@ -138,11 +148,13 @@ std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth) {
 	0*0
 	X00
 	*/
-	if (pCollisionGrid[x - 1 + (y + 1) * pWidth])
-	{
-		if (pCollisionGrid[x - 1 + y * pWidth] && pCollisionGrid[x + (y + 1) * pWidth])
+	if (x - 1 >= 0 && y + 1 < pHeight){
+		if (pCollisionGrid[x - 1 + (y + 1) * pWidth])
 		{
-			neighbours.push_back(Coordinate(x - 1, y + 1));
+			if (pCollisionGrid[x - 1 + y * pWidth] && pCollisionGrid[x + (y + 1) * pWidth])
+			{
+				neighbours.push_back(Coordinate(x - 1, y + 1));
+			}
 		}
 	}
 	/*
@@ -150,11 +162,13 @@ std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth) {
 	0*0
 	000
 	*/
-	if (pCollisionGrid[x + 1 + (y - 1) * pWidth])
-	{
-		if (pCollisionGrid[x + 1 + y * pWidth] && pCollisionGrid[x + (y - 1) * pWidth])
+	if (x + 1 < pWidth && y - 1 >= 0){
+		if (pCollisionGrid[x + 1 + (y - 1) * pWidth])
 		{
-			neighbours.push_back(Coordinate(x + 1, y - 1));
+			if (pCollisionGrid[x + 1 + y * pWidth] && pCollisionGrid[x + (y - 1) * pWidth])
+			{
+				neighbours.push_back(Coordinate(x + 1, y - 1));
+			}
 		}
 	}
 	/*
@@ -162,11 +176,13 @@ std::vector<Coordinate> Node::getNeighbours(bool* pCollisionGrid, int pWidth) {
 	0*0
 	000
 	*/
-	if (pCollisionGrid[x - 1 + (y - 1) * pWidth])
-	{
-		if (pCollisionGrid[x - 1 + y * pWidth] && pCollisionGrid[x + (y - 1) * pWidth])
+	if (x - 1 >= 0 && y - 1 >= 0){
+		if (pCollisionGrid[x - 1 + (y - 1) * pWidth])
 		{
-			neighbours.push_back(Coordinate(x - 1, y - 1));
+			if (pCollisionGrid[x - 1 + y * pWidth] && pCollisionGrid[x + (y - 1) * pWidth])
+			{
+				neighbours.push_back(Coordinate(x - 1, y - 1));
+			}
 		}
 	}
 	return neighbours;

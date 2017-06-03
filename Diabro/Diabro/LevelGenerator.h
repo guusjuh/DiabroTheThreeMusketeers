@@ -29,6 +29,7 @@ public:
 	
 	Ogre::Vector3 getWorldPosition(Coordinate pWorldCoord);
 	Coordinate getGridPosition(Coordinate pGridCoord);
+	Coordinate getCollisionGridPosition(Coordinate pGridCoord);
 	Coordinate getEmptyPosition(bool pEmptyNeighbours);
 	
 	float getDistToSis(Ogre::Vector3 otherPos) {
@@ -40,7 +41,7 @@ public:
 	}
 
 	Ogre::Vector3 getStartPos() {
-		return getWorldPosition(_startCity->position) + Ogre::Vector3(250, 0, 250);
+		return getWorldPosition(_startCity->getCenterTile());
 	}
 
 	int scalar; ///< scales grid position to world positions

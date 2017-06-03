@@ -15,9 +15,9 @@ QuestContentManager::QuestContentManager(/*std::vector<City*> cities*/) {
 
 	//find all cities and add them to correct list
 	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
-		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == CityRT) {
+		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].TypeFlag() == CityRT) {
 			_NPCCities.push_back(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
-		} else if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == HideoutRT) {
+		} else if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].TypeFlag() == HideoutRT) {
 			_enemyCities.push_back(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
 		}
 	}

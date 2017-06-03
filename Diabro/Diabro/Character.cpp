@@ -94,23 +94,23 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 bool Character::collidesWithGrid(Ogre::Vector3 pos, Zone* zone, int range){
 	//4 positions each with an offset for checking the collision with the wall
 	float cornerRange = cos(45.0f) * range;
-	Coordinate temp0 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x - range, pos.z));
-	Coordinate temp1 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x + range, pos.z));
-	Coordinate temp2 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x, pos.z - range));
-	Coordinate temp3 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x, pos.z + range));
-	Coordinate temp4 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x - cornerRange, pos.z - cornerRange));
-	Coordinate temp5 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x + cornerRange, pos.z - cornerRange));
-	Coordinate temp6 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x - cornerRange, pos.z + cornerRange));
-	Coordinate temp7 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(pos.x + cornerRange, pos.z + cornerRange));
+	Coordinate temp0 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x - range, pos.z));
+	Coordinate temp1 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x + range, pos.z));
+	Coordinate temp2 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z - range));
+	Coordinate temp3 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z + range));
+	Coordinate temp4 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x - cornerRange, pos.z - cornerRange));
+	Coordinate temp5 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x + cornerRange, pos.z - cornerRange));
+	Coordinate temp6 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x - cornerRange, pos.z + cornerRange));
+	Coordinate temp7 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x + cornerRange, pos.z + cornerRange));
 
-	return(zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width] &&
-		zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width] &&
-		zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width] &&
-		zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width] &&
-		zone->getCollisionGrid()[temp4.x + temp4.z * zone->_width] &&
-		zone->getCollisionGrid()[temp5.x + temp5.z * zone->_width] &&
-		zone->getCollisionGrid()[temp6.x + temp6.z * zone->_width] &&
-		zone->getCollisionGrid()[temp7.x + temp7.z * zone->_width]);
+	return(zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width * City::gridScalar] &&
+		zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width * City::gridScalar] &&
+		zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width * City::gridScalar] &&
+		zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width * City::gridScalar] &&
+		zone->getCollisionGrid()[temp4.x + temp4.z * zone->_width * City::gridScalar] &&
+		zone->getCollisionGrid()[temp5.x + temp5.z * zone->_width * City::gridScalar] &&
+		zone->getCollisionGrid()[temp6.x + temp6.z * zone->_width * City::gridScalar] &&
+		zone->getCollisionGrid()[temp7.x + temp7.z * zone->_width * City::gridScalar]);
 }
 
 //TODO: these methods should be generic

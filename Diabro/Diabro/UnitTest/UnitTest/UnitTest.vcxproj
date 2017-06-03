@@ -88,9 +88,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Catch.hpp" />
+    <ClInclude Include="LevelAccess.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LevelGenerationTest.cpp" />
+    <ClCompile Include="LevelAccess.cpp" />
     <ClCompile Include="MainTest.cpp" />
     <ClCompile Include="PlayerClassTest.cpp" />
     <ClCompile Include="CollisionGridTest.cpp" />

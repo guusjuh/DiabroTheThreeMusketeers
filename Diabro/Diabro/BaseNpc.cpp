@@ -86,20 +86,21 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	//get the zoe from the levelmanager
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
 
+	//get scale 
+	int scale = _myCity->Scalar() / _myCity->gridScalar;
+
 	//get the pointer to the collisiongrid
 	bool* collisionGrid = zone->getCollisionGrid();
 	//instantiate a second ersion of the collisiongrid
-	bool* grid = new bool[zone->_width * zone->_depth];
-	for (int ix = 0; ix < zone->_width; ++ix) {
-		for (int iy = 0; iy < zone->_depth; ++iy) {
-			grid[ix + iy * zone->_width] = collisionGrid[ix + iy * zone->_width];
+	bool* grid = new bool[zone->_width * _myCity->gridScalar * zone->_depth * _myCity->gridScalar];
+	for (int ix = 0; ix < zone->_width * _myCity->gridScalar; ++ix) {
+		for (int iy = 0; iy < zone->_depth * _myCity->gridScalar; ++iy) {
+			grid[ix + iy * zone->_width * _myCity->gridScalar] = collisionGrid[ix + iy * zone->_width * _myCity->gridScalar];
 		}
 	}
-	//get scale 
-	int scale = _myCity->scalar;
 
 	//check if target position is viable
-	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->_width))]){
+	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->_width * _myCity->gridScalar))]){
 		Debug("The target position is not a valid point in the collision grid");
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
@@ -118,7 +119,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	closedList.clear();
 
 	//get the current position of the npc
-	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getGridPosition(Coordinate(getPosition().x, getPosition().z));
+	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
 
 	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z){
 		Debug("The goal is the same as the current position");
@@ -133,7 +134,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	Node start = Node(currentPos.x, currentPos.z, targetPos.x, targetPos.z);
 	nodes.push_back(start);
 	openList.push_back(nodes.size() - 1);
-	grid[start.x + start.y * zone->_width] = false;
+	grid[start.x + start.y * zone->_width * _myCity->gridScalar] = false;
 
 	//last node from the path
 	bool targetAdded = false;
@@ -185,13 +186,13 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 		}
 
 		//add its neigbours to the openlist
-		std::vector<Coordinate> neighboursPositions = lowestFNode.getNeighbours(collisionGrid, zone->_width);
+		std::vector<Coordinate> neighboursPositions = lowestFNode.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
 		for (size_t i = 0; i < neighboursPositions.size(); i++)
 		{
 			int pX = neighboursPositions[i].x;
 			int pY = neighboursPositions[i].z;
-			if (grid[pX + pY * zone->_width]){
-				grid[pX + pY * zone->_width] = false;
+			if (grid[pX + pY * zone->_width * _myCity->gridScalar]){
+				grid[pX + pY * zone->_width * _myCity->gridScalar] = false;
 				nodes.push_back(Node(lowestFNode, lowestFNodeId, pX, pY, targetPos.x, targetPos.z));
 				openList.push_back(nodes.size() - 1);
 			}
@@ -213,8 +214,3 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 		}
 	}
 }
-/// <summary>
-/// Debugs the specified message.
-/// </summary>
-/// <param name="msg">The message.</param>
-/// <param name="val">The value.</param>

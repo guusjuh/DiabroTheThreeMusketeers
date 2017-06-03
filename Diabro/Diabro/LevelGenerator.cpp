@@ -34,7 +34,7 @@ LevelGenerator::~LevelGenerator()
 /// </summary>
 void LevelGenerator::restart() {
 	Debug("initializing zone");
-	_zone[0] = Zone(20, 20, 6, 6, 10, 100, scalar);
+	_zone[0] = Zone(19, 19, 5, 5, 10, 500, scalar);
 	
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
@@ -57,7 +57,17 @@ Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 	int x = static_cast<int>((float)pWorldCoord.x / scalar + 0.5f);
 	int z = static_cast<int>((float)pWorldCoord.z / scalar + 0.5f);
 
-	return Coordinate(x,z);
+	return Coordinate(x, z);
+}
+
+/// transfroms a world position to a grid coordinate
+/// \param pWorldCoord coordinate in world position
+Coordinate LevelGenerator::getCollisionGridPosition(Coordinate pWorldCoord) {
+
+	int x = static_cast<int>((float)pWorldCoord.x / (scalar / City::gridScalar) + 0.5f);
+	int z = static_cast<int>((float)pWorldCoord.z / (scalar / City::gridScalar) + 0.5f);
+
+	return Coordinate(x, z);
 }
 
 /// transforms a grid coordinate to a world position
@@ -254,7 +264,7 @@ void LevelGenerator::spawnCityContent() {
 		// set a pointer to the current city 
 		City* thisCity = &_zone[0].cities[i];
 		// switch on the city type
-		switch (thisCity->typeFlag) {
+		switch (thisCity->TypeFlag()) {
 		case CityRT:
 			for (int j = 0; j < thisCity->Buildings().size(); ++j) { // for each building
 				spawnNPCs(thisCity, &thisCity->Buildings()[j]);
@@ -304,7 +314,7 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 /// <param name="i">The i.</param>
 void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
 	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 0, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
+	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->Position().x + thisCity->Width() / 2) * scalar, 0, (thisCity->Position().z + thisCity->Depth() / 2) * scalar), &_zone[0].cities[i]);
 }
 
 /// <summary>

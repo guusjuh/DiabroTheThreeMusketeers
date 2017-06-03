@@ -178,6 +178,7 @@
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseNpc.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Coordinate.h" />
     <ClInclude Include="EnemyAttackState.h" />
     <ClInclude Include="EnemyEquipment.h" />
     <ClInclude Include="EnemyFollowState.h" />

@@ -182,13 +182,13 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 					}
 
 					//TODO: optimize this.
-					int notWantedCityID = pSourceNpc->getHomeTown()->id;
+					int notWantedCityID = pSourceNpc->getHomeTown()->ID();
 
 					if(i != 0) {
 						for (int k = 0; k < actions[i - 1]._concreteContent.size(); ++k) {
 							if (actions[i - 1]._concreteContent[k].first->getType() == NPCQC || actions[i - 1]._concreteContent[k].first->getType() == TownQC) {
-								notWantedCityID = actions[i - 1]._concreteContent[k].first->getType() == NPCQC ? ((Npc*)(actions[i - 1]._concreteContent[k].first))->getHomeTown()->id
-									: ((City*)actions[i - 1]._concreteContent[k].first)->id;
+								notWantedCityID = actions[i - 1]._concreteContent[k].first->getType() == NPCQC ? ((Npc*)(actions[i - 1]._concreteContent[k].first))->getHomeTown()->ID()
+									: ((City*)actions[i - 1]._concreteContent[k].first)->ID();
 							}
 						}
 					}
@@ -196,7 +196,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 
 					do{
 						chosenCity = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0)->getRandomCity(CityRT);
-					} while (chosenCity->id == notWantedCityID);
+					} while (chosenCity->ID() == notWantedCityID);
 
 					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, cities));
 					contentIDs.push_back(std::pair<IQuestContent*, int>(chosenCity, cities));
@@ -238,15 +238,15 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 					if (i != 0) {
 						for (int k = 0; k < actions[i - 1]._concreteContent.size(); ++k) {
 							if (actions[i - 1]._concreteContent[k].first->getType() == EnemyQC || actions[i - 1]._concreteContent[k].first->getType() == HideOutQC) {
-								notWantedCityID = actions[i - 1]._concreteContent[k].first->getType() == EnemyQC ? ((BasicEnemy*)(actions[i - 1]._concreteContent[k].first))->getMyCity()->id
-									: ((City*)actions[i - 1]._concreteContent[k].first)->id;
+								notWantedCityID = actions[i - 1]._concreteContent[k].first->getType() == EnemyQC ? ((BasicEnemy*)(actions[i - 1]._concreteContent[k].first))->getMyCity()->ID()
+									: ((City*)actions[i - 1]._concreteContent[k].first)->ID();
 							}
 						}
 					}
 
 					do {
 						chosenCity = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0)->getRandomCity(HideoutRT);
-					} while (chosenCity->id == notWantedCityID);
+					} while (chosenCity->ID() == notWantedCityID);
 
 					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
 					contentIDs.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
@@ -308,7 +308,7 @@ Npc* QuestGenerator::getRandomNPC(Npc* pSourceNpc) {
 	// find all relevant npcs
 	for (int k = 0; k < allNPCs.size(); ++k) {
 		// if this npc doesn't live in the start town
-		if (pSourceNpc->getHomeTown()->id != allNPCs[k]->getHomeTown()->id) {
+		if (pSourceNpc->getHomeTown()->ID() != allNPCs[k]->getHomeTown()->ID()) {
 			possNPCs.push_back(allNPCs[k]);
 		}
 	}
@@ -340,7 +340,7 @@ City* QuestGenerator::getRandomCity(RoomType type) {
 	std::vector<City*> possCities;
 
 	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
-		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].typeFlag == type) {
+		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].TypeFlag() == type) {
 			possCities.push_back(&GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
 		}
 	}

@@ -1,6 +1,7 @@
 #include "Zone.h"
 #include <ctime>
 #include "GameManager.h"
+#include "Coordinate.h"
 #include <OgreConfigFile.h>
 #include <OgreMath.h>
 #include "Debug.h"
@@ -9,7 +10,6 @@
 /// Initializes a new instance of the <see cref="Zone"/> class.
 /// </summary>
 Zone::Zone() {
-	
 }
 
 /// <summary>
@@ -50,16 +50,13 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 /// <summary>
 /// Finalizes an instance of the <see cref="Zone"/> class.
 /// </summary>
-Zone::~Zone()
-{
-
-}
+Zone::~Zone(){ }
 
 City* Zone::getRandomCity(RoomType type) {
 	std::vector<int> id;
 
 	for (int i = 0; i < cities.size(); ++i) {
-		if (cities[i].typeFlag == type) {
+		if (cities[i].TypeFlag() == type) {
 			id.push_back(i);
 		}
 	}
@@ -154,75 +151,186 @@ Coordinate Zone::getPosition(int pId, bool pCheckNeighbours) {
 	
 }
 
+int Zone::findPossibleConnections(City &c)
+{
+	int i = 0;
+	for (int x = -1; x <= c.Width(); x++)
+	{
+		for (int z = -1; z <= c.Depth(); z++)
+		{
+			if (x == -1 || z == -1 || x == c.Width() || z == c.Depth())
+			{
+				if (getTile(c.Position().x + x, c.Position().z + z) == -1)
+				{
+					c.addConnection(c.Position() + Coordinate(x, z));
+					i++;
+				}
+			}
+		}
+	}
+	return i;
+}
+
+int Zone::findUsedConnections(City &c)
+{
+	c.clearConnections();
+	for (int x = -1; x <= c.Width(); x++)
+	{
+		for (int z = -1; z <= c.Depth(); z++)
+		{
+			if (x == -1 || z == -1 || x == c.Width() || z == c.Depth())
+			{
+				if (getTile(c.Position().x + x, c.Position().z + z) > 0)
+				{
+					c.addConnection(Coordinate(c.Position().x + x, c.Position().z + z));
+				}
+				else
+				{
+					setTile(c.Position() + Coordinate(x, z), 0);
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+int Zone::getMaxValue()
+{
+	int max = 0;
+	for (int x = 0; x < _width; x++)
+	{
+		for (int z = 0; z < _depth; z++)
+		{
+			if (max > getTile(x, z))
+			{
+				max = getTile(x, z);
+			}
+		}
+	}
+	return max;
+}
+
 /// connects rooms and pathways of the dungeon untill all routes are connected
 /// \param pMaxId highest value used in the grid
 /// \param pChance the decimal percentage of chance a room has to get an extra connection to the dungeon
 void Zone::connectDungeon(int pMaxId, float pChance) {
-	std::vector<std::pair<Coordinate, int>> connections; ///< holds all possible connections
+	//TODO: find all possible connections
 	Debug("city loop");
-	for (int i = 0; i < cities.size(); ++i) {
-		int rndIndex[2] = { 0,0 };
-		int start = connections.size(); // prevents usage of connections of other cities
-		int length = getPossibleConnections(cities[i], &connections);
+	std::vector<Coordinate> connections; ///< holds all possible connections
+	for (int i = 0; i < cities.size(); i++)
+	{
+		//1. collect all connections positions and set their value on -1
+		getPossibleConnections(cities[i], &connections);
+		//2. walk through all connections per city and add all posibilities
+		int n = findPossibleConnections(cities[i]);
 
-		if (length < 1) continue; //skip cities without connections
+		//3. Open one connection per room
+		int rnd[2];
+		rnd[0] = rand() % n;
+		Coordinate picked = cities[i].getConnection(rnd[0]);
+		setTile(picked, 1);
 
-		rndIndex[0] = rand() % length + start;
-		// set tile to room id value, carving an opening
-		setTile(connections[rndIndex[0]].first, connections[rndIndex[0]].second);
-		cities[i].connections.push_back(connections[rndIndex[0]].first);
-		connections.erase(connections.begin() + rndIndex[0]);
-		length--;
-
-		//prevent perfect dungeon by giving each room a chance of opening up another connection
-		if (length > 1) {
+		//4. open up MOAAARRR connections
+		if (cities[i].nConnections() > 1) {
+			//check whether an optional connection should be opened up
 			float rndPercent = (rand() % 100 + 1) / 100.0f;
 			if (rndPercent <= pChance) {
-				rndIndex[1] = rndIndex[0];
-				while (rndIndex[1] == rndIndex[0]) {
-					rndIndex[1] = rand() % length + start;
+				rnd[1] = rand() % n;
+				while (rnd[0] == rnd[1]) {
+					rnd[1] = rand() % n;
 				}
-				setTile(connections[rndIndex[1]].first, connections[rndIndex[1]].second);
-				cities[i].connections.push_back(connections[rndIndex[1]].first);
-				connections.erase(connections.begin() + rndIndex[1]);
-			}
-		}
-	}
-	//check if the each room/path is connected to the dungeon
-	Debug("changeTileValues 1");
-	int regions = changeTileValues(pMaxId);
-	
-	if (!connections.empty() && regions > 1){
-		//find options for connecting a region to the region with the lowest id (marked as id 2)
-		std::vector<std::pair<Coordinate, int>> options;
-		for (int i = 0; i < connections.size(); ++i) {
-			if ((getTile(connections[i].first.x, connections[i].first.z + 1) > 2 && getTile(connections[i].first.x, connections[i].first.z - 1) == 2) ||
-				(getTile(connections[i].first.x, connections[i].first.z + 1) == 2 && getTile(connections[i].first.x, connections[i].first.z - 1) > 2)) {
-				options.push_back(std::make_pair(connections[i].first, connections[i].second));
-				connections.erase(connections.begin() + i);
-			} else if ((getTile(connections[i].first.x + 1, connections[i].first.z) > 2 && getTile(connections[i].first.x - 1, connections[i].first.z) == 2) ||
-				(getTile(connections[i].first.x + 1, connections[i].first.z) == 2 && getTile(connections[i].first.x - 1, connections[i].first.z) > 2)) {
-				options.push_back(std::make_pair(connections[i].first, connections[i].second));
-				connections.erase(connections.begin() + i);
-			}
-		}
-		Debug("changeTileValues 2");
-		int regions = changeTileValues(pMaxId);
-		
-		while (regions > 1 && options.size() > 0) { // opens options until the whole dungeon is connected
-			Debug("openConnection");
-			int rnd = rand() % options.size();
-			setTile(options[rnd].first, 1); 
-			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
-			//TODO: city-id > city.Size()
-			cities[options[rnd].second - 1].connections.push_back(options[rnd].first);
-			options.erase(options.begin() + rnd);
 
-			// check if dungeon is connected
-			Debug("changeTileValues 3");
-			regions = changeTileValues(pMaxId);
+				setTile(cities[i].getConnection(rnd[1]), 1);
+			}
 		}
+		findUsedConnections(cities[i]);
 	}
+
+	std::vector<Coordinate> options;
+	int regions = changeTileValues(pMaxId);
+	printGrid();
+	//5. connect the still separated dungeon parts
+
+	for (int i = 2; i < regions + 1; i++)
+	{		
+		for (int j = 0; j < connections.size(); j++)
+		{
+			//find all used connections and remove them from the list
+			if (getTile(connections[j]) > 0)
+			{
+				connections.erase(connections.begin() + j);
+				j--;
+			} else //1. find all positions with an higher number next to them
+			{
+				Coordinate top, bot, left, right;
+				top = connections[j] + Coordinate(0, 1);
+				bot = connections[j] + Coordinate(0, -1);
+				left = connections[j] + Coordinate(-1, 0);
+				right = connections[j] + Coordinate(1, 0);
+				int bar = 0;
+
+				if ((getTile(top) > 0 && getTile(bot) > 0) && (getTile(top) == i || getTile(bot) == i)
+					&& getTile(bot) != getTile(top))
+				{
+					options.push_back(connections[j]);
+					connections.erase(connections.begin() + j);
+					j--;
+
+				}
+		Debug("changeTileValues 2");
+
+				if ((getTile(left) > 0 && getTile(right) > 0) && (getTile(left) == i || getTile(right) == i)
+					&& getTile(right) != getTile(left))
+				{
+					options.push_back(connections[j]);
+					connections.erase(connections.begin() + j);
+					j--;
+
+				}
+			}
+		}
+		//options = all connections connecting i and something not i
+		//2. open some of these connections
+		for (int k = 0; k < 3; k++)
+		{
+			if (options.size() > 1)
+			{
+				int rnd = rand() % options.size();
+				setTile(options[rnd], 1);
+				options.erase(options.begin() + rnd);
+			}
+		}
+		//3. repeat for each separate region
+		// WARNING: check if connection even exist, else use another region
+	}
+
+			Debug("changeTileValues 3");
+	regions = changeTileValues(pMaxId);
+	if (regions <= 0)
+	{
+		printGrid();
+	}
+	while (regions > 1)
+	{
+		int rnd[5];
+		for (int i = 0; i < 5; i++)
+		{
+			int index = rnd[i];
+			setTile(options[index], 1);
+		}
+		regions = changeTileValues(getMaxValue());
+		Debug("-", regions);
+	}
+
+	printGrid();
+	
+	Debug("regions last:", regions);
+	for (int i = 0; i < cities.size(); i++)
+	{
+		findUsedConnections(cities[i]);
+	}
+	printGrid();
+	int i = 0;
 }
 
 ///prints all values used in the grid (Windows only method)
@@ -307,43 +415,43 @@ int Zone::changeTileValues(int pMaxIndex) {
 /// finds all possible points to connect a city with a path
 /// \param pCity the city for which connections have to be found
 /// \param pConnections pointer to connections vector existing of a position and city id
-int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, int>> *pConnections) {
+int Zone::getPossibleConnections(City pCity, std::vector<Coordinate> *pConnections) {
 	int connectionAmount = 0;
-	for (int ix = 0; ix < pCity.width; ++ix) {
-		for (int iz = 0; iz < pCity.depth; ++iz) {
+	for (int ix = 0; ix < pCity.Width(); ++ix) {
+		for (int iz = 0; iz < pCity.Depth(); ++iz) {
 			//north
-			if (getTile(pCity.position.x + ix, pCity.position.z + iz - 1) == 0 && pCity.position.z + iz - 2 > 0) {
-				if (getTile(pCity.position.x + ix, pCity.position.z + iz - 2) > 0) {
+			if (getTile(pCity.Position().x + ix, pCity.Position().z + iz - 1) == 0 && pCity.Position().z + iz - 2 > 0) {
+				if (getTile(pCity.Position().x + ix, pCity.Position().z + iz - 2) > 0) {
 					//save connection in grid and connection vector
-					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix, pCity.position.z + iz - 1), pCity.id));
-					setTile(pCity.position.x + ix, pCity.position.z + iz - 1, -1);
+					pConnections->push_back(Coordinate(pCity.Position().x + ix, pCity.Position().z + iz - 1));
+					setTile(pCity.Position().x + ix, pCity.Position().z + iz - 1, -1);
 					connectionAmount++;
 				}
 			}
 			//east
-			if (getTile(pCity.position.x + ix + 1, pCity.position.z + iz) == 0 && pCity.position.x + ix + 2 < _width) {
-				if (getTile(pCity.position.x + ix + 2, pCity.position.z + iz) > 0) {
+			if (getTile(pCity.Position().x + ix + 1, pCity.Position().z + iz) == 0 && pCity.Position().x + ix + 2 < _width) {
+				if (getTile(pCity.Position().x + ix + 2, pCity.Position().z + iz) > 0) {
 					//save connection in grid and connection vector
-					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix + 1, pCity.position.z + iz), pCity.id));
-					setTile(pCity.position.x + ix + 1, pCity.position.z + iz, -1);
+					pConnections->push_back(Coordinate(pCity.Position().x + ix + 1, pCity.Position().z + iz));
+					setTile(pCity.Position().x + ix + 1, pCity.Position().z + iz, -1);
 					connectionAmount++;
 				}
 			}
 			//south
-			if (getTile(pCity.position.x + ix, pCity.position.z + iz + 1) == 0 && pCity.position.z + iz + 2 < _depth) {
-				if (getTile(pCity.position.x + ix, pCity.position.z + iz + 2) > 0) {
+			if (getTile(pCity.Position().x + ix, pCity.Position().z + iz + 1) == 0 && pCity.Position().z + iz + 2 < _depth) {
+				if (getTile(pCity.Position().x + ix, pCity.Position().z + iz + 2) > 0) {
 					//save connection in grid and connection vector
-					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix, pCity.position.z + iz + 1), pCity.id));
-					setTile(pCity.position.x + ix, pCity.position.z + iz + 1, -1);
+					pConnections->push_back(Coordinate(pCity.Position().x + ix, pCity.Position().z + iz + 1));
+					setTile(pCity.Position().x + ix, pCity.Position().z + iz + 1, -1);
 					connectionAmount++;
 				}
 			}
 			//west
-			if (getTile(pCity.position.x + ix - 1, pCity.position.z + iz) == 0 && pCity.position.x + ix - 2 > 0) {
-				if (getTile(pCity.position.x + ix - 2, pCity.position.z + iz) > 0) {
+			if (getTile(pCity.Position().x + ix - 1, pCity.Position().z + iz) == 0 && pCity.Position().x + ix - 2 > 0) {
+				if (getTile(pCity.Position().x + ix - 2, pCity.Position().z + iz) > 0) {
 					//save connection in grid and connection vector
-					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix - 1, pCity.position.z + iz), pCity.id));
-					setTile(pCity.position.x + ix - 1, pCity.position.z + iz, -1);
+					pConnections->push_back(Coordinate(pCity.Position().x + ix - 1, pCity.Position().z + iz));
+					setTile(pCity.Position().x + ix - 1, pCity.Position().z + iz, -1);
 					connectionAmount++;
 				}
 			}
@@ -450,12 +558,12 @@ bool Zone::hasCollision(Coordinate pPosition) {
 /// checks wheter a city can be placed on its position
 /// \param pC selected city
 bool Zone::hasCollision(City pC) {
-	if (pC.position.x + pC.width >= _width || pC.position.x <= 0) return true;
-	if (pC.position.z + pC.depth >= _depth || pC.position.z <= 0) return true;
+	if (pC.Position().x + pC.Width() >= _width || pC.Position().x <= 0) return true;
+	if (pC.Position().z + pC.Depth() >= _depth || pC.Position().z <= 0) return true;
 
-	for (int ix = (pC.position.x > 0)? -1: 0; ix < pC.width + 1; ++ix) {
-		for (int iz = (pC.position.z > 0)? -1: 0; iz < pC.depth + 1; ++iz) {
-			if (getTile(pC.position.x + ix, pC.position.z + iz)) return true;
+	for (int ix = (pC.Position().x > 0)? -1: 0; ix < pC.Width() + 1; ++ix) {
+		for (int iz = (pC.Position().z > 0)? -1: 0; iz < pC.Depth() + 1; ++iz) {
+			if (getTile(pC.Position().x + ix, pC.Position().z + iz)) return true;
 		}
 	}
 	return false;
@@ -478,9 +586,9 @@ bool Zone::checkGrid() {
 /// \param pC selected city
 bool Zone::placeCity(City pC) {
 	if (!hasCollision(pC)) {
-		for (int ix = 0; ix < pC.width; ++ix) {
-			for (int iz = 0; iz < pC.depth; ++iz) {
-				setTile(pC.position.x + ix, pC.position.z + iz, pC.id);
+		for (int ix = 0; ix < pC.Width(); ++ix) {
+			for (int iz = 0; iz < pC.Depth(); ++iz) {
+				setTile(pC.Position().x + ix, pC.Position().z + iz, pC.ID());
 			}
 		}
 		//pC.init();
@@ -527,6 +635,7 @@ void Zone::printGrid() {
 
 	Debug d = Debug();
 	d.printArray(_tiles, _width, _width * _depth);
+	printf("\n");
 }
 
 /// <summary>
@@ -549,18 +658,18 @@ bool* Zone::getCollisionGrid() {
 /// </summary>
 /// <returns></returns>
 bool* Zone::generateCollisionGrid() {
-	bool* grid = new bool[(_width * _depth)];
+	bool* grid = new bool[(_width * City::gridScalar * _depth * City::gridScalar)];
 
-	for (size_t i = 0; i < _width; i++)
+	for (size_t i = 0; i < _width * City::gridScalar; i++)
 	{
-		for (size_t j = 0; j < _depth; j++)
+		for (size_t j = 0; j < _depth * City::gridScalar; j++)
 		{
-			if (getTile(i, j)){
-				grid[i + j * _width] = true;
+			if (getTile((i / City::gridScalar), (j / City::gridScalar)) > 0){
+				grid[i + j * _width * City::gridScalar] = true;
 			}
 			else
 			{
-				grid[i + j * _width] = false;
+				grid[i + j * _width * City::gridScalar] = false;
 			}
 		}
 	}
@@ -569,7 +678,7 @@ bool* Zone::generateCollisionGrid() {
 		std::vector<Coordinate> buildings = cities[i].buildingPositions();
 		for (size_t j = 0; j < buildings.size(); j++)
 		{
-			grid[buildings[j].x + buildings[j].z * _width] = false;// set tiles at building pos false
+			grid[buildings[j].x + buildings[j].z * _width * City::gridScalar] = false;// set tiles at building pos false
 		}
 	}
 	
@@ -582,5 +691,5 @@ bool* Zone::generateCollisionGrid() {
 /// </summary>
 void Zone::printCollisionGrid() {
 	Debug d = Debug();
-	d.printArray(collisionGrid, _width, _width * _depth);
+	d.printArray(collisionGrid, _width * City::gridScalar, _width * City::gridScalar * _depth * City::gridScalar);
 }

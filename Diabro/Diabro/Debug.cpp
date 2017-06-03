@@ -100,12 +100,7 @@ void Debug::printArray(bool* boolArray, int width, int size) const {
 			printf("\n");
 		}
 		printf("|%c", boolArray[i]?'T':'F');
-		if (boolArray[i] > 10) {
-			printf(" |");
-		}
-		else {
-			printf("|");
-		}
+		printf("|");
 	}
 	printf("\n");
 #endif

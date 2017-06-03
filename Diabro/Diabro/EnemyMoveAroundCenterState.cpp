@@ -23,7 +23,7 @@ void EnemyMoveAroundCenterState::Enter(BaseNpc* agent){
 
 void EnemyMoveAroundCenterState::Execute(BaseNpc* agent){
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getCity()->scalar * 2) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getCity()->Scalar() * 2) {
 		agent->stateMachine.setState("Follow");
 	}
 	if (agent->getDirVector() == Ogre::Vector3().ZERO){
@@ -78,19 +78,19 @@ void EnemyMoveAroundCenterState::setNextPointList(BaseNpc* agent){
 	if (cornerId>3)
 		cornerId = -1;
 	Coordinate centerPos = agent->getCity()->getCenterTile();
-	int scalar = agent->getCity()->scalar;
+	int scalar = agent->getCity()->Scalar();
 	switch (cornerId){
 	case 0:
-		agent->calculateAStar(Ogre::Vector3(centerPos.x - 1, 0, centerPos.z - 1));
+		agent->calculateAStar(Ogre::Vector3((centerPos.x - 1) * City::gridScalar, 0, (centerPos.z - 1) * City::gridScalar));
 		break;
 	case 1:
-		agent->calculateAStar(Ogre::Vector3(centerPos.x - 1, 0, centerPos.z + 1));
+		agent->calculateAStar(Ogre::Vector3((centerPos.x - 1) * City::gridScalar, 0, (centerPos.z + 1) * City::gridScalar));
 		break;
 	case 2:
-		agent->calculateAStar(Ogre::Vector3(centerPos.x + 1, 0, centerPos.z + 1));
+		agent->calculateAStar(Ogre::Vector3((centerPos.x + 1) * City::gridScalar, 0, (centerPos.z + 1) * City::gridScalar));
 		break;
 	case 3:
-		agent->calculateAStar(Ogre::Vector3(centerPos.x + 1, 0, centerPos.z - 1));
+		agent->calculateAStar(Ogre::Vector3((centerPos.x + 1) * City::gridScalar, 0, (centerPos.z - 1) * City::gridScalar));
 		break;
 	}
 }
