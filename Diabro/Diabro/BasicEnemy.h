@@ -18,7 +18,7 @@
 class BasicEnemy : public BaseNpc
 {
 public:
-	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int, Spawner<BasicEnemy>* mySpawner);
+	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int);
 	~BasicEnemy() {}
 
 	void update(Ogre::Real) override;
@@ -42,7 +42,6 @@ private:
 	std::string name;
 
 	std::map<std::string, State<BaseNpc>*> possibleStates;
-	Spawner<BasicEnemy>* mySpawner;
 	bool _initialized;
 
 	static const int LOW_HP;

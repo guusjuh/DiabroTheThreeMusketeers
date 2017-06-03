@@ -22,8 +22,8 @@ const Ogre::ColourValue BasicEnemy::COL_NDIST = Ogre::ColourValue(0, 0, 1);
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level, Spawner<BasicEnemy>* mySpawner) 
-: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), mySpawner(mySpawner)
+BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, int level) 
+: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
 	EnemyFollowState* followPlayer = new EnemyFollowState();
 	EnemyAttackState* attack = new EnemyAttackState();
@@ -243,7 +243,7 @@ void BasicEnemy::die() {
 
 	Character::die();
 	
-	mySpawner->instanceDeath();
+	GameManager::getSingletonPtr()->getLevelManager()->spawnEnemy(_myCity, 5.0f);
 
 	if (_relevantForAction) {
 		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgEnemyDead);

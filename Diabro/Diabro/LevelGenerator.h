@@ -17,6 +17,7 @@ enum DirectionType
 /// </summary>
 class LevelGenerator
 {
+	friend class LevelManager;
 public:
 	LevelGenerator();
 	~LevelGenerator();
@@ -61,7 +62,7 @@ private:
 
 	void determineCityTypes();
 	void spawnCityContent();
-	void placeEnemySpawnNode(City*, int);
+	void spawnEnemy(City*, int);
 	void spawnNPCs(City*, Building*);
 	
 	Ogre::SceneNode* _dungeonNode;

@@ -273,7 +273,7 @@ void LevelGenerator::spawnCityContent() {
 			break;
 		case HideoutRT:
 			// spawn enemy spawners in the middle of an enemy hideout
-			placeEnemySpawnNode(thisCity, i);
+			spawnEnemy(thisCity, i);
 			break;
 		default:
 			break;
@@ -286,25 +286,25 @@ void LevelGenerator::spawnCityContent() {
 /// Spawns the NPCs for a specified building.
 /// </summary>
 /// <param name="pCity">The p city.</param>
-/// <param name="pThisBuilding">The p this building.</param>
-void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
-	// catch the buildings position
-	Ogre::Vector3 buildingPosition = pThisBuilding->getPositionInFrontOf();
-	Ogre::Vector3 offsets[3];
-	offsets[0] = Ogre::Vector3(250, 0, -50);
-	offsets[1] = Ogre::Vector3(250, 0, 0);
-	offsets[2] = Ogre::Vector3(250, 0, 50);
-	// for each resident
-	for (int i = 0; i < pThisBuilding->residents; ++i) {
-		// the scene node for the resident
+/// <param name="pBuilding">The p this building.</param>
+void LevelGenerator::spawnNPCs(City* pCity, Building* pBuilding) {
+	for (int i = 0; i < pBuilding->residents; i++) {
+		RealCoordinate npcCoord = pCity->getNpcPosition();
+		if (npcCoord.rx < 0 || npcCoord.rz < 0) {
+			//Debug("not enough free space in city")Z
+			break;
+		}
+		Ogre::Vector3 npcPos = Ogre::Vector3(npcCoord.rx, 18.0f, npcCoord.rz);
+
+		//assign position to NPC
 		Ogre::SceneNode* instanceNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode();
-		instanceNode->translate(buildingPosition + offsets[i], Ogre::Node::TS_WORLD);
+		instanceNode->translate(npcPos, Ogre::Node::TS_WORLD);
 		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		rotationNode->attachObject(instanceEntity);
-		Npc* instanceScript = new Npc(instanceNode, rotationNode, instanceEntity, pCity, pThisBuilding);
-		//instanceScript->initialize();
+		Npc* instanceScript = new Npc(instanceNode, rotationNode, instanceEntity, pCity, pBuilding);
 	}
+	pCity->removeNpcTiles();
 }
 
 /// <summary>
@@ -312,9 +312,24 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
 /// </summary>
 /// <param name="thisCity">The this city.</param>
 /// <param name="i">The i.</param>
-void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
-	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-	Spawner<BasicEnemy>* enemySpawner = new Spawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((thisCity->Position().x + thisCity->Width() / 2) * scalar, 0, (thisCity->Position().z + thisCity->Depth() / 2) * scalar), &_zone[0].cities[i]);
+void LevelGenerator::spawnEnemy(City* pCity, int nAmount) {
+	for (int i = 0; i < nAmount; i++) {
+		RealCoordinate enemyCoord = pCity->getNpcPosition();
+		if (enemyCoord.rx < 0 || enemyCoord.rz < 0) {
+			//Debug("not enough free space in city")Z
+			break;
+		}
+		Ogre::Vector3 enemyPos = Ogre::Vector3(enemyCoord.rx, 18.0f, enemyCoord.rz);
+
+		//assign position to NPC
+		Ogre::SceneNode* instanceNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode();
+		instanceNode->translate(enemyPos, Ogre::Node::TS_WORLD);
+		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
+		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
+		rotationNode->attachObject(instanceEntity);
+		BasicEnemy* instanceScript = new BasicEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
+	}
+	pCity->removeNpcTiles();
 }
 
 /// <summary>
