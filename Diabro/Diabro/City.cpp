@@ -13,6 +13,10 @@ Coordinate operator* (Coordinate &lhs, int &rhs) {
 	return Coordinate(lhs.x * rhs, lhs.z * rhs);
 }
 
+Coordinate operator* (Coordinate &lhs, float &rhs){
+	return Coordinate(static_cast<int>(lhs.x * rhs), static_cast<int>(lhs.z * rhs));
+}
+
 void Coordinate::operator=(RealCoordinate& rhs) {
 	x = static_cast<int>(rhs.rx);
 	z = static_cast<int>(rhs.rz);
@@ -243,6 +247,10 @@ void City::setType(int type)
 }
 
 std::vector<Coordinate> City::getFreePositions() {
+	Coordinate temp = getCenterTile();
+	temp -= position;
+	temp = temp * gridScalar;
+	setTile(temp, 2);
 	std::vector<Coordinate> freePositions = std::vector<Coordinate>();
 	for (int x = 0; x < scaledWidth(); x++) {
 		for (int z = 0; z < scaledDepth(); z++) {
@@ -314,33 +322,36 @@ void City::generateBuildings()
 		if (typeFlag == HideoutRT){
 			pos = getCenterTile();
 			pos = pos * scalar;
+			pos.rx += 125;
+			pos.rz += 125;
 			y = 250;
 			Coordinate enemyCoord = getCenterTile();
 			enemyCoord -= position;
 			
 			for (int x = 0; x < 2; x++) {
 				for (int z = 0; z < 2; z++) {
-					setTile(enemyCoord + Coordinate(x, z), 1);
+					setTile((enemyCoord * gridScalar) + Coordinate(x, z), 1);
 				}
 			}
 		}
 		else {
 			//translate object half a tile in the positive direction because the pivot of the object is at center
 			// scalar (1 zone unit in world size) / GridScalar (now one city tile) / 2 (half a city tile as buildings have their pivot centered)
-			pos = buildingLocations[n];
+			pos = buildingLocations[rnd];
+			/*while (getTile(pos.rx + 1, pos.rz) || getTile(pos.rx - 1, pos.rz) ||
+				getTile(pos.rx, pos.rz + 1) || getTile(pos.rx, pos.rz - 1))
+			{
+				buildingLocations.erase(buildingLocations.begin() + rnd);
+				rnd = rand() % buildingLocations.size();
+				pos = buildingLocations[rnd];
+				//building
+			}*/
 			//buildingLocations.erase(buildingLocations.begin() + rnd);
 			RealCoordinate rc = RealCoordinate((pos.rx / scalar), (pos.rz / scalar));
 			rc -= position;
 			rc = rc * gridScalar;
 			Coordinate friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
-			if (getTile(friendlyCoord)) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-				FILE* fp;
-				freopen_s(&fp, "CONOUT$", "w", stdout);
-				printf("check city.cpp 292 jasper \n");
-				fclose(fp);
-#endif
-			}
+
 			while(getTile(friendlyCoord)) {
 				rnd = rand() % buildingLocations.size();
 				RealCoordinate rc = RealCoordinate((buildingLocations[rnd].rx / scalar), (buildingLocations[rnd].rz / scalar));

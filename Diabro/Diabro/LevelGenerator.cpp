@@ -12,7 +12,7 @@ LevelGenerator::LevelGenerator() :
 scalar(500)
 {
 	Debug("Initializing zone");
-	_zone[0] = Zone(19, 19, 3, 3, 10, 750, scalar);
+	_zone[0] = Zone(12, 12, 3, 3, 10, 750, scalar);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -330,7 +330,7 @@ void LevelGenerator::spawnEnemy(City* pCity, int nAmount) {
 		//assign position to NPC
 		Ogre::SceneNode* instanceNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode();
 		instanceNode->translate(enemyPos, Ogre::Node::TS_WORLD);
-		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
+		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
 		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		rotationNode->attachObject(instanceEntity);
 		BasicEnemy* instanceScript = new BasicEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());

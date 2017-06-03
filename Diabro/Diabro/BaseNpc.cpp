@@ -25,9 +25,9 @@ void BaseNpc::collide(){
 /// <param name="pDeltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
-	detectPlayer();
+	//detectPlayer();
 
-	Character::update(pDeltatime);
+	//Character::update(pDeltatime);
 }
 
 /// <summary>

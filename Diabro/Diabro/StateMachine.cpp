@@ -78,7 +78,7 @@ void StateMachine<T>::setState(std::string newState){
 	}
 	_currentState = newState.c_str();
 	_possibleStates[_currentState]->Enter(_owner);
-	Debug(_currentState.c_str());
+	//Debug(_currentState.c_str());
 }
 
 template class StateMachine <BaseNpc> ;

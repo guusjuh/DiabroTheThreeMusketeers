@@ -2,6 +2,7 @@
 #include <ctime>
 #include "GameManager.h"
 #include "Coordinate.h"
+#include "City.h"
 #include <OgreConfigFile.h>
 #include <OgreMath.h>
 #include "Debug.h"
@@ -677,11 +678,30 @@ bool* Zone::generateCollisionGrid() {
 	}
 	for (size_t i = 0; i < cities.size(); i++)
 	{
-		std::vector<Coordinate> buildings = cities[i].buildingPositions();
+		//TODO: go through city tiles
+		//1. double for-loop
+		for (int x = 0; x < cities[i].scaledWidth(); x++)
+		{
+			for (int z = 0; z < cities[i].scaledDepth(); z++)
+			{
+				if (cities[i].getTile(x, z))
+				{
+					Coordinate position = cities[i].Position();
+					position.x *= City::gridScalar;
+					position.z *= City::gridScalar;
+					position = position + Coordinate(x, z);
+
+					grid[position.x + position.z * _width * City::gridScalar] = false;
+				}
+			}
+		}
+		
+		
+		/*std::vector<Coordinate> buildings = cities[i].buildingPositions();
 		for (size_t j = 0; j < buildings.size(); j++)
 		{
 			grid[buildings[j].x + buildings[j].z * _width * City::gridScalar] = false;// set tiles at building pos false
-		}
+		}*/
 	}
 	
 
