@@ -67,6 +67,10 @@ private:
 	std::vector<Coordinate> connections;
 
 public:
+	City() {}
+	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
+	~City();
+
 	void init();
 	void update();
 
@@ -95,10 +99,6 @@ public:
 	Coordinate getRandomTile();
 	std::vector<Coordinate> getFreePositions();
 	RealCoordinate getNpcPosition();
-
-	City(){}
-	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
-	~City();
 
 	std::vector<Building> Buildings() { return _buildings; };
 	std::vector<Coordinate> buildingPositions();

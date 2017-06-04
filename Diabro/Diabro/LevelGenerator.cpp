@@ -279,7 +279,7 @@ void LevelGenerator::spawnCityContent() {
 			break;
 		case HideoutRT:
 			// spawn enemy spawners in the middle of an enemy hideout
-			spawnEnemy(thisCity, i);
+			spawnEnemy(thisCity, thisCity->Buildings()[0].residents);
 			break;
 		default:
 			break;
