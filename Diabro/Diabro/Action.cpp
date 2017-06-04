@@ -199,7 +199,7 @@ void Action::setPreConditionsContent() {
 		case SomebodyThere:
 			for (int j = 0; j < _concreteContent.size(); ++j) {
 				if (_concreteContent[j].first->getType() == EnemyQC) {
-					if(_concreteContent[j].first != nullptr || ((BasicEnemy*)_concreteContent[j].first)->isDead()) {
+					if(_concreteContent[j].first != nullptr || !((BasicEnemy*)_concreteContent[j].first)->isDead()) {
 						((PreSomebodyThere*)it->second)->characters.push_back(_concreteContent[j].first);
 					}
 					else {
