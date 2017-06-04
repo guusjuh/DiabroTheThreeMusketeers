@@ -353,7 +353,7 @@ void UIManager::increaseFloorText() {
 }
 
 void UIManager::resetFloorText() {
-	_floorTextWidget->setText("Floor " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel()));
+	_floorTextWidget->setText("Floor " + Ogre::StringConverter::toString(1));
 }
 
 void UIManager::increaseUpgradeText(UpgradeModifierType type) {

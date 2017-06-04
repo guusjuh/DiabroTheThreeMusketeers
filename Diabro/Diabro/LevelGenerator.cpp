@@ -42,7 +42,7 @@ void LevelGenerator::restart() {
 	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries);
 
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
-	_zone[0].printGrid();
+	//_zone[0].printGrid();
 
 	determineCityTypes();
 	spawnCityContent();

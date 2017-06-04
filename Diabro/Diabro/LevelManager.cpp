@@ -73,6 +73,8 @@ void LevelManager::restartGame() {
 /// Resets the level.
 /// </summary>
 void LevelManager::generateNewDungeon() {
+	Debug("\t\tTHE CURRENT LEVEL IS ", _level);
+
 	Debug("\tL: generating new dungeon.");
 	while (_friendlyNpcScripts.size() > 0) {
 		detachFriendlyNPC(0);

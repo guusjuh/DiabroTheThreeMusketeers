@@ -76,7 +76,6 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_inBattle = false;
 	_inBattleTime = 0;
 
-	_currentHealth = _maxHealth;
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 }
 
@@ -97,6 +96,9 @@ void Player::die() {
 	_damage = equipment->getDamage();
 	_healthUpgrades = 0;
 	_damageUpgrades = 0;
+
+	_currentHealth = _maxHealth;
+
 	GameManager::getSingleton().getUIManager()->resetUpgradeText();
 	GameManager::getSingletonPtr()->getUIManager()->resetFloorText();
 }

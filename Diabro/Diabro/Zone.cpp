@@ -252,7 +252,7 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 
 	std::vector<Coordinate> options;
 	int regions = changeTileValues(pMaxId);
-	printGrid();
+	//printGrid();
 	//5. connect the still separated dungeon parts
 
 	for (int i = 2; i < regions + 1; i++)
@@ -312,7 +312,7 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 	regions = changeTileValues(pMaxId);
 	if (regions <= 0)
 	{
-		printGrid();
+		//printGrid();
 	}
 	while (regions > 1)
 	{
@@ -326,14 +326,14 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		Debug("-", regions);
 	}
 
-	printGrid();
+	//printGrid();
 	
 	Debug("regions last:", regions);
 	for (int i = 0; i < cities.size(); i++)
 	{
 		findUsedConnections(cities[i]);
 	}
-	printGrid();
+	//printGrid();
 	int i = 0;
 }
 
@@ -700,7 +700,7 @@ bool* Zone::generateCollisionGrid() {
 			for (int z = 0; z < cities[i].scaledDepth(); z++)
 			{
 				int temp = cities[i].getTile(x, z);
-				cities[i].printGrid();
+				//cities[i].printGrid();
 				if (temp)
 				{
 					Coordinate position = cities[i].Position();
