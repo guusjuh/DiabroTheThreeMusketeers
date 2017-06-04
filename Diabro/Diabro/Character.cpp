@@ -47,7 +47,7 @@ void Character::update(Ogre::Real pDeltatime)
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
 	
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
-	if (collidesWithGrid(newPos, zone, _radius) && closestDistanceToNpc(newPos) > 50)
+	if (collidesWithGrid(newPos, zone, _radius) && closestDistanceToNpc(newPos) > _radius)
 	{
 		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	}
@@ -62,27 +62,35 @@ void Character::collide(){
 
 Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 	Ogre::Real DistanceToClosestTarget = 1000;
+	Ogre::Real distance;
+	//hostile Npc
 	std::vector<Character*> hostileNpcs = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	for (size_t i = 0; i < hostileNpcs.size(); i++)
 	{
 		if (hostileNpcs[i] != this){
-			Ogre::Real distance = pos.distance(hostileNpcs[i]->getPosition());
+			distance = pos.distance(hostileNpcs[i]->getPosition());
 
 			if (distance < DistanceToClosestTarget){
 				DistanceToClosestTarget = distance;
 			}
 		}
 	}
+	//friendly Npc
 	std::vector<Character*> friendlyNpcs = GameManager::getSingletonPtr()->getLevelManager()->getFriendlyNpcs();
 	for (size_t i = 0; i < friendlyNpcs.size(); i++)
 	{
 		if (friendlyNpcs[i] != this){
-			Ogre::Real distance = pos.distance(friendlyNpcs[i]->getPosition());
+			distance = pos.distance(friendlyNpcs[i]->getPosition());
 
 			if (distance < DistanceToClosestTarget){
 				DistanceToClosestTarget = distance;
 			}
 		}
+	}
+	//sister
+	distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos());
+	if (distance < DistanceToClosestTarget){
+		DistanceToClosestTarget = distance;
 	}
 	return DistanceToClosestTarget;
 }
