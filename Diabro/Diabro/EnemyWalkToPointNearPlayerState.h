@@ -1,5 +1,5 @@
-#ifndef ENEMY_FOLLOW_DIRECT_STATE_H
-#define ENEMY_FOLLOW_DIRECT_STATE_H
+#ifndef ENEMY_WALK_TO_POINT_NEAR_PLAYER_STATE_H
+#define ENEMY_WALK_TO_POINT_NEAR_PLAYER_STATE_H
 
 #include "State.h"
 #include "BaseNpc.h"
@@ -8,15 +8,19 @@
 /// The concrete idle implementation for characters. 
 /// </summary>
 /// <seealso cref="State{Character}" />
-class EnemyFollowDirectState : public State<BaseNpc>
+class EnemyWalkToPointNearPlayerState : public State<BaseNpc>
 {
 public:
-	EnemyFollowDirectState();
-	~EnemyFollowDirectState();
+	EnemyWalkToPointNearPlayerState();
+	~EnemyWalkToPointNearPlayerState();
 
 	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;
 	void Exit(BaseNpc* agent) override;
 	void Collide(BaseNpc* agent) override;
+private:
+	void calculateRelativePoint();
+
+	Ogre::Vector3 relative;
 };
 #endif

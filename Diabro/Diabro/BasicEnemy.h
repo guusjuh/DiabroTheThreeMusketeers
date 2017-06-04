@@ -9,6 +9,7 @@
 #include "EnemyFollowDirectState.h"
 #include "EnemyAttackState.h"
 #include "EnemyMoveAroundCenterState.h"
+#include "EnemyWalkToPointNearPlayerState.h"
 #include "EnemyEquipment.h"
 #include "Spawner.h"
 

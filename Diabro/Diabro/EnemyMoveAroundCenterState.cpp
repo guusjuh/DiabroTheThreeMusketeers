@@ -58,7 +58,7 @@ void EnemyMoveAroundCenterState::Exit(BaseNpc* agent){
 
 }
 
-void EnemyMoveAroundCenterState::Collide(BaseNpc* agent){
+void EnemyMoveAroundCenterState::Collide(BaseNpc* agent){/*
 	if (agent->getNextPosSize() > 0)
 	{
 		agent->walkToNextPoint();
@@ -70,7 +70,8 @@ void EnemyMoveAroundCenterState::Collide(BaseNpc* agent){
 			setNextPointList(agent);
 		}
 		agent->walkToNextPoint();
-	}
+	}*/
+	agent->walkToNeighbour();
 }
 
 void EnemyMoveAroundCenterState::setNextPointList(BaseNpc* agent){

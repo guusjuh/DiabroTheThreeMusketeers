@@ -50,7 +50,7 @@ void EnemyFollowAStarState::Exit(BaseNpc* agent){
 
 }
 
-void EnemyFollowAStarState::Collide(BaseNpc* agent){
+void EnemyFollowAStarState::Collide(BaseNpc* agent){/*
 	if (agent->getNextPosSize() > 0)
 	{
 		agent->walkToNextPoint();
@@ -65,5 +65,6 @@ void EnemyFollowAStarState::Collide(BaseNpc* agent){
 		playerPos.z = player.z;
 		agent->calculateAStar(playerPos);
 		agent->walkToNextPoint();
-	}
+	}*/
+	agent->walkToNeighbour();
 }
