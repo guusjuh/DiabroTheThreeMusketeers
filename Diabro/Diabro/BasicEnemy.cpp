@@ -26,12 +26,10 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
 	// set the states of the FSM
-	EnemyFollowState* followPlayer = new EnemyFollowState();
-	EnemyAttackState* attack = new EnemyAttackState();
-	EnemyMoveAroundCenterState* moveAroundCenter = new EnemyMoveAroundCenterState();
-	possibleStates["Follow"] = followPlayer;
-	possibleStates["Attack"] = attack;
-	possibleStates["AroundCenter"] = moveAroundCenter;
+	possibleStates["FollowAStar"] = new EnemyFollowAStarState();
+	possibleStates["FollowDirect"] = new EnemyFollowDirectState();
+	possibleStates["Attack"] = new EnemyAttackState();
+	possibleStates["AroundCenter"] = new EnemyMoveAroundCenterState();
 	_initialized = false;
 
 	// subscribe @ levelmanager
@@ -41,7 +39,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	healthUpgrades = 0;
 	damageUpgrades = 0;
 	noticeDistUpgrades = 0;
-	equipment = new EnemyEquipment(20.0f, 2.0f, 200.0f);
+	equipment = new EnemyEquipment(20.0f, 2.0f, 1000.0f);
 
 	assignUpgrades(level);
 	IEnemyEquipment* tempEquipment = equipment;
