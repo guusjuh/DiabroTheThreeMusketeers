@@ -15,10 +15,8 @@ void EnemyAttackState::Enter(BaseNpc* agent){
 
 }
 
-void EnemyAttackState::Execute(BaseNpc* agent){
-	Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
-	
-	if (agent->getPosition().distance(playerPos) <= agent->getAttackDistance()) {
+void EnemyAttackState::Execute(BaseNpc* agent){	
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) <= agent->getAttackDistance()) {
 		agent->lightAttack();
 		agent->setDirVector(Ogre::Vector3().ZERO);
 		return;

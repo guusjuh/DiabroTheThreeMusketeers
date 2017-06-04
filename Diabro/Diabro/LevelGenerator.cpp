@@ -8,11 +8,9 @@
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
-LevelGenerator::LevelGenerator() :
-scalar(500)
-{
+LevelGenerator::LevelGenerator() {
 	Debug("Initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 10, 750, scalar);
+	_zone[0] = Zone(40, 40, 3, 3, 20, 750);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -34,7 +32,7 @@ LevelGenerator::~LevelGenerator()
 /// </summary>
 void LevelGenerator::restart() {
 	Debug("initializing zone");
-	_zone[0] = Zone(19, 19, 3, 3, 10, 750, scalar);
+	_zone[0] = Zone(19, 19, 3, 3, 10, 750);
 	
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
@@ -54,8 +52,8 @@ Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {
 /// \param pWorldCoord coordinate in world position
 Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 
-	int x = static_cast<int>((float)pWorldCoord.x / scalar + 0.5f);
-	int z = static_cast<int>((float)pWorldCoord.z / scalar + 0.5f);
+	int x = static_cast<int>((float)pWorldCoord.x / Zone::scalar + 0.5f);
+	int z = static_cast<int>((float)pWorldCoord.z / Zone::scalar + 0.5f);
 
 	return Coordinate(x, z);
 }
@@ -64,8 +62,8 @@ Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 /// \param pWorldCoord coordinate in world position
 Coordinate LevelGenerator::getCollisionGridPosition(Coordinate pWorldCoord) {
 
-	int x = static_cast<int>((float)pWorldCoord.x / (scalar / City::gridScalar) + 0.5f);
-	int z = static_cast<int>((float)pWorldCoord.z / (scalar / City::gridScalar) + 0.5f);
+	int x = static_cast<int>((float)pWorldCoord.x / (Zone::scalar / City::gridScalar) + 0.5f);
+	int z = static_cast<int>((float)pWorldCoord.z / (Zone::scalar / City::gridScalar) + 0.5f);
 
 	return Coordinate(x, z);
 }
@@ -73,13 +71,13 @@ Coordinate LevelGenerator::getCollisionGridPosition(Coordinate pWorldCoord) {
 /// transforms a grid coordinate to a world position
 /// \param pGridCoord grid coordinate
 Ogre::Vector3 LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
-	return Ogre::Vector3((pGridCoord.x - 0.5f) * scalar, 0, (pGridCoord.z - 0.5f) * scalar);
+	return Ogre::Vector3((pGridCoord.x - 0.5f) * Zone::scalar, 0, (pGridCoord.z - 0.5f) * Zone::scalar);
 }
 
 /// transforms a grid coordinate to a world position
 /// \param pGridCoord grid coordinate
 Ogre::Vector3 LevelGenerator::getWorldPosition(RealCoordinate pGridCoord) {
-	return Ogre::Vector3((pGridCoord.rx - 0.5f) * scalar, 0, (pGridCoord.rz - 0.5f) * scalar);
+	return Ogre::Vector3((pGridCoord.rx - 0.5f) * Zone::scalar, 0, (pGridCoord.rz - 0.5f) * Zone::scalar);
 }
 
 /// retrieve zone
@@ -117,9 +115,9 @@ void LevelGenerator::drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
 				Ogre::SceneNode* tileNode = _dungeonNode->createChildSceneNode();
-				tileNode->setPosition(ix * scalar - (scalar / 4.0f), 0, iz * scalar - (scalar / 4.0f));
+				tileNode->setPosition(ix * Zone::scalar - (Zone::scalar / 4.0f), 0, iz * Zone::scalar - (Zone::scalar / 4.0f));
 				Ogre::SceneNode* wallNode = tileNode->createChildSceneNode();
-				wallNode->setPosition((scalar / 2.0f), 0.0f, (scalar / 2.0f));
+				wallNode->setPosition((Zone::scalar / 2.0f), 0.0f, (Zone::scalar / 2.0f));
 
 				std::stringstream name;
 				name << "tile_" << ix << "-" << iz;
@@ -176,16 +174,16 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol) cons
 	const size_t nVertices = 4;
 	const size_t vBufCount = 8 * nVertices;
 	float vertices[vBufCount] = {
-		static_cast<float>(scalar / 2.0f), static_cast<float>(0), -(scalar / 2.0f),			 //1
+		static_cast<float>(Zone::scalar / 2.0f), static_cast<float>(0), -(Zone::scalar / 2.0f),			 //1
 		sqrt13,  -sqrt13, -sqrt13,
 		1,0,
-		static_cast<float>(-(scalar / 2.0f)), static_cast<float>(0), -(scalar / 2.0f),				 //2
+		static_cast<float>(-(Zone::scalar / 2.0f)), static_cast<float>(0), -(Zone::scalar / 2.0f),				 //2
 		-sqrt13, -sqrt13, -sqrt13,
 		0,0,
-		static_cast<float>(scalar/2.0f), static_cast<float>(scalar), -(scalar / 2.0f),       //3
+		static_cast<float>(Zone::scalar/2.0f), static_cast<float>(Zone::scalar), -(Zone::scalar / 2.0f),       //3
 		sqrt13,  -sqrt13, sqrt13,
 		1,1,
-		static_cast<float>(-(scalar / 2.0f)), static_cast<float>(scalar), -(scalar / 2.0f),			 //4
+		static_cast<float>(-(Zone::scalar / 2.0f)), static_cast<float>(Zone::scalar), -(Zone::scalar / 2.0f),			 //4
 		-sqrt13, -sqrt13, sqrt13,
 		0,1
 	};
@@ -255,7 +253,7 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol) cons
 	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
-	mesh->_setBounds(Ogre::AxisAlignedBox(Ogre::AxisAlignedBox(-(scalar / 2.0f), 0.0f, -(scalar / 2.0f), scalar / 2.0f, scalar, -(scalar / 2.0f))));
+	mesh->_setBounds(Ogre::AxisAlignedBox(Ogre::AxisAlignedBox(-(Zone::scalar / 2.0f), 0.0f, -(Zone::scalar / 2.0f), Zone::scalar / 2.0f, Zone::scalar, -(Zone::scalar / 2.0f))));
 
 	mesh->load();
 }
@@ -356,16 +354,16 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 	const size_t nVertices = 4;
 	const size_t vBufCount = 8 * nVertices;
 	float vertices[vBufCount] = {
-		static_cast<float>(scalar), static_cast<float>(0), static_cast<float>(0),			 //1
+		static_cast<float>(Zone::scalar), static_cast<float>(0), static_cast<float>(0),			 //1
 		sqrt13,  -sqrt13, -sqrt13,
 		0,0,
 		static_cast<float>(0), static_cast<float>(0), static_cast<float>(0),				 //2
 		-sqrt13, -sqrt13, -sqrt13,
 		0,1,
-		static_cast<float>(scalar), static_cast<float>(0), static_cast<float>(scalar),       //3
+		static_cast<float>(Zone::scalar), static_cast<float>(0), static_cast<float>(Zone::scalar),       //3
 		sqrt13,  -sqrt13, sqrt13,
 		1,0,
-		static_cast<float>(0), static_cast<float>(0), static_cast<float>(scalar),			 //4
+		static_cast<float>(0), static_cast<float>(0), static_cast<float>(Zone::scalar),			 //4
 		-sqrt13, -sqrt13, sqrt13,
 		1,1
 	};
@@ -435,7 +433,7 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
-	mesh->_setBounds(Ogre::AxisAlignedBox(0, 0, 0, scalar, 0, scalar));
+	mesh->_setBounds(Ogre::AxisAlignedBox(0, 0, 0, Zone::scalar, 0, Zone::scalar));
 
 	mesh->load();
 }
@@ -472,7 +470,7 @@ void LevelGenerator::determineCityTypes() {
 	_sisterNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("SisterNode");
 	Ogre::Entity* _sis = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 	_sisterNode->setScale(0.25f, 0.25f, 0.25f);
-	_sisterNode->setPosition((furtherstCity->getCenterTile().x - 1) * scalar, 18.0f, (furtherstCity->getCenterTile().z) * scalar);
+	_sisterNode->setPosition((furtherstCity->getCenterTile().x - 1) * Zone::scalar, 18.0f, (furtherstCity->getCenterTile().z) * Zone::scalar);
 	_sis->setMaterialName("InGame/PinkHouse");
 
 	_sisterNode->createChildSceneNode()->attachObject(_sis);

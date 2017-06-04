@@ -7,6 +7,8 @@
 #include <OgreMath.h>
 #include "Debug.h"
 
+const int Zone::scalar = 500;
+
 /// <summary>
 /// Initializes a new instance of the <see cref="Zone"/> class.
 /// </summary>
@@ -23,8 +25,8 @@ Zone::Zone() {
 /// <param name="pMaxCities">The maximum amount of cities.</param>
 /// <param name="pMaxTries">The maximum amount of tries.</param>
 /// <param name="pScalar">The scalar value.</param>
-Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar) :
-_width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight), _scalar(pScalar)
+Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries) :
+_width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
 {	
 	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
 		//zones use uneven sizes, this ensures walls can be created properly
@@ -639,7 +641,7 @@ void Zone::generateCity(int& nCities) {
 	(z % 2 == 0) ? z++ : z;
 
 	//try to place the city
-	if (placeCity(City(x, z, width, depth, nCities + 1, _scalar))) {
+	if (placeCity(City(x, z, width, depth, nCities + 1, scalar))) {
 		++nCities;
 	}
 }

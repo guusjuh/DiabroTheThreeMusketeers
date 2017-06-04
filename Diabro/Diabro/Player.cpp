@@ -130,7 +130,7 @@ void Player::update(Ogre::Real pDeltaTime)
 	if (_inDialog) return;
 
 	// set epic music when close to sis
-	if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar * 3) {
+	if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < Zone::scalar * 3) {
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom();
 		// if player reached the end 
 		if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {

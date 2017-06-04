@@ -23,7 +23,7 @@ void EnemyFollowAStarState::Enter(BaseNpc* agent){
 
 void EnemyFollowAStarState::Execute(BaseNpc* agent){
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < 250) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < Zone::scalar / 2.0f) {
 		agent->stateMachine.setState("FollowDirect");
 	}
 	//check if state transition is needed
@@ -32,7 +32,7 @@ void EnemyFollowAStarState::Execute(BaseNpc* agent){
 	}
 
 	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < agent->getSpeed() / 2.0f || agent->getNextPosSize() == 0){
-		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
+		int scale = Zone::scalar;
 		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
 		Coordinate player = Coordinate(playerPos.x, playerPos.z);
 		player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(player);
@@ -57,7 +57,7 @@ void EnemyFollowAStarState::Collide(BaseNpc* agent){
 	}
 	else
 	{
-		int scale = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->scalar;
+		int scale = Zone::scalar;
 		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
 		Coordinate player = Coordinate(playerPos.x, playerPos.z);
 		player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(player);
