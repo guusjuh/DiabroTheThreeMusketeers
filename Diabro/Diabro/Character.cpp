@@ -68,7 +68,7 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 	for (size_t i = 0; i < hostileNpcs.size(); i++)
 	{
 		if (hostileNpcs[i] != this){
-			distance = pos.distance(hostileNpcs[i]->getPosition());
+			distance = pos.distance(hostileNpcs[i]->getPosition()) - hostileNpcs[i]->_radius;
 
 			if (distance < DistanceToClosestTarget){
 				DistanceToClosestTarget = distance;
@@ -80,15 +80,23 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 	for (size_t i = 0; i < friendlyNpcs.size(); i++)
 	{
 		if (friendlyNpcs[i] != this){
-			distance = pos.distance(friendlyNpcs[i]->getPosition());
+			distance = pos.distance(friendlyNpcs[i]->getPosition()) - friendlyNpcs[i]->_radius;
 
 			if (distance < DistanceToClosestTarget){
 				DistanceToClosestTarget = distance;
 			}
 		}
 	}
+	//player
+	Character* player = GameManager::getSingletonPtr()->getLevelManager()->getPlayer();
+	if (player != this){
+		distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos()) - player->_radius;
+		if (distance < DistanceToClosestTarget){
+			DistanceToClosestTarget = distance;
+		}
+	}
 	//sister
-	distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos());
+	distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos()) - player->_radius;
 	if (distance < DistanceToClosestTarget){
 		DistanceToClosestTarget = distance;
 	}
