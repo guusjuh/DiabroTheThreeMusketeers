@@ -18,7 +18,7 @@ const int Player::HIGH_DMG = 5;
 Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
 	// set equipment
-	equipment = new PlayerEquipment(25.0f, 5.0f);
+	equipment = new PlayerEquipment(30.0f, 5.0f);
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_healthUpgrades = 0;

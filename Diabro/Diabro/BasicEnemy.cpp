@@ -40,7 +40,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	healthUpgrades = 0;
 	damageUpgrades = 0;
 	noticeDistUpgrades = 0;
-	equipment = new EnemyEquipment(20.0f, 2.0f, Zone::scalar * 1.5f);
+	equipment = new EnemyEquipment(15.0f, 1.5f, Zone::scalar * 1.5f);
 
 	assignUpgrades(level);
 	IEnemyEquipment* tempEquipment = equipment;
