@@ -23,18 +23,19 @@ protected:
 	bool* collisionGrid;
 	bool collisionGridGenerated;
 
-	int _scalar;
 
 public:
 	int _width;
 	int _depth;
 
+	const static int scalar;
+
 	City* getRandomCity(RoomType type);// { return &cities[0]; }
-	Ogre::Vector3 getCenterZone() { return Ogre::Vector3(_width * _scalar / 2.0f, 0, _depth * _scalar / 2.0f); }
+	Ogre::Vector3 getCenterZone() { return Ogre::Vector3(_width * scalar / 2.0f, 0, _depth * scalar / 2.0f); }
 
 	std::vector<City> cities; ///< vector containing all cities within the zone
 
-	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries, int pScalar);
+	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries);
 	Zone();
 	~Zone();
 

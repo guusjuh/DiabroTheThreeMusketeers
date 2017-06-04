@@ -1,5 +1,5 @@
-#ifndef ENEMY_FOLLOW_STATE_H
-#define ENEMY_FOLLOW_STATE_H
+#ifndef ENEMY_FOLLOW_DIRECT_STATE_H
+#define ENEMY_FOLLOW_DIRECT_STATE_H
 
 #include "State.h"
 #include "BaseNpc.h"
@@ -8,15 +8,14 @@
 /// The concrete idle implementation for characters. 
 /// </summary>
 /// <seealso cref="State{Character}" />
-class EnemyFollowState : public State<BaseNpc>
+class EnemyFollowDirectState : public State<BaseNpc>
 {
 public:
-	EnemyFollowState();
-	~EnemyFollowState();
+	EnemyFollowDirectState();
+	~EnemyFollowDirectState();
 
 	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;
 	void Exit(BaseNpc* agent) override;
-	void Collide(BaseNpc* agent) override;
 };
 #endif

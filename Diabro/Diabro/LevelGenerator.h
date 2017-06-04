@@ -55,8 +55,6 @@ public:
 		return getWorldPosition(_startCity->getCenterPosition());
 	}
 
-	int scalar; ///< scales grid position to world positions
-
 private:
 	Zone _zone[1]; ///<holds different zones in level
 

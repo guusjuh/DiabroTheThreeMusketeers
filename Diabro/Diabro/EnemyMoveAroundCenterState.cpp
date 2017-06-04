@@ -23,8 +23,8 @@ void EnemyMoveAroundCenterState::Enter(BaseNpc* agent){
 
 void EnemyMoveAroundCenterState::Execute(BaseNpc* agent){
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getCity()->Scalar() * 2) {
-		agent->stateMachine.setState("Follow");
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getNoticeDistance()) {
+		agent->stateMachine.setState("FollowAStar");
 	}
 	if (agent->getDirVector() == Ogre::Vector3().ZERO){
 		if (agent->getNextPosSize() == 0){
