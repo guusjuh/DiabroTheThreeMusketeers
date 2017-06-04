@@ -237,7 +237,6 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 		
 	case OIS::KC_LSHIFT:
-		//_levelManager->getPlayer()->toggleInQuest();
 		break;
 
 	case OIS::KC_E:

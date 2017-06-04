@@ -266,3 +266,33 @@ material InGame/RedEnemy
       }
    }
 }
+
+material InGame/HasQuest
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Quests/hasQuest.jpg
+         }
+      }
+   }
+}
+
+material InGame/ActiveInQuest
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Quests/activeInQuest.jpg
+         }
+      }
+   }
+}
+
+

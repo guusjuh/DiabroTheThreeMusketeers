@@ -27,7 +27,7 @@ public:
 	/// <summary>
 	/// IF YOU TOUCH THIS U DEAD
 	/// </summary>
-	void setRelevantForAction(bool val) {
+	virtual void setRelevantForAction(bool val) {
 		_relevantForAction = val;
 	}
 

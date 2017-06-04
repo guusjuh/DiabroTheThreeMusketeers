@@ -133,7 +133,7 @@ void Player::update(Ogre::Real pDeltaTime)
 	if (_inDialog) return;
 
 	// set epic music when close to sis
-	if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < Zone::scalar * 3) {
+	if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getEndCity()->inThisCity(getPosition())) {
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom();
 		// if player reached the end 
 		if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
@@ -204,7 +204,6 @@ void Player::dialogTriggered() {
 
 	if (!_inDialog) {
 		GameManager::getSingletonPtr()->getSoundManager()->dialog();
-
 	}
 	_inDialog = true;
 
@@ -323,14 +322,6 @@ float Player::angleBetween(Ogre::Vector3 other) {
 	if(cross.y > 0) angle = -angle;
 
 	return angle;
-}
-
-/// <summary>
-/// Toggles whether the player is doing a quest right now.
-/// </summary>
-void Player::toggleInQuest() {
-	_inQuest = !_inQuest; 
-	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(_inQuest);
 }
 
 void Player::recieveItem() {

@@ -51,9 +51,10 @@ public:
 	}
 
 	Ogre::Vector3 getStartPos() {
-		
 		return getWorldPosition(_startCity->getCenterPosition());
 	}
+
+	City* getEndCity() { return _endCity; }
 
 private:
 	Zone _zone[1]; ///<holds different zones in level

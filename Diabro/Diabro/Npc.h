@@ -88,6 +88,26 @@ private:
 
 	std::vector<std::string> getNameOptions();
 
+	void setRelevantForAction(bool val) override{
+		// don't change if u don't have to
+		if (_relevantForAction == val) return;
+
+		IQuestContent::setRelevantForAction(val);
+
+		// if you're relevant, set the indicator on with correct color
+		if (_relevantForAction) {
+			questIndicatorEntity->setMaterialName(_activeMaterial);
+			indicatorNode->setVisible(true);
+		}
+		else {
+			if(_hasQuest) {
+				questIndicatorEntity->setMaterialName(_questMaterial);
+				indicatorNode->setVisible(true);
+			} else {
+				indicatorNode->setVisible(false);
+			}
+		}
+	}
 };
 
 #endif

@@ -94,18 +94,22 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	// set node
 	pMyNode->setScale(0.5f, 0.5f, 0.5f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 18.0f, pMyNode->getPosition().z);
+	indicatorNode->setScale(0.15f, 0.15f, 0.15f);
+	indicatorNode->setPosition(0.0f, 100.0f, 0.0f);
 
 	_movespeed = 320;
 	_rotationspeed = 0.13f;
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_noticeDistance = equipment->getNoticeDist();
-	_attackDistance = 130;
+	_attackDistance = 110;
 	_lightAttackCooldown = 1.2f;
 	_totalHitTime = 0.3f;
 	_radius = 25.0f;
 
 	_currentHealth = _maxHealth;
+
+	_isDead = false;
 }
 
 void BasicEnemy::assignUpgrades(int level) {
@@ -228,6 +232,8 @@ bool BasicEnemy::lightAttack()
 /// Called when the enemy dies, e.g. runs out of health.
 /// </summary>
 void BasicEnemy::die() {
+	_isDead = true;
+
 	equipment = equipment->removeUpgrades();
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();

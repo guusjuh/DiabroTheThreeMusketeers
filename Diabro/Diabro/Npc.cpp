@@ -22,6 +22,8 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 
 	pMyNode->setScale(0.25f, 0.25f, 0.25f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 18.0f, pMyNode->getPosition().z);
+	indicatorNode->setScale(0.3f, 0.3f, 0.3f);
+	indicatorNode->setPosition(0.0f, 150.0f, 0.0f);
 
 	switch (_home->type) // assign building random professions by giving them a rolenode
 	{
@@ -107,10 +109,10 @@ void Npc::update(Ogre::Real pDeltatime)
 	// this is contained in the update due to order problems when done in constructor
 	if (!_hasQuest && !_initialized) {
 		// generate a random number
-		int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
-		//Debug("Random roll was ", randomroll);
+		int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
+		Debug("Random roll was ", randomroll);
 		if(randomroll < 1) {
-			//Debug("I got a quest! ", randomroll);
+			Debug("I got a quest! ", randomroll);
 			needNewQuest();
 			_hasQuest = true;
 		}
@@ -150,6 +152,7 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 				// get the dialog for starting the quest
 			setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
 			_hasQuest = false;
+			indicatorNode->setVisible(false);
 		}
 		// else if // do i have text in the current quest?
 		else {
@@ -207,6 +210,9 @@ void Npc::needNewQuest() {
 
 	// set the current quest to a new random quest 
 	_currentQuest = GameManager::getSingletonPtr()->getQuestManager()->generateQuest(this, lowestNeed.type);
+
+	questIndicatorEntity->setMaterialName(_questMaterial);
+	indicatorNode->setVisible(true);
 
 	lowestNeed.adjustValue(50);
 }

@@ -3,6 +3,9 @@
 #include "Node.h" 
 #include "Debug.h"
 
+const Ogre::String BaseNpc::_questMaterial = "InGame/HasQuest";
+const Ogre::String BaseNpc::_activeMaterial = "InGame/ActiveInQuest";
+
 /// <summary>
 /// Creates a new instance of the <see cref="BaseNpc" /> class.
 /// All NPC's inherit from this class, either friendly and hostile NPC's.
@@ -11,6 +14,13 @@
 /// <param name="pMyEntity">My entity.</param>
 BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : Character(pMyNode, pMyEntity), _timer(0), _myCity(pMyCity)
 {
+	// create the entity for the quest indicator
+	questIndicatorEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
+	indicatorNode = pMyNode->createChildSceneNode();
+	indicatorNode->attachObject(questIndicatorEntity);
+	questIndicatorEntity->setMaterialName(_questMaterial);
+	indicatorNode->setVisible(false);
+
 	_myRotationNode = pMyRotationNode;
 	goalPos = Coordinate(0, 0);
 }

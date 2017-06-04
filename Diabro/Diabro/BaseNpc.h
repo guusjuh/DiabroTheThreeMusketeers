@@ -61,9 +61,30 @@ protected:
 
 	virtual void detectPlayer(); 
 
+	void setRelevantForAction(bool val) override {
+		// don't change if u don't have to
+		if (_relevantForAction == val) return;
+
+		IQuestContent::setRelevantForAction(val);
+
+		// if you're relevant, set the indicator on with correct color
+		if(_relevantForAction) {
+			questIndicatorEntity->setMaterialName(_activeMaterial);
+			indicatorNode->setVisible(true);
+		} else {
+			indicatorNode->setVisible(false);
+		}
+	}
+
+	static const Ogre::String _questMaterial;
+	static const Ogre::String _activeMaterial;
+	Ogre::Entity* questIndicatorEntity;
+	Ogre::SceneNode* indicatorNode;
 
 private:
 	float _timer;
+
+
 
 	void wander(); 	
 };

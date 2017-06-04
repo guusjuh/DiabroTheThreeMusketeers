@@ -36,7 +36,6 @@ public:
 	float angleBetween(Ogre::Vector3);
 
 	bool getInQuest() { return _inQuest; }
-	void toggleInQuest();
 	void upgradeEquipment(PlayerUpgradeType type);
 
 	void recieveItem() override;

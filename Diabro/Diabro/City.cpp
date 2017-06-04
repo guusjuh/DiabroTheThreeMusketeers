@@ -186,9 +186,10 @@ void City::update() {
 }
 
 bool City::inThisCity(Ogre::Vector3 worldCoord) {
-	// x as
-	if(position.x * scalar < worldCoord.x && position.x * scalar + (width * scalar) > worldCoord.x &&
-		position.z * scalar < worldCoord.z && position.z * scalar + (depth * scalar) > worldCoord.z) {
+	worldCoord += (Zone::scalar / (City::gridScalar*2));
+
+	if(position.x * scalar <= worldCoord.x && position.x * scalar + (width * scalar) >= worldCoord.x &&
+		position.z * scalar <= worldCoord.z && position.z * scalar + (depth * scalar) >= worldCoord.z) {
 		return true;
 	} 
 	return false;
@@ -314,8 +315,9 @@ void City::generateBuildings()
 		buildingLocations = getBuildingPositions();
 		if (buildingLocations.size() < 1) return;
 
-		buildingAmount = rand() % (width * depth - width) + width - 2;
-		
+		buildingAmount = rand() % ((width > depth) ? width : depth) + ((width < depth) ? width : depth) / 2;
+		if (buildingAmount <= 1) buildingAmount = 2;
+
 		y = 100;
 		scale = Ogre::Vector3(2.5f, 3.0f, 2.5f);
 	}

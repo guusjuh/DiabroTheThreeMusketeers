@@ -32,6 +32,7 @@ public:
 
 	std::string getName() { return name; }
 
+	bool isDead() { return _isDead; }
 private:
 	bool _updateBar;
 
@@ -45,6 +46,8 @@ private:
 
 	std::map<std::string, State<BaseNpc>*> possibleStates;
 	bool _initialized;
+
+	bool _isDead;
 
 	static const int LOW_HP;
 	static const int HIGH_HP;
