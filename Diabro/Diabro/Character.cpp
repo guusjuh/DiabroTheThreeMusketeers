@@ -96,7 +96,7 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 		}
 	}
 	//sister
-	distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos()) - player->_radius;
+	distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos()) - friendlyNpcs[0]->_radius;//uses the radius of the first friendly npc
 	if (distance < DistanceToClosestTarget){
 		DistanceToClosestTarget = distance;
 	}

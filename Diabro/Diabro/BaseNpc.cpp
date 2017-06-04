@@ -83,7 +83,7 @@ void BaseNpc::walkTo(Ogre::Vector3 targetPos)
 /// </summary>
 /// <param name="targetPos">The target position.</param>
 void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
-	//get the zoe from the levelmanager
+	//get the zone from the levelmanager
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
 
 	//get scale 
@@ -208,4 +208,23 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 			return;
 		}
 	}
+}
+
+void BaseNpc::walkToNeighbour(){
+	//get the zoe from the levelmanager
+	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
+	//get the pointer to the collisiongrid
+	bool* collisionGrid = zone->getCollisionGrid();
+
+	int scale = _myCity->Scalar() / _myCity->gridScalar;
+
+	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
+	Node start = Node(currentPos.x, currentPos.z, 0, 0);
+	std::vector<Coordinate> neighboursPositions = start.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
+
+
+	int rnd = GameManager::getSingletonPtr()->getRandomInRange(0, neighboursPositions.size());
+	nextPos.clear();
+	nextPos.push_back(Coordinate(neighboursPositions[rnd].x * scale, neighboursPositions[rnd].z * scale));
+	walkToNextPoint();
 }

@@ -40,6 +40,8 @@ public:
 
 	using Character::lightAttack;
 
+	void walkToNeighbour();
+
 protected:
 	std::vector<Coordinate> nextPos;
 	bool _inCurrentQuest;
