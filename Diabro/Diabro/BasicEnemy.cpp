@@ -39,7 +39,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	healthUpgrades = 0;
 	damageUpgrades = 0;
 	noticeDistUpgrades = 0;
-	equipment = new EnemyEquipment(20.0f, 2.0f, 1000.0f);
+	equipment = new EnemyEquipment(20.0f, 2.0f, Zone::scalar * 1.5f);
 
 	assignUpgrades(level);
 	IEnemyEquipment* tempEquipment = equipment;
@@ -102,6 +102,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	_attackDistance = 130;
 	_lightAttackCooldown = 1.2f;
 	_totalHitTime = 0.3f;
+	_radius = 25.0f;
 
 	_currentHealth = _maxHealth;
 }

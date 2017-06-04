@@ -49,6 +49,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_attackDistance = 170;
 	_lightAttackCooldown = 0.5f;
 	_totalHitTime = 0.2f;
+	_radius = 30.0f;
 
 	_currentHealth = _maxHealth;
 }

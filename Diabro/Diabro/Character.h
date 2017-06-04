@@ -95,6 +95,8 @@ protected:
 	float timeSinceHit;
 	bool gotHitTimerActive;
 
+	float _radius;
+
 private:
 };
 

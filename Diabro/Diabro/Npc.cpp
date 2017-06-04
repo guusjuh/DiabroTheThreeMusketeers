@@ -68,6 +68,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	_movespeed = 100;
 	_rotationspeed = 0.13f;
 	_noticeDistance = 400;
+	_radius = 25.0f;
 }
 
 /// <summary>

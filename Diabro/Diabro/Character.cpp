@@ -11,7 +11,7 @@
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity),  _dirVec(0, 0, 0),
-_movespeed(0), _rotationspeed(0), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(1), _hasItem(false), _needToGiveItem(false),
+_movespeed(0), _rotationspeed(0), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(1), _hasItem(false), _needToGiveItem(false), _radius(1),
 _attackDistance(0), _currAttackCooldown(0), _lightAttackCooldown(0), _hitted(false), _totalHitTime(0), _damage(0), _noticeDistance(0), _totalFlashTimeOnHit(0.1f)
 {
 	_currentHealth = _maxHealth;
@@ -33,7 +33,7 @@ void Character::update(Ogre::Real pDeltatime)
 	if (_hitTime > 0) {
 		_hitTime -= pDeltatime;
 		timeSinceHit += pDeltatime;
-		if (timeSinceHit < _totalFlashTimeOnHit) {
+		if (timeSinceHit > _totalFlashTimeOnHit) {
 			_myEntity->setMaterialName(_originalMaterialName);
 			gotHitTimerActive = false;
 		}
@@ -45,11 +45,9 @@ void Character::update(Ogre::Real pDeltatime)
 
 	_dirVec.normalise();
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
-	float range = 40;
-
 	
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
-	if (collidesWithGrid(newPos, zone, range) && closestDistanceToNpc(newPos) > 50)
+	if (collidesWithGrid(newPos, zone, _radius) && closestDistanceToNpc(newPos) > 50)
 	{
 		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	}
@@ -164,6 +162,7 @@ bool Character::adjustHealth(float pAdjust)
 	if (pAdjust > 0){
 		GameManager::getSingletonPtr()->getSoundManager()->hit();
 		_myEntity->setMaterialName("InGame/Hit");
+		Debug("I think i changed my material");
 		gotHitTimerActive = true;
 		timeSinceHit = 0;
 	}

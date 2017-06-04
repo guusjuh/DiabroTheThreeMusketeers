@@ -17,7 +17,7 @@ LevelGenerator::LevelGenerator() {
 	_maxTries = 750;
 
 	Debug("Initializing zone");
-	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries, scalar);
+	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -39,7 +39,7 @@ LevelGenerator::~LevelGenerator()
 /// </summary>
 void LevelGenerator::restart() {
 	Debug("initializing zone");
-	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries, scalar);
+	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries);
 
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
