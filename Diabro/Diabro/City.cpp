@@ -116,7 +116,7 @@ bool operator== (RealCoordinate &lhs, Coordinate &rhs) {
 /// <param name="pId">The id.</param>
 /// <param name="pScalar">The scalar for the city.</param>
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
-position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar)
+position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar), _enemyRespawnTime(5.0f)
 {
 	_relevantForAction = false;
 	_tiles = new int[scaledWidth() * scaledDepth()];
@@ -131,14 +131,16 @@ position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pSca
 }
 
 int City::getTile(Coordinate pos) {
-	if (pos.x < 0 || pos.z < 0 || pos.x >= scaledWidth() || pos.z >= scaledDepth()) {
+	if (pos.x < 0 || pos.z < 0 || pos.x >= scaledWidth() || pos.z >= scaledDepth() 
+		|| _tiles == nullptr) {
 		return false;
 	}
 	return _tiles[pos.x + pos.z * scaledWidth()];
 }
 
 int City::getTile(int x, int z) {
-	if (x < 0 || z < 0 || x >= scaledWidth() || z >= scaledDepth()) {
+	if (x < 0 || z < 0 || x >= scaledWidth() || z >= scaledDepth() 
+		|| _tiles == nullptr) {
 		return -1;
 	}
 	return _tiles[x + z * scaledWidth()];

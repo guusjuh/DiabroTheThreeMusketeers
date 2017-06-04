@@ -239,7 +239,9 @@ void BasicEnemy::die() {
 
 	Character::die();
 	
-	GameManager::getSingletonPtr()->getLevelManager()->spawnEnemy(_myCity, 5.0f);
+	static float slowIncrease = 0;
+	slowIncrease += 0.01f;
+	GameManager::getSingletonPtr()->getLevelManager()->spawnEnemy(_myCity, false);
 
 	if (_relevantForAction) {
 		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgEnemyDead);

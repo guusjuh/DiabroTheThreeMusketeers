@@ -125,13 +125,13 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 	return _hostileNpcScripts.size() - 1;
 }
 
-void LevelManager::spawnEnemy(City *pCity, float pTimer) {
+void LevelManager::spawnEnemy(City *pCity, bool pInstant) {
 	if (pCity != nullptr) {
-		if (pTimer <= 0.0f) {
+		if (pInstant) {
 			levelGenerator->spawnEnemy(pCity, 1);
 		}
 		else {
-			enemySpawnTimers.push_back(std::make_pair(Timer(pTimer), pCity));
+			enemySpawnTimers.push_back(std::make_pair(Timer(pCity->getEnemyRespawnTimeForUsage()), pCity));
 		}
 	}
 }
@@ -190,7 +190,7 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	if (enemySpawnTimers.size() > 0) {
 		for (int i = 0; i < enemySpawnTimers.size(); i++) {
 			if (enemySpawnTimers[i].first.isFinished) {
-				spawnEnemy(enemySpawnTimers[i].second, 0.0f);
+				spawnEnemy(enemySpawnTimers[i].second, true);
 				enemySpawnTimers.erase(enemySpawnTimers.begin() + i);
 				i--;
 			} else {

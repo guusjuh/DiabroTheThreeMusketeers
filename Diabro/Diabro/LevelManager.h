@@ -48,7 +48,7 @@ public:
 	Ogre::SceneNode* getLevelNode() { return _levelNode; }
 	Ogre::SceneNode* getCamNode() { return _camNode; }
 
-	void spawnEnemy(City *pCity, float timer);
+	void spawnEnemy(City *pCity, bool pInstant);
 
 	Player* getPlayer() { return playerScript; }
 	std::vector<Character*> getFriendlyNpcs() { return _friendlyNpcScripts; }

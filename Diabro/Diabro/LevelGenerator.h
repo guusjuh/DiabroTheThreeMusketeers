@@ -78,6 +78,13 @@ private:
 	Ogre::SceneNode* _dungeonNode;
 	std::vector<Ogre::Entity*> _content;
 
+	int _zoneWidth;
+	int _zoneDepth;
+	int _maxCityWidth;
+	int _maxCityDepth;
+	int _maxCityAmount;
+	int _maxTries;
+
 };
 
 #endif

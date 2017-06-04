@@ -120,6 +120,15 @@ public:
 	//bool inThisCity(Coordinate gridCoord);// { return false; }
 	void printGrid();
 
+	float getEnemyRespawnTime() {
+		return _enemyRespawnTime;
+	}
+
+	float getEnemyRespawnTimeForUsage() {
+		_enemyRespawnTime += 0.1f;
+		return _enemyRespawnTime;
+	}
+
 protected:
 	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
 	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
@@ -148,5 +157,7 @@ private:
 
 	std::vector<std::string> getNameOptions(RoomType type);
 	std::string name;
+
+	float _enemyRespawnTime;
 };
 #endif

@@ -11,8 +11,15 @@
 LevelGenerator::LevelGenerator() :
 scalar(500)
 {
+	_zoneWidth = 10;
+	_zoneDepth = 10;
+	_maxCityWidth = 3;
+	_maxCityDepth = 3;
+	_maxCityAmount = 10;
+	_maxTries = 750;
+
 	Debug("Initializing zone");
-	_zone[0] = Zone(10, 10, 3, 3, 10, 750, scalar);
+	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries, scalar);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 
 	determineCityTypes();
@@ -34,15 +41,14 @@ LevelGenerator::~LevelGenerator()
 /// </summary>
 void LevelGenerator::restart() {
 	Debug("initializing zone");
-	_zone[0] = Zone(19, 19, 3, 3, 10, 750, scalar);
-	
+	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries, scalar);
+
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	_zone[0].printGrid();
 
 	determineCityTypes();
 	spawnCityContent();
 }
-
 
 /// returns empty position within dungeon
 /// \param pEmptyNeighbours only returns positions with 8 emty neighbours
