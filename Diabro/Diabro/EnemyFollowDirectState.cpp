@@ -33,5 +33,8 @@ void EnemyFollowDirectState::Execute(BaseNpc* agent){
 }
 
 void EnemyFollowDirectState::Exit(BaseNpc* agent){
+}
 
+void EnemyFollowDirectState::Collide(BaseNpc* agent){
+	agent->stateMachine.setState("Relative");
 }

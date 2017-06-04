@@ -29,6 +29,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	possibleStates["FollowAStar"] = new EnemyFollowAStarState();
 	possibleStates["FollowDirect"] = new EnemyFollowDirectState();
 	possibleStates["Attack"] = new EnemyAttackState();
+	possibleStates["Relative"] = new EnemyWalkToPointNearPlayerState();
 	possibleStates["AroundCenter"] = new EnemyMoveAroundCenterState();
 	_initialized = false;
 
