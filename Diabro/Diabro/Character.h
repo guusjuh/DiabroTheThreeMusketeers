@@ -25,6 +25,7 @@ public:
 
 	virtual void collide();
 	virtual void update(Ogre::Real);
+
 	virtual void move(Ogre::Vector3&);
 	virtual bool adjustHealth(float);
 	virtual void die();
@@ -64,6 +65,7 @@ protected:
 	Ogre::Real _maxHealth;
 	
 	Ogre::Real _totalHitTime;
+	Ogre::Real _totalFlashTimeOnHit;
 	Ogre::Real _hitTime;
 	bool _hitted;
 

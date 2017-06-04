@@ -63,7 +63,7 @@ private:
 	float _inBattleTime;
 	float _totalInBattleTime;
 	void changeInBattle(bool val);
-	bool _canAttack;
+	//bool _canAttack;
 
 	bool _inQuest;
 

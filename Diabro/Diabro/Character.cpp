@@ -12,7 +12,7 @@
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity),  _dirVec(0, 0, 0),
 _movespeed(0), _rotationspeed(0), _currentLevel(1), _currentHealth(0), _canAttack(true), _maxHealth(1), _hasItem(false), _needToGiveItem(false),
-_attackDistance(0), _currAttackCooldown(0), _lightAttackCooldown(0), _hitted(false), _totalHitTime(0), _damage(0), _noticeDistance(0)
+_attackDistance(0), _currAttackCooldown(0), _lightAttackCooldown(0), _hitted(false), _totalHitTime(0), _damage(0), _noticeDistance(0), _totalFlashTimeOnHit(0.1f)
 {
 	_currentHealth = _maxHealth;
 	isPlayer = false;
@@ -24,13 +24,6 @@ _attackDistance(0), _currAttackCooldown(0), _lightAttackCooldown(0), _hitted(fal
 /// <param name="pDeltatime">The time since last frame.</param>
 void Character::update(Ogre::Real pDeltatime)
 {
-	if (gotHitTimerActive){
-		timeSinceHit += pDeltatime;
-		if (timeSinceHit > 0.1f){
-			_myEntity->setMaterialName(_originalMaterialName);
-			gotHitTimerActive = false;
-		}
-	}
 	if (_currAttackCooldown > 0) {
 		_currAttackCooldown -= pDeltatime;
 	}else {
@@ -39,6 +32,11 @@ void Character::update(Ogre::Real pDeltatime)
 
 	if (_hitTime > 0) {
 		_hitTime -= pDeltatime;
+		timeSinceHit += pDeltatime;
+		if (timeSinceHit < _totalFlashTimeOnHit) {
+			_myEntity->setMaterialName(_originalMaterialName);
+			gotHitTimerActive = false;
+		}
 		return;
 	}
 	else {

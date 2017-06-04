@@ -101,8 +101,8 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_noticeDistance = equipment->getNoticeDist();
-	_attackDistance = 180;
-	_lightAttackCooldown = 2.3f;
+	_attackDistance = 130;
+	_lightAttackCooldown = 1.2f;
 	_totalHitTime = 0.3f;
 
 	_currentHealth = _maxHealth;
@@ -195,8 +195,6 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 	}
 	stateMachine.update();
 	
-	if (_playerDetected) {
-	}
 	BaseNpc::update(pDeltatime);
 }
 

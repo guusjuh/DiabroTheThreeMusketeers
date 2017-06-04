@@ -18,7 +18,7 @@ const int Player::HIGH_DMG = 5;
 Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
 	// set equipment
-	equipment = new PlayerEquipment(25.0f, 3.0f);
+	equipment = new PlayerEquipment(25.0f, 5.0f);
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_healthUpgrades = 0;
@@ -46,8 +46,8 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_noticeDistance = 200;
-	_attackDistance = 220;
-	_lightAttackCooldown = 2.0f;
+	_attackDistance = 170;
+	_lightAttackCooldown = 0.5f;
 	_totalHitTime = 0.2f;
 
 	_currentHealth = _maxHealth;
@@ -248,15 +248,17 @@ bool Player::lightAttack()
 	if (_target == nullptr) {
 		return false;
 	}
-	
+
 	//deal damage 
 	changeInBattle(true);
 
 	if (_target->adjustHealth(_damage)) {
 		GameManager::getSingletonPtr()->getUIManager()->adjustEnemyHealthBar(_target->getCurrHealth(), _target->getMaxHealth());
+
 	}
 	else {
 		changeInBattle(false);
+
 	}
 
 	_inBattleTime = 0;

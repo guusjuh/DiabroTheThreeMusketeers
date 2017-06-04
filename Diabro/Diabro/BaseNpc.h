@@ -38,6 +38,8 @@ public:
 
 	Ogre::Vector3 getQuestPosition() override { return getPosition(); }
 
+	using Character::lightAttack;
+
 protected:
 	std::vector<Coordinate> nextPos;
 	bool _inCurrentQuest;
