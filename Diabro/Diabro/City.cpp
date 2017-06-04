@@ -257,6 +257,8 @@ std::vector<Coordinate> City::getFreePositions() {
 			}
 		}
 	}
+
+	//printGrid();
 	return freePositions;
 }
 
@@ -275,6 +277,8 @@ RealCoordinate City::getNpcPosition() {
 	if (positions.size() > 0) {
 		int rnd = rand() % positions.size();
 		setTile(positions[rnd], 2);
+		//printGrid();
+
 		RealCoordinate returnPos = RealCoordinate(position.x, position.z);
 		if (positions[rnd].x != 0) returnPos.rx += static_cast<float>(positions[rnd].x) / static_cast<float>(gridScalar);
 		if (positions[rnd].z != 0) returnPos.rz += static_cast<float>(positions[rnd].z) / static_cast<float>(gridScalar);
@@ -321,9 +325,9 @@ void City::generateBuildings()
 		RealCoordinate pos;
 		
 		// if no locations, continue
-		int rnd;
+		int rnd = 0;
 		
-		if (buildingAmount == 1) rnd = 0;
+		if (buildingLocations.size() == 1) rnd = 0;
 		else if (buildingLocations.size() > 1) rnd = rand() % buildingLocations.size();
 		
 		int residents = rand() % 2 + 1;;
@@ -357,6 +361,12 @@ void City::generateBuildings()
 			Coordinate friendlyCoord = Coordinate(floor(rc.rx), floor(rc.rz));
 
 			while(getTile(friendlyCoord)) {
+				if(buildingLocations.size() <= 0) {
+					Debug("No building positions available.");
+					//assign roles for all other buildings in city
+					assignBuildingRole(_buildings, buildingEntities);
+					return;
+				}
 				rnd = rand() % buildingLocations.size();
 				pos = buildingLocations[rnd];
 				RealCoordinate rc = RealCoordinate((pos.rx / scalar), (pos.rz / scalar));
@@ -449,7 +459,7 @@ std::vector<RealCoordinate> City::getBuildingPositions() {
 }
 
 void City::printGrid() {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+/*#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	for (int ix = 0; ix < scaledWidth(); ++ix) {
@@ -461,7 +471,7 @@ void City::printGrid() {
 	printf("\n");
 	fclose(fp);
 	//printValues();
-#endif
+#endif*/
 }
 
 /// <summary>

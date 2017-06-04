@@ -9,19 +9,19 @@
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::LevelGenerator() {
-	_zoneWidth = 10;
-	_zoneDepth = 10;
-	_maxCityWidth = 3;
-	_maxCityDepth = 3;
-	_maxCityAmount = 10;
+	_zoneWidth = 19;
+	_zoneDepth = 19;
+	_maxCityWidth = 5;
+	_maxCityDepth = 5;
+	_maxCityAmount = 7;
 	_maxTries = 750;
 
 	Debug("Initializing zone");
 	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
+	//_zone[0].printGrid();
 
 	determineCityTypes();
-	_zone[0].printGrid();
 	
 	spawnCityContent();
 }
@@ -279,7 +279,7 @@ void LevelGenerator::spawnCityContent() {
 			for (int j = 0; j < thisCity->Buildings().size(); ++j) { // for each building
 				spawnNPCs(thisCity, &thisCity->Buildings()[j]);
 			}
-
+			thisCity->removeNpcTiles();
 			break;
 		case HideoutRT:
 			// spawn enemy spawners in the middle of an enemy hideout
@@ -314,7 +314,7 @@ void LevelGenerator::spawnNPCs(City* pCity, Building* pBuilding) {
 		rotationNode->attachObject(instanceEntity);
 		Npc* instanceScript = new Npc(instanceNode, rotationNode, instanceEntity, pCity, pBuilding);
 	}
-	pCity->removeNpcTiles();
+	
 }
 
 /// <summary>

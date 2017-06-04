@@ -83,10 +83,10 @@ void Debug::printArray(int* intArray, int width, int size) const {
 			printf("\n");
 		}
 		printf("|%d", intArray[i]);
-		if (intArray[i] > 10) {
-			printf(" |");
+		if (intArray[i] < 10) {
+			printf("  |");
 		} else {
-			printf("|");
+			printf(" |");
 		}
 	}
 	printf("\n");

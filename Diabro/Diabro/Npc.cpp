@@ -108,9 +108,9 @@ void Npc::update(Ogre::Real pDeltatime)
 	if (!_hasQuest && !_initialized) {
 		// generate a random number
 		int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
-		Debug("Random roll was ", randomroll);
+		//Debug("Random roll was ", randomroll);
 		if(randomroll < 1) {
-			Debug("I got a quest! ", randomroll);
+			//Debug("I got a quest! ", randomroll);
 			needNewQuest();
 			_hasQuest = true;
 		}

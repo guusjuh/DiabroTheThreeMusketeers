@@ -205,7 +205,7 @@ int Zone::getMaxValue()
 	{
 		for (int z = 0; z < _depth; z++)
 		{
-			if (max > getTile(x, z))
+			if (max < getTile(x, z))
 			{
 				max = getTile(x, z);
 			}
@@ -224,7 +224,12 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 	for (int i = 0; i < cities.size(); i++)
 	{
 		//1. collect all connections positions and set their value on -1
+
+		// !!
+		Debug("A: Getting possible connections");
 		getPossibleConnections(cities[i], &connections);
+		Debug("B: Got possible connections");
+
 		//2. walk through all connections per city and add all posibilities
 		int n = findPossibleConnections(cities[i]);
 
@@ -235,6 +240,8 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		setTile(picked, 1);
 
 		//4. open up MOAAARRR connections
+		Debug("A: Opening more connections");
+
 		if (cities[i].nConnections() > 1) {
 			//check whether an optional connection should be opened up
 			float rndPercent = (rand() % 100 + 1) / 100.0f;
@@ -247,12 +254,19 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 				setTile(cities[i].getConnection(rnd[1]), 1);
 			}
 		}
+		Debug("B: Opened more connections");
+
 		findUsedConnections(cities[i]);
 	}
 
 	std::vector<Coordinate> options;
-	int regions = changeTileValues(pMaxId);
-	//printGrid();
+	int maxValue = getMaxValue();
+	Debug("A: changeTileValues", maxValue);
+	int regions = changeTileValues(getMaxValue());
+	
+	printGrid();
+	Debug("B: changeTileValues", regions);
+
 	//5. connect the still separated dungeon parts
 
 	for (int i = 2; i < regions + 1; i++)
@@ -281,7 +295,6 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 					j--;
 
 				}
-		Debug("changeTileValues 2");
 
 				if ((getTile(left) > 0 && getTile(right) > 0) && (getTile(left) == i || getTile(right) == i)
 					&& getTile(right) != getTile(left))
@@ -295,7 +308,7 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		}
 		//options = all connections connecting i and something not i
 		//2. open some of these connections
-		for (int k = 0; k < 3; k++)
+		for (int k = 0; k < 5; k++)
 		{
 			if (options.size() > 1)
 			{
@@ -308,8 +321,13 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		// WARNING: check if connection even exist, else use another region
 	}
 
-			Debug("changeTileValues 3");
-	regions = changeTileValues(pMaxId);
+	maxValue = getMaxValue();
+	Debug("A: changeTileValues", maxValue);
+
+	regions = changeTileValues(getMaxValue());
+	printGrid();
+	Debug("B: changeTileValues", regions);
+
 	if (regions <= 0)
 	{
 		//printGrid();
@@ -322,8 +340,10 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 			int index = rnd[i];
 			setTile(options[index], 1);
 		}
+		Debug("A: changeTileValues", regions);
 		regions = changeTileValues(getMaxValue());
-		Debug("-", regions);
+		printGrid();
+		Debug("B: changeTileValues", regions);
 	}
 
 	//printGrid();
@@ -333,8 +353,8 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 	{
 		findUsedConnections(cities[i]);
 	}
-	//printGrid();
-	int i = 0;
+	//
+
 }
 
 ///prints all values used in the grid (Windows only method)
@@ -362,58 +382,76 @@ Coordinate Zone::getResolution() const {
 	return(Coordinate(_width, _depth));
 }
 
-///checks all tiles and changes the id of connected regions to the lowest id of the two, returns amount of remaining regions
-/// \param pMaxIndex maximum index value used in the whole zone
+/// <summary>
+/// Checks all tiles and changes the id of connected regions to the lowest id of the two, returns amount of remaining regions
+/// </summary>
+/// <param name="pMaxIndex">Highest index that occurs in the grid (is zone index).</param>
+/// <returns></returns>
 int Zone::changeTileValues(int pMaxIndex) {
-	
 	int currentRegion = 1;
 	int amountOfRegions = 0;
-	for (int i = 1; i <= pMaxIndex; ++i) {
-		std::vector<Coordinate> positions;
-		//pick random cell for current region
-		positions.push_back(getPosition(currentRegion, false));
-		
-		if (!inGrid(positions[0]) || getTile(positions[0]) != currentRegion) { //continue if no options are found for this id
-			positions.clear();
+
+	if (getMaxValue() > 2) {
+		// 0 - means empty tile so we start with all 1 tiles
+		for (int i = 1; i <= pMaxIndex + 1; ++i) {
+			std::vector<Coordinate> cells;
+
+			//pick random cell to start with for current region
+			cells.push_back(getPosition(currentRegion, false));
+
+			// continue if no options are found for this id
+			// this means this region doesn't exist (it's possible to loose region 2 for example when he is connected)
+			if (!inGrid(cells[0]) || getTile(cells[0]) != currentRegion) {
+				cells.clear();
+				currentRegion++;
+				continue;
+			}
+
+			// if the one found position is valid
+			if (cells[0].x >= 0 && cells[0].z >= 0) {
+
+				// as long as I have positions
+				while (!cells.empty()) {
+
+					// find all neighbours (which have a value > 0) and add them to the list of cells
+					if (cells[0].z + 1 < _depth - 1) {
+						if (getTile(cells[0].x, cells[0].z + 1) > 0) cells.push_back(Coordinate(cells[0].x, cells[0].z + 1));
+					}
+					if (cells[0].x + 1 < _width - 1) {
+						if (getTile(cells[0].x + 1, cells[0].z) > 0) cells.push_back(Coordinate(cells[0].x + 1, cells[0].z));
+					}
+					if (cells[0].z - 1 > 0) {
+						if (getTile(cells[0].x, cells[0].z - 1) > 0) cells.push_back(Coordinate(cells[0].x, cells[0].z - 1));
+					}
+					if (cells[0].x - 1 > 0) {
+						if (getTile(cells[0].x - 1, cells[0].z) > 0) cells.push_back(Coordinate(cells[0].x - 1, cells[0].z));
+					}
+
+					// assigns temporary value to cell to avoid finding it multiple times.
+					// the temp value is a negative value (and NOT -1 since already used).
+					setTile(cells[0], -(amountOfRegions + 2));
+					cells.erase(cells.begin());
+				}
+				amountOfRegions++;
+			}
+			cells.clear();
 			currentRegion++;
-			continue;
 		}
 
-		if (positions[0].x >= 0 && positions[0].z >= 0) {
-			while(!positions.empty()) {
-				//find all neighbours (which are >0) and add them to the list
-				if (positions[0].z + 1 < _depth - 1) {
-					if (getTile(positions[0].x, positions[0].z + 1) > 0) positions.push_back(Coordinate(positions[0].x, positions[0].z + 1));
+		for (int ix = 0; ix < _width; ++ix) {
+			for (int iz = 0; iz < _depth; ++iz) {
+				int n = getTile(ix, iz);
+				if (n < 0 && n != -1) {
+					// set tiles to correct values
+					setTile(ix, iz, n * -1);
 				}
-				if (positions[0].x + 1 < _width - 1) {
-					if (getTile(positions[0].x + 1, positions[0].z) > 0) positions.push_back(Coordinate(positions[0].x + 1, positions[0].z));
-				}
-				if (positions[0].z > 0) {
-					if (getTile(positions[0].x, positions[0].z - 1) > 0) positions.push_back(Coordinate(positions[0].x, positions[0].z - 1));
-				}
-				if (positions[0].x - 1 > 0) {
-					if (getTile(positions[0].x - 1, positions[0].z) > 0) positions.push_back(Coordinate(positions[0].x - 1, positions[0].z));
-				}
-				
-				//assigns temporary value to cell (negative of id value, one is not used as negative one is used for possible connections)
-				setTile(positions[0], -(amountOfRegions + 2));
-				positions.erase(positions.begin());
-			}
-			amountOfRegions++;
-		}
-		positions.clear();
-		currentRegion++;
-	}
-	for (int ix = 0; ix < _width; ++ix) {
-		for (int iz = 0; iz < _depth; ++iz) {
-			int n = getTile(ix, iz);
-			if (n < 0 && n != -1) {
-				// set tiles to correct values
-				setTile(ix, iz, getTile(ix, iz) * -1);
 			}
 		}
+		return amountOfRegions;
 	}
-	return amountOfRegions;
+	else {
+		return 1;
+	}
 }
 
 /// finds all possible points to connect a city with a path

@@ -49,8 +49,8 @@ public:
 	void printGrid();
 
 	void printCollisionGrid();
-
 	bool* getCollisionGrid();
+
 protected:
 	void cleanGrid();
 	bool inGrid(Coordinate pCoord);
@@ -60,16 +60,15 @@ protected:
 	void connectDungeon(int pId, float pChance);
 	int getPossibleConnections(City pCity, std::vector<Coordinate> *pConnections);
 	int changeTileValues(int pMaxIndex);
-	int getMaxValue();
-	void printValues();
-	
 	int generatePathways(int pPathId);
 	std::vector<Coordinate> getNeighbours(Coordinate pCell);
 	Coordinate getRndNeighbour(Coordinate pCell, int nPathId);
 	bool hasNeighBours(Coordinate pCell, int pDistance);
 	bool checkGrid();
-	
 
+	int getMaxValue();
+	void printValues();
+	
 	void generateCities(int pMaxTries, int pMaxCities);
 	void generateCity(int& nCities);
 	bool hasCollision(Coordinate pPosition);

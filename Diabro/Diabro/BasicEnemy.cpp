@@ -105,16 +105,6 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	_radius = 25.0f;
 
 	_currentHealth = _maxHealth;
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("Level: %d \n", level);
-	printf("H: %f D: %f ND: %f \n", _maxHealth, _damage, _noticeDistance);
-	printf("H nr: %d D nr: %d ND nr: %d \n", healthUpgrades, damageUpgrades, noticeDistUpgrades);
-	fclose(fp);
-#endif
-
 }
 
 void BasicEnemy::assignUpgrades(int level) {
