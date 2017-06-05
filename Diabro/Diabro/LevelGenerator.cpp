@@ -342,7 +342,7 @@ void LevelGenerator::spawnEnemy(City* pCity, int nAmount) {
 		BasicEnemy* instanceScript = new BasicEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
 	
 		// loop to ensure that the enemy doesn't collide
-		while(instanceScript->closestDistanceToNpc(enemyPos) < instanceScript->getRadius()) {
+		while(instanceScript->closestDistanceToNpc(enemyPos) < instanceScript->getRadius() * 2) {
 			enemyCoord = pCity->getNpcPosition();
 			if (enemyCoord.rx < 0 || enemyCoord.rz < 0) continue;
 			enemyPos = Ogre::Vector3(enemyCoord.rx, 18.0f, enemyCoord.rz);

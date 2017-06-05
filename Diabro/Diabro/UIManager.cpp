@@ -1,6 +1,6 @@
 #include "UIManager.h"
 #include "GameManager.h"
-
+#include <math.h>
 
 /// <summary>
 /// Creates a new instance of the <see cref="UIManager"/> class.
@@ -253,6 +253,8 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
 	pValue = Ogre::Math::Clamp<Ogre::Real>(pValue, 0, pMaxValue);
 
+	pValue = floor(pValue * 100) / 100;
+
 	_playerHealthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
 }
 
@@ -263,6 +265,8 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <param name="pMaxValue">The maximum pValue.</param>
 void UIManager::adjustEnemyHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
+	pValue = floor(pValue * 100) / 100;
+
 	_enemyHealthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
 }
 
@@ -291,7 +295,7 @@ void UIManager::hideEnemyHealthBar() {
 /// <returns></returns>
 Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-	return((pValue / pMaxValue) * pMaxSize);
+	return ((pValue / pMaxValue) * pMaxSize);
 }
 
 /// updates the position of the locators on the minimap.
