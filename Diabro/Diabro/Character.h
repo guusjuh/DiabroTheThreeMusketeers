@@ -65,6 +65,7 @@ protected:
 	Ogre::Real _movespeed;
 	Ogre::Real _rotationspeed;
 	Ogre::Vector3 _dirVec;
+	Ogre::Vector3 _forwardVec;
 
 	int _currentLevel;
 

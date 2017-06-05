@@ -16,6 +16,8 @@ _attackDistance(0), _currAttackCooldown(0), _lightAttackCooldown(0), _hitted(fal
 {
 	_currentHealth = _maxHealth;
 	isPlayer = false;
+
+	_forwardVec = Ogre::Vector3::ZERO;
 }
 
 /// <summary>
@@ -224,7 +226,7 @@ void Character::recieveItem() {
 float Character::angleBetween(Ogre::Vector3 other) {
 	if (_myNode == nullptr) return 0;
 
-	Ogre::Vector3 myDir = _myNode->getOrientation() * Ogre::Vector3(-1, 0, 0);
+	Ogre::Vector3 myDir = _myNode->getOrientation() * _forwardVec;
 	Ogre::Vector3 dirToSis = other - getPosition();
 	myDir.normalise();
 	dirToSis.normalise();

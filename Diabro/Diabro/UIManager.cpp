@@ -116,8 +116,6 @@ void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 /// <param name="pFE">The frameevent to obtain the passed time.</param>
 void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 {
-	updateMiniMapLocators();
-
 	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 

@@ -29,6 +29,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
 	_originalMaterialName = "InGame/BlueHouse";
 	pMyEntity->setMaterialName(_originalMaterialName);
+	_forwardVec = Ogre::Vector3(0, 0, -1);
 
 	_nearbyNPC = nullptr;
 	_inDialog = false;
@@ -45,7 +46,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_rotationspeed = 0.13f;
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
-	_noticeDistance = 200;
+	_noticeDistance = 100;
 	_attackDistance = 170;
 	_lightAttackCooldown = 0.5f;
 	_totalHitTime = 0.2f;
@@ -184,6 +185,9 @@ void Player::interactionTriggered() {
 }
 
 void Player::findSister() {
+	_myNode = nullptr;
+	_myEntity = nullptr;
+
 	GameManager::getSingletonPtr()->goNextState();
 	GameManager::getSingletonPtr()->getSoundManager()->completed();
 	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);

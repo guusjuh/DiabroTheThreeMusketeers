@@ -9,17 +9,16 @@
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::LevelGenerator() {
-	_zoneWidth = 10;
-	_zoneDepth = 10;
+	_zoneWidth = 19;
+	_zoneDepth = 19;
 	_maxCityWidth = 5;
 	_maxCityDepth = 5;
-	_maxCityAmount = 7;
+	_maxCityAmount = 5;
 	_maxTries = 750;
 
 	Debug("Initializing zone");
 	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries);
 	drawDungeonFloor(_zone[0], Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
-	//_zone[0].printGrid();
 
 	determineCityTypes();
 }

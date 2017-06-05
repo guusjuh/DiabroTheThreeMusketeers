@@ -23,6 +23,8 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 
 	_degreePerFrame = 0;
 
+	_forwardVec = Ogre::Vector3(-1, 0, 0);
+
 	_myRotationNode = pMyRotationNode;
 	goalPos = Coordinate(0, 0);
 }

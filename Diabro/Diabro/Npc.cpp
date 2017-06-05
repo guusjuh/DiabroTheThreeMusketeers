@@ -110,15 +110,11 @@ void Npc::update(Ogre::Real pDeltatime)
 	// this is contained in the update due to order problems when done in constructor
 	if (!_hasQuest && !_initialized) {
 		// generate a random number
-		int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
-		Debug("Random roll was ", randomroll);
-		if(randomroll < 1) {
-			Debug("I got a quest! ", randomroll);
+		int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
+		if(randomroll < 2) {
 			needNewQuest();
 			_hasQuest = true;
 		}
-		//_randomTownPos = _myCity->getNpcPosition();
-		//calculateAStar(Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz));
 		_initialized = true;
 	}
 
@@ -137,13 +133,6 @@ void Npc::update(Ogre::Real pDeltatime)
 					_randomTownPos = _myCity->getNpcPosition();
 					pos = Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz);
 				}
-				/*Coordinate me = Coordinate(getPosition().x, getPosition().z);
-				me = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(me);
-				Ogre::Vector3 myPos = Ogre::Vector3::ZERO;
-				myPos.x = me.x;
-				myPos.z = me.z;
-				agent->calculateAStar(playerPos);*/
-
 				pos.x = pos.x / Zone::scalar * City::gridScalar;
 				pos.z = pos.z / Zone::scalar * City::gridScalar;
 
@@ -168,13 +157,7 @@ void Npc::die() {
 }
 
 void Npc::collide() {
-	_randomTownPos = _myCity->getNpcPosition();
-	Ogre::Vector3 pos = Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz);
-
-	pos.x = pos.x / Zone::scalar * City::gridScalar;
-	pos.z = pos.z / Zone::scalar * City::gridScalar;
-
-	calculateAStar(pos);
+	walkToNeighbour();
 }
 
 /// <param name="pPlayerPos">The current player position.</param>
