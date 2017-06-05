@@ -89,17 +89,18 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 	}
 	//player
 	Character* player = GameManager::getSingletonPtr()->getLevelManager()->getPlayer();
-	if (player != this){
-		distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos()) - player->_radius;
-		if (distance < DistanceToClosestTarget){
+	if (player != this) {
+		distance = pos.distance(player->getPosition()) - player->_radius;
+		if (distance < DistanceToClosestTarget) {
 			DistanceToClosestTarget = distance;
 		}
 	}
 	//sister
 	distance = pos.distance(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos()) - friendlyNpcs[0]->_radius;//uses the radius of the first friendly npc
-	if (distance < DistanceToClosestTarget){
+	if (distance < DistanceToClosestTarget) {
 		DistanceToClosestTarget = distance;
 	}
+
 	return DistanceToClosestTarget;
 }
 
@@ -213,4 +214,24 @@ void Character::recieveItem() {
 	Debug("\tCharacter: I received an item!");
 		
 	_hasItem = true;
+}
+
+/// <summary>
+/// Calculates the angle between the player and a vector.
+/// </summary>
+/// <param name="other">Position of the other object.</param>
+/// <returns></returns>
+float Character::angleBetween(Ogre::Vector3 other) {
+	Ogre::Vector3 myDir = _myNode->getOrientation() * Ogre::Vector3(0, 0, -1);
+	Ogre::Vector3 dirToSis = other - getPosition();
+	myDir.normalise();
+	dirToSis.normalise();
+
+	float dotproduct = (myDir.x * dirToSis.x) + (myDir.y * dirToSis.y) + (myDir.z * dirToSis.z);
+	Ogre::Vector3 cross = myDir.crossProduct(dirToSis);
+	float angle = Ogre::Math::ACos(dotproduct).valueDegrees();
+
+	if (cross.y > 0) angle = -angle;
+
+	return angle;
 }

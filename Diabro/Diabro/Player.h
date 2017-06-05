@@ -33,7 +33,6 @@ public:
 	void dialogTriggered();
 
 	void interactionTriggered();
-	float angleBetween(Ogre::Vector3);
 
 	bool getInQuest() { return _inQuest; }
 	void upgradeEquipment(PlayerUpgradeType type);

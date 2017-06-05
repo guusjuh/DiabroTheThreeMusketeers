@@ -22,6 +22,8 @@ public:
 	LevelGenerator();
 	~LevelGenerator();
 
+	void initialize();
+
 	void restart();
 
 	Zone getZone(Coordinate pZoneId);

@@ -54,6 +54,10 @@ public:
 
 	bool hasItem() { return _hasItem; }
 
+	float angleBetween(Ogre::Vector3);
+
+	float getRadius() { return _radius; }
+
 protected:
 	Ogre::Real _movespeed;
 	Ogre::Real _rotationspeed;

@@ -9,8 +9,8 @@
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::LevelGenerator() {
-	_zoneWidth = 19;
-	_zoneDepth = 19;
+	_zoneWidth = 10;
+	_zoneDepth = 10;
 	_maxCityWidth = 5;
 	_maxCityDepth = 5;
 	_maxCityAmount = 7;
@@ -23,15 +23,17 @@ LevelGenerator::LevelGenerator() {
 
 	determineCityTypes();
 	
-	spawnCityContent();
 }
-
 
 /// <summary>
 /// Finalizes an instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::~LevelGenerator()
 {
+}
+
+void LevelGenerator::initialize() {
+	spawnCityContent();
 }
 
 /// <summary>
@@ -338,6 +340,14 @@ void LevelGenerator::spawnEnemy(City* pCity, int nAmount) {
 		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		rotationNode->attachObject(instanceEntity);
 		BasicEnemy* instanceScript = new BasicEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
+	
+		// loop to ensure that the enemy doesn't collide
+		while(instanceScript->closestDistanceToNpc(enemyPos) < instanceScript->getRadius()) {
+			enemyCoord = pCity->getNpcPosition();
+			if (enemyCoord.rx < 0 || enemyCoord.rz < 0) continue;
+			enemyPos = Ogre::Vector3(enemyCoord.rx, 18.0f, enemyCoord.rz);
+			instanceNode->setPosition(enemyPos);
+		}
 	}
 	pCity->removeNpcTiles();
 }

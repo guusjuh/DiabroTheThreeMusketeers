@@ -85,6 +85,8 @@ void BaseNpc::walkToNextPoint() {
 void BaseNpc::walkTo(Ogre::Vector3 targetPos)
 {
 	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
+	//_myNode->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
+
 	_dirVec = Ogre::Vector3(1, 0, 0);
 }
 

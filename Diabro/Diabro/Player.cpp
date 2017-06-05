@@ -304,26 +304,6 @@ void Player::changeInBattle(bool val) {
 	}
 }
 
-/// <summary>
-/// Calculates the angle between the player and a vector.
-/// </summary>
-/// <param name="other">Position of the other object.</param>
-/// <returns></returns>
-float Player::angleBetween(Ogre::Vector3 other) {
-	Ogre::Vector3 myDir = _myNode->getOrientation() * Ogre::Vector3(0, 0, -1);
-	Ogre::Vector3 dirToSis = other - getPosition();
-	myDir.normalise();
-	dirToSis.normalise();
-
-	float dotproduct = (myDir.x * dirToSis.x) + (myDir.y * dirToSis.y) + (myDir.z * dirToSis.z);
-	Ogre::Vector3 cross = myDir.crossProduct(dirToSis);
-	float angle = Ogre::Math::ACos(dotproduct).valueDegrees();
-
-	if(cross.y > 0) angle = -angle;
-
-	return angle;
-}
-
 void Player::recieveItem() {
 	Character::recieveItem();
 
