@@ -99,6 +99,9 @@ void Player::die() {
 
 	_currentHealth = _maxHealth;
 
+	_myNode = nullptr;
+	_myEntity = nullptr;
+
 	GameManager::getSingleton().getUIManager()->resetUpgradeText();
 	GameManager::getSingletonPtr()->getUIManager()->resetFloorText();
 }
@@ -129,6 +132,8 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 /// <param name="pDeltaTime">The delta time, time since last frame.</param>
 void Player::update(Ogre::Real pDeltaTime)
 {
+	if (_myNode == nullptr) return;
+
 	// don't do stuff when in dialog
 	if (_inDialog) return;
 

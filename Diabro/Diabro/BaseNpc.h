@@ -84,7 +84,9 @@ protected:
 private:
 	float _timer;
 
+	float _degreePerFrame;
 
+	float _wantedRotationAngle;
 
 	void wander(); 	
 };

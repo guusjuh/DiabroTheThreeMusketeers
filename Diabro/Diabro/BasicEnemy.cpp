@@ -98,7 +98,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	indicatorNode->setPosition(0.0f, 100.0f, 0.0f);
 
 	_movespeed = 320;
-	_rotationspeed = 0.13f;
+	_rotationspeed = 180.0f;
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
 	_noticeDistance = equipment->getNoticeDist();

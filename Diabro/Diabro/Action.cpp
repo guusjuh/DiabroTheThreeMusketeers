@@ -124,6 +124,7 @@ IQuestContent* Action::getTarget() {
 				idTarget = contentContains(HideOutQC);
 				if (idTarget < 0) {
 					// something wrong.
+					Debug("No target set for the quest");
 				}
 			}
 		}
@@ -199,7 +200,7 @@ void Action::setPreConditionsContent() {
 		case SomebodyThere:
 			for (int j = 0; j < _concreteContent.size(); ++j) {
 				if (_concreteContent[j].first->getType() == EnemyQC) {
-					if(_concreteContent[j].first != nullptr || !((BasicEnemy*)_concreteContent[j].first)->isDead()) {
+					if(_concreteContent[j].first != nullptr && !((BasicEnemy*)_concreteContent[j].first)->isDead()) {
 						((PreSomebodyThere*)it->second)->characters.push_back(_concreteContent[j].first);
 					}
 					else {
@@ -214,7 +215,9 @@ void Action::setPreConditionsContent() {
 						// do a random roll to chose an enemy
 						int randomroll = GameManager::getSingletonPtr()->getRandomInRange(0, allEnemies.size());
 						randomEnemy = allEnemies[randomroll];
-						((PreSomebodyThere*)it->second)->characters.push_back(randomEnemy);
+
+						_concreteContent[j].first = randomEnemy;
+						((PreSomebodyThere*)it->second)->characters.push_back(_concreteContent[j].first);
 					}
 				}
 				if(_concreteContent[j].first->getType() == NPCQC) {

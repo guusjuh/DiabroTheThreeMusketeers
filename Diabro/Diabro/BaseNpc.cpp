@@ -21,6 +21,8 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 	questIndicatorEntity->setMaterialName(_questMaterial);
 	indicatorNode->setVisible(false);
 
+	_degreePerFrame = 0;
+
 	_myRotationNode = pMyRotationNode;
 	goalPos = Coordinate(0, 0);
 }
@@ -36,6 +38,16 @@ void BaseNpc::collide(){
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
 	detectPlayer();
+
+	_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
+	_degreePerFrame = _rotationspeed * pDeltatime;
+
+	if (Ogre::Math::Abs(_wantedRotationAngle) > _degreePerFrame) {
+		if (_wantedRotationAngle < 0) _degreePerFrame *= -1;
+			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_degreePerFrame)), Ogre::Node::TS_LOCAL);
+		} else {
+			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_wantedRotationAngle)), Ogre::Node::TS_LOCAL);
+	}
 
 	Character::update(pDeltatime);
 }
@@ -73,7 +85,6 @@ void BaseNpc::walkToNextPoint() {
 	}
 	goalPos = nextPos[nextPos.size() - 1];
 	nextPos.pop_back();
-	_myNode->lookAt(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
 
 	_dirVec = Ogre::Vector3(1, 0, 0);
 }
@@ -84,8 +95,7 @@ void BaseNpc::walkToNextPoint() {
 /// <param name="targetPos">The target position.</param>
 void BaseNpc::walkTo(Ogre::Vector3 targetPos)
 {
-	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
-	//_myNode->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
+	goalPos = Coordinate(targetPos.x, targetPos.z);
 
 	_dirVec = Ogre::Vector3(1, 0, 0);
 }
@@ -234,9 +244,11 @@ void BaseNpc::walkToNeighbour(){
 	Node start = Node(currentPos.x, currentPos.z, 0, 0);
 	std::vector<Coordinate> neighboursPositions = start.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
 
-
 	int rnd = GameManager::getSingletonPtr()->getRandomInRange(0, neighboursPositions.size());
 	nextPos.clear();
 	nextPos.push_back(Coordinate(neighboursPositions[rnd].x * scale, neighboursPositions[rnd].z * scale));
+
+	_myNode->lookAt(Ogre::Vector3(nextPos[0].x, getPosition().y, nextPos[0].z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
+
 	walkToNextPoint();
 }

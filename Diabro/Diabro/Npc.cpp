@@ -68,9 +68,11 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	_relevantForAction = false;
 
 	_movespeed = 100;
-	_rotationspeed = 0.13f;
+	_rotationspeed = 180.0f;
 	_noticeDistance = 400;
 	_radius = 25.0f;
+
+	goalPos = Coordinate(pMyNode->getPosition().x, pMyNode->getPosition().z);
 }
 
 /// <summary>
@@ -103,7 +105,6 @@ std::vector<std::string> Npc::getNameOptions() {
 /// <param name="pDeltatime">The time since last frame.</param>
 void Npc::update(Ogre::Real pDeltatime)
 {
-	BaseNpc::update(pDeltatime);
 
 	// if we don't have a quest yet and we arn't initialized
 	// this is contained in the update due to order problems when done in constructor
@@ -116,13 +117,45 @@ void Npc::update(Ogre::Real pDeltatime)
 			needNewQuest();
 			_hasQuest = true;
 		}
+		//_randomTownPos = _myCity->getNpcPosition();
+		//calculateAStar(Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz));
 		_initialized = true;
 	}
 
 	if(_playerDetected)
 	{
 		_dirVec = Ogre::Vector3::ZERO;
-	} 
+	} else {
+		if(_dirVec == Ogre::Vector3::ZERO) _dirVec = Ogre::Vector3(1, 0, 0);
+
+		if (getPosition().distance(Ogre::Vector3(getGoalPos().x, getPosition().y, getGoalPos().z)) < 50) {
+			if (getNextPosSize() == 0) {
+				_randomTownPos = _myCity->getNpcPosition();
+				Ogre::Vector3 pos = Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz);
+				Ogre::Vector3 goalPosition = Ogre::Vector3(getGoalPos().x / getCity()->Scalar(), getPosition().y, getGoalPos().z / getCity()->Scalar());
+				while (goalPosition.distance(pos) < 1) {
+					_randomTownPos = _myCity->getNpcPosition();
+					pos = Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz);
+				}
+				/*Coordinate me = Coordinate(getPosition().x, getPosition().z);
+				me = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(me);
+				Ogre::Vector3 myPos = Ogre::Vector3::ZERO;
+				myPos.x = me.x;
+				myPos.z = me.z;
+				agent->calculateAStar(playerPos);*/
+
+				pos.x = pos.x / Zone::scalar * City::gridScalar;
+				pos.z = pos.z / Zone::scalar * City::gridScalar;
+
+				calculateAStar(pos);
+			}
+			else {
+				walkToNextPoint();
+			}
+		}
+	}
+
+	BaseNpc::update(pDeltatime);
 }
 
 /// <summary>
@@ -132,6 +165,16 @@ void Npc::die() {
 	Character::die();
 	
 	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
+}
+
+void Npc::collide() {
+	_randomTownPos = _myCity->getNpcPosition();
+	Ogre::Vector3 pos = Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz);
+
+	pos.x = pos.x / Zone::scalar * City::gridScalar;
+	pos.z = pos.z / Zone::scalar * City::gridScalar;
+
+	calculateAStar(pos);
 }
 
 /// <param name="pPlayerPos">The current player position.</param>

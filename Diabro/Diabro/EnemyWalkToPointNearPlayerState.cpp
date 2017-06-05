@@ -35,7 +35,7 @@ void EnemyWalkToPointNearPlayerState::Exit(BaseNpc* agent){
 }
 
 void EnemyWalkToPointNearPlayerState::Collide(BaseNpc* agent){
-	calculateRelativePoint();
+	//calculateRelativePoint();
 }
 
 void EnemyWalkToPointNearPlayerState::calculateRelativePoint(){

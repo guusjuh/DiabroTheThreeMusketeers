@@ -30,7 +30,10 @@ public:
 	virtual bool adjustHealth(float);
 	virtual void die();
 
-	Ogre::Vector3 getPosition() { return _myNode->getPosition(); }
+	Ogre::Vector3 getPosition() {
+		if(_myNode != nullptr) return _myNode->getPosition();
+		else return Ogre::Vector3(0, 0, 0);
+	}
 	Ogre::Real getSpeed() { return _movespeed; }
 	Ogre::Real getRotationspeed() { return _rotationspeed; }
 	Ogre::Vector3 getDirVector() { return _dirVec; }

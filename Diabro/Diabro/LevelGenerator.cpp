@@ -22,7 +22,6 @@ LevelGenerator::LevelGenerator() {
 	//_zone[0].printGrid();
 
 	determineCityTypes();
-	
 }
 
 /// <summary>

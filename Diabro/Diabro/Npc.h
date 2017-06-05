@@ -38,6 +38,8 @@ public:
 	bool talk(Ogre::Vector3);
 	void die() override;
 
+	void collide() override;
+
 	City* getHomeTown() { return _hometown; }
 
 	QuestContent getType() override { return NPCQC; }
@@ -82,6 +84,8 @@ private:
 	Profession _profession;			//!< The profession of the NPC, used to generate relevant quests.
 	City* _hometown;
 	Building* _home;
+
+	RealCoordinate _randomTownPos;
 
 	void adjustNeed(NeedType, int);
 	void needNewQuest();

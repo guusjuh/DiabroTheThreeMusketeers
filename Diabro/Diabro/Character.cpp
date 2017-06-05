@@ -222,7 +222,9 @@ void Character::recieveItem() {
 /// <param name="other">Position of the other object.</param>
 /// <returns></returns>
 float Character::angleBetween(Ogre::Vector3 other) {
-	Ogre::Vector3 myDir = _myNode->getOrientation() * Ogre::Vector3(0, 0, -1);
+	if (_myNode == nullptr) return 0;
+
+	Ogre::Vector3 myDir = _myNode->getOrientation() * Ogre::Vector3(-1, 0, 0);
 	Ogre::Vector3 dirToSis = other - getPosition();
 	myDir.normalise();
 	dirToSis.normalise();
