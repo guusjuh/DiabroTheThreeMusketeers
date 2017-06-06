@@ -209,7 +209,19 @@ material InGame/PurpleHouse
    }
 }
 
-
+material InGame/GreyHideoutHouse
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+            texture greyBox.jpg
+         }
+      }
+   }
+}
 
 material InGame/GreyEnemy
 {
@@ -219,7 +231,7 @@ material InGame/GreyEnemy
       {        
          texture_unit
          {
-			texture greyBox.jpg
+			texture Enemies/greyDarkBox.png
          }
       }
    }

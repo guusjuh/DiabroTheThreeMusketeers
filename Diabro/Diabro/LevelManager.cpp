@@ -57,6 +57,7 @@ void LevelManager::nextFloor() {
 	Debug("\tL: spawning next floor, player succeeded.");
 	_level++;
 	GameManager::getSingletonPtr()->getUIManager()->increaseFloorText();
+	enemySpawnTimers.clear();
 
 	generateNewDungeon();
 }
@@ -67,6 +68,7 @@ void LevelManager::nextFloor() {
 void LevelManager::restartGame() {
 	Debug("\tL: restarting the game, player died.");
 	_level = 1;
+	enemySpawnTimers.clear();
 
 	generateNewDungeon();
 }

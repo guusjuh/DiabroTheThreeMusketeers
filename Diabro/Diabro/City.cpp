@@ -509,7 +509,7 @@ void City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre
 			break;
 
 		case HideOutHouse:
-			pEntities[i]->setMaterialName("InGame/GreyEnemy");
+			pEntities[i]->setMaterialName("InGame/GreyHideoutHouse");
 			break;
 		default:
 			break;

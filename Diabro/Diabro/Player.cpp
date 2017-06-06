@@ -49,7 +49,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_noticeDistance = 100;
 	_attackDistance = 170;
 	_lightAttackCooldown = 0.5f;
-	_totalHitTime = 0.2f;
+	_totalHitTime = 0.11f;
 	_radius = 30.0f;
 
 	_currentHealth = _maxHealth;
@@ -63,12 +63,13 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_myNode = pMyNode;
 	_myEntity = pMyEntity;
-
+	
 	setDirVector(Ogre::Vector3(0, 0, 0));
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
 	pMyEntity->setMaterialName("InGame/BlueHouse");
 
+	changeInBattle(false);
 	_target = nullptr;
 	_inDialog = false;
 	_nearbyNPC = nullptr;

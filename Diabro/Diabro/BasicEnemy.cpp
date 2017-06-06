@@ -67,23 +67,33 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 		tempEquipment = tempEquipment->getBase();
 	}
 
-	Ogre::ColourValue myCol = COL_HP;
-	if(damageUpgrades > healthUpgrades) {
+	//Ogre::ColourValue myCol = COL_HP;
+	int colorIndex = 0;
+	if(damageUpgrades == 0 && healthUpgrades == 0 && noticeDistUpgrades == 0) {
+		colorIndex = 0;
+	} else if(damageUpgrades > healthUpgrades) {
 		if(damageUpgrades > noticeDistUpgrades) {
-			myCol = COL_DMG;
+			//myCol = COL_DMG;
+			colorIndex = 2;
 		} else {
-			myCol = COL_NDIST;
+			//myCol = COL_NDIST;
+			colorIndex = 3;
 		}
 	} else if (noticeDistUpgrades > healthUpgrades){
-		myCol = COL_NDIST;
+		//myCol = COL_NDIST;
+		colorIndex = 3;
+	} else {
+		colorIndex = 1;
 	}
 
 	//set color
-	if(myCol == COL_HP) {
+	if(colorIndex == 0) {
+		_originalMaterialName = "InGame/GreyEnemy";
+	} else if (colorIndex == 1) {
 		_originalMaterialName = "InGame/GreenEnemy";
-	} else if (myCol == COL_DMG) {
+	} else if (colorIndex == 2) {
 		_originalMaterialName = "InGame/RedEnemy";
-	} else if (myCol == COL_NDIST) {
+	} else if (colorIndex == 3) {
 		_originalMaterialName = "InGame/BlueEnemy";
 	}
 	pMyEntity->setMaterialName(_originalMaterialName);
