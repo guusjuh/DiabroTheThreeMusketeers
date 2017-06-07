@@ -30,14 +30,10 @@ set(HDRS
 	./Diabro/Diabro/Character.h
 	./Diabro/Diabro/BaseNpc.h
 	./Diabro/Diabro/UIManager.h
-	./Diabro/Diabro/Spawner.h
 	./Diabro/Diabro/LevelGenerator.h
 	./Diabro/Diabro/Zone.h
 	./Diabro/Diabro/City.h
 	./Diabro/Diabro/StateMachine.h
-	./Diabro/Diabro/State.h
-	./Diabro/Diabro/IdleState.h
-	./Diabro/Diabro/WanderState.h
 	./Diabro/Diabro/EnemyFollowAStarState.h
 	./Diabro/Diabro/EnemyFollowDirectState.h
 	./Diabro/Diabro/EnemyMoveAroundCenterState.h
@@ -98,7 +94,6 @@ set(SRCS
 	./Diabro/Diabro/BaseNpc.cpp
 	./Diabro/Diabro/Npc.cpp
 	./Diabro/Diabro/UIManager.cpp
-	./Diabro/Diabro/Spawner.cpp
 	./Diabro/Diabro/QuestContentManager.cpp
 	./Diabro/Diabro/GenericContainer.cpp
 	./Diabro/Diabro/QuestItemContainer.cpp
@@ -123,8 +118,6 @@ set(SRCS
 	./Diabro/Diabro/City.cpp
 	./Diabro/Diabro/StateMachine.cpp
 	./Diabro/Diabro/State.cpp
-	./Diabro/Diabro/IdleState.cpp
-	./Diabro/Diabro/WanderState.cpp
 	./Diabro/Diabro/EnemyFollowAStarState.cpp
 	./Diabro/Diabro/EnemyFollowDirectState.cpp
 	./Diabro/Diabro/EnemyMoveAroundCenterState.cpp

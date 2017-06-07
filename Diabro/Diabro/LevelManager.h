@@ -6,7 +6,6 @@
 #include "BaseApplication.h"
 #include "BasicEnemy.h"
 #include <OgreSceneManager.h>
-#include "Spawner.h"
 #include "LevelGenerator.h"
 
 struct Timer {
@@ -75,9 +74,6 @@ private:
 	//TODO replace all with spawners
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
-
-	Spawner<Npc>* npcSpawner;
-	Spawner<BasicEnemy>* enemySpawner;
 
 	Ogre::Entity* _groundEntity;
 

@@ -138,15 +138,12 @@
     <ClCompile Include="EnemyAttackState.cpp" />
     <ClCompile Include="EnemyFollowAStarState.cpp" />
     <ClCompile Include="EnemyMoveAroundCenterState.cpp" />
-    <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="City.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EnemyEquipment.cpp" />
     <ClCompile Include="EnemyUpgrade.cpp" />
-    <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GenericContainer.cpp" />
-    <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Npc.cpp" />
@@ -171,7 +168,6 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
     <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="WanderState.cpp" />
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,13 +207,11 @@
     <ClInclude Include="QuestItem.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="Spawner.h" />
     <ClInclude Include="City.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericContainer.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateMachine.h" />
-    <ClInclude Include="IdleState.h" />
     <ClInclude Include="IQuestContent.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="Needs.h" />
@@ -239,7 +233,6 @@
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="UIElements.h" />
     <ClInclude Include="UIManager.h" />
-    <ClInclude Include="WanderState.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>

@@ -3,15 +3,12 @@
 
 #include "BaseNpc.h"
 #include "StateMachine.h"
-#include "IdleState.h"
-#include "WanderState.h"
 #include "EnemyFollowAStarState.h"
 #include "EnemyFollowDirectState.h"
 #include "EnemyAttackState.h"
 #include "EnemyMoveAroundCenterState.h"
 #include "EnemyWalkToPointNearPlayerState.h"
 #include "EnemyEquipment.h"
-#include "Spawner.h"
 
 /// <summary>
 /// The basic class for an enemy.

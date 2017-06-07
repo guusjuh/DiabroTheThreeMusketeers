@@ -52,9 +52,6 @@
     <ClCompile Include="StrategyContainer.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
-    <ClCompile Include="IdleState.cpp">
-      <Filter>Sources\Finite State Machines\States</Filter>
-    </ClCompile>
     <ClCompile Include="BaseNpc.cpp">
       <Filter>Sources\Characters</Filter>
     </ClCompile>
@@ -70,9 +67,6 @@
     <ClCompile Include="StateMachine.cpp">
       <Filter>Sources\Finite State Machines</Filter>
     </ClCompile>
-    <ClCompile Include="FloatRange.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
     <ClCompile Include="Npc.cpp">
       <Filter>Sources\Characters</Filter>
     </ClCompile>
@@ -82,14 +76,8 @@
     <ClCompile Include="Quest.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="QuestGenerator.cpp">
       <Filter>Sources\Quest</Filter>
-    </ClCompile>
-    <ClCompile Include="Spawner.cpp">
-      <Filter>Sources\Characters</Filter>
     </ClCompile>
     <ClCompile Include="PlayerDamageUpgrade.cpp">
       <Filter>Sources\Decorator\Player</Filter>
@@ -120,9 +108,6 @@
     </ClCompile>
     <ClCompile Include="QuestItem.cpp">
       <Filter>Sources\Quest</Filter>
-    </ClCompile>
-    <ClCompile Include="WanderState.cpp">
-      <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAttackState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
@@ -174,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="EnemyWalkToPointNearPlayerState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Sources\Characters\A%2a</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,9 +250,6 @@
     <ClInclude Include="UIElements.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="IdleState.h">
-      <Filter>Headers\Finite State Machines\States</Filter>
-    </ClInclude>
     <ClInclude Include="StateMachine.h">
       <Filter>Headers\Finite State Machines</Filter>
     </ClInclude>
@@ -276,12 +261,6 @@
     </ClInclude>
     <ClInclude Include="QuestGenerator.h">
       <Filter>Headers\Quests</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Spawner.h">
-      <Filter>Headers\Characters</Filter>
     </ClInclude>
     <ClInclude Include="IDecorator.h">
       <Filter>Headers\Decorator</Filter>
@@ -318,9 +297,6 @@
     </ClInclude>
     <ClInclude Include="Coordinate.h">
       <Filter>Headers\LevelGeneration</Filter>
-    </ClInclude>
-    <ClInclude Include="WanderState.h">
-      <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAttackState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
@@ -372,6 +348,9 @@
     </ClInclude>
     <ClInclude Include="EnemyWalkToPointNearPlayerState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Headers\Characters\A%2a</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -489,6 +468,12 @@
     </Filter>
     <Filter Include="Sources\Quest\Conditions\Post">
       <UniqueIdentifier>{840be4a2-36b6-41df-9c67-e1af9f35c10a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Characters\A%2a">
+      <UniqueIdentifier>{98ce54cc-c3bc-4f20-a996-72c75d20d07b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Characters\A%2a">
+      <UniqueIdentifier>{9d128f46-6a99-440a-a65d-f6cc18eefd7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
