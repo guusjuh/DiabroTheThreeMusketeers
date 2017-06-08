@@ -78,6 +78,7 @@ public:
 	}
 
 	void restartGame();
+	bool up, down, left, right;
 
 protected:
     virtual void createScene(void);

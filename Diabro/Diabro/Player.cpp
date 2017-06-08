@@ -136,6 +136,21 @@ void Player::update(Ogre::Real pDeltaTime)
 {
 	if (_myNode == nullptr) return;
 
+	_dirVec.x = 0;
+	_dirVec.z = 0;
+	if (GameManager::getSingletonPtr()->up){
+		_dirVec.z = -1;
+	}
+	if (GameManager::getSingletonPtr()->down){
+		_dirVec.z = 1;
+	}
+	if (GameManager::getSingletonPtr()->left){
+		_dirVec.x = -1;
+	}
+	if (GameManager::getSingletonPtr()->right){
+		_dirVec.x = 1;
+	}
+
 	// don't do stuff when in dialog
 	if (_inDialog) return;
 

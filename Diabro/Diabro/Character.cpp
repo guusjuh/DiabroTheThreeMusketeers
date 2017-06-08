@@ -47,8 +47,12 @@ void Character::update(Ogre::Real pDeltatime)
 
 	_dirVec.normalise();
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
-	
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
+
+	correctRotation(newPos, zone, _radius);
+
+	newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
+
 	if (collidesWithGrid(newPos, zone, _radius) && closestDistanceToNpc(newPos) > _radius)
 	{
 		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
@@ -105,6 +109,32 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 
 	return DistanceToClosestTarget;
 }
+
+void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
+	//4 positions each with an offset for checking the collision with the wall
+	float cornerRange = cos(45.0f) * range;
+	Ogre::Vector3 tempPos = pos;
+	Coordinate temp0 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x - range, pos.z));
+	Coordinate temp1 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x + range, pos.z));
+	Coordinate temp2 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z - range));
+	Coordinate temp3 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z + range));
+
+	Ogre::Vector3 newDirection = _myNode->getOrientation() * _dirVec;
+	if (!(zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width * City::gridScalar]) ||
+		!(zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width * City::gridScalar])){
+		newDirection.x = 0;
+	}
+	if (!(zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width * City::gridScalar]) ||
+		!(zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width * City::gridScalar])){
+		newDirection.z = 0;
+	}
+
+	Ogre::Quaternion tempQ = _myNode->getOrientation();
+	Ogre::Quaternion rotation = tempQ.Inverse();// Ogre::Quaternion(Ogre::Degree(roll.valueDegrees()), Ogre::Vector3(0, 1, 0));
+		
+	_dirVec = rotation * newDirection;
+}
+
 
 bool Character::collidesWithGrid(Ogre::Vector3 pos, Zone* zone, int range){
 	//4 positions each with an offset for checking the collision with the wall

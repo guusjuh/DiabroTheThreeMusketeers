@@ -49,6 +49,7 @@ public:
 
 	Ogre::Real closestDistanceToNpc(Ogre::Vector3 pos);
 	bool collidesWithGrid(Ogre::Vector3, Zone* zone, int cornerRange);
+	void correctRotation(Ogre::Vector3, Zone* zone, int cornerRange);
 
 	virtual void recieveItem();
 	void needToGiveItem() {

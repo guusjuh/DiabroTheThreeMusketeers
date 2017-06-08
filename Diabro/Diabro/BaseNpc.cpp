@@ -39,6 +39,9 @@ void BaseNpc::collide(){
 /// <param name="pDeltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
+	if (_dirVec != Ogre::Vector3(0, 0, 0)){
+		_dirVec = Ogre::Vector3(1, 0, 0);
+	}
 	detectPlayer();
 
 	_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
