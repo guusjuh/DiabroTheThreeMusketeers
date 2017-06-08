@@ -12,7 +12,7 @@
 /// The player character of the game. Only one exists. 
 /// </summary>
 /// <seealso cref="Character" />
-class Player : public Character
+class Player : public Character, public IQuestContent
 {
 	friend class QuestGenerator;
 

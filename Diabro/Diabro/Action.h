@@ -100,7 +100,7 @@ public:
 	static const std::string msgPlayerInfo;
 	static const std::string msgEnemyDead;
 
-	void sendMsg(std::string msg);
+	void sendMsg(IQuestContent* sender, std::string msg);
 
 private:
 

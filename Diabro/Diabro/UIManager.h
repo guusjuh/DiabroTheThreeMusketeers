@@ -48,7 +48,7 @@ public:
 	void increaseFloorText();
 	void resetFloorText();
 
-	void increaseUpgradeText(UpgradeModifierType type);
+	void setUpgradeText(UpgradeModifierType type);
 	void resetUpgradeText();
 
 private:
