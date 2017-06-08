@@ -51,8 +51,8 @@
 <Strategy>
 	<ID>5</ID>
 	<NameStrat>Kill enemies</NameStrat>
-	<QuestName>The slaughter of 'EnemyQC1'</QuestName>
-	<StartDialog>'EnemyQC1' has been harrassing me forever, but I can't do anything about it. \nPlease kill him for me.</StartDialog>
+	<QuestName>The slaughter of the squared bastard</QuestName>
+	<StartDialog>That squared bastard has been harrassing me forever, but I can't do anything about it. \nPlease kill him for me.</StartDialog>
 	<NeedType>Reputation</NeedType>
 	<Actions>
 		<Action>
@@ -63,7 +63,7 @@
 		</Action>
 		<Action>
 			<ID>11</ID>
-			<Dialog>Thank you so much! I was so scared of 'EnemyQC1'.. \nHe's better of dead.</Dialog>
+			<Dialog>Thank you so much! I was so scared of that squared bastard.. \nHe's better of dead.</Dialog>
 			<Content>1</Content>
 			<Content>1</Content>
 		</Action>

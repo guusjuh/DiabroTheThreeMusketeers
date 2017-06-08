@@ -96,6 +96,27 @@ std::vector<std::string> Npc::getNameOptions() {
 	_nameOptions.push_back("Mike");
 	_nameOptions.push_back("Resa");
 
+	_nameOptions.push_back("Charry");
+	_nameOptions.push_back("Jule");
+	_nameOptions.push_back("Dalwin");
+
+	_nameOptions.push_back("Alexia");	// alexander
+	_nameOptions.push_back("Anderson");	// anders
+	_nameOptions.push_back("Dora");		// nora
+	_nameOptions.push_back("Jordan");	// joris
+	_nameOptions.push_back("Deric");	// eric
+	_nameOptions.push_back("Richael");	// richard
+	_nameOptions.push_back("Sassia");	// saskia
+	_nameOptions.push_back("Greg");		// reggie
+	_nameOptions.push_back("Bonney");	// bonnee
+	_nameOptions.push_back("Marlin");	// marianne
+	_nameOptions.push_back("Marlene");	// irene
+
+	_nameOptions.push_back("Gustik");
+	_nameOptions.push_back("Mufo");
+	_nameOptions.push_back("Jerico");
+	_nameOptions.push_back("Marloes");
+
 	return _nameOptions;
 }
 
@@ -198,7 +219,7 @@ bool Npc::talk(Ogre::Vector3 pPlayerPos)
 				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
 			}
 			else if (_relevantForAction) {
-				GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgPlayerInfo);
+				GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerInfo);
 			}
 
 			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
@@ -247,6 +268,6 @@ void Npc::needNewQuest() {
 void Npc::recieveItem() {
 	Character::recieveItem();
 
-	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgNpcItem);
+	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgNpcItem);
 }
 

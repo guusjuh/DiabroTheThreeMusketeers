@@ -264,8 +264,8 @@ void Action::setPostConditionsContent() {
 	
 }
 
-void Action::sendMsg(std::string msg) {
+void Action::sendMsg(IQuestContent* sender, std::string msg) {
 	if(_postcondition.second != nullptr) {
-		_postcondition.second->receiveMsg(msg);
+		_postcondition.second->receiveMsg(sender, msg);
 	}
 }

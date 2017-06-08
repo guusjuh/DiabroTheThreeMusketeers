@@ -222,7 +222,7 @@ void Player::dialogTriggered() {
 			giveItem(_nearbyNPC);
 		} 
 		if (_nearbyNPC->relevantForAction()) {
-			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgNpcInfo);
+			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgNpcInfo);
 		}
 
 		_inDialog = false;
@@ -317,5 +317,5 @@ void Player::changeInBattle(bool val) {
 void Player::recieveItem() {
 	Character::recieveItem();
 
-	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgPlayerItem);
+	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerItem);
 }

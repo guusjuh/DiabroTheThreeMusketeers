@@ -28,7 +28,7 @@ public:
 
 	bool completed() { return _completed; }
 
-	void sendMsg(std::string msg);
+	void sendMsg(IQuestContent* sender, std::string msg);
 
 private:
 	Strategy _strategy;

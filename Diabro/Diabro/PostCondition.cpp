@@ -5,14 +5,14 @@
 void PostCondition::update() {
 	if (queuedMsgs.size() > 0) {
 		for (int i = 0; i < queuedMsgs.size(); ++i) {
-			if (queuedMsgs[i] == Action::msgPlayerItem) {
+			if (queuedMsgs[i].second == Action::msgPlayerItem) {
 				Debug("Player claims to have an item");
 			}
-			else if (queuedMsgs[i] == Action::msgNpcItem) {
+			else if (queuedMsgs[i].second == Action::msgNpcItem) {
 				Debug("Npc claims to have an item");
 
 			}
-			else if (queuedMsgs[i] == Action::msgCityReached) {
+			else if (queuedMsgs[i].second == Action::msgCityReached) {
 				Debug("Player reached city");
 
 			}

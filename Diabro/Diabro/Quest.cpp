@@ -87,6 +87,6 @@ void Quest::updateLocatorPos() {
 	GameManager::getSingletonPtr()->getUIManager()->setQuestTarget(_currentTarget->getQuestPosition());
 }
 
-void Quest::sendMsg(std::string msg) {
-	_strategy._actionSequence[_strategy._currentAction].sendMsg(msg);
+void Quest::sendMsg(IQuestContent* sender, std::string msg) {
+	_strategy._actionSequence[_strategy._currentAction].sendMsg(sender, msg);
 }

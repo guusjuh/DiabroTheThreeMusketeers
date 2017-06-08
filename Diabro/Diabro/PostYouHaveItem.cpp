@@ -5,7 +5,7 @@
 void PostYouHaveItem::update() {
 	if (queuedMsgs.size() > 0) {
 		for (int i = 0; i < queuedMsgs.size(); ++i) {
-			if (queuedMsgs[i] == Action::msgPlayerItem) {
+			if (queuedMsgs[i].second == Action::msgPlayerItem) {
 				_isMet = true;
 				Debug("Post - you have item - completed");
 			}

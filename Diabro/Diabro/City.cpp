@@ -180,7 +180,7 @@ City::~City() { }
 void City::update() {
 	if(_relevantForAction) {
 		if(inThisCity(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition())) {
-			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(Action::msgCityReached);
+			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgCityReached);
 		}
 	}
 }
@@ -199,12 +199,57 @@ std::vector<std::string> City::getNameOptions(RoomType type) {
 	std::vector<std::string> _nameOptions;
 
 	if (type == CityRT) {
-		_nameOptions.push_back("Zeist");
-		_nameOptions.push_back("Amsterdam");
+		_nameOptions.push_back("Al Kharid");
+		_nameOptions.push_back("Arposandra");
+		_nameOptions.push_back("Brimhaven");
+		_nameOptions.push_back("Burthorpe");
+		_nameOptions.push_back("Canifis");
+		_nameOptions.push_back("Catherby");
+		_nameOptions.push_back("Draynor Village");
+		_nameOptions.push_back("Edgeville");
+		_nameOptions.push_back("Etceteria");
+		_nameOptions.push_back("Falador");
+		_nameOptions.push_back("Hemenster");
+		_nameOptions.push_back("Keldagrim");
+		_nameOptions.push_back("Lletya");
+		_nameOptions.push_back("Lumbridge");
+		_nameOptions.push_back("Marim");
+		_nameOptions.push_back("Meiyerditch");
+		_nameOptions.push_back("Mos Le'Harmless");
+		_nameOptions.push_back("Otot");
+		_nameOptions.push_back("Palingrad");
+		_nameOptions.push_back("Prifddinas");
+		_nameOptions.push_back("Rellekka");
+		_nameOptions.push_back("Rimmington");
+		_nameOptions.push_back("Seers' Village");
+		_nameOptions.push_back("Shilo Village");
+		_nameOptions.push_back("Sophanem");
+		_nameOptions.push_back("Taverley");
+		_nameOptions.push_back("Tzhaar");
+		_nameOptions.push_back("Ullek");
+		_nameOptions.push_back("Varrock");
+		_nameOptions.push_back("Yanille");
 	}
 	else {
-		_nameOptions.push_back("Limburg");
-		_nameOptions.push_back("Gend");
+		_nameOptions.push_back("Ardougne");
+		_nameOptions.push_back("Askroth");
+		_nameOptions.push_back("Barbarian Village");
+		_nameOptions.push_back("Dis");
+		_nameOptions.push_back("Dorgesh-Kaan");
+		_nameOptions.push_back("Gu'Tanoth");
+		_nameOptions.push_back("Jatizso");
+		_nameOptions.push_back("Kanatah");
+		_nameOptions.push_back("Menaphos");
+		_nameOptions.push_back("Mort'ton");
+		_nameOptions.push_back("Musa Point");
+		_nameOptions.push_back("Nardah");
+		_nameOptions.push_back("Neitiznot");
+		_nameOptions.push_back("Onkhara");
+		_nameOptions.push_back("Oo'glog");
+		_nameOptions.push_back("Pollniveach");
+		_nameOptions.push_back("Tyras Camp");
+		_nameOptions.push_back("Uzer");
+		_nameOptions.push_back("Zanaris");
 	}
 
 	return _nameOptions;
