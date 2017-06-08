@@ -66,6 +66,9 @@ void UIManager::setupUI()
 	_healthUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Health", "HealthUpgrade", 64, 56);
 	_dmgUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Damage", "DamageUpgrade", 64, 56);
 
+	setUpgradeText(Health);
+	setUpgradeText(Damage);
+
 	_hudTextWidget = nullptr;
 }
 
@@ -356,7 +359,7 @@ void UIManager::resetFloorText() {
 	_floorTextWidget->setText("Floor " + Ogre::StringConverter::toString(1));
 }
 
-void UIManager::increaseUpgradeText(UpgradeModifierType type) {
+void UIManager::setUpgradeText(UpgradeModifierType type) {
 	switch(type) {
 	case Health:
 		_healthUpgradeIcon->setValue(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->healthUpgradeAmount());
@@ -370,6 +373,6 @@ void UIManager::increaseUpgradeText(UpgradeModifierType type) {
 }
 
 void UIManager::resetUpgradeText() {
-	_healthUpgradeIcon->setValue(0);
-	_dmgUpgradeIcon->setValue(0);
+	_healthUpgradeIcon->setValue(1);
+	_dmgUpgradeIcon->setValue(1);
 }

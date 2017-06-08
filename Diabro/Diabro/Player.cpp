@@ -21,8 +21,8 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	equipment = new PlayerEquipment(30.0f, 5.0f);
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
-	_healthUpgrades = 0;
-	_damageUpgrades = 0;
+	_healthUpgrades = 1;
+	_damageUpgrades = 1;
 
 	// set node vars
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
@@ -96,8 +96,8 @@ void Player::die() {
 	equipment = equipment->removeUpgrades();
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
-	_healthUpgrades = 0;
-	_damageUpgrades = 0;
+	_healthUpgrades = 1;
+	_damageUpgrades = 1;
 
 	_currentHealth = _maxHealth;
 
@@ -114,13 +114,13 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 		equipment = new PlayerHealthUpgrade(equipment, upgrade.value);
 		_maxHealth = equipment->getHealth();
 		_healthUpgrades++;
-		GameManager::getSingletonPtr()->getUIManager()->increaseUpgradeText(Health);
+		GameManager::getSingletonPtr()->getUIManager()->setUpgradeText(Health);
 		break;
 	case Damage:
 		equipment = new PlayerDamageUpgrade(equipment, upgrade.value);
 		_damage = equipment->getDamage();
 		_damageUpgrades++;
-		GameManager::getSingletonPtr()->getUIManager()->increaseUpgradeText(Damage);
+		GameManager::getSingletonPtr()->getUIManager()->setUpgradeText(Damage);
 		break;
 	default:
 		Debug("Wrong upgrade type");
