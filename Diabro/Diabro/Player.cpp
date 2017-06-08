@@ -116,6 +116,21 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 /// <param name="pDeltaTime">The delta time, time since last frame.</param>
 void Player::update(Ogre::Real pDeltaTime)
 {
+	_dirVec.x = 0;
+	_dirVec.z = 0;
+	if (GameManager::getSingletonPtr()->up){
+		_dirVec.z = -1;
+	}
+	if (GameManager::getSingletonPtr()->down){
+		_dirVec.z = 1;
+	}
+	if (GameManager::getSingletonPtr()->left){
+		_dirVec.x = -1;
+	}
+	if (GameManager::getSingletonPtr()->right){
+		_dirVec.x = 1;
+	}
+
 	// don't do stuff when in dialog
 	if (_inDialog) return;
 

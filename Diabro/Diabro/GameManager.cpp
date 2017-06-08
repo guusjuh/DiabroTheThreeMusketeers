@@ -15,7 +15,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0)
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), up(false), down(false), left(false), right(false)
 {
 }
 //---------------------------------------------------------------------------
@@ -191,28 +191,26 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	if (state != InGame) return false;
 
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
-
 	switch (pKE.key)
 	{
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		dirVec.z = -1;
+		up = true;
 		break;
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		dirVec.z = 1;
+		down = true;
 		break;
 
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
-		dirVec.x = -1;
+		left = true;
 		break;
 
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
-		dirVec.x = 1;
+		right = true;
 		break;
 		
 	case OIS::KC_LSHIFT:
@@ -231,7 +229,6 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 	}
 
-	_levelManager->playerScript->setDirVector(dirVec);
 	return true;
 }
 
@@ -243,36 +240,33 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
 	if (state != InGame) return false;
-
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
-
+	
 	switch (pKE.key)
 	{
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		dirVec.z = 0;
+		up = false;
 		break;
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		dirVec.z = 0;
+		down = false;
 		break;
 
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
-		dirVec.x = 0;
+		left = false;
 		break;
 
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
-		dirVec.x = 0;
+		right = false;
 		break;
 
 	default:
 		break;
 	}
 
-	_levelManager->playerScript->setDirVector(dirVec);
 	return true;
 }
 

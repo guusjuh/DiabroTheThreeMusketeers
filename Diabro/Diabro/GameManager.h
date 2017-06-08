@@ -71,6 +71,8 @@ public:
 		return rand() % (pHI-pLO) + pLO;
 	}
 
+	bool up, down, left, right;
+
 protected:
     virtual void createScene(void);
 	virtual void createCamera(void);
