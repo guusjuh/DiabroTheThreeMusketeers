@@ -23,6 +23,7 @@ public:
 	void reset(Ogre::SceneNode*, Ogre::Entity*);
 
 	float getMaxHealth() { return _maxHealth; }
+	float getDamage() { return _damage; }
 	void update(Ogre::Real) override;
 
 	bool adjustHealth(float) override;

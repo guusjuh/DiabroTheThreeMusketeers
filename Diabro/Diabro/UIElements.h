@@ -34,7 +34,7 @@ namespace DiabroUI
 
 	class Widget;
 	class HUDText;
-	class DialogTextBox;
+	class TextBox;
 	class MiniMap;
 	class ImageWidget;
 	class Bar;
@@ -327,12 +327,12 @@ namespace DiabroUI
 	/*=============================================================================
 	| Floor text widget.
 	=============================================================================*/
-	class FloorText : public Widget
+	class Text : public Widget
 	{
 	public:
 
 		// Do not instantiate any widgets directly. Use UIElementsManager.
-		FloorText(const Ogre::String& name, const Ogre::DisplayString& text, Ogre::Real width, Ogre::Real height)
+		Text(const Ogre::String& name, const Ogre::DisplayString& text, Ogre::Real width, Ogre::Real height)
 		{
 			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/FloorIndicator", "Panel", name);
 			mElement->setWidth(width);
@@ -457,12 +457,12 @@ namespace DiabroUI
 	/*=============================================================================
 	| Text box widget.
 	=============================================================================*/
-	class DialogTextBox : public Widget
+	class TextBox : public Widget
 	{
 	public:
 
 		// Do not instantiate any widgets directly. Use UIElementsManager.
-		DialogTextBox(const Ogre::String& name, const Ogre::DisplayString& caption, Ogre::Real width, Ogre::Real height)
+		TextBox(const Ogre::String& name, const Ogre::DisplayString& caption, const Ogre::DisplayString& bottomCaption, Ogre::Real width, Ogre::Real height)
 		{
 			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/DialogBox", "BorderPanel", name);
 			mElement->setWidth(width);
@@ -471,7 +471,7 @@ namespace DiabroUI
 			mTextArea = (Ogre::TextAreaOverlayElement*)container->getChild(getName() + "/DialogText");
 
 			Ogre::TextAreaOverlayElement* continueText = (Ogre::TextAreaOverlayElement*)container->getChild(getName() + "/ContinueText");
-			continueText->setCaption("Press SPACE to continue");
+			continueText->setCaption(bottomCaption);
 
 			mCaptionBar = (Ogre::BorderPanelOverlayElement*)container->getChild(getName() + "/DialogCaptionBar");
 			mCaptionBar->setWidth(width - 4);
@@ -1246,10 +1246,10 @@ namespace DiabroUI
 			return tb;
 		}
 
-		DialogTextBox* createDialogTextBox(AnchorLocation trayLoc, const Ogre::String& name, const Ogre::DisplayString& caption,
-			Ogre::Real width, Ogre::Real height)
+		TextBox* createDialogTextBox(AnchorLocation trayLoc, const Ogre::String& name, const Ogre::DisplayString& caption, 
+			const Ogre::DisplayString& bottomCaption, Ogre::Real width, Ogre::Real height)
 		{
-			DialogTextBox* tb = new DialogTextBox(name, caption, width, height);
+			TextBox* tb = new TextBox(name, caption, bottomCaption, width, height);
 			moveWidgetToTray(tb, trayLoc);
 			return tb;
 		}
@@ -1284,10 +1284,10 @@ namespace DiabroUI
 			return tb;
 		}
 
-		FloorText* createFloorText(AnchorLocation trayLoc, const Ogre::String& name, const Ogre::DisplayString& caption,
+		Text* createFloorText(AnchorLocation trayLoc, const Ogre::String& name, const Ogre::DisplayString& caption,
 			Ogre::Real width, Ogre::Real height)
 		{
-			FloorText* tb = new FloorText(name, caption, width, height);
+			Text* tb = new Text(name, caption, width, height);
 			moveWidgetToTray(tb, trayLoc);
 			return tb;
 		}

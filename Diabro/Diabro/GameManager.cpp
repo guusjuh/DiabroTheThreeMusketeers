@@ -76,7 +76,8 @@ void GameManager::createScene(void)
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	state = Start;
+	currentState = Start;
+	previousState = currentState;
 	//_uiManager->startState();
 }
 
@@ -91,7 +92,8 @@ void GameManager::nextFloor() {
 
 	setupLights(mSceneMgr);
 
-	state = Start;
+	previousState = currentState;
+	currentState = Start;
 
 	up = false;
 	down = false;
@@ -111,7 +113,8 @@ void GameManager::restartGame() {
 
 	setupLights(mSceneMgr);
 
-	state = Start;
+	previousState = currentState;
+	currentState = Start;
 
 	up = false;
 	down = false;
@@ -160,11 +163,11 @@ void GameManager::createCamera()
 void GameManager::createViewports()
 {
 	// add a viewport
-	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+	vp = mWindow->addViewport(mCamera);
 
 	// set background viewport
 	vp->setBackgroundColour(Ogre::ColourValue(0.278f, 0.368f, 0.482f));
-
+	
 	// as aspect ratio to avoid distortion
 	mCamera->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
@@ -189,7 +192,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
 
-	switch (state) {
+	switch (currentState) {
 	case Start:
 		_uiManager->startUpdate(pFE);
 		break;
@@ -220,7 +223,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
 	if (pKE.key == OIS::KC_ESCAPE) mShutDown = true;
 
-	if (state != InGame) return false;
+	if (currentState != InGame && currentState != Paused) return false;
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
@@ -259,6 +262,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		}
 		break;
 
+	case OIS::KC_P:
+		if(currentState == Paused) {
+			goToState(previousState);
+		} else {
+			goToState(Paused);
+		}
+
 	default:
 		break;
 	}
@@ -274,7 +284,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
-	if (state != InGame) return false;
+	if (currentState != InGame && currentState != Paused) return false;
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
@@ -315,6 +325,8 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 {
+	if (currentState == Paused) return false;
+
 	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * pME.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
@@ -337,6 +349,8 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 /// <returns></returns>
 bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
+	if (currentState == Paused) return false;
+
 	return true;
 }
 
@@ -348,6 +362,8 @@ bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pI
 /// <returns></returns>
 bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
+	if (currentState == Paused) return false;
+
 	switch (pID)
 	{
 	case OIS::MB_Left:

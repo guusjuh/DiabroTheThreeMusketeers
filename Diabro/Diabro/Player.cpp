@@ -204,7 +204,7 @@ void Player::findSister() {
 	_myNode = nullptr;
 	_myEntity = nullptr;
 
-	GameManager::getSingletonPtr()->goNextState();
+	GameManager::getSingletonPtr()->goToState(End);
 	GameManager::getSingletonPtr()->getSoundManager()->completed();
 	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
 }

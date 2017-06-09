@@ -8,6 +8,7 @@
 		<Precondition>SomebodyThere</Precondition>
 	</Preconditions>
 	<Postcondition>Accompanied</Postcondition>
+	<Instruction>Escort 'NPCQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
@@ -26,6 +27,7 @@
 		<Precondition>BothItemOfInterest</Precondition>
 	</Preconditions>
 	<Postcondition>BothHaveTheItem</Postcondition>
+	<Instruction>Exchange 'QuestItemQC1' with 'NPCQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
@@ -49,6 +51,7 @@
 		<Precondition>KnowWhereToGo</Precondition>
 	</Preconditions>
 	<Postcondition>YouInfo</Postcondition>
+	<Instruction>Explore 'TownQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>TownQC</Type>
@@ -63,6 +66,7 @@
 		<Precondition>KnowWhereToGo</Precondition>
 	</Preconditions>
 	<Postcondition>YouInfo</Postcondition>
+	<Instruction>Explore 'HideOutQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
@@ -77,6 +81,7 @@
 		<Precondition>SomethingThere</Precondition>
 	</Preconditions>
 	<Postcondition>YouHaveTheItem</Postcondition>
+	<Instruction>Get 'QuestItemQC' from 'NPCQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
@@ -94,6 +99,7 @@
 		<Precondition>SomethingThere</Precondition>
 	</Preconditions>
 	<Postcondition>YouHaveTheItem</Postcondition>
+	<Instruction>Get 'QuestItemQC' from 'EnemyQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>EnemyQC</Type>
@@ -113,6 +119,7 @@
 		<Precondition>YouItemOfInterest</Precondition>
 	</Preconditions>
 	<Postcondition>TheyHaveTheItem</Postcondition>
+	<Instruction>Get 'QuestItemQC' to 'NPCQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
@@ -133,6 +140,7 @@
 		<Precondition>KnowWhereToGo</Precondition>
 	</Preconditions>
 	<Postcondition>YouThere</Postcondition>
+	<Instruction>Goto 'TownQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>TownQC</Type>
@@ -147,6 +155,7 @@
 		<Precondition>KnowWhereToGo</Precondition>
 	</Preconditions>
 	<Postcondition>YouThere</Postcondition>
+	<Instruction>Goto 'HideOutQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
@@ -161,6 +170,7 @@
 		<Precondition>SomebodyThere</Precondition>
 	</Preconditions>
 	<Postcondition>TheyDead</Postcondition>
+	<Instruction>Kill 'EnemyQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>EnemyQC</Type>
@@ -178,6 +188,7 @@
 		<Precondition>SomebodyThere</Precondition>
 	</Preconditions>
 	<Postcondition>YouInfo</Postcondition>
+	<Instruction>Talk to 'NPCQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
@@ -195,6 +206,7 @@
 		<Precondition>SomebodyThere</Precondition>
 	</Preconditions>
 	<Postcondition>TheyInfo</Postcondition>
+	<Instruction>Report to 'NPCQC'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
