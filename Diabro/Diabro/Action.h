@@ -59,8 +59,8 @@ class Action {
 
 public:
 	Action();
-	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<QuestContent> pQuestContent, std::string dialog);
-	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<std::pair<QuestContent, int>> pQuestContent, std::string dialog);
+	Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, 
+		std::vector<std::pair<QuestContent, int>> pQuestContent, std::string dialog, std::string instruction);
 	~Action();
 
 	void start();
@@ -69,7 +69,10 @@ public:
 
 	int getID() { return _id; }
 	ActionType getType() { return _type; }
+
 	std::string getDialog() { return _dialog; }
+	std::string getInstruction() { return _instruction; }
+
 	std::vector<PreconditionsType> getPreconditions() {
 		std::vector<PreconditionsType> returnVector;
 
@@ -83,6 +86,7 @@ public:
 	PostconditionType getPostcondition() { return _postcondition.first; }
 	std::vector<std::pair<QuestContent, int>> getRequiredContent() { return _requiredContent; }
 	std::vector<std::pair<IQuestContent*, int>> getConcreteContent() { return _concreteContent; }
+
 
 	std::vector<QuestContent> getRequiredContentTypes();
 	IQuestContent* getTarget();
@@ -116,10 +120,13 @@ private:
 	void createPostConditions(PostconditionType precontype);
 	void setPostConditionsContent();
 
+	void updateIds(std::vector<int> pNewIds);
+
 	std::vector<std::pair<QuestContent, int>> _requiredContent;
 	std::vector<std::pair<IQuestContent*, int>> _concreteContent;
 
 	std::string _dialog;
+	std::string _instruction;
 
 	bool _completed;
 };

@@ -12,9 +12,11 @@
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>NPCQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -31,15 +33,19 @@
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>TownQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
+			<ID>2</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -55,6 +61,7 @@
 	<RequiredContent>
 		<Pair>
 			<Type>TownQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -66,10 +73,11 @@
 		<Precondition>KnowWhereToGo</Precondition>
 	</Preconditions>
 	<Postcondition>YouInfo</Postcondition>
-	<Instruction>Explore 'HideOutQC'</Instruction>
+	<Instruction>Explore 'HideOutQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -81,13 +89,15 @@
 		<Precondition>SomethingThere</Precondition>
 	</Preconditions>
 	<Postcondition>YouHaveTheItem</Postcondition>
-	<Instruction>Get 'QuestItemQC' from 'NPCQC'</Instruction>
+	<Instruction>Get 'QuestItemQC1' from 'NPCQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -99,13 +109,15 @@
 		<Precondition>SomethingThere</Precondition>
 	</Preconditions>
 	<Postcondition>YouHaveTheItem</Postcondition>
-	<Instruction>Get 'QuestItemQC' from 'EnemyQC'</Instruction>
+	<Instruction>Get 'QuestItemQC1' from 'EnemyQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>EnemyQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -119,16 +131,19 @@
 		<Precondition>YouItemOfInterest</Precondition>
 	</Preconditions>
 	<Postcondition>TheyHaveTheItem</Postcondition>
-	<Instruction>Get 'QuestItemQC' to 'NPCQC'</Instruction>
+	<Instruction>Give 'QuestItemQC1' to 'NPCQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>QuestItemQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>TownQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -140,10 +155,11 @@
 		<Precondition>KnowWhereToGo</Precondition>
 	</Preconditions>
 	<Postcondition>YouThere</Postcondition>
-	<Instruction>Goto 'TownQC'</Instruction>
+	<Instruction>Goto 'TownQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>TownQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -155,10 +171,11 @@
 		<Precondition>KnowWhereToGo</Precondition>
 	</Preconditions>
 	<Postcondition>YouThere</Postcondition>
-	<Instruction>Goto 'HideOutQC'</Instruction>
+	<Instruction>Goto 'HideOutQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>HideOutQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -170,13 +187,15 @@
 		<Precondition>SomebodyThere</Precondition>
 	</Preconditions>
 	<Postcondition>TheyDead</Postcondition>
-	<Instruction>Kill 'EnemyQC'</Instruction>
+	<Instruction>Kill 'EnemyQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>EnemyQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>HideOutQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -188,13 +207,15 @@
 		<Precondition>SomebodyThere</Precondition>
 	</Preconditions>
 	<Postcondition>YouInfo</Postcondition>
-	<Instruction>Talk to 'NPCQC'</Instruction>
+	<Instruction>Talk to 'NPCQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>TownQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>
@@ -206,13 +227,15 @@
 		<Precondition>SomebodyThere</Precondition>
 	</Preconditions>
 	<Postcondition>TheyInfo</Postcondition>
-	<Instruction>Report to 'NPCQC'</Instruction>
+	<Instruction>Report to 'NPCQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>NPCQC</Type>
+			<ID>1</ID>
 		</Pair>
 		<Pair>
 			<Type>TownQC</Type>
+			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
 </Action>

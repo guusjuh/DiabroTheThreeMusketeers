@@ -41,6 +41,7 @@ public:
 	void collide() override;
 
 	City* getHomeTown() { return _hometown; }
+	std::string getName() { return _name; }
 
 	QuestContent getType() override { return NPCQC; }
 	void recieveItem() override;

@@ -276,7 +276,7 @@ template container Panel(UI/FloorIndicator)
 	metrics_mode pixels
 	transparent true
 
-	element TextArea(FloorValue)
+	element TextArea(ValueFloorIndicator)
 	{
         metrics_mode pixels
         horz_align center
@@ -284,6 +284,24 @@ template container Panel(UI/FloorIndicator)
         top 20
         font_name UI/Caption
         char_height 30
+        space_width 7
+        colour 0.9 0.9 0.9
+	}
+}
+
+template container Panel(UI/InstructionIndicator)
+{
+	metrics_mode pixels
+	transparent true
+
+	element TextArea(ValueInstructionIndicator)
+	{
+        metrics_mode pixels
+        horz_align center
+        alignment left
+        top 20
+        font_name UI/Caption
+        char_height 15
         space_width 7
         colour 0.9 0.9 0.9
 	}

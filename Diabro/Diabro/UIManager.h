@@ -72,7 +72,8 @@ private:
 	DiabroUI::Bar*				_enemyHealthBarWidget;
 	Ogre::Real					_maxWidthBar;
 
-	DiabroUI::Text*		_floorTextWidget;
+	DiabroUI::Text*				_floorTextWidget;
+	DiabroUI::Text*				_questGoalTextWidget;
 
 	DiabroUI::UpgradeIcon*		_healthUpgradeIcon;
 	DiabroUI::UpgradeIcon*		_dmgUpgradeIcon;

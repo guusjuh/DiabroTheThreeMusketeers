@@ -11,6 +11,8 @@
 #include "PostYouInfo.h"
 #include "PostTheyInfo.h"
 #include "PostTheyDead.h"
+#include <regex>
+#include <string>
 
 const std::string Action::msgCityReached = "City reached";
 const std::string Action::msgPlayerItem = "Player received item";
@@ -34,30 +36,10 @@ Action::Action() : _id(0), _type((ActionType)0), _preconditions(), _postconditio
 /// <param name="pPreconditions">The preconditions.</param>
 /// <param name="pPostcondition">The postcondition.</param>
 /// <param name="pQuestContent">Required content for this action.</param>
-Action::Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<QuestContent> pQuestContent, std::string dialog) :
-	_id(pID), _type(pType), _concreteContent(0), _dialog(dialog) {
-	std::vector<std::pair<QuestContent, int>>	tempRequiredContent;
-	createPreConditions(pPreconditions);
-	createPostConditions(pPostcondition);
+Action::Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, 
+	std::vector<std::pair<QuestContent, int>> pQuestContent, std::string dialog, std::string instruction) :
+	_id(pID), _type(pType), _requiredContent(pQuestContent), _concreteContent(0), _dialog(dialog), _instruction(instruction) {
 
-	for (int i = 0; i < pQuestContent.size(); ++i) {
-		tempRequiredContent.push_back(std::pair<QuestContent, int>(pQuestContent[i], 0));
-	}
-
-	_requiredContent = tempRequiredContent;
-
-	_completed = false;
-}
-
-/// Initializes a new abstract instance of the <see cref="Action"/> class.
-/// </summary>
-/// <param name="pID">The id.</param>
-/// <param name="pType">Type of the action.</param>
-/// <param name="pPreconditions">The preconditions.</param>
-/// <param name="pPostcondition">The postcondition.</param>
-/// <param name="pQuestContent">Required content for this action.</param>
-Action::Action(int pID, ActionType pType, std::vector<PreconditionsType> pPreconditions, PostconditionType pPostcondition, std::vector<std::pair<QuestContent, int>> pQuestContent, std::string dialog) :
-	_id(pID), _type(pType), _requiredContent(pQuestContent), _concreteContent(0), _dialog(dialog) {
 	createPreConditions(pPreconditions);
 	createPostConditions(pPostcondition);
 
@@ -262,6 +244,79 @@ void Action::setPreConditionsContent() {
 
 void Action::setPostConditionsContent() {
 	
+}
+
+/// <summary>
+/// Updates the ids of the required content list.
+/// </summary>
+/// <param name="pNewIds">The p new ids.</param>
+void Action::updateIds(std::vector<int> pNewIds) {
+	// need to member the original ids
+	std::vector<int> oldIds;
+
+	// save the old ids and update to the new
+	for (int i = 0; i < _requiredContent.size(); ++i) {
+		oldIds.push_back(_requiredContent[i].second);
+		_requiredContent[i].second = pNewIds[i];
+	}
+
+	// info to replace templates from string
+	QuestContent contentType;
+
+	std::string newInstructionText = "";
+	int id;
+	std::string typeString;
+
+	std::regex expr("([A-Z||a-z]+)([0-9]+)");	 // the template to match
+	std::smatch match;										 // the matches to be found
+
+	while (std::regex_search(_instruction, match, expr)) {
+		// add everything before the found pattern to the return string
+		newInstructionText += match.prefix().str();
+
+		// find the type and the id in the string
+		typeString = match[1].str();
+		id = atoi(match[2].str().c_str());
+
+		// find the enums for all the type strings found
+		for (std::map<std::string, QuestContent>::iterator it = GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.begin();
+			it != GameManager::getSingletonPtr()->getQuestManager()->stringToQuestContentType.end(); ++it) {
+			if (typeString == it->first) {
+				contentType = it->second;
+			}
+		}
+
+		// the replace string contains at least the type string, but the id still needs to be updated
+		std::string replaceString = typeString;
+
+		// find the new id by counting the index of the found id and matching it with the index in the updated requiredcontent list
+		int index = 0;
+		for (int i = 0; i < oldIds.size(); ++i) {
+			if(oldIds[i] == id && _requiredContent[i].first == contentType) {
+				index = pNewIds[i];
+				break;
+			}
+		}
+
+		std::stringstream newId;
+		newId << index;
+
+		replaceString += newId.str();
+
+		// add the replaced text
+		newInstructionText += replaceString;
+
+		// cut the processed part of the instruction
+		_instruction = match.suffix().str();
+	}
+
+	// add the last part to the new instruction if no matches are found anymore
+	if (_instruction != "") {
+		newInstructionText += _instruction;
+	}
+
+	// set the instruction text to the newly build text with updated ids
+	_instruction = newInstructionText;
 }
 
 void Action::sendMsg(IQuestContent* sender, std::string msg) {

@@ -30,6 +30,11 @@ public:
 
 	void sendMsg(IQuestContent* sender, std::string msg);
 
+	std::string getCurrentInstruction() {
+		if (_strategy._currentAction == -1) return "";
+		return _strategy._actionSequence[_strategy._currentAction].getInstruction();
+	}
+
 private:
 	Strategy _strategy;
 	BaseNpc* _sourceNPC;

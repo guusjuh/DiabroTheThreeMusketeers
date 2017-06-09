@@ -83,20 +83,23 @@ void StrategyContainer::readFromXML()
 
 				// get content node
 				tinyxml2::XMLElement* contentNode = actionNode->FirstChildElement("Content");
-				int counter = 0;
+				//int counter = 0;
+				std::vector<int> ids;
 
 				// for loop till no next element
 				for (contentNode; contentNode; contentNode = contentNode->NextSiblingElement()) 
 				{
 					// get content from node
-					int id = contentNode->IntText();
+					ids.push_back(contentNode->IntText());
 
 					// store content in required content map
-					tempAction._requiredContent[counter].second = id;
+					//tempAction._requiredContent[counter].second = id;
 
-					counter++;
+					//counter++;
 				}
 				
+				tempAction.updateIds(ids);
+
 				actions.push_back(tempAction);
 			}
 

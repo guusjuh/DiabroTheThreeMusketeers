@@ -55,19 +55,22 @@ void UIManager::setupUI()
 	_maxWidthBar = _playerHealthBarWidget->getOverlayElement()->getWidth();
 
 	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -90, 90);
-	setQuestOn(false);
 	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getNorth());
 	_miniMap->setValueNorth(angle, calcLocatorPos(angle, _maxWidthBar));
 	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSouth());
 	_miniMap->setValueSouth(angle, calcLocatorPos(angle, _maxWidthBar));
 
-	_floorTextWidget = _uiElementMgr->createFloorText(DiabroUI::TOPLEFT, "FLOORTEXT", "Floor " + Ogre::StringConverter::toString(1), 40, 40);
+	_floorTextWidget = _uiElementMgr->createText(DiabroUI::TOPLEFT, "FloorIndicator", "FloorText", "Floor " + Ogre::StringConverter::toString(1), 40, 40);
+	_questGoalTextWidget = _uiElementMgr->createText(DiabroUI::TOPLEFT, "InstructionIndicator", "QuestGoalText", "Test instruction!", 40, 10);
+	_questGoalTextWidget->getOverlayElement()->setTop(128);
+	_questGoalTextWidget->hide();
 
 	_healthUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Health", "HealthUpgrade", 64, 56);
 	_dmgUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Damage", "DamageUpgrade", 64, 56);
 
 	setUpgradeText(Health);
 	setUpgradeText(Damage);
+	setQuestOn(false);
 
 	_hudTextWidget = nullptr;
 
@@ -343,13 +346,17 @@ void UIManager::setQuestOn(bool val)
 
 	if(!_questOn) {
 		_miniMap->getQuestLocator()->hide();
+		_questGoalTextWidget->hide();
 	}else {
 		_miniMap->getQuestLocator()->show();
+		_questGoalTextWidget->show();
+		_questGoalTextWidget->setText(GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentInstruction());
 	}
 }
 
 void UIManager::setQuestTarget(Ogre::Vector3 position) {
 	_questTargetPos = position;
+	_questGoalTextWidget->setText(GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentInstruction());
 }
 
 /// calculates the position of the locator as an angle

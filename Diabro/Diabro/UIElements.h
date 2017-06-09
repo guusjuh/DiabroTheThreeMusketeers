@@ -332,14 +332,14 @@ namespace DiabroUI
 	public:
 
 		// Do not instantiate any widgets directly. Use UIElementsManager.
-		Text(const Ogre::String& name, const Ogre::DisplayString& text, Ogre::Real width, Ogre::Real height)
+		Text(std::string uiTemplate, const Ogre::String& name, const Ogre::DisplayString& text, Ogre::Real width, Ogre::Real height)
 		{
-			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/FloorIndicator", "Panel", name);
+			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate("UI/" + uiTemplate, "Panel", name);
 			mElement->setWidth(width);
 			mElement->setHeight(height);
 			Ogre::OverlayContainer* container = (Ogre::OverlayContainer*)mElement;
-			mTextArea = (Ogre::TextAreaOverlayElement*)container->getChild(getName() + "/FloorValue");
-			mPadding = 15;
+			mTextArea = (Ogre::TextAreaOverlayElement*)container->getChild(getName() + "/Value" + uiTemplate);
+			mPadding = 10;
 			mText = text;
 			refitContents();
 		}
@@ -1284,10 +1284,10 @@ namespace DiabroUI
 			return tb;
 		}
 
-		Text* createFloorText(AnchorLocation trayLoc, const Ogre::String& name, const Ogre::DisplayString& caption,
+		Text* createText(AnchorLocation trayLoc, std::string uiTemplate, const Ogre::String& name, const Ogre::DisplayString& caption,
 			Ogre::Real width, Ogre::Real height)
 		{
-			Text* tb = new Text(name, caption, width, height);
+			Text* tb = new Text(uiTemplate, name, caption, width, height);
 			moveWidgetToTray(tb, trayLoc);
 			return tb;
 		}
