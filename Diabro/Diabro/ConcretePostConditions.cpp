@@ -2,12 +2,12 @@
 #include "Debug.h"
 #include "Action.h"
 
-void PostYouThere::update() {
+void PostYouInfo::update() {
 	if (queuedMsgs.size() > 0) {
 		for (int i = 0; i < queuedMsgs.size(); ++i) {
-			if (queuedMsgs[i].second == Action::msgCityReached) {
+			if (queuedMsgs[i].first == npcWithInfo && queuedMsgs[i].second == Action::msgPlayerInfo) {
 				_isMet = true;
-				Debug("Post - you there - completed");
+				Debug("Post - you info - completed");
 			}
 		}
 		queuedMsgs.clear();
@@ -26,12 +26,12 @@ void PostYouHaveItem::update() {
 	}
 }
 
-void PostYouInfo::update() {
+void PostYouThere::update() {
 	if (queuedMsgs.size() > 0) {
 		for (int i = 0; i < queuedMsgs.size(); ++i) {
-			if (queuedMsgs[i].second == Action::msgPlayerInfo) {
+			if (queuedMsgs[i].first == city && queuedMsgs[i].second == Action::msgCityReached) {
 				_isMet = true;
-				Debug("Post - you info - completed");
+				Debug("Post - you there - completed");
 			}
 		}
 		queuedMsgs.clear();
@@ -53,7 +53,7 @@ void PostTheyInfo::update() {
 void PostTheyHaveItem::update() {
 	if (queuedMsgs.size() > 0) {
 		for (int i = 0; i < queuedMsgs.size(); ++i) {
-			if (queuedMsgs[i].second == Action::msgNpcItem) {
+			if (queuedMsgs[i].first == npc && queuedMsgs[i].second == Action::msgNpcItem) {
 				_isMet = true;
 				Debug("Post - they have item - completed");
 			}
@@ -65,7 +65,7 @@ void PostTheyHaveItem::update() {
 void PostTheyDead::update() {
 	if (queuedMsgs.size() > 0) {
 		for (int i = 0; i < queuedMsgs.size(); ++i) {
-			if (queuedMsgs[i].second == Action::msgEnemyDead) {
+			if (queuedMsgs[i].first == enemy && queuedMsgs[i].second == Action::msgEnemyDead) {
 				_isMet = true;
 				Debug("Post - they dead - completed");
 			}

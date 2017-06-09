@@ -45,6 +45,7 @@ Action::~Action() {}
 
 void Action::start() {
 	setPreConditionsContent();
+	setPostConditionsContent();
 
 	// make pre conditions happen
 	std::map<PreconditionsType, PreCondition*>::iterator it;
@@ -231,11 +232,45 @@ void Action::setPreConditionsContent() {
 			break;
 		}
 	}
-	
 }
 
 void Action::setPostConditionsContent() {
-	
+	switch (_postcondition.first) {
+	case YouHaveTheItem:
+		break;
+	case TheyHaveTheItem:
+		for (int j = 0; j < _concreteContent.size(); ++j) {
+			if (_concreteContent[j].first->getType() == NPCQC) {
+				((PostTheyHaveItem*)_postcondition.second)->npc = _concreteContent[j].first;
+			}
+		}
+		break;
+	case YouInfo:
+		for (int j = 0; j < _concreteContent.size(); ++j) {
+			if (_concreteContent[j].first->getType() == NPCQC) {
+				((PostYouInfo*)_postcondition.second)->npcWithInfo = _concreteContent[j].first;
+			}
+		}
+		break;
+	case TheyInfo:
+		break;
+	case YouThere:
+		for (int j = 0; j < _concreteContent.size(); ++j) {
+			if (_concreteContent[j].first->getType() == TownQC) {
+				((PostYouThere*)_postcondition.second)->city = _concreteContent[j].first;
+			}
+		}
+		break;
+	case TheyDead:
+		for (int j = 0; j < _concreteContent.size(); ++j) {
+			if (_concreteContent[j].first->getType() == TownQC) {
+				((PostTheyDead*)_postcondition.second)->enemy = _concreteContent[j].first;
+			}
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 /// <summary>

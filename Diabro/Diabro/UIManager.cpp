@@ -235,7 +235,7 @@ void UIManager::hideHUDText()
 void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 	if (_hudTextWidget != nullptr) hideHUDText();
 
-	_mDialogTextArea = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "DialogTextArea", "Press 'SPACE' to continue.", pNPCName, 400, 400);
+	_mDialogTextArea = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "DialogTextArea", pNPCName, "Press 'SPACE' to continue.", 400, 400);
 	_mDialogTextArea->setText(pDialogText);
 	_dialogOn = true;
 }
