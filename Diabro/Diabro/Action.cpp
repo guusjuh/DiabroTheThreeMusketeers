@@ -1,16 +1,8 @@
 #include "Action.h"
 #include "Debug.h"
-#include "PreSomethingThere.h"
 #include "GameManager.h"
-#include "PostYouHaveItem.h"
-#include "PreKnowWhereToGo.h"
-#include "PostYouThere.h"
-#include "PreSomebodyThere.h"
-#include "PreYouItemOfInterest.h"
-#include "PostTheyHaveItem.h"
-#include "PostYouInfo.h"
-#include "PostTheyInfo.h"
-#include "PostTheyDead.h"
+#include "ConcretePostConditions.h"
+#include "ConcretePreConditions.h"
 #include <regex>
 #include <string>
 
