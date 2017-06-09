@@ -49,10 +49,57 @@
 </Strategy>
 
 <Strategy>
+	<ID>2</ID>
+	<NameStrat>Obtain luxuries</NameStrat>
+	<QuestName> The journey for the beautiful 'QuestItemQC1' </QuestName>
+	<StartDialog>I have heard about this beautiful 'QuestItemQC1'. I desire to have it. \n Bring it to me, peasant!</StartDialog>
+	<NeedType>Comfort</NeedType>
+	<Actions>
+		<Action>
+			<ID>5</ID>
+			<Dialog>In the remains of your enemy, you found 'QuestItemQC1'.</Dialog>
+			<Content>2</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Dialog>Oh my, 'QuestItemQC1' is even more beautiful than I could imagine. \nThanks a lot for obtaining it for me!</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+	</Actions>
+	<RarityPref>1</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>3</ID>
+	<NameStrat>Kill pests</NameStrat>
+	<QuestName> The harrassement of 'NPCQC1' </QuestName>
+	<StartDialog>Two squared bastards have been harrassing me forever, but I can't do anything about it. Please kill them for me. \n Thank you so much, now be on your way.</StartDialog>
+	<NeedType>Comfort</NeedType>
+	<Actions>
+		<Action>
+			<ID>9</ID>
+			<Dialog>That wasn't so hard was it? \nI should report back to 'NPCQC1' and tell him that he's save now.</Dialog>
+			<Content>1</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>11</ID>
+			<Dialog>I was so scared of them! \nThank you so much, I can finally sleep safely again.</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+
+<Strategy>
 	<ID>5</ID>
 	<NameStrat>Kill enemies</NameStrat>
 	<QuestName>The slaughter of the squared bastard</QuestName>
-	<StartDialog>That squared bastard has been harrassing me forever, but I can't do anything about it. \nPlease kill him for me.</StartDialog>
+	<StartDialog>I bet you're not so strong as you say, haha! \nYou think I'm wrong? Than prove yourself! \nSlaughter that one squared bastard and I will reward you.</StartDialog>
 	<NeedType>Reputation</NeedType>
 	<Actions>
 		<Action>
@@ -63,7 +110,7 @@
 		</Action>
 		<Action>
 			<ID>11</ID>
-			<Dialog>Thank you so much! I was so scared of that squared bastard.. \nHe's better of dead.</Dialog>
+			<Dialog>So you are good for something! \nGood job killing that bastard.</Dialog>
 			<Content>1</Content>
 			<Content>1</Content>
 		</Action>
