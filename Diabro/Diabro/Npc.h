@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Needs.h"
 #include "Quest.h"
+#include "NpcWanderState.h"
 
 /// <summary>
 /// Enum for the different professions of NPC's. An important variable for the quest system. 
@@ -84,8 +85,6 @@ private:
 	Profession _profession;			//!< The profession of the NPC, used to generate relevant quests.
 	City* _hometown;
 	Building* _home;
-
-	RealCoordinate _randomTownPos;
 
 	void adjustNeed(NeedType, int);
 	void needNewQuest();

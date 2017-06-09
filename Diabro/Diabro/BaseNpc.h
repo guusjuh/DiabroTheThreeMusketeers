@@ -26,6 +26,7 @@ public:
 	void walkTo(Ogre::Vector3);
 
 	StateMachine<BaseNpc> stateMachine;
+	std::map<std::string, State<BaseNpc>*> possibleStates;
 
 	int getNextPosSize() { return nextPos.size(); }
 	Coordinate getGoalPos() { return goalPos; }
@@ -88,6 +89,6 @@ private:
 
 	float _wantedRotationAngle;
 
-	void wander(); 	
+	void wander();
 };
 #endif

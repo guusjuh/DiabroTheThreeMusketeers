@@ -163,6 +163,9 @@
     <ClCompile Include="Node.cpp">
       <Filter>Sources\Characters\A%2a</Filter>
     </ClCompile>
+    <ClCompile Include="NpcWanderState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -351,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>Headers\Characters\A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcWanderState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,10 @@
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
 : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding), _initialized(false)
 {
+	// set the states of the FSM
+	possibleStates["Wander"] = new NpcWanderState();
+	_initialized = false;
+
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
 	
@@ -126,7 +130,6 @@ std::vector<std::string> Npc::getNameOptions() {
 /// <param name="pDeltatime">The time since last frame.</param>
 void Npc::update(Ogre::Real pDeltatime)
 {
-
 	// if we don't have a quest yet and we arn't initialized
 	// this is contained in the update due to order problems when done in constructor
 	if (!_hasQuest && !_initialized) {
@@ -136,33 +139,8 @@ void Npc::update(Ogre::Real pDeltatime)
 			needNewQuest();
 			_hasQuest = true;
 		}
+		stateMachine = StateMachine<BaseNpc>(this, "Wander", possibleStates);
 		_initialized = true;
-	}
-
-	if(_playerDetected)
-	{
-		_dirVec = Ogre::Vector3::ZERO;
-	} else {
-		if(_dirVec == Ogre::Vector3::ZERO) _dirVec = Ogre::Vector3(1, 0, 0);
-
-		if (getPosition().distance(Ogre::Vector3(getGoalPos().x, getPosition().y, getGoalPos().z)) < 50) {
-			if (getNextPosSize() == 0) {
-				_randomTownPos = _myCity->getNpcPosition();
-				Ogre::Vector3 pos = Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz);
-				Ogre::Vector3 goalPosition = Ogre::Vector3(getGoalPos().x / getCity()->Scalar(), getPosition().y, getGoalPos().z / getCity()->Scalar());
-				while (goalPosition.distance(pos) < 1) {
-					_randomTownPos = _myCity->getNpcPosition();
-					pos = Ogre::Vector3(_randomTownPos.rx, getPosition().y, _randomTownPos.rz);
-				}
-				pos.x = pos.x / Zone::scalar * City::gridScalar;
-				pos.z = pos.z / Zone::scalar * City::gridScalar;
-
-				calculateAStar(pos);
-			}
-			else {
-				walkToNextPoint();
-			}
-		}
 	}
 
 	BaseNpc::update(pDeltatime);
