@@ -56,7 +56,6 @@
 	<Type>RawMaterial</Type>
 </BaseQuestItem>
 
-
 <BaseQuestItem>
 	<Name>Diamond</Name>
 	<SpriteName>/</SpriteName>
@@ -74,7 +73,6 @@
 	<SpriteName>/</SpriteName>
 	<Type>Gem</Type>
 </BaseQuestItem>
-
 
 <BaseQuestItem>
 	<Name>Mysterious Book</Name>

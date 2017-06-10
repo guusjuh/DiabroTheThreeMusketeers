@@ -70,7 +70,7 @@ private:
 			_rarity = 1;
 			break;
 		case Mysterious:
-			_rarity = 1;
+			_rarity = 2;
 			break;
 		default:
 			_rarity = 0;
