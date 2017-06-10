@@ -16,6 +16,15 @@ template container BorderPanel(UI/Tray)
 	border_bottomright_uv 0.75 0.75 1.00 1.00
 }
 
+template container Panel(UI/Logo)
+{
+	metrics_mode pixels
+	material UI/LogoImg
+	uv_coords 0.0 0.0 1.0 1.0
+	height 200
+	width 300
+}
+
 template container BorderPanel(UI/PlayerHealthBar)
 {
 	metrics_mode pixels

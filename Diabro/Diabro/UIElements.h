@@ -632,7 +632,7 @@ namespace DiabroUI
 		// Do not instantiate any widgets directly. Use UIElementsManager.
 		ImageWidget(const Ogre::String& name, const Ogre::String& templateName)
 		{
-			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate(templateName, "BorderPanel", name);
+			mElement = Ogre::OverlayManager::getSingleton().createOverlayElementFromTemplate(templateName, "Panel", name);
 		}
 	};
 

@@ -6,8 +6,6 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 #include "SdkTrays.h"
-#include "Tree.h"
-
 
 //---------------------------------------------------------------------------
 
@@ -76,9 +74,9 @@ void GameManager::createScene(void)
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	currentState = Start;
+	currentState = (GameState)0;
 	previousState = currentState;
-	//_uiManager->startState();
+	goToState(MainMenu);
 }
 
 /// <summary>
@@ -100,7 +98,6 @@ void GameManager::nextFloor() {
 	left = false;
 	right = false;
 }
-
 
 /// <summary>
 /// Resets the game.
@@ -230,7 +227,12 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
 	if (pKE.key == OIS::KC_ESCAPE) mShutDown = true;
 
-	if (currentState != InGame && currentState != Paused) return false;
+	if (currentState != InGame && currentState != Paused && currentState != MainMenu) return false;
+
+	if(currentState == MainMenu) {
+		goToState(Start);
+		return true;
+	}
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 

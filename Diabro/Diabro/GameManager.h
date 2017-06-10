@@ -59,8 +59,15 @@ public:
 		if(pState == Paused) {
 			_uiManager->showPauseScreen();
 		}
-		if(currentState == Paused && pState != Paused) {
+		else if(currentState == Paused) {
 			_uiManager->hidePauseScreen();
+		}
+
+		if (pState == MainMenu) {
+			_uiManager->showMainMenu();
+		}
+		else if (currentState == MainMenu) {
+			_uiManager->hideMainMenu();
 		}
 
 		previousState = currentState;

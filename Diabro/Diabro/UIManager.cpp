@@ -402,6 +402,8 @@ void UIManager::resetUpgradeText() {
 void UIManager::showPauseScreen() {
 	hideAllIngameElements();
 
+	_uiElementMgr->showBackdrop("UI/PauseBackdrop");
+
 	// title: game is paused
 	Ogre::String pausedString = "The game is paused.";
 	int count = pausedString.length();  				// count the symbols in text
@@ -430,6 +432,38 @@ void UIManager::hidePauseScreen() {
 	// information panel
 	_uiElementMgr->destroyWidget("InformationTextArea");
 	_informationTextBox = nullptr;
+
+	_uiElementMgr->hideBackdrop();
+
+	showAllIngameElements();
+}
+
+void UIManager::showMainMenu() {
+	hideAllIngameElements();
+
+	// background img
+	_uiElementMgr->showBackdrop("UI/MenuBackdrop");
+
+	// start game txt
+	Ogre::String startTxt = "Press any key to start playing!";
+	int count = startTxt.length();  				// count the symbols in text
+	float width = count * 14.25f;
+	_startGameTextElement = _uiElementMgr->createHUDText(DiabroUI::BOTTOM, "StartGameText", startTxt, width, 40);
+
+	_startGameTextElement->getOverlayElement()->setTop(-128);
+
+	// logo
+	_logoImg = _uiElementMgr->createDecorWidget(DiabroUI::TOP, "Logo", "UI/Logo");
+}
+
+void UIManager::hideMainMenu() {
+	_uiElementMgr->destroyWidget("StartGameText");
+	_startGameTextElement = nullptr;
+
+	_uiElementMgr->destroyWidget("Logo");
+	_logoImg = nullptr;
+
+	_uiElementMgr->hideBackdrop();
 
 	showAllIngameElements();
 }

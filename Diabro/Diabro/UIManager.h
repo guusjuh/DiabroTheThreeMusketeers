@@ -2,9 +2,6 @@
 #define UI_MANAGER_H_
 
 #pragma once
-#include <OgreBillboardSet.h>
-#include "BaseApplication.h"
-#include "SdkTrays.h"
 #include "UIElements.h"
 #include "EnemyUpgrade.h"
 
@@ -53,6 +50,9 @@ public:
 
 	void showPauseScreen();
 	void hidePauseScreen();
+	
+	void showMainMenu();
+	void hideMainMenu();
 
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
@@ -95,6 +95,9 @@ private:
 	DiabroUI::HUDText*			_pauseText;
 	DiabroUI::TextBox*	_informationTextBox;
 
+	// MAIN MENU ELEMENTS
+	DiabroUI::HUDText*			_startGameTextElement;
+	DiabroUI::ImageWidget*		_logoImg;
 
 	bool showStoryText(std::vector<std::string>, float);
 
