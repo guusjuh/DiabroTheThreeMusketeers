@@ -22,7 +22,7 @@ public:
 	void start();
 	void update();
 	void end();
-	void abondon();
+	void abandon();
 
 	bool isAbstract() { return _strategy.isAbstract(); }
 

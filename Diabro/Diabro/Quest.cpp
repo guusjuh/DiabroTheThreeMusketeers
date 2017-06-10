@@ -75,8 +75,14 @@ void Quest::end() {
 /// <summary>
 /// Abondons the quest.
 /// </summary>
-void Quest::abondon() {
+void Quest::abandon() {
+	// the quest needs to be ended without getting the rewards
+	_strategy.abandon();
+
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
+
+	// still set completed to avoid getting back at this quest again
+	_completed = true;
 }
 
 /// <summary>

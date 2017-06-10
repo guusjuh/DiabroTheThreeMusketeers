@@ -29,7 +29,7 @@ public:
 	void reset() {
 		if(_currentQuest != nullptr) {
 			// abondon quet
-			_currentQuest->abondon();
+			_currentQuest->abandon();
 			_currentQuest = nullptr;
 		}
 

@@ -250,6 +250,9 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 		
 	case OIS::KC_LSHIFT:
+		if(_questManager->getCurrentQuest()) {
+			_questManager->getCurrentQuest()->abandon();
+		}
 		break;
 
 	case OIS::KC_E:

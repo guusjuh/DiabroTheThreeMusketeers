@@ -53,8 +53,6 @@ void Action::start() {
 		if(it->second == nullptr) continue;
 		it->second->start();
 	}
-
-	// check for pre conditions being true
 }
 
 void Action::update() {
@@ -76,6 +74,31 @@ void Action::end() {
 		if (_concreteContent[i].first == nullptr) 
 			return;
 		_concreteContent[i].first->setRelevantForAction(false);
+	}
+}
+
+void Action::abandon() {
+	// finalize the action.
+	for (int i = 0; i < _concreteContent.size(); ++i) {
+		if (_concreteContent[i].first == nullptr)
+			return;
+		_concreteContent[i].first->setRelevantForAction(false);
+
+		// set variables regarding items so that next actions cannot be completed
+		if (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->hasItem()) {
+			GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->resetItem();
+		}
+
+		if (_concreteContent[i].first->getType() == EnemyQC) {
+			if (((BasicEnemy*)_concreteContent[i].first)->hasItem()) {
+				((BasicEnemy*)_concreteContent[i].first)->resetItem();
+			}
+		}
+		else if (_concreteContent[i].first->getType() == NPCQC) {
+			if (((Npc*)_concreteContent[i].first)->hasItem()) {
+				((Npc*)_concreteContent[i].first)->resetItem();
+			}
+		}
 	}
 }
 
@@ -263,7 +286,7 @@ void Action::setPostConditionsContent() {
 		break;
 	case TheyDead:
 		for (int j = 0; j < _concreteContent.size(); ++j) {
-			if (_concreteContent[j].first->getType() == TownQC) {
+			if (_concreteContent[j].first->getType() == EnemyQC) {
 				((PostTheyDead*)_postcondition.second)->enemy = _concreteContent[j].first;
 			}
 		}

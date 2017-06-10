@@ -57,6 +57,15 @@ public:
 
 	bool isAbstract() { return _actionSequence[0].getConcreteContent().size() == 0 ? true : false; }
 
+	void abandon() {
+		// end the current action
+		if (_currentAction >= 0) {
+			_actionSequence[_currentAction].abandon();
+		}
+
+		_currentAction = -1;
+	}
+
 private:
 	int _id;
 	std::string _nameStrategy;

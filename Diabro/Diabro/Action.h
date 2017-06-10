@@ -129,6 +129,8 @@ private:
 	std::string _instruction;
 
 	bool _completed;
+
+	void abandon();
 };
 
 #endif

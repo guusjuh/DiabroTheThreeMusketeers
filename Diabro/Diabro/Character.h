@@ -5,7 +5,6 @@
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
 #include "BaseApplication.h"
-#include "QuestItem.h"
 #include "Zone.h"
 #include "Debug.h"
 
@@ -16,6 +15,7 @@
 /// </summary>
 class Character
 {
+	friend class Action;
 public:
 	Character(Ogre::SceneNode*, Ogre::Entity*);
 	Character() : _hasItem(false), _needToGiveItem(false) {}
@@ -105,6 +105,11 @@ protected:
 	bool gotHitTimerActive;
 
 	float _radius;
+
+	void resetItem() {
+		_hasItem = false;
+		_needToGiveItem = false;
+	}
 
 private:
 };
