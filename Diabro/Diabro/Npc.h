@@ -6,6 +6,7 @@
 #include "Needs.h"
 #include "Quest.h"
 #include "NpcWanderState.h"
+#include "NpcFollowPlayerState.h"
 
 /// <summary>
 /// Enum for the different professions of NPC's. An important variable for the quest system. 

@@ -124,6 +124,7 @@
     <ClCompile Include="EnemyFollowDirectState.cpp" />
     <ClCompile Include="EnemyWalkToPointNearPlayerState.cpp" />
     <ClCompile Include="IQuestContent.cpp" />
+    <ClCompile Include="NpcFollowPlayerState.cpp" />
     <ClCompile Include="NpcWanderState.cpp" />
     <ClCompile Include="PostCondition.cpp" />
     <ClCompile Include="PostTheyHaveItem.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="IDecorator.h" />
     <ClInclude Include="IEnemyEquipment.h" />
     <ClInclude Include="IPlayerEquipment.h" />
+    <ClInclude Include="NpcFollowPlayerState.h" />
     <ClInclude Include="NpcWanderState.h" />
     <ClInclude Include="PlayerDamageUpgrade.h" />
     <ClInclude Include="PlayerEquipment.h" />

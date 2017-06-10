@@ -11,6 +11,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 {
 	// set the states of the FSM
 	possibleStates["Wander"] = new NpcWanderState();
+	possibleStates["FollowPlayer"] = new NpcFollowPlayerState();
 	_initialized = false;
 
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
