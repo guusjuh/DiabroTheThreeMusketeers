@@ -141,6 +141,16 @@ int Action::contentContains(QuestContent type) {
 	return -1;
 }
 
+int Action::contentContains(IQuestContent* content) {
+	for (int i = 0; i < _concreteContent.size(); ++i) {
+		if (_concreteContent[i].first == content) {
+			return i;
+		}
+	}
+
+	return -1;
+}
+
 void Action::createPreConditions(std::vector<PreconditionsType> precontypes) {
 	for (int i = 0; i < precontypes.size(); ++i) {
 		PreCondition* precondition = nullptr;

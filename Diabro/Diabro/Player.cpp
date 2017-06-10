@@ -232,7 +232,7 @@ void Player::dialogTriggered() {
 	}
 	_inDialog = true;
 
-	if (!_nearbyNPC->talk(getPosition())) {
+	if (!_nearbyNPC->talk()) {
 		if (_hasItem && _needToGiveItem && _nearbyNPC->relevantForAction()) {
 			giveItem(_nearbyNPC);
 		} 

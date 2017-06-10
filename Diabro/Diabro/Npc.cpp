@@ -2,7 +2,7 @@
 #include "GameManager.h"
 
 const std::string Npc::_nameOptions[26] = { "Gleann", "Wolter", "Jesper", "Gus", "Fredo", "Kelvin", "Mike", "Resa",
-										  "Charry", "Jule", "Dalwin", "Alexia", "Anderson", "Dora", "Jordan", "Deric",
+										  "Charry", "Jule", "Darwin", "Alexia", "Anderson", "Dora", "Jordan", "Deric",
 										  "Richael", "Sassia", "Greg", "Bonney", "Marlin", "Marlene", "Gustik",
 										  "Mufo", "Jerico", "Marloes"};
 
@@ -14,7 +14,7 @@ std::vector<std::string> Npc::_usedNameOptions;
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
-: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding), _initialized(false)
+: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _hometown(pMyCity), _home(pBuilding), _initialized(false)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
@@ -190,55 +190,7 @@ void Npc::collide() {
 	walkToNeighbour();
 }
 
-/// <param name="pPlayerPos">The current player position.</param>
-/// <returns>False if the player is too far away to start a talk</returns>
-bool Npc::talk(Ogre::Vector3 pPlayerPos)
-{
-	// start the dialog if it wasn't started already
-	if (!_inDialog) {
-		// this npc is currently in dialog
-		_inDialog = true;
 
-		// if this NPC has a quest 
-		if (_relevantForAction) {
-			setDialog(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this));
-		}
-		else if (_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
-			// if this quest can be started
-				// get the dialog for starting the quest
-			setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
-			_hasQuest = false;
-			indicatorNode->setVisible(false);
-		}
-		// else if // do i have text in the current quest?
-		else {
-			_dialog = getStndrtDialog();
-		}
-
-		// show the first line of the dialog
-		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, _dialog[_dialogCount]);
-	}
-	else {
-		_dialogCount++;
-		if (_dialogCount < _dialog.size()) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_dialog[_dialogCount]);
-		}
-		else {
-			if (_hasItem && _needToGiveItem) {
-				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
-			}
-			else if (_relevantForAction) {
-				GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerInfo);
-			}
-
-			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
-			_dialogCount = 0;
-			_inDialog = false;
-		}
-	}
-
-	return _inDialog;
-}
 
 /// <summary>
 /// Adjusts the given need.
@@ -273,10 +225,30 @@ void Npc::needNewQuest() {
 	lowestNeed.adjustValue(50);
 }
 
+/// <param name="pPlayerPos">The current player position.</param>
+/// <returns>False if the player is too far away to start a talk</returns>
+bool Npc::talk()
+{
+	if (!_inDialog) {
+		// this npc is currently in dialog
+		_inDialog = true;
 
-void Npc::recieveItem() {
-	Character::recieveItem();
+		// if this quest can be started
+		if (_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
+			//TODO: this variable should be set when the quest is over and there is actually not a quest anymore
+			indicatorNode->setVisible(false);
+		}
 
-	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgNpcItem);
+		setDialog(GameManager::getSingletonPtr()->getDialogManager()->getDialogText(this));
+
+		// show the first line of the dialog
+		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, _dialog[_dialogCount]);
+	}
+	else {
+		BaseNpc::talk();
+	}
+
+	return _inDialog;
 }
+
 

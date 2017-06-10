@@ -29,7 +29,7 @@
 	<ID>1</ID>
 	<NameStrat>Interview NPC</NameStrat>
 	<QuestName> The 'NPCQC2' that knew </QuestName>
-	<StartDialog>'NPCQC2' knows something, but he won't tell me. Can you go talk to him? Maybe he will tell you. \n Thank you! Don't tell him you know me.</StartDialog>
+	<StartDialog>'NPCQC2' knows something, but he won't tell me. Can you go talk to him? Maybe he will tell you. \nThank you! Don't tell him you know me.</StartDialog>
 	<NeedType>Knowledge</NeedType>
 	<Actions>
 		<Action>			

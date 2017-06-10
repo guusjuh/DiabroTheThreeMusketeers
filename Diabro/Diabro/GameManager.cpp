@@ -14,7 +14,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), 
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0),
 up(false), down(false), left(false), right(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
 //---------------------------------------------------------------------------
 /// <summary>
@@ -25,6 +25,8 @@ GameManager::~GameManager()
 	delete _gameTimer;
 	delete _levelManager;
 	delete _uiManager;
+	delete _questManager;
+	delete _dialogManager;
 }
 
 //---------------------------------------------------------------------------
@@ -56,6 +58,8 @@ GameManager& GameManager::getSingleton(void)
 void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
+
+	_dialogManager = new DialogManager();
 
 	_levelManager = new LevelManager();
 	_levelManager->initialize();

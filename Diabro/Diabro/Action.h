@@ -91,6 +91,7 @@ public:
 	std::vector<QuestContent> getRequiredContentTypes();
 	IQuestContent* getTarget();
 	int contentContains(QuestContent type);
+	int contentContains(IQuestContent* content);
 
 	bool isAbstract() { return getConcreteContent().size() == 0 ? true : false; }
 

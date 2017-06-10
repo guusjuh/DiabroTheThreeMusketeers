@@ -15,6 +15,7 @@ Filename:    GameManager.h
 #include <ctime>
 #include "QuestManager.h"
 #include "SoundManager.h"
+#include "DialogManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -82,6 +83,7 @@ public:
 	UIManager* getUIManager(void) { return _uiManager; }
 	QuestManager* getQuestManager(void) { return _questManager; }
 	SoundManager* getSoundManager(void) { return _soundManager; }
+	DialogManager* getDialogManager(void) { return _dialogManager; }
 
 	int getRandomInRange(int pLO, int pHI) {
 		if (pHI == 0) return 0;
@@ -113,6 +115,7 @@ private:
 	UIManager* _uiManager;
 	QuestManager* _questManager;
 	SoundManager* _soundManager;
+	DialogManager* _dialogManager;
 
 	Ogre::Timer* _gameTimer;
 

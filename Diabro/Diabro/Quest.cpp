@@ -27,6 +27,8 @@ Quest::~Quest() {}
 /// Starts the quest.
 /// </summary>
 void Quest::start() {	
+	((Npc*)_sourceNPC)->_hasQuest = false;
+
 	// set the first action as current
 	_strategy.increaseAction();
 
@@ -68,7 +70,7 @@ void Quest::end() {
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-_healthReward);
 
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
-	Debug("\tQuest: I am complete!");
+	Debug("\tQuest: I aaaaaam compleeeeeteeee!");
 	_completed = true;
 }
 

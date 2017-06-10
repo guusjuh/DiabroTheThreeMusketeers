@@ -139,6 +139,9 @@
     <ClCompile Include="ConcretePostConditions.cpp">
       <Filter>Sources\Quest\Conditions\Post</Filter>
     </ClCompile>
+    <ClCompile Include="DialogManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -303,6 +306,9 @@
     </ClInclude>
     <ClInclude Include="ConcretePreConditions.h">
       <Filter>Headers\Quests\Conditions\Pre</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogManager.h">
+      <Filter>Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

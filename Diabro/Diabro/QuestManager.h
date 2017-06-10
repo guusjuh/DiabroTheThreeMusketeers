@@ -54,6 +54,7 @@ public:
 	std::string startQuest(Npc* sourceNpc);
 
 	std::string obtainDialog(IQuestContent* client);
+	std::string obtainDialog(IQuestContent* client, int actionNr);
 
 	// maps a string to an enum to enable parsing of xml files. 
 	std::map<std::string, ActionType> stringToActionType;
