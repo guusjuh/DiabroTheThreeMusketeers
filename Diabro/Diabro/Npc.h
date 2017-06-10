@@ -91,7 +91,10 @@ private:
 	void adjustNeed(NeedType, int);
 	void needNewQuest();
 
-	std::vector<std::string> getNameOptions();
+	std::string getRandomName();
+
+	static const std::string _nameOptions[];
+	static std::vector<std::string> _usedNameOptions;
 
 	void setRelevantForAction(bool val) override{
 		// don't change if u don't have to

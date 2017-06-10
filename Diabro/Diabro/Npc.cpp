@@ -1,6 +1,13 @@
 #include "Npc.h"
 #include "GameManager.h"
 
+const std::string Npc::_nameOptions[26] = { "Gleann", "Wolter", "Jesper", "Gus", "Fredo", "Kelvin", "Mike", "Resa",
+										  "Charry", "Jule", "Dalwin", "Alexia", "Anderson", "Dora", "Jordan", "Deric",
+										  "Richael", "Sassia", "Greg", "Bonney", "Marlin", "Marlene", "Gustik",
+										  "Mufo", "Jerico", "Marloes"};
+
+std::vector<std::string> Npc::_usedNameOptions;
+
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
 /// </summary>
@@ -61,7 +68,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 		tempNeeds.push_back(tempNeed);
 	};
 
-	_name = getNameOptions()[GameManager::getSingletonPtr()->getRandomInRange(0, getNameOptions().size())];
+	_name = getRandomName();
 	_needs = NeedSet(tempNeeds);
 
 	_hasQuest = false;
@@ -85,39 +92,41 @@ Npc::~Npc() {
 /// Gets the name options.
 /// </summary>
 /// <returns></returns>
-std::vector<std::string> Npc::getNameOptions() {
-	std::vector<std::string> _nameOptions;
-	_nameOptions.push_back("Gleann");
-	_nameOptions.push_back("Wolter");
-	_nameOptions.push_back("Jesper");
-	_nameOptions.push_back("Gus");
-	_nameOptions.push_back("Fredo");
-	_nameOptions.push_back("Kelvin");
-	_nameOptions.push_back("Mike");
-	_nameOptions.push_back("Resa");
+std::string Npc::getRandomName() {
+	std::vector<std::string> _currOptions;
+	std::string _returnName;
 
-	_nameOptions.push_back("Charry");
-	_nameOptions.push_back("Jule");
-	_nameOptions.push_back("Dalwin");
+	// find all names that aren't used yet 
+	bool occured = false;
+	int lengthNameOptions = sizeof(_nameOptions) / sizeof(_nameOptions[0]);
 
-	_nameOptions.push_back("Alexia");	// alexander
-	_nameOptions.push_back("Anderson");	// anders
-	_nameOptions.push_back("Dora");		// nora
-	_nameOptions.push_back("Jordan");	// joris
-	_nameOptions.push_back("Deric");	// eric
-	_nameOptions.push_back("Richael");	// richard
-	_nameOptions.push_back("Sassia");	// saskia
-	_nameOptions.push_back("Greg");		// reggie
-	_nameOptions.push_back("Bonney");	// bonnee
-	_nameOptions.push_back("Marlin");	// marianne
-	_nameOptions.push_back("Marlene");	// irene
+	for (int i = 0; i < lengthNameOptions; ++i) {
+		occured = false;
 
-	_nameOptions.push_back("Gustik");
-	_nameOptions.push_back("Mufo");
-	_nameOptions.push_back("Jerico");
-	_nameOptions.push_back("Marloes");
+		for (int j = 0; j < _usedNameOptions.size(); ++j) {
+			if(_nameOptions[i] == _usedNameOptions[j]) {
+				occured = true;
+			}
+		}
 
-	return _nameOptions;
+		if (!occured) _currOptions.push_back(_nameOptions[i]);
+	}
+
+	// if there are no available names anymore, start reusing
+	if(_currOptions.size() == 0) {
+		_usedNameOptions.clear();
+		
+		// call this method again 
+		// now that the vector is empty, names will be reused
+		_returnName = getRandomName();
+	} 
+	else {
+		_returnName = _currOptions[GameManager::getSingletonPtr()->getRandomInRange(0, _currOptions.size())];
+	}
+
+	_usedNameOptions.push_back(_returnName);
+
+	return _returnName;
 }
 
 /// <summary>

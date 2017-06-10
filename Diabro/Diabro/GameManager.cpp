@@ -8,6 +8,7 @@ Filename:    GameManager.cpp
 #include "SdkTrays.h"
 #include "Tree.h"
 
+
 //---------------------------------------------------------------------------
 
 /// <summary>
@@ -15,9 +16,8 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), up(false), down(false), left(false), right(false)
-{
-}
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), 
+up(false), down(false), left(false), right(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
 //---------------------------------------------------------------------------
 /// <summary>
 /// Finalizes an instance of the <see cref="GameManager"/> class.
@@ -163,7 +163,7 @@ void GameManager::createCamera()
 void GameManager::createViewports()
 {
 	// add a viewport
-	vp = mWindow->addViewport(mCamera);
+	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
 
 	// set background viewport
 	vp->setBackgroundColour(Ogre::ColourValue(0.278f, 0.368f, 0.482f));
@@ -211,6 +211,13 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		break;
 	}
 
+	if(_abandonedQuestPressed) {
+		_abandonTimer -= pFE.timeSinceLastFrame;
+		if(_abandonTimer < 0) {
+			_abandonedQuestPressed = false;
+		}
+	}
+
 	return ret;
 }
 
@@ -249,9 +256,16 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		right = true;
 		break;
 		
-	case OIS::KC_LSHIFT:
+	case OIS::KC_Q:
 		if(_questManager->getCurrentQuest()) {
-			_questManager->getCurrentQuest()->abandon();
+			if(_abandonedQuestPressed) {
+				_questManager->getCurrentQuest()->abandon();
+			}
+			else {
+				_uiManager->showHUDText("Press 'Q' again to abandon your current quest.", 1.0f);
+				_abandonedQuestPressed = true;
+				_abandonTimer = _totalTimeBeforeAbandon;
+			}
 		}
 		break;
 

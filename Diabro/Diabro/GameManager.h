@@ -75,7 +75,6 @@ public:
 	UIManager* getUIManager(void) { return _uiManager; }
 	QuestManager* getQuestManager(void) { return _questManager; }
 	SoundManager* getSoundManager(void) { return _soundManager; }
-	Ogre::Viewport* getViewport() { return vp; }
 
 	int getRandomInRange(int pLO, int pHI) {
 		if (pHI == 0) return 0;
@@ -113,7 +112,9 @@ private:
 	GameState currentState;
 	GameState previousState;
 
-	Ogre::Viewport* vp;
+	bool _abandonedQuestPressed;
+	float _abandonTimer;
+	const float _totalTimeBeforeAbandon;
 };
 
 //---------------------------------------------------------------------------

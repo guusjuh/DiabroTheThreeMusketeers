@@ -155,8 +155,13 @@ private:
 	std::vector<Building> _buildings;
 	int _numberOfBuildings;
 
-	std::vector<std::string> getNameOptions(RoomType type);
 	std::string name;
+	std::string getRandomName(RoomType type);
+
+	static const std::string _hideoutNameOptions[];
+	static std::vector<std::string> _usedHideoutNameOptions;
+	static const std::string _townNameOptions[];
+	static std::vector<std::string> _usedTownNameOptions;
 
 	float _enemyRespawnTime;
 };

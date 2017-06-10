@@ -94,7 +94,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	}
 	pMyEntity->setMaterialName(_originalMaterialName);
 
-	name = getNameOptions()[rand() % getNameOptions().size()];
+	name = "squared bastard";
 	_relevantForAction = false;
 
 	// set node
