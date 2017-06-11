@@ -166,6 +166,25 @@ void LevelManager::detachHostileNPC(int id) {
 	}
 }
 
+std::string LevelManager::getMaterial(std::string color, MaterialType type)
+{
+	//"blue", "green", "pink", "purple", "red", "yellow"
+	//InGame/PinkNPC, InGame/RedNPC, InGame/YellowNPC, InGame/BlueNPC, InGame/GreenNPC, InGame/PurpleNPC
+	//InGame/PinkHouse, InGame/RedHouse, InGame/YellowHouse, InGame/BlueHouse, InGame/GreenHouse, InGame/PurpleHouse, InGame/GreyHideoutHouse
+	switch (type)
+	{
+	case NpcMT:
+		return("InGame/" + color + "NPC");
+		break;
+	case HousesMT:
+		return("InGame/" + color + "House");
+		break;
+	default:
+		Debug("Material not found:");
+		Debug(color.c_str(), type);
+		break;
+	}
+}
 
 /// <summary>
 /// Updates the frame based on the specified fe.

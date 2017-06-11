@@ -23,6 +23,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_damage = equipment->getDamage();
 	_healthUpgrades = 1;
 	_damageUpgrades = 1;
+	curCityId = -1;
 
 	// set node vars
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
@@ -189,6 +190,26 @@ void Player::update(Ogre::Real pDeltaTime)
 			break;
 		}
 		setNearbyNPC(nullptr);
+	}
+
+	for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0,0).cities.size(); i++)
+	{
+		Coordinate position = Coordinate(getPosition().x / Zone::scalar, getPosition().z / Zone::scalar);
+		City city = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i];
+		bool inCity = city.inCity(position);
+		if (inCity)
+		{
+			if (curCityId == -1)
+			{
+				curCityId = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].ID();
+				std::string cName = city.getName();
+				GameManager::getSingletonPtr()->getUIManager()->showHUDText("Welcome to " + cName, 2.5f);
+			}
+		}
+		else if (curCityId == city.ID())
+		{
+			curCityId = -1;
+		}
 	}
 }
 

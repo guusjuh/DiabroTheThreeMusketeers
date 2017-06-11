@@ -44,6 +44,7 @@ public:
 
 private:
 	void die() override;
+	int curCityId;
 
 	IPlayerEquipment* equipment;
 	int _healthUpgrades;

@@ -46,11 +46,16 @@ public:
 	int getTile(Coordinate pCoord) const;
 	
 	void printGrid();
-	void printGrid2();
 	void printCollisionGrid();
 	bool* getCollisionGrid();
 
+	std::string getCityColor();
+
 protected:
+	std::vector<std::string> colorList;
+	const static std::string colors[];
+	void resetColors();
+
 	int getMaxValue();
 	bool inGrid(Coordinate pCoord);
 
