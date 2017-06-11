@@ -417,10 +417,11 @@ void UIManager::showPauseScreen() {
 	_informationTextBox = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "InformationTextArea", "Information", "Press 'P' to continue playing!", 500, 400);
 	std::string informationString = "";
 	informationString.append("Current floor: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel()) + "\n\n" +
-							"Values due to ugrades: \n"
-								"- Health: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth()) + "\n" +
-								"- Damage: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getDamage()) + "\n\n" +
-							"Current quest action: " );
+		"Values due to ugrades: \n"
+		"- Health: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth()) + "\n" +
+		"- Damage: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getDamage()) + "\n\n");
+	
+	if (_questOn) informationString.append("Current quest action: " + GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentInstruction() );
 
 	_informationTextBox->setText(informationString);
 }
@@ -476,6 +477,8 @@ void UIManager::hideAllIngameElements() {
 	// _miniMap
 	_miniMap->hide();
 
+	if (_questOn) _questGoalTextWidget->hide();
+
 	// _playerHealthBarWidget
 	_playerHealthBarWidget->hide();
 
@@ -500,6 +503,8 @@ void UIManager::showAllIngameElements() {
 
 	// _miniMap
 	_miniMap->show();
+
+	if (_questOn) _questGoalTextWidget->show();
 
 	// _playerHealthBarWidget
 	_playerHealthBarWidget->show();

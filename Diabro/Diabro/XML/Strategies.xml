@@ -69,7 +69,7 @@
 	<ID>2</ID>
 	<NameStrat>Obtain luxuries</NameStrat>
 	<QuestName> The journey for the beautiful 'QuestItemQC1' </QuestName>
-	<StartDialog>I have heard about this beautiful 'QuestItemQC1'. I desire to have it. \nBring it to me, peasant!</StartDialog>
+	<StartDialog>I have heard about this beautiful 'QuestItemQC1'... I desire to have it. \nBring it to me, peasant!</StartDialog>
 	<NeedType>Comfort</NeedType>
 	<Actions>
 		<Action>
@@ -120,7 +120,7 @@
 	<ID>4</ID>
 	<NameStrat>Obtain rare item</NameStrat>
 	<QuestName> The exceptional 'QuestItemQC1' </QuestName>
-	<StartDialog>Did you ever hear of 'QuestItemQC1'? It's really pretty! \nIf you can bring it to me, I will greatly reward you!</StartDialog>
+	<StartDialog>Did you ever hear of 'QuestItemQC1'?? It's really pretty! \nIf you can bring it to me, I will greatly reward you!</StartDialog>
 	<NeedType>Reputation</NeedType>
 	<Actions>
 		<Action>			
@@ -187,7 +187,7 @@
 	<Actions>
 		<Action>
 			<ID>10</ID>
-			<Dialog>You came from 'TownQC1'? And you saw 'NPCQC1'? \nAwh, it's lovely that he thought of me. \nPlease let him know all is fine!</Dialog>
+			<Dialog>You came from 'TownQC1' and you saw 'NPCQC1' you say? \nAwh, it's lovely that he thought of me. \nPlease let him know all is fine!</Dialog>
 			<Content>2</Content>
 			<Content>2</Content>
 		</Action>
