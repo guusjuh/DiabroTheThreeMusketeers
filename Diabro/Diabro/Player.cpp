@@ -23,7 +23,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_damage = equipment->getDamage();
 	_healthUpgrades = 1;
 	_damageUpgrades = 1;
-	curCityId = -1;
+	curCityId = 1;
 
 	// set node vars
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
@@ -78,6 +78,7 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 
 	_inBattle = false;
 	_inBattleTime = 0;
+	curCityId = 1;
 
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
 }

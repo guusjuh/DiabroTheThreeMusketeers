@@ -18,9 +18,10 @@ LevelGenerator::LevelGenerator() {
 
 	Debug("Initializing zone");
 	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries);
+	determineCityTypes();
 	drawDungeonFloor(_zone[0]);
 
-	determineCityTypes();
+	
 }
 
 /// <summary>
@@ -41,10 +42,10 @@ void LevelGenerator::restart() {
 	Debug("initializing zone");
 	_zone[0] = Zone(_zoneWidth, _zoneDepth, _maxCityWidth, _maxCityDepth, _maxCityAmount, _maxTries);
 
+	determineCityTypes();
 	drawDungeonFloor(_zone[0]);
 	//_zone[0].printGrid();
 
-	determineCityTypes();
 	spawnCityContent();
 }
 
@@ -111,7 +112,7 @@ Zone* LevelGenerator::getZonePointer(int pX, int pZ) {
 
 /// creates a tile for each position in the zone
 /// \param pZone zone from which to draw the tiles
-void LevelGenerator::drawDungeonFloor(Zone pZone) {
+void LevelGenerator::drawDungeonFloor(Zone &pZone) {
 	//"Blue", "Green", "Pink", "Purple", "Red", "Yellow"
 	createTileMesh("tileMesh", Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	createTileMesh("BluetileMesh", Ogre::ColourValue(0.6f, 0.6f, 1.0f, 1.0f));
@@ -119,7 +120,7 @@ void LevelGenerator::drawDungeonFloor(Zone pZone) {
 	createTileMesh("PinktileMesh", Ogre::ColourValue(1.0f, 0.9f, 0.9f, 1.0f));
 	createTileMesh("PurpletileMesh", Ogre::ColourValue(0.86f, 0.625f, 0.86f, 1.0f));
 	createTileMesh("RedtileMesh", Ogre::ColourValue(1.0f, 0.6f, 0.6f, 1.0f));
-	createTileMesh("YellowtileMesh", Ogre::ColourValue(1.0f, 0.6f, 1.0f, 1.0f));
+	createTileMesh("YellowtileMesh", Ogre::ColourValue(1.0f, 1.0f, 0.6f, 1.0f));
 	donaldTrump("wallMesh", Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	//TODO: add different colors
 	//1. select color based on city color
@@ -166,11 +167,12 @@ void LevelGenerator::drawDungeonFloor(Zone pZone) {
 					west->yaw(Ogre::Radian(-90 * Ogre::Math::PI / 180));
 				}
 				std::string color = "";
-				for (int i = 0; i < _zone[0].cities.size(); i++)
+				for (int i = 0; i < pZone.cities.size(); i++)
 				{
-					if (_zone[0].cities[i].inCity(Coordinate(ix, iz)))
+					RoomType check = _zone[0].cities[i].TypeFlag();
+					if (pZone.cities[i].inCity(Coordinate(ix, iz)) && pZone.cities[i].TypeFlag() != HideoutRT)
 					{
-						color = _zone[0].cities[i].getColor();
+						color = pZone.cities[i].getColor();
 					}
 				}
 				Ogre::Entity* tileEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), color + "tileMesh");
