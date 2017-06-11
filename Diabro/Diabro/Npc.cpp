@@ -12,6 +12,8 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	// set the states of the FSM
 	possibleStates["Wander"] = new NpcWanderState();
 	possibleStates["FollowPlayer"] = new NpcFollowPlayerState();
+	possibleStates["Idle"] = new NpcIdleState();
+	possibleStates["Kidnapped"] = new NpcKidnappedState();
 	_initialized = false;
 
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
@@ -140,7 +142,7 @@ void Npc::update(Ogre::Real pDeltatime)
 			needNewQuest();
 			_hasQuest = true;
 		}
-		stateMachine = StateMachine<BaseNpc>(this, "Wander", possibleStates);
+		stateMachine = StateMachine<BaseNpc>(this, "Idle", possibleStates);
 		_initialized = true;
 	}
 
