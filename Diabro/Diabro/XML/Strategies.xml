@@ -10,9 +10,15 @@
 	<Actions>
 		<Action>
 			<ID>4</ID>
-			<Dialog>Is the 'QuestItemQC1' what you're looking for? Ah, yes the 'QuestItemQC1' is very mysterious. I could tell you how it works, but it's way to complicated. \nYou're smart, you say? Well.. -wispers- \nSo that's all there is to it.</Dialog>
+			<Dialog>Is the 'QuestItemQC1' what you're looking for? \nNo, no, I have no idea of it's meanings. It's to complicated for a simple sphere like me. \nBut at least I can give it to you!</Dialog>
 			<Content>2</Content>
 			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>10</ID>
+			<Dialog>Ah, yes the 'QuestItemQC1' is very mysterious. I could tell you how it works, but it's way to complicated. \nYou're smart, you say? Well.. -wispers- \nSo that's all there is to it.</Dialog>
+			<Content>3</Content>
+			<Content>3</Content>
 		</Action>
 		<Action>
 			<ID>6</ID>
@@ -28,13 +34,24 @@
 <Strategy>
 	<ID>1</ID>
 	<NameStrat>Interview NPC</NameStrat>
-	<QuestName> The 'NPCQC2' that knew </QuestName>
+	<QuestName>'NPCQC2', who knows</QuestName>
 	<StartDialog>'NPCQC2' knows something, but he won't tell me. Can you go talk to him? Maybe he will tell you. \nThank you! Don't tell him you know me.</StartDialog>
 	<NeedType>Knowledge</NeedType>
 	<Actions>
 		<Action>			
 			<ID>10</ID>
-			<Dialog>Hmm.. why should I trust you? \nOh, why didn't you say at once that you didn't know 'NPCQC1'? I'll tell you then. \n-wispers-</Dialog>
+			<Dialog>Hmm.. why should I trust you? \nNah, that's not good enough, but you can earn my trust! \nProve you're a real sphere by killing a square!</Dialog>
+			<Content>2</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Dialog>'NPCQC2' should trust me now!</Dialog>
+			<Content>1</Content>
+		</Action>
+		<Action>			
+			<ID>10</ID>
+			<Dialog>Oke, oke you are very trustworthy! \nI'll tell you my secret now... \n-wispers-</Dialog>
 			<Content>2</Content>
 			<Content>2</Content>
 		</Action>
@@ -49,21 +66,134 @@
 </Strategy>
 
 <Strategy>
-	<ID>5</ID>
-	<NameStrat>Kill enemies</NameStrat>
-	<QuestName>The slaughter of the squared bastard</QuestName>
-	<StartDialog>That squared bastard has been harrassing me forever, but I can't do anything about it. \nPlease kill him for me.</StartDialog>
-	<NeedType>Reputation</NeedType>
+	<ID>2</ID>
+	<NameStrat>Obtain luxuries</NameStrat>
+	<QuestName> The journey for the beautiful 'QuestItemQC1' </QuestName>
+	<StartDialog>I have heard about this beautiful 'QuestItemQC1'. I desire to have it. \nBring it to me, peasant!</StartDialog>
+	<NeedType>Comfort</NeedType>
 	<Actions>
 		<Action>
-			<ID>9</ID>
-			<Dialog></Dialog>
+			<ID>5</ID>
+			<Dialog>In the remains of your enemy, you found 'QuestItemQC1'.</Dialog>
 			<Content>1</Content>
 			<Content>1</Content>
 		</Action>
 		<Action>
+			<ID>6</ID>
+			<Dialog>Oh my, 'QuestItemQC1' is even more beautiful than I could imagine. \nThanks a lot for obtaining it for me!</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+	</Actions>
+	<RarityPref>1</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>3</ID>
+	<NameStrat>Kill pests</NameStrat>
+	<QuestName>The harrassement of 'NPCQC1' </QuestName>
+	<StartDialog>Two squared bastards have been harrassing me forever, but I can't do anything about it. Please kill them for me. \nThank you so much, now be on your way.</StartDialog>
+	<NeedType>Comfort</NeedType>
+	<Actions>
+		<Action>
+			<ID>9</ID>
+			<Dialog>Now where is that other one?</Dialog>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Dialog>I should report back to 'NPCQC1'.</Dialog>
+			<Content>2</Content>
+		</Action>
+		<Action>
 			<ID>11</ID>
-			<Dialog>Thank you so much! I was so scared of that squared bastard.. \nHe's better of dead.</Dialog>
+			<Dialog>I was so scared of them! \nThank you so much, I can finally sleep safely again.</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>4</ID>
+	<NameStrat>Obtain rare item</NameStrat>
+	<QuestName> The exceptional 'QuestItemQC1' </QuestName>
+	<StartDialog>Did you ever hear of 'QuestItemQC1'? It's really pretty! \nIf you can bring it to me, I will greatly reward you!</StartDialog>
+	<NeedType>Reputation</NeedType>
+	<Actions>
+		<Action>			
+			<ID>10</ID>
+			<Dialog>'QuestItemQC1' you say? \nWell you're lucky to meet me, I saw one of those square bastards have it just a minute ago. \nIf you hurry, you should be able to find it!</Dialog>
+			<Content>2</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>5</ID>
+			<Dialog>In the remains of your enemy, you found 'QuestItemQC1'.</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>6</ID>
+			<Dialog>You found it! \nOh my I never thought I would see 'QuestItemQC1' with my own eyes! \nHere are your rewards, you have deserved it.</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+	</Actions>
+	<RarityPref>1</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>5</ID>
+	<NameStrat>Kill enemies</NameStrat>
+	<QuestName>The slaughter of the squared bastard</QuestName>
+	<StartDialog>I bet you're not so strong as you say, haha! \nYou think I'm wrong? Than prove yourself! \nSlaughter those squared bastards and I will reward you.</StartDialog>
+	<NeedType>Reputation</NeedType>
+	<Actions>
+		<Action>
+			<ID>9</ID>
+			<Dialog>Two more to go..</Dialog>
+			<Content>1</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Dialog>One more to go..</Dialog>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>9</ID>
+			<Dialog>Aced it!</Dialog>
+			<Content>3</Content>
+		</Action>
+		<Action>
+			<ID>11</ID>
+			<Dialog>So you are good for something! \nGood job killing those bastards.</Dialog>
+			<Content>1</Content>
+			<Content>1</Content>
+		</Action>
+	</Actions>
+	<RarityPref>0</RarityPref>
+</Strategy>
+
+<Strategy>
+	<ID>6</ID>
+	<NameStrat>Check on NPC</NameStrat>
+	<QuestName>Worries about 'NPCQC2'</QuestName>
+	<StartDialog>You lost your little sister? \nI know how it feels to worry about your beloved ones... I don't know how my own sister is doing and with all these squares I'm to scared to leave my city. \nShe is in 'TownQC2', please go check on her.</StartDialog>
+	<NeedType>Serenity</NeedType>
+	<Actions>
+		<Action>
+			<ID>10</ID>
+			<Dialog>You came from 'TownQC1'? And you saw 'NPCQC1'? \nAwh, it's lovely that he thought of me. \nPlease let him know all is fine!</Dialog>
+			<Content>2</Content>
+			<Content>2</Content>
+		</Action>
+		<Action>
+			<ID>11</ID>
+			<Dialog>I am glad to here she's alright! \nYou deserve a reward, my friend. I would never have dared to leave my city.</Dialog>
 			<Content>1</Content>
 			<Content>1</Content>
 		</Action>

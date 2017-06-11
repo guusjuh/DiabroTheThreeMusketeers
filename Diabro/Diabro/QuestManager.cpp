@@ -51,7 +51,7 @@ QuestManager::QuestManager()
 
 	stringToNeedType.insert(std::pair<std::string, NeedType>("Knowledge", KnowledgeNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Comfort", ComfortNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
+	//stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Serenity", SerenityNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Protection", ProtectionNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Conquest", ConquestNeed));

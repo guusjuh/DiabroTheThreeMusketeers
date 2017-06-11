@@ -131,7 +131,7 @@ bool operator== (RealCoordinate &lhs, Coordinate &rhs) {
 /// <param name="pId">The id.</param>
 /// <param name="pScalar">The scalar for the city.</param>
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
-position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar), _enemyRespawnTime(5.0f)
+position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar), _enemyRespawnTime(60.0f)
 {
 	_relevantForAction = false;
 	_tiles = new int[scaledWidth() * scaledDepth()];

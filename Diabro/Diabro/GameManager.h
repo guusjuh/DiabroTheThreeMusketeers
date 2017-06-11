@@ -54,7 +54,7 @@ public:
 		if(currentState == Died && pState == InGame) {
 			restartGame();
 		}
-		if (pState == End) {
+		if (currentState == End) {
 			nextFloor();
 		}
 		if(pState == Paused) {

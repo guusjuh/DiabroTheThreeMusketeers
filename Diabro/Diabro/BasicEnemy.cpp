@@ -239,6 +239,15 @@ bool BasicEnemy::lightAttack()
 void BasicEnemy::die() {
 	_isDead = true;
 
+	// display hud text if this enemy is important for quests
+	if (_hasItem && _needToGiveItem) {
+		giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+	}
+	if (_relevantForAction) {
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this), 3.5f);
+		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerInfo);
+	}
+
 	equipment = equipment->removeUpgrades();
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();

@@ -25,10 +25,9 @@ void PreSomebodyThere::start() {
 		}
 		else if (characters[i]->getType() == EnemyQC) {
 			// its an enemy
-			if (!((City*)city)->inThisCity(characters[i]->getQuestPosition())) {
-				Debug("Error occurred: no enemy in the city");
-				return;
-			}
+/*			if (!((City*)city)->inThisCity(characters[i]->getQuestPosition())) {
+				Debug("Warning occurred: no enemy in the city");
+			}*/
 		}
 		characters[i]->setRelevantForAction(true);
 	}

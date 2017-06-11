@@ -135,7 +135,6 @@ std::string Npc::getRandomName() {
 /// <param name="pDeltatime">The time since last frame.</param>
 void Npc::update(Ogre::Real pDeltatime)
 {
-
 	// if we don't have a quest yet and we arn't initialized
 	// this is contained in the update due to order problems when done in constructor
 	if (!_hasQuest && !_initialized) {

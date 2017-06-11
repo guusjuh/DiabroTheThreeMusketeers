@@ -63,7 +63,6 @@ protected:
 		size_t pos = 0;
 		while ((pos = s.find(delimiter)) != std::string::npos) {
 			token = s.substr(0, pos);
-			std::cout << token << std::endl;
 			_dialog.push_back(token);
 			s.erase(0, pos + delimiter.length());
 		}

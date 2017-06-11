@@ -113,6 +113,7 @@ void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 
 	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
+		_hudTextWidget->getOverlayElement()->setTop(128);
 
 		if (_hudTimer <= 0) {
 			hideHUDText();
@@ -243,7 +244,7 @@ void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 /// adds text to the dialog window
 /// \param pDialogText text to append
 void UIManager::appendDialogText(Ogre::String pDialogText) {
-	_mDialogTextArea->appendText("\n" + pDialogText);
+	_mDialogTextArea->appendText(pDialogText);
 }
 
 /// hides the dialog window

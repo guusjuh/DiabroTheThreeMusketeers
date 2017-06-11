@@ -109,7 +109,7 @@
 		<Precondition>SomethingThere</Precondition>
 	</Preconditions>
 	<Postcondition>YouHaveTheItem</Postcondition>
-	<Instruction>Get 'QuestItemQC1' from 'EnemyQC1'</Instruction>
+	<Instruction>Kill 'EnemyQC1' to get 'QuestItemQC1'</Instruction>
 	<RequiredContent>
 		<Pair>
 			<Type>EnemyQC</Type>
@@ -191,10 +191,6 @@
 	<RequiredContent>
 		<Pair>
 			<Type>EnemyQC</Type>
-			<ID>1</ID>
-		</Pair>
-		<Pair>
-			<Type>HideOutQC</Type>
 			<ID>1</ID>
 		</Pair>
 	</RequiredContent>
