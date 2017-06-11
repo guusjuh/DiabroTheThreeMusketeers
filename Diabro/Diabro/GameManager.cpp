@@ -279,6 +279,10 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		_levelManager->getPlayer()->interactionTriggered();
 		break;
 
+	case OIS::KC_LSHIFT:
+		_levelManager->getPlayer()->setRunning(true);
+		break;
+
 	case OIS::KC_SPACE:
 		if(_levelManager->getPlayer()->isInDialog()) {
 			_levelManager->getPlayer()->dialogTriggered();
@@ -331,6 +335,10 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
 		right = false;
+		break;
+
+	case OIS::KC_LSHIFT:
+		_levelManager->getPlayer()->setRunning(false);
 		break;
 
 	default:

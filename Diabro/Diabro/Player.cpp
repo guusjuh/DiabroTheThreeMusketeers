@@ -43,6 +43,9 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	isPlayer = true;
 
 	_movespeed = 550;
+	_runspeed = 800;
+	_isRunning = false;
+
 	_rotationspeed = 0.13f;
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();

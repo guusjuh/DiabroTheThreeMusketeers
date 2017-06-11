@@ -22,6 +22,7 @@ public:
 
 	void reset(Ogre::SceneNode*, Ogre::Entity*);
 
+	Ogre::Real getSpeed() override { return _isRunning ? _runspeed : _movespeed; }
 	float getMaxHealth() { return _maxHealth; }
 	float getDamage() { return _damage; }
 	void update(Ogre::Real) override;
@@ -43,6 +44,8 @@ public:
 	int healthUpgradeAmount() { return _healthUpgrades; }
 	int damageUpgradeAmount() { return _damageUpgrades; }
 
+	void setRunning(bool val) { _isRunning = val; }
+
 private:
 	void die() override;
 
@@ -63,6 +66,9 @@ private:
 	float _totalInBattleTime;
 	void changeInBattle(bool val);
 	//bool _canAttack;
+
+	float _runspeed;
+	bool _isRunning;
 
 	bool _inQuest;
 
