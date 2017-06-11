@@ -9,6 +9,8 @@
 
 const int Zone::scalar = 500;
 
+const Coordinate Zone::directions[4] = { Coordinate(1, 0), Coordinate(0, 1), Coordinate(-1, 0), Coordinate(0, -1) };
+
 /// <summary>
 /// Initializes a new instance of the <see cref="Zone"/> class.
 /// </summary>
@@ -27,7 +29,7 @@ Zone::Zone() {
 /// <param name="pScalar">The scalar value.</param>
 Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries) :
 _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
-{	
+{
 	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
 		//zones use uneven sizes, this ensures walls can be created properly
 		if (pWidth % 2 == 0) _width++;
@@ -45,6 +47,8 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 	int n = generatePathways(cities.size() + 1);
 	Debug("connecting dungeon");
 	connectDungeon(cities.size() + 1 + n, 0.5f);
+	Debug("removing dead ends");
+	removeDeadEnds();
 
 	cleanGrid();
 	collisionGridGenerated = false;
@@ -155,6 +159,56 @@ Coordinate Zone::getPosition(int pId, bool pCheckNeighbours) {
 	
 }
 
+///removes pathways with dead ends from the dungeon
+void Zone::removeDeadEnds()
+{
+	std::vector<Coordinate> deadEnds = findDeadEnds();
+	while (deadEnds.size() > 0)
+	{
+		setTile(deadEnds[0], 0);
+		for (int j = 0; j < (sizeof(directions) / sizeof(directions[0])); j++)
+		{
+			Coordinate tile = deadEnds[0] + directions[j];
+			if (getTile(tile) && aliveNeighbors(tile) <= 1)
+			{
+				deadEnds.push_back(tile);
+			}
+		}
+		deadEnds.erase(deadEnds.begin());
+	}
+}
+
+//finds all tiles with only one open neighbour
+std::vector<Coordinate> Zone::findDeadEnds()
+{
+	std::vector<Coordinate> deadEnds;
+	for (int x = 0; x < _width; x++)
+	{
+		for (int y = 0; y < _depth; y++)
+		{
+			if (getTile(Coordinate(x, y)) && aliveNeighbors(Coordinate(x, y)) <= 1)
+			{
+				deadEnds.push_back(Coordinate(x, y));
+			}
+		}
+	}
+	return deadEnds;
+}
+
+/// returns the amount of open neighbours of a cell
+/// \param pCell Cell from which to count the neighbors
+int Zone::aliveNeighbors(Coordinate pCell)
+{
+	int alive = 0;
+	for (int i = 0; i < sizeof(directions) / sizeof(directions[0]); i++)
+	{
+		if (getTile(pCell + directions[i])) alive++;
+	}
+	return alive;
+}
+
+/// finds possible connection points in the city
+/// \param c the city of which connections have to be found
 int Zone::findPossibleConnections(City &c)
 {
 	int i = 0;
@@ -175,6 +229,8 @@ int Zone::findPossibleConnections(City &c)
 	return i;
 }
 
+/// finds all opened-up connections of a city
+/// \param c the city of which connections have to be found
 int Zone::findUsedConnections(City &c)
 {
 	c.clearConnections();
@@ -198,6 +254,7 @@ int Zone::findUsedConnections(City &c)
 	return 0;
 }
 
+///finds the highest numbers, used in the grid
 int Zone::getMaxValue()
 {
 	int max = 0;
@@ -665,6 +722,8 @@ void Zone::generateCities(int pMaxTries, int pMaxCities) {
 	}
 }
 
+/// generates a new city
+/// \param nCities the current amount of cities (will be raised if new city is placed)
 void Zone::generateCity(int& nCities) {
 	//generate width, depth, should be uneven for wall creation
 	int width = rand() % (_maxCityWidth - 2) + 2;
