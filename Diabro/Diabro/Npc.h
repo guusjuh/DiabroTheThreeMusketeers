@@ -49,7 +49,12 @@ public:
 	QuestContent getType() override { return NPCQC; }
 	void recieveItem() override;
 
+	bool isKidnapped() { return _kidnapped; }
+	void setKidnapped(bool val) { _kidnapped = val; }
+
 private: 
+	bool _kidnapped;
+
 	bool _initialized;
 	bool _hasQuest;
 	Quest* _currentQuest;

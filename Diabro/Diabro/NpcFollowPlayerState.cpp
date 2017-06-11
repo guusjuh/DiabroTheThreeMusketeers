@@ -26,6 +26,11 @@ void NpcFollowPlayerState::Execute(BaseNpc* agent){
 		agent->stateMachine.setState("Kidnapped");
 		return;
 	}
+	if (agent->getCity()->inThisCity(agent->getPosition())){
+		((Npc*)agent)->setKidnapped(false);
+		agent->stateMachine.setState("Idle");
+		return;
+	}
 
 	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < agent->getSpeed() / 2.0f || agent->getNextPosSize() == 0){
 		int scale = Zone::scalar;

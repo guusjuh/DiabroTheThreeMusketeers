@@ -19,6 +19,11 @@ void NpcKidnappedState::Execute(BaseNpc* agent){
 		agent->stateMachine.setState("FollowPlayer");
 		return;
 	}
+	if (agent->getCity()->inThisCity(agent->getPosition())){
+		((Npc*)agent)->setKidnapped(false);
+		agent->stateMachine.setState("Idle");
+		return;
+	}
 	agent->setDirVector(Ogre::Vector3(0, 0, 0));
 }
 
