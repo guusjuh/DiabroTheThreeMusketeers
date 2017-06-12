@@ -304,6 +304,8 @@ bool Player::lightAttack()
 	if (!Character::lightAttack()) {
 		return false;
 	}
+	_canAttack = false;
+	_currAttackCooldown = _lightAttackCooldown;
 
 	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	findTarget(targets);
@@ -315,6 +317,8 @@ bool Player::lightAttack()
 	//deal damage 
 	changeInBattle(true);
 
+	_inBattleTime = 0;
+
 	if (_target->adjustHealth(_damage)) {
 		GameManager::getSingletonPtr()->getUIManager()->adjustEnemyHealthBar(_target->getCurrHealth(), _target->getMaxHealth());
 
@@ -323,10 +327,6 @@ bool Player::lightAttack()
 		changeInBattle(false);
 
 	}
-
-	_inBattleTime = 0;
-	_canAttack = false;
-	_currAttackCooldown = _lightAttackCooldown;
 
 	return true;
 }
