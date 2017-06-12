@@ -52,17 +52,10 @@ set(HDRS
 	./Diabro/Diabro/Action.h
 	./Diabro/Diabro/ActionContainer.h
 	./Diabro/Diabro/PostCondition.h
-	./Diabro/Diabro/PostTheyHaveItem.h
-	./Diabro/Diabro/PostYouHaveItem.h
-	./Diabro/Diabro/PostYouThere.h
-	./Diabro/Diabro/PostTheyDead.h
-	./Diabro/Diabro/PostTheyInfo.h
-	./Diabro/Diabro/PostYouInfo.h
+	./Diabro/Diabro/ConcretePostConditions.h
 	./Diabro/Diabro/PreCondition.h
-	./Diabro/Diabro/PreKnowWhereToGo.h
-	./Diabro/Diabro/PreSomebodyThere.h
-	./Diabro/Diabro/PreSomethingThere.h
-	./Diabro/Diabro/PreYouItemOfInterest.h
+	./Diabro/Diabro/ConcretePreConditions.h
+	./Diabro/Diabro/DialogManager.h
 	./Diabro/Diabro/GenericContainer.h
 	./Diabro/Diabro/Strategy.h
 	./Diabro/Diabro/StrategyContainer.h
@@ -105,16 +98,9 @@ set(SRCS
 	./Diabro/Diabro/Action.cpp
 	./Diabro/Diabro/ActionContainer.cpp
 	./Diabro/Diabro/PostCondition.cpp
-	./Diabro/Diabro/PostTheyHaveItem.cpp
-	./Diabro/Diabro/PostYouHaveItem.cpp
-	./Diabro/Diabro/PostYouThere.cpp
-	./Diabro/Diabro/PostTheyDead.cpp
-	./Diabro/Diabro/PostTheyInfo.cpp
-	./Diabro/Diabro/PostYouInfo.cpp
-	./Diabro/Diabro/PreKnowWhereToGo.cpp
-	./Diabro/Diabro/PreSomebodyThere.cpp
-	./Diabro/Diabro/PreSomethingThere.cpp
-	./Diabro/Diabro/PreYouItemOfInterest.cpp
+	./Diabro/Diabro/ConcretePostConditions.cpp
+	./Diabro/Diabro/ConcretePreConditions.cpp
+	./Diabro/Diabro/DialogManager.cpp
 	./Diabro/Diabro/StrategyContainer.cpp
 	./Diabro/Diabro/QuestManager.cpp
 	./Diabro/Diabro/LevelGenerator.cpp
