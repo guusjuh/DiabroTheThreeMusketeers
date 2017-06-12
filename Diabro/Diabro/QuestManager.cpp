@@ -51,7 +51,7 @@ QuestManager::QuestManager()
 
 	stringToNeedType.insert(std::pair<std::string, NeedType>("Knowledge", KnowledgeNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Comfort", ComfortNeed));
-	stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
+	//stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Serenity", SerenityNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Protection", ProtectionNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Conquest", ConquestNeed));
@@ -94,12 +94,6 @@ std::string QuestManager::startQuest(Npc* sourceNpc) {
 	return _currentQuest->_strategy.getDialog();
 }
 
-/// <summary>
-/// Generates a quest.
-/// </summary>
-/// <param name="pSourceNpc">The source NPC.</param>
-/// <param name="pMotivation">The motivation.</param>
-/// <returns></returns>
 std::string QuestManager::obtainDialog(IQuestContent* client) {
 	// is there even an active action?
 	if (_currentQuest == nullptr) return "";
@@ -108,6 +102,18 @@ std::string QuestManager::obtainDialog(IQuestContent* client) {
 	for (int i = 0; i < _currentQuest->_strategy.getCurrentAction()->getConcreteContent().size(); ++i) {
 		if (_currentQuest->_strategy.getCurrentAction()->getConcreteContent()[i].first == client) {
 			return _currentQuest->_strategy.getCurrentAction()->getDialog();
+		}
+	}
+}
+
+std::string QuestManager::obtainDialog(IQuestContent* client, int actionNr) {
+	// is there even an active action?
+	if (_currentQuest == nullptr) return "";
+
+	// check if this client is relevant to the current active action
+	for (int i = 0; i < _currentQuest->_strategy.getActionSequence()[actionNr].getConcreteContent().size(); ++i) {
+		if (_currentQuest->_strategy.getActionSequence()[actionNr].getConcreteContent()[i].first == client) {
+			return _currentQuest->_strategy.getActionSequence()[actionNr].getDialog();
 		}
 	}
 }

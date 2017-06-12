@@ -15,6 +15,7 @@ Filename:    GameManager.h
 #include <ctime>
 #include "QuestManager.h"
 #include "SoundManager.h"
+#include "DialogManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -22,7 +23,9 @@ Filename:    GameManager.h
 /// Enum for the game states. 
 /// </summary>
 enum GameState {
-	Start = 0, 
+	MainMenu = 0,
+	Paused,
+	Start, 
 	InGame,
 	End,
 	Died
@@ -44,23 +47,32 @@ public:
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
 
-	GameState getCurrentState() { return state; }
-	void goNextState() {
-		if (state == End) {
-			nextFloor();
-			return;
-		}
-		state = (GameState)(((int)state + 1) % 3);
-		//_uiManager->startState();
-	}
+	GameState getCurrentState() { return currentState; }
 
 	void goToState(GameState pState) {
 		//check for player died before going to ingame so you can reset stuff
-		if(state == Died && pState == InGame) {
+		if(currentState == Died && pState == InGame) {
 			restartGame();
 		}
+		if (currentState == End) {
+			nextFloor();
+		}
+		if(pState == Paused) {
+			_uiManager->showPauseScreen();
+		}
+		else if(currentState == Paused) {
+			_uiManager->hidePauseScreen();
+		}
 
-		state = pState;
+		if (pState == MainMenu) {
+			_uiManager->showMainMenu();
+		}
+		else if (currentState == MainMenu) {
+			_uiManager->hideMainMenu();
+		}
+
+		previousState = currentState;
+		currentState = pState;
 	}
 
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
@@ -71,6 +83,7 @@ public:
 	UIManager* getUIManager(void) { return _uiManager; }
 	QuestManager* getQuestManager(void) { return _questManager; }
 	SoundManager* getSoundManager(void) { return _soundManager; }
+	DialogManager* getDialogManager(void) { return _dialogManager; }
 
 	int getRandomInRange(int pLO, int pHI) {
 		if (pHI == 0) return 0;
@@ -102,10 +115,16 @@ private:
 	UIManager* _uiManager;
 	QuestManager* _questManager;
 	SoundManager* _soundManager;
+	DialogManager* _dialogManager;
 
 	Ogre::Timer* _gameTimer;
 
-	GameState state;
+	GameState currentState;
+	GameState previousState;
+
+	bool _abandonedQuestPressed;
+	float _abandonTimer;
+	const float _totalTimeBeforeAbandon;
 };
 
 //---------------------------------------------------------------------------

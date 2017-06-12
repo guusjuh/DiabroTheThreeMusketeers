@@ -55,21 +55,28 @@ void UIManager::setupUI()
 	_maxWidthBar = _playerHealthBarWidget->getOverlayElement()->getWidth();
 
 	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -90, 90);
-	setQuestOn(false);
 	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getNorth());
 	_miniMap->setValueNorth(angle, calcLocatorPos(angle, _maxWidthBar));
 	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSouth());
 	_miniMap->setValueSouth(angle, calcLocatorPos(angle, _maxWidthBar));
 
-	_floorTextWidget = _uiElementMgr->createFloorText(DiabroUI::TOPLEFT, "FLOORTEXT", "Floor " + Ogre::StringConverter::toString(1), 40, 40);
+	_floorTextWidget = _uiElementMgr->createText(DiabroUI::TOPLEFT, "FloorIndicator", "FloorText", "Floor " + Ogre::StringConverter::toString(1), 40, 40);
+	_questGoalTextWidget = _uiElementMgr->createText(DiabroUI::TOPLEFT, "InstructionIndicator", "QuestGoalText", "Test instruction!", 40, 10);
+	_questGoalTextWidget->getOverlayElement()->setTop(128);
+	_questGoalTextWidget->hide();
 
 	_healthUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Health", "HealthUpgrade", 64, 56);
 	_dmgUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Damage", "DamageUpgrade", 64, 56);
 
 	setUpgradeText(Health);
 	setUpgradeText(Damage);
+	setQuestOn(false);
 
 	_hudTextWidget = nullptr;
+
+	_dialogOn = false;
+	_enemyBarOn = false;
+	_hudTextOn = false;
 }
 
 /// <summary>
@@ -87,7 +94,7 @@ void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 			hideHUDText();
 			if (!showStoryText(_first ? _startGameText : _startLevelText, 2.0f)){
 				_first = false;
-				GameManager::getSingletonPtr()->goNextState();
+				GameManager::getSingletonPtr()->goToState(InGame);
 			}
 		}
 	}
@@ -106,6 +113,7 @@ void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 
 	if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
+		_hudTextWidget->getOverlayElement()->setTop(128);
 
 		if (_hudTimer <= 0) {
 			hideHUDText();
@@ -125,7 +133,7 @@ void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 		if (_hudTimer <= 0) {
 			hideHUDText();
 			if (!showStoryText(_endLevelText, 2.0f)) {
-				GameManager::getSingletonPtr()->goNextState();
+				GameManager::getSingletonPtr()->goToState(Start);
 			}
 		}
 	}
@@ -193,6 +201,8 @@ void UIManager::showHUDText(Ogre::String pHUDText)
 	if (_hudTextWidget != nullptr)
 		hideHUDText();
 
+	_hudTextOn = true;
+
 	_hudTextWidget = _uiElementMgr->createHUDText(DiabroUI::TOP, "HUDText", pHUDText, width, 40);
 	_hudTextWidget->getOverlayElement()->setTop(128);
 }
@@ -214,6 +224,7 @@ void UIManager::hideHUDText()
 	_hudTextWithTimeOn = false;
 
 	if (_hudTextWidget != nullptr) {
+		_hudTextOn = false;
 		_uiElementMgr->destroyWidget("HUDText");
 		_hudTextWidget = nullptr;
 	}
@@ -225,19 +236,21 @@ void UIManager::hideHUDText()
 void UIManager::showDialog(Ogre::String pNPCName, Ogre::String pDialogText) {
 	if (_hudTextWidget != nullptr) hideHUDText();
 
-	_mDialogTextArea = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "DialogTextArea", pNPCName, 400, 400);
+	_mDialogTextArea = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "DialogTextArea", pNPCName, "Press 'SPACE' to continue.", 400, 400);
 	_mDialogTextArea->setText(pDialogText);
+	_dialogOn = true;
 }
 
 /// adds text to the dialog window
 /// \param pDialogText text to append
 void UIManager::appendDialogText(Ogre::String pDialogText) {
-	_mDialogTextArea->appendText("\n" + pDialogText);
+	_mDialogTextArea->appendText(pDialogText);
 }
 
 /// hides the dialog window
 void UIManager::hideDialog() {
 	if (_mDialogTextArea != nullptr) {
+		_dialogOn = false;
 		_uiElementMgr->destroyWidget("DialogTextArea");
 		_mDialogTextArea = nullptr;
 	}
@@ -272,7 +285,12 @@ void UIManager::adjustEnemyHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 ///shows the enemy healthbar
 void UIManager::showEnemyHealthBar()
 {
-	if (_enemyHealthBarWidget != nullptr) { hideEnemyHealthBar(); }
+	if (_enemyHealthBarWidget != nullptr) {
+		_enemyBarOn = false;
+		hideEnemyHealthBar();
+	}
+
+	_enemyBarOn = true;
 
 	_enemyHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMRIGHT, "Enemy", "EnemyHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
 }
@@ -280,6 +298,7 @@ void UIManager::showEnemyHealthBar()
 ///hides the enemy healthbar
 void UIManager::hideEnemyHealthBar() {
 	if (_enemyHealthBarWidget != nullptr) {
+		_enemyBarOn = false;
 		_uiElementMgr->destroyWidget("EnemyHealth");
 		_enemyHealthBarWidget = nullptr;
 	}
@@ -328,13 +347,17 @@ void UIManager::setQuestOn(bool val)
 
 	if(!_questOn) {
 		_miniMap->getQuestLocator()->hide();
+		_questGoalTextWidget->hide();
 	}else {
 		_miniMap->getQuestLocator()->show();
+		_questGoalTextWidget->show();
+		_questGoalTextWidget->setText(GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentInstruction());
 	}
 }
 
 void UIManager::setQuestTarget(Ogre::Vector3 position) {
 	_questTargetPos = position;
+	_questGoalTextWidget->setText(GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentInstruction());
 }
 
 /// calculates the position of the locator as an angle
@@ -375,4 +398,128 @@ void UIManager::setUpgradeText(UpgradeModifierType type) {
 void UIManager::resetUpgradeText() {
 	_healthUpgradeIcon->setValue(1);
 	_dmgUpgradeIcon->setValue(1);
+}
+
+void UIManager::showPauseScreen() {
+	hideAllIngameElements();
+
+	_uiElementMgr->showBackdrop("UI/PauseBackdrop");
+
+	// title: game is paused
+	Ogre::String pausedString = "The game is paused.";
+	int count = pausedString.length();  				// count the symbols in text
+	float width = count * 14.25f;
+
+	_pauseText = _uiElementMgr->createHUDText(DiabroUI::TOP, "PauseText", pausedString, width, 40);
+	_pauseText->getOverlayElement()->setTop(128);
+
+	// wide dialog
+	_informationTextBox = _uiElementMgr->createDialogTextBox(DiabroUI::CENTER, "InformationTextArea", "Information", "Press 'P' to continue playing!", 500, 400);
+	std::string informationString = "";
+	informationString.append("Current floor: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel()) + "\n\n" +
+		"Values due to ugrades: \n"
+		"- Health: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth()) + "\n" +
+		"- Damage: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getDamage()) + "\n\n");
+	
+	if (_questOn) informationString.append("Current quest action: " + GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentInstruction() );
+
+	_informationTextBox->setText(informationString);
+}
+
+void UIManager::hidePauseScreen() {
+	// pauseText
+	_uiElementMgr->destroyWidget("PauseText");
+	_pauseText = nullptr;
+
+	// information panel
+	_uiElementMgr->destroyWidget("InformationTextArea");
+	_informationTextBox = nullptr;
+
+	_uiElementMgr->hideBackdrop();
+
+	showAllIngameElements();
+}
+
+void UIManager::showMainMenu() {
+	hideAllIngameElements();
+
+	// background img
+	_uiElementMgr->showBackdrop("UI/MenuBackdrop");
+
+	// start game txt
+	Ogre::String startTxt = "Press any key to start playing!";
+	int count = startTxt.length();  				// count the symbols in text
+	float width = count * 14.25f;
+	_startGameTextElement = _uiElementMgr->createHUDText(DiabroUI::BOTTOM, "StartGameText", startTxt, width, 40);
+
+	_startGameTextElement->getOverlayElement()->setTop(-128);
+
+	// logo
+	_logoImg = _uiElementMgr->createDecorWidget(DiabroUI::TOP, "Logo", "UI/Logo");
+}
+
+void UIManager::hideMainMenu() {
+	_uiElementMgr->destroyWidget("StartGameText");
+	_startGameTextElement = nullptr;
+
+	_uiElementMgr->destroyWidget("Logo");
+	_logoImg = nullptr;
+
+	_uiElementMgr->hideBackdrop();
+
+	showAllIngameElements();
+}
+
+void UIManager::hideAllIngameElements() {
+	// _mDialogTextArea
+	if(_dialogOn) _mDialogTextArea->hide();
+
+	// _miniMap
+	_miniMap->hide();
+
+	if (_questOn) _questGoalTextWidget->hide();
+
+	// _playerHealthBarWidget
+	_playerHealthBarWidget->hide();
+
+	// _enemyHealthBarWidget
+	if(_enemyBarOn) _enemyHealthBarWidget->hide();
+
+	// _floorTextWidget
+	_floorTextWidget->hide();
+
+	// _healthUpgradeIcon
+	_healthUpgradeIcon->hide();
+	// _dmgUpgradeIcon
+	_dmgUpgradeIcon->hide();
+
+	// _hudTextWidget
+	if (_hudTextOn) _hudTextWidget->hide();
+}
+
+void UIManager::showAllIngameElements() {
+	// _mDialogTextArea
+	if (_dialogOn) _mDialogTextArea->show();
+
+	// _miniMap
+	_miniMap->show();
+
+	if (_questOn) _questGoalTextWidget->show();
+
+	// _playerHealthBarWidget
+	_playerHealthBarWidget->show();
+
+	// _enemyHealthBarWidget
+	if (_enemyBarOn) _enemyHealthBarWidget->show();
+
+	// _floorTextWidget
+	_floorTextWidget->show();
+
+	// _healthUpgradeIcon
+	_healthUpgradeIcon->show();
+	// _dmgUpgradeIcon
+	_dmgUpgradeIcon->show();
+
+	// _hudTextWidget
+	if (_hudTextOn) _hudTextWidget->show();
 }

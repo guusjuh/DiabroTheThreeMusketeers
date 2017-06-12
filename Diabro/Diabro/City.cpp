@@ -5,6 +5,21 @@
 
 int City::gridScalar = 2;
 
+const std::string City::_hideoutNameOptions[19] = 
+{ "Ardougne", "Askroth", "Barbarian Village", "Dis", "Dorgesh-Kaan", "Gu'Tanoth", "Jatizso", "Kanatah",
+  "Menaphos", "Mort'ton", "Musa Point", "Nardah", "Neitiznot", "Onkhara", "Oo'glog", "Pollniveach",
+  "Tyras Camp", "Uzer", "Zanaris" };
+
+std::vector<std::string> City::_usedHideoutNameOptions;
+
+const std::string City::_townNameOptions[30] = 
+{ "Al Kharid", "Arposandra", "Brimhaven", "Burthorpe", "Canifis", "Catherby", "Draynor Village", "Edgeville",
+  "Etceteria", "Falador", "Hemenster", "Keldagrim", "Lletya", "Lumbridge", "Marim", "Meiyerditch",
+  "Mos Le'Harmless", "Otot", "Palingrad", "Prifddinas", "Rellekka", "Rimmington", "Seers' Village",
+  "Shilo Village", "Sophanem", "Taverley", "Tzhaar", "Ullek", "Varrock", "Yanille" };
+
+std::vector<std::string> City::_usedTownNameOptions;
+
 Coordinate operator- (Coordinate &lhs, Coordinate &rhs) {
 	return (Coordinate(lhs.x - rhs.x, lhs.z - rhs.z));
 }
@@ -116,7 +131,7 @@ bool operator== (RealCoordinate &lhs, Coordinate &rhs) {
 /// <param name="pId">The id.</param>
 /// <param name="pScalar">The scalar for the city.</param>
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
-position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar), _enemyRespawnTime(5.0f)
+position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar), _enemyRespawnTime(60.0f)
 {
 	_relevantForAction = false;
 	_tiles = new int[scaledWidth() * scaledDepth()];
@@ -169,7 +184,7 @@ void City::init()
 {
 	generateBuildings();
 
-	name = getNameOptions(typeFlag)[rand() % getNameOptions(typeFlag).size()];
+	name = getRandomName(typeFlag);
 }
 
 /// <summary>
@@ -195,64 +210,74 @@ bool City::inThisCity(Ogre::Vector3 worldCoord) {
 	return false;
 }
 
-std::vector<std::string> City::getNameOptions(RoomType type) {
-	std::vector<std::string> _nameOptions;
+std::string City::getRandomName(RoomType type) {
+	std::vector<std::string> _currOptions;
+	std::string _returnName;
 
-	if (type == CityRT) {
-		_nameOptions.push_back("Al Kharid");
-		_nameOptions.push_back("Arposandra");
-		_nameOptions.push_back("Brimhaven");
-		_nameOptions.push_back("Burthorpe");
-		_nameOptions.push_back("Canifis");
-		_nameOptions.push_back("Catherby");
-		_nameOptions.push_back("Draynor Village");
-		_nameOptions.push_back("Edgeville");
-		_nameOptions.push_back("Etceteria");
-		_nameOptions.push_back("Falador");
-		_nameOptions.push_back("Hemenster");
-		_nameOptions.push_back("Keldagrim");
-		_nameOptions.push_back("Lletya");
-		_nameOptions.push_back("Lumbridge");
-		_nameOptions.push_back("Marim");
-		_nameOptions.push_back("Meiyerditch");
-		_nameOptions.push_back("Mos Le'Harmless");
-		_nameOptions.push_back("Otot");
-		_nameOptions.push_back("Palingrad");
-		_nameOptions.push_back("Prifddinas");
-		_nameOptions.push_back("Rellekka");
-		_nameOptions.push_back("Rimmington");
-		_nameOptions.push_back("Seers' Village");
-		_nameOptions.push_back("Shilo Village");
-		_nameOptions.push_back("Sophanem");
-		_nameOptions.push_back("Taverley");
-		_nameOptions.push_back("Tzhaar");
-		_nameOptions.push_back("Ullek");
-		_nameOptions.push_back("Varrock");
-		_nameOptions.push_back("Yanille");
-	}
-	else {
-		_nameOptions.push_back("Ardougne");
-		_nameOptions.push_back("Askroth");
-		_nameOptions.push_back("Barbarian Village");
-		_nameOptions.push_back("Dis");
-		_nameOptions.push_back("Dorgesh-Kaan");
-		_nameOptions.push_back("Gu'Tanoth");
-		_nameOptions.push_back("Jatizso");
-		_nameOptions.push_back("Kanatah");
-		_nameOptions.push_back("Menaphos");
-		_nameOptions.push_back("Mort'ton");
-		_nameOptions.push_back("Musa Point");
-		_nameOptions.push_back("Nardah");
-		_nameOptions.push_back("Neitiznot");
-		_nameOptions.push_back("Onkhara");
-		_nameOptions.push_back("Oo'glog");
-		_nameOptions.push_back("Pollniveach");
-		_nameOptions.push_back("Tyras Camp");
-		_nameOptions.push_back("Uzer");
-		_nameOptions.push_back("Zanaris");
+	bool occured = false;
+	int lengthNameOptions;
+
+	if(type == CityRT) {
+		lengthNameOptions = sizeof(_townNameOptions) / sizeof(_townNameOptions[0]);
+		for (int i = 0; i < lengthNameOptions; ++i) {
+			occured = false;
+
+			for (int j = 0; j < _usedTownNameOptions.size(); ++j) {
+				if (_townNameOptions[i] == _usedTownNameOptions[j]) {
+					occured = true;
+				}
+			}
+
+			if (!occured) _currOptions.push_back(_townNameOptions[i]);
+		}
+
+		// if there are no available names anymore, start reusing
+		if (_currOptions.size() == 0) {
+			_usedTownNameOptions.clear();
+
+			// call this method again 
+			// now that the vector is empty, names will be reused
+			_returnName = getRandomName(CityRT);
+		}
+		else {
+			_returnName = _currOptions[GameManager::getSingletonPtr()->getRandomInRange(0, _currOptions.size())];
+		}
+
+		_usedTownNameOptions.push_back(_returnName);
+
+	} else if(type == HideoutRT) {
+		lengthNameOptions = sizeof(_hideoutNameOptions) / sizeof(_hideoutNameOptions[0]);
+		for (int i = 0; i < lengthNameOptions; ++i) {
+			occured = false;
+
+			for (int j = 0; j < _usedHideoutNameOptions.size(); ++j) {
+				if (_hideoutNameOptions[i] == _usedHideoutNameOptions[j]) {
+					occured = true;
+				}
+			}
+
+			if (!occured) _currOptions.push_back(_hideoutNameOptions[i]);
+		}
+
+		// if there are no available names anymore, start reusing
+		if (_currOptions.size() == 0) {
+			_usedHideoutNameOptions.clear();
+
+			// call this method again 
+			// now that the vector is empty, names will be reused
+			_returnName = getRandomName(HideoutRT);
+		}
+		else {
+			_returnName = _currOptions[GameManager::getSingletonPtr()->getRandomInRange(0, _currOptions.size())];
+		}
+
+		_usedHideoutNameOptions.push_back(_returnName);
+
+	} else {
+		Debug("!\tThis is not a valid room type.");
 	}
 
-	return _nameOptions;
+	return _returnName;
 }
 
 /// returns the center tile of the room

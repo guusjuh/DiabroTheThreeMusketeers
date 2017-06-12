@@ -5,7 +5,6 @@
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
 #include "BaseApplication.h"
-#include "QuestItem.h"
 #include "Zone.h"
 #include "Debug.h"
 
@@ -16,6 +15,7 @@
 /// </summary>
 class Character
 {
+	friend class Action;
 public:
 	Character(Ogre::SceneNode*, Ogre::Entity*);
 	Character() : _hasItem(false), _needToGiveItem(false) {}
@@ -34,7 +34,7 @@ public:
 		if(_myNode != nullptr) return _myNode->getPosition();
 		else return Ogre::Vector3(0, 0, 0);
 	}
-	Ogre::Real getSpeed() { return _movespeed; }
+	virtual Ogre::Real getSpeed() { return _movespeed; }
 	Ogre::Real getRotationspeed() { return _rotationspeed; }
 	Ogre::Vector3 getDirVector() { return _dirVec; }
 	Ogre::Vector3 setDirVector(Ogre::Vector3 pMoveVec) { return _dirVec = pMoveVec; }
@@ -105,6 +105,11 @@ protected:
 	bool gotHitTimerActive;
 
 	float _radius;
+
+	void resetItem() {
+		_hasItem = false;
+		_needToGiveItem = false;
+	}
 
 private:
 };

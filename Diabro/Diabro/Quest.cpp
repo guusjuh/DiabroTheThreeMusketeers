@@ -27,6 +27,8 @@ Quest::~Quest() {}
 /// Starts the quest.
 /// </summary>
 void Quest::start() {	
+	((Npc*)_sourceNPC)->_hasQuest = false;
+
 	// set the first action as current
 	_strategy.increaseAction();
 
@@ -68,15 +70,21 @@ void Quest::end() {
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-_healthReward);
 
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
-	Debug("\tQuest: I am complete!");
+	Debug("\tQuest: I aaaaaam compleeeeeteeee!");
 	_completed = true;
 }
 
 /// <summary>
 /// Abondons the quest.
 /// </summary>
-void Quest::abondon() {
+void Quest::abandon() {
+	// the quest needs to be ended without getting the rewards
+	_strategy.abandon();
+
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
+
+	// still set completed to avoid getting back at this quest again
+	_completed = true;
 }
 
 /// <summary>

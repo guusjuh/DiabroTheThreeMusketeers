@@ -2,9 +2,6 @@
 #define UI_MANAGER_H_
 
 #pragma once
-#include <OgreBillboardSet.h>
-#include "BaseApplication.h"
-#include "SdkTrays.h"
 #include "UIElements.h"
 #include "EnemyUpgrade.h"
 
@@ -51,27 +48,37 @@ public:
 	void setUpgradeText(UpgradeModifierType type);
 	void resetUpgradeText();
 
+	void showPauseScreen();
+	void hidePauseScreen();
+	
+	void showMainMenu();
+	void hideMainMenu();
+
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
 	Ogre::SceneNode*			_uiNode;
 
 	Ogre::RenderWindow*			_mWindow;
 
-	DiabroUI::DialogTextBox*	_mDialogTextArea;
+	bool						_dialogOn;
+	DiabroUI::TextBox*	_mDialogTextArea;
 	
 	DiabroUI::MiniMap*			_miniMap;
 	bool						_questOn;
 	Ogre::Vector3				_questTargetPos;
 
 	DiabroUI::Bar*				_playerHealthBarWidget;
+	bool						_enemyBarOn;
 	DiabroUI::Bar*				_enemyHealthBarWidget;
 	Ogre::Real					_maxWidthBar;
 
-	DiabroUI::FloorText*		_floorTextWidget;
+	DiabroUI::Text*				_floorTextWidget;
+	DiabroUI::Text*				_questGoalTextWidget;
 
 	DiabroUI::UpgradeIcon*		_healthUpgradeIcon;
 	DiabroUI::UpgradeIcon*		_dmgUpgradeIcon;
 
+	bool						_hudTextOn;
 	DiabroUI::HUDText*			_hudTextWidget;
 	float						_hudTotalTimer;
 	float						_hudTimer;
@@ -84,8 +91,18 @@ private:
 	bool						_storyTextOn;
 	bool						_first;
 
+	// PAUSE ELEMENTS
+	DiabroUI::HUDText*			_pauseText;
+	DiabroUI::TextBox*	_informationTextBox;
+
+	// MAIN MENU ELEMENTS
+	DiabroUI::HUDText*			_startGameTextElement;
+	DiabroUI::ImageWidget*		_logoImg;
+
 	bool showStoryText(std::vector<std::string>, float);
 
+	void hideAllIngameElements();
+	void showAllIngameElements();
 };
 
 #endif

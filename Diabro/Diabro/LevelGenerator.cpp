@@ -9,11 +9,11 @@
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::LevelGenerator() {
-	_zoneWidth = 19;
-	_zoneDepth = 19;
+	_zoneWidth = 15;
+	_zoneDepth = 15;
 	_maxCityWidth = 5;
 	_maxCityDepth = 5;
-	_maxCityAmount = 5;
+	_maxCityAmount = 7;
 	_maxTries = 750;
 
 	Debug("Initializing zone");

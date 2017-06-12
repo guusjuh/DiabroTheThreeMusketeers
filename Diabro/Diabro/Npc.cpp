@@ -1,13 +1,20 @@
 #include "Npc.h"
 #include "GameManager.h"
 
+const std::string Npc::_nameOptions[26] = { "Gleann", "Wolter", "Jesper", "Gus", "Fredo", "Kelvin", "Mike", "Resa",
+										  "Charry", "Jule", "Darwin", "Alexia", "Anderson", "Dora", "Jordan", "Deric",
+										  "Richael", "Sassia", "Greg", "Bonney", "Marlin", "Marlene", "Gustik",
+										  "Mufo", "Jerico", "Marloes"};
+
+std::vector<std::string> Npc::_usedNameOptions;
+
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity, Building* pBuilding) 
-	: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown(pMyCity), _home(pBuilding), _initialized(false), _kidnapped(true)
+: BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _hometown(pMyCity), _home(pBuilding), _initialized(false), _kidnapped(true)
 {
 	// set the states of the FSM
 	possibleStates["Wander"] = new NpcWanderState();
@@ -68,7 +75,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 		tempNeeds.push_back(tempNeed);
 	};
 
-	_name = getNameOptions()[GameManager::getSingletonPtr()->getRandomInRange(0, getNameOptions().size())];
+	_name = getRandomName();
 	_needs = NeedSet(tempNeeds);
 
 	_hasQuest = false;
@@ -92,39 +99,41 @@ Npc::~Npc() {
 /// Gets the name options.
 /// </summary>
 /// <returns></returns>
-std::vector<std::string> Npc::getNameOptions() {
-	std::vector<std::string> _nameOptions;
-	_nameOptions.push_back("Gleann");
-	_nameOptions.push_back("Wolter");
-	_nameOptions.push_back("Jesper");
-	_nameOptions.push_back("Gus");
-	_nameOptions.push_back("Fredo");
-	_nameOptions.push_back("Kelvin");
-	_nameOptions.push_back("Mike");
-	_nameOptions.push_back("Resa");
+std::string Npc::getRandomName() {
+	std::vector<std::string> _currOptions;
+	std::string _returnName;
 
-	_nameOptions.push_back("Charry");
-	_nameOptions.push_back("Jule");
-	_nameOptions.push_back("Dalwin");
+	// find all names that aren't used yet 
+	bool occured = false;
+	int lengthNameOptions = sizeof(_nameOptions) / sizeof(_nameOptions[0]);
 
-	_nameOptions.push_back("Alexia");	// alexander
-	_nameOptions.push_back("Anderson");	// anders
-	_nameOptions.push_back("Dora");		// nora
-	_nameOptions.push_back("Jordan");	// joris
-	_nameOptions.push_back("Deric");	// eric
-	_nameOptions.push_back("Richael");	// richard
-	_nameOptions.push_back("Sassia");	// saskia
-	_nameOptions.push_back("Greg");		// reggie
-	_nameOptions.push_back("Bonney");	// bonnee
-	_nameOptions.push_back("Marlin");	// marianne
-	_nameOptions.push_back("Marlene");	// irene
+	for (int i = 0; i < lengthNameOptions; ++i) {
+		occured = false;
 
-	_nameOptions.push_back("Gustik");
-	_nameOptions.push_back("Mufo");
-	_nameOptions.push_back("Jerico");
-	_nameOptions.push_back("Marloes");
+		for (int j = 0; j < _usedNameOptions.size(); ++j) {
+			if(_nameOptions[i] == _usedNameOptions[j]) {
+				occured = true;
+			}
+		}
 
-	return _nameOptions;
+		if (!occured) _currOptions.push_back(_nameOptions[i]);
+	}
+
+	// if there are no available names anymore, start reusing
+	if(_currOptions.size() == 0) {
+		_usedNameOptions.clear();
+		
+		// call this method again 
+		// now that the vector is empty, names will be reused
+		_returnName = getRandomName();
+	} 
+	else {
+		_returnName = _currOptions[GameManager::getSingletonPtr()->getRandomInRange(0, _currOptions.size())];
+	}
+
+	_usedNameOptions.push_back(_returnName);
+
+	return _returnName;
 }
 
 /// <summary>
@@ -162,55 +171,7 @@ void Npc::collide() {
 	walkToNeighbour();
 }
 
-/// <param name="pPlayerPos">The current player position.</param>
-/// <returns>False if the player is too far away to start a talk</returns>
-bool Npc::talk(Ogre::Vector3 pPlayerPos)
-{
-	// start the dialog if it wasn't started already
-	if (!_inDialog) {
-		// this npc is currently in dialog
-		_inDialog = true;
 
-		// if this NPC has a quest 
-		if (_relevantForAction) {
-			setDialog(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this));
-		}
-		else if (_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
-			// if this quest can be started
-				// get the dialog for starting the quest
-			setDialog(GameManager::getSingletonPtr()->getQuestManager()->startQuest(this));
-			_hasQuest = false;
-			indicatorNode->setVisible(false);
-		}
-		// else if // do i have text in the current quest?
-		else {
-			_dialog = getStndrtDialog();
-		}
-
-		// show the first line of the dialog
-		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, _dialog[_dialogCount]);
-	}
-	else {
-		_dialogCount++;
-		if (_dialogCount < _dialog.size()) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_dialog[_dialogCount]);
-		}
-		else {
-			if (_hasItem && _needToGiveItem) {
-				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
-			}
-			else if (_relevantForAction) {
-				GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerInfo);
-			}
-
-			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
-			_dialogCount = 0;
-			_inDialog = false;
-		}
-	}
-
-	return _inDialog;
-}
 
 /// <summary>
 /// Adjusts the given need.
@@ -245,10 +206,30 @@ void Npc::needNewQuest() {
 	lowestNeed.adjustValue(50);
 }
 
+/// <param name="pPlayerPos">The current player position.</param>
+/// <returns>False if the player is too far away to start a talk</returns>
+bool Npc::talk()
+{
+	if (!_inDialog) {
+		// this npc is currently in dialog
+		_inDialog = true;
 
-void Npc::recieveItem() {
-	Character::recieveItem();
+		// if this quest can be started
+		if (_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
+			//TODO: this variable should be set when the quest is over and there is actually not a quest anymore
+			indicatorNode->setVisible(false);
+		}
 
-	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgNpcItem);
+		setDialog(GameManager::getSingletonPtr()->getDialogManager()->getDialogText(this));
+
+		// show the first line of the dialog
+		GameManager::getSingletonPtr()->getUIManager()->showDialog(_name, _dialog[_dialogCount]);
+	}
+	else {
+		BaseNpc::talk();
+	}
+
+	return _inDialog;
 }
+
 

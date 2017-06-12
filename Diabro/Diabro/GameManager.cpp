@@ -6,7 +6,6 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 #include "SdkTrays.h"
-#include "Tree.h"
 
 //---------------------------------------------------------------------------
 
@@ -15,9 +14,8 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), up(false), down(false), left(false), right(false)
-{
-}
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0),
+up(false), down(false), left(false), right(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
 //---------------------------------------------------------------------------
 /// <summary>
 /// Finalizes an instance of the <see cref="GameManager"/> class.
@@ -27,6 +25,8 @@ GameManager::~GameManager()
 	delete _gameTimer;
 	delete _levelManager;
 	delete _uiManager;
+	delete _questManager;
+	delete _dialogManager;
 }
 
 //---------------------------------------------------------------------------
@@ -59,6 +59,8 @@ void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
 
+	_dialogManager = new DialogManager();
+
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
 
@@ -76,8 +78,9 @@ void GameManager::createScene(void)
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	state = Start;
-	//_uiManager->startState();
+	currentState = (GameState)0;
+	previousState = currentState;
+	goToState(MainMenu);
 }
 
 /// <summary>
@@ -91,14 +94,14 @@ void GameManager::nextFloor() {
 
 	setupLights(mSceneMgr);
 
-	state = Start;
+	previousState = currentState;
+	currentState = Start;
 
 	up = false;
 	down = false;
 	left = false;
 	right = false;
 }
-
 
 /// <summary>
 /// Resets the game.
@@ -111,7 +114,8 @@ void GameManager::restartGame() {
 
 	setupLights(mSceneMgr);
 
-	state = Start;
+	previousState = currentState;
+	currentState = Start;
 
 	up = false;
 	down = false;
@@ -164,7 +168,7 @@ void GameManager::createViewports()
 
 	// set background viewport
 	vp->setBackgroundColour(Ogre::ColourValue(0.278f, 0.368f, 0.482f));
-
+	
 	// as aspect ratio to avoid distortion
 	mCamera->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
@@ -189,7 +193,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
 
-	switch (state) {
+	switch (currentState) {
 	case Start:
 		_uiManager->startUpdate(pFE);
 		break;
@@ -208,6 +212,13 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		break;
 	}
 
+	if(_abandonedQuestPressed) {
+		_abandonTimer -= pFE.timeSinceLastFrame;
+		if(_abandonTimer < 0) {
+			_abandonedQuestPressed = false;
+		}
+	}
+
 	return ret;
 }
 
@@ -220,7 +231,12 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
 	if (pKE.key == OIS::KC_ESCAPE) mShutDown = true;
 
-	if (state != InGame) return false;
+	if (currentState != InGame && currentState != Paused && currentState != MainMenu) return false;
+
+	if(currentState == MainMenu) {
+		goToState(Start);
+		return true;
+	}
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
@@ -246,11 +262,25 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		right = true;
 		break;
 		
-	case OIS::KC_LSHIFT:
+	case OIS::KC_Q:
+		if(_questManager->getCurrentQuest()) {
+			if(_abandonedQuestPressed) {
+				_questManager->getCurrentQuest()->abandon();
+			}
+			else {
+				_uiManager->showHUDText("Press 'Q' again to abandon your current quest.", 1.0f);
+				_abandonedQuestPressed = true;
+				_abandonTimer = _totalTimeBeforeAbandon;
+			}
+		}
 		break;
 
 	case OIS::KC_E:
 		_levelManager->getPlayer()->interactionTriggered();
+		break;
+
+	case OIS::KC_LSHIFT:
+		_levelManager->getPlayer()->setRunning(true);
 		break;
 
 	case OIS::KC_SPACE:
@@ -258,6 +288,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 			_levelManager->getPlayer()->dialogTriggered();
 		}
 		break;
+
+	case OIS::KC_P:
+		if(currentState == Paused) {
+			goToState(previousState);
+		} else {
+			goToState(Paused);
+		}
 
 	default:
 		break;
@@ -274,7 +311,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
-	if (state != InGame) return false;
+	if (currentState != InGame && currentState != Paused) return false;
 
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
@@ -300,6 +337,10 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 		right = false;
 		break;
 
+	case OIS::KC_LSHIFT:
+		_levelManager->getPlayer()->setRunning(false);
+		break;
+
 	default:
 		break;
 	}
@@ -315,6 +356,8 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 {
+	if (currentState == Paused) return false;
+
 	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * pME.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
@@ -337,6 +380,8 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 /// <returns></returns>
 bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
+	if (currentState == Paused) return false;
+
 	return true;
 }
 
@@ -348,6 +393,8 @@ bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pI
 /// <returns></returns>
 bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
+	if (currentState == Paused) return false;
+
 	switch (pID)
 	{
 	case OIS::MB_Left:

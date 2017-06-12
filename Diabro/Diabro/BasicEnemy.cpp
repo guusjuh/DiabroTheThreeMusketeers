@@ -67,20 +67,16 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 		tempEquipment = tempEquipment->getBase();
 	}
 
-	//Ogre::ColourValue myCol = COL_HP;
 	int colorIndex = 0;
 	if(damageUpgrades == 0 && healthUpgrades == 0 && noticeDistUpgrades == 0) {
 		colorIndex = 0;
 	} else if(damageUpgrades > healthUpgrades) {
 		if(damageUpgrades > noticeDistUpgrades) {
-			//myCol = COL_DMG;
 			colorIndex = 2;
 		} else {
-			//myCol = COL_NDIST;
 			colorIndex = 3;
 		}
 	} else if (noticeDistUpgrades > healthUpgrades){
-		//myCol = COL_NDIST;
 		colorIndex = 3;
 	} else {
 		colorIndex = 1;
@@ -98,7 +94,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	}
 	pMyEntity->setMaterialName(_originalMaterialName);
 
-	name = getNameOptions()[rand() % getNameOptions().size()];
+	name = "squared bastard";
 	_relevantForAction = false;
 
 	// set node
@@ -161,7 +157,6 @@ void BasicEnemy::assignUpgrades(int level) {
 		upgradeEquipment(EnemyUpgradeType(value, type));
 	}
 }
-
 
 std::vector<std::string> BasicEnemy::getNameOptions() {
 	std::vector<std::string> _nameOptions;
@@ -242,6 +237,15 @@ bool BasicEnemy::lightAttack()
 /// </summary>
 void BasicEnemy::die() {
 	_isDead = true;
+
+	// display hud text if this enemy is important for quests
+	if (_hasItem && _needToGiveItem) {
+		giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+	}
+	if (_relevantForAction) {
+		GameManager::getSingletonPtr()->getUIManager()->showHUDText(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this), 3.5f);
+		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerInfo);
+	}
 
 	equipment = equipment->removeUpgrades();
 	_maxHealth = equipment->getHealth();

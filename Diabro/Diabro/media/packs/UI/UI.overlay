@@ -16,6 +16,15 @@ template container BorderPanel(UI/Tray)
 	border_bottomright_uv 0.75 0.75 1.00 1.00
 }
 
+template container Panel(UI/Logo)
+{
+	metrics_mode pixels
+	material UI/LogoImg
+	uv_coords 0.0 0.0 1.0 1.0
+	height 200
+	width 300
+}
+
 template container BorderPanel(UI/PlayerHealthBar)
 {
 	metrics_mode pixels
@@ -276,7 +285,7 @@ template container Panel(UI/FloorIndicator)
 	metrics_mode pixels
 	transparent true
 
-	element TextArea(FloorValue)
+	element TextArea(ValueFloorIndicator)
 	{
         metrics_mode pixels
         horz_align center
@@ -284,6 +293,24 @@ template container Panel(UI/FloorIndicator)
         top 20
         font_name UI/Caption
         char_height 30
+        space_width 7
+        colour 0.9 0.9 0.9
+	}
+}
+
+template container Panel(UI/InstructionIndicator)
+{
+	metrics_mode pixels
+	transparent true
+
+	element TextArea(ValueInstructionIndicator)
+	{
+        metrics_mode pixels
+        horz_align center
+        alignment left
+        top 20
+        font_name UI/Caption
+        char_height 15
         space_width 7
         colour 0.9 0.9 0.9
 	}

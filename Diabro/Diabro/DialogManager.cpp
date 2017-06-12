@@ -1,0 +1,66 @@
+#include "DialogManager.h"
+#include "GameManager.h"
+
+const std::string DialogManager::instructionStrings[6] = {
+	"Hi there!'\\nDid you know you can take a break from all of your adventures? \\nJust press 'P'!",  // pausing
+	"Do you hate squares? \\nI hate squares! \\nYou can kill them by clicking with your left mouse button when you're close to them.", // killing squares
+	"You still didn't figure out how to quest?! \\nIt's easy and you get lots of hints! \\nYellow indicators show who has a quest for you. \\nAnd the green indicator shows the your current goal!", // finding quest goals
+	"Family is the most important thing in the world, don't you think? \\nYour sister is lost?! Go find her, mate!", // family is important, save it
+	"Some quests are so stupid, don't you think so? \\nLuckily you can abandon them by pressing 'Q'.", // abandon quests
+	"Escaping from this cave? \\n'ESC' is the fasted way to escape for sure, but that might not be the kind of escape you need." // quiting the game
+};
+
+DialogManager::DialogManager() { }
+
+DialogManager::~DialogManager() { }
+
+std::string DialogManager::getDialogText(BaseNpc* thisNpc) {
+	return instructionStrings[GameManager::getSingletonPtr()->getRandomInRange(0, sizeof(instructionStrings)/ sizeof(instructionStrings[0]))];
+}
+
+std::string DialogManager::getDialogText(Npc* thisNpc) {
+	// the string to return
+	std::string returnString = "";
+
+	// catch the current action number of the quest.
+	// if no quest is active, the nr will be -1 and we can skip some checks. 
+	int currActionNr = -1;
+	if(GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()) {
+		currActionNr = GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentAction();
+	}
+
+	// if the npc can be in this quest at all
+	if(currActionNr > -1) {
+		// if relevant in the current action, it knows, so directly obtain the dialog
+		if (thisNpc->_relevantForAction) {
+			returnString = GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(thisNpc);
+		}
+		// else, does this npc have a quest and are we in the first action?
+		// note: there is not a start action so we can't check for being content in such an action
+		else if (thisNpc == (Npc*)GameManager::getSingletonPtr()->getSingletonPtr()->getQuestManager()->getCurrentQuest()->getSourceNpc()
+			&& currActionNr == 0) {
+			returnString = GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getStrategy()->getDialog();
+		}
+		// else, was this npc relevant in the last action?
+		else if(GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->isContentInAction(thisNpc, currActionNr - 1)) {
+			returnString = GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(thisNpc, currActionNr - 1);
+		}
+	}
+	// else, does the npc has a quest + can it be started?
+	else if (thisNpc->_hasQuest && GameManager::getSingletonPtr()->getQuestManager()->questCanStart()) {
+		// if this quest can be started
+		// get the dialog for starting the quest
+		returnString = GameManager::getSingletonPtr()->getQuestManager()->startQuest(thisNpc);
+	}
+
+	// if we still have an empty string at this point, none of the conditions was met or something went wrong
+	if(returnString == "") {
+		returnString = instructionStrings[GameManager::getSingletonPtr()->getRandomInRange(0, sizeof(instructionStrings) / sizeof(instructionStrings[0]))];
+	}
+
+	return returnString;
+}
+
+std::string DialogManager::getDialogText(BasicEnemy* thisNpc) {
+	return instructionStrings[GameManager::getSingletonPtr()->getRandomInRange(0, sizeof(instructionStrings) / sizeof(instructionStrings[0]))];
+}

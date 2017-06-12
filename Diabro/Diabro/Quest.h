@@ -22,13 +22,43 @@ public:
 	void start();
 	void update();
 	void end();
-	void abondon();
+	void abandon();
 
 	bool isAbstract() { return _strategy.isAbstract(); }
 
 	bool completed() { return _completed; }
 
 	void sendMsg(IQuestContent* sender, std::string msg);
+
+	BaseNpc* getSourceNpc() { return _sourceNPC; }
+
+	std::string getCurrentInstruction() {
+		if (_strategy._currentAction == -1) return "";
+		return _strategy._actionSequence[_strategy._currentAction].getInstruction();
+	}
+
+	int getCurrentAction() { return _strategy._currentAction; }
+	Strategy* getStrategy() { return &_strategy; }
+
+	bool isContentInAction(IQuestContent* contentToMatch, int actionNr) {
+		if (actionNr < 0 || actionNr >= _strategy.getActionSequence().size()) return false;
+		
+		if(_strategy.getActionSequence()[actionNr].contentContains(contentToMatch) != -1) {
+			return true;
+		}
+
+		return false;
+	}
+
+	bool isContentInQuest(IQuestContent* contentToMatch) {
+		for (int i = 0; i < _strategy.getActionSequence().size(); ++i) {
+			if (_strategy.getActionSequence()[i].contentContains(contentToMatch) != -1) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 private:
 	Strategy _strategy;

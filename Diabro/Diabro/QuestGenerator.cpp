@@ -64,7 +64,7 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 	for (int i = 0; i < tempActions.size(); ++i) {
 		newActions.push_back(Action(tempActions[i].getID(), tempActions[i].getType(), 
 			tempActions[i].getPreconditions(), 
-			tempActions[i].getPostcondition(), tempActions[i].getRequiredContent(), tempActions[i].getDialog()));
+			tempActions[i].getPostcondition(), tempActions[i].getRequiredContent(), tempActions[i].getDialog(), tempActions[i].getInstruction()));
 	}
 
 	Strategy choosenStrat = Strategy(possibleStrategies[randomRoll]->getID(), possibleStrategies[randomRoll]->getName(), 
@@ -287,6 +287,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 	// generate dialog for all actions
 	for (int i = 0; i < actions.size(); ++i) {
 		actions[i]._dialog = getFilledTemplate(actions[i]._dialog, contentIDs);
+		actions[i]._instruction = getFilledTemplate(actions[i]._instruction, contentIDs);
 	}
 
 	// set the action sequence

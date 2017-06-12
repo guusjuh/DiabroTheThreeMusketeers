@@ -3,14 +3,9 @@
 #include <vector>
 #include <string>
 #include "IQuestContent.h"
-//TODO: implement
-// 1. you have the item
-// 2. they have the item
-// 3. you there
 
 class PostCondition {
 public:
-	//TODO: moet ismet overal op false/base constructor aanroepen?
 	PostCondition() { _isMet = false; }
 	~PostCondition() {}
 

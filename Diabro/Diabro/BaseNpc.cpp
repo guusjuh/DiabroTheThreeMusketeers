@@ -12,7 +12,8 @@ const Ogre::String BaseNpc::_activeMaterial = "InGame/ActiveInQuest";
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : Character(pMyNode, pMyEntity), _timer(0), _myCity(pMyCity)
+BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) 
+: Character(pMyNode, pMyEntity), _timer(0), _myCity(pMyCity), _inDialog(false)
 {
 	// create the entity for the quest indicator
 	questIndicatorEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
@@ -258,4 +259,41 @@ void BaseNpc::walkToNeighbour(){
 	_myNode->lookAt(Ogre::Vector3(nextPos[0].x, getPosition().y, nextPos[0].z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
 
 	walkToNextPoint();
+}
+
+void BaseNpc::recieveItem() {
+	Character::recieveItem();
+
+	GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgNpcItem);
+}
+
+/// <returns>False if the player is too far away to start a talk</returns>
+bool BaseNpc::talk()
+{
+	// start the dialog if it wasn't started already
+	if (!_inDialog) {
+		// currently in dialog
+		_inDialog = true;
+
+	}
+	else {
+		_dialogCount++;
+		if (_dialogCount < _dialog.size()) {
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_dialog[_dialogCount]);
+		}
+		else {
+			if (_hasItem && _needToGiveItem) {
+				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+			}
+			else if (_relevantForAction) {
+				GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerInfo);
+			}
+
+			GameManager::getSingletonPtr()->getUIManager()->hideDialog();
+			_dialogCount = 0;
+			_inDialog = false;
+		}
+	}
+
+	return _inDialog;
 }

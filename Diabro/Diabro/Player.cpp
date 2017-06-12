@@ -43,6 +43,9 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	isPlayer = true;
 
 	_movespeed = 550;
+	_runspeed = 800;
+	_isRunning = false;
+
 	_rotationspeed = 0.13f;
 	_maxHealth = equipment->getHealth();
 	_damage = equipment->getDamage();
@@ -204,7 +207,7 @@ void Player::findSister() {
 	_myNode = nullptr;
 	_myEntity = nullptr;
 
-	GameManager::getSingletonPtr()->goNextState();
+	GameManager::getSingletonPtr()->goToState(End);
 	GameManager::getSingletonPtr()->getSoundManager()->completed();
 	GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom(false);
 }
@@ -232,7 +235,7 @@ void Player::dialogTriggered() {
 	}
 	_inDialog = true;
 
-	if (!_nearbyNPC->talk(getPosition())) {
+	if (!_nearbyNPC->talk()) {
 		if (_hasItem && _needToGiveItem && _nearbyNPC->relevantForAction()) {
 			giveItem(_nearbyNPC);
 		} 

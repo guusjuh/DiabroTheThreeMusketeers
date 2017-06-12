@@ -31,6 +31,48 @@ material UI/MiniTray : UI/Base
     }
 }
 
+material UI/PauseBackdrop : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture pauseBackdrop.png
+            }
+        }
+    }
+}
+
+material UI/MenuBackdrop : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture blackbackground.png
+            }
+        }
+    }
+}
+
+material UI/LogoImg : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture logo.png
+            }
+        }
+    }
+}
+
 material UI/TextBox : UI/Base
 {
     technique
