@@ -57,6 +57,13 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_radius = 30.0f;
 
 	_currentHealth = _maxHealth;
+
+	
+	Ogre::Entity* attackSphere = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
+	attackNode = pMyNode->createChildSceneNode();
+	attackNode->attachObject(attackSphere);
+	attackNode->setPosition(Ogre::Vector3(getAttackDistance(), 0, 0));
+	attackNode->setScale(0.25f, 0.25f, 0.25f);
 }
 
 /// <summary>
@@ -139,6 +146,10 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 /// <param name="pDeltaTime">The delta time, time since last frame.</param>
 void Player::update(Ogre::Real pDeltaTime)
 {
+	Ogre::Vector3 attackSpherePos = Ogre::Vector3(getAttackDistance(), 0, 0);
+	attackSpherePos = Ogre::Quaternion(Ogre::Degree(_currAttackCooldown * 180), Ogre::Vector3::UNIT_Y) * attackSpherePos;// _currAttackCooldown;
+	attackNode->setPosition(attackSpherePos);
+
 	if (_myNode == nullptr) return;
 
 	_dirVec.x = 0;

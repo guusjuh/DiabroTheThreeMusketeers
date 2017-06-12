@@ -47,6 +47,8 @@ public:
 	void setRunning(bool val) { _isRunning = val; }
 
 private:
+	Ogre::SceneNode* attackNode;
+
 	void die() override;
 	int curCityId;
 
