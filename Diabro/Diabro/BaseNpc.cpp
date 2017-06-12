@@ -44,6 +44,8 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 	}
 	detectPlayer();
 
+	stateMachine.update();
+
 	_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
 	_degreePerFrame = _rotationspeed * pDeltatime;
 

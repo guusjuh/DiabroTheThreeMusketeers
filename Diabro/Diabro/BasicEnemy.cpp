@@ -207,7 +207,6 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 		stateMachine = StateMachine<BaseNpc>(this, "AroundCenter", possibleStates);
 		_initialized = true;
 	}
-	stateMachine.update();
 	
 	BaseNpc::update(pDeltatime);
 }

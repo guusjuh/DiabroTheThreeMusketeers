@@ -5,6 +5,10 @@
 #include <fstream>
 #include "Needs.h"
 #include "Quest.h"
+#include "NpcWanderState.h"
+#include "NpcFollowPlayerState.h"
+#include "NpcIdleState.h"
+#include "NpcKidnappedState.h"
 
 /// <summary>
 /// Enum for the different professions of NPC's. An important variable for the quest system. 
@@ -45,7 +49,12 @@ public:
 	QuestContent getType() override { return NPCQC; }
 	void recieveItem() override;
 
+	bool isKidnapped() { return _kidnapped; }
+	void setKidnapped(bool val) { _kidnapped = val; }
+
 private: 
+	bool _kidnapped;
+
 	bool _initialized;
 	bool _hasQuest;
 	Quest* _currentQuest;
@@ -84,8 +93,6 @@ private:
 	Profession _profession;			//!< The profession of the NPC, used to generate relevant quests.
 	City* _hometown;
 	Building* _home;
-
-	RealCoordinate _randomTownPos;
 
 	void adjustNeed(NeedType, int);
 	void needNewQuest();

@@ -41,7 +41,6 @@ private:
 	std::vector<std::string> getNameOptions();
 	std::string name;
 
-	std::map<std::string, State<BaseNpc>*> possibleStates;
 	bool _initialized;
 
 	bool _isDead;
