@@ -64,11 +64,12 @@ private:
 	int depth;
 	int id; ///< unique id
 	int scalar;
+	std::string color;
 	std::vector<Coordinate> connections;
 
 public:
 	City() {}
-	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar);
+	City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar, std::string color);
 	~City();
 
 	void init();
@@ -77,6 +78,8 @@ public:
 	int Width() { return width; }
 	int Depth() { return depth; }
 	int ID(){ return id; }
+	bool inCity(Coordinate position);
+	std::string getColor(){ return color; }
 	RoomType TypeFlag(){ return typeFlag; }
 	Coordinate Position() { return position; }
 	void addConnection(Coordinate coord){ connections.push_back(coord);}
@@ -130,11 +133,8 @@ public:
 	}
 
 protected:
-	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
-	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
-	bool checkEntryWay(Ogre::SceneNode *); //Checks if the buildings are blocking entryways
-	void assignBuildingRole(std::vector<Building> , std::vector<Ogre::Entity*>); //Assign roles to buildings in the city
-	
+	void setBuildingMaterial(std::vector<Building>, std::vector<Ogre::Entity*>);
+
 	std::vector<Ogre::SceneNode*> nodeList(Ogre::SceneNode* pBuildingNode);
 	
 private:

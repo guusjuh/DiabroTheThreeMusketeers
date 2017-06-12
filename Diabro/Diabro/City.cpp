@@ -130,8 +130,8 @@ bool operator== (RealCoordinate &lhs, Coordinate &rhs) {
 /// <param name="pDepth">Depth of the city.</param>
 /// <param name="pId">The id.</param>
 /// <param name="pScalar">The scalar for the city.</param>
-City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar) :
-position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar), _enemyRespawnTime(60.0f)
+City::City(int pX, int pZ, int pWidth, int pDepth, int pId, int pScalar, std::string color) :
+position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pScalar), color(color), _enemyRespawnTime(5.0f)
 {
 	_relevantForAction = false;
 	_tiles = new int[scaledWidth() * scaledDepth()];
@@ -278,6 +278,20 @@ std::string City::getRandomName(RoomType type) {
 	}
 
 	return _returnName;
+}
+
+///returns whether a (zoneGrid) position is in the current grid
+/// \param position the position to check
+bool City::inCity(Coordinate position)
+{
+	if (position.x >= this->position.x && position.z >= this->position.z)
+	{
+		if (position.x < this->position.x + width && position.z < this->position.z + depth)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 /// returns the center tile of the room
@@ -436,7 +450,7 @@ void City::generateBuildings()
 				if(buildingLocations.size() <= 0) {
 					Debug("No building positions available.");
 					//assign roles for all other buildings in city
-					assignBuildingRole(_buildings, buildingEntities);
+					setBuildingMaterial(_buildings, buildingEntities);
 					return;
 				}
 				rnd = rand() % buildingLocations.size();
@@ -470,8 +484,24 @@ void City::generateBuildings()
 		buildingEntities.push_back(buildingEntity);
 	}
 	//assign material, based on buildingtype
-	assignBuildingRole(_buildings, buildingEntities);
+	setBuildingMaterial(_buildings, buildingEntities);
 }
+
+void City::setBuildingMaterial(std::vector<Building> buildings, std::vector<Ogre::Entity*> entities)
+{
+	for (int i = 0; i < buildings.size(); i++)
+	{
+		if (typeFlag == HideoutRT)
+		{
+			entities[i]->setMaterialName("InGame/GreyHideoutHouse");
+		} else
+		{
+			entities[i]->setMaterialName(GameManager::getSingletonPtr()->getLevelManager()->getMaterial(color, HousesMT));
+		}
+		
+	}
+}
+
 
 std::vector<RealCoordinate> City::getBuildingPositions() {
 	std::vector<RealCoordinate> buildingLocations;
@@ -544,47 +574,6 @@ void City::printGrid() {
 	fclose(fp);
 	//printValues();
 #endif*/
-}
-
-/// <summary>
-/// Assigns the building role.
-/// </summary>
-/// <param name="buildings">The buildings.</param>
-/// <param name="pEntities">The p entities.</param>
-/// <returns></returns>
-void City::assignBuildingRole(std::vector<Building>  buildings, std::vector<Ogre::Entity*> pEntities)
-{
-	std::stringstream nodename("buildingRoleNode");
-	
-	for (int i = 0; i < buildings.size(); i++) {
-		switch (buildings[i].type) // assign building random professions by giving them a rolenode
-		{
-		case Smithery:
-			pEntities[i]->setMaterialName("InGame/YellowHouse");
-			break;
-		case GuardHouse:
-			pEntities[i]->setMaterialName("InGame/PinkHouse");
-			break;
-		case Church:
-			pEntities[i]->setMaterialName("InGame/GreenHouse");
-			break;
-		case PotionStore:
-			pEntities[i]->setMaterialName("InGame/PurpleHouse");
-			break;
-		case Shop:
-			pEntities[i]->setMaterialName("InGame/BlueHouse");
-			break;
-		case FancyHouse:
-			pEntities[i]->setMaterialName("InGame/RedHouse");
-			break;
-
-		case HideOutHouse:
-			pEntities[i]->setMaterialName("InGame/GreyHideoutHouse");
-			break;
-		default:
-			break;
-		}
-	}
 }
 
 /// <summary>

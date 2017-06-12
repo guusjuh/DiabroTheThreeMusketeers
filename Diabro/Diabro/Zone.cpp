@@ -10,6 +10,7 @@
 const int Zone::scalar = 500;
 
 const Coordinate Zone::directions[4] = { Coordinate(1, 0), Coordinate(0, 1), Coordinate(-1, 0), Coordinate(0, -1) };
+const std::string Zone::colors[6] = {"Blue", "Green", "Pink", "Purple", "Red", "Yellow"};
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Zone"/> class.
@@ -43,6 +44,12 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 			setTile(ix, iy, 0);
 		}
 	}
+
+	for (int i = 0; i < sizeof(colors) / sizeof(colors[0]); i++)
+	{
+		colorList.push_back(colors[i]);
+	}
+
 	generateCities(pMaxTries, pMaxCities);
 	int n = generatePathways(cities.size() + 1);
 	Debug("connecting dungeon");
@@ -52,13 +59,33 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 
 	cleanGrid();
 	collisionGridGenerated = false;
-	
 }
 
 /// <summary>
 /// Finalizes an instance of the <see cref="Zone"/> class.
 /// </summary>
 Zone::~Zone(){ }
+
+void Zone::resetColors()
+{
+	for (int i = 0; i < sizeof(colors) / sizeof(colors[0]); i++)
+	{
+		colorList.push_back(colors[i]);
+	}
+}
+
+std::string Zone::getCityColor()
+{
+	if (colorList.size() < 1)
+	{
+		resetColors();
+	}
+
+	int rnd = rand() % colorList.size();
+	std::string returnColor = colorList[rnd];
+	colorList.erase(colorList.begin() + rnd);
+	return returnColor;
+}
 
 City* Zone::getRandomCity(RoomType type) {
 	std::vector<int> id;
@@ -738,11 +765,10 @@ void Zone::generateCity(int& nCities) {
 	(z % 2 == 0) ? z++ : z;
 
 	//try to place the city
-	if (placeCity(City(x, z, width, depth, nCities + 1, scalar))) {
+	if (placeCity(City(x, z, width, depth, nCities + 1, scalar, getCityColor()))) {
 		++nCities;
 	}
 }
-
 
 /// prints all values of the grid (windows only method)
 void Zone::printGrid() {

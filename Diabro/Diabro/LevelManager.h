@@ -22,6 +22,12 @@ public:
 	}
 };
 
+enum MaterialType
+{
+	NpcMT,
+	HousesMT
+};
+
 /// <summary>
 /// The manager of the level. 
 /// </summary>
@@ -66,6 +72,8 @@ public:
 	Ogre::Degree startPitchCam;
 	Ogre::Vector3 playerPosition;
 	std::string npcNames[8];
+
+	std::string getMaterial(std::string color, MaterialType type);
 
 private:
 	std::vector<std::pair<Timer, City*>> enemySpawnTimers;

@@ -66,7 +66,7 @@ private:
 	
 	Ogre::SceneNode* _sisterNode;
 
-	void drawDungeonFloor(Zone pZone, Ogre::ColourValue pCol);
+	void drawDungeonFloor(Zone &pZone);
 
 	void createTileMesh(std::string pName, Ogre::ColourValue pCol) const;
 	void donaldTrump(std::string pName, Ogre::ColourValue pCol) const;
