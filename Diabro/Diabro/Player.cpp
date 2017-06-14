@@ -62,7 +62,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	Ogre::Entity* attackSphere = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 	attackNode = pMyNode->createChildSceneNode();
 	attackNode->attachObject(attackSphere);
-	attackNode->setPosition(Ogre::Vector3(getAttackDistance(), 0, 0));
+	attackNode->setPosition(Ogre::Vector3(getAttackDistance() * .75f, 0, 0));
 	attackNode->setScale(0.25f, 0.25f, 0.25f);
 }
 
@@ -146,8 +146,8 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 /// <param name="pDeltaTime">The delta time, time since last frame.</param>
 void Player::update(Ogre::Real pDeltaTime)
 {
-	Ogre::Vector3 attackSpherePos = Ogre::Vector3(getAttackDistance(), 0, 0);
-	attackSpherePos = Ogre::Quaternion(Ogre::Degree(_currAttackCooldown * 180), Ogre::Vector3::UNIT_Y) * attackSpherePos;// _currAttackCooldown;
+	Ogre::Vector3 attackSpherePos = Ogre::Vector3(getAttackDistance() * .75f, 0, 0);
+	attackSpherePos = Ogre::Quaternion(Ogre::Degree(-std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f) * 180 + 90), Ogre::Vector3::UNIT_Y) * attackSpherePos;// _currAttackCooldown;
 	attackNode->setPosition(attackSpherePos);
 
 	if (_myNode == nullptr) return;
