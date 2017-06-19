@@ -91,6 +91,13 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	curCityId = 1;
 
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _maxHealth);
+
+
+	Ogre::Entity* attackSphere = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
+	attackNode = pMyNode->createChildSceneNode();
+	attackNode->attachObject(attackSphere);
+	attackNode->setPosition(Ogre::Vector3(getAttackDistance() * .75f, 0, 0));
+	attackNode->setScale(0.25f, 0.25f, 0.25f);
 }
 
 /// <summary>

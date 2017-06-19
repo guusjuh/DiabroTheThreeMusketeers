@@ -8,7 +8,7 @@
 class Node
 {
 public:
-	Node(Node parent, int parentId, int x, int y, int goalX, int goalY);
+	Node(Node parent, int parentId, int x, int y, int goalX, int goalY, bool weighted = false);
 	Node(int x, int y, int goalX, int goalY);
 	Node() { hasParent = false; }
 	~Node();

@@ -1,6 +1,7 @@
 #include "Node.h"
 #include <vector>
 #include "City.h"
+#include "GameManager.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Node"/> class.
@@ -11,7 +12,7 @@
 /// <param name="y">The y pos.</param>
 /// <param name="goalX">The goal x pos for this path.</param>
 /// <param name="goalY">The goal y pos for this path.</param>
-Node::Node(Node parent, int parentId, int x, int y, int goalX, int goalY) :
+Node::Node(Node parent, int parentId, int x, int y, int goalX, int goalY, bool weighted) :
 parentId(parentId), x(x), y(y)
 {
 	hasParent = true;
@@ -23,6 +24,30 @@ parentId(parentId), x(x), y(y)
 	{
 		g = parent.g + 10;
 	}
+
+	if (weighted){
+		int weight = 0;
+		std::vector<Character*> hostileNpcs = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
+		for (size_t i = 0; i < hostileNpcs.size(); i++)
+		{
+			Coordinate npcPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(hostileNpcs[i]->getPosition().x, hostileNpcs[i]->getPosition().z));
+			if (npcPos.x == x && npcPos.z == y){
+				weight += 500;
+			}
+			if (((BaseNpc*)hostileNpcs[i])->stateMachine.getCurrentState() == "FollowAStar"){
+				std::vector<Coordinate> nextPositions = ((BaseNpc*)hostileNpcs[i])->getNextPosList();
+				for (size_t i = 0; i < nextPositions.size(); i++)
+				{
+					Coordinate nextPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(hostileNpcs[i]->getPosition().x, hostileNpcs[i]->getPosition().z));
+					if (nextPos.x == x && nextPos.z == y){
+						weight += 500;
+					}
+				}
+			}
+		}
+		g += weight;
+	}
+
 	h = (std::abs(x - goalX) + std::abs(y - goalY)) * 10;
 }
 

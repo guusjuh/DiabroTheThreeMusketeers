@@ -17,7 +17,7 @@ void EnemyFollowAStarState::Enter(BaseNpc* agent){
 	player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(player);
 	playerPos.x = player.x;
 	playerPos.z = player.z;
-	agent->calculateAStar(playerPos);
+	agent->calculateAStarWeighted(playerPos);
 	agent->walkToNextPoint();
 }
 
@@ -38,7 +38,7 @@ void EnemyFollowAStarState::Execute(BaseNpc* agent){
 		player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(player);
 		playerPos.x = player.x;
 		playerPos.z = player.z;
-		agent->calculateAStar(playerPos);
+		agent->calculateAStarWeighted(playerPos);
 
 		if (agent->getNextPosSize() > 0){
 			agent->walkToNextPoint();

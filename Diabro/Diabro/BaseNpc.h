@@ -23,6 +23,7 @@ public:
 	using Character::lightAttack;
 
 	void calculateAStar(Ogre::Vector3 targetPos);
+	void calculateAStarWeighted(Ogre::Vector3 targetPos);
 	void walkToNextPoint();
 	void walkTo(Ogre::Vector3);
 	void walkToNeighbour();
@@ -31,6 +32,7 @@ public:
 	std::map<std::string, State<BaseNpc>*> possibleStates;
 
 	int getNextPosSize() { return nextPos.size(); }
+	std::vector<Coordinate> getNextPosList() { return nextPos; }
 	Coordinate getGoalPos() { return goalPos; }
 	City* getCity() { return _myCity; }
 	bool isPlayerDetected() { return _playerDetected; }
