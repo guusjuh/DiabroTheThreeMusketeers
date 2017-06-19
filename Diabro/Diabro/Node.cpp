@@ -32,15 +32,15 @@ parentId(parentId), x(x), y(y)
 		{
 			Coordinate npcPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(hostileNpcs[i]->getPosition().x, hostileNpcs[i]->getPosition().z));
 			if (npcPos.x == x && npcPos.z == y){
-				weight += 500;
+				weight += 10;
 			}
 			if (((BaseNpc*)hostileNpcs[i])->stateMachine.getCurrentState() == "FollowAStar"){
 				std::vector<Coordinate> nextPositions = ((BaseNpc*)hostileNpcs[i])->getNextPosList();
-				for (size_t i = 0; i < nextPositions.size(); i++)
+				for (size_t j = 0; j < nextPositions.size(); j++)
 				{
-					Coordinate nextPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(hostileNpcs[i]->getPosition().x, hostileNpcs[i]->getPosition().z));
+					Coordinate nextPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(nextPositions[j].x, nextPositions[j].z));
 					if (nextPos.x == x && nextPos.z == y){
-						weight += 500;
+						weight += 10;
 					}
 				}
 			}
