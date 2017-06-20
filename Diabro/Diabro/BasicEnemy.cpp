@@ -115,6 +115,8 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 
 	_currentHealth = _maxHealth;
 
+	_rotationType = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
+
 	_isDead = false;
 }
 

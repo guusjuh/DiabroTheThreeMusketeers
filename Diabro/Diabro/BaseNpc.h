@@ -43,6 +43,8 @@ public:
 	virtual bool talk();
 	void recieveItem() override;
 
+	int _rotationType;
+
 protected:
 	std::vector<Coordinate> nextPos;
 	bool _inCurrentQuest;
