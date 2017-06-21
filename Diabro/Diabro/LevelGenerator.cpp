@@ -503,7 +503,7 @@ void LevelGenerator::determineCityTypes() {
 	Ogre::Entity* _sis = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 	_sisterNode->setScale(0.25f, 0.25f, 0.25f);
 	_sisterNode->setPosition((furtherstCity->getCenterTile().x - 1) * Zone::scalar, 18.0f, (furtherstCity->getCenterTile().z) * Zone::scalar);
-	_sis->setMaterialName("InGame/PinkHouse");
+	_sis->setMaterialName("InGame/Sister");
 
 	_sisterNode->createChildSceneNode()->attachObject(_sis);
 

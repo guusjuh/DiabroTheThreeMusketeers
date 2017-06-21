@@ -57,7 +57,6 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_radius = 30.0f;
 
 	_currentHealth = _maxHealth;
-
 	
 	Ogre::Entity* attackSphere = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
 	attackNode = pMyNode->createChildSceneNode();
@@ -78,7 +77,7 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	setDirVector(Ogre::Vector3(0, 0, 0));
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
-	pMyEntity->setMaterialName("InGame/BlueHouse");
+	pMyEntity->setMaterialName("InGame/Player");
 
 	changeInBattle(false);
 	_target = nullptr;
@@ -214,9 +213,9 @@ void Player::update(Ogre::Real pDeltaTime)
 		setNearbyNPC(nullptr);
 	}
 
+	Coordinate position = Coordinate(getPosition().x / Zone::scalar + 0.25f, getPosition().z / Zone::scalar + 0.25f);
 	for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0,0).cities.size(); i++)
 	{
-		Coordinate position = Coordinate(getPosition().x / Zone::scalar, getPosition().z / Zone::scalar);
 		City city = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i];
 		bool inCity = city.inCity(position);
 		if (inCity)

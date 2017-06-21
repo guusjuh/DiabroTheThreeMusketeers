@@ -89,6 +89,7 @@ void GameManager::createScene(void)
 void GameManager::nextFloor() {
 	Debug("\tG: spawning next floor, player succeeded.");
 	getSceneManager()->clearScene();
+
 	_levelManager->nextFloor();
 	_questManager->reset();
 
@@ -109,6 +110,7 @@ void GameManager::nextFloor() {
 void GameManager::restartGame() {
 	Debug("\tG: restarting the game, player died.");
 	getSceneManager()->clearScene();
+	
 	_levelManager->restartGame();
 	_questManager->reset();
 

@@ -12,6 +12,20 @@ material InGame/Player
    }
 }
 
+material InGame/Sister
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture Houses/pinkBox.jpg
+         }
+      }
+   }
+}
+
 material InGame/Floor
 {
    technique
