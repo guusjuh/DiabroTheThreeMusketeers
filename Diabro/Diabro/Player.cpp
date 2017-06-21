@@ -28,7 +28,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	// set node vars
 	pMyNode->setScale(0.4f, 0.4f, 0.4f);
 	pMyNode->setPosition(pMyNode->getPosition().x, 27.0f, pMyNode->getPosition().z);
-	_originalMaterialName = "InGame/BlueHouse";
+	_originalMaterialName = "InGame/Player";
 	pMyEntity->setMaterialName(_originalMaterialName);
 	_forwardVec = Ogre::Vector3(0, 0, -1);
 

@@ -1,3 +1,17 @@
+material InGame/Player
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+			texture Houses/blueBox.jpg
+         }
+      }
+   }
+}
+
 material InGame/Floor
 {
    technique
@@ -133,7 +147,7 @@ material InGame/PinkHouse
       {        
          texture_unit
          {
-			texture Houses/pinkBox.jpg
+			texture Houses/pinkHouse.jpg
          }
       }
    }
@@ -147,7 +161,7 @@ material InGame/RedHouse
       {        
          texture_unit
          {
-			texture Houses/redBox.jpg
+			texture Houses/redHouse.jpg
          }
       }
    }
@@ -161,7 +175,7 @@ material InGame/YellowHouse
       {
          texture_unit
          {
-			texture Houses/yellowBox.jpg
+			texture Houses/yellowHouse.jpg
          }
       }
    }
@@ -175,7 +189,7 @@ material InGame/BlueHouse
       {
          texture_unit
          {
-			texture Houses/blueBox.jpg
+			texture Houses/blueHouse.jpg
          }
       }
    }
@@ -189,7 +203,7 @@ material InGame/GreenHouse
       {
          texture_unit
          {
-			texture Houses/greenBox.jpg
+			texture Houses/greenHouse.jpg
          }
       }
    }
@@ -203,7 +217,7 @@ material InGame/PurpleHouse
       {        
          texture_unit
          {
-			texture Houses/purpleBox.jpg
+			texture Houses/purpleHouse.jpg
          }
       }
    }
@@ -217,7 +231,7 @@ material InGame/GreyHideoutHouse
       {        
          texture_unit
          {
-            texture greyBox.jpg
+            texture Houses/greyHouse.jpg
          }
       }
    }
