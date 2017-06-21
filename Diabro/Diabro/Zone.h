@@ -49,12 +49,12 @@ public:
 	void printCollisionGrid();
 	bool* getCollisionGrid();
 
-	std::string getCityColor();
+	static std::string getCityColor();
 
 protected:
-	std::vector<std::string> colorList;
+	static std::vector<std::string> colorList;
 	const static std::string colors[];
-	void resetColors();
+	static void resetColors();
 
 	int getMaxValue();
 	bool inGrid(Coordinate pCoord);

@@ -6,7 +6,6 @@
 #include "Coordinate.h"
 #include "math.h"
 
-
 /// <summary>
 /// Enum for the different city types. 
 /// </summary>
@@ -80,6 +79,7 @@ public:
 	int ID(){ return id; }
 	bool inCity(Coordinate position);
 	std::string getColor(){ return color; }
+	void setColor(std::string col) { color = col; }
 	RoomType TypeFlag(){ return typeFlag; }
 	Coordinate Position() { return position; }
 	void addConnection(Coordinate coord){ connections.push_back(coord);}

@@ -117,21 +117,35 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 	//4 positions each with an offset for checking the collision with the wall
 	float cornerRange = cos(45.0f) * range;
 	Ogre::Vector3 tempPos = pos;
-	Coordinate temp0 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x - range, pos.z));
-	Coordinate temp1 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x + range, pos.z));
-	Coordinate temp2 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z - range));
-	Coordinate temp3 = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z + range));
 
+	//TODO: list
+	// 1. special case whiskers must be defined, a bit outside the player himself.
+	// 2. these check for collision with the collision grid.
+	// 3. if ONE of them collides, check the player direction and steer by with 45 degrees.
+	// 4. if any of the normal points collides, let it do it's thing (e.g. step 1-3 should be done before those).
+	// 5. 
+
+	Coordinate left = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x - range, pos.z));
+	Coordinate right = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x + range, pos.z));
+	Coordinate behind = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z - range));
+	Coordinate front = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(pos.x, pos.z + range));
+
+	// world direction
 	Ogre::Vector3 newDirection = _myNode->getOrientation() * _dirVec;
-	if (!(zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width * City::gridScalar]) ||
-		!(zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width * City::gridScalar])){
+
+	// left and right
+	if (!(zone->getCollisionGrid()[left.x + left.z * zone->_width * City::gridScalar]) ||
+		!(zone->getCollisionGrid()[right.x + right.z * zone->_width * City::gridScalar])){
 		newDirection.x = 0;
 	}
-	if (!(zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width * City::gridScalar]) ||
-		!(zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width * City::gridScalar])){
+
+	// up and down
+	if (!(zone->getCollisionGrid()[behind.x + behind.z * zone->_width * City::gridScalar]) ||
+		!(zone->getCollisionGrid()[front.x + front.z * zone->_width * City::gridScalar])){
 		newDirection.z = 0;
 	}
 
+	// back to local
 	Ogre::Quaternion tempQ = _myNode->getOrientation();
 	Ogre::Quaternion rotation = tempQ.Inverse();// Ogre::Quaternion(Ogre::Degree(roll.valueDegrees()), Ogre::Vector3(0, 1, 0));
 		

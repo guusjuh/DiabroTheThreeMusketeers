@@ -9,8 +9,8 @@
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::LevelGenerator() {
-	_zoneWidth = 15;
-	_zoneDepth = 15;
+	_zoneWidth = 17;
+	_zoneDepth = 17;
 	_maxCityWidth = 5;
 	_maxCityDepth = 5;
 	_maxCityAmount = 7;
@@ -117,7 +117,7 @@ void LevelGenerator::drawDungeonFloor(Zone &pZone) {
 	createTileMesh("tileMesh", Ogre::ColourValue(1.0f, 1.0f, 1.0f, 1.0f));
 	createTileMesh("BluetileMesh", Ogre::ColourValue(0.6f, 0.6f, 1.0f, 1.0f));
 	createTileMesh("GreentileMesh", Ogre::ColourValue(0.6f, 1.0f, 0.6f, 1.0f));
-	createTileMesh("PinktileMesh", Ogre::ColourValue(1.0f, 0.9f, 0.9f, 1.0f));
+	createTileMesh("PinktileMesh", Ogre::ColourValue(1.0f, 0.8f, 0.8f, 1.0f));
 	createTileMesh("PurpletileMesh", Ogre::ColourValue(0.86f, 0.625f, 0.86f, 1.0f));
 	createTileMesh("RedtileMesh", Ogre::ColourValue(1.0f, 0.6f, 0.6f, 1.0f));
 	createTileMesh("YellowtileMesh", Ogre::ColourValue(1.0f, 1.0f, 0.6f, 1.0f));
@@ -483,13 +483,19 @@ void LevelGenerator::determineCityTypes() {
 	// start
 	_startCity = &_zone[0].cities[0];
 	_startCity->setType((int)CityRT);
+	_startCity->setColor(Zone::getCityColor());
 	_zone[0].cities[1].setType((int)CityRT);
+	_zone[0].cities[1].setColor(Zone::getCityColor());
 
 	// end
 	City* furtherstCity = &_zone[0].cities[2];
 	float dist = _startCity->getDistTo(furtherstCity);
 	for (int i = 2; i < _zone[0].cities.size(); ++i) {
 		_zone[0].cities[i].setType();
+
+		if(_zone[0].cities[i].TypeFlag() == CityRT) {
+			_zone[0].cities[i].setColor(Zone::getCityColor());
+		}
 
 		if(_startCity->getDistTo(&_zone[0].cities[i]) > dist) {
 			furtherstCity = &_zone[0].cities[i];

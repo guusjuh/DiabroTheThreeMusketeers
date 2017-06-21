@@ -11,6 +11,7 @@ const int Zone::scalar = 500;
 
 const Coordinate Zone::directions[4] = { Coordinate(1, 0), Coordinate(0, 1), Coordinate(-1, 0), Coordinate(0, -1) };
 const std::string Zone::colors[6] = {"Blue", "Green", "Pink", "Purple", "Red", "Yellow"};
+std::vector<std::string> Zone::colorList;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Zone"/> class.
@@ -765,7 +766,7 @@ void Zone::generateCity(int& nCities) {
 	(z % 2 == 0) ? z++ : z;
 
 	//try to place the city
-	if (placeCity(City(x, z, width, depth, nCities + 1, scalar, getCityColor()))) {
+	if (placeCity(City(x, z, width, depth, nCities + 1, scalar, ""))) {
 		++nCities;
 	}
 }
