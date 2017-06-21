@@ -8,6 +8,7 @@
 #include "EnemyAttackState.h"
 #include "EnemyMoveAroundCenterState.h"
 #include "EnemyWalkToPointNearPlayerState.h"
+#include "EnemyChargeState.h"
 #include "EnemyEquipment.h"
 
 /// <summary>

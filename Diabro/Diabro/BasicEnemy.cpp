@@ -31,6 +31,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	possibleStates["Attack"] = new EnemyAttackState();
 	possibleStates["Relative"] = new EnemyWalkToPointNearPlayerState();
 	possibleStates["AroundCenter"] = new EnemyMoveAroundCenterState();
+	possibleStates["Charge"] = new EnemyChargeState();
 	_initialized = false;
 
 	// subscribe @ levelmanager

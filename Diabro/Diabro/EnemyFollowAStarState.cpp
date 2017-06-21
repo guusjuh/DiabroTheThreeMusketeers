@@ -24,7 +24,12 @@ void EnemyFollowAStarState::Enter(BaseNpc* agent){
 void EnemyFollowAStarState::Execute(BaseNpc* agent){
 	//check if state transition is needed
 	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < Zone::scalar / 2.0f) {
-		agent->stateMachine.setState("FollowDirect");
+		if (agent->_rotationType == 0){
+			agent->stateMachine.setState("FollowDirect");
+		}
+		else if (agent->_rotationType == 1){
+			agent->stateMachine.setState("Charge");
+		}
 	}
 	//check if state transition is needed
 	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) > agent->getNoticeDistance()) {
