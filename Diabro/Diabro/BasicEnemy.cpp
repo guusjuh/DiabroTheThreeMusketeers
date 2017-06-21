@@ -224,6 +224,8 @@ void BasicEnemy::upgradeEquipment(EnemyUpgradeType upgrade) {
 /// <param name="pDeltatime">The deltatime.</param>
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
+	timePast = pDeltatime;
+
 	Ogre::Vector3 scale = Ogre::Vector3(0.5f, 0.5f, 0.5f) * (1.5f - std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f));
 	_myNode->setScale(scale);
 

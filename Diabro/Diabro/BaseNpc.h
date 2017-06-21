@@ -45,6 +45,8 @@ public:
 
 	int _rotationType;
 
+	float timePast;
+
 protected:
 	std::vector<Coordinate> nextPos;
 	bool _inCurrentQuest;
