@@ -916,7 +916,7 @@ namespace DiabroUI
 
 			if (width <= 0) mFitToContents = true;
 
-			setValue(0);
+			setValue(1);
 		}
 
 		const Ogre::DisplayString& getValueCaption()

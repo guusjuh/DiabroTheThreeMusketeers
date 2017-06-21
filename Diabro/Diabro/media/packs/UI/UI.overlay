@@ -316,6 +316,25 @@ template container Panel(UI/InstructionIndicator)
 	}
 }
 
+template container Panel(UI/UpgradeIndicator)
+{
+	metrics_mode pixels
+	transparent true
+
+	element TextArea(ValueUpgradeIndicator)
+	{
+        metrics_mode pixels
+        horz_align center
+        alignment left
+        top 5
+		left -40
+        font_name UI/Caption
+        char_height 15
+        space_width 7
+        colour 0.9 0.9 0.9
+	}
+}
+
 template container BorderPanel(UI/HealthUpgradeIcon)
 {
 	metrics_mode pixels

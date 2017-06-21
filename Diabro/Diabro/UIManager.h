@@ -75,6 +75,7 @@ private:
 	DiabroUI::Text*				_floorTextWidget;
 	DiabroUI::Text*				_questGoalTextWidget;
 
+	DiabroUI::Text*				_upgradeTextWidget;
 	DiabroUI::UpgradeIcon*		_healthUpgradeIcon;
 	DiabroUI::UpgradeIcon*		_dmgUpgradeIcon;
 

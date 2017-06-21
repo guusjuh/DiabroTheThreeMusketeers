@@ -16,8 +16,9 @@ public:
 	std::string getDialogText(BasicEnemy* thisNpc);
 
 private:
-	static const std::string instructionStrings[7];
+	static const std::string instructionStrings[13];
 	static const std::string cantStartQuestString;
+	static const std::string rewardString;
 };
 
 #endif

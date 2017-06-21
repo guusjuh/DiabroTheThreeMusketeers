@@ -65,6 +65,7 @@ void UIManager::setupUI()
 	_questGoalTextWidget->getOverlayElement()->setTop(128);
 	_questGoalTextWidget->hide();
 
+	_upgradeTextWidget = _uiElementMgr->createText(DiabroUI::TOPRIGHT, "UpgradeIndicator", "UpgradeIndicator", "Upgrades: ", 40, 20);
 	_healthUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Health", "HealthUpgrade", 64, 56);
 	_dmgUpgradeIcon = _uiElementMgr->createUpgradeIcon(DiabroUI::TOPRIGHT, "Damage", "DamageUpgrade", 64, 56);
 
@@ -488,6 +489,9 @@ void UIManager::hideAllIngameElements() {
 	// _floorTextWidget
 	_floorTextWidget->hide();
 
+	// upgrade text
+	_upgradeTextWidget->hide();
+
 	// _healthUpgradeIcon
 	_healthUpgradeIcon->hide();
 	// _dmgUpgradeIcon
@@ -514,6 +518,9 @@ void UIManager::showAllIngameElements() {
 
 	// _floorTextWidget
 	_floorTextWidget->show();
+
+	// upgrade text
+	_upgradeTextWidget->show();
 
 	// _healthUpgradeIcon
 	_healthUpgradeIcon->show();
