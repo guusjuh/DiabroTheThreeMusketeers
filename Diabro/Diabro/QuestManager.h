@@ -26,15 +26,7 @@ public:
 		_questGenerator = new QuestGenerator();
 	}  
 
-	void reset() {
-		if(_currentQuest != nullptr) {
-			// abondon quet
-			_currentQuest->abandon();
-			_currentQuest = nullptr;
-		}
-
-		_quests.clear();
-	}
+	void reset();
 
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 	ActionContainer* getActionContainer(void) { return _actionContainer; }

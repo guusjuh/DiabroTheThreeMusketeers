@@ -81,9 +81,11 @@ void LevelManager::generateNewDungeon() {
 
 	Debug("\tL: generating new dungeon.");
 	while (_friendlyNpcScripts.size() > 0) {
+		delete _friendlyNpcScripts[0];
 		detachFriendlyNPC(0);
 	}
 	while (_hostileNpcScripts.size() > 0) {
+		delete _hostileNpcScripts[0];
 		detachHostileNPC(0);
 	}
 

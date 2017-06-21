@@ -9,9 +9,9 @@
 /// </summary>
 enum NeedType {
 	KnowledgeNeed = 0, 
-	//ComfortNeed,
-	//ReputationNeed,
-	//SerenityNeed,
+	ComfortNeed,
+	ReputationNeed,
+	SerenityNeed,
 	//ProtectionNeed,
 	//ConquestNeed,
 	//WealthNeed,

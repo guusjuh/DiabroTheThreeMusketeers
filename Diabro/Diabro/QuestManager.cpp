@@ -50,9 +50,9 @@ QuestManager::QuestManager()
 	stringToQuestContentType.insert(std::pair<std::string, QuestContent>("EnemyQC", EnemyQC));
 
 	stringToNeedType.insert(std::pair<std::string, NeedType>("Knowledge", KnowledgeNeed));
-	//stringToNeedType.insert(std::pair<std::string, NeedType>("Comfort", ComfortNeed));
-	//stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
-	//stringToNeedType.insert(std::pair<std::string, NeedType>("Serenity", SerenityNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Comfort", ComfortNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Reputation", ReputationNeed));
+	stringToNeedType.insert(std::pair<std::string, NeedType>("Serenity", SerenityNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Protection", ProtectionNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Conquest", ConquestNeed));
 	//stringToNeedType.insert(std::pair<std::string, NeedType>("Wealth", WealthNeed));
@@ -116,4 +116,15 @@ std::string QuestManager::obtainDialog(IQuestContent* client, int actionNr) {
 			return _currentQuest->_strategy.getActionSequence()[actionNr].getDialog();
 		}
 	}
+}
+
+void QuestManager::reset() {
+	if (_currentQuest != nullptr) {
+		// abondon quet
+		GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
+
+		_currentQuest = nullptr;
+	}
+
+	_quests.clear();
 }
