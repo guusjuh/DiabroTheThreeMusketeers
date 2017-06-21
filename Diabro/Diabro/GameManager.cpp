@@ -229,7 +229,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
-	if (pKE.key == OIS::KC_ESCAPE) mShutDown = true;
+	if (pKE.key == OIS::KC_ESCAPE && currentState != Paused) mShutDown = true;
 
 	if (currentState != InGame && currentState != Paused && currentState != MainMenu) return false;
 
