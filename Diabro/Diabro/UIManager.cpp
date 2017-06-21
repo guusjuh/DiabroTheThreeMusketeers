@@ -92,14 +92,14 @@ void UIManager::startUpdate(const Ogre::FrameEvent& pFE)
 
 		if (_hudTimer <= 0) {
 			hideHUDText();
-			if (!showStoryText(_first ? _startGameText : _startLevelText, 2.0f)){
+			if (!showStoryText(_first ? _startGameText : _startLevelText, 2.5f)){
 				_first = false;
 				GameManager::getSingletonPtr()->goToState(InGame);
 			}
 		}
 	}
 	else {
-		!showStoryText(_startGameText, 2.0f);
+		!showStoryText(_startGameText, 2.5f);
 	}
 }
 
@@ -132,13 +132,13 @@ void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 
 		if (_hudTimer <= 0) {
 			hideHUDText();
-			if (!showStoryText(_endLevelText, 2.0f)) {
+			if (!showStoryText(_endLevelText, 2.5f)) {
 				GameManager::getSingletonPtr()->goToState(Start);
 			}
 		}
 	}
 	else {
-		showStoryText(_endLevelText, 2.0f);
+		showStoryText(_endLevelText, 2.5f);
 	}
 }
 
@@ -153,13 +153,13 @@ void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
 
 		if (_hudTimer <= 0) {
 			hideHUDText();
-			if (!showStoryText(_diedText, 2.0f)) {
+			if (!showStoryText(_diedText, 2.5f)) {
 				GameManager::getSingletonPtr()->goToState(GameState::InGame);
 			}
 		}
 	}
 	else {
-		showStoryText(_diedText, 2.0f);
+		showStoryText(_diedText, 2.5f);
 	}
 }
 

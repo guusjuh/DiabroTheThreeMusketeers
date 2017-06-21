@@ -4,8 +4,7 @@
 #include <vector>
 #include "BaseNpc.h"
 #include "BasicEnemy.h"
-
-class Npc;
+#include "Npc.h"
 
 class DialogManager {
 public:
@@ -17,7 +16,8 @@ public:
 	std::string getDialogText(BasicEnemy* thisNpc);
 
 private:
-	static const std::string instructionStrings[6];
+	static const std::string instructionStrings[7];
+	static const std::string cantStartQuestString;
 };
 
 #endif

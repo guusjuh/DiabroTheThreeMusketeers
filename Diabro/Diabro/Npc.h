@@ -25,7 +25,7 @@ enum Profession {
 };
 
 /// <summary>
-/// The firendly NPC class. 
+/// The friendly NPC class. 
 /// </summary>
 /// <seealso cref="BaseNpc" />
 class Npc : public BaseNpc
