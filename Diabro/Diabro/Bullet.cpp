@@ -81,7 +81,7 @@ void Bullet::update(Ogre::Real deltaTime) {
 void Bullet::impact() {
 	GameManager::getSingletonPtr()->getPlayer()->adjustHealth(_damage);
 	Particle::castParticles(_particleAmount, _node->getPosition(), "uv_sphere.mesh", "InGame/ParticleBullet",
-		0.03f, 0.06f, 400, 550, 0.3f, 0.4f, 150.0f);
+		0.02f, 0.05f, 400, 550, 0.3f, 0.4f, 150.0f);
 
 	destroy();
 }

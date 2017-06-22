@@ -54,7 +54,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_attackDistance = 170;
 	_lightAttackCooldown = 0.5f;
 	_totalHitTime = 0.11f;
-	_radius = 30.0f;
+	_radius = 40.0f;
 
 	_currentHealth = _maxHealth;
 	
@@ -84,6 +84,8 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_inDialog = false;
 	_nearbyNPC = nullptr;
 	_sisNearby = false;
+
+	_currentHealth = _maxHealth;
 
 	_inBattle = false;
 	_inBattleTime = 0;

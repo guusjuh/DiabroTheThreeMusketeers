@@ -1,7 +1,7 @@
 #include "DialogManager.h"
 #include "GameManager.h"
 
-const std::string DialogManager::instructionStrings[13] = {
+const std::string DialogManager::instructionStrings[14] = {
 	"Did you know you can take a break from all of your adventures? \\nJust press 'P'!",  // pausing
 	"Do you hate squares? \\nI hate squares! \\nYou can kill them by clicking with your left mouse button when you're close to them.", // killing squares
 	"You still didn't figure out how to quest?! \\nIt's easy and you get lots of hints! \\nYellow indicators show who has a quest for you. \\nAnd the green indicator shows the your current goal!", // finding quest goals
@@ -14,7 +14,8 @@ const std::string DialogManager::instructionStrings[13] = {
 	"Quests are the only way to become stronger. \\nYou should quest a lot!", // quests have rewards
 	"You noticed the heart and sword in the upper right corner of your screen? \\nThose are your upgrades and indicate your health and damage.", // upgrades
 	"You are not the only one becoming stronger! \\nEnemies gain upgrades each floor. You better watch your back!", // enemy upgrades en sterker per floor
-	"I want to build a wall, but those squares have to pay for it! \\nWill you vote for me?" // little joke
+	"I want to build a wall, but those squares have to pay for it! \\nWill you vote for me?", // little joke
+	"There are different types of square bastards... \\nTerrible, right? There are rangers and knights. \\nBoth have to be fought differently!"
 };
 
 const std::string DialogManager::cantStartQuestString = "I have a quest, but you cannot start it until you finished your current quest! \\n";

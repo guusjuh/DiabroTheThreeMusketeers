@@ -358,7 +358,7 @@ void LevelGenerator::spawnEnemy(City* pCity, int nAmount) {
 		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		rotationNode->attachObject(instanceEntity);
 		BaseEnemy* instanceScript;
-		int randomRoll = 1;// GameManager::getSingletonPtr()->getRandomInRange(0, 2);
+		int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
 		if (randomRoll == 0) {
 			instanceScript = new MeleeEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
 		}
