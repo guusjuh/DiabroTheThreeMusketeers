@@ -214,11 +214,11 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 void BasicEnemy::collide() {
 	std::string state = stateMachine.getCurrentState();
 
-	if(state == "FollowDirectState") 
+/*	if() 
 	{
 		stateMachine.setState("Relative");
-	} 
-	else if(state == "FollowAStar" || state == "AroundCenter")
+	} */
+	if(state == "FollowAStar" || state == "AroundCenter"  || state == "FollowDirect")
 	{
 		walkToNeighbour();
 	}
