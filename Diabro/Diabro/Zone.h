@@ -69,7 +69,7 @@ protected:
 	int aliveNeighbors(Coordinate pCell);
 
 	void connectDungeon(int pId, float pChance);
-	int changeTileValues(int pMaxIndex);
+	int changeTileValues();
 	int generatePathways(int pPathId);
 	void generateCities(int pMaxTries, int pMaxCities);
 	void generateCity(int& nCities);

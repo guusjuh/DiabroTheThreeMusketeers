@@ -59,6 +59,7 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 	removeDeadEnds();
 
 	cleanGrid();
+	Debug("dead ends removed, grid cleaned up");
 	collisionGridGenerated = false;
 }
 
@@ -347,13 +348,13 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 	std::vector<Coordinate> options;
 	int maxValue = getMaxValue();
 	Debug("A: changeTileValues", maxValue);
-	int regions = changeTileValues(getMaxValue());
+	int regions = changeTileValues();
 	
 	printGrid();
 	Debug("B: changeTileValues", regions);
 
 	//5. connect the still separated dungeon parts
-
+	Debug("connect separated");
 	for (int i = 2; i < regions + 1; i++)
 	{		
 		for (int j = 0; j < connections.size(); j++)
@@ -393,13 +394,17 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 		}
 		//options = all connections connecting i and something not i
 		//2. open some of these connections
-		for (int k = 0; k < 5; k++)
-		{
-			if (options.size() > 1)
+		Debug("opening options");
+		if (options.size() > 0) {
+			for (int k = 0; k < 5; k++)
 			{
-				int rnd = rand() % options.size();
-				setTile(options[rnd], 1);
-				options.erase(options.begin() + rnd);
+
+				if (options.size() > 1)
+				{
+					int rnd = rand() % options.size();
+					setTile(options[rnd], 1);
+					options.erase(options.begin() + rnd);
+				}
 			}
 		}
 		//3. repeat for each separate region
@@ -409,7 +414,7 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 	maxValue = getMaxValue();
 	Debug("A: changeTileValues", maxValue);
 
-	regions = changeTileValues(getMaxValue());
+	regions = changeTileValues();
 	printGrid();
 	Debug("B: changeTileValues", regions);
 
@@ -419,14 +424,18 @@ void Zone::connectDungeon(int pMaxId, float pChance) {
 	}
 	while (regions > 1)
 	{
-		int rnd[5];
+		int rnd;
 		for (int i = 0; i < 5; i++)
 		{
-			int index = rnd[i];
-			setTile(options[index], 1);
+			rnd = rand() % options.size();
+			setTile(options[rnd], 1);
+			options.erase(options.begin() + rnd);
+			if (options.size() < 1) {
+				break;
+			}
 		}
 		Debug("A: changeTileValues", regions);
-		regions = changeTileValues(getMaxValue());
+		regions = changeTileValues();
 		printGrid();
 		Debug("B: changeTileValues", regions);
 	}
@@ -472,13 +481,14 @@ Coordinate Zone::getResolution() const {
 /// </summary>
 /// <param name="pMaxIndex">Highest index that occurs in the grid (is zone index).</param>
 /// <returns></returns>
-int Zone::changeTileValues(int pMaxIndex) {
+int Zone::changeTileValues() {
 	int currentRegion = 1;
 	int amountOfRegions = 0;
+	int max = getMaxValue();
 
-	if (getMaxValue() > 2) {
+	if (max > 2) {
 		// 0 - means empty tile so we start with all 1 tiles
-		for (int i = 1; i <= pMaxIndex + 1; ++i) {
+		for (int i = 1; i <= max + 1; ++i) {
 			std::vector<Coordinate> cells;
 
 			//pick random cell to start with for current region
