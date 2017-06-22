@@ -129,6 +129,10 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 	Coordinate right = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x + range, pos.z));
 	Coordinate behind = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x, pos.z - range));
 	Coordinate front = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x, pos.z + range));
+	Coordinate topLeft = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x - range, pos.z - range));
+	Coordinate topRight = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x - range, pos.z + range));
+	Coordinate bottomLeft = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x + range, pos.z - range));
+	Coordinate bottomRight = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x + range, pos.z + range));
 
 	// world direction
 	Ogre::Vector3 newDirection = _myNode->getOrientation() * _dirVec;
@@ -140,14 +144,52 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 	}
 
 	// up and down
-	if (!(zone->getCollisionGrid()[behind.x + behind.z * zone->_width * City::gridScalar]) ||
-		!(zone->getCollisionGrid()[front.x + front.z * zone->_width * City::gridScalar])){
+	else if (!(zone->getCollisionGrid()[behind.x + behind.z * zone->_width * City::gridScalar]) ||
+			!(zone->getCollisionGrid()[front.x + front.z * zone->_width * City::gridScalar])){
 		newDirection.z = 0;
+	}
+
+	//whiskers
+	else if (!(zone->getCollisionGrid()[topLeft.x + topLeft.z * zone->_width * City::gridScalar])){
+		if (newDirection.x < -0.5f){
+			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
+		else if (newDirection.z < -0.5f)
+		{
+			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
+	}
+	else if (!(zone->getCollisionGrid()[topRight.x + topRight.z * zone->_width * City::gridScalar])){
+		if (newDirection.x < -0.5f){
+			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
+		else if (newDirection.z > 0.5f)
+		{
+			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
+	}
+	else if (!(zone->getCollisionGrid()[bottomLeft.x + bottomLeft.z * zone->_width * City::gridScalar])){
+		if (newDirection.x > 0.5f){
+			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
+		else if (newDirection.z < -0.5f)
+		{
+			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
+	}
+	else if (!(zone->getCollisionGrid()[bottomRight.x + bottomRight.z * zone->_width * City::gridScalar])){
+		if (newDirection.x > 0.5f){
+			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
+		else if (newDirection.z > 0.5f)
+		{
+			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+		}
 	}
 
 	// back to local
 	Ogre::Quaternion tempQ = _myNode->getOrientation();
-	Ogre::Quaternion rotation = tempQ.Inverse();// Ogre::Quaternion(Ogre::Degree(roll.valueDegrees()), Ogre::Vector3(0, 1, 0));
+	Ogre::Quaternion rotation = tempQ.Inverse();
 		
 	_dirVec = rotation * newDirection;
 }
