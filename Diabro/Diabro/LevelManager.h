@@ -8,6 +8,7 @@
 #include <OgreSceneManager.h>
 #include "LevelGenerator.h"
 #include "Bullet.h"
+#include "Particle.h"
 
 struct Timer {
 public:
@@ -63,9 +64,11 @@ public:
 	int subscribeHostileNPC(BaseEnemy*);
 	int subscribeFriendlyNPC(Npc*);
 	int subscribeBullet(Bullet*);
+	int subscribeParticle(Particle*);
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
 	void detachBullet(int);
+	void detachParticle(int);
 
 	void spawnEnemy(City *pCity, bool pInstant);
 
@@ -79,6 +82,8 @@ private:
 	std::vector<Character*> _friendlyNpcScripts;
 	std::vector<Character*> _hostileNpcScripts;
 	std::vector<Bullet*> _bulletScripts;
+	std::vector<Particle*> _particleScripts;
+
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
 	LevelGenerator* _levelGenerator;

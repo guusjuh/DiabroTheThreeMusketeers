@@ -19,11 +19,14 @@ private:
 	float _radius;
 	float _damage;
 
+	int _particleAmount;
+
 	Ogre::SceneNode* _node;
 	RangedEnemy* _enemy;
 
 	void impact();
 	void destroy();
+	void instantiateParticle();
 };
 
 #endif

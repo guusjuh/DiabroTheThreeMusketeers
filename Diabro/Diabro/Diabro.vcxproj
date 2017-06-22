@@ -136,6 +136,7 @@
     <ClCompile Include="NpcIdleState.cpp" />
     <ClCompile Include="NpcKidnappedState.cpp" />
     <ClCompile Include="NpcWanderState.cpp" />
+    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="PostCondition.cpp" />
     <ClCompile Include="QuestItem.cpp" />
     <ClCompile Include="EnemyMeleeAttackState.cpp" />

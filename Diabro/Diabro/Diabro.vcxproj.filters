@@ -172,6 +172,9 @@
     <ClCompile Include="EnemyIdleState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Sources\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -504,6 +507,9 @@
     </Filter>
     <Filter Include="Headers\Particles">
       <UniqueIdentifier>{6698ee61-c450-4326-b678-93f041907884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Particles">
+      <UniqueIdentifier>{7174baa2-b762-423d-a64f-3d5ba7b85f11}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

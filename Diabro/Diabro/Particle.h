@@ -4,10 +4,12 @@
 
 class Particle {
 public:
-	Particle();
-	~Particle();
+	Particle(std::string meshName, std::string materialName, Ogre::Vector3 position, Ogre::Vector3 direction, Ogre::Vector3 scale, float speed, float lifetime);
+	~Particle() {}
 
-	void update();
+	int id;
+
+	void update(Ogre::Real deltatime);
 
 private:
 	Ogre::SceneNode* _node;
