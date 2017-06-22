@@ -15,7 +15,7 @@ Filename:    GameManager.cpp
 /// It contains all other managers.
 /// </summary>
 GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0),
-up(false), down(false), left(false), right(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
+up(false), down(false), left(false), right(false), fly(false), fall(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
 //---------------------------------------------------------------------------
 /// <summary>
 /// Finalizes an instance of the <see cref="GameManager"/> class.
@@ -265,7 +265,14 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	case OIS::KC_D:
 		right = true;
 		break;
+	case OIS::KC_F1:
+		fly = true;
+		break;
+	case OIS::KC_F2:
+		fall = true;
+		break;
 		
+
 	case OIS::KC_Q:
 		if(_questManager->getCurrentQuest()) {
 			if(_abandonedQuestPressed) {
@@ -339,6 +346,12 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
 		right = false;
+		break;
+	case OIS::KC_F1:
+		fly = false;
+		break;
+	case OIS::KC_F2:
+		fall = false;
 		break;
 
 	case OIS::KC_LSHIFT:

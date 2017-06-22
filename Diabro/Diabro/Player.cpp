@@ -159,6 +159,7 @@ void Player::update(Ogre::Real pDeltaTime)
 	if (_myNode == nullptr) return;
 
 	_dirVec.x = 0;
+	_dirVec.y = 0;
 	_dirVec.z = 0;
 	if (GameManager::getSingletonPtr()->up){
 		_dirVec.z = -1;
@@ -171,6 +172,12 @@ void Player::update(Ogre::Real pDeltaTime)
 	}
 	if (GameManager::getSingletonPtr()->right){
 		_dirVec.x = 1;
+	}
+	if (GameManager::getSingletonPtr()->fly) {
+		_dirVec.y = 1;
+	}
+	if (GameManager::getSingletonPtr()->fall) {
+		_dirVec.y = -1;
 	}
 
 	// don't do stuff when in dialog

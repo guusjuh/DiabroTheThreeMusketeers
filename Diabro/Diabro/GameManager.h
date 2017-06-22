@@ -93,6 +93,7 @@ public:
 
 	void restartGame();
 	bool up, down, left, right;
+	bool fly, fall;
 
 	float getDeltaTime(){ return _deltaTime; }
 
