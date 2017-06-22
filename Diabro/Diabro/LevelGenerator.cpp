@@ -9,8 +9,8 @@
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::LevelGenerator() {
-	_zoneWidth = 17;
-	_zoneDepth = 17;
+	_zoneWidth = 40;
+	_zoneDepth = 40;
 	_maxCityWidth = 5;
 	_maxCityDepth = 5;
 	_maxCityAmount = 7;

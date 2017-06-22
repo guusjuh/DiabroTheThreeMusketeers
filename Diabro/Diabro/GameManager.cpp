@@ -265,7 +265,14 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	case OIS::KC_D:
 		right = true;
 		break;
+	case OIS::KC_F1:
+		fly = true;
+		break;
+	case OIS::KC_F2:
+		fall = true;
+		break;
 		
+
 	case OIS::KC_Q:
 		if(_questManager->getCurrentQuest()) {
 			if(_abandonedQuestPressed) {
@@ -339,6 +346,12 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
 		right = false;
+		break;
+	case OIS::KC_F1:
+		fly = false;
+		break;
+	case OIS::KC_F2:
+		fall = false;
 		break;
 
 	case OIS::KC_LSHIFT:
