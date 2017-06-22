@@ -154,6 +154,9 @@
     <ClCompile Include="NpcKidnappedState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyChargeState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIManager.h">
@@ -332,6 +335,9 @@
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
     <ClInclude Include="NpcKidnappedState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyChargeState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
   </ItemGroup>

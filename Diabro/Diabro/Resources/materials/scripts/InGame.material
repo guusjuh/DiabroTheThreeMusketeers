@@ -251,7 +251,7 @@ material InGame/GreyHideoutHouse
    }
 }
 
-material InGame/GreyEnemy
+material InGame/GreyStripeEnemy
 {
    technique
    {
@@ -265,7 +265,7 @@ material InGame/GreyEnemy
    }
 }
 
-material InGame/BlueEnemy
+material InGame/BlueStripeEnemy
 {
    technique
    {
@@ -279,7 +279,7 @@ material InGame/BlueEnemy
    }
 }
 
-material InGame/GreenEnemy
+material InGame/GreenStripeEnemy
 {
    technique
    {
@@ -293,7 +293,7 @@ material InGame/GreenEnemy
    }
 }
 
-material InGame/RedEnemy
+material InGame/RedStripeEnemy
 {
    technique
    {
@@ -302,6 +302,62 @@ material InGame/RedEnemy
          texture_unit
          {
 			texture Enemies/redDarkBox.jpg
+         }
+      }
+   }
+}
+
+material InGame/GreyDotEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/greyDarkDot.jpg
+         }
+      }
+   }
+}
+
+material InGame/BlueDotEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/blueDarkDot.jpg
+         }
+      }
+   }
+}
+
+material InGame/GreenDotEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/greenDarkDot.jpg
+         }
+      }
+   }
+}
+
+material InGame/RedDotEnemy
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/redDarkDot.jpg
          }
       }
    }

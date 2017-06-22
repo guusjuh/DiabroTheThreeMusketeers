@@ -31,6 +31,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	possibleStates["Attack"] = new EnemyAttackState();
 	possibleStates["Relative"] = new EnemyWalkToPointNearPlayerState();
 	possibleStates["AroundCenter"] = new EnemyMoveAroundCenterState();
+	possibleStates["Charge"] = new EnemyChargeState();
 	_initialized = false;
 
 	// subscribe @ levelmanager
@@ -82,15 +83,40 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 		colorIndex = 1;
 	}
 
+	_rotationType = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
+
 	//set color
 	if(colorIndex == 0) {
-		_originalMaterialName = "InGame/GreyEnemy";
-	} else if (colorIndex == 1) {
-		_originalMaterialName = "InGame/GreenEnemy";
-	} else if (colorIndex == 2) {
-		_originalMaterialName = "InGame/RedEnemy";
-	} else if (colorIndex == 3) {
-		_originalMaterialName = "InGame/BlueEnemy";
+		if (_rotationType == 0){
+			_originalMaterialName = "InGame/GreyStripeEnemy";
+		}
+		else if (_rotationType == 1){
+			_originalMaterialName = "InGame/GreyDotEnemy";
+		}
+	}
+	else if (colorIndex == 1) {
+		if (_rotationType == 0){
+			_originalMaterialName = "InGame/GreenStripeEnemy";
+		}
+		else if (_rotationType == 1){
+			_originalMaterialName = "InGame/GreenDotEnemy";
+		}
+	}
+	else if (colorIndex == 2) {
+		if (_rotationType == 0){
+			_originalMaterialName = "InGame/RedStripeEnemy";
+		}
+		else if (_rotationType == 1){
+			_originalMaterialName = "InGame/RedDotEnemy";
+		}
+	}
+	else if (colorIndex == 3) {
+		if (_rotationType == 0){
+			_originalMaterialName = "InGame/BlueStripeEnemy";
+		}
+		else if (_rotationType == 1){
+			_originalMaterialName = "InGame/BlueDotEnemy";
+		}
 	}
 	pMyEntity->setMaterialName(_originalMaterialName);
 
@@ -114,8 +140,6 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 	_radius = 25.0f;
 
 	_currentHealth = _maxHealth;
-
-	_rotationType = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
 
 	_isDead = false;
 }
@@ -200,6 +224,7 @@ void BasicEnemy::upgradeEquipment(EnemyUpgradeType upgrade) {
 /// <param name="pDeltatime">The deltatime.</param>
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
+
 	Ogre::Vector3 scale = Ogre::Vector3(0.5f, 0.5f, 0.5f) * (1.5f - std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f));
 	_myNode->setScale(scale);
 

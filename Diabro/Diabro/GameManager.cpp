@@ -195,6 +195,8 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
 
+	_deltaTime = pFE.timeSinceLastFrame;
+
 	switch (currentState) {
 	case Start:
 		_uiManager->startUpdate(pFE);

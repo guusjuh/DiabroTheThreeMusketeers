@@ -124,6 +124,7 @@
     <ClCompile Include="ConcretePostConditions.cpp" />
     <ClCompile Include="ConcretePreConditions.cpp" />
     <ClCompile Include="DialogManager.cpp" />
+    <ClCompile Include="EnemyChargeState.cpp" />
     <ClCompile Include="EnemyFollowDirectState.cpp" />
     <ClCompile Include="EnemyWalkToPointNearPlayerState.cpp" />
     <ClCompile Include="IQuestContent.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="DialogManager.h" />
     <ClInclude Include="EnemyAttackState.h" />
+    <ClInclude Include="EnemyChargeState.h" />
     <ClInclude Include="EnemyEquipment.h" />
     <ClInclude Include="EnemyFollowAStarState.h" />
     <ClInclude Include="EnemyFollowDirectState.h" />

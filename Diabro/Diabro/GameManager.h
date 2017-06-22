@@ -94,6 +94,8 @@ public:
 	void restartGame();
 	bool up, down, left, right;
 
+	float getDeltaTime(){ return _deltaTime; }
+
 protected:
     virtual void createScene(void);
 	virtual void createCamera(void);
@@ -103,6 +105,8 @@ protected:
 	static void setupLights(Ogre::SceneManager*);
 	
 private:
+	float _deltaTime;
+
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent&);
 	virtual bool keyPressed(const OIS::KeyEvent&);
 	virtual bool keyReleased(const OIS::KeyEvent&);
