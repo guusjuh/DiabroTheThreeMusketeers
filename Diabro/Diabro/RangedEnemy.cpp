@@ -42,6 +42,9 @@ bool RangedEnemy::lightAttack() {
 }
 
 void RangedEnemy::update(Ogre::Real deltaTime) {
+	Ogre::Vector3 scale = Ogre::Vector3(0.5f, 0.5f, 0.5f) * (0.5f + std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f));
+	_myNode->setScale(scale);
+
 	BaseEnemy::update(deltaTime);
 }
 

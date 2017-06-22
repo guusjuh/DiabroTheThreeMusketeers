@@ -47,18 +47,19 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 
 	stateMachine.update();
 
+	if(stateMachine.getCurrentState() != "Idle" && stateMachine.getCurrentState() != "Attack") {
 		_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
 
-	_degreePerFrame = _rotationspeed * pDeltatime;
+		_degreePerFrame = _rotationspeed * pDeltatime;
 
-	if (Ogre::Math::Abs(_wantedRotationAngle) > _degreePerFrame) {
-		if (_wantedRotationAngle < 0) _degreePerFrame *= -1;
-		_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_degreePerFrame)), Ogre::Node::TS_LOCAL);
+		if (Ogre::Math::Abs(_wantedRotationAngle) > _degreePerFrame) {
+			if (_wantedRotationAngle < 0) _degreePerFrame *= -1;
+			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_degreePerFrame)), Ogre::Node::TS_LOCAL);
+		}
+		else {
+			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_wantedRotationAngle)), Ogre::Node::TS_LOCAL);
+		}
 	}
-	else {
-		_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_wantedRotationAngle)), Ogre::Node::TS_LOCAL);
-	}
-
 
 	Character::update(pDeltatime);
 }
