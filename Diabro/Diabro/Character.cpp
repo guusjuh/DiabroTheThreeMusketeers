@@ -118,13 +118,6 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 	float cornerRange = cos(45.0f) * range;
 	Ogre::Vector3 tempPos = pos;
 
-	//TODO: list
-	// 1. special case whiskers must be defined, a bit outside the player himself.
-	// 2. these check for collision with the collision grid.
-	// 3. if ONE of them collides, check the player direction and steer by with 45 degrees.
-	// 4. if any of the normal points collides, let it do it's thing (e.g. step 1-3 should be done before those).
-	// 5. 
-
 	Coordinate left = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x - range, pos.z));
 	Coordinate right = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x + range, pos.z));
 	Coordinate behind = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x, pos.z - range));
@@ -136,6 +129,9 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 
 	// world direction
 	Ogre::Vector3 newDirection = _myNode->getOrientation() * _dirVec;
+
+	//the amount it rotates to resolve the whisker resolution
+	int collisionRotation = 65;
 
 	// left and right
 	if (!(zone->getCollisionGrid()[left.x + left.z * zone->_width * City::gridScalar]) ||
@@ -152,38 +148,38 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 	//whiskers
 	else if (!(zone->getCollisionGrid()[topLeft.x + topLeft.z * zone->_width * City::gridScalar])){
 		if (newDirection.x < -0.5f){
-			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 		else if (newDirection.z < -0.5f)
 		{
-			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(-collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 	}
 	else if (!(zone->getCollisionGrid()[topRight.x + topRight.z * zone->_width * City::gridScalar])){
 		if (newDirection.x < -0.5f){
-			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(-collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 		else if (newDirection.z > 0.5f)
 		{
-			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 	}
 	else if (!(zone->getCollisionGrid()[bottomLeft.x + bottomLeft.z * zone->_width * City::gridScalar])){
 		if (newDirection.x > 0.5f){
-			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(-collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 		else if (newDirection.z < -0.5f)
 		{
-			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 	}
 	else if (!(zone->getCollisionGrid()[bottomRight.x + bottomRight.z * zone->_width * City::gridScalar])){
 		if (newDirection.x > 0.5f){
-			newDirection = Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 		else if (newDirection.z > 0.5f)
 		{
-			newDirection = Ogre::Quaternion(Ogre::Degree(-45), Ogre::Vector3::UNIT_Y) * newDirection;
+			newDirection = Ogre::Quaternion(Ogre::Degree(-collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 	}
 

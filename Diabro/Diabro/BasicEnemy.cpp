@@ -83,8 +83,7 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 		colorIndex = 1;
 	}
 
-	//_rotationType = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
-	_rotationType = 0;
+	_rotationType = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
 
 	//set color
 	if(colorIndex == 0) {
