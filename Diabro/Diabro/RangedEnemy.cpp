@@ -36,6 +36,7 @@ bool RangedEnemy::lightAttack() {
 	bulletNode->createChildSceneNode()->attachObject(bulletEntity);
 	bulletNode->setPosition(getPosition());
 	bulletNode->setScale(0.1f, 0.1f, 0.1f);
+	bulletEntity->setMaterialName("InGame/Bullet");
 	Bullet* bulletScript = new Bullet(bulletNode, equipment->getDamage(), this);
 
 	return true;

@@ -370,6 +370,9 @@
     <ClInclude Include="EnemyIdleState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Headers\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -498,6 +501,9 @@
     </Filter>
     <Filter Include="Sources\Characters\Enemies">
       <UniqueIdentifier>{4dcff531-10fe-4b97-93e5-ac3f6b57644f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Particles">
+      <UniqueIdentifier>{6698ee61-c450-4326-b678-93f041907884}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

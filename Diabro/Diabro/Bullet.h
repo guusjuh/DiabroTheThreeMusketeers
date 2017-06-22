@@ -7,7 +7,7 @@
 class Bullet {
 public:
 	Bullet(Ogre::SceneNode* node, float dmg, RangedEnemy* enemy);
-	~Bullet();
+	~Bullet(){}
 
 	int id;
 

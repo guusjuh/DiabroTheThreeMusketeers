@@ -84,6 +84,10 @@ void LevelManager::generateNewDungeon() {
 		delete _hostileNpcScripts[0];
 		detachHostileNPC(0);
 	}
+	while (_bulletScripts.size() > 0) {
+		delete _bulletScripts[0];
+		detachBullet(0);
+	}
 
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");

@@ -202,6 +202,7 @@
     <ClInclude Include="NpcIdleState.h" />
     <ClInclude Include="NpcKidnappedState.h" />
     <ClInclude Include="NpcWanderState.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="PlayerDamageUpgrade.h" />
     <ClInclude Include="PlayerEquipment.h" />
     <ClInclude Include="PlayerHealthUpgrade.h" />
