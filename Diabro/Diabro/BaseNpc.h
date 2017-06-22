@@ -34,6 +34,7 @@ public:
 	int getNextPosSize() { return nextPos.size(); }
 	std::vector<Coordinate> getNextPosList() { return nextPos; }
 	Coordinate getGoalPos() { return goalPos; }
+	void setGoalPos(Coordinate newGoal) { goalPos = newGoal; }
 	City* getCity() { return _myCity; }
 	bool isPlayerDetected() { return _playerDetected; }
 	City* getMyCity() { return _myCity; }
@@ -44,9 +45,6 @@ public:
 	void recieveItem() override;
 
 	int _rotationType;
-
-	float timePast;
-
 protected:
 	std::vector<Coordinate> nextPos;
 	bool _inCurrentQuest;

@@ -37,7 +37,7 @@ public:
 	virtual Ogre::Real getSpeed() { return _movespeed; }
 	Ogre::Real getRotationspeed() { return _rotationspeed; }
 	Ogre::Vector3 getDirVector() { return _dirVec; }
-	Ogre::Vector3 setDirVector(Ogre::Vector3 pMoveVec) { return _dirVec = pMoveVec; }
+	void setDirVector(Ogre::Vector3 pMoveVec) { _dirVec = pMoveVec; }
 
 	Ogre::Real getCurrHealth() { return _currentHealth;  }
 	Ogre::Real getMaxHealth() { return _maxHealth;  }
@@ -62,6 +62,7 @@ public:
 
 	float getRadius() { return _radius; }
 
+	Ogre::SceneNode* getMyNode() { return _myNode; };
 protected:
 	Ogre::Real _movespeed;
 	Ogre::Real _rotationspeed;
