@@ -6,6 +6,10 @@
 /// </summary>
 /// <param name="agent">The agent.</param>
 void EnemyMoveAroundCenterState::Enter(BaseNpc* agent) {
+	if(nextState == "") {
+		nextState = "FollowAStar";
+	}
+
 	// start with a negative nr. to indicate the agent doesnt have any yet
 	_cornerId = -1;
 	
@@ -29,11 +33,11 @@ void EnemyMoveAroundCenterState::Enter(BaseNpc* agent) {
 void EnemyMoveAroundCenterState::Execute(BaseNpc* agent) {
 	// if the player came too close, start following him
 	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) < agent->getNoticeDistance()) {
-		agent->stateMachine.setState("FollowAStar");
+		agent->stateMachine.setState(nextState);
 		return;
 	}
 
-	// 
+	// if agent is colliding
 	if (agent->getDirVector() == Ogre::Vector3().ZERO){
 		if (agent->getNextPosSize() == 0){
 			while (agent->getNextPosSize() == 0)
@@ -47,6 +51,7 @@ void EnemyMoveAroundCenterState::Execute(BaseNpc* agent) {
 		}
 	}
 
+	// if agent got to it's goal position
 	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < agent->getSpeed() / 2){
 		if (agent->getNextPosSize() == 0){
 			while (agent->getNextPosSize() == 0)

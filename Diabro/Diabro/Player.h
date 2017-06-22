@@ -3,7 +3,7 @@
 
 #pragma once
 #include "Character.h"
-#include "BasicEnemy.h"
+#include "BaseEnemy.h"
 #include "Npc.h"
 #include "IPlayerEquipment.h"
 #include "PlayerEquipment.h"

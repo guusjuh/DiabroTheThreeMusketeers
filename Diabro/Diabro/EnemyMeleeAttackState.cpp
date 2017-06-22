@@ -1,11 +1,11 @@
-#include "EnemyAttackState.h"
+#include "EnemyMeleeAttackState.h"
 #include "GameManager.h"
 
 /// <summary>
 /// Executes the attack state on its agent.
 /// </summary>
 /// <param name="agent">The agent.</param>
-void EnemyAttackState::Execute(BaseNpc* agent) {
+void EnemyMeleeAttackState::Execute(BaseNpc* agent) {
 	// if the agent is close enough to perform it's attack
 	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) <= agent->getAttackDistance()) {
 		

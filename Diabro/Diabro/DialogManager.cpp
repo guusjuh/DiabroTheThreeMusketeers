@@ -86,6 +86,6 @@ std::string DialogManager::getDialogText(Npc* thisNpc) {
 	return returnString;
 }
 
-std::string DialogManager::getDialogText(BasicEnemy* thisNpc) {
+std::string DialogManager::getDialogText(BaseEnemy* thisNpc) {
 	return instructionStrings[GameManager::getSingletonPtr()->getRandomInRange(0, sizeof(instructionStrings) / sizeof(instructionStrings[0]))];
 }

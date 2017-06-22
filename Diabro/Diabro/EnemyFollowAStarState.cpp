@@ -22,11 +22,8 @@ void EnemyFollowAStarState::Enter(BaseNpc* agent) {
 /// <param name="agent">The agent.</param>
 void EnemyFollowAStarState::Execute(BaseNpc* agent) {
 	// if the agent is close enough, set the state to following him directly
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) < Zone::scalar / 2.0f && agent->_rotationType == 0) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) < Zone::scalar / 2.0f) {
 		agent->stateMachine.setState("FollowDirect");
-	}
-	else if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) < Zone::scalar && agent->_rotationType == 1){
-		agent->stateMachine.setState("Charge");
 	}
 
 	// else if the agent is too far, start moving around the building in it's hometown again

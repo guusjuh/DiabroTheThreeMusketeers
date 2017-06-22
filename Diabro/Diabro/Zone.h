@@ -26,8 +26,6 @@ protected:
 	const static Coordinate directions[];
 
 public:
-	int _width;
-	int _depth;
 	const static int scalar;
 	std::vector<City> cities; ///< vector containing all cities within the zone
 
@@ -52,6 +50,9 @@ public:
 	static std::string getCityColor();
 
 protected:
+	int _width;
+	int _depth;
+
 	static std::vector<std::string> colorList;
 	const static std::string colors[];
 	static void resetColors();

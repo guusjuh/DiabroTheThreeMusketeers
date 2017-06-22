@@ -118,6 +118,8 @@ void Player::die() {
 
 	_currentHealth = _maxHealth;
 
+	Character::destroy();
+
 	_myNode = nullptr;
 	_myEntity = nullptr;
 

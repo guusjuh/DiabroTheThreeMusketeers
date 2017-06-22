@@ -28,7 +28,8 @@ public:
 
 	virtual void move(Ogre::Vector3&);
 	virtual bool adjustHealth(float);
-	virtual void die();
+	virtual void die(){}
+	virtual void destroy();
 
 	Ogre::Vector3 getPosition() {
 		if(_myNode != nullptr) return _myNode->getPosition();
@@ -63,6 +64,9 @@ public:
 	float getRadius() { return _radius; }
 
 	Ogre::SceneNode* getMyNode() { return _myNode; };
+
+	bool onAttackCooldown() { return !_canAttack; }
+
 protected:
 	Ogre::Real _movespeed;
 	Ogre::Real _rotationspeed;

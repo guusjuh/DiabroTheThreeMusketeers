@@ -13,7 +13,7 @@ const Ogre::String BaseNpc::_activeMaterial = "InGame/ActiveInQuest";
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) 
-: Character(pMyNode, pMyEntity), _timer(0), _myCity(pMyCity), _inDialog(false)
+: Character(pMyNode, pMyEntity), _timer(0), _myCity(pMyCity), _inDialog(false), _isDead(false)
 {
 	// create the entity for the quest indicator
 	questIndicatorEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
@@ -40,29 +40,25 @@ void BaseNpc::collide(){
 /// <param name="pDeltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
-	if (_dirVec != Ogre::Vector3(0, 0, 0)){
+	if (_dirVec != Ogre::Vector3(0, 0, 0)) {
 		_dirVec = Ogre::Vector3(1, 0, 0);
 	}
 	detectPlayer();
 
 	stateMachine.update();
 
-	_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
+		_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
 
-	if (_rotationType == 0){
-		_degreePerFrame = _rotationspeed * pDeltatime;
+	_degreePerFrame = _rotationspeed * pDeltatime;
 
-		if (Ogre::Math::Abs(_wantedRotationAngle) > _degreePerFrame) {
-			if (_wantedRotationAngle < 0) _degreePerFrame *= -1;
-			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_degreePerFrame)), Ogre::Node::TS_LOCAL);
-		}
-		else {
-			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_wantedRotationAngle)), Ogre::Node::TS_LOCAL);
-		}
+	if (Ogre::Math::Abs(_wantedRotationAngle) > _degreePerFrame) {
+		if (_wantedRotationAngle < 0) _degreePerFrame *= -1;
+		_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_degreePerFrame)), Ogre::Node::TS_LOCAL);
 	}
-	else if (_rotationType == 1){
-		_myNode->lookAt(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
+	else {
+		_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_wantedRotationAngle)), Ogre::Node::TS_LOCAL);
 	}
+
 
 	Character::update(pDeltatime);
 }
@@ -129,15 +125,15 @@ void BaseNpc::calculateAStarWeighted(Ogre::Vector3 targetPos) {
 	//get the pointer to the collisiongrid
 	bool* collisionGrid = zone->getCollisionGrid();
 	//instantiate a second ersion of the collisiongrid
-	bool* grid = new bool[zone->_width * _myCity->gridScalar * zone->_depth * _myCity->gridScalar];
-	for (int ix = 0; ix < zone->_width * _myCity->gridScalar; ++ix) {
-		for (int iy = 0; iy < zone->_depth * _myCity->gridScalar; ++iy) {
-			grid[ix + iy * zone->_width * _myCity->gridScalar] = collisionGrid[ix + iy * zone->_width * _myCity->gridScalar];
+	bool* grid = new bool[zone->getResolution().x * _myCity->gridScalar * zone->getResolution().z * _myCity->gridScalar];
+	for (int ix = 0; ix < zone->getResolution().x * _myCity->gridScalar; ++ix) {
+		for (int iy = 0; iy < zone->getResolution().z * _myCity->gridScalar; ++iy) {
+			grid[ix + iy * zone->getResolution().x * _myCity->gridScalar] = collisionGrid[ix + iy * zone->getResolution().x * _myCity->gridScalar];
 		}
 	}
 
 	//check if target position is viable
-	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->_width * _myCity->gridScalar))]){
+	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->getResolution().x * _myCity->gridScalar))]){
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
 		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));
@@ -166,7 +162,7 @@ void BaseNpc::calculateAStarWeighted(Ogre::Vector3 targetPos) {
 	Node start = Node(currentPos.x, currentPos.z, targetPos.x, targetPos.z);
 	nodes.push_back(start);
 	openList.push_back(nodes.size() - 1);
-	grid[start.x + start.y * zone->_width * _myCity->gridScalar] = false;
+	grid[start.x + start.y * zone->getResolution().x * _myCity->gridScalar] = false;
 
 	//last node from the path
 	bool targetAdded = false;
@@ -218,13 +214,13 @@ void BaseNpc::calculateAStarWeighted(Ogre::Vector3 targetPos) {
 		}
 
 		//add its neigbours to the openlist
-		std::vector<Coordinate> neighboursPositions = lowestFNode.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
+		std::vector<Coordinate> neighboursPositions = lowestFNode.getNeighbours(collisionGrid, zone->getResolution().x * _myCity->gridScalar, zone->getResolution().z * _myCity->gridScalar);
 		for (size_t i = 0; i < neighboursPositions.size(); i++)
 		{
 			int pX = neighboursPositions[i].x;
 			int pY = neighboursPositions[i].z;
-			if (grid[pX + pY * zone->_width * _myCity->gridScalar]){
-				grid[pX + pY * zone->_width * _myCity->gridScalar] = false;
+			if (grid[pX + pY * zone->getResolution().x * _myCity->gridScalar]){
+				grid[pX + pY * zone->getResolution().x * _myCity->gridScalar] = false;
 				nodes.push_back(Node(lowestFNode, lowestFNodeId, pX, pY, targetPos.x, targetPos.z, true));
 				openList.push_back(nodes.size() - 1);
 			}
@@ -262,15 +258,15 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	//get the pointer to the collisiongrid
 	bool* collisionGrid = zone->getCollisionGrid();
 	//instantiate a second ersion of the collisiongrid
-	bool* grid = new bool[zone->_width * _myCity->gridScalar * zone->_depth * _myCity->gridScalar];
-	for (int ix = 0; ix < zone->_width * _myCity->gridScalar; ++ix) {
-		for (int iy = 0; iy < zone->_depth * _myCity->gridScalar; ++iy) {
-			grid[ix + iy * zone->_width * _myCity->gridScalar] = collisionGrid[ix + iy * zone->_width * _myCity->gridScalar];
+	bool* grid = new bool[zone->getResolution().x * _myCity->gridScalar * zone->getResolution().z * _myCity->gridScalar];
+	for (int ix = 0; ix < zone->getResolution().x * _myCity->gridScalar; ++ix) {
+		for (int iy = 0; iy < zone->getResolution().z * _myCity->gridScalar; ++iy) {
+			grid[ix + iy * zone->getResolution().x * _myCity->gridScalar] = collisionGrid[ix + iy * zone->getResolution().x * _myCity->gridScalar];
 		}
 	}
 
 	//check if target position is viable
-	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->_width * _myCity->gridScalar))]){
+	if (!collisionGrid[(int)(targetPos.x + (targetPos.z * zone->getResolution().x * _myCity->gridScalar))]){
 		//new random point in room
 		Ogre::Vector3 coord = _myCity->getRandomPointInRoom();
 		calculateAStar(Ogre::Vector3(coord.x, getPosition().y, coord.z));
@@ -299,7 +295,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	Node start = Node(currentPos.x, currentPos.z, targetPos.x, targetPos.z);
 	nodes.push_back(start);
 	openList.push_back(nodes.size() - 1);
-	grid[start.x + start.y * zone->_width * _myCity->gridScalar] = false;
+	grid[start.x + start.y * zone->getResolution().x * _myCity->gridScalar] = false;
 
 	//last node from the path
 	bool targetAdded = false;
@@ -351,13 +347,13 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 		}
 
 		//add its neigbours to the openlist
-		std::vector<Coordinate> neighboursPositions = lowestFNode.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
+		std::vector<Coordinate> neighboursPositions = lowestFNode.getNeighbours(collisionGrid, zone->getResolution().x * _myCity->gridScalar, zone->getResolution().z * _myCity->gridScalar);
 		for (size_t i = 0; i < neighboursPositions.size(); i++)
 		{
 			int pX = neighboursPositions[i].x;
 			int pY = neighboursPositions[i].z;
-			if (grid[pX + pY * zone->_width * _myCity->gridScalar]){
-				grid[pX + pY * zone->_width * _myCity->gridScalar] = false;
+			if (grid[pX + pY * zone->getResolution().x * _myCity->gridScalar]){
+				grid[pX + pY * zone->getResolution().x * _myCity->gridScalar] = false;
 				nodes.push_back(Node(lowestFNode, lowestFNodeId, pX, pY, targetPos.x, targetPos.z));
 				openList.push_back(nodes.size() - 1);
 			}
@@ -389,7 +385,7 @@ void BaseNpc::walkToNeighbour(){
 
 	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
 	Node start = Node(currentPos.x, currentPos.z, 0, 0);
-	std::vector<Coordinate> neighboursPositions = start.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
+	std::vector<Coordinate> neighboursPositions = start.getNeighbours(collisionGrid, zone->getResolution().x * _myCity->gridScalar, zone->getResolution().z * _myCity->gridScalar);
 
 	int rnd = GameManager::getSingletonPtr()->getRandomInRange(0, neighboursPositions.size());
 	nextPos.clear();

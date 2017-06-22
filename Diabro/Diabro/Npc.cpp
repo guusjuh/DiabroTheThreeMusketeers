@@ -85,7 +85,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	_rotationspeed = 180.0f;
 	_noticeDistance = 400;
 	_radius = 25.0f;
-	_rotationType = 0;
 
 	goalPos = Coordinate(pMyNode->getPosition().x, pMyNode->getPosition().z);
 }
@@ -163,9 +162,8 @@ void Npc::update(Ogre::Real pDeltatime)
 /// Dies this instance.
 /// </summary>
 void Npc::die() {
-	Character::die();
-	
 	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
+	Character::destroy();
 }
 
 void Npc::collide() {

@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "BaseNpc.h"
-#include "BasicEnemy.h"
+#include "BaseEnemy.h"
 #include "Npc.h"
 
 class DialogManager {
@@ -13,7 +13,7 @@ public:
 
 	std::string getDialogText(BaseNpc* thisBaseNpc);
 	std::string getDialogText(Npc* thisNpc);
-	std::string getDialogText(BasicEnemy* thisNpc);
+	std::string getDialogText(BaseEnemy* thisNpc);
 
 private:
 	static const std::string instructionStrings[13];

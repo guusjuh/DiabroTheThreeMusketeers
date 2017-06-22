@@ -123,10 +123,21 @@ int LevelManager::subscribeFriendlyNPC(Npc* friendly) {
 /// </summary>
 /// <param name="hostile">The hostile.</param>
 /// <returns></returns>
-int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
+int LevelManager::subscribeHostileNPC(BaseEnemy* hostile) {
 	_hostileNpcScripts.push_back(hostile);
 
 	return _hostileNpcScripts.size() - 1;
+}
+
+/// <summary>
+/// Subscribes a bullet.
+/// </summary>
+/// <param name="hostile">The bullet.</param>
+/// <returns></returns>
+int LevelManager::subscribeBullet(Bullet* bullet) {
+	_bulletScripts.push_back(bullet);
+
+	return _bulletScripts.size() - 1;
 }
 
 void LevelManager::spawnEnemy(City *pCity, bool pInstant) {
@@ -165,6 +176,18 @@ void LevelManager::detachHostileNPC(int id) {
 }
 
 /// <summary>
+/// Detaches the hostile NPC.
+/// </summary>
+/// <param name="id">The identifier.</param>
+void LevelManager::detachBullet(int id) {
+	_bulletScripts.erase(_bulletScripts.begin() + id);
+	//nextFloor id values
+	for (std::vector<Bullet*>::iterator it = _bulletScripts.begin() + id; it < _bulletScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+}
+
+/// <summary>
 /// Updates the frame based on the specified fe.
 /// </summary>
 /// <param name="fe">The frame event.</param>
@@ -185,6 +208,11 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	for (int i = 0; i < _hostileNpcScripts.size(); i++)
 	{
 		_hostileNpcScripts[i]->update(deltaTime);
+	}
+
+	for (int i = 0; i < _bulletScripts.size(); i++)
+	{
+		_bulletScripts[i]->update(deltaTime);
 	}
 
 	for (int i = 0; i < _levelGenerator->getZone(0, 0).cities.size(); ++i) {
