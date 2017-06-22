@@ -15,7 +15,7 @@ Filename:    GameManager.cpp
 /// It contains all other managers.
 /// </summary>
 GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0),
-up(false), down(false), left(false), right(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
+up(false), down(false), left(false), right(false), fly(false), fall(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
 //---------------------------------------------------------------------------
 /// <summary>
 /// Finalizes an instance of the <see cref="GameManager"/> class.

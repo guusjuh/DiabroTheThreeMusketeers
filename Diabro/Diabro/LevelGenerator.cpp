@@ -9,8 +9,8 @@
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
 /// </summary>
 LevelGenerator::LevelGenerator() {
-	_zoneWidth = 40;
-	_zoneDepth = 40;
+	_zoneWidth = 17;
+	_zoneDepth = 17;
 	_maxCityWidth = 5;
 	_maxCityDepth = 5;
 	_maxCityAmount = 7;
@@ -277,7 +277,7 @@ void LevelGenerator::donaldTrump(std::string pName, Ogre::ColourValue pCol) cons
 	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
-	mesh->_setBounds(Ogre::AxisAlignedBox(Ogre::AxisAlignedBox(-(Zone::scalar / 2.0f), 0.0f, -(Zone::scalar / 2.0f), Zone::scalar / 2.0f, Zone::scalar, -(Zone::scalar / 2.0f))));
+	mesh->_setBounds(Ogre::AxisAlignedBox(Ogre::AxisAlignedBox(-(Zone::scalar / 2.0f), 0.0f, -(Zone::scalar / 2.0f), Zone::scalar / 2.0f, Zone::scalar, -(Zone::scalar / 2.0f) + 1)));
 
 	mesh->load();
 }
@@ -465,7 +465,7 @@ void LevelGenerator::createTileMesh(std::string pName, Ogre::ColourValue pCol) c
 	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
-	mesh->_setBounds(Ogre::AxisAlignedBox(0, 0, 0, Zone::scalar, 0, Zone::scalar));
+	mesh->_setBounds(Ogre::AxisAlignedBox(0, 0, 0, Zone::scalar, 1, Zone::scalar));
 
 	mesh->load();
 }
