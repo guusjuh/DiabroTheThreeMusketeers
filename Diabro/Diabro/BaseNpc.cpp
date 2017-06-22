@@ -392,12 +392,9 @@ void BaseNpc::walkToNeighbour(){
 	std::vector<Coordinate> neighboursPositions = start.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
 
 	int rnd = GameManager::getSingletonPtr()->getRandomInRange(0, neighboursPositions.size());
-	nextPos.clear();
-	nextPos.push_back(Coordinate(neighboursPositions[rnd].x * scale, neighboursPositions[rnd].z * scale));
+	calculateAStar(Ogre::Vector3(neighboursPositions[rnd].x, 0, neighboursPositions[rnd].z));
 
 	_myNode->lookAt(Ogre::Vector3(nextPos[0].x, getPosition().y, nextPos[0].z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
-
-	walkToNextPoint();
 }
 
 void BaseNpc::recieveItem() {
