@@ -256,6 +256,7 @@ void BaseEnemy::die() {
 		Character::destroy();
 	}*/
 
+	Character::die();
 	Character::destroy();
 }
 

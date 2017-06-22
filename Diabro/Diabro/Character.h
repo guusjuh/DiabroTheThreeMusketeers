@@ -28,7 +28,7 @@ public:
 
 	virtual void move(Ogre::Vector3&);
 	virtual bool adjustHealth(float);
-	virtual void die(){}
+	virtual void die();
 	virtual void destroy();
 
 	Ogre::Vector3 getPosition() {

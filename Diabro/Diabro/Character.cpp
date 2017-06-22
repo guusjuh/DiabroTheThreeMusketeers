@@ -245,6 +245,13 @@ bool Character::adjustHealth(float pAdjust)
 	return true;
 }
 
+void Character::die() {
+	int amount = GameManager::getSingletonPtr()->getRandomInRange(12, 16);
+
+	Particle::castParticles(amount, getPosition(), "uv_sphere.mesh", "InGame/ParticleDead",
+		0.05f, 0.07f, 300, 450, 0.3f, 0.4f, 260.0f);
+}
+
 /// <summary>
 /// Character dies.
 /// </summary>

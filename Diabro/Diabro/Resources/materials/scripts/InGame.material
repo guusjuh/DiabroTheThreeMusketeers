@@ -391,6 +391,21 @@ material InGame/ParticleBullet
    }
 }
 
+
+material InGame/ParticleDead
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture particledead.jpg
+         }
+      }
+   }
+}
+
 material InGame/HasQuest
 {
    technique
