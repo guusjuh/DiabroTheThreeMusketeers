@@ -5,18 +5,18 @@
 #include "BaseNpc.h"
 
 /// <summary>
-/// The concrete idle implementation for characters. 
+/// In this state, the enemy walks directly to the player. 
 /// </summary>
 /// <seealso cref="State{Character}" />
 class EnemyFollowDirectState : public State<BaseNpc>
 {
 public:
-	EnemyFollowDirectState();
-	~EnemyFollowDirectState();
+	EnemyFollowDirectState(){}
+	~EnemyFollowDirectState(){}
 
-	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;
-	void Exit(BaseNpc* agent) override;
-	void Collide(BaseNpc* agent) override;
+
+private:
+	Ogre::Vector3 _playerPos;
 };
 #endif

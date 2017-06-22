@@ -211,6 +211,19 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 	BaseNpc::update(pDeltatime);
 }
 
+void BasicEnemy::collide() {
+	std::string state = stateMachine.getCurrentState();
+
+	if(state == "FollowDirectState") 
+	{
+		stateMachine.setState("Relative");
+	} 
+	else if(state == "FollowAStar" || state == "AroundCenter")
+	{
+		walkToNeighbour();
+	}
+}
+
 /// <summary>
 /// Performs a light attack.
 /// </summary>
@@ -222,7 +235,7 @@ bool BasicEnemy::lightAttack()
 	}
 
 	std::vector<Character*> targets;
-	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+	targets.push_back(GameManager::getSingletonPtr()->getPlayer());
 	findTarget(targets);
 
 	if (_target == nullptr) {
@@ -245,7 +258,7 @@ void BasicEnemy::die() {
 
 	// display hud text if this enemy is important for quests
 	if (_hasItem && _needToGiveItem) {
-		giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+		giveItem(GameManager::getSingletonPtr()->getPlayer());
 	}
 	if (_relevantForAction) {
 		GameManager::getSingletonPtr()->getUIManager()->showHUDText(GameManager::getSingletonPtr()->getQuestManager()->obtainDialog(this), 3.5f);
@@ -271,7 +284,7 @@ void BasicEnemy::die() {
 		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgEnemyDead);
 	}
 
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth() / 100) * 2);
+	GameManager::getSingletonPtr()->getPlayer()->adjustHealth(-(GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100) * 2);
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 }
 

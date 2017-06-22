@@ -31,29 +31,29 @@ enum MaterialType
 /// <summary>
 /// The manager of the level. 
 /// </summary>
-class LevelManager
-{
+class LevelManager {
 public:
 	LevelManager();
+	~LevelManager() {}
 
 	void initialize();
+	void inGameUpdate(const Ogre::FrameEvent&);
+
 	void nextFloor();
 	void restartGame();
 	void generateNewDungeon();
 
 	int getCurrentLevel() { return _level; }
+	LevelGenerator* getLevelGenerator() { return _levelGenerator; }
 
-	void inGameUpdate(const Ogre::FrameEvent&);
+	Ogre::SceneNode* getCamNode() { return _camNode; }
+	Ogre::Degree startPitchCam;
 
+	Ogre::SceneNode* getLevelNode() { return _levelNode; }
 	static void createGroundMesh();
 	static void createNPCMesh();
 	static void createEnemyMesh();
 	static void createPlayerMesh();
-
-	Ogre::SceneNode* getLevelNode() { return _levelNode; }
-	Ogre::SceneNode* getCamNode() { return _camNode; }
-
-	void spawnEnemy(City *pCity, bool pInstant);
 
 	Player* getPlayer() { return playerScript; }
 	std::vector<Character*> getFriendlyNpcs() { return _friendlyNpcScripts; }
@@ -61,38 +61,24 @@ public:
 
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeFriendlyNPC(Npc*);
-
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
-	
-	LevelGenerator* levelGenerator;
-	// for now public so that game manager can access it. 
-	Player* playerScript; 
 
-	Ogre::Degree startPitchCam;
-	Ogre::Vector3 playerPosition;
-	std::string npcNames[8];
-
-	std::string getMaterial(std::string color, MaterialType type);
+	void spawnEnemy(City *pCity, bool pInstant);
 
 private:
+	int _level;
+
 	std::vector<std::pair<Timer, City*>> enemySpawnTimers;
 
-	Ogre::Entity* _playerEntity;
-	//TODO replace all with spawners
-	Ogre::Entity* _npcEntity;
-	Ogre::Entity* _basicEnemyEntity;
+	Player* playerScript;
 
-	Ogre::Entity* _groundEntity;
+	std::vector<Character*> _friendlyNpcScripts;
+	std::vector<Character*> _hostileNpcScripts;
 
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
-	
-	std::vector<Character*> _friendlyNpcScripts;
-	std::vector<Character*> _hostileNpcScripts;
-	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
-
-	int _level;
+	LevelGenerator* _levelGenerator;
 };
 
 #endif

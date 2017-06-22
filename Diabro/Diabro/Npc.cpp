@@ -94,7 +94,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 /// Finalizes an instance of the <see cref=""/> class.
 /// </summary>
 Npc::~Npc() {
-	int i = 0;
 }
 
 /// <summary>

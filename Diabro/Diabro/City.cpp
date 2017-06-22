@@ -194,7 +194,7 @@ City::~City() { }
 
 void City::update() {
 	if(_relevantForAction) {
-		if(inThisCity(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition())) {
+		if(inThisCity(GameManager::getSingletonPtr()->getPlayer()->getPosition())) {
 			GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgCityReached);
 		}
 	}
@@ -496,7 +496,7 @@ void City::setBuildingMaterial(std::vector<Building> buildings, std::vector<Ogre
 			entities[i]->setMaterialName("InGame/GreyHideoutHouse");
 		} else
 		{
-			entities[i]->setMaterialName(GameManager::getSingletonPtr()->getLevelManager()->getMaterial(color, HousesMT));
+			entities[i]->setMaterialName("InGame/" + color + "House");
 		}
 		
 	}
@@ -651,12 +651,12 @@ std::vector<Coordinate> City::buildingPositions() {
 	positions.clear();
 	for (int i = 0; i < _buildingNodes.size(); i++) {
 		Ogre::Vector3 buildingPos = _buildingNodes[i]->getPosition();
-		positions.push_back(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(buildingPos.x, buildingPos.z)));
+		positions.push_back(GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(buildingPos.x, buildingPos.z)));
 	}
 
 	return positions;
 }
 
 Ogre::Vector3 City::getQuestPosition() {
-	return GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getWorldPosition(getCenterTile());
+	return GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getWorldPosition(getCenterTile());
 }

@@ -5,18 +5,20 @@
 #include "BaseNpc.h"
 
 /// <summary>
-/// The concrete idle implementation for characters. 
+/// In this state the enemy follows the target with help of A* 
 /// </summary>
 /// <seealso cref="State{Character}" />
 class EnemyFollowAStarState : public State<BaseNpc>
 {
 public:
-	EnemyFollowAStarState();
-	~EnemyFollowAStarState();
+	EnemyFollowAStarState() {}
+	~EnemyFollowAStarState() {}
 
 	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;
-	void Exit(BaseNpc* agent) override;
-	void Collide(BaseNpc* agent) override;
+
+private: 
+	Ogre::Vector3 _targetPos;
+	Ogre::Vector3 getPlayerAsTarget();
 };
 #endif

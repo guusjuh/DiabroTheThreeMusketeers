@@ -15,7 +15,6 @@ public:
 	virtual void Enter(T* agent) {}
 	virtual void Execute(T* agent) {}
 	virtual void Exit(T* agent) {}
-	virtual void Collide(T* agent) {}
 };
 
 #endif

@@ -48,14 +48,14 @@ void StateMachine<T>::update()
 /// <summary>
 /// Updates collision for the current state of the fsm.
 /// </summary>
-template<typename T>
+/*template<typename T>
 void StateMachine<T>::collide()
 {
 	if (this->getCurrentState() != ""){
 		State<T>* current = _possibleStates[this->getCurrentState()];
 		current->Collide(_owner);
 	}
-}
+}*/
 
 /// <summary>
 /// Gets the current state.

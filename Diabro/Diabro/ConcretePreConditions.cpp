@@ -56,12 +56,12 @@ void PreSomethingThere::start() {
 }
 
 void PreYouItemOfInterest::start() {
-	if (!GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->hasItem()) {
+	if (!GameManager::getSingletonPtr()->getPlayer()->hasItem()) {
 		Debug("Error occured: player managed to get here without getting an item..");
 		return;
 	}
 
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->needToGiveItem();
+	GameManager::getSingletonPtr()->getPlayer()->needToGiveItem();
 	item->setRelevantForAction(true);
 
 	_isMet = true;

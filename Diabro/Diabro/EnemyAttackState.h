@@ -5,17 +5,15 @@
 #include "BaseNpc.h"
 
 /// <summary>
-/// The concrete idle implementation for characters. 
+/// In this state an enemy performs its attack. 
 /// </summary>
 /// <seealso cref="State{Character}" />
 class EnemyAttackState : public State<BaseNpc>
 {
 public:
-	EnemyAttackState();
-	~EnemyAttackState();
+	EnemyAttackState(){}
+	~EnemyAttackState(){}
 
-	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;
-	void Exit(BaseNpc* agent) override;
 };
 #endif

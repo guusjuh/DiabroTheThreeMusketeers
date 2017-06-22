@@ -1,36 +1,44 @@
 #include "EnemyMoveAroundCenterState.h"
 #include "GameManager.h"
 
-EnemyMoveAroundCenterState::EnemyMoveAroundCenterState()
-{
+/// <summary>
+/// Enters this state.
+/// </summary>
+/// <param name="agent">The agent.</param>
+void EnemyMoveAroundCenterState::Enter(BaseNpc* agent) {
+	// start with a negative nr. to indicate the agent doesnt have any yet
+	_cornerId = -1;
+	
+	// set the next route with A* based on it's current position
+	setNextRoute(agent);
 
-}
-
-EnemyMoveAroundCenterState::~EnemyMoveAroundCenterState()
-{
-
-}
-
-void EnemyMoveAroundCenterState::Enter(BaseNpc* agent){
-	cornerId = -1;
-	setNextPointList(agent);
+	// as long as the agent doesn't have a route to walk, find a new one
 	while (agent->getNextPosSize() == 0)
 	{
-		setNextPointList(agent);
+		setNextRoute(agent);
 	}
+
+	// start walking to the first point 
 	agent->walkToNextPoint();
 }
 
-void EnemyMoveAroundCenterState::Execute(BaseNpc* agent){
-	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getNoticeDistance()) {
+/// <summary>
+/// Executes this state.
+/// </summary>
+/// <param name="agent">The agent.</param>
+void EnemyMoveAroundCenterState::Execute(BaseNpc* agent) {
+	// if the player came too close, start following him
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) < agent->getNoticeDistance()) {
 		agent->stateMachine.setState("FollowAStar");
+		return;
 	}
+
+	// 
 	if (agent->getDirVector() == Ogre::Vector3().ZERO){
 		if (agent->getNextPosSize() == 0){
 			while (agent->getNextPosSize() == 0)
 			{
-				setNextPointList(agent);
+				setNextRoute(agent);
 			}
 			agent->walkToNextPoint();
 		}
@@ -43,7 +51,7 @@ void EnemyMoveAroundCenterState::Execute(BaseNpc* agent){
 		if (agent->getNextPosSize() == 0){
 			while (agent->getNextPosSize() == 0)
 			{
-				setNextPointList(agent);
+				setNextRoute(agent);
 			}
 			agent->walkToNextPoint();
 		}
@@ -51,36 +59,19 @@ void EnemyMoveAroundCenterState::Execute(BaseNpc* agent){
 			agent->walkToNextPoint();
 		}
 	}
-
 }
 
-void EnemyMoveAroundCenterState::Exit(BaseNpc* agent){
-
-}
-
-void EnemyMoveAroundCenterState::Collide(BaseNpc* agent){/*
-	if (agent->getNextPosSize() > 0)
-	{
-		agent->walkToNextPoint();
-	}
-	else
-	{
-		while (agent->getNextPosSize() == 0)
-		{
-			setNextPointList(agent);
-		}
-		agent->walkToNextPoint();
-	}*/
-	agent->walkToNeighbour();
-}
-
-void EnemyMoveAroundCenterState::setNextPointList(BaseNpc* agent){
-	cornerId++;
-	if (cornerId>3)
-		cornerId = -1;
+/// <summary>
+/// Sets the next point list.
+/// </summary>
+/// <param name="agent">The agent.</param>
+void EnemyMoveAroundCenterState::setNextRoute(BaseNpc* agent) {
+	_cornerId++;
+	if (_cornerId>3)
+		_cornerId = -1;
 	Coordinate centerPos = agent->getCity()->getCenterTile();
 	int scalar = agent->getCity()->Scalar();
-	switch (cornerId){
+	switch (_cornerId){
 	case 0:
 		agent->calculateAStar(Ogre::Vector3((centerPos.x - 1) * City::gridScalar, 0, (centerPos.z - 1) * City::gridScalar));
 		break;

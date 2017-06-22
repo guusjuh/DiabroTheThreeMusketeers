@@ -51,13 +51,13 @@ void UIManager::setupUI()
 	_uiNode->setPosition(0, 0, 0);
 
 	// create health bars
-	_playerHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMLEFT, "Player", "PlayerHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
+	_playerHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMLEFT, "Player", "PlayerHealth", 256, 256, 0, GameManager::getSingletonPtr()->getPlayer()->getMaxHealth(), 1);
 	_maxWidthBar = _playerHealthBarWidget->getOverlayElement()->getWidth();
 
 	_miniMap = _uiElementMgr->createMiniMap(DiabroUI::TOP, "MiniMap", 256, -90, 90);
-	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getNorth());
+	Ogre::Real angle = GameManager::getSingletonPtr()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getNorth());
 	_miniMap->setValueNorth(angle, calcLocatorPos(angle, _maxWidthBar));
-	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSouth());
+	angle = GameManager::getSingletonPtr()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getSouth());
 	_miniMap->setValueSouth(angle, calcLocatorPos(angle, _maxWidthBar));
 
 	_floorTextWidget = _uiElementMgr->createText(DiabroUI::TOPLEFT, "FloorIndicator", "FloorText", "Floor " + Ogre::StringConverter::toString(1), 40, 40);
@@ -293,7 +293,7 @@ void UIManager::showEnemyHealthBar()
 
 	_enemyBarOn = true;
 
-	_enemyHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMRIGHT, "Enemy", "EnemyHealth", 256, 256, 0, GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth(), 1);
+	_enemyHealthBarWidget = _uiElementMgr->createHealthBar(DiabroUI::BOTTOMRIGHT, "Enemy", "EnemyHealth", 256, 256, 0, GameManager::getSingletonPtr()->getPlayer()->getMaxHealth(), 1);
 }
 
 ///hides the enemy healthbar
@@ -320,18 +320,18 @@ Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre:
 /// updates the position of the locators on the minimap.
 void UIManager::updateMiniMapLocators() {
 	// update sis
-	Ogre::Real angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSisPos());
+	Ogre::Real angle = GameManager::getSingletonPtr()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getSisPos());
 	_miniMap->setValueSister(angle, calcLocatorPos(angle, _maxWidthBar));
 
-	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getNorth());
+	angle = GameManager::getSingletonPtr()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getNorth());
 	_miniMap->setValueNorth(angle, calcLocatorPos(angle, _maxWidthBar));
 
-	angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getSouth());
+	angle = GameManager::getSingletonPtr()->getPlayer()->angleBetween(GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getSouth());
 	_miniMap->setValueSouth(angle, calcLocatorPos(angle, _maxWidthBar));
 
 	// update quest 
 	if (_questOn) {
-		angle = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->angleBetween(_questTargetPos);
+		angle = GameManager::getSingletonPtr()->getPlayer()->angleBetween(_questTargetPos);
 		_miniMap->setValueQuest(angle, calcLocatorPos(angle, _maxWidthBar));
 	}
 }
@@ -386,10 +386,10 @@ void UIManager::resetFloorText() {
 void UIManager::setUpgradeText(UpgradeModifierType type) {
 	switch(type) {
 	case Health:
-		_healthUpgradeIcon->setValue(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->healthUpgradeAmount());
+		_healthUpgradeIcon->setValue(GameManager::getSingletonPtr()->getPlayer()->healthUpgradeAmount());
 		break;
 	case Damage:
-		_dmgUpgradeIcon->setValue(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->damageUpgradeAmount());
+		_dmgUpgradeIcon->setValue(GameManager::getSingletonPtr()->getPlayer()->damageUpgradeAmount());
 		break;
 	default:
 		break;
@@ -419,8 +419,8 @@ void UIManager::showPauseScreen() {
 	std::string informationString = "";
 	informationString.append("Current floor: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel()) + "\n\n" +
 		"Values due to ugrades: \n"
-		"- Health: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth()) + "\n" +
-		"- Damage: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getDamage()) + "\n\n");
+		"- Health: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getPlayer()->getMaxHealth()) + "\n" +
+		"- Damage: " + Ogre::StringConverter::toString(GameManager::getSingletonPtr()->getPlayer()->getDamage()) + "\n\n");
 	
 	if (_questOn) informationString.append("Current quest action: " + GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->getCurrentInstruction() );
 

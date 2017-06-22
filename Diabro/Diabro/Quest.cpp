@@ -66,8 +66,8 @@ void Quest::update() {
 /// Ends the quest, assigns rewards.
 /// </summary>
 void Quest::end() {
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->upgradeEquipment(_upgradeReward);
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustHealth(-_healthReward);
+	GameManager::getSingletonPtr()->getPlayer()->upgradeEquipment(_upgradeReward);
+	GameManager::getSingletonPtr()->getPlayer()->adjustHealth(-_healthReward);
 
 	GameManager::getSingletonPtr()->getUIManager()->setQuestOn(false);
 	Debug("\tQuest: I aaaaaam compleeeeeteeee!");

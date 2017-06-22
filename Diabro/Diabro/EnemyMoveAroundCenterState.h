@@ -11,14 +11,14 @@
 class EnemyMoveAroundCenterState: public State<BaseNpc>
 {
 public:
-	EnemyMoveAroundCenterState();
-	~EnemyMoveAroundCenterState();
+	EnemyMoveAroundCenterState() {}
+	~EnemyMoveAroundCenterState() {}
 
 	void Enter(BaseNpc* agent) override;
 	void Execute(BaseNpc* agent) override;
-	void Exit(BaseNpc* agent) override;
-	void Collide(BaseNpc* agent) override;
-	int cornerId;
-	void setNextPointList(BaseNpc* agent);
+
+private:
+	int _cornerId;
+	void setNextRoute(BaseNpc* agent);
 };
 #endif

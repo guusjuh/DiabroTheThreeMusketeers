@@ -15,7 +15,7 @@ void NpcKidnappedState::Enter(BaseNpc* agent){
 
 void NpcKidnappedState::Execute(BaseNpc* agent){
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < agent->getNoticeDistance()) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) < agent->getNoticeDistance()) {
 		agent->stateMachine.setState("FollowPlayer");
 		return;
 	}

@@ -8,11 +8,7 @@
 /// This class is created by the <see cref="GameManager" /> and contains all level information
 /// like characters and the environment.
 /// </summary>
-LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
-playerScript(0), _levelNode(0), _camNode(0)
-{
-
-}
+LevelManager::LevelManager() : playerScript(0), _levelNode(0), _camNode(0) { }
 
 /// <summary>
 /// Initializes this the level by setting the camera, player, NPC's and surroundings.
@@ -29,19 +25,19 @@ void LevelManager::initialize()
 	printf("LevelGen Start!\n");
 	fclose(fp);
 #endif
-	levelGenerator = new LevelGenerator();
+	_levelGenerator = new LevelGenerator();
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
-	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
-	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	playerNode->setPosition(levelGenerator->getStartPos());
+	Ogre::Entity* playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
+	playerNode->createChildSceneNode()->attachObject(playerEntity);
+	playerNode->setPosition(_levelGenerator->getStartPos());
 	playerNode->setScale(0.75f, 0.75f, 0.75f);
-	playerScript = new Player(playerNode, _playerEntity);
+	playerScript = new Player(playerNode, playerEntity);
 
-	levelGenerator->initialize();
+	_levelGenerator->initialize();
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
@@ -91,18 +87,18 @@ void LevelManager::generateNewDungeon() {
 
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
-	Debug("restarting levelGenerator");
-	levelGenerator->restart();
+	Debug("restarting _levelGenerator");
+	_levelGenerator->restart();
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
 	Debug("spawning player");
-	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
-	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	playerNode->setPosition(levelGenerator->getStartPos());
-	playerScript->reset(playerNode, _playerEntity);
+	Ogre::Entity* playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
+	playerNode->createChildSceneNode()->attachObject(playerEntity);
+	playerNode->setPosition(_levelGenerator->getStartPos());
+	playerScript->reset(playerNode, playerEntity);
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
@@ -136,7 +132,7 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 void LevelManager::spawnEnemy(City *pCity, bool pInstant) {
 	if (pCity != nullptr) {
 		if (pInstant) {
-			levelGenerator->spawnEnemy(pCity, 1);
+			_levelGenerator->spawnEnemy(pCity, 1);
 		}
 		else {
 			enemySpawnTimers.push_back(std::make_pair(Timer(pCity->getEnemyRespawnTimeForUsage()), pCity));
@@ -168,26 +164,6 @@ void LevelManager::detachHostileNPC(int id) {
 	}
 }
 
-std::string LevelManager::getMaterial(std::string color, MaterialType type)
-{
-	//"blue", "green", "pink", "purple", "red", "yellow"
-	//InGame/PinkNPC, InGame/RedNPC, InGame/YellowNPC, InGame/BlueNPC, InGame/GreenNPC, InGame/PurpleNPC
-	//InGame/PinkHouse, InGame/RedHouse, InGame/YellowHouse, InGame/BlueHouse, InGame/GreenHouse, InGame/PurpleHouse, InGame/GreyHideoutHouse
-	switch (type)
-	{
-	case NpcMT:
-		return("InGame/" + color + "NPC");
-		break;
-	case HousesMT:
-		return("InGame/" + color + "House");
-		break;
-	default:
-		Debug("Material not found:");
-		Debug(color.c_str(), type);
-		break;
-	}
-}
-
 /// <summary>
 /// Updates the frame based on the specified fe.
 /// </summary>
@@ -211,8 +187,8 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 		_hostileNpcScripts[i]->update(deltaTime);
 	}
 
-	for (int i = 0; i < levelGenerator->getZone(0, 0).cities.size(); ++i) {
-		levelGenerator->getZone(0, 0).cities[i].update();
+	for (int i = 0; i < _levelGenerator->getZone(0, 0).cities.size(); ++i) {
+		_levelGenerator->getZone(0, 0).cities[i].update();
 	}
 	if (enemySpawnTimers.size() > 0) {
 		for (int i = 0; i < enemySpawnTimers.size(); i++) {

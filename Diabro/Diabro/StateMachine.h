@@ -22,8 +22,6 @@ public:
 
 	void update();
 
-	void collide();
-
 private:
 	std::string _currentState;
 	std::string _previous;

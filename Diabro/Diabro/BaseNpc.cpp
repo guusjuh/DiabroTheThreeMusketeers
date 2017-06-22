@@ -31,7 +31,7 @@ BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogr
 }
 
 void BaseNpc::collide(){
-	stateMachine.collide();
+	//stateMachine.collide();
 }
 
 /// <summary>
@@ -82,7 +82,7 @@ void BaseNpc::rotatePivot(Ogre::Vector3 pRotationDegrees) {
 /// </summary>
 void BaseNpc::detectPlayer()
 {
-	if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _noticeDistance) {
+	if (getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) < _noticeDistance) {
 		_playerDetected = true;
 	}
 	else {
@@ -121,7 +121,7 @@ void BaseNpc::walkTo(Ogre::Vector3 targetPos)
 /// <param name="targetPos">The target position.</param>
 void BaseNpc::calculateAStarWeighted(Ogre::Vector3 targetPos) {
 	//get the zone from the levelmanager
-	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
+	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZonePointer(0, 0);
 
 	//get scale 
 	int scale = _myCity->Scalar() / _myCity->gridScalar;
@@ -155,7 +155,7 @@ void BaseNpc::calculateAStarWeighted(Ogre::Vector3 targetPos) {
 	closedList.clear();
 
 	//get the current position of the npc
-	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
+	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
 
 	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z) {
 		//stops method
@@ -254,7 +254,7 @@ void BaseNpc::calculateAStarWeighted(Ogre::Vector3 targetPos) {
 /// <param name="targetPos">The target position.</param>
 void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	//get the zone from the levelmanager
-	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
+	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZonePointer(0, 0);
 
 	//get scale 
 	int scale = _myCity->Scalar() / _myCity->gridScalar;
@@ -288,7 +288,7 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 	closedList.clear();
 
 	//get the current position of the npc
-	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
+	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
 
 	if (currentPos.x == targetPos.x && currentPos.z == targetPos.z) {
 		//stops method
@@ -381,13 +381,13 @@ void BaseNpc::calculateAStar(Ogre::Vector3 targetPos) {
 }
 void BaseNpc::walkToNeighbour(){
 	//get the zoe from the levelmanager
-	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0);
+	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZonePointer(0, 0);
 	//get the pointer to the collisiongrid
 	bool* collisionGrid = zone->getCollisionGrid();
 
 	int scale = _myCity->Scalar() / _myCity->gridScalar;
 
-	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
+	Coordinate currentPos = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(getPosition().x, getPosition().z));
 	Node start = Node(currentPos.x, currentPos.z, 0, 0);
 	std::vector<Coordinate> neighboursPositions = start.getNeighbours(collisionGrid, zone->_width * _myCity->gridScalar, zone->_depth * _myCity->gridScalar);
 
@@ -422,7 +422,7 @@ bool BaseNpc::talk()
 		}
 		else {
 			if (_hasItem && _needToGiveItem) {
-				giveItem(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+				giveItem(GameManager::getSingletonPtr()->getPlayer());
 			}
 			else if (_relevantForAction) {
 				GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgPlayerInfo);

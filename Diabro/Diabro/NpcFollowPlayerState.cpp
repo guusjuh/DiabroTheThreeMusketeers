@@ -11,9 +11,9 @@ NpcFollowPlayerState::~NpcFollowPlayerState()
 }
 
 void NpcFollowPlayerState::Enter(BaseNpc* agent){
-	Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
+	Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getPlayer()->getPosition();
 	Coordinate player = Coordinate(playerPos.x, playerPos.z);
-	player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(player);
+	player = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(player);
 	playerPos.x = player.x;
 	playerPos.z = player.z;
 	agent->calculateAStar(playerPos);
@@ -22,7 +22,7 @@ void NpcFollowPlayerState::Enter(BaseNpc* agent){
 
 void NpcFollowPlayerState::Execute(BaseNpc* agent){
 	//check if state transition is needed
-	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) > agent->getNoticeDistance()) {
+	if (agent->getPosition().distance(GameManager::getSingletonPtr()->getPlayer()->getPosition()) > agent->getNoticeDistance()) {
 		agent->stateMachine.setState("Kidnapped");
 		return;
 	}
@@ -34,9 +34,9 @@ void NpcFollowPlayerState::Execute(BaseNpc* agent){
 
 	if (agent->getPosition().distance(Ogre::Vector3(agent->getGoalPos().x, agent->getPosition().y, agent->getGoalPos().z)) < agent->getSpeed() / 2.0f || agent->getNextPosSize() == 0){
 		int scale = Zone::scalar;
-		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
+		Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getPlayer()->getPosition();
 		Coordinate player = Coordinate(playerPos.x, playerPos.z);
-		player = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(player);
+		player = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(player);
 		playerPos.x = player.x;
 		playerPos.z = player.z;
 		agent->calculateAStar(playerPos);

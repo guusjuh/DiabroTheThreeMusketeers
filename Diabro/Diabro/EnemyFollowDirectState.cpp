@@ -1,40 +1,24 @@
 #include "EnemyFollowDirectState.h"
 #include "GameManager.h"
 
-EnemyFollowDirectState::EnemyFollowDirectState()
-{
+/// <summary>
+/// Executes this state.
+/// </summary>
+/// <param name="agent">The agent.</param>
+void EnemyFollowDirectState::Execute(BaseNpc* agent) {
+	 _playerPos = GameManager::getSingletonPtr()->getPlayer()->getPosition();
 
-}
-
-EnemyFollowDirectState::~EnemyFollowDirectState()
-{
-
-}
-
-void EnemyFollowDirectState::Enter(BaseNpc* agent){
-
-}
-
-void EnemyFollowDirectState::Execute(BaseNpc* agent){
-	Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
-
-	//check if state transition is needed
-	if (agent->getPosition().distance(playerPos) > 250) {
+	// if the enemy is too far away to be in this state, go back to following the player with A*
+	if (agent->getPosition().distance(_playerPos) >  Zone::scalar / 2.0f) {
 		agent->stateMachine.setState("FollowAStar");
 		return;
 	}
-
-	if (agent->getPosition().distance(playerPos) < agent->getAttackDistance()) {
+	// else if, the enemy is close enough to attack
+	else if (agent->getPosition().distance(_playerPos) < agent->getAttackDistance()) {
 		agent->stateMachine.setState("Attack");
 		return;
 	}
 
-	agent->walkTo(playerPos);
-}
-
-void EnemyFollowDirectState::Exit(BaseNpc* agent){
-}
-
-void EnemyFollowDirectState::Collide(BaseNpc* agent){
-	agent->stateMachine.setState("Relative");
+	// make the agent walk to the player
+	agent->walkTo(_playerPos);
 }

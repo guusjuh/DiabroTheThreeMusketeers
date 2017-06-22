@@ -20,6 +20,7 @@ public:
 	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int);
 	~BasicEnemy() {}
 
+	void collide() override;
 	void update(Ogre::Real) override;
 	void die() override;
 	void updateBar(bool val) { _updateBar = val; }

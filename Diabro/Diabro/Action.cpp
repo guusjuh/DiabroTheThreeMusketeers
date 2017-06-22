@@ -85,8 +85,8 @@ void Action::abandon() {
 		_concreteContent[i].first->setRelevantForAction(false);
 
 		// set variables regarding items so that next actions cannot be completed
-		if (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->hasItem()) {
-			GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->resetItem();
+		if (GameManager::getSingletonPtr()->getPlayer()->hasItem()) {
+			GameManager::getSingletonPtr()->getPlayer()->resetItem();
 		}
 
 		if (_concreteContent[i].first->getType() == EnemyQC) {

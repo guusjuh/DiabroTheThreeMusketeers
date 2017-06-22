@@ -240,7 +240,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		return true;
 	}
 
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
+	Ogre::Vector3 dirVec = getPlayer()->getDirVector();
 
 	switch (pKE.key)
 	{
@@ -278,16 +278,16 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 
 	case OIS::KC_E:
-		_levelManager->getPlayer()->interactionTriggered();
+		getPlayer()->interactionTriggered();
 		break;
 
 	case OIS::KC_LSHIFT:
-		_levelManager->getPlayer()->setRunning(true);
+		getPlayer()->setRunning(true);
 		break;
 
 	case OIS::KC_SPACE:
-		if(_levelManager->getPlayer()->isInDialog()) {
-			_levelManager->getPlayer()->dialogTriggered();
+		if(getPlayer()->isInDialog()) {
+			getPlayer()->dialogTriggered();
 		}
 		break;
 
@@ -302,7 +302,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 	}
 
-	_levelManager->playerScript->setDirVector(dirVec);
+	getPlayer()->setDirVector(dirVec);
 	return true;
 }
 
@@ -315,7 +315,7 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
 	if (currentState != InGame && currentState != Paused) return false;
 
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
+	Ogre::Vector3 dirVec = getPlayer()->getDirVector();
 
 	switch (pKE.key)
 	{
@@ -340,14 +340,14 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 		break;
 
 	case OIS::KC_LSHIFT:
-		_levelManager->getPlayer()->setRunning(false);
+		getPlayer()->setRunning(false);
 		break;
 
 	default:
 		break;
 	}
 
-	_levelManager->playerScript->setDirVector(dirVec);
+	getPlayer()->setDirVector(dirVec);
 	return true;
 }
 
@@ -360,11 +360,11 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 {
 	if (currentState == Paused) return false;
 
-	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * pME.state.Y.rel);
+	Ogre::Degree rotX = Ogre::Degree(-getPlayer()->getRotationspeed()/2 * pME.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
 
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
+	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-getPlayer()->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
 
 	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
 	{
@@ -400,7 +400,7 @@ bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID p
 	switch (pID)
 	{
 	case OIS::MB_Left:
-		_levelManager->playerScript->lightAttack();
+		getPlayer()->lightAttack();
 		break;
 	default:
 		break;

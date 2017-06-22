@@ -30,7 +30,7 @@ parentId(parentId), x(x), y(y)
 		std::vector<Character*> hostileNpcs = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 		for (size_t i = 0; i < hostileNpcs.size(); i++)
 		{
-			Coordinate npcPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(hostileNpcs[i]->getPosition().x, hostileNpcs[i]->getPosition().z));
+			Coordinate npcPos = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(hostileNpcs[i]->getPosition().x, hostileNpcs[i]->getPosition().z));
 			if (npcPos.x == x && npcPos.z == y){
 				weight += 10;
 			}
@@ -38,7 +38,7 @@ parentId(parentId), x(x), y(y)
 				std::vector<Coordinate> nextPositions = ((BaseNpc*)hostileNpcs[i])->getNextPosList();
 				for (size_t j = 0; j < nextPositions.size(); j++)
 				{
-					Coordinate nextPos = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getCollisionGridPosition(Coordinate(nextPositions[j].x, nextPositions[j].z));
+					Coordinate nextPos = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(nextPositions[j].x, nextPositions[j].z));
 					if (nextPos.x == x && nextPos.z == y){
 						weight += 10;
 					}

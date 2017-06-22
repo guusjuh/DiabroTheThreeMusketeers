@@ -15,7 +15,7 @@ void EnemyWalkToPointNearPlayerState::Enter(BaseNpc* agent){
 }
 
 void EnemyWalkToPointNearPlayerState::Execute(BaseNpc* agent){
-	Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition() + relative;
+	Ogre::Vector3 playerPos = GameManager::getSingletonPtr()->getPlayer()->getPosition() + relative;
 
 	//check if state transition is needed
 	if (agent->getPosition().distance(playerPos) > 250) {
@@ -32,10 +32,6 @@ void EnemyWalkToPointNearPlayerState::Execute(BaseNpc* agent){
 }
 
 void EnemyWalkToPointNearPlayerState::Exit(BaseNpc* agent){
-}
-
-void EnemyWalkToPointNearPlayerState::Collide(BaseNpc* agent){
-	//calculateRelativePoint();
 }
 
 void EnemyWalkToPointNearPlayerState::calculateRelativePoint(){

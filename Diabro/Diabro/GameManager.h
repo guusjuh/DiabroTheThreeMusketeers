@@ -84,6 +84,7 @@ public:
 	QuestManager* getQuestManager(void) { return _questManager; }
 	SoundManager* getSoundManager(void) { return _soundManager; }
 	DialogManager* getDialogManager(void) { return _dialogManager; }
+	Player* getPlayer() { return getLevelManager()->getPlayer(); }
 
 	int getRandomInRange(int pLO, int pHI) {
 		if (pHI == 0) return 0;

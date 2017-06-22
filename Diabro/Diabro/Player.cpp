@@ -177,10 +177,10 @@ void Player::update(Ogre::Real pDeltaTime)
 	if (_inDialog) return;
 
 	// set epic music when close to sis
-	if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getEndCity()->inThisCity(getPosition())) {
+	if (GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getEndCity()->inThisCity(getPosition())) {
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom();
 		// if player reached the end 
-		if (GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getDistToSis(getPosition()) < _noticeDistance) {
+		if (GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getDistToSis(getPosition()) < _noticeDistance) {
 			setSisterNearby(true);
 		}
 		else {
@@ -214,15 +214,15 @@ void Player::update(Ogre::Real pDeltaTime)
 	}
 
 	Coordinate position = Coordinate(getPosition().x / Zone::scalar + 0.25f, getPosition().z / Zone::scalar + 0.25f);
-	for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0,0).cities.size(); i++)
+	for (int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZone(0,0).cities.size(); i++)
 	{
-		City city = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i];
+		City city = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZone(0, 0).cities[i];
 		bool inCity = city.inCity(position);
 		if (inCity)
 		{
 			if (curCityId == -1)
 			{
-				curCityId = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].ID();
+				curCityId = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZone(0, 0).cities[i].ID();
 				std::string cName = city.getName();
 				GameManager::getSingletonPtr()->getUIManager()->showHUDText("Welcome to " + cName, 2.5f);
 			}

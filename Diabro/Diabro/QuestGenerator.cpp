@@ -71,7 +71,7 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 		possibleStrategies[randomRoll]->getNameQuest(), possibleStrategies[randomRoll]->getDialog(), possibleStrategies[randomRoll]->getMotivation(),
 		newActions, possibleStrategies[randomRoll]->getRarityPref());
 
-	float healthReward = (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getMaxHealth() / 100) * 10;
+	float healthReward = (GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100) * 10;
 	PlayerUpgradeType upgradeReward = generateRandomUpgrade(); 
 
 	// assign values to the quest
@@ -195,7 +195,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 
 
 					do{
-						chosenCity = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0)->getRandomCity(CityRT);
+						chosenCity = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZonePointer(0, 0)->getRandomCity(CityRT);
 					} while (chosenCity->ID() == notWantedCityID);
 
 					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, cities));
@@ -245,7 +245,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 					}
 
 					do {
-						chosenCity = GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZonePointer(0, 0)->getRandomCity(HideoutRT);
+						chosenCity = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZonePointer(0, 0)->getRandomCity(HideoutRT);
 					} while (chosenCity->ID() == notWantedCityID);
 
 					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
@@ -340,9 +340,9 @@ BasicEnemy* QuestGenerator::getRandomEnemy() {
 City* QuestGenerator::getRandomCity(RoomType type) {
 	std::vector<City*> possCities;
 
-	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities.size(); ++i) {
-		if(GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i].TypeFlag() == type) {
-			possCities.push_back(&GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->getZone(0, 0).cities[i]);
+	for(int i = 0; i < GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZone(0, 0).cities.size(); ++i) {
+		if(GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZone(0, 0).cities[i].TypeFlag() == type) {
+			possCities.push_back(&GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZone(0, 0).cities[i]);
 		}
 	}
 
