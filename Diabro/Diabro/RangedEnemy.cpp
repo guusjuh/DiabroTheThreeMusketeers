@@ -29,7 +29,7 @@ RangedEnemy::RangedEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationN
 }
 
 bool RangedEnemy::lightAttack() {
-	BaseEnemy::lightAttack();
+	if (!BaseEnemy::lightAttack()) return false;
 
 	Ogre::SceneNode* bulletNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 	Ogre::Entity* bulletEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
