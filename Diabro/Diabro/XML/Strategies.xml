@@ -131,7 +131,7 @@
 		</Action>
 		<Action>
 			<ID>5</ID>
-			<Dialog>In the remains of your enemy, you found 'QuestItemQC1'.</Dialog>
+			<Dialog>In the enemy's remains, you found 'QuestItemQC1'.</Dialog>
 			<Content>1</Content>
 			<Content>1</Content>
 		</Action>

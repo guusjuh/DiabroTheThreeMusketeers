@@ -369,7 +369,7 @@ template container BorderPanel(UI/HealthUpgradeIcon)
 			metrics_mode pixels
 			horz_align right
 			vert_align bottom
-			left -11
+			left -16
 			top -16
 			font_name UI/Value
 			char_height 20
@@ -413,7 +413,7 @@ template container BorderPanel(UI/DamageUpgradeIcon)
 			metrics_mode pixels
 			horz_align right
 			vert_align bottom
-			left -11
+			left -16
 			top -16
 			font_name UI/Value
 			char_height 20
