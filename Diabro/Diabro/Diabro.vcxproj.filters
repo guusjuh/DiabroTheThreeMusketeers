@@ -55,9 +55,6 @@
     <ClCompile Include="BaseNpc.cpp">
       <Filter>Sources\Characters</Filter>
     </ClCompile>
-    <ClCompile Include="BasicEnemy.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Sources\Finite State Machines</Filter>
     </ClCompile>
@@ -109,9 +106,6 @@
     <ClCompile Include="QuestItem.cpp">
       <Filter>Sources\Quest</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyAttackState.cpp">
-      <Filter>Sources\Finite State Machines\States</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyMoveAroundCenterState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
@@ -156,6 +150,30 @@
     </ClCompile>
     <ClCompile Include="EnemyChargeState.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>Sources\Characters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="MeleeEnemy.cpp">
+      <Filter>Sources\Characters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="RangedEnemy.cpp">
+      <Filter>Sources\Characters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Sources\Characters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMeleeAttackState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyRangedAttackState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyIdleState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Sources\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +230,6 @@
       <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="BaseNpc.h">
-      <Filter>Headers\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicEnemy.h">
       <Filter>Headers\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
@@ -292,9 +307,6 @@
     <ClInclude Include="Coordinate.h">
       <Filter>Headers\LevelGeneration</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyAttackState.h">
-      <Filter>Headers\Finite State Machines\States</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyMoveAroundCenterState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
     </ClInclude>
@@ -339,6 +351,30 @@
     </ClInclude>
     <ClInclude Include="EnemyChargeState.h">
       <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MeleeEnemy.h">
+      <Filter>Headers\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="RangedEnemy.h">
+      <Filter>Headers\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>Headers\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Headers\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMeleeAttackState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyRangedAttackState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyIdleState.h">
+      <Filter>Headers\Finite State Machines\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Headers\Particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -462,6 +498,18 @@
     </Filter>
     <Filter Include="Sources\Characters\A%2a">
       <UniqueIdentifier>{9d128f46-6a99-440a-a65d-f6cc18eefd7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Characters\Enemies">
+      <UniqueIdentifier>{4d67512b-5f84-4d84-a375-69f8f5575110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Characters\Enemies">
+      <UniqueIdentifier>{4dcff531-10fe-4b97-93e5-ac3f6b57644f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Particles">
+      <UniqueIdentifier>{6698ee61-c450-4326-b678-93f041907884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Particles">
+      <UniqueIdentifier>{7174baa2-b762-423d-a64f-3d5ba7b85f11}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

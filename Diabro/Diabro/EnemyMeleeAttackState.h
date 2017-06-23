@@ -8,11 +8,11 @@
 /// In this state an enemy performs its attack. 
 /// </summary>
 /// <seealso cref="State{Character}" />
-class EnemyAttackState : public State<BaseNpc>
+class EnemyMeleeAttackState : public State<BaseNpc>
 {
 public:
-	EnemyAttackState(){}
-	~EnemyAttackState(){}
+	EnemyMeleeAttackState(){}
+	~EnemyMeleeAttackState(){}
 
 	void Execute(BaseNpc* agent) override;
 };

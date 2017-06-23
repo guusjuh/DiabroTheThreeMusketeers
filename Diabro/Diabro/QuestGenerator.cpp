@@ -147,7 +147,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 				}
 				// else, a new npc has to be found is a different city
 				else {
-					BasicEnemy* chosenEnemy = getRandomEnemy();
+					BaseEnemy* chosenEnemy = getRandomEnemy();
 					concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenEnemy, enemies));
 					contentIDs.push_back(std::pair<IQuestContent*, int>(chosenEnemy, enemies));
 					enemies++;
@@ -218,7 +218,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 					if (j > 0) {
 						for (int k = 0; k < j; ++k) {
 							if (thisAction._requiredContent[k].first == EnemyQC) {
-								BasicEnemy* temp = (BasicEnemy*)concreteActionContent[k].first;
+								BaseEnemy* temp = (BaseEnemy*)concreteActionContent[k].first;
 								chosenCity = temp->getMyCity();
 								concreteActionContent.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
 								contentIDs.push_back(std::pair<IQuestContent*, int>(chosenCity, hideouts));
@@ -238,7 +238,7 @@ Quest* QuestGenerator::generateConcreteQuest(Quest* pQuest, Npc* pSourceNpc) {
 					if (i != 0) {
 						for (int k = 0; k < actions[i - 1]._concreteContent.size(); ++k) {
 							if (actions[i - 1]._concreteContent[k].first->getType() == EnemyQC || actions[i - 1]._concreteContent[k].first->getType() == HideOutQC) {
-								notWantedCityID = actions[i - 1]._concreteContent[k].first->getType() == EnemyQC ? ((BasicEnemy*)(actions[i - 1]._concreteContent[k].first))->getMyCity()->ID()
+								notWantedCityID = actions[i - 1]._concreteContent[k].first->getType() == EnemyQC ? ((BaseEnemy*)(actions[i - 1]._concreteContent[k].first))->getMyCity()->ID()
 									: ((City*)actions[i - 1]._concreteContent[k].first)->ID();
 							}
 						}
@@ -321,13 +321,13 @@ Npc* QuestGenerator::getRandomNPC(Npc* pSourceNpc) {
 	return randomNpc;
 }
 
-BasicEnemy* QuestGenerator::getRandomEnemy() {
-	BasicEnemy* randomEnemy;
-	std::vector<BasicEnemy*> allEnemies;
+BaseEnemy* QuestGenerator::getRandomEnemy() {
+	BaseEnemy* randomEnemy;
+	std::vector<BaseEnemy*> allEnemies;
 
 	// cast all npcs to the NPC class (they are stored as characters)
 	for (int k = 0; k < GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs().size(); ++k) {
-		allEnemies.push_back((BasicEnemy*)(GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs()[k]));
+		allEnemies.push_back((BaseEnemy*)(GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs()[k]));
 	}
 
 	// do a random roll to chose an enemy
@@ -395,7 +395,7 @@ std::string QuestGenerator::getFilledTemplate(std::string templateString, std::v
 			replaceString = ((Npc*)thisTemplate.first)->_name;
 			break;
 		case EnemyQC:
-			replaceString = ((BasicEnemy*)thisTemplate.first)->getName();
+			replaceString = ((BaseEnemy*)thisTemplate.first)->getName();
 			break;
 		case TownQC:
 			replaceString = ((City*)thisTemplate.first)->getName();

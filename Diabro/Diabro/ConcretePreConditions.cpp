@@ -3,7 +3,7 @@
 #include "City.h"
 #include "Debug.h"
 #include "Npc.h"
-#include "BasicEnemy.h"
+#include "BaseEnemy.h"
 #include "GameManager.h"
 
 void PreKnowWhereToGo::start() {
@@ -44,8 +44,8 @@ void PreSomethingThere::start() {
 		((Npc*)character)->needToGiveItem();
 	}
 	else {
-		((BasicEnemy*)character)->recieveItem();
-		((BasicEnemy*)character)->needToGiveItem();
+		((BaseEnemy*)character)->recieveItem();
+		((BaseEnemy*)character)->needToGiveItem();
 	}
 
 	character->setRelevantForAction(true);

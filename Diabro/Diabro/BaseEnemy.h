@@ -2,51 +2,47 @@
 #define BASE_ENEMY_H_
 
 #include "BaseNpc.h"
-#include "StateMachine.h"
+#include "EnemyEquipment.h"
+
 #include "EnemyFollowAStarState.h"
 #include "EnemyFollowDirectState.h"
-#include "EnemyAttackState.h"
+#include "EnemyMeleeAttackState.h"
 #include "EnemyMoveAroundCenterState.h"
 #include "EnemyWalkToPointNearPlayerState.h"
 #include "EnemyChargeState.h"
-#include "EnemyEquipment.h"
 
 /// <summary>
 /// The basic class for an enemy.
 /// </summary>
 /// <seealso cref="BaseNpc" />
-class BasicEnemy : public BaseNpc
+class BaseEnemy : public BaseNpc
 {
 public:
-	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int);
-	~BasicEnemy() {}
+	BaseEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*, int);
+	~BaseEnemy() {}
 
-	void collide() override;
-	void update(Ogre::Real) override;
+	virtual void collide() override;
+	virtual void update(Ogre::Real) override;
 	void die() override;
+	virtual bool lightAttack() override;
 	void updateBar(bool val) { _updateBar = val; }
 
 	QuestContent getType() override { return EnemyQC; }
-	bool lightAttack() override;
-
 	std::string getName() { return name; }
 
-	bool isDead() { return _isDead; }
-private:
+protected:
+	bool _initialized;
 	bool _updateBar;
 
+	int healthUpgrades, damageUpgrades, noticeDistUpgrades;
+	IEnemyEquipment* equipment;
 	void assignUpgrades(int level);
 	void upgradeEquipment(EnemyUpgradeType upgrade);
-	IEnemyEquipment* equipment;
+	UpgradeModifierType getMostUsedUpgrade();
 
-	int healthUpgrades, damageUpgrades, noticeDistUpgrades;
-	std::vector<std::string> getNameOptions();
 	std::string name;
-
-	bool _initialized;
-
-	bool _isDead;
-
+	std::vector<std::string> getNameOptions();
+	
 	static const int LOW_HP;
 	static const int HIGH_HP;
 	static const int LOW_DMG;

@@ -134,19 +134,19 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 	int collisionRotation = 65;
 
 	// left and right
-	if (!(zone->getCollisionGrid()[left.x + left.z * zone->_width * City::gridScalar]) ||
-		!(zone->getCollisionGrid()[right.x + right.z * zone->_width * City::gridScalar])){
+	if (!(zone->getCollisionGrid()[left.x + left.z * zone->getResolution().x * City::gridScalar]) ||
+		!(zone->getCollisionGrid()[right.x + right.z * zone->getResolution().x * City::gridScalar])){
 		newDirection.x = 0;
 	}
 
 	// up and down
-	else if (!(zone->getCollisionGrid()[behind.x + behind.z * zone->_width * City::gridScalar]) ||
-			!(zone->getCollisionGrid()[front.x + front.z * zone->_width * City::gridScalar])){
+	else if (!(zone->getCollisionGrid()[behind.x + behind.z * zone->getResolution().x * City::gridScalar]) ||
+		!(zone->getCollisionGrid()[front.x + front.z * zone->getResolution().x * City::gridScalar])){
 		newDirection.z = 0;
 	}
 
 	//whiskers
-	else if (!(zone->getCollisionGrid()[topLeft.x + topLeft.z * zone->_width * City::gridScalar])){
+	else if (!(zone->getCollisionGrid()[topLeft.x + topLeft.z * zone->getResolution().x * City::gridScalar])){
 		if (newDirection.x < -0.5f){
 			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
@@ -155,7 +155,7 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 			newDirection = Ogre::Quaternion(Ogre::Degree(-collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 	}
-	else if (!(zone->getCollisionGrid()[topRight.x + topRight.z * zone->_width * City::gridScalar])){
+	else if (!(zone->getCollisionGrid()[topRight.x + topRight.z * zone->getResolution().x * City::gridScalar])){
 		if (newDirection.x < -0.5f){
 			newDirection = Ogre::Quaternion(Ogre::Degree(-collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
@@ -164,7 +164,7 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 	}
-	else if (!(zone->getCollisionGrid()[bottomLeft.x + bottomLeft.z * zone->_width * City::gridScalar])){
+	else if (!(zone->getCollisionGrid()[bottomLeft.x + bottomLeft.z * zone->getResolution().x * City::gridScalar])){
 		if (newDirection.x > 0.5f){
 			newDirection = Ogre::Quaternion(Ogre::Degree(-collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
@@ -173,7 +173,7 @@ void Character::correctRotation(Ogre::Vector3 pos, Zone* zone, int range){
 			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
 	}
-	else if (!(zone->getCollisionGrid()[bottomRight.x + bottomRight.z * zone->_width * City::gridScalar])){
+	else if (!(zone->getCollisionGrid()[bottomRight.x + bottomRight.z * zone->getResolution().x * City::gridScalar])){
 		if (newDirection.x > 0.5f){
 			newDirection = Ogre::Quaternion(Ogre::Degree(collisionRotation), Ogre::Vector3::UNIT_Y) * newDirection;
 		}
@@ -203,14 +203,14 @@ bool Character::collidesWithGrid(Ogre::Vector3 pos, Zone* zone, int range){
 	Coordinate temp6 = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x - cornerRange, pos.z + cornerRange));
 	Coordinate temp7 = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getCollisionGridPosition(Coordinate(pos.x + cornerRange, pos.z + cornerRange));
 
-	return(zone->getCollisionGrid()[temp0.x + temp0.z * zone->_width * City::gridScalar] &&
-		zone->getCollisionGrid()[temp1.x + temp1.z * zone->_width * City::gridScalar] &&
-		zone->getCollisionGrid()[temp2.x + temp2.z * zone->_width * City::gridScalar] &&
-		zone->getCollisionGrid()[temp3.x + temp3.z * zone->_width * City::gridScalar] &&
-		zone->getCollisionGrid()[temp4.x + temp4.z * zone->_width * City::gridScalar] &&
-		zone->getCollisionGrid()[temp5.x + temp5.z * zone->_width * City::gridScalar] &&
-		zone->getCollisionGrid()[temp6.x + temp6.z * zone->_width * City::gridScalar] &&
-		zone->getCollisionGrid()[temp7.x + temp7.z * zone->_width * City::gridScalar]);
+	return(zone->getCollisionGrid()[temp0.x + temp0.z * zone->getResolution().x * City::gridScalar] &&
+		zone->getCollisionGrid()[temp1.x + temp1.z * zone->getResolution().x * City::gridScalar] &&
+		zone->getCollisionGrid()[temp2.x + temp2.z * zone->getResolution().x * City::gridScalar] &&
+		zone->getCollisionGrid()[temp3.x + temp3.z * zone->getResolution().x * City::gridScalar] &&
+		zone->getCollisionGrid()[temp4.x + temp4.z * zone->getResolution().x * City::gridScalar] &&
+		zone->getCollisionGrid()[temp5.x + temp5.z * zone->getResolution().x * City::gridScalar] &&
+		zone->getCollisionGrid()[temp6.x + temp6.z * zone->getResolution().x * City::gridScalar] &&
+		zone->getCollisionGrid()[temp7.x + temp7.z * zone->getResolution().x * City::gridScalar]);
 }
 
 //TODO: these methods should be generic
@@ -283,18 +283,20 @@ bool Character::adjustHealth(float pAdjust)
 	return true;
 }
 
+void Character::die() {
+	int amount = GameManager::getSingletonPtr()->getRandomInRange(12, 16);
+
+	Particle::castParticles(amount, getPosition(), "uv_sphere.mesh", "InGame/ParticleDead",
+		0.05f, 0.07f, 300, 450, 0.3f, 0.4f, 260.0f);
+}
+
 /// <summary>
 /// Character dies.
 /// </summary>
-void Character::die()
+void Character::destroy()
 {
-	_myNode->setVisible(false);
-
-	//TODO: clean up the memory.. 
-
-	//TODO: actually destroy the node and its children
-	//_myNode->removeAndDestroyAllChildren();
-	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
+	_myNode->removeAndDestroyAllChildren();
+	GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
 }
 
 void Character::recieveItem() {

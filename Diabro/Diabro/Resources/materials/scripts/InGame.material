@@ -363,6 +363,49 @@ material InGame/RedDotEnemy
    }
 }
 
+material InGame/Bullet
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/bullet.jpg
+         }
+      }
+   }
+}
+
+material InGame/ParticleBullet
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture Enemies/particlebullet.jpg
+         }
+      }
+   }
+}
+
+
+material InGame/ParticleDead
+{
+   technique
+   {
+      pass
+      {        
+         texture_unit
+         {
+			texture particledead.jpg
+         }
+      }
+   }
+}
+
 material InGame/HasQuest
 {
    technique

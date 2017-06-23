@@ -4,6 +4,8 @@
 #include "GameManager.h"
 #include "math.h"
 #include "Debug.h"
+#include "MeleeEnemy.h"
+#include "RangedEnemy.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelGenerator"/> class.
@@ -355,8 +357,15 @@ void LevelGenerator::spawnEnemy(City* pCity, int nAmount) {
 		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
 		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		rotationNode->attachObject(instanceEntity);
-		BasicEnemy* instanceScript = new BasicEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
-	
+		BaseEnemy* instanceScript;
+		int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(0, 2);
+		if (randomRoll == 0) {
+			instanceScript = new MeleeEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
+		}
+		else {
+			instanceScript = new RangedEnemy(instanceNode, rotationNode, instanceEntity, pCity, GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel());
+		}
+		
 		// loop to ensure that the enemy doesn't collide
 		while(instanceScript->closestDistanceToNpc(enemyPos) < instanceScript->getRadius() * 2) {
 			enemyCoord = pCity->getNpcPosition();

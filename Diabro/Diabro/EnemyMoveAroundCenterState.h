@@ -11,7 +11,9 @@
 class EnemyMoveAroundCenterState: public State<BaseNpc>
 {
 public:
-	EnemyMoveAroundCenterState() {}
+	EnemyMoveAroundCenterState(std::string next) {
+		nextState = next;
+	}
 	~EnemyMoveAroundCenterState() {}
 
 	void Enter(BaseNpc* agent) override;
@@ -20,5 +22,7 @@ public:
 private:
 	int _cornerId;
 	void setNextRoute(BaseNpc* agent);
+
+	std::string nextState;
 };
 #endif

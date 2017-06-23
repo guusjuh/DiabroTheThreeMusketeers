@@ -2,7 +2,7 @@
 #define QUEST_GENERATOR
 #include "Quest.h"
 #include "Npc.h"
-class BasicEnemy;
+class BaseEnemy;
 
 /// <summary>
 /// The generator for new quests. 
@@ -20,7 +20,7 @@ private:
 
 	std::pair<IQuestContent*, int> findTypeAndID(std::vector<std::pair<IQuestContent*, int>> searchSpace, QuestContent type, int id);
 	Npc* getRandomNPC(Npc* pSourceNpc);
-	BasicEnemy* getRandomEnemy();
+	BaseEnemy* getRandomEnemy();
 	City* getRandomCity(RoomType type);
 
 	PlayerUpgradeType generateRandomUpgrade();

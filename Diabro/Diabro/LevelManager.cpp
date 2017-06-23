@@ -8,7 +8,8 @@
 /// This class is created by the <see cref="GameManager" /> and contains all level information
 /// like characters and the environment.
 /// </summary>
-LevelManager::LevelManager() : playerScript(0), _levelNode(0), _camNode(0) { }
+LevelManager::LevelManager() : playerScript(0), _levelNode(0), _camNode(0), 
+	_friendlyNpcScripts(), _hostileNpcScripts(), _bulletScripts(), _particleScripts() { }
 
 /// <summary>
 /// Initializes this the level by setting the camera, player, NPC's and surroundings.
@@ -84,6 +85,14 @@ void LevelManager::generateNewDungeon() {
 		delete _hostileNpcScripts[0];
 		detachHostileNPC(0);
 	}
+	while (_bulletScripts.size() > 0) {
+		delete _bulletScripts[0];
+		detachBullet(0);
+	}
+	while (_particleScripts.size() > 0) {
+		delete _particleScripts[0];
+		detachParticle(0);
+	}
 
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
@@ -123,10 +132,32 @@ int LevelManager::subscribeFriendlyNPC(Npc* friendly) {
 /// </summary>
 /// <param name="hostile">The hostile.</param>
 /// <returns></returns>
-int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
+int LevelManager::subscribeHostileNPC(BaseEnemy* hostile) {
 	_hostileNpcScripts.push_back(hostile);
 
 	return _hostileNpcScripts.size() - 1;
+}
+
+/// <summary>
+/// Subscribes a bullet.
+/// </summary>
+/// <param name="hostile">The bullet.</param>
+/// <returns></returns>
+int LevelManager::subscribeBullet(Bullet* bullet) {
+	_bulletScripts.push_back(bullet);
+
+	return _bulletScripts.size() - 1;
+}
+
+/// <summary>
+/// Subscribes a particle.
+/// </summary>
+/// <param name="hostile">The bullet.</param>
+/// <returns></returns>
+int LevelManager::subscribeParticle(Particle* particle) {
+	_particleScripts.push_back(particle);
+
+	return _particleScripts.size() - 1;
 }
 
 void LevelManager::spawnEnemy(City *pCity, bool pInstant) {
@@ -165,6 +196,30 @@ void LevelManager::detachHostileNPC(int id) {
 }
 
 /// <summary>
+/// Detaches the bullet.
+/// </summary>
+/// <param name="id">The identifier.</param>
+void LevelManager::detachBullet(int id) {
+	_bulletScripts.erase(_bulletScripts.begin() + id);
+	//nextFloor id values
+	for (std::vector<Bullet*>::iterator it = _bulletScripts.begin() + id; it < _bulletScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+}
+
+/// <summary>
+/// Detaches the hostile NPC.
+/// </summary>
+/// <param name="id">The identifier.</param>
+void LevelManager::detachParticle(int id) {
+	_particleScripts.erase(_particleScripts.begin() + id);
+	//nextFloor id values
+	for (std::vector<Particle*>::iterator it = _particleScripts.begin() + id; it < _particleScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+}
+
+/// <summary>
 /// Updates the frame based on the specified fe.
 /// </summary>
 /// <param name="fe">The frame event.</param>
@@ -185,6 +240,16 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	for (int i = 0; i < _hostileNpcScripts.size(); i++)
 	{
 		_hostileNpcScripts[i]->update(deltaTime);
+	}
+
+	for (int i = 0; i < _bulletScripts.size(); i++)
+	{
+		_bulletScripts[i]->update(deltaTime);
+	}
+
+	for (int i = 0; i < _particleScripts.size(); i++)
+	{
+		_particleScripts[i]->update(deltaTime);
 	}
 
 	for (int i = 0; i < _levelGenerator->getZone(0, 0).cities.size(); ++i) {

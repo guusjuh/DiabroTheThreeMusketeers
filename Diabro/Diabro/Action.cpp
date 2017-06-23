@@ -90,8 +90,8 @@ void Action::abandon() {
 		}
 
 		if (_concreteContent[i].first->getType() == EnemyQC) {
-			if (((BasicEnemy*)_concreteContent[i].first)->hasItem()) {
-				((BasicEnemy*)_concreteContent[i].first)->resetItem();
+			if (((BaseEnemy*)_concreteContent[i].first)->hasItem()) {
+				((BaseEnemy*)_concreteContent[i].first)->resetItem();
 			}
 		}
 		else if (_concreteContent[i].first->getType() == NPCQC) {
@@ -208,16 +208,16 @@ void Action::setPreConditionsContent() {
 		case SomebodyThere:
 			for (int j = 0; j < _concreteContent.size(); ++j) {
 				if (_concreteContent[j].first->getType() == EnemyQC) {
-					if(_concreteContent[j].first != nullptr && !((BasicEnemy*)_concreteContent[j].first)->isDead()) {
+					if(_concreteContent[j].first != nullptr && !((BaseEnemy*)_concreteContent[j].first)->isDead()) {
 						((PreSomebodyThere*)it->second)->characters.push_back(_concreteContent[j].first);
 					}
 					else {
-						BasicEnemy* randomEnemy;
-						std::vector<BasicEnemy*> allEnemies;
+						BaseEnemy* randomEnemy;
+						std::vector<BaseEnemy*> allEnemies;
 
 						// cast all npcs to the NPC class (they are stored as characters)
 						for (int k = 0; k < GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs().size(); ++k) {
-							allEnemies.push_back((BasicEnemy*)(GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs()[k]));
+							allEnemies.push_back((BaseEnemy*)(GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs()[k]));
 						}
 
 						// do a random roll to chose an enemy
@@ -239,16 +239,16 @@ void Action::setPreConditionsContent() {
 		case SomethingThere:
 			for (int j = 0; j < _concreteContent.size(); ++j) {
 				if (_concreteContent[j].first->getType() == EnemyQC) {
-					if (_concreteContent[j].first != nullptr && !((BasicEnemy*)_concreteContent[j].first)->isDead()) {
+					if (_concreteContent[j].first != nullptr && !((BaseEnemy*)_concreteContent[j].first)->isDead()) {
 						((PreSomethingThere*)it->second)->character = _concreteContent[j].first;
 					}
 					else {
-						BasicEnemy* randomEnemy;
-						std::vector<BasicEnemy*> allEnemies;
+						BaseEnemy* randomEnemy;
+						std::vector<BaseEnemy*> allEnemies;
 
 						// cast all npcs to the NPC class (they are stored as characters)
 						for (int k = 0; k < GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs().size(); ++k) {
-							allEnemies.push_back((BasicEnemy*)(GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs()[k]));
+							allEnemies.push_back((BaseEnemy*)(GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs()[k]));
 						}
 
 						// do a random roll to chose an enemy

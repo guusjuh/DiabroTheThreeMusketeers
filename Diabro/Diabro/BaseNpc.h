@@ -44,8 +44,11 @@ public:
 	virtual bool talk();
 	void recieveItem() override;
 
-	int _rotationType;
+	bool isDead() { return _isDead; }
+
 protected:
+	bool _isDead;
+
 	std::vector<Coordinate> nextPos;
 	bool _inCurrentQuest;
 
@@ -79,6 +82,8 @@ protected:
 		if (_relevantForAction == val) return;
 
 		IQuestContent::setRelevantForAction(val);
+
+		if (isDead()) return;
 
 		// if you're relevant, set the indicator on with correct color
 		if(_relevantForAction) {
