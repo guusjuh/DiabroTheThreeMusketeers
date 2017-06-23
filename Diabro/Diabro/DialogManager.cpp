@@ -1,10 +1,10 @@
 #include "DialogManager.h"
 #include "GameManager.h"
 
-const std::string DialogManager::instructionStrings[14] = {
+const std::string DialogManager::instructionStrings[15] = {
 	"Did you know you can take a break from all of your adventures? \\nJust press 'P'!",  // pausing
-	"Do you hate squares? \\nI hate squares! \\nYou can kill them by clicking with your left mouse button when you're close to them.", // killing squares
-	"You still didn't figure out how to quest?! \\nIt's easy and you get lots of hints! \\nYellow indicators show who has a quest for you. \\nAnd the green indicator shows the your current goal!", // finding quest goals
+	"We spheres sure hate squares, don't we? \\nI hate squares! \\nYou can kill them by clicking with your left mouse button when you're close to them.", // killing squares
+	"You still didn't figure out how to quest?! \\nIt's easy and you get lots of hints! \\nYellow indicators show which sphere has a quest for you. \\nAnd the green indicator shows the your current goal!", // finding quest goals
 	"Family is the most important thing in the world, don't you think? \\nYour sister is lost?! Go find her, mate!", // family is important, save it
 	"Some quests are so stupid, don't you think so? \\nLuckily you can abandon them by pressing 'Q'.", // abandon quests
 	"Escaping from this cave? \\n'ESC' is the fasted way to escape for sure, but that might not be the kind of escape you need.", // quiting the game
@@ -13,9 +13,10 @@ const std::string DialogManager::instructionStrings[14] = {
 	"You are going to need a bit more health to survive in here.. \\nQuesting is a really good way to get that bit extra you might need! \\nWhen killing an enemy, you also gain a bit of health, but you will probably lose more than you gain.", // healing
 	"Quests are the only way to become stronger. \\nYou should quest a lot!", // quests have rewards
 	"You noticed the heart and sword in the upper right corner of your screen? \\nThose are your upgrades and indicate your health and damage.", // upgrades
-	"You are not the only one becoming stronger! \\nEnemies gain upgrades each floor. You better watch your back!", // enemy upgrades en sterker per floor
+	"You are not the only one becoming stronger! \\nSquares gain upgrades each floor. You better watch your back!", // enemy upgrades en sterker per floor
 	"I want to build a wall, but those squares have to pay for it! \\nWill you vote for me?", // little joke
 	"There are different types of square bastards... \\nTerrible, right? There are rangers and knights. \\nBoth have to be fought differently!"
+	"No no no no... \\nThey are squares, we are spheres. That's completely different!"
 };
 
 const std::string DialogManager::cantStartQuestString = "I have a quest, but you cannot start it until you finished your current quest! \\n";

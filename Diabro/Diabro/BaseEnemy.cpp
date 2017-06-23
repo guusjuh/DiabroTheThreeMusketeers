@@ -5,8 +5,8 @@
 #include "EnemyUpgrade.h"
 #include "BaseNpc.h"
 
-const int BaseEnemy::LOW_HP = 5;
-const int BaseEnemy::HIGH_HP = 10;
+const int BaseEnemy::LOW_HP = 2;
+const int BaseEnemy::HIGH_HP = 7;
 const int BaseEnemy::LOW_DMG = 4;
 const int BaseEnemy::HIGH_DMG = 8;
 const int BaseEnemy::LOW_NDIST = 5;
@@ -85,6 +85,8 @@ UpgradeModifierType BaseEnemy::getMostUsedUpgrade() {
 
 		tempEquipment = tempEquipment->getBase();
 	}
+	// remove standard added amount of heath upgrades
+	healthUpgrades = healthUpgrades - GameManager::getSingletonPtr()->getLevelManager()->getCurrentLevel();
 
 	UpgradeModifierType mostUsedUpgrade = None;
 	if (damageUpgrades == 0 && healthUpgrades == 0 && noticeDistUpgrades == 0) {
@@ -109,8 +111,15 @@ UpgradeModifierType BaseEnemy::getMostUsedUpgrade() {
 }
 
 void BaseEnemy::assignUpgrades(int level) {
+	// assign healthupgrades based on level 
+	for (int i = 0; i < level; i++) {
+		// random value between low and high
+		int value = GameManager::getSingletonPtr()->getRandomInRange(LOW_HP, HIGH_HP);
+
+		upgradeEquipment(EnemyUpgradeType(value, Health));
+	}
 	// random amount based on level
-	level = GameManager::getSingletonPtr()->getRandomInRange(level - 2, level + 1);
+	level = GameManager::getSingletonPtr()->getRandomInRange(level - 2, level + 2);
 	if (level < 0) level = 0;
 
 	// set variables used for creation of each upgrade.
