@@ -182,7 +182,7 @@
 	<ID>6</ID>
 	<NameStrat>Check on NPC</NameStrat>
 	<QuestName>Worries about 'NPCQC2'</QuestName>
-	<StartDialog>You lost your little sister? \nI know how it feels to worry about your beloved ones... I don't know how my own sister is doing and with all these squares I'm to scared to leave my city. \nShe is in 'TownQC2', please go check on her.</StartDialog>
+	<StartDialog>You lost your little sister? \nI know how it feels to worry about your beloved ones... I don't know how my kid is doing and with all these squares I'm to scared to leave my city. \nHe is in 'TownQC2', please go check on him.</StartDialog>
 	<NeedType>Serenity</NeedType>
 	<Actions>
 		<Action>
@@ -193,7 +193,7 @@
 		</Action>
 		<Action>
 			<ID>11</ID>
-			<Dialog>I am glad to here she's alright! \nYou deserve a reward, my friend. I would never have dared to leave my city.</Dialog>
+			<Dialog>I am glad to here he's alright! \nYou deserve a reward, my friend. I would never have dared to leave my city.</Dialog>
 			<Content>1</Content>
 			<Content>1</Content>
 		</Action>

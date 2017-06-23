@@ -203,11 +203,9 @@ void City::update() {
 bool City::inThisCity(Ogre::Vector3 worldCoord) {
 	worldCoord += (Zone::scalar / (City::gridScalar*2));
 
-	if(position.x * scalar <= worldCoord.x && position.x * scalar + (width * scalar) >= worldCoord.x &&
-		position.z * scalar <= worldCoord.z && position.z * scalar + (depth * scalar) >= worldCoord.z) {
-		return true;
-	} 
-	return false;
+	Coordinate coord = Coordinate(worldCoord.x / Zone::scalar, worldCoord.z / Zone::scalar);
+
+	return inCity(coord, true);
 }
 
 std::string City::getRandomName(RoomType type) {
@@ -282,11 +280,21 @@ std::string City::getRandomName(RoomType type) {
 
 ///returns whether a (zoneGrid) position is in the current grid
 /// \param position the position to check
-bool City::inCity(Coordinate position)
+bool City::inCity(Coordinate position, bool outerBorders)
 {
-	if (position.x >= this->position.x && position.z >= this->position.z)
+	Coordinate min = this->position;
+	Coordinate max = this->position + Coordinate(width, depth);
+
+	if (outerBorders){
+		min.x--;
+		min.z--;
+		max.x++;
+		max.z++;
+	}
+
+	if (position.x >= min.x && position.z >= min.z)
 	{
-		if (position.x < this->position.x + width && position.z < this->position.z + depth)
+		if (position.x < max.x && position.z < max.z)
 		{
 			return true;
 		}

@@ -77,7 +77,7 @@ public:
 	int Width() { return width; }
 	int Depth() { return depth; }
 	int ID(){ return id; }
-	bool inCity(Coordinate position);
+	bool inCity(Coordinate position, bool outerBorders = false);
 	std::string getColor(){ return color; }
 	void setColor(std::string col) { color = col; }
 	RoomType TypeFlag(){ return typeFlag; }
