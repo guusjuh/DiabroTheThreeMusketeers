@@ -8,7 +8,7 @@
 /// e.g. the in-game and menu UI.
 /// </summary>
 UIManager::UIManager()
-	: _uiNode(0), _playerHealthBarWidget(0), _maxWidthBar(0), _enemyHealthBarWidget(0), _questOn(true), _currentTransparancyScale(3.0f),
+	: _uiNode(0), _playerHealthBarWidget(0), _maxWidthBar(0), _enemyHealthBarWidget(0), _questOn(true), _currentTransparancyScale(3.5f), _maxTransparancyScale(3.5f),
 	_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0), _storyTextOn(false)
 {
 }
@@ -273,7 +273,7 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 
 	_playerHealthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
 
-	_currentTransparancyScale = ((pValue / pMaxValue) * 3.0f) + 1.0f;
+	_currentTransparancyScale = ((pValue / pMaxValue) * (_maxTransparancyScale - 1)) + 1.0f;
 	Debug("", _currentTransparancyScale);
 	_uiElementMgr->showBackdrop("UI/BloodBackdrop");
 	_uiElementMgr->getBackdropLayer()->setScale(_currentTransparancyScale, _currentTransparancyScale);

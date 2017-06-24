@@ -69,6 +69,7 @@ private:
 
 	DiabroUI::Bar*				_playerHealthBarWidget;
 	float						_currentTransparancyScale; // for the backdrop with blood
+	float						_maxTransparancyScale;
 	bool						_enemyBarOn;
 	DiabroUI::Bar*				_enemyHealthBarWidget;
 	Ogre::Real					_maxWidthBar;
