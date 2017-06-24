@@ -1,0 +1,38 @@
+Known Errors
+Error: 01
+	Reproducing the error: 
+		The dungeon generation system is able to take over a minute to connect the separate parts of the dungeon. This can be reproduced by creating dungeons with a high amount of buildings (an example would be having 10 rooms in a 15 by 15 dungeon).
+		Values to have a high likelyhood of reproducing the error:
+		_zoneWidth = 15;
+		_zoneDepth = 15;
+		_maxCityWidth = 3;
+		_maxCityDepth = 5;
+		_maxCityAmount = 10;
+		_maxTries = 1000;
+
+	Quick fix:
+		Escape the game and regenerate a new dungeon. The likelyhood of this error is very small.
+
+	Fix:
+		The methods that should be optimized are the connectDungeon and changeTileValues methods, within the Zone class. These methods are used multiple times to connect different 'regions' of the dungeon to eachother, so no dungeon exists with unreachable rooms or paths can exist.
+
+Error: 02
+	Reproducing the error: 
+		Walls within the generated dungeon have sometimes not been visible. This error occurs in very small occasions and might be caused by the amount of entities within the scene. Having a too big amount of entities in the scene can cause framedrops or even not drawn entities.
+		Becuase of the low amount of occurences of this bug, we've not yet pinned down it's exact cause yet. We've already enlarged the culling boxes of the geometry, which could be the solution.
+
+	Quick fix:
+		Continue playing as the collision is not affected by this bug.
+
+	Fix:
+		Unknown.
+		
+Error: 03
+	Reproducing the error: 
+		Talking to an Npc could cause an vector out of range error, to our knowledge this can only happen to the first npc in a floor.
+
+	Quick fix:
+		Restart the game.
+
+	Fix:
+		Unknown.
