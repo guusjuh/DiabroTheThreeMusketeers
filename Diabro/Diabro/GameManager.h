@@ -131,6 +131,10 @@ private:
 	bool _abandonedQuestPressed;
 	float _abandonTimer;
 	const float _totalTimeBeforeAbandon;
+
+	bool _exitGamePressed;
+	float _exitTimer;
+	const float _totalTimeBeforeExit;
 };
 
 //---------------------------------------------------------------------------

@@ -15,7 +15,7 @@ Filename:    GameManager.cpp
 /// It contains all other managers.
 /// </summary>
 GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0),
-up(false), down(false), left(false), right(false), fly(false), fall(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f) {}
+up(false), down(false), left(false), right(false), fly(false), fall(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f), _exitGamePressed(false), _totalTimeBeforeExit(1.0f) {}
 //---------------------------------------------------------------------------
 /// <summary>
 /// Finalizes an instance of the <see cref="GameManager"/> class.
@@ -223,6 +223,13 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		}
 	}
 
+	if (_exitGamePressed) {
+		_exitTimer -= pFE.timeSinceLastFrame;
+		if (_exitTimer < 0) {
+			_exitGamePressed = false;
+		}
+	}
+
 	return ret;
 }
 
@@ -233,7 +240,16 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
-	if (pKE.key == OIS::KC_ESCAPE && currentState != Paused) mShutDown = true;
+	if (pKE.key == OIS::KC_ESCAPE && currentState != Paused) {
+		if (_exitGamePressed) {
+			mShutDown = true;
+		}
+		else {
+			_uiManager->showHUDText("Press 'ESC' again to exit the game.", 1.0f);
+			_exitGamePressed = true;
+			_exitTimer = _totalTimeBeforeExit;
+		}
+	}
 
 	if (currentState != InGame && currentState != Paused && currentState != MainMenu) return false;
 
