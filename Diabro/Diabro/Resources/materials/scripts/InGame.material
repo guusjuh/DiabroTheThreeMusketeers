@@ -6,7 +6,7 @@ material InGame/Player
       {
          texture_unit
          {
-			texture Houses/blueBox.jpg
+			texture player.png
          }
       }
    }

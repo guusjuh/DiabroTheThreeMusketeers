@@ -9,7 +9,7 @@
 /// </summary>
 UIManager::UIManager()
 	: _uiNode(0), _playerHealthBarWidget(0), _maxWidthBar(0), _enemyHealthBarWidget(0), _questOn(true), _currentTransparancyScale(3.5f), _maxTransparancyScale(3.5f),
-	_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0), _storyTextOn(false)
+	_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0), _storyTextOn(false), _showLoading(false)
 {
 }
 
@@ -131,17 +131,30 @@ void UIManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 /// <param name="pFE">The frameevent to obtain the passed time.</param>
 void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 {
-	if (_hudTextWithTimeOn) {
+	static float loadingTimer = 3.0f;
+
+	if (_showLoading) {
+		loadingTimer -= pFE.timeSinceLastFrame;
+		if(loadingTimer <= 0) {
+			GameManager::getSingletonPtr()->goToState(Start);
+			_showLoading = false;
+			loadingTimer = 3.0f;
+		}
+		return;
+	}
+	else if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
 		if (_hudTimer <= 0) {
 			hideHUDText();
 			if (!showStoryText(_endLevelText, 2.5f)) {
-				GameManager::getSingletonPtr()->goToState(Start);
+				_showLoading = true;
+				hideHUDText();
+				showLoadingScreen();
 			}
 		}
 	}
-	else {
+	else if(!_showLoading) {
 		showStoryText(_endLevelText, 2.5f);
 	}
 }
@@ -152,17 +165,30 @@ void UIManager::endUpdate(const Ogre::FrameEvent& pFE)
 /// <param name="pFE">The frameevent to obtain the passed time.</param>
 void UIManager::diedUpdate(const Ogre::FrameEvent& pFE)
 {
-	if (_hudTextWithTimeOn) {
+	static float loadingTimer = 3.0f;
+
+	if (_showLoading) {
+		loadingTimer -= pFE.timeSinceLastFrame;
+		if (loadingTimer <= 0) {
+			GameManager::getSingletonPtr()->goToState(InGame);
+			_showLoading = false;
+			loadingTimer = 3.0f;
+		}
+		return;
+	}
+	else if (_hudTextWithTimeOn) {
 		_hudTimer -= pFE.timeSinceLastFrame;
 
 		if (_hudTimer <= 0) {
 			hideHUDText();
 			if (!showStoryText(_diedText, 2.5f)) {
-				GameManager::getSingletonPtr()->goToState(GameState::InGame);
+				_showLoading = true;
+				hideHUDText();
+				showLoadingScreen();
 			}
 		}
 	}
-	else {
+	else if (!_showLoading) {
 		showStoryText(_diedText, 2.5f);
 	}
 }
@@ -479,8 +505,33 @@ void UIManager::hideMainMenu() {
 	showAllIngameElements();
 }
 
+void UIManager::showLoadingScreen() {
+	hideAllIngameElements();
+
+	// background img
+	_uiElementMgr->showBackdrop("UI/MenuBackdrop");
+
+	// start game txt
+	Ogre::String startTxt = "Generating the dungeon and quests... Please be patient.";
+	int count = startTxt.length();  				// count the symbols in text
+	float width = count * 14.25f;
+	_startGameTextElement = _uiElementMgr->createHUDText(DiabroUI::BOTTOM, "StartGameText", startTxt, width, 40);
+
+	_startGameTextElement->getOverlayElement()->setTop(-128);
+}
+
+void UIManager::hideLoadingScreen() {
+	_uiElementMgr->destroyWidget("StartGameText");
+	_startGameTextElement = nullptr;
+
+	_uiElementMgr->hideBackdrop();
+
+	showAllIngameElements();
+}
+
 void UIManager::hideAllIngameElements() {
 	_uiElementMgr->hideBackdrop();
+	_uiElementMgr->getBackdropLayer()->setScale(1.0f, 1.0f);
 
 	// _mDialogTextArea
 	if(_dialogOn) _mDialogTextArea->hide();

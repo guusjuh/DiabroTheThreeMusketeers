@@ -54,6 +54,9 @@ public:
 	void showMainMenu();
 	void hideMainMenu();
 
+	void showLoadingScreen();
+	void hideLoadingScreen();
+
 private:
 	DiabroUI::UIElementsManager*	_uiElementMgr;
 	Ogre::SceneNode*			_uiNode;
@@ -86,6 +89,7 @@ private:
 	float						_hudTotalTimer;
 	float						_hudTimer;
 	bool						_hudTextWithTimeOn;
+	bool						_showLoading;
 
 	std::vector<std::string>	_startGameText;
 	std::vector<std::string>	_startLevelText;

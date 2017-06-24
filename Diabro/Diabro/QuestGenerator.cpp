@@ -71,7 +71,7 @@ Quest* QuestGenerator::generateAbstractQuest(Quest* pQuest, Npc* pSourceNpc, Nee
 		possibleStrategies[randomRoll]->getNameQuest(), possibleStrategies[randomRoll]->getDialog(), possibleStrategies[randomRoll]->getMotivation(),
 		newActions, possibleStrategies[randomRoll]->getRarityPref());
 
-	float healthReward = (GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100) * 10;
+	float healthReward = (GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100) * 25;
 	PlayerUpgradeType upgradeReward = generateRandomUpgrade(); 
 
 	// assign values to the quest

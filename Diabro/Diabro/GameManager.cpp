@@ -102,6 +102,8 @@ void GameManager::nextFloor() {
 	down = false;
 	left = false;
 	right = false;
+
+	_uiManager->hideLoadingScreen();
 }
 
 /// <summary>
@@ -123,6 +125,8 @@ void GameManager::restartGame() {
 	down = false;
 	left = false;
 	right = false;
+
+	_uiManager->hideLoadingScreen();
 }
 
 /// <summary>
