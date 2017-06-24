@@ -18,10 +18,6 @@ void NpcWanderState::Execute(BaseNpc* agent){
 		agent->stateMachine.setState("Idle");
 		return;
 	}
-	if (((Npc*)agent)->isKidnapped()){
-		agent->stateMachine.setState("Kidnapped");
-		return;
-	}
 
 	if (agent->getDirVector() == Ogre::Vector3::ZERO) agent->setDirVector(Ogre::Vector3(1, 0, 0));
 

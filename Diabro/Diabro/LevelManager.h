@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "Npc.h"
+#include "Sister.h"
 #include "BaseApplication.h"
 #include "BaseEnemy.h"
 #include <OgreSceneManager.h>
@@ -58,6 +59,7 @@ public:
 	static void createPlayerMesh();
 
 	Player* getPlayer() { return playerScript; }
+	Sister* getSister() { return _sisterScript; }
 	std::vector<Character*> getFriendlyNpcs() { return _friendlyNpcScripts; }
 	std::vector<Character*> getHostileNpcs() { return _hostileNpcScripts; }
 
@@ -65,6 +67,7 @@ public:
 	int subscribeFriendlyNPC(Npc*);
 	int subscribeBullet(Bullet*);
 	int subscribeParticle(Particle*);
+	void subscribeSister(Sister*);
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
 	void detachBullet(int);
@@ -83,6 +86,7 @@ private:
 	std::vector<Character*> _hostileNpcScripts;
 	std::vector<Bullet*> _bulletScripts;
 	std::vector<Particle*> _particleScripts;
+	Sister* _sisterScript;
 
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
