@@ -6,9 +6,9 @@
 #include "BaseNpc.h"
 
 const int BaseEnemy::LOW_HP = 2;
-const int BaseEnemy::HIGH_HP = 7;
+const int BaseEnemy::HIGH_HP = 6;
 const int BaseEnemy::LOW_DMG = 4;
-const int BaseEnemy::HIGH_DMG = 8;
+const int BaseEnemy::HIGH_DMG = 6;
 const int BaseEnemy::LOW_NDIST = 5;
 const int BaseEnemy::HIGH_NDIST = 20;
 
@@ -34,9 +34,6 @@ BaseEnemy::BaseEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode,
 	healthUpgrades = 0;
 	damageUpgrades = 0;
 	noticeDistUpgrades = 0;
-	equipment = new EnemyEquipment(15.0f, 1.5f, Zone::scalar * 1.5f);
-
-	assignUpgrades(level);
 
 	name = "squared bastard";
 	_relevantForAction = false;
@@ -47,18 +44,12 @@ BaseEnemy::BaseEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode,
 	indicatorNode->setScale(0.15f, 0.15f, 0.15f);
 	indicatorNode->setPosition(0.0f, 100.0f, 0.0f);
 
-	_maxHealth = equipment->getHealth();
-	_damage = equipment->getDamage();
-	_noticeDistance = equipment->getNoticeDist();
-
 	_movespeed = 0;
 	_rotationspeed = 0;
 	_attackDistance = 0;
 	_lightAttackCooldown = 0;
 	_totalHitTime = 0.3f;
 	_radius = 25.0f;
-
-	_currentHealth = _maxHealth;
 }
 
 UpgradeModifierType BaseEnemy::getMostUsedUpgrade() {
@@ -249,15 +240,13 @@ void BaseEnemy::die() {
 	damageUpgrades = 0;
 	noticeDistUpgrades = 0;
 	
-	static float slowIncrease = 0;
-	slowIncrease += 0.01f;
 	GameManager::getSingletonPtr()->getLevelManager()->spawnEnemy(_myCity, false);
 
 	if (_relevantForAction) {
 		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgEnemyDead);
 	} 
 
-	GameManager::getSingletonPtr()->getPlayer()->adjustHealth(-(GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100) * 2);
+	GameManager::getSingletonPtr()->getPlayer()->adjustHealth(-(GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100.0f) * 5.0f);
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 
 /*	// note: we can sneaky still check for relevant, since it's relevant till the next update

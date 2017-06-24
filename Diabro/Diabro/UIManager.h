@@ -68,6 +68,7 @@ private:
 	Ogre::Vector3				_questTargetPos;
 
 	DiabroUI::Bar*				_playerHealthBarWidget;
+	float						_currentTransparancyScale; // for the backdrop with blood
 	bool						_enemyBarOn;
 	DiabroUI::Bar*				_enemyHealthBarWidget;
 	Ogre::Real					_maxWidthBar;

@@ -18,6 +18,7 @@ public:
 private:
 	static const std::string instructionStrings[15];
 	static const std::string cantStartQuestString;
+	static const std::string howToCancelQuestString;
 	static const std::string rewardString;
 };
 

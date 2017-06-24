@@ -45,6 +45,20 @@ material UI/PauseBackdrop : UI/Base
     }
 }
 
+material UI/BloodBackdrop : UI/Base
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture bloodBackdrop.png
+            }
+        }
+    }
+}
+
 material UI/MenuBackdrop : UI/Base
 {
     technique

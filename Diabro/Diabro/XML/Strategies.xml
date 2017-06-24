@@ -40,7 +40,7 @@
 	<Actions>
 		<Action>			
 			<ID>10</ID>
-			<Dialog>Hmm.. why should I trust you? \nNah, that's not good enough, but you can earn my trust! \nProve you're a real sphere by killing a square!</Dialog>
+			<Dialog>Hmm.. why should I trust you? \nNah, that's not good enough, but you can earn my trust! \nDo you know that square? \nProve you're a real sphere by killing him!</Dialog>
 			<Content>2</Content>
 			<Content>2</Content>
 		</Action>
@@ -93,7 +93,7 @@
 	<ID>3</ID>
 	<NameStrat>Kill pests</NameStrat>
 	<QuestName>The harrassement of 'NPCQC1' </QuestName>
-	<StartDialog>Two squared bastards have been harrassing me forever, but I can't do anything about it. Please kill them for me. \nThank you so much, now be on your way.</StartDialog>
+	<StartDialog>Those two squared bastards have been harrassing me forever, but I can't do anything about it. Please kill them for me. \nThank you so much, now be on your way.</StartDialog>
 	<NeedType>Comfort</NeedType>
 	<Actions>
 		<Action>
@@ -125,7 +125,7 @@
 	<Actions>
 		<Action>			
 			<ID>10</ID>
-			<Dialog>'QuestItemQC1' you say? \nWell you're lucky to meet me, I saw one of those square bastards have it just a minute ago. \nIf you hurry, you should be able to find it!</Dialog>
+			<Dialog>'QuestItemQC1' you say? \nWell you're lucky to meet me, I saw one of those square bastards have it just a minute ago. \nIf you hurry, you should be able to find him!</Dialog>
 			<Content>2</Content>
 			<Content>2</Content>
 		</Action>

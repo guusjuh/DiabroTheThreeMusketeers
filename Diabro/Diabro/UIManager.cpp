@@ -8,7 +8,7 @@
 /// e.g. the in-game and menu UI.
 /// </summary>
 UIManager::UIManager()
-	: _uiNode(0), _playerHealthBarWidget(0), _maxWidthBar(0), _enemyHealthBarWidget(0), _questOn(true),
+	: _uiNode(0), _playerHealthBarWidget(0), _maxWidthBar(0), _enemyHealthBarWidget(0), _questOn(true), _currentTransparancyScale(3.0f),
 	_mWindow(0), _hudTextWidget(0), _hudTotalTimer(3), _hudTextWithTimeOn(false), _uiElementMgr(0), _mDialogTextArea(0), _storyTextOn(false)
 {
 }
@@ -78,6 +78,9 @@ void UIManager::setupUI()
 	_dialogOn = false;
 	_enemyBarOn = false;
 	_hudTextOn = false;
+
+	_uiElementMgr->showBackdrop("UI/BloodBackdrop");
+	_uiElementMgr->getBackdropLayer()->setScale(_currentTransparancyScale, _currentTransparancyScale);
 }
 
 /// <summary>
@@ -269,6 +272,11 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 	pValue = floor(pValue * 100) / 100;
 
 	_playerHealthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
+
+	_currentTransparancyScale = ((pValue / pMaxValue) * 3.0f) + 1.0f;
+	Debug("", _currentTransparancyScale);
+	_uiElementMgr->showBackdrop("UI/BloodBackdrop");
+	_uiElementMgr->getBackdropLayer()->setScale(_currentTransparancyScale, _currentTransparancyScale);
 }
 
 /// <summary>
@@ -472,6 +480,8 @@ void UIManager::hideMainMenu() {
 }
 
 void UIManager::hideAllIngameElements() {
+	_uiElementMgr->hideBackdrop();
+
 	// _mDialogTextArea
 	if(_dialogOn) _mDialogTextArea->hide();
 
@@ -502,6 +512,9 @@ void UIManager::hideAllIngameElements() {
 }
 
 void UIManager::showAllIngameElements() {
+	_uiElementMgr->showBackdrop("UI/BloodBackdrop");
+	_uiElementMgr->getBackdropLayer()->setScale(_currentTransparancyScale, _currentTransparancyScale);
+
 	// _mDialogTextArea
 	if (_dialogOn) _mDialogTextArea->show();
 

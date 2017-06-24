@@ -191,7 +191,7 @@ void Player::update(Ogre::Real pDeltaTime)
 	if (GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getEndCity()->inThisCity(getPosition())) {
 		GameManager::getSingletonPtr()->getSoundManager()->triggerEndRoom();
 		// if player reached the end 
-		if (GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getDistToSis(getPosition()) < _noticeDistance) {
+		if (GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getDistToSis(getPosition()) < _noticeDistance * 2) {
 			setSisterNearby(true);
 		}
 		else {

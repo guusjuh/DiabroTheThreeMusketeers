@@ -128,7 +128,7 @@ public:
 	}
 
 	float getEnemyRespawnTimeForUsage() {
-		_enemyRespawnTime += 5.0f;
+		_enemyRespawnTime += 2.5f;
 		return _enemyRespawnTime;
 	}
 

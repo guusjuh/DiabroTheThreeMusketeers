@@ -15,7 +15,7 @@ Filename:    GameManager.cpp
 /// It contains all other managers.
 /// </summary>
 GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0),
-up(false), down(false), left(false), right(false), fly(false), fall(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.0f), _exitGamePressed(false), _totalTimeBeforeExit(1.0f) {}
+up(false), down(false), left(false), right(false), fly(false), fall(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.5f), _exitGamePressed(false), _totalTimeBeforeExit(1.5f) {}
 //---------------------------------------------------------------------------
 /// <summary>
 /// Finalizes an instance of the <see cref="GameManager"/> class.
@@ -205,6 +205,8 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 		_uiManager->diedUpdate(pFE);
 		break;
 	case InGame:
+		if (getPlayer()->isInDialog()) return ret;
+
 		if (_questManager->getCurrentQuest() != nullptr) {
 			_questManager->getCurrentQuest()->update();
 		}
@@ -245,7 +247,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 			mShutDown = true;
 		}
 		else {
-			_uiManager->showHUDText("Press 'ESC' again to exit the game.", 1.0f);
+			_uiManager->showHUDText("Press 'ESC' again to exit the game.", 1.5f);
 			_exitGamePressed = true;
 			_exitTimer = _totalTimeBeforeExit;
 		}
@@ -289,13 +291,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 		
 
-	case OIS::KC_Q:
+	case OIS::KC_BACK:
 		if(_questManager->getCurrentQuest()) {
 			if(_abandonedQuestPressed) {
 				_questManager->getCurrentQuest()->abandon();
 			}
 			else {
-				_uiManager->showHUDText("Press 'Q' again to abandon your current quest.", 1.0f);
+				_uiManager->showHUDText("Press 'BACKSPACE' again to abandon your current quest.", 1.5f);
 				_abandonedQuestPressed = true;
 				_abandonTimer = _totalTimeBeforeAbandon;
 			}
@@ -397,7 +399,7 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 
 	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-getPlayer()->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
 
-	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
+	if (degreeFrmStartPitch < Ogre::Degree(25) && degreeFrmStartPitch > Ogre::Degree(-30))
 	{
 		mSceneMgr->getSceneNode("CameraNode")->pitch(rotX, Ogre::Node::TS_LOCAL);
 	}
@@ -415,6 +417,15 @@ bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pI
 {
 	if (currentState == Paused) return false;
 
+	switch (pID)
+	{
+	case OIS::MB_Left:
+		getPlayer()->lightAttack();
+		break;
+	default:
+		break;
+	}
+
 	return true;
 }
 
@@ -428,14 +439,6 @@ bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID p
 {
 	if (currentState == Paused) return false;
 
-	switch (pID)
-	{
-	case OIS::MB_Left:
-		getPlayer()->lightAttack();
-		break;
-	default:
-		break;
-	}
 	return true;
 }
 

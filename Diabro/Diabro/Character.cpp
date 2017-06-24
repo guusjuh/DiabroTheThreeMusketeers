@@ -47,7 +47,7 @@ void Character::update(Ogre::Real pDeltatime)
 
 	_dirVec.normalise();
 	if (_dirVec.z > 0){
-		_dirVec.z = (_dirVec.z / 3);
+		_dirVec.z = (_dirVec.z / 2.3f);
 	}
 	Ogre::Vector3 newPos = _myNode->getPosition() + (_myNode->getOrientation() * (_dirVec * getSpeed() * pDeltatime));
 	Zone* zone = GameManager::getSingletonPtr()->getLevelManager()->getLevelGenerator()->getZonePointer(0, 0);

@@ -12,6 +12,20 @@ RangedEnemy::RangedEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationN
 	possibleStates["AroundCenter"] = new EnemyMoveAroundCenterState("Idle");
 	possibleStates["Idle"] = new EnemyIdleState();
 
+	// set upgrades
+	equipment = new EnemyEquipment(7.0f, 1.5f, Zone::scalar * 1.5f);
+	assignUpgrades(pLevel);
+	_maxHealth = equipment->getHealth();
+	_damage = equipment->getDamage();
+	_noticeDistance = equipment->getNoticeDist();
+
+	_movespeed = GameManager::getSingletonPtr()->getRandomInRange(200, 300);
+	_rotationspeed = 200.0f;
+	_attackDistance = _noticeDistance;
+	_lightAttackCooldown = 2.8f;
+
+	_currentHealth = _maxHealth;
+
 	// set material according to upgrades.
 	UpgradeModifierType mostUsedUpgrade = getMostUsedUpgrade();
 
@@ -21,11 +35,6 @@ RangedEnemy::RangedEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationN
 	else if (mostUsedUpgrade == 3) { _originalMaterialName = "InGame/BlueDotEnemy"; }
 
 	pMyEntity->setMaterialName(_originalMaterialName);
-
-	_movespeed = 250;
-	_rotationspeed = 200.0f;
-	_attackDistance = _noticeDistance;
-	_lightAttackCooldown = 2.8f;
 }
 
 bool RangedEnemy::lightAttack() {
