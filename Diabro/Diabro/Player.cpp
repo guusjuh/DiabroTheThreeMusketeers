@@ -56,6 +56,9 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_totalHitTime = 0.11f;
 	_radius = 40.0f;
 
+	//attack animation
+	_rotAmount = 135;
+
 	_currentHealth = _maxHealth;
 	
 	Ogre::Entity* attackSphere = GameManager::getSingletonPtr()->getSceneManager()->createEntity("uv_sphere.mesh");
@@ -241,8 +244,7 @@ void Player::update(Ogre::Real pDeltaTime)
 
 	//attackSphere animation
 	Ogre::Vector3 attackSpherePos = Ogre::Vector3(getAttackDistance() * .75f, 0, 0);
-	int rotAmount = 135;
-	attackSpherePos = Ogre::Quaternion(Ogre::Degree(-std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f) * rotAmount + rotAmount), Ogre::Vector3::UNIT_Y) * attackSpherePos;// _currAttackCooldown;
+	attackSpherePos = Ogre::Quaternion(Ogre::Degree(-std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f) * (_rotAmount * 2) + _rotAmount), Ogre::Vector3::UNIT_Y) * attackSpherePos;
 	attackSpherePos.z = attackSpherePos.z * 2;
 	attackNode->setPosition(attackSpherePos);
 

@@ -70,6 +70,9 @@ private:
 	void changeInBattle(bool val);
 	//bool _canAttack;
 
+	//for the animation
+	int _rotAmount;
+
 	float _runspeed;
 	bool _isRunning;
 
