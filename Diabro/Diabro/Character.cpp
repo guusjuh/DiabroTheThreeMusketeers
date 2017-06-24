@@ -28,6 +28,9 @@ void Character::update(Ogre::Real pDeltatime)
 {
 	if (_currAttackCooldown > 0) {
 		_currAttackCooldown -= pDeltatime;
+		if (_currAttackCooldown < 0){
+			_currAttackCooldown = 0;
+		}
 	}else {
 		_canAttack = true;
 	}
