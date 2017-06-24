@@ -71,6 +71,7 @@ void LevelManager::generateNewDungeon() {
 	Debug("\t\tTHE CURRENT LEVEL IS ", _level);
 
 	Debug("\tL: generating new dungeon.");
+	delete _sisterScript;
 	while (_friendlyNpcScripts.size() > 0) {
 		delete _friendlyNpcScripts[0];
 		detachFriendlyNPC(0);
@@ -116,9 +117,18 @@ void LevelManager::generateNewDungeon() {
 /// <param name="friendly">The friendly.</param>
 /// <returns></returns>
 int LevelManager::subscribeFriendlyNPC(Npc* friendly) {
-	_friendlyNpcScripts.push_back(friendly); 
+	_friendlyNpcScripts.push_back(friendly);
 
 	return _friendlyNpcScripts.size() - 1;
+}
+
+/// <summary>
+/// Subscribes the Sister.
+/// </summary>
+/// <param name="friendly">The friendly.</param>
+/// <returns></returns>
+void LevelManager::subscribeSister(Sister* sister) {
+	_sisterScript = sister;
 }
 
 /// <summary>
@@ -225,6 +235,7 @@ void LevelManager::inGameUpdate(const Ogre::FrameEvent& pFE)
 	}
 	// update characters
 	playerScript->update(deltaTime);
+	_sisterScript->update(deltaTime);
 
 	for(int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{

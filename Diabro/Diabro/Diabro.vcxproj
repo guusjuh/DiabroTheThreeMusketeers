@@ -163,6 +163,7 @@
     <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="RangedEnemy.cpp" />
+    <ClCompile Include="Sister.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericContainer.h" />
     <ClInclude Include="RangedEnemy.h" />
+    <ClInclude Include="Sister.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="IQuestContent.h" />

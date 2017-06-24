@@ -520,7 +520,9 @@ void LevelGenerator::determineCityTypes() {
 	_sisterNode->setPosition((furtherstCity->getCenterTile().x - 1) * Zone::scalar, 18.0f, (furtherstCity->getCenterTile().z) * Zone::scalar);
 	_sis->setMaterialName("InGame/Sister");
 
-	_sisterNode->createChildSceneNode()->attachObject(_sis);
+	Ogre::SceneNode* rotationNode = _sisterNode->createChildSceneNode();
+	rotationNode->attachObject(_sis);
+	new Sister(_sisterNode, rotationNode, _sis, furtherstCity);
 
 	_endCity = furtherstCity;
 
