@@ -14,7 +14,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0),
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0), _questManager(0), _dialogManager(0), _debuggingOn(false),
 up(false), down(false), left(false), right(false), fly(false), fall(false), _abandonedQuestPressed(false), _totalTimeBeforeAbandon(1.5f), _exitGamePressed(false), _totalTimeBeforeExit(1.5f) {}
 //---------------------------------------------------------------------------
 /// <summary>

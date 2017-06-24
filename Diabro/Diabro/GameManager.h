@@ -97,6 +97,8 @@ public:
 
 	float getDeltaTime(){ return _deltaTime; }
 
+	bool DebuggingOn() { return _debuggingOn; }
+
 protected:
     virtual void createScene(void);
 	virtual void createCamera(void);
@@ -106,6 +108,7 @@ protected:
 	static void setupLights(Ogre::SceneManager*);
 	
 private:
+	bool _debuggingOn;
 	float _deltaTime;
 
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent&);

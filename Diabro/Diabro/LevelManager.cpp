@@ -20,12 +20,6 @@ void LevelManager::initialize()
 
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("LevelGen Start!\n");
-	fclose(fp);
-#endif
 	_levelGenerator = new LevelGenerator();
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");

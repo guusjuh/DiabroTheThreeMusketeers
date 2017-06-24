@@ -1,8 +1,11 @@
 #include "Debug.h"
 #include "math.h"
+#include "GameManager.h"
 /// writes a message and a digit to the console
 Debug::Debug(std::string msg, float digit)
 {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	
 	freopen_s(&fp, "CONOUT$", "w", stdout);
@@ -15,6 +18,8 @@ Debug::Debug(std::string msg, float digit)
 /// writes a message and an integer to the console
 Debug::Debug(std::string msg, int digit)
 {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 
 	freopen_s(&fp, "CONOUT$", "w", stdout);
@@ -26,6 +31,8 @@ Debug::Debug(std::string msg, int digit)
 }
 /// writes a message to the console
 Debug::Debug(std::string msg) {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf(msg.c_str());
@@ -35,6 +42,8 @@ Debug::Debug(std::string msg) {
 }
 /// writes a digit to the console
 Debug::Debug(float digit) {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf(" %f", digit);
@@ -44,6 +53,8 @@ Debug::Debug(float digit) {
 }
 /// writes an integer to the console
 Debug::Debug(int digit) {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf(" %d", digit);
@@ -53,6 +64,8 @@ Debug::Debug(int digit) {
 }
 /// writes a coordinate to the console
 Debug::Debug(Coordinate coord) {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf("(%d, %d)", coord.x, coord.z);
@@ -62,6 +75,8 @@ Debug::Debug(Coordinate coord) {
 }
 /// writes a message and a coordinate to the console
 Debug::Debug(std::string msg, Coordinate coord) {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf("%s (%d, %d)", msg.c_str(), coord.x, coord.z);
@@ -71,12 +86,16 @@ Debug::Debug(std::string msg, Coordinate coord) {
 }
 /// creates an empty debugger
 Debug::Debug() {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 #endif
 }
 
 void Debug::printArray(int* intArray, int width, int size) const {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	for (int i = 0; i < size; i++) {
 		if (width < size && width != 0 && i % width == 0) {
@@ -94,6 +113,8 @@ void Debug::printArray(int* intArray, int width, int size) const {
 }
 
 void Debug::printArray(bool* boolArray, int width, int size) const {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	for (int i = 0; i < size; i++) {
 		if (width < size && width != 0 && i % width == 0) {
@@ -108,6 +129,8 @@ void Debug::printArray(bool* boolArray, int width, int size) const {
 
 Debug::~Debug()
 {
+	if (!GameManager::getSingletonPtr()->DebuggingOn()) return;
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	fclose(fp);
 #endif
