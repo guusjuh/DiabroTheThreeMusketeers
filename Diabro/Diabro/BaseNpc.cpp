@@ -40,25 +40,31 @@ void BaseNpc::collide(){
 /// <param name="pDeltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real pDeltatime)
 {
-	if (_dirVec != Ogre::Vector3(0, 0, 0)) {
-		_dirVec = Ogre::Vector3(1, 0, 0);
+	if (!beingPushed){
+		if (_dirVec != Ogre::Vector3(0, 0, 0)) {
+			_dirVec = Ogre::Vector3(1, 0, 0);
+		}
+		detectPlayer();
+
+		stateMachine.update();
+
+		if (stateMachine.getCurrentState() != "Idle" && stateMachine.getCurrentState() != "Attack") {
+			_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
+
+			_degreePerFrame = _rotationspeed * pDeltatime;
+
+			if (Ogre::Math::Abs(_wantedRotationAngle) > _degreePerFrame) {
+				if (_wantedRotationAngle < 0) _degreePerFrame *= -1;
+				_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_degreePerFrame)), Ogre::Node::TS_LOCAL);
+			}
+			else {
+				_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_wantedRotationAngle)), Ogre::Node::TS_LOCAL);
+			}
+		}
 	}
-	detectPlayer();
-
-	stateMachine.update();
-
-	if(stateMachine.getCurrentState() != "Idle" && stateMachine.getCurrentState() != "Attack") {
-		_wantedRotationAngle = angleBetween(Ogre::Vector3(goalPos.x, getPosition().y, goalPos.z));
-
-		_degreePerFrame = _rotationspeed * pDeltatime;
-
-		if (Ogre::Math::Abs(_wantedRotationAngle) > _degreePerFrame) {
-			if (_wantedRotationAngle < 0) _degreePerFrame *= -1;
-			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_degreePerFrame)), Ogre::Node::TS_LOCAL);
-		}
-		else {
-			_myNode->yaw(Ogre::Radian(Ogre::Math::DegreesToRadians(_wantedRotationAngle)), Ogre::Node::TS_LOCAL);
-		}
+	else
+	{
+		beingPushed = false;
 	}
 
 	Character::update(pDeltatime);

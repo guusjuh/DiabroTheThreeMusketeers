@@ -67,6 +67,8 @@ public:
 
 	bool onAttackCooldown() { return !_canAttack; }
 
+	bool beingPushed;
+
 protected:
 	Ogre::Real _movespeed;
 	Ogre::Real _rotationspeed;
