@@ -156,7 +156,7 @@ void Player::upgradeEquipment(PlayerUpgradeType upgrade) {
 void Player::update(Ogre::Real pDeltaTime)
 {
 	Ogre::Vector3 attackSpherePos = Ogre::Vector3(getAttackDistance() * .75f, 0, 0);
-	attackSpherePos = Ogre::Quaternion(Ogre::Degree(-std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f) * 180 + 90), Ogre::Vector3::UNIT_Y) * attackSpherePos;// _currAttackCooldown;
+	attackSpherePos = Ogre::Quaternion(Ogre::Degree(-std::abs(_currAttackCooldown / _lightAttackCooldown - 0.5f) * 230 + 140), Ogre::Vector3::UNIT_Y) * attackSpherePos;// _currAttackCooldown;
 	attackSpherePos.z = attackSpherePos.z * 2;
 	attackNode->setPosition(attackSpherePos);
 
