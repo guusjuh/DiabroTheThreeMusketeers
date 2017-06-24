@@ -97,6 +97,12 @@ Ogre::Real Character::closestDistanceToNpc(Ogre::Vector3 pos){
 			if (distance < DistanceToClosestTarget){
 				DistanceToClosestTarget = distance;
 			}
+			if (distance < _radius){
+				friendlyNpcs[i]->beingPushed = true;
+				Ogre::Vector3 dir = Ogre::Vector3(friendlyNpcs[i]->getPosition().x - pos.x, 0, friendlyNpcs[i]->getPosition().z - pos.z);
+				friendlyNpcs[i]->_myNode->lookAt(friendlyNpcs[i]->getPosition() + dir, Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
+				friendlyNpcs[i]->setDirVector(Ogre::Vector3(1, 0, 0));
+			}
 		}
 	}
 	//player
