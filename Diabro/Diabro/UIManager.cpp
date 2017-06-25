@@ -300,7 +300,7 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 	_playerHealthBarWidget->setValue(pValue, calcBarSize(pValue, pMaxValue, _maxWidthBar));
 
 	_currentTransparancyScale = ((pValue / pMaxValue) * (_maxTransparancyScale - 1)) + 1.0f;
-	Debug("", _currentTransparancyScale);
+	
 	_uiElementMgr->showBackdrop("UI/BloodBackdrop");
 	_uiElementMgr->getBackdropLayer()->setScale(_currentTransparancyScale, _currentTransparancyScale);
 }

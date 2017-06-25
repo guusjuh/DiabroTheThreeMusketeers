@@ -49,6 +49,8 @@ public:
 private:
 	Ogre::SceneNode* attackNode;
 
+	static const float healPerFloorPercentage;
+
 	void die() override;
 	int curCityId;
 

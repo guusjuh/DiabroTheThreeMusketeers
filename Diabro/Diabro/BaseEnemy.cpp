@@ -12,6 +12,8 @@ const int BaseEnemy::HIGH_DMG = 6;
 const int BaseEnemy::LOW_NDIST = 5;
 const int BaseEnemy::HIGH_NDIST = 20;
 
+const float BaseEnemy::killRestorePercentage = 3.0f;
+
 const Ogre::ColourValue BaseEnemy::COL_HP = Ogre::ColourValue(0, 1, 0);
 const Ogre::ColourValue BaseEnemy::COL_DMG = Ogre::ColourValue(1, 0, 0);
 const Ogre::ColourValue BaseEnemy::COL_NDIST = Ogre::ColourValue(0, 0, 1);
@@ -246,7 +248,7 @@ void BaseEnemy::die() {
 		GameManager::getSingletonPtr()->getQuestManager()->getCurrentQuest()->sendMsg(this, Action::msgEnemyDead);
 	} 
 
-	GameManager::getSingletonPtr()->getPlayer()->adjustHealth(-(GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100.0f) * 5.0f);
+	GameManager::getSingletonPtr()->getPlayer()->adjustHealth(-(GameManager::getSingletonPtr()->getPlayer()->getMaxHealth() / 100.0f) * killRestorePercentage);
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 
 /*	// note: we can sneaky still check for relevant, since it's relevant till the next update

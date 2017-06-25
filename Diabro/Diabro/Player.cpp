@@ -10,6 +10,8 @@ const int Player::HIGH_HP = 4;
 const int Player::LOW_DMG = 2;
 const int Player::HIGH_DMG = 5;
 
+const float Player::healPerFloorPercentage = 20.0f;
+
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
 /// </summary>
@@ -88,8 +90,9 @@ void Player::reset(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) {
 	_nearbyNPC = nullptr;
 	_sisNearby = false;
 
-	//_currentHealth = _maxHealth;
-
+	_currentHealth += _maxHealth / 100.0f * 20.0f;
+	if (_currentHealth > _maxHealth) _currentHealth = _maxHealth;
+	
 	_inBattle = false;
 	_inBattleTime = 0;
 	curCityId = 1;

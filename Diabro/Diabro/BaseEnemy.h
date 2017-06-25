@@ -34,6 +34,8 @@ protected:
 	bool _initialized;
 	bool _updateBar;
 
+	static const float killRestorePercentage;
+
 	int healthUpgrades, damageUpgrades, noticeDistUpgrades;
 	IEnemyEquipment* equipment;
 	void assignUpgrades(int level);
